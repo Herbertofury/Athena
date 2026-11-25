@@ -6,7 +6,7 @@ const choicePanel=get('choice'), choices=get('choices'), status=get('status'), f
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
-let host=null, snapshot=null, mode='ready', raf=0, prior=0, leftover=0, lastOffer=null;
+let host=null, snapshot=null, transfer=0, mode='ready', raf=0, prior=0, leftover=0, lastOffer=null;
 const setText=(el,text)=>{if(el.textContent!==text)el.textContent=text;};
 const clearKeys=()=>{for(const key of Object.keys(keys))delete keys[key];};
 function transition(next,message){
@@ -25,6 +25,7 @@ function showChoices(offers){
   button.append(marker);
   button.addEventListener('click',()=>{
    if(mode!=='choice'||lastOffer!==offers)return;
+   if(loading){transfer++;controls(false);reportTape('Verification cancelled because you chose an upgrade.');}
    host.choose(id);snapshot=host.snapshot();choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
    transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':'Upgrade equipped: '+name);
    board.focus();draw();
@@ -39,6 +40,7 @@ function showFrameStats(){
  setText(hud.hp,Math.max(0,Math.ceil(player.hp))+' / '+player.maxHp);
  setText(hud.level,String(player.level));setText(hud.xp,player.xp+' / '+player.xpToNext);setText(hud.kills,String(run.kills));
  const t=Math.floor(gameTime);setText(hud.time,Math.floor(t/60)+':'+String(t%60).padStart(2,'0'));
+ get('write-tape').disabled=!host?.canSave();
  const m=snapshot.arenaFormat;
  setText(pressure,m?(m.seconds===null?'Endless':m.seconds/60+' min')+' · '+m.label+(m.wave?' '+m.wave:''):'Classic source rules');
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
@@ -95,15 +97,60 @@ function frame(now){
 }
 function togglePause(){
  if(mode==='running')transition('paused','Paused. Resume when ready.');
- else if(mode==='paused'){transition('running','Run resumed.');board.focus();}
+ else if(mode==='paused'){
+  if(loading){transfer++;controls(false);reportTape('Verification cancelled because you resumed play.');}
+  transition('running','Run resumed.');board.focus();
+ }
  draw();
 }
 start.addEventListener('click',()=>{
  if(!seed.checkValidity()||seed.value===''){seed.focus();setText(status,'Enter a whole seed from 0 to 4294967295.');return;}
- let state=Number(seed.value)>>>0;
- host=createLegacySurvivorRun({format:formatField.value,random:()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;}});
+ transfer++;
+ if(loading)controls(false);
+ host=createRecordedArena({seed:Number(seed.value),format:formatField.value});
  clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();prior=0;leftover=0;snapshot=host.snapshot();
  transition('running','Run started.');setText(start,'Restart run');board.focus();draw();
+});
+const readTape=get('read-tape'), verifyTapeButton=get('verify-tape'), cancelTape=get('cancel-tape');
+const tapeStatus=get('tape-status'), reportTape=s=>setText(tapeStatus,s);
+const sha=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),
+ b=>b.toString(16).padStart(2,'0')).join('');
+const handOff=()=>new Promise(resolve=>setTimeout(resolve,0));
+let loading=false;
+function controls(active){
+ loading=active;verifyTapeButton.disabled=active||!readTape.files?.length;cancelTape.hidden=!active;
+}
+readTape.addEventListener('change',()=>{transfer++;controls(false);});
+cancelTape.addEventListener('click',()=>{transfer++;controls(false);reportTape('Run verification cancelled.');});
+get('write-tape').addEventListener('click',async()=>{
+ if(!host)return;
+ try{
+  if(mode==='running')togglePause();
+  const raw=await encodeArenaTape(host,sha);
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));a.download='Athena-Survivor-Arena-Tape.json';
+  try{a.click();reportTape('Run tape generated. Your browser handles the download.');}finally{setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+ }catch(e){reportTape('Could not export the run: '+e.message);}
+});
+verifyTapeButton.addEventListener('click',async()=>{
+ const f=readTape.files?.[0];if(!f||loading)return;
+ const id=++transfer;
+ try{
+  if(mode==='running')togglePause();
+  if(f.size>ARENA_TAPE_MAX_BYTES)throw Error('Tape is larger than the portable limit');
+  controls(true);reportTape('Reading the selected run…');
+  const raw=new TextDecoder('utf-8',{fatal:true}).decode(await f.arrayBuffer());
+  const candidate=await decodeArenaTape(raw,{digest:sha,yieldTask:handOff,
+   cancelled:()=>id!==transfer,onProgress:(n,total)=>{if(id===transfer)reportTape(`Verifying ${n.toLocaleString()} / ${total.toLocaleString()} input frames…`);}});
+  if(id!==transfer)return;
+  host=candidate;clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();snapshot=host.snapshot();
+  const h=host.capture().header;
+  seed.value=String(h.seed);formatField.value=h.format;
+  if(host.phase()==='choice'){transition('choice','Select your pending upgrade.');showChoices(snapshot.offers);}
+  else if(host.phase()==='finished')transition('finished','Verified completed run.');
+  else transition('paused','Verified run loaded, ready to resume.');
+  setText(start,'Restart run');draw();reportTape('Verified and loaded the selected run.');
+ }catch(e){if(id===transfer)reportTape('Not loaded. '+e.message);}
+ finally{if(id===transfer)controls(false);}
 });
 pause.addEventListener('click',togglePause);
 window.addEventListener('keydown',e=>{

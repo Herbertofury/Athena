@@ -132,3 +132,19 @@ or latency claims. Classic has not adopted them. The browser shows the
 active stage and upcoming selection; changing it starts a new run only
 when requested. This preview has no autosave, cross-app profile storage,
 or mod-manager integration.
+
+### Save or resume an offline run
+
+The browser can download and validate a versioned **run tape** before loading
+it. A tape stores the seed, format, 60 Hz input spans and upgrade choices.
+It does not contain executable state or auto-write a file. Consecutive
+identical inputs are compressed as one span. Verification replays those
+inputs into a fresh engine, checks the exact resulting state digest, and
+shows measured progress on long tapes. Cancel or reject the import without
+replacing the current run. After successful loading, continue from Pause
+or finish the pending upgrade choice.
+
+Tapes are bounded to eight simulated hours, 450,000 spans and 8 MiB. An
+Endless run can continue beyond the portable limits but can no longer be
+exported. Digests check consistency, not authorship or multiplayer
+legality. Browser hashing uses Web Crypto; no network connection is needed.
