@@ -399,6 +399,35 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.match(await foundryReadiness.textContent(),/Still open · Native and rights acceptance/);
   assert.equal(await foundryReadiness.locator('a[href*="/64954a16f8af349c27a2652649882d4ec0e3450a/"]').count(),2);
   assert.equal(await page.locator('#projects a[href="/#continuity"]').count(),1);
+  assert.match(await page.locator('#snapshot').textContent(),/verified SHA-256/);
+  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#evidence-download').click()]);
+  assert.equal(download.suggestedFilename(),'Athena-Migration-Evidence.json');
+  const savedEvidence=path.join(out,'migration-evidence.json');
+  await download.saveAs(savedEvidence);
+  assert.deepEqual(fs.readFileSync(savedEvidence),Buffer.from(snapshotText,'utf8'));
+  await page.selectOption('#project-filter','foundry');
+  await page.selectOption('#gate-filter','open');
+  assert.equal(await page.locator('#projects article:visible').count(),1);
+  assert.equal(await foundryReadiness.locator('section:visible').count(),2);
+  await page.fill('#evidence-search','rights');
+  assert.equal(await foundryReadiness.locator('section:visible').count(),1);
+  await page.fill('#evidence-search','no such gate here');
+  assert.equal(await page.locator('#projects article:visible').count(),0);
+  assert.match(await page.locator('#status').textContent(),/No matching gates/);
+  await page.goto(origin+'/migration?source=foundry&view=open');
+  await page.locator('#controls').waitFor();
+  assert.equal(await page.locator('#projects article:visible').count(),1);
+  assert.equal(await page.locator('#gate-filter').inputValue(),'open');
+  await page.route('**/api/migration/readiness',route=>route.fulfill({
+    status:200,contentType:'application/json',headers:{'x-athena-snapshot-sha256':'0'.repeat(64)},body:snapshotText,
+  }));
+  await page.goto(origin+'/migration');
+  await page.getByText('Evidence checksum mismatch. No evidence was displayed or saved.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#projects article').count(),0);
+  assert.equal(await page.locator('#evidence-download').isVisible(),false);
+  await page.unroute('**/api/migration/readiness');
+  await page.goto(origin+'/migration');
+  await page.locator('#projects article').nth(3).waitFor();
   await page.screenshot({path:path.join(out,'migration-readiness.png'),fullPage:true});
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);

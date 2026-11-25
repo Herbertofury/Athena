@@ -20,13 +20,20 @@ source audit, parity proof, complete backlog or source-retirement certificate.
 `retirement_certified` remains false and every source has explicit open gates.
 There is no delete, archive, permission, install, restore or remote-refresh action.
 The page makes no external fetches; source links open only when the user chooses
-one. Its hash identifies the embedded snapshot, not evidence authenticity or
-current upstream state. Snapshot changes require reviewed repository updates.
+one. The browser checks exact UTF-8 response bytes against the engine's digest
+before rendering or allowing a byte-identical local JSON download. This detects
+corruption; it is not a signature, independent source authentication or a live
+audit. The full download is unchanged by any filter. No filters are persisted
+and no network re-read is needed to search or filter. Use
+`/migration?source=foundry&view=open` to link directly to a particular project
+and status. Unknown parameters do not navigate elsewhere. Snapshot content
+changes require reviewed repository updates.
 
 Tests pin source URLs, permit only known workspace routes and recorded/open states,
 require all sources to retain open gates, and reject a certification assertion.
 Actual portable Chromium acceptance navigates Learning History → readiness →
-Learning History, checks four source cards and seven pinned links, verifies exact
-snapshot bytes/hash, absence of action buttons, no browser mutation requests
+Learning History, checks four source cards and nine pinned links, verifies exact
+snapshot bytes/hash and downloaded bytes, search/filter and bad digest refusal,
+absence of action buttons, no browser mutation requests
 during the dedicated readiness visit, POST refusal and narrow-screen overflow. Screenshot inspection is
 separate from automated acceptance. Source repositories remain preserved.
