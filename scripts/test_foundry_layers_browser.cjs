@@ -54,6 +54,8 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
    return {keyboard:buttons[0]===row.getRootNode().activeElement,rowFits:rect.left>=0&&rect.right<=innerWidth,sizes:buttons.map(b=>b.getBoundingClientRect().height),
     outline:getComputedStyle(buttons[0]).outlineStyle,wrapping:style.flexWrap};
   });
+  const skipStyle=await one('.skip').evaluate(el=>{const s=getComputedStyle(el);return [s.clipPath,s.pointerEvents];});
+  assert.deepEqual(skipStyle,['inset(50%)','none']);
   const {sizes,...traits}=geometry;
   assert.deepEqual(traits,{keyboard:true,rowFits:true,outline:'solid',wrapping:'wrap'});
   assert.ok(sizes.every(h=>h>=44),'Layer action heights: '+sizes.join(', '));
