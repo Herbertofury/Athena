@@ -18,7 +18,7 @@
     { id: "regen",   name: "HP Regen +1/s",     icon: "💚",  apply: (p) => { p.regen += 1; } },
   ];
 
-export function generateLegacyUpgradeOffers(player,random) {
+export function generateLegacyUpgradeOffers(player,random,shuffle) {
   const pick  = (arr) => arr[Math.floor(random() * arr.length)];
     let levelUpChoices;
       // Pick 3 random upgrades
@@ -31,7 +31,7 @@ export function generateLegacyUpgradeOffers(player,random) {
         pool.push({ id: "weapon_" + w.name, name: "New: " + w.name, icon: "🗡️", weapon: w });
       }
 
-      const shuffled = pool.sort(() => random() - 0.5);
+      const shuffled = shuffle ? shuffle(pool) : pool.sort(() => random() - 0.5);
       levelUpChoices = shuffled.slice(0, 3);
     return levelUpChoices;
 }

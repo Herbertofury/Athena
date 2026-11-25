@@ -84,6 +84,8 @@ jobs:
         run: node --test engines/roguelite/tests/arena-formats.test.mjs
       - name: Replay exact Arena input tapes and reject malformed or altered files
         run: node --test engines/roguelite/tests/arena-replay.test.mjs
+      - name: Hunt roaming geodes and fleeing goblins; collect and replay exact rewards
+        run: node --test engines/roguelite/tests/roaming-points.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML

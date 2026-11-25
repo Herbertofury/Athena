@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {encodeArenaTape} from '../src/arena-replay.mjs';
+import {followExpedition} from './expedition-fixture.mjs';
 import {resolve} from 'node:path';
 import {readFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
@@ -69,14 +72,50 @@ try{
  assert.equal(await page.locator('#kills').textContent(),'0');
  assert.equal(await page.locator('#level').textContent(),'1');
  const profile=page.getByLabel('Format for next run');
- assert.equal(await profile.locator('option').count(),6);
+ assert.equal(await profile.locator('option').count(),7);
  await profile.selectOption('marathon-120');
  await page.getByRole('button',{name:'Restart run'}).click();
  assert.match(await page.locator('#pressure').textContent(),/120 min · Onset/);
  await profile.selectOption('endless');
  await page.getByRole('button',{name:'Restart run'}).click();
  assert.match(await page.locator('#pressure').textContent(),/Endless · Onset/);
+ assert.equal(await page.locator('#expedition-readout').isHidden(),true);
+ await page.clock.resume();
+ const {h,collections,firstSight,cacheSight}=followExpedition();
+ assert.deepEqual(collections,['crystal','gold']);
+ const hash=value=>createHash('sha256').update(value).digest('hex');
+ const paintColor=rgb=>arena.evaluate((el,[r,g,b])=>{
+  const data=el.getContext('2d').getImageData(0,0,el.width,el.height).data;
+  let count=0;
+  for(let i=0;i<data.length;i+=4)if(data[i]===r&&data[i+1]===g&&data[i+2]===b)count++;
+  return count;
+ },rgb);
+ const renderFixture=async(name,fixture)=>{
+  const wasOpen=await page.locator('#run-tapes').evaluate(el=>el.open);
+  if(!wasOpen)await page.locator('#run-tapes summary').click();
+  const tape=await encodeArenaTape(fixture,hash);
+  await file.setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(tape)});
+  await page.getByRole('button',{name:'Verify and load'}).click();
+  const notice=page.locator('#tape-status');
+  await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();
+  assert.match(await notice.textContent(),/Verified and loaded/,name+' verification');
+  assert.equal(await profile.inputValue(),'roaming-expedition-20');
+  assert.equal(await page.locator('#expedition-readout').isVisible(),true);
+ };
+ await renderFixture('geode-spotted.json',{capture:()=>firstSight});
+ assert.match(await page.locator('#expedition-event').textContent(),/Crystalback Geode Worm spotted/);
+ assert.ok(await paintColor([119,239,220])>300,'mining target is drawn in the arena');
+ await renderFixture('drop-awaiting.json',{capture:()=>cacheSight});
+ const beforePickup=JSON.parse(cacheSight.final).world.roaming;
+ const pending=beforePickup.caches[0];
+ assert.ok(['crystal','gold'].includes(pending.resource));
+ assert.match(await page.locator('#expedition-event').textContent(),new RegExp('Cache dropped: collect '+pending.resource));
+ assert.equal(await page.locator('#expedition-balance').textContent(),`Crystal ${beforePickup.balance.crystal} · Gold ${beforePickup.balance.gold}`);
+ const cacheColor=pending.resource==='gold'?[255,202,117]:[138,255,238];
+ assert.ok(await paintColor(cacheColor)>40,'the uncollected cache is actually rendered');
+ await renderFixture('both-collected.json',h);
+ assert.equal(await page.locator('#expedition-balance').textContent(),'Crystal 12 · Gold 24');
  assert.deepEqual(errors,[]);
  assert.deepEqual(requests,[address]);
- console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, local tape download and exact recovery, tamper refusal, format selection; zero external requests.');
+ console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, local tape download and exact recovery, tamper refusal, format selection, actual geode/cache pixels and both collected Expedition resources; zero external requests.');
 }finally{await browser.close();}

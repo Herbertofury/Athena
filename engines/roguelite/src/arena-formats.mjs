@@ -4,6 +4,7 @@ const make=(id,minutes)=>Object.freeze({id,seconds:minutes===null?null:minutes*6
 export const ARENA_FORMATS=Object.freeze([
  make('classic',5),make('marathon-20',20),make('marathon-30',30),
  make('marathon-60',60),make('marathon-120',120),make('endless',null),
+ Object.freeze({id:'roaming-expedition-20',seconds:20*60,roaming:true}),
 ]);
 const formats=new Map(ARENA_FORMATS.map(p=>[p.id,p]));
 export function arenaFormat(id) {

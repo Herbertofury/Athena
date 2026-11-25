@@ -3,6 +3,7 @@ const get=id=>document.getElementById(id);
 const board=get('arena'), ctx=board.getContext('2d'), start=get('start'), pause=get('pause'), seed=get('seed');
 const hud=Object.fromEntries(['hp','level','xp','kills','time','arsenal'].map(id=>[id,get(id)]));
 const choicePanel=get('choice'), choices=get('choices'), status=get('status'), formatField=get('run-format'), pressure=get('pressure');
+const expedition=get('expedition-readout'), eventReadout=get('expedition-event'), balanceReadout=get('expedition-balance');
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
@@ -43,10 +44,66 @@ function showFrameStats(){
  get('write-tape').disabled=!host?.canSave();
  const m=snapshot.arenaFormat;
  setText(pressure,m?(m.seconds===null?'Endless':m.seconds/60+' min')+' · '+m.label+(m.wave?' '+m.wave:''):'Classic source rules');
+ const discoveries=snapshot.roaming;
+ expedition.hidden=!discoveries;
+ if(discoveries){
+  const target=discoveries.live, cache=discoveries.caches[0];
+  const marked=cache??target;
+  const dx=marked?marked.x-player.x:0,dy=marked?marked.y-player.y:0;
+  const offset=(Math.abs(dy)>28?(dy<0?'north':'south'):'')+(Math.abs(dx)>28?(dx<0?'west':'east'):'');
+  const where=offset?' · '+offset:' · nearby';
+  const name=cache?'Cache dropped: collect '+cache.resource+where:target?target.name+' spotted'+where:'No roaming encounter nearby.';
+  setText(eventReadout,name);
+  setText(balanceReadout,'Crystal '+discoveries.balance.crystal+' · Gold '+discoveries.balance.gold);
+ }
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
 }
 function circle(x,y,r,color){
  ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,Math.max(.1,r),0,Math.PI*2);ctx.fill();
+}
+function drawExpedition(discoveries,ox,oy,width,height) {
+ if(!discoveries)return;
+ const {live,caches}=discoveries;
+ if(live){
+  const x=live.x+ox,y=live.y+oy;
+  if(live.kind==='geode'){
+   const bx=live.anchorX+ox,by=live.anchorY+oy;
+   const dx=bx-x,dy=by-y;
+   for(let i=6;i>=1;i--){
+    const ratio=i*.43;
+    circle(x+dx*ratio,y+dy*ratio+Math.sin(i*1.3)*9,29-i*2.8,i%2?'#285960':'#356d76');
+   }
+   circle(x,y,live.size+5,'#24565b');
+  }else{
+   ctx.fillStyle='#74442d';ctx.fillRect(x-19,y-10,13,20);
+  }
+  circle(x,y,live.size,live.hitFlash>0?'#fff4c9':live.color);
+  ctx.fillStyle='#042023';ctx.fillRect(x-32,y-live.size-11,64,5);
+  ctx.fillStyle=live.color;ctx.fillRect(x-32,y-live.size-11,64*Math.max(0,live.hp/live.maxHp),5);
+  if(x>=35&&x<=width-35&&y>=40&&y<=height-22){
+   ctx.textAlign='center';ctx.font='bold 12px system-ui';ctx.fillStyle='#fff5df';
+   ctx.fillText(live.kind==='geode'?'MINE THE GEODE':'CATCH THE GOBLIN',x,y-live.size-17);
+  }
+ }
+ for(const cache of caches){
+  const x=cache.x+ox,y=cache.y+oy;
+  ctx.strokeStyle=cache.resource==='gold'?'#ffca75':'#8affee';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#16273b';ctx.fillRect(x-12,y-8,24,16);ctx.strokeRect(x-12,y-8,24,16);
+ }
+ const marked=caches[0]??live;
+ if(marked){
+  const x=marked.x+ox,y=marked.y+oy;
+  if(x<24||x>width-24||y<24||y>height-24){
+   const dx=x-width/2,dy=y-height/2;
+   const scale=Math.min((width/2-27)/Math.max(1,Math.abs(dx)),(height/2-27)/Math.max(1,Math.abs(dy)));
+   const atX=width/2+dx*scale,atY=height/2+dy*scale,angle=Math.atan2(dy,dx);
+   ctx.save();ctx.translate(atX,atY);ctx.rotate(angle);
+   ctx.fillStyle=marked.resource==='gold'?'#ffca75':'#8affee';
+   ctx.beginPath();ctx.moveTo(17,0);ctx.lineTo(-8,-9);ctx.lineTo(-3,0);ctx.lineTo(-8,9);ctx.closePath();ctx.fill();
+   ctx.restore();
+  }
+ }
 }
 function draw(){
  const W=board.width,H=board.height,p=snapshot?.player??{x:0,y:0}, ox=W/2-p.x, oy=H/2-p.y;
@@ -64,14 +121,16 @@ function draw(){
   ctx.fillStyle='#252533';ctx.fillRect(x-enemy.size,y-enemy.size-7,2*enemy.size,3);
   ctx.fillStyle='#ff8f94';ctx.fillRect(x-enemy.size,y-enemy.size-7,2*enemy.size*Math.max(0,Math.min(1,enemy.hp/enemy.maxHp)),3);
  }
+ drawExpedition(snapshot?.roaming,ox,oy,W,H);
  for(const shot of snapshot?.projectiles??[])circle(shot.x+ox,shot.y+oy,shot.size,shot.color);
  for(const b of snapshot?.bibles??[])circle(W/2+Math.cos(b.angle)*b.r,H/2+Math.sin(b.angle)*b.r,b.size,b.color);
  circle(W/2,H/2,15,p.dashTimer>0?'#d6faff':'#354967');circle(W/2,H/2,10,'#89f7cd');
  ctx.font='bold 13px system-ui';ctx.textAlign='center';
  for(const n of snapshot?.damageNumbers??[]){ctx.fillStyle=n.color;ctx.fillText(n.val,n.x+ox,n.y+oy);}
  if(mode==='ready'||mode==='paused'||mode==='finished'){
-  ctx.fillStyle='#0a0c14d9';ctx.fillRect(0,H/2-31,W,63);ctx.font='bold 25px system-ui';ctx.fillStyle='#f1f5ff';
-  ctx.fillText(mode==='ready'?'Survivor Arena':mode==='paused'?'Paused':snapshot.run.won?'You survived!':'Run finished',W/2,H/2+8);
+  const bannerY=snapshot?.roaming&&mode==='paused'?44:H/2;
+  ctx.fillStyle='#0a0c14d9';ctx.fillRect(0,bannerY-31,W,63);ctx.font='bold 25px system-ui';ctx.fillStyle='#f1f5ff';
+  ctx.fillText(mode==='ready'?'Survivor Arena':mode==='paused'?'Paused':snapshot.run.won?'You survived!':'Run finished',W/2,bannerY+8);
  }
  showFrameStats();
 }
@@ -89,7 +148,7 @@ function frame(now){
    if(result==='choice'){
     transition('choice','Level '+snapshot.player.level+'. Choose an upgrade.');
     showChoices(snapshot.offers);
-   }else transition('finished',snapshot.run.won?(snapshot.arenaFormat?'Marathon complete.':'You survived five minutes.'):'Run finished. Try another seed or play again.');
+   }else transition('finished',snapshot.run.won?(snapshot.roaming?'Expedition complete.':snapshot.arenaFormat?'Marathon complete.':'You survived five minutes.'):'Run finished. Try another seed or play again.');
   }
  }
  if(mode==='running')snapshot=host.snapshot();

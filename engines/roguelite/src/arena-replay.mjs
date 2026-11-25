@@ -22,7 +22,7 @@ export function createRecordedArena({seed,format='classic'}={}){
  if(!uint(seed,2**32-1))throw RangeError('Invalid Arena seed');
  arenaFormat(format);
  let cursor=seed>>>0,ticks=0,phase='running',truncated=false;
- const host=createLegacySurvivorRun({format,random:()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;}});
+ const host=createLegacySurvivorRun({format,seed,random:()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;}});
  const input=[];
  function advance(mask){
   if(!uint(mask,31))throw Error('Invalid Arena input mask');
@@ -50,7 +50,12 @@ export function createRecordedArena({seed,format='classic'}={}){
  function capture(){
   if(truncated)throw Error('This run is beyond the portable replay limit. You can keep playing.');
   return {header:{schema:ARENA_TAPE_SCHEMA,rules:ARENA_REPLAY_RULES,seed,format,ticks,inputs:structuredClone(input)},
-   final:JSON.stringify({phase,cursor,world:host.snapshot()})};
+   // Expedition introduces long-running movement with trig. Normalize sub-pixel
+   // float noise for cross-runtime verification, not engine inputs or world state.
+   // Existing formats keep their exact byte-for-byte tape state digests.
+   final:JSON.stringify({phase,cursor,world:host.snapshot()},format==='roaming-expedition-20'
+    ?(_key,value)=>typeof value==='number'&&!Number.isInteger(value)?Number(value.toFixed(6)):value
+    :undefined)};
  }
  return Object.freeze({
   step:({keys}={})=>advance(readMask(keys)),advance,choose,capture,
