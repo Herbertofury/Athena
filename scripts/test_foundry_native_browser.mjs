@@ -743,10 +743,30 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByRole('heading',{name:'Engine Foundry Play Lab',exact:true}).waitFor();
    const storage=()=>play.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
    const before=await storage();
-   await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   // Hold one boot dependency, not the whole document, to prove that a
+   // quick first click cannot be silently dropped while the module loads.
+   let releaseBoot;
+   const bootGate=new Promise(resolve=>{releaseBoot=resolve;});
+   let observedModuleResolve;
+   const observedModule=new Promise(resolve=>{observedModuleResolve=resolve;});
+   const dependency=origin+'/play/survivor/src/spatial-region.mjs';
+   await play.route(dependency,async route=>{
+    observedModuleResolve();
+    await bootGate;
+    await route.continue();
+   });
+   try{
+    await play.getByRole('link',{name:'Survivor Arena',exact:true}).click({noWaitAfter:true});
+    await Promise.race([observedModule,play.waitForTimeout(8000).then(()=>{throw Error('Frontier module not requested: '+errors.join('; '));})]);
+    const start=play.getByRole('button',{name:'Start run',exact:true});
+    assert.equal(await start.isDisabled(),true);
+    assert.match(await play.locator('#status').textContent(),/Loading Survivor Arena/);
+   }finally{releaseBoot();}
+   await play.locator('#status').filter({hasText:'Ready. Choose a seed or start with 42.'}).waitFor();
+   await play.unroute(dependency);
    const arena=play.locator('#arena');
    await play.getByRole('button',{name:'Start run',exact:true}).click();
-   await play.locator('#status').filter({hasText:'Run started.'}).waitFor();
+   assert.match(await play.locator('#status').textContent(),/Run started\./);
    assert.equal(await arena.evaluate(e=>e===document.activeElement),true);
    const pixels=()=>arena.evaluate(e=>e.toDataURL());
    const original=await pixels();assert.ok(original.length>100);
@@ -777,7 +797,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
- if(portableUnified)await check('Exact portable Athena resumes a side rift and verifies a funded camp upgrade through browser-local tapes',async()=>{
+ if(portableUnified)await check('Exact portable Athena resumes a side rift, builds a camp totem, and verifies both Frontier routes',async()=>{
   // The preceding animation proof installs a paused context-wide fake clock.
   // Replay cooperatively yields to real timers and should be tested independently.
   const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -847,6 +867,32 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByText('Save or resume an offline run',{exact:true}).click();
    await load('restore-built-camp.json',campBytes);
    assert.match(await play.locator('#camp-ranks').textContent(),/Health totems 1/);
+   const {followFrontier,interveneAndAdvance}=await import('../engines/roguelite/tests/frontier-fixture.mjs');
+   const {yes,no}=followFrontier();
+   const moduleLoaded=play.waitForResponse(r=>r.url()===origin+'/play/survivor/src/spatial-region.mjs'&&r.ok());
+   await play.reload();
+   assert.match((await moduleLoaded).headers()['content-type'],/javascript/);
+   await play.getByText('Save or resume an offline run',{exact:true}).click();
+   await load('native-frontier-survey.json',Buffer.from(await encodeArenaTape(no,digest)));
+   assert.match(await play.locator('#frontier-event').textContent(),/Survey Outcrop discovered/);
+   assert.match(await play.locator('#pressure').textContent(),/30 min/);
+   await load('native-frontier-battle.json',Buffer.from(await encodeArenaTape(yes,digest)));
+   assert.match(await play.locator('#frontier-event').textContent(),/Amber and Violet factions fighting/);
+   assert.ok(yes.snapshot().region.amber<54 && yes.snapshot().region.violet<47);
+   await play.getByRole('button',{name:/Help the Amber Surveyors/}).press('Enter');
+   assert.match(await play.locator('#status').textContent(),/Stay inside the basin/);
+   const frontierDownload=play.waitForEvent('download');
+   await play.getByRole('button',{name:'Download run tape'}).click();
+   const frontierTape=path.join(scratch,'native-frontier-joined.json');
+   await (await frontierDownload).saveAs(frontierTape);
+   const joined=await decodeArenaTape(fs.readFileSync(frontierTape,'utf8'),{digest});
+   assert.equal(joined.snapshot().region.state,'intervening');
+   interveneAndAdvance(joined,400);
+   assert.equal(joined.snapshot().region.bankedCrystal,8);
+   await load('native-frontier-reward.json',Buffer.from(await encodeArenaTape(joined,digest)));
+   assert.match(await play.locator('#frontier-details').textContent(),/banked 8/);
+   const names=await play.evaluate(()=>performance.getEntriesByType('resource').map(entry=>new URL(entry.name).pathname));
+   assert.ok(names.includes('/play/survivor/src/spatial-region.mjs'));
    assert.equal(await storage(),before);
    assert.deepEqual(errors,[]);
    assert.deepEqual(actions,[]);

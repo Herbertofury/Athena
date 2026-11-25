@@ -166,3 +166,17 @@ The Canvas loop reads a copied frame projection, including every visible entity,
 ### Camp Expedition
 
 Select **Camp Expedition · 20 min** to give earned resources a use. Mine a geode, chase a goblin, or clear a rift, then follow the campfire marker. A health totem spends 12 crystal and grants 15 maximum health. A weapon rack spends 24 gold and increases weapon damage by 10%. Neither upgrade applies without your choice. The workshop, resources, upgrades, and already-paid choices are part of the selected run tape. This is an in-run progression prototype; it does not implement account, shared or permanent home progression.
+
+### Frontier Expedition
+
+**Frontier Expedition · 30 min** is a separate playable recipe, not a shortened
+Marathon. Explore instead of following only time-triggered encounters. A fixed
+seed places two distinct world regions in opposite directions. One route can
+reach the quiet Survey Outcrop. Another enters Skirmish Basin while the Amber
+Surveyors and Violet Marauders are already fighting. You can detour, or support
+the Surveyors by staying in the basin until the outcome resolves. On success,
+the cache is physically collected once and adds crystal to the same run's camp
+wallet. Walking away can lose the fight and provides nothing. Rifts and camps
+retain their previously tested local behavior, and the tape preserves the
+existing phase, reward, and suspended worlds. No more than the two authored
+regions are claimed here, and the older recipes retain their previous tape data.
