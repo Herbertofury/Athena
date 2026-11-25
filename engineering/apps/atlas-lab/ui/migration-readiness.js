@@ -45,6 +45,7 @@ function makeCard(project) {
   nav.append(link('Open native workspace', project.workspace));
   if (project.native_entry) nav.append(link('Open local experiments', project.native_entry));
   if (project.id === 'atlas') nav.append(link('Browse recovered Engineering-Atlas evidence', '/migration/atlas'));
+  if (project.id === 'constellation') nav.append(link('Review an original Constellation export', '/migration/constellation'));
   card.append(nav);
   const gateRows = project.gates.map(gate => {
     const section = node('section');

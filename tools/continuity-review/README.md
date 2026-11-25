@@ -122,3 +122,10 @@ selected references, not recoverability, concurrent file mutation, all
 semantic content, private-data clearance, or source-retirement readiness.
 It does not import data. Use an explicitly selected quiescent file in a
 trusted folder (16 MiB limit).
+
+In the unified app, **Migration readiness → Project Constellation → Review an
+original Constellation export** opens the same native count-only review. Choose
+a file and explicitly click **Run local review**; selection alone makes no
+request. The current local engine accepts one bounded request at a time. The
+browser can filter to missing or uncertain collections. The file is processed
+in loopback memory and is never imported or persisted by the review.

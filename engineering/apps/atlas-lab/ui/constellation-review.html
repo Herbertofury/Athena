@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Athena · Review a Constellation export</title><link rel="stylesheet" href="/learning/style.css"></head>
+<body><main><nav aria-label="Athena native pages"><a href="/">ATHENA / HOME</a><a href="/migration?source=constellation">Migration readiness</a><a href="/#continuity">Continuity workspace</a></nav>
+<header><p class="eyebrow">BEFORE YOU MOVE ANYTHING</p><h1>Review a Constellation export</h1><p>Check what an original v7 backup contains, what its writer omitted, and whether its saved turn links are present.</p></header>
+<section class="runner" aria-labelledby="choose"><h2 id="choose">Choose a closed v7 export</h2>
+<p id="scope">Athena processes the file in memory on this computer only. It shows counts and a checksum, not chat text, settings, or URLs. This is not an import or proof you can retire the source.</p>
+<form id="review-form" class="history-controls"><label for="source">Original export JSON (up to 16 MiB)</label><input id="source" type="file" accept=".json,application/json" required aria-describedby="scope"><button id="review" type="submit" disabled>Run local review</button></form>
+<p id="review-status" role="status">Choose a file; nothing is sent on selection.</p></section>
+<section id="results" class="runner" hidden aria-labelledby="receipt"><h2 id="receipt">What this export contains</h2><p id="digest"></p><ul id="references"></ul>
+<label for="filter">Show collections</label> <select id="filter"><option value="all">All collections</option><option value="needs">Missing or uncertain</option></select>
+<p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div></section>
+<footer>No import · No file edits · No external requests</footer></main>
+<script type="module" src="/migration/constellation/app.js"></script></body></html>
