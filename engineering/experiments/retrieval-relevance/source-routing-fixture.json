@@ -1,0 +1,16 @@
+{
+  "schema": "athena-review-exact-source-v1",
+  "provider": "x",
+  "source_commit": "219a82d312803a5b4bfdb2556e9418665fd5c15f",
+  "entries": [
+    {"id":"core-unidentified-bluekiwidog-post-2125587147482869811","title":"Yvette","source":"https://x.com/BluekiwiDog/status/2125587147482869811"},
+    {"id":"core-unidentified-koqona-selection-20261125","title":"Koko’s pointed-ear look","source":"https://x.com/koqona/status/2125658710080946675"}
+  ],
+  "cases": [
+    {"id":"exact-alias","query":"https://twitter.com/bluekiwidog/status/2125587147482869811?ref=fixture","mode":"exact","expect":"core-unidentified-bluekiwidog-post-2125587147482869811"},
+    {"id":"exact-neighbor-absent","query":"https://x.com/BluekiwiDog/status/2125587147482869812","mode":"exact","expect":null},
+    {"id":"exact-photo-marker","query":"https://x.com/i/web/status/2125658710080946675/photo/1#test","mode":"exact","expect":"core-unidentified-koqona-selection-20261125"},
+    {"id":"exact-second-neighbor-absent","query":"https://x.com/koqona/status/2125658710080946676","mode":"exact","expect":null},
+    {"id":"descriptive-identity-safe","query":"the blue-haired pointed-ear look","mode":"text","expect":"core-unidentified-koqona-selection-20261125"}
+  ]
+}
