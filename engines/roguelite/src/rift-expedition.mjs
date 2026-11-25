@@ -44,11 +44,12 @@ export function createRiftExpedition({seed,random}) {
   }
   return travel.choose(id);
  }
- return Object.freeze({step,choose,riftActive:()=>inRift,captureSuspended:travel.captureSuspended,snapshot:()=>{
-  const view=travel.snapshot(), portal=director.snapshot();
+ return Object.freeze({step,choose,riftActive:()=>inRift,captureSuspended:travel.captureSuspended,snapshot:()=>project(false),frameView:()=>project(true)});
+ function project(frame){
+  const view=frame?travel.frameView():travel.snapshot(), portal=director.snapshot();
   return {...view,portal,...(decision?{offers:[
    {id:'rift-enter',icon:'◈',name:'Enter '+portal.marker.minutes+'-minute rift',kind:'rift'},
    {id:'rift-stay',icon:'↶',name:'Stay in the main Expedition',kind:'rift'},
   ]}:{})};
- }});
+ }
 }

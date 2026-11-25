@@ -158,3 +158,7 @@ The opt-in encounter lane derives its choices from the run seed and simulated cl
 ### Rift Expedition
 
 **Rift Expedition · 20 min** includes the Roaming Expedition and discoverable portals. Follow a portal marker to choose whether to enter. Seeded side runs last 10, 20, or 30 minutes; you can decline or leave early. The parent run is suspended, including its clock, enemies, player, and random stream. A side run has its own clock, starting kit, health and random stream. Clearing it banks a one-time run-local reward; loss or early departure pays nothing. Your tape can resume a side run and preserves the suspended parent without changing older tape meanings. No store, account, native installation, or network access.
+
+### Rendering and replay boundaries
+
+The Canvas loop reads a copied frame projection, including every visible entity, projectile, damage number, cache and route marker. It does not clone the complete gameplay state or walk projectile hit sets merely to draw. Full snapshots, tape verification, save/resume, and rules remain unchanged. Tests compare the two views across all eight recipes, including portal choice and active side run, and verify that changing a frame record cannot alter gameplay.

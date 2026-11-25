@@ -37,12 +37,14 @@ export function createRiftSession({main,createSide}={}) {
   enter,step,choose:id=>(active?.side??main).choose(id),
   abandon:()=>active?finish('abandoned'):null,
   captureSuspended:()=>active?{main:structuredClone(active.frozen),sideEntropy:active.side.entropyCursor?.()??null}:null,
-  snapshot:()=>{
+  snapshot:()=>project(false), frameView:()=>project(true),
+ });
+ function project(frame){
    const {side,minutes,seed,route,frozen}=active??{};
-   return {...(side?side.snapshot():main.snapshot()),rift:{
+   const target=side??main;
+   return {...(frame&&target.frameView?target.frameView():target.snapshot()),rift:{
     active:side?{minutes,seed,route}:null,earned:{...earned},last:last?{...last,reward:{...last.reward}}:null,
     ...(frozen?{mainTime:frozen.gameTime}:{}),
    }};
-  }
- });
+ }
 }
