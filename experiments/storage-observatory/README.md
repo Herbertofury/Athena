@@ -51,3 +51,13 @@ fixture compares actual sparse file and hardlink sizes/blocks/IDs against GNU
 metadata unchanged. The mount-boundary check injects a distinct mount ID; it
 never mounts anything. The measured-JSON UI test uses real CLI output and
 LinkeDOM; no rendered Chromium or Windows evidence.
+
+### Descriptor-backed mount lookup
+
+On supported Linux kernels and libc, the optional scanner gets the mount ID
+directly from the exact descriptor it already opened
+([Linux statx](https://man7.org/linux/man-pages/man2/statx.2.html),
+`AT_EMPTY_PATH` and `STATX_MNT_ID`). If the call or mount-ID field is unavailable,
+it falls back to the original `/proc/self/fdinfo` lookup. The same-device mount
+check, no-follow boundary, stable-identity checks, counters and report contract
+are unchanged. This does not add a Windows scanner.
