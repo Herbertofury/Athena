@@ -2,7 +2,7 @@
 
 **Status:** source intake; not yet a canonical production package. **License:** GPL-3.0-or-later. **Origin:** GameSync `app/shared/cardgame/` at `bce6c1bcb31c63d31c64185fef143a53d9c4d35f` (23 modules).
 
-This is a substantial existing card-game platform, not just UI card components. It includes turn/combat rules, card/hero/keyword definitions, AI, deckbuilder, collection, packs, progression, multiple game modes and a GameSync library-to-card content adapter. GameSync Next has a matching 23-module directory: 19 files are byte-identical; `board.js`, `cardgame.css`, `deck-select.js` and `screens.js` are host/presentation divergences.
+The complete 23-module source snapshot is now stored at `upstream/gamesync/` and verified against the pinned source manifest. This is a substantial existing card-game platform, not just UI card components. It includes turn/combat rules, card/hero/keyword definitions, AI, deckbuilder, collection, packs, progression, multiple game modes and a GameSync library-to-card content adapter. GameSync Next has a matching 23-module directory: 19 files are byte-identical; `board.js`, `cardgame.css`, `deck-select.js` and `screens.js` are host/presentation divergences.
 
 ## Athena target package
 
