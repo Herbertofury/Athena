@@ -70,6 +70,35 @@ class PackageTests(unittest.TestCase):
                     pack.package(source,root/'public',self.approved(source),profile='public-preview')
                 self.assertFalse((root/'public').exists())
 
+    def test_native_workspace_files_are_required_even_if_review_omits_them(self):
+        paths = (
+            'workspaces/storage/index.mjs',
+            'workspaces/storage/model.mjs',
+            'workspaces/storage/style.css',
+            'workspaces/projects/index.mjs',
+            'workspaces/projects/model.mjs',
+            'workspaces/projects/style.css',
+            'workspaces/projects/import.mjs',
+            'workspaces/projects/compare.mjs',
+            'workspaces/continuity/index.mjs',
+            'workspaces/continuity/model.mjs',
+            'workspaces/continuity/style.css',
+            'workspaces/continuity/import.mjs',
+            'workspaces/continuity/context.mjs',
+            'workspaces/continuity/artifacts.mjs',
+        )
+        for profile in ('complete', 'public-preview'):
+            for name in paths:
+                with self.subTest(profile=profile, path=name), tempfile.TemporaryDirectory() as temp:
+                    root=pathlib.Path(temp);source=self.source(root)
+                    if profile=='public-preview':
+                        (source/'workspaces/foundry/index.js').unlink()
+                    (source/name).unlink(missing_ok=True)
+                    # Review covers everything present, not whether every route works.
+                    with self.assertRaisesRegex(ValueError, 'missing: .*'+name):
+                        pack.package(source,root/'public',self.approved(source),profile=profile)
+                    self.assertFalse((root/'public').exists())
+
     def test_existing_output_preserved(self):
         with tempfile.TemporaryDirectory() as temp:
             root=pathlib.Path(temp);source=self.source(root);output=root/'public';output.mkdir();(output/'mine').write_text('preserve')
@@ -136,7 +165,7 @@ class PackageTests(unittest.TestCase):
             root=pathlib.Path(temp);source=self.source(root)
             (source/'workspaces/foundry/index.js').unlink()
             manifest=pack.package(source,root/'public',self.approved(source),profile='public-preview')
-            self.assertEqual(manifest['workspaces'],['learning','software','guidance','research','media','lab','cards','audio','receiver','diagnostics','build'])
+            self.assertEqual(manifest['workspaces'],['learning','software','guidance','research','media','lab','cards','audio','receiver','diagnostics','storage','projects','continuity','build'])
             self.assertEqual(manifest['pending'], ['Full Foundry parity: original 3D, artist worlds, native persistence and provider authorization'])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 

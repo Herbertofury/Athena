@@ -34,6 +34,11 @@ jobs:
           node scripts/test_continuity_browser.cjs
           node scripts/test_continuity_import_browser.cjs
           node scripts/test_continuity_artifacts_browser.cjs
+      - name: Verify workspace preservation in the exact public-preview package
+        run: |
+          candidate="$RUNNER_TEMP/athena-workspaces-preview"
+          python3 scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output "$candidate"
+          ATHENA_CONTINUITY_RUNTIME_DIR="$candidate" node scripts/test_continuity_browser.cjs
       - name: Verify native project browser
         run: node scripts/test_projects_browser.cjs
       - name: Verify native guidance reader and reference exports
