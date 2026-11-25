@@ -375,5 +375,9 @@ hash checks do not make this safe with concurrent writers.
 
 [Upgrade-copy evidence and scope](../../research/portable-upgrade-copy-2026-11-15/README.md)
 
+### Stable room layers
+
+The Room layers navigator keeps the same row and action controls while selecting, filtering, showing or pinning an instance in the current room. Keyboard focus remains on its action, inspector options stay mounted if their values, labels and order are unchanged, each control is described by its layer, and stack and surface changes move the existing row rather than making a new one. A different room retires the prior controls even when IDs happen to match. No workspace format, visibility, persistence, or history behavior changes. Verify the full 100-row local fixture and the extracted-runtime Chromium keyboard test.
+
 ### Current-theme catalog search
 The native Asset Library filters catalog entries by name, shape and role. All whitespace-separated terms must match, case-insensitively. Search stays in the current theme, retains the instance limit, and does not change layouts, selection or history. It is session-only and clearing it restores the full current-theme catalog. Filtered-out stale buttons cannot add objects.
