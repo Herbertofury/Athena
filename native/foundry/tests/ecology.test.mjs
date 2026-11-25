@@ -38,3 +38,30 @@ test('ecology preserves allowlisted blends within isolated stage and neutralizes
 
 test('authored rotation footprint includes corners for both sway signs and right-angle swaps',()=>{for(const rotation of [-360,-180,-90,-45,0,30,90,180,360])for(const vx of [-100,0,100]){const b=motionBox(110,150,vx,rotation),r=b.angle*Math.PI/180;for(const [x,y]of[[0,0],[110,0],[0,150],[110,150]]){const px=b.insetX+55+(x-55)*Math.cos(r)-(y-75)*Math.sin(r),py=b.insetY+75+(x-55)*Math.sin(r)+(y-75)*Math.cos(r);assert(px>=-1e-9&&px<=b.width+1e-9);assert(py>=-1e-9&&py<=b.height+1e-9)}}assert(Math.abs(motionBox(110,150,0,90).width-150)<1e-9);for(const bad of [361,-361,NaN,Infinity,'90'])assert.throws(()=>motionBox(110,150,0,bad))});
 test('rotation remains through movement and pause while new footprint reclamps without writes',()=>{const s=setup(),id=themes[0].objects[1].id;s.value.placements[id]={x:1,y:1,pinned:false,rotation:90};s.adapter.update(s.value);const original=JSON.stringify(s.value);s.one('[data-ecology-open]').click();let el=s.one('[data-ecology-object="'+id+'"]');assert.match(el.style.transform,/rotate\(90deg\)/);assert.equal(el.style.transformOrigin,'50% 50%');s.one('[data-ecology-motion]').checked=true;s.throwActor();for(let i=0;i<10;i++)s.advance();s.one('[data-ecology-motion]').checked=false;s.event(s.one('[data-ecology-motion]'),'change');assert.match(el.style.transform,/rotate\(90deg\)/);assert.equal(s.frames.size,0);assert.equal(JSON.stringify(s.value),original);for(const rotation of ['90',Infinity,-361,361,'1) url(https://example.invalid/rotation)']){s.value.placements[id].rotation=rotation;s.adapter.update(s.value);el=s.one('[data-ecology-object="'+id+'"]');assert.match(el.style.transform,/rotate\(0deg\)/)}s.adapter.dispose()});
+
+test('targeted preview focuses the exact independent instance without replacing an open lab',()=>{
+ const s=setup(),id=themes[0].objects[0].id,copy='instance-11111111-1111-4111-8111-111111111111';
+ const item={objectId:id,x:.25,y:.25,pinned:false,scope:'world',visible:true};
+ const value={...s.value,version:9,placements:{[id]:item,[copy]:{...item,x:.65},hidden:{...item,visible:false},ui:{...item,scope:'ui'}}};
+ const before=JSON.stringify(value),focused=[];
+ s.window.HTMLElement.prototype.focus=function(){focused.push(this.dataset.ecologyInstance)};
+ try{
+  s.adapter.update(value);
+  for(const invalid of ['hidden','ui','missing',null])assert.equal(s.adapter.focusPreview(invalid),false);
+  assert.equal(s.one('[data-ecology-stage]').hidden,true);
+  assert.equal(s.adapter.focusPreview(copy),true);
+  assert.deepEqual(focused,[copy]);assert.equal(s.frames.size,0);
+  assert.equal(s.one('[data-ecology-motion]').checked,false);
+  const preview=s.one('[data-ecology-instance="'+copy+'"]'),previous=preview.style.transform;
+  s.event(preview,'keydown',{key:'ArrowRight'});assert.notEqual(preview.style.transform,previous);
+  s.one('[data-ecology-motion]').checked=true;
+  assert.equal(s.adapter.focusPreview(id),true);
+  assert.equal(s.one('[data-ecology-instance="'+copy+'"]'),preview);
+  assert.equal(s.one('[data-ecology-motion]').checked,true);
+  assert.equal(s.frames.size,0);
+  assert.equal(JSON.stringify(value),before);
+  s.adapter.update({...value,placements:{[id]:item}});
+  assert.equal(s.adapter.focusPreview(copy),false);
+  s.adapter.dispose();assert.equal(s.adapter.focusPreview(id),false);
+ }finally{s.adapter.dispose();delete s.window.HTMLElement.prototype.focus;}
+});
