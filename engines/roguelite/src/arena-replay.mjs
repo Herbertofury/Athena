@@ -22,7 +22,7 @@ export function createRecordedArena({seed,format='classic'}={}){
  if(!uint(seed,2**32-1))throw RangeError('Invalid Arena seed');
  arenaFormat(format);
  let cursor=seed>>>0,ticks=0,phase='running',truncated=false;
- const host=createLegacySurvivorRun({format,random:()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;}});
+ const host=createLegacySurvivorRun({format,seed,random:()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;}});
  const input=[];
  function advance(mask){
   if(!uint(mask,31))throw Error('Invalid Arena input mask');

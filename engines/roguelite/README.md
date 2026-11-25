@@ -148,3 +148,9 @@ Tapes are bounded to eight simulated hours, 450,000 spans and 8 MiB. An
 Endless run can continue beyond the portable limits but can no longer be
 exported. Digests check consistency, not authorship or multiplayer
 legality. Browser hashing uses Web Crypto; no network connection is needed.
+
+### Roaming Expedition
+
+Select **Roaming Expedition · 20 min** in the standalone Arena. The Crystalback Geode Worm carries a moving mineable crystal node; the Lockbox Loot Goblin flees your approach. Your ordinary weapons damage these targets. Follow the canvas marker or the text direction, then step into the dropped cache to collect XP and crystal or gold. An escaped target or expired cache pays nothing. The resource balance is local to this run and included in its verified portable tape; it is not a shop, a base economy, or cross-game progression.
+
+The opt-in encounter lane derives its choices from the run seed and simulated clock. It does not consume an extra random draw on existing Classic, Marathon, or Endless. Existing tapes are unchanged. Encounter and resource visuals are original Canvas drawings; the offline build does not fetch assets.
