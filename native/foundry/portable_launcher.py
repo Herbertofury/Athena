@@ -14,6 +14,15 @@ def destination_clear(destination):
     if any(os.path.lexists(str(destination)+suffix) for suffix in ('','-wal','-shm','-journal')):
         raise FileExistsError('Destination database or sidecar exists; preserve it and choose a new name')
 
+def publish_new(staged,destination):
+    # Both paths are staged on the destination volume. Windows rename refuses
+    # an existing name; POSIX rename can overwrite, so use an exclusive link.
+    # Do not fall back to a partial copy or replace on failure.
+    if os.name=='nt':
+        os.rename(staged,destination)
+    else:
+        os.link(staged,destination)
+
 def portable_name(name):
     if not isinstance(name,str) or not name or len(name)>512 or any(ord(c)<32 or ord(c)>126 for c in name):return False
     relative=pathlib.PurePosixPath(name)
@@ -88,8 +97,9 @@ def verify(root):
 def create_database(root,data,destination):
     destination=external_path(destination)
     root=pathlib.Path(root).absolute()
-    if root in destination.parents or not destination.parent.is_dir() or any(p.is_symlink() for p in (destination,*destination.parents)) or os.path.lexists(destination):
-        raise ValueError('New external database required')
+    if (root in destination.parents or not destination.parent.is_dir() or
+            os.path.lexists(destination) or any(link_or_reparse(p) for p in destination.parents)):
+        raise ValueError('New external database with direct parents required')
     destination_clear(destination)
     binary=root/data['binary']
     # Stage on the destination filesystem. Never upgrade or open an existing target.
@@ -104,10 +114,8 @@ def create_database(root,data,destination):
         status=json.loads(run('status'))
         if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Native setup verification failed')
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
-        # Exclusive publication, unlike rename which can replace an existing target.
-        # If hard links are unsupported, refuse rather than degrade to overwrite/copy.
         destination_clear(destination)
-        os.link(staged,destination)
+        publish_new(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
 def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
@@ -142,7 +150,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         payload=staged.read_bytes();final_sha=hashlib.sha256(payload).hexdigest()
         if not upgrade and final_sha!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
         destination_clear(destination)
-        os.link(staged,destination)
+        publish_new(staged,destination)
     return {'backed_up':True,'upgraded_copy':upgrade,'source_schema':original_schema,'schema':status['schema'],'integrity':'ok','bytes':len(payload),
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
@@ -193,13 +201,13 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expec
                 'engineering_validation':'SQLite integrity only; semantic/native acceptance remains separate',
                 'stores':{name:{'sha256':receipt['destination_sha256'],'bytes':receipt['destination_bytes'],'source_file_hashes':receipt['source_file_hashes'],'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime']} for name,receipt in zip(names,receipts)}}
         if parent_checkpoint_sha256 is not None:result['parent_checkpoint_sha256']=parent_checkpoint_sha256
-        # Exclusive directory. Completion marker is linked last; any partial new
+        # Exclusive directory. Completion marker is published last; any partial new
         # directory on failure is retained for inspection, never called complete.
         marker=stage/'checkpoint.json'
         with marker.open('x',encoding='utf-8') as stream:
             json.dump(result,stream,indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
         destination.mkdir(mode=0o700)
-        for name in (*names,'checkpoint.json'):os.link(stage/name,destination/name)
+        for name in (*names,'checkpoint.json'):publish_new(stage/name,destination/name)
     return result
 
 def verify_checkpoint(directory):
@@ -254,12 +262,40 @@ def fork_checkpoint(root,data,source,destination,quiescent=False):
     expected=[{'':receipt['stores'][name]['sha256']} for name in names]
     return checkpoint_stores(root,data,source/names[0],source/names[1],destination,True,expected,parent_digest)
 
+def portable_data_paths(root,directory):
+    root=pathlib.Path(root).absolute()
+    directory=external_path(directory)
+    if directory==root or root in directory.parents or not directory.is_dir():
+        raise ValueError('Choose an existing data folder outside the package')
+    if any(link_or_reparse(p) for p in (directory,*directory.parents)):
+        raise ValueError('Portable data folder and its parents must not be linked')
+    native,journal=(directory/name for name in ('foundry.sqlite3','engineering.sqlite3'))
+    for store in (native,journal):
+        for suffix in ('','-wal','-shm','-journal'):
+            candidate=pathlib.Path(str(store)+suffix)
+            if os.path.lexists(candidate):
+                metadata=candidate.lstat()
+                if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink!=1 or link_or_reparse(candidate):
+                    raise ValueError('Portable data files and sidecars must be ordinary unlinked files')
+    return native,journal
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--portable-data-dir',help='open foundry.sqlite3 and engineering.sqlite3 in one existing external folder');p.add_argument('--init-portable-data',help='explicitly initialize a new paired profile in one existing external folder');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if a.portable_data_dir or a.init_portable_data:
+            if not data.get('engine') or (a.portable_data_dir and a.init_portable_data) or any((
+                a.database,a.journal,a.create_database,a.checkpoint_directory,a.fork_checkpoint,
+                a.working_directory,a.backup_database,a.upgrade_copy,a.backup_destination,a.source_quiescent,a.verify_only)):
+                raise ValueError('Choose one portable data-folder operation on a unified package')
+            native,journal=portable_data_paths(root,a.portable_data_dir or a.init_portable_data)
+            if a.init_portable_data:
+                destination_clear(journal)
+                a.create_database=native
+            else:
+                a.database,a.journal=native,journal
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
         if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')

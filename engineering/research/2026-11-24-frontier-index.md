@@ -1,6 +1,6 @@
 # Frontier engineering intelligence — November 24, 2026
 
-This is the next dated expansion of Athena's existing engineering library, not a new competing database. 64 additional source records are indexed in the complete source register: 44 reviewed upstream documentation observations and 20 release/method observations. Some are new projects; some refresh or deepen existing candidates. The October Explorer snapshot's 283 candidate count remains unchanged until an explicitly verified Explorer rebuild integrates the records. No new candidate is accepted on documentation alone.
+This is the next dated expansion of Athena's existing engineering library, not a new competing database. 64 additional source records are indexed in the complete source register: 44 reviewed upstream documentation observations and 20 release/method observations. Some are new projects; some refresh or deepen existing candidates. In Athena's native Research workspace, open **Frontier source observations** to search these 64 records or filter by batch, with their exact upstream links, reviewed dates and caveats. The ledger works offline; following a source link requires network access. It does not change the October Explorer snapshot's 283 candidates or the comparison shortlist. No new candidate is accepted on documentation alone.
 
 ## Research map
 

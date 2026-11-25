@@ -90,12 +90,62 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await context.request.post(origin+'/__native/backup',{headers:{'X-Athena-Native':'1','Content-Type':'application/json','If-Match':'"empty"'},data:'{}'})).status(),403);
   assert.equal((await context.request.post(origin+'/api/jobs',{headers:{Origin:origin,'X-Athena-Native':'1'},data:{kind:'dedup'}})).status(),403);
  });
+ if(portableUnified)await check('Extracted portable Athena browses exact offline frontier source evidence',async()=>{
+  const evidencePath='/workspaces/engineering/research/frontier-observations.json';
+  const events=[];
+  const track=request=>{if(new URL(request.url()).pathname===evidencePath)events.push(request.url());};
+  page.on('request',track);
+  try{
+   await page.goto(origin+'/#research');
+   await page.locator('.workspace-status').filter({hasText:'Athena research workspace loaded.'}).waitFor();
+   const panel=page.locator('#frontier-observations');
+   const matches=panel.locator('[data-source-observation]');
+   assert.equal(events.length,0);
+   const loaded=page.waitForResponse(r=>new URL(r.url()).pathname===evidencePath);
+   await panel.locator('summary').press('Space');
+   const response=await loaded;
+   assert.equal(response.status(),200);
+   const payload=await response.body();
+   assert.equal(createHash('sha256').update(payload).digest('hex'),
+    createHash('sha256').update(fs.readFileSync(path.join(portable,'runtime',evidencePath.slice(1)))).digest('hex'));
+   await panel.getByRole('status').filter({hasText:'64 of 64 source observations'}).waitFor();
+   assert.equal(await matches.count(),64);
+   await panel.getByLabel('Source batch').selectOption('releases');
+   await panel.getByLabel('Search observations').fill('VulkanMod');
+   assert.equal(await matches.count(),1);
+   assert.equal(await matches.first().getByRole('link').getAttribute('href'),'https://github.com/xCollateral/VulkanMod/releases/tag/0.6.0');
+   assert.equal(events.length,1);
+   assert.equal(report.externalRequests.length,0);
+  }finally{page.off('request',track);}
+ });
  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
   assert.equal(await page.locator('.foundry-workspace iframe').count(),0);
   await page.locator('[data-native-save]').waitFor();
   assert.equal(await page.locator('[data-native-save]').count(),1);
   assert.equal(await page.locator('audio[autoplay],video[autoplay]').count(),0);
+ });
+ await check('Real semantic room replacement preserves edits until explicit discard',async()=>{
+  const fixture={sourceName:'Original room',imported:true,importMode:'unified',keepUnified:true,detachInteractables:false,autoPhysics:false,mascotAffordances:false,selectedId:'chair',stage:'ready',tableAssetId:null,objects:[{id:'chair',name:'Chair',icon:'chair',role:'Couch / Seat',physics:'No collision',interactive:false,detachable:false,visible:true,locked:false,state:'recorded',actions:[],mascot:''}]};
+  const one=selector=>page.locator(selector);
+  const load=(sourceName)=>one('[data-semantic-file]').setInputFiles({name:'fixture.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...fixture,sourceName}))});
+  await load('Original room');await one('[data-semantic-status]').filter({hasText:'Snapshot inspected locally'}).waitFor();
+  await one('[data-semantic-visible]').uncheck();await one('[data-semantic-apply]').click();await one('[data-semantic-prepare]').click();
+  const original=await one('[data-semantic-export]').getAttribute('href'),edited=await one('[data-semantic-edited]').getAttribute('href');
+  assert.ok(original&&edited&&original!==edited);
+  await load('Replacement room');
+  const keep=one('[data-semantic-keep]'),discard=one('[data-semantic-discard]');
+  await keep.waitFor();assert.equal(await keep.evaluate(button=>document.activeElement===button),true);
+  await page.keyboard.press('Enter');await keep.waitFor({state:'hidden'});
+  assert.equal(await one('[data-semantic-visible]').isChecked(),false);
+  assert.equal(await one('[data-semantic-export]').getAttribute('href'),original);
+  assert.equal(await one('[data-semantic-edited]').getAttribute('href'),edited);
+  await load('Replacement room');await discard.click();
+  assert.match(await one('[data-semantic-summary]').textContent(),/Replacement room/);
+  assert.equal(await one('[data-semantic-visible]').isChecked(),true);
+  await one('[data-semantic-locked]').check();await one('[data-semantic-close]').click();
+  assert.equal(await one('[data-semantic-locked]').isChecked(),true);
+  await discard.click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
  });
  if(unified)await check('Unified CSP allows explicit local PNG and synthetic video without external players',async()=>{
   const png=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=64;c.height=48;c.getContext('2d').fillRect(0,0,64,48);return c.toDataURL('image/png').split(',')[1]});
@@ -342,7 +392,12 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const snapshotResponse=await fetch(origin+'/api/migration/readiness');const snapshotText=await snapshotResponse.text();
   assert.equal(snapshotResponse.headers.get('x-athena-snapshot-sha256'),createHash('sha256').update(snapshotText).digest('hex'));
   assert.equal(JSON.parse(snapshotText).retirement_certified,false);
-  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),7);
+  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),9);
+  const foundryReadiness=page.locator('#projects article').filter({has:page.getByRole('heading',{name:'Feature Foundry',exact:true})});
+  assert.match(await foundryReadiness.textContent(),/Recorded evidence · Original v24 release custody/);
+  assert.match(await foundryReadiness.textContent(),/Still open · Non-Git records and owner data/);
+  assert.match(await foundryReadiness.textContent(),/Still open · Native and rights acceptance/);
+  assert.equal(await foundryReadiness.locator('a[href*="/64954a16f8af349c27a2652649882d4ec0e3450a/"]').count(),2);
   assert.equal(await page.locator('#projects a[href="/#continuity"]').count(),1);
   await page.screenshot({path:path.join(out,'migration-readiness.png'),fullPage:true});
   await page.setViewportSize({width:390,height:844});
@@ -431,6 +486,34 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('#run-experiment').isDisabled(),true);assert.equal(statusSubmissions,1);
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
+ });
+ await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
+  const other=await context.newPage();
+  const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});
+  const openJournal=async tab=>{
+   await tab.goto(origin+'/#continuity');
+   await tab.locator('[data-artifacts-open]').click();
+   await tab.locator('[data-artifact-status]').filter({hasText:'Local journal opened'}).waitFor();
+  };
+  try{
+   await openJournal(page);
+   await selectFile(page,'fixture-original.bin','original bytes');
+   await page.locator('[data-artifact-save]').click();
+   await page.locator('[data-artifact-history] p').filter({hasText:'Revision 1:'}).waitFor();
+   const id=await page.locator('[data-artifact-target] option').nth(1).getAttribute('value');
+   assert.ok(id);
+   await page.locator('[data-artifact-target]').selectOption(id);await selectFile(page,'not-retained.bin','selected only');
+   await openJournal(other);
+   await other.locator('[data-artifact-target]').selectOption(id);await selectFile(other,'other-tab.bin','another revision');
+   await other.locator('[data-artifact-save]').click();
+   await other.locator('[data-artifact-history] p').filter({hasText:'Revision 2:'}).waitFor();
+   assert.equal(await page.locator('[data-artifact-history] p').filter({hasText:'Revision 2:'}).count(),0);
+   await page.locator('[data-artifact-refresh]').click();
+   await page.locator('[data-artifact-history] p').filter({hasText:'Revision 2: other-tab.bin'}).waitFor();
+   assert.equal(await page.locator('[data-artifact-target]').inputValue(),id);
+   assert.equal(await page.locator('[data-artifact-file]').evaluate(input=>input.files[0].name),'not-retained.bin');
+   assert.equal(await page.locator('[data-artifact-history] p').count(),2);
+  }finally{await other.close();}
  });
  await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
   await stopBridge();
