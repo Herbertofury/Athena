@@ -1,6 +1,6 @@
 const q=id=>document.getElementById(id),PAGE=25;
 const element=(tag,text)=>Object.assign(document.createElement(tag),{textContent:text});
-let index=[],offset=0;
+let index=[],offset=0,drill=null;
 const filters={changed:r=>r.early&&r.later&&(r.early.status!==r.later.status||r.early.conclusion!==r.later.conclusion),
  failed:r=>r.later?.conclusion==='failure',later:r=>!r.early&&r.later};
 function label(r){return r?(r.conclusion??r.status).replaceAll('_',' '):'Not present in that snapshot';}
@@ -18,17 +18,42 @@ function card(r){
  d.append(external('https://github.com/Herbertofury/Engineering-Atlas/actions/runs/'+r.id,'Open original GitHub run'));
  n.append(d);return n;
 }
+function commitCard({sha,rows,failures,changes}){
+ const n=document.createElement('article');
+ n.className='record-panel';
+ const go=element('button','Inspect '+rows.length+' matched '+(rows.length===1?'run':'runs'));
+ go.type='button';
+ go.addEventListener('click',()=>{
+  drill={sha,offset};offset=0;render();q('run-heading').focus();
+ });
+ const title=element('h3','Commit '+sha.slice(0,12));title.title=sha;
+ n.append(title,element('p',rows.length+' matched · '+failures+' failed on Nov 14 · '+changes+' changed between snapshots'),go);
+ return n;
+}
 function render(){
  const needle=q('search').value.trim().toLocaleLowerCase(),filter=filters[q('scope').value];
- const selected=index.filter(x=>(!filter||filter(x.run))&&x.text.includes(needle));
- offset=Math.min(offset,Math.max(0,Math.floor((selected.length-1)/PAGE)*PAGE));
- const rows=selected.slice(offset,offset+PAGE);
- q('records').replaceChildren(...rows.map(x=>card(x.run)));
- q('status').textContent=rows.length?`Showing ${offset+1}–${offset+rows.length} of ${selected.length} matched runs (${index.length} archived).`:'No recorded runs match.';
- q('pages').hidden=selected.length<=PAGE;
- q('previous').disabled=offset===0;q('next').disabled=offset+PAGE>=selected.length;
+ const selected=index.filter(x=>(!filter||filter(x.run))&&x.text.includes(needle)&&(!drill||x.run.head_sha===drill.sha));
+ const grouped=q('view').value==='commits'&&!drill;
+ const byCommit=new Map();
+ if(grouped)for(const {run} of selected){
+  let c=byCommit.get(run.head_sha);
+  if(!c){c={sha:run.head_sha,rows:[],failures:0,changes:0};byCommit.set(run.head_sha,c);}
+  c.rows.push(run);if(filters.failed(run))c.failures++;if(filters.changed(run))c.changes++;
+ }
+ const list=grouped?[...byCommit.values()]:selected;
+ offset=Math.min(offset,Math.max(0,Math.floor((list.length-1)/PAGE)*PAGE));
+ const rows=list.slice(offset,offset+PAGE);
+ q('records').replaceChildren(...rows.map(x=>grouped?commitCard(x):card(x.run)));
+ const scope=grouped?(list.length===1?'commit':'commits')+' · '+selected.length+' matched '+(selected.length===1?'run':'runs'):(list.length===1?'run':'runs');
+ q('status').textContent=rows.length?`Showing ${offset+1}–${offset+rows.length} of ${list.length} matched ${scope} (${index.length} archived).`:'No recorded runs match.';
+ q('commit-focus').hidden=!drill;
+ q('commit-label').textContent=drill?'Showing matching runs for '+drill.sha:'';
+ q('run-heading').textContent=grouped?'Recorded commits':'Recorded runs';
+ q('pages').hidden=list.length<=PAGE;
+ q('previous').disabled=offset===0;q('next').disabled=offset+PAGE>=list.length;
 }
-for(const id of ['search','scope'])q(id).addEventListener(id==='search'?'input':'change',()=>{offset=0;render();});
+for(const id of ['search','scope','view'])q(id).addEventListener(id==='search'?'input':'change',()=>{offset=0;drill=null;render();});
+q('back-to-groups').addEventListener('click',()=>{if(!drill)return;offset=drill.offset;drill=null;render();q('run-heading').focus();});
 for(const [id,delta] of [['previous',-PAGE],['next',PAGE]])q(id).addEventListener('click',()=>{offset=Math.max(0,offset+delta);render();q('run-heading').focus();});
 try{
  const r=await fetch('/api/migration/atlas-runs',{credentials:'omit',mode:'same-origin',redirect:'error'});
