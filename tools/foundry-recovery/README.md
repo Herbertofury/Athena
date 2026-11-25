@@ -148,3 +148,13 @@ payloads, promote them to active revisions, or alter the reviewed source. The
 operation refuses existing output, stale sidecars, invalid payloads, more than
 5,000 events, or events over 256 KiB / aggregate input over 6 MiB; it never
 publishes a partial archive. Keep the reviewed original for all other data.
+
+### Compare old catalog records before migration
+
+The portable launcher's `--prepare-legacy` and `--import-reviewed-legacy`
+reports include `catalog_comparison`. The count-only report shows matching IDs,
+byte-exact selected text, changes, and source-only/Athena-only counts. It
+compares theme and room names plus ecology names, shapes and roles. Missing
+legacy ecology data is unknown, not an empty catalog. No raw JSON, materials,
+assets, behaviors or custom labels are exported by this comparison. Even
+when every ID and selected field agrees, it is not a full parity test.

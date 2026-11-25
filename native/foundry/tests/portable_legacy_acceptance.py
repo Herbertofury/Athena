@@ -48,6 +48,13 @@ def main(package):
         assert reviewed['prepared_review_copy'] and not reviewed['lossless_migration']
         assert reviewed['report']['soundtracks'] == 1
         assert reviewed['report']['source_table_rows']['history'] == 1
+        comparison = reviewed['report']['catalog_comparison']
+        assert comparison['theme_names']['matching_ids'] == 1
+        assert comparison['theme_names']['exact_selected_fields'] == 0
+        assert comparison['theme_names']['changed_selected_fields'] == 1
+        assert comparison['room_names']['only_in_athena'] == 33
+        assert comparison['ecology_name_shape_role']['only_in_source'] == 1
+        assert comparison['ecology_name_shape_role']['exact_selected_fields'] == 0
         assert 'private_marker' not in json.dumps(reviewed)
         expected = reviewed['output_sha256']
         assert sha(snapshot) == expected and snapshot.read_bytes()[18:20] == b'\1\1'

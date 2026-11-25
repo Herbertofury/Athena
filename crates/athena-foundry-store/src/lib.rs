@@ -441,6 +441,7 @@ pub struct LegacyReport {
     pub source_table_rows: std::collections::BTreeMap<String, i64>,
     pub unknown_source_tables: usize,
     pub source_catalog_rows_not_copied: i64,
+    pub catalog_comparison: legacy_catalog::CatalogComparison,
     pub lossless_migration: bool,
     pub reviewed_themes: usize,
     pub reviewed_rooms: usize,
@@ -528,6 +529,7 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
         source_table_rows: std::collections::BTreeMap::new(),
         unknown_source_tables: 0,
         source_catalog_rows_not_copied: 0,
+        catalog_comparison: legacy_catalog::catalog_comparison(&db, &c)?,
         lossless_migration: false,
         reviewed_themes: 0,
         reviewed_rooms: 0,
@@ -644,6 +646,7 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
         .count();
     Ok((report, assignments))
 }
+mod legacy_catalog;
 pub mod legacy_history;
 
 pub fn inspect_legacy(path: &Path) -> Result<LegacyReport> {
