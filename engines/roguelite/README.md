@@ -24,3 +24,30 @@ Deterministic seeded RNG streams, fixed-step simulation, configurable run profil
 ## Promotion gate
 
 Same seed + ruleset + content lock + action stream must reproduce the same eligible result. Test early/mid/late runs, cancellation, pause/resume, reload, defeat, reward duplication, save migration and complete native/packaged gameplay. No source candidate is selected as universal winner yet.
+
+## Portable fixed-step Mascot Survivors prototype
+
+Build from the exact retained GameSync source with Node.js 24:
+
+```sh
+node engines/roguelite/build-fixed-step.mjs /path/to/new-survivors-folder
+cd /path/to/new-survivors-folder
+node play.mjs
+node play.mjs --demo 123 300
+```
+
+The source-pinned prototype runs the original movement, dash, enemy waves,
+auto-attacks, XP gems, upgrade choices and win/lose rules without a browser.
+The terminal accepts discrete moves and explicitly pauses until an offered
+upgrade is selected. Use seed/duration arguments to replay a chosen scenario.
+There is no idle animation loop, storage, account, download or install step
+after Node is available. The terminal demo defaults to 90 seconds; the engine
+defaults to the original five minutes and supports 5–600 whole seconds.
+
+The source-derived headless loop uses fixed 60 Hz simulation ticks, shares
+the versioned deterministic entropy used by the card prototype, and uses
+explicit Fisher–Yates for draft ordering. It preserves the upgrade effects
+and archetype rules, not legacy per-frame timing or unseeded random samples.
+Rendering, audio, owner data, endgame progression, rewards, snapshots, and
+consumer integration are not part of this prototype. The old GameSync source
+and other consumer projects remain unchanged.
