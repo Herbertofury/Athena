@@ -96,3 +96,31 @@ export function compareWindowsDirectoryReports(before,after,asserted=false){
  return {eligible:true,reason:'Second observation minus reference. Folder, order and settings were not verified by Athena. Not free or reclaimable space.',
   changes:Object.fromEntries(windowsMetrics.map(key=>[key,after[key]-before[key]]))};
 }
+
+const windowsScope='Explicit directory direct children only. No child content, recursion, names, IDs or paths returned.';
+const comparisonSchema='athena-windows-directory-comparison-v1';
+const rehydrateWindowsObservation=value=>{
+ if(value===null||typeof value!=='object'||Array.isArray(value)||Object.keys(value).length!==windowsCounters.length+windowsFlags.length||
+  [...windowsCounters,...windowsFlags].some(k=>!Object.hasOwn(value,k)))throw Error('Unexpected Windows comparison observation fields.');
+ return parseWindowsDirectoryReport(JSON.stringify({schema:'athena-windows-directory-observation-v1',scope:windowsScope,...value}));
+};
+export function buildWindowsComparisonReceipt(before,after,asserted){
+ if(asserted!==true)throw Error('Confirm matching folder and settings before exporting.');
+ const reference=rehydrateWindowsObservation(before), second=rehydrateWindowsObservation(after);
+ const compared=compareWindowsDirectoryReports(reference,second,true);
+ if(!compared.changes)throw Error(compared.reason);
+ return {schema:comparisonSchema,assertion:'user says same directory and settings in the intended order',
+  reference,second,difference:compared.changes,point_in_time_snapshot:false,reclaimable_space_inferred:false};
+}
+export function verifyWindowsComparisonReceipt(text){
+ if(typeof text!=='string'||new TextEncoder().encode(text).length>4096)throw Error('Select a Windows comparison receipt up to 4 KiB.');
+ const input=JSON.parse(text);
+ const fields=['schema','assertion','reference','second','difference','point_in_time_snapshot','reclaimable_space_inferred'];
+ if(!input||input.schema!==comparisonSchema||Object.keys(input).length!==fields.length||fields.some(k=>!Object.hasOwn(input,k))||
+  input.assertion!=='user says same directory and settings in the intended order'||input.point_in_time_snapshot!==false||
+  input.reclaimable_space_inferred!==false)throw Error('Not a supported Windows comparison receipt.');
+ const expected=buildWindowsComparisonReceipt(input.reference,input.second,true);
+ if(!input.difference||Object.keys(input.difference).length!==windowsMetrics.length||
+  windowsMetrics.some(key=>input.difference[key]!==expected.difference[key]))throw Error('Windows comparison values did not recompute.');
+ return expected;
+}

@@ -216,3 +216,12 @@ identity and timestamps, so Athena cannot verify that assertion.
 Output is exact second-minus-reference for logical pathname bytes,
 identified allocation, pathnames, and unique files. It is not a verified
 filesystem audit, a point-in-time snapshot, or a reclaimable-space estimate.
+
+After a valid held comparison, **Download Windows comparison receipt** writes a
+browser-local JSON file only when requested. It contains the two unnamed,
+path-free observations, their signed differences, and the operator's assertion.
+**Check a saved comparison receipt** recomputes the numbers from that file
+without replacing the open reports or confirming a new pair. Changing a number
+without adjusting the observations is detected; an authored coherent receipt is
+not independently authenticated. It is not a signature, date, author, folder
+identity, filesystem audit, or reclaimable estimate.
