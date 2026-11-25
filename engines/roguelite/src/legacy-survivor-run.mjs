@@ -105,5 +105,9 @@ export function createLegacySurvivorRun({random,format='classic',seed,sideMinute
    default: throw Error('Unknown camp perk');
   }
  }
- return Object.freeze({step,choose,snapshot,frameView,applyCampPerk,balance:()=>roaming?.balance()??{crystal:0,gold:0},location:()=>({gameTime,player:{x:player.x,y:player.y}})});
+ function recoverCampHealth(points){
+  if(!Number.isInteger(points)||points<1||points>36)throw Error('Invalid camp recovery');
+  const prior=player.hp;player.hp=Math.min(player.maxHp,player.hp+points);return player.hp-prior;
+ }
+ return Object.freeze({step,choose,snapshot,frameView,applyCampPerk,recoverCampHealth,canRecoverCampHealth:()=>player.hp<player.maxHp,balance:()=>roaming?.balance()??{crystal:0,gold:0},location:()=>({gameTime,player:{x:player.x,y:player.y}})});
 }

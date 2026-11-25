@@ -797,7 +797,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
- if(portableUnified)await check('Exact portable Athena resumes a side rift, builds a camp totem, and verifies both Frontier routes',async()=>{
+ if(portableUnified)await check('Exact portable Athena plays the Frontier series: faction routes, Ashglass vault, ferry remedy and Endless relay',async()=>{
   // The preceding animation proof installs a paused context-wide fake clock.
   // Replay cooperatively yields to real timers and should be tested independently.
   const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -893,6 +893,33 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.match(await play.locator('#frontier-details').textContent(),/banked 8/);
    const names=await play.evaluate(()=>performance.getEntriesByType('resource').map(entry=>new URL(entry.name).pathname));
    assert.ok(names.includes('/play/survivor/src/spatial-region.mjs'));
+   const {routeAshglass}=await import('../engines/roguelite/tests/ashglass-fixture.mjs');
+   const {reachFloodplain}=await import('../engines/roguelite/tests/floodplain-fixture.mjs');
+   const {relayTrail}=await import('../engines/roguelite/tests/frontier-relay-fixture.mjs');
+   const ash=routeAshglass();
+   await load('portable-ashglass-cairns.json',Buffer.from(await encodeArenaTape({capture:()=>ash.first},digest)));
+   assert.match(await play.locator('#pressure').textContent(),/60 min/);
+   assert.match(await play.locator('#cavern-event').textContent(),/1 \/ 3 mirrors aligned/);
+   await load('portable-ashglass-vault.json',Buffer.from(await encodeArenaTape(ash.trial,digest)));
+   assert.match(await play.locator('#cavern-event').textContent(),/vault is open/);
+   const ferry=reachFloodplain();
+   await load('portable-crossing.json',Buffer.from(await encodeArenaTape({capture:()=>ferry.crossing},digest)));
+   assert.match(await play.locator('#pressure').textContent(),/90 min/);
+   assert.match(await play.locator('#escort-event').textContent(),/Stay alongside the moving ferry/);
+   await load('portable-injured-camp.json',Buffer.from(await encodeArenaTape(ferry.injuredCamp,digest)));
+   await play.getByRole('button',{name:/Use the ferryman’s remedy/}).press('Enter');
+   assert.match(await play.locator('#escort-details').textContent(),/remedies left: 1/);
+   const relay=relayTrail();
+   await load('portable-relay-first.json',Buffer.from(await encodeArenaTape({capture:()=>relay.first},digest)));
+   await play.getByRole('heading',{name:'Choose a Frontier relay task'}).waitFor();
+   await play.getByRole('button',{name:/Light two watchline beacons/}).press('Enter');
+   assert.match(await play.locator('#relay-event').textContent(),/Light the lower beacon/);
+   await load('portable-relay-bank.json',Buffer.from(await encodeArenaTape(relay.finished,digest)));
+   assert.match(await play.locator('#relay-details').textContent(),/Relays done 2 · Gold 24 · Crystal 12/);
+   const used=await play.evaluate(()=>performance.getEntriesByType('resource').map(entry=>new URL(entry.name).pathname));
+   for(const name of ['ashglass-cavern','floodplain-escort','frontier-relay']){
+    assert.ok(used.includes('/play/survivor/src/'+name+'.mjs'));
+   }
    assert.equal(await storage(),before);
    assert.deepEqual(errors,[]);
    assert.deepEqual(actions,[]);
