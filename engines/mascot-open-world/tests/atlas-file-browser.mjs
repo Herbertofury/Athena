@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdir,mkdtemp,readFile,rename,rm} from 'node:fs/promises';
-import {resolve} from 'node:path';
+import {copyFile,mkdir,mkdtemp,readFile,rename,rm,writeFile} from 'node:fs/promises';
+import {dirname,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {chromium} from 'playwright';
 import {buildAtlas} from '../build-atlas.mjs';
 
@@ -51,4 +51,19 @@ test('real Chromium opens the moved file offline, plots authored roads and tours
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
  await page.screenshot({path:resolve(output,'03-mobile.png'),fullPage:true});
  assert.deepEqual(calls,[]);assert.deepEqual(errors,[]);
+});
+
+
+test('portable HTML is byte-identical with Windows-style checkout line endings',async t=>{
+ const root=await mkdtemp(resolve(tmpdir(),'athena-atlas-eol-'));
+ t.after(()=>rm(root,{recursive:true,force:true}));
+ const replica=resolve(root,'replica'),actual=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+ for(const rel of ['build-atlas.mjs','build-topology.mjs','LICENSE','src/city-topology.mjs','src/explore.mjs','preview/atlas.css','preview/atlas.html','preview/atlas-ui.mjs','upstream/gamesync/game-openworld.js']){
+  const dst=resolve(replica,rel);await mkdir(dirname(dst),{recursive:true});
+  if(rel.startsWith('upstream/'))await copyFile(resolve(actual,rel),dst);
+  else await writeFile(dst,(await readFile(resolve(actual,rel),'utf8')).replace(/\r?\n/g,'\r\n'));
+ }
+ const {buildAtlas:windowsStyle}=await import(pathToFileURL(resolve(replica,'build-atlas.mjs')));
+ const a=resolve(root,'initial.html'),b=resolve(root,'replica.html');
+ await buildAtlas(a);await windowsStyle(b);assert.deepEqual(await readFile(b),await readFile(a));
 });

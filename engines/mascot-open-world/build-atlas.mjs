@@ -11,10 +11,11 @@ export async function buildAtlas(destination){
  try{
   const artifact=resolve(dir,'engine');
   await buildTopology(artifact);
+  const editable=async path=>(await readFile(path,'utf8')).replace(/\r\n/g,'\n');
   const [template,css,ui,topology,logic]=await Promise.all([
-   readFile(resolve(here,'preview/atlas.html'),'utf8'),readFile(resolve(here,'preview/atlas.css'),'utf8'),
-   readFile(resolve(here,'preview/atlas-ui.mjs'),'utf8'),readFile(resolve(artifact,'city-source.mjs'),'utf8'),
-   readFile(resolve(artifact,'city.mjs'),'utf8')
+   editable(resolve(here,'preview/atlas.html')),editable(resolve(here,'preview/atlas.css')),
+   editable(resolve(here,'preview/atlas-ui.mjs')),readFile(resolve(artifact,'city-source.mjs'),'utf8'),
+   editable(resolve(artifact,'city.mjs'))
   ]);
   if(!/\nexport \{[^\n]+\};\n$/.test(topology)||!/^\/\/ SPDX[^\n]+\nimport [^\n]+ from '\.\/city-source\.mjs';\n/m.test(logic)){
    throw Error('Unexpected pinned topology module shape');
