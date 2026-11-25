@@ -77,6 +77,52 @@ function renderReferenceGuides(query) {
       element('h3', {}, link(guide.title, target)), element('p', {}, guide.summary), element('p', {}, ...names));
   }));
 }
+const frontier = element('details', {id: 'frontier-observations', class: 'layer-guide'},
+  element('summary', {}, 'Frontier source observations'),
+  element('p', {}, 'Dated upstream evidence, separate from evaluated candidates. Not a benchmark, recommendation, or current-version check.'),
+  element('p', {role: 'status', 'aria-live': 'polite'}));
+const frontierStatus = frontier.querySelector('[role="status"]');
+$('catalog').querySelector('.search-row').after(frontier);
+let frontierLoading = false, frontierReady = false;
+frontier.addEventListener('toggle', async () => {
+  if (!frontier.open || frontierLoading || frontierReady || disposed) return;
+  frontierLoading = true;
+  frontierStatus.textContent = 'Opening the bundled source ledger…';
+  try {
+    const result = await fetch(new URL('./frontier-observations.json', import.meta.url), {signal: lifetime.signal});
+    if (!result.ok) throw new Error('Bundled observations unavailable');
+    const {batches, entries} = await result.json();
+    if (disposed) return;
+    const query = element('input', {type: 'search', maxlength: 300, placeholder: 'For example, VulkanMod or compiler'});
+    const batch = element('select', {}, element('option', {value: ''}, 'All batches'),
+      Object.entries(batches).map(([id, label]) => element('option', {value: id}, label)));
+    const list = element('ol', {class: 'frontier-observation-list'});
+    const indexed = entries.map(row => [row, referenceTokens(Object.values(row).join(' '))]);
+    const paint = () => {
+      const terms = referenceTokens(query.value);
+      const matches = indexed.filter(([row, index]) =>
+        (!batch.value || row.batch === batch.value) && terms.every(term => index.some(token => token.includes(term))));
+      frontierStatus.textContent = matches.length + ' of ' + entries.length + ' source observations';
+      list.replaceChildren(...matches.map(([row]) => element('li', {'data-source-observation': row.id},
+        element('h4', {}, link(row.title, row.url)),
+        element('p', {}, row.observed_version),
+        element('p', {}, row.note),
+        element('small', {}, row.id + ' · ' + batches[row.batch] + ' · ' + row.evidence.replaceAll('_', ' ') +
+          ' · Reviewed ', element('time', {datetime: row.checked_at}, dateLabel(row.checked_at)),
+          ' · Recheck after ' + row.review_after_days + ' days'))));
+    };
+    query.addEventListener('input', paint);
+    batch.addEventListener('change', paint);
+    frontier.append(element('p', {class: 'frontier-filters'}, element('label', {}, 'Search observations ', query),
+      element('label', {}, 'Source batch ', batch)), list);
+    paint();
+    frontierReady = true;
+  } catch {
+    if (!disposed) frontierStatus.textContent = 'Could not open the bundled ledger. Close and reopen to retry.';
+  } finally {
+    frontierLoading = false;
+  }
+});
 let catalog,loaded=false;
 let state = parseState(route.includes('?')?route.slice(route.indexOf('?')+1):typeof initialState==='string'?initialState:initialState?.query||'');
 if(search!==undefined)state.q=String(search).slice(0,300);

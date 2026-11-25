@@ -1,4 +1,4 @@
-import hashlib,importlib.util,json,os,pathlib,subprocess,sys,tempfile,unittest
+import concurrent.futures,threading,importlib.util,json,os,pathlib,subprocess,sys,tempfile,unittest
 from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('first_run_launcher',ROOT/'native/foundry/portable_launcher.py');launch=importlib.util.module_from_spec(spec);spec.loader.exec_module(launch)
@@ -19,16 +19,39 @@ class FirstRunTests(unittest.TestCase):
    with self.assertRaises(subprocess.TimeoutExpired):self.create()
   self.assertFalse(self.target.exists());self.assertEqual(sentinel.read_text(),'keep');self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
  def test_racing_target_never_overwritten(self):
-  actual_link=os.link
+  operation='rename' if os.name=='nt' else 'link';actual=getattr(os,operation)
   def race(source,target):
-   self.target.write_bytes(b'OTHER WRITER');return actual_link(source,target)
-  with patch.object(launch.os,'link',side_effect=race):
+   self.target.write_bytes(b'OTHER WRITER');return actual(source,target)
+  with patch.object(launch.os,operation,side_effect=race):
    with self.assertRaises(FileExistsError):self.create()
   self.assertEqual(self.target.read_bytes(),b'OTHER WRITER');self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
- def test_unsupported_hardlinks_refuse_without_target(self):
-  with patch.object(launch.os,'link',side_effect=OSError('unsupported')):
+ def test_publication_error_refuses_without_copy_or_target(self):
+  operation='rename' if os.name=='nt' else 'link'
+  with patch.object(launch.os,operation,side_effect=OSError('unsupported')):
    with self.assertRaises(OSError):self.create()
   self.assertFalse(self.target.exists());self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
+ def test_two_independently_verified_publishers_leave_one_database(self):
+  operation='rename' if os.name=='nt' else 'link';actual=getattr(os,operation)
+  barrier=threading.Barrier(2,timeout=15)
+  def publish(source,target):
+   barrier.wait()
+   return actual(source,target)
+  def initialize():
+   try:return self.create()['schema']
+   except FileExistsError:return None
+  self.target=self.root/'New Ω workspace.sqlite3'
+  with patch.object(launch.os,operation,side_effect=publish):
+   with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    result=list(executor.map(lambda _:initialize(),range(2)))
+  self.assertEqual(result.count(15),1);self.assertEqual(result.count(None),1)
+  status=json.loads(subprocess.check_output([str(BINARY),'status',str(self.target)]))
+  self.assertEqual(status['integrity'],'ok');self.assertEqual(status['schema'],15)
+  self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
+ @unittest.skipUnless(os.name=='nt','Windows publication behavior')
+ def test_windows_first_run_never_uses_hardlinks(self):
+  with patch.object(launch.os,'link',side_effect=AssertionError('hard link attempted')):
+   self.assertEqual(self.create()['schema'],15)
+  self.assertTrue(self.target.is_file())
  def test_missing_parent_internal_path_and_symlink_refused(self):
   with self.assertRaises(ValueError):launch.create_database(self.root,{},self.target)
   self.target=self.root/'missing'/'db'

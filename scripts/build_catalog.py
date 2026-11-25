@@ -141,7 +141,7 @@ Athena is the canonical host for reusable card-game, roguelite and mascot open-w
 - [Engine Foundry architecture](https://github.com/Herbertofury/Athena/blob/main/docs/ENGINE-FOUNDRY.md)
 - [Machine-readable engine catalog](https://github.com/Herbertofury/Athena/blob/main/engines/catalog.json)
 - [M5 implementation issue #365](https://github.com/Herbertofury/Athena/issues/365)
-- [Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange)
+- [Game Systems Exchange](Engineering-Game-Systems-Exchange)
 
 ## The three flagship engines
 
@@ -159,10 +159,11 @@ Consumers pin exact local package versions and keep host-specific UI, assets, sa
 
 [Card Game package](https://github.com/Herbertofury/Athena/tree/main/engines/card-game) · [Roguelite package](https://github.com/Herbertofury/Athena/tree/main/engines/roguelite) · [Mascot Open World package](https://github.com/Herbertofury/Athena/tree/main/engines/mascot-open-world) · [Shared Browser Game Runtime](https://github.com/Herbertofury/Athena/tree/main/engines/shared-game-runtime)
 """
-write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry)
-for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry'),('wiki/Engineering-Home.md','Engineering-Engine-Foundry'),('wiki/Engineering-Navigation.md','Engineering-Engine-Foundry')]:
- destination = R / name
- link = '\n- [Athena Engine Foundry](' + target + ')\n'
- existing = destination.read_text()
- if 'Athena Engine Foundry](' not in existing:
-  destination.write_text(existing + link)
+write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry.rstrip('\n'))
+# Only the Home and Sidebar below are owned by this generator. Preserve any
+# existing Engineering navigation pages; they are independent wiki inputs.
+engine_section = '\n## Game engines\n\n- [Athena Engine Foundry](Engineering-Engine-Foundry)\n'
+for name in ('Home.md', '_Sidebar.md'):
+ destination = R / 'wiki' / name
+ existing = destination.read_text(encoding='utf-8')
+ destination.write_text(existing + engine_section, encoding='utf-8')

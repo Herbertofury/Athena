@@ -83,7 +83,52 @@ def build(binary,engine,system,metadata,destination,commit,toolchain=None):
              'project_license':'No repository-wide license declared; no new downstream license is granted by this inventory.',
              'limits':'Cargo metadata and retained license/notice files, not full redistribution clearance, a legal opinion or signed build attestation. Native vendored components and runtime assets may have additional obligations. Python and OS prerequisites not bundled.'}
         (bundle/'DEPENDENCIES.json').write_text(json.dumps(doc,indent=2)+'\n',encoding='utf-8')
-        (bundle/'START-HERE.txt').write_text('Athena unsigned CI evaluation candidate. Not an installer.\nRequires Python 3.13+; Windows 10+ or compatible Linux.\nVerify: python -B launch.py --verify-only\nCreate NEW external DB: python -B launch.py --create-database NEW.sqlite\nLaunch: python -B launch.py --database EXISTING.sqlite --journal EXTERNAL_JOURNAL.sqlite\nStop with Ctrl-C. Preserve all source repositories and backups.\nNo user-device, full migration or all-codec acceptance is claimed.\n',encoding='utf-8')
+        (bundle/'START-HERE.txt').write_text('''Athena portable evaluation
+==========================
+Unsigned test build, not an installer. Python 3.13 or newer is required.
+Check that "python --version" reports a supported version.
+
+1. Create a fresh parent folder and extract this ZIP into a new "app" folder
+   inside it. Open a terminal in the parent folder, not inside "app".
+2. Verify extracted files:
+      python -B app/launch.py --verify-only
+3. Create an empty sibling "data" folder and initialize it once:
+      mkdir data
+      python -B app/launch.py --init-portable-data data
+   Never point initialization at an existing profile or import real data into
+   this evaluation. Keep the separate app and data directories.
+4. Start Athena:
+      python -B app/launch.py --portable-data-dir data
+   With the terminal still running, open http://127.0.0.1:41379/ in a browser.
+   To stop Athena, return to the terminal and press Ctrl+C.
+   To move the portable profile, shut it down first, move the whole parent
+   folder and start it again from the new parent. Do not copy open databases.
+
+Optional test: after your first start and shutdown, create a new checkpoint:
+      python -B app/launch.py --database data/foundry.sqlite3 --journal data/engineering.sqlite3 --checkpoint-directory checkpoint --source-quiescent
+   To make a separate working copy from the saved checkpoint:
+      python -B app/launch.py --fork-checkpoint checkpoint --working-directory working --source-quiescent
+   Do not use existing destinations. Keep checkpoint and working copies private.
+
+Optional Feature Foundry v24 rehearsal (disposable source only):
+   Quit Feature Foundry. In a private folder with no active writers, prepare a
+   new standalone review copy, even if the closed database has a WAL header:
+      python -B app/launch.py --prepare-legacy legacy.sqlite3 --legacy-destination reviewed.sqlite3 --source-quiescent
+   Read report counts and retain the original and reviewed copy. WAL recovery
+   with WAL frames requires a Python SQLite runtime at least 3.54.0.
+   If the counts are acceptable, replace REVIEWED_SHA256 below with the full
+   output_sha256 from preparation. Use an empty, separate rehearsal data folder:
+      python -B app/launch.py --import-reviewed-legacy reviewed.sqlite3 --reviewed-sha256 REVIEWED_SHA256 --legacy-destination rehearsal/foundry.sqlite3
+      python -B app/launch.py --portable-data-dir rehearsal
+   This maps supported room soundtrack assignments and seeds Athena's reviewed
+   catalog. It does NOT migrate custom catalogs, arbitrary history, artist data,
+   or user/browser files. It is not a reason to delete the original app or data.
+   An existing profile or SQLite sidecar is never an acceptable destination.
+
+This is an evaluation only. It does not certify actual removable or network
+drives, an existing profile, all codecs, any complete source migration, or
+retirement of source repositories. Preserve all original repositories and backups.
+''',encoding='utf-8')
         listed={row['path'] for row in receipt['files']}
         for path in sorted(bundle.rglob('*')):
             if path.is_file() and path.name!='native-package.json' and path.relative_to(bundle).as_posix() not in listed:

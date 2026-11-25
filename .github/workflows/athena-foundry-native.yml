@@ -44,6 +44,8 @@ jobs:
         run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
       - name: Build and extract unsigned candidate from exact current binaries
         run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
+      - name: Portable Feature Foundry v24 review and import acceptance
+        run: python native/foundry/tests/portable_legacy_acceptance.py candidate-extracted
       - name: Unified dual-store HTTP acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
@@ -91,6 +93,10 @@ jobs:
         run: |
           node scripts/test_foundry_native_browser.mjs
           python -B candidate-extracted/launch.py --verify-only
+      - name: Extracted Foundry recovery capsule and original room editor
+        env:
+          ATHENA_BROWSER_ROOT: candidate-extracted/runtime
+        run: node scripts/test_foundry_semantic_browser.cjs
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs

@@ -27,6 +27,32 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
  await check('Learning opens real lesson, retains read state and notes',async()=>{await page.locator('[data-nav="network"]').click();await page.locator('[data-lesson="net-dns-evidence"]').first().click();await page.locator('#lesson-dialog').waitFor({state:'visible'});await page.locator('#read-check').check();await page.locator('#lesson-note').fill('Browser-verified local note');await page.locator('#close-lesson').click();await page.reload();await page.locator('[data-lesson="net-dns-evidence"]').first().click();assert.equal(await page.locator('#read-check').isChecked(),true);assert.equal(await page.locator('#lesson-note').inputValue(),'Browser-verified local note');await page.locator('#close-lesson').click();});
  await page.screenshot({path:path.join(out,'learning-desktop.png'),fullPage:true});
  await check('Research loads actual catalog within the same document',async()=>{await openWorkspace('research');assert.match(await page.locator('.workspace-container #result-count').textContent(),/283/);assert.equal(await page.locator('iframe').count(),0);assert.equal(await page.locator('body > .sidebar').count(),1);});
+ await check('Research opens and filters the bundled frontier ledger without provider requests',async()=>{
+   const panel=page.locator('#frontier-observations'), rows=panel.locator('[data-source-observation]');
+   const requests=[];const observe=req=>{if(req.url().endsWith('/frontier-observations.json'))requests.push(req.url());};
+   page.on('request',observe);
+   const before=await page.locator('.workspace-container #result-count').textContent();
+   try{
+     assert.equal(await rows.count(),0);
+     const summary=panel.getByText('Frontier source observations',{exact:true});
+     await summary.focus();await page.keyboard.press('Space');
+     await panel.getByRole('status').filter({hasText:'64 of 64 source observations'}).waitFor();
+     assert.equal(await rows.count(),64);
+     await panel.getByLabel('Source batch').selectOption('releases');
+     assert.equal(await rows.count(),20);
+     await panel.getByLabel('Search observations').fill('VulkanMod');
+     assert.equal(await rows.count(),1);
+     assert.equal(await rows.first().getByRole('link').getAttribute('href'),'https://github.com/xCollateral/VulkanMod/releases/tag/0.6.0');
+     assert.equal(await rows.first().locator('time').getAttribute('datetime'),'2026-11-24');
+     assert.equal(await page.locator('.workspace-container #result-count').textContent(),before);
+     await summary.click();await summary.click();
+     await rows.first().waitFor({state:'visible'});
+     assert.equal(requests.length,1);
+   }finally{
+     if(await panel.evaluate(el=>el.open))await panel.locator('summary').click();
+     page.off('request',observe);
+   }
+ });
  await check('Research filters, shortlist and saved query survive workspace switch',async()=>{await search.fill('rust');await page.waitForFunction(()=>location.hash.includes('q=rust'));const box=page.locator('.workspace-container input[type="checkbox"]').first();await box.check();await page.locator('.workspace-container #compare-open').click();await page.locator('.workspace-container #compare-dialog').waitFor({state:'visible'});await page.keyboard.press('/');assert.equal(await search.evaluate(el=>el===document.activeElement),false);await page.locator('.workspace-container #compare-close').click();await page.locator('[data-nav="home"]').click();await openWorkspace('research');assert.equal(await search.inputValue(),'rust');assert.equal(await page.locator('.workspace-container #shortlist-count').textContent(),'1');await page.locator('.workspace-container #reset').click();await page.waitForFunction(()=>location.hash==='#research?q=');assert.equal(await search.inputValue(),'');});
  await check('Research evidence citations use exact Athena copies with original attribution',async()=>{
    await page.evaluate(()=>{location.hash='#research?sort=measured&cohort=json-catalog-2000-decode';});

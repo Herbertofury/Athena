@@ -16,6 +16,16 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
  const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  await context.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin&&u.protocol!=='blob:'){report.outsideRequests.push(u.href);return route.abort();}return route.continue();});
  page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
+ await page.addInitScript(()=>{
+  window.athenaRoomWorkers={created:0,terminated:0,transferred:0};
+  const Base=window.Worker,stats=window.athenaRoomWorkers;
+  window.Worker=class extends Base{
+   constructor(url,options){super(url,options);this.room=String(url).endsWith('/native-semantic-room.mjs');if(this.room)stats.created++;}
+   postMessage(bytes,transfers){if(this.room&&transfers?.[0]===bytes.buffer)stats.transferred+=bytes.byteLength;return super.postMessage(bytes,transfers);}
+   terminate(){if(this.room)stats.terminated++;return super.terminate();}
+  };
+ });
+
  await page.goto(origin+'/index.html#build');
  await page.locator('[data-semantic-file]').waitFor();
  await page.locator('.workspace-status').filter({hasText:/workspace loaded/}).waitFor();
@@ -49,8 +59,52 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   await one('[data-semantic-file]').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"objects":[],"objects":[]}')});
   await one('[data-semantic-status]').filter({hasText:'Rejected'}).waitFor();assert.match(await one('[data-semantic-details]').textContent(),/Unverified/);
  });
+ await check('Valid replacement keeps current edits and export until explicit discard',async()=>{
+  const file=one('[data-semantic-file]'),keep=one('[data-semantic-keep]'),discard=one('[data-semantic-discard]');
+  await one('[data-semantic-prepare]').click();
+  const previous=await one('[data-semantic-edited]').getAttribute('href');
+  const replacement=Buffer.from(JSON.stringify({...fixture,sourceName:'Replacement scene'}));
+  const choose=()=>file.setInputFiles({name:'replacement.json',mimeType:'application/json',buffer:replacement});
+  await choose();await keep.waitFor();
+  assert.equal(await keep.evaluate(button=>document.activeElement===button),true);
+  await page.keyboard.press('Enter');await keep.waitFor({state:'hidden'});
+  assert.equal(await one('[data-semantic-edited]').getAttribute('href'),previous);
+  assert.equal(await one('[data-semantic-visible]').isChecked(),false);
+  await choose();await discard.click();
+  assert.match(await one('[data-semantic-summary]').textContent(),/Replacement scene/);
+  assert.equal(await one('[data-semantic-undo]').isEnabled(),false);
+  assert.equal(await page.evaluate(async u=>{try{await fetch(u);return false}catch{return true}},previous),true);
+ });
+ await check('real private-format capsule reveals and exports only its verified room value',async()=>{
+  const os=require('node:os'),cp=require('node:child_process'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'athena-room-capsule-'));
+  const selected={...fixture,sourceName:'Verified capsule Ω scene'},record='\ufeff \n'+JSON.stringify(selected,null,2)+'\n';
+  const secret='non-room-capsule-marker-unsupported-export',source=path.join(temp,'values.json'),output=path.join(temp,'capsule.json');
+  try{
+   fs.writeFileSync(source,JSON.stringify({'ff-room-semantic-state':record,'ff.music-hub.v2':secret+'a'.repeat(1_750_000)+'😀'+String.fromCharCode(0xd800)}));
+   cp.execFileSync(process.env.PYTHON||'python',['-B','tools/foundry-recovery/capsule/capsule.py','pack',source,output]);
+   const capsule=fs.readFileSync(output),file=one('[data-semantic-file]');
+   assert.deepEqual(await page.evaluate(()=>window.athenaRoomWorkers),{created:0,terminated:0,transferred:0});
+   const started=page.waitForEvent('worker',w=>w.url().endsWith('/native-semantic-room.mjs'));
+   await file.setInputFiles({name:'capsule.json',mimeType:'application/json',buffer:capsule});
+   await started;
+   await one('[data-semantic-status]').filter({hasText:'Recovery capsule verified locally'}).waitFor();
+   assert.deepEqual(await page.evaluate(()=>window.athenaRoomWorkers),{created:1,terminated:1,transferred:capsule.byteLength});
+   assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
+   assert.ok(!(await one('[data-foundry-module=semanticRoom]').textContent()).includes(secret));
+   const event=page.waitForEvent('download');await one('[data-semantic-export]').click();
+   assert.deepEqual(fs.readFileSync(await (await event).path()),Buffer.from(record));
+   const invalid=JSON.parse(capsule);invalid.entries.find(v=>v.key==='ff.music-hub.v2').value+='tamper';
+   await file.setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(invalid))});
+   await one('[data-semantic-status]').filter({hasText:'checksum mismatch'}).waitFor();
+   assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
+   assert.ok(!(await page.evaluate(()=>JSON.stringify(localStorage))).includes(secret));
+   const workers=await page.evaluate(()=>window.athenaRoomWorkers);
+   assert.equal(workers.created,2);assert.equal(workers.terminated,2);assert.ok(workers.transferred>3_500_000);
+   report.largeWorker={...workers,successBytes:capsule.byteLength};
+  }finally{fs.rmSync(temp,{force:true,recursive:true});}
+ });
  await check('close revokes export and route navigation discards session',async()=>{
-  const href=await one('[data-semantic-export]').getAttribute('href');await one('[data-semantic-close]').click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
+  const href=await one('[data-semantic-export]').getAttribute('href');await one('[data-semantic-role]').selectOption('Decoration');await one('[data-semantic-close]').click();await one('[data-semantic-discard]').click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
   assert.equal(await page.evaluate(async url=>{try{await fetch(url);return false}catch{return true}},href),true);
   await page.evaluate(()=>{location.hash='#home'});await one('[data-semantic-file]').waitFor({state:'detached'});await page.evaluate(()=>{location.hash='#build'});await one('[data-semantic-file]').waitFor();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
  });
