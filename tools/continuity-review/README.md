@@ -99,3 +99,26 @@ Reports contain private note text and URLs; do not publish them without review.
 Synthetic tests additionally cover branching, cycles/self-links, ignored notes,
 missing targets/revisions, deterministic ordering, a 1500-link chain, real CLI
 use, unchanged input bytes, incompatible options and overwrite refusal.
+
+## Review an original Project Constellation v7 export
+
+The native Athena engine included in the unified portable evaluation bundle can
+review a selected **closed** original export locally, before any migration:
+
+```sh
+./atlas-lab review-constellation-v7 /path/to/Project-Constellation.json
+```
+
+On Windows use `atlas-lab.exe`. It prints counts, the input SHA-256 and basic
+chat/turn/revision reference findings. It reports the counts actually retained
+by the [original v7 writer](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/src/brain-core.js).
+Events and checkpoints have source totals to compare against their writer
+cutoffs; a full sync-receipt or catalog-run slice cannot establish how many
+records were omitted. An absent extension-only collection is unknown, not an
+empty collection. Counts exclude unpublished or unavailable provider history.
+No saved titles, text, URL, ID, settings or content are printed. No files,
+browser state, or app stores are written. This checks a bounded schema and
+selected references, not recoverability, concurrent file mutation, all
+semantic content, private-data clearance, or source-retirement readiness.
+It does not import data. Use an explicitly selected quiescent file in a
+trusted folder (16 MiB limit).
