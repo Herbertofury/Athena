@@ -163,6 +163,9 @@ write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry)
 for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry'),('wiki/Engineering-Home.md','Engineering-Engine-Foundry'),('wiki/Engineering-Navigation.md','Engineering-Engine-Foundry')]:
  destination = R / name
  link = '\n- [Athena Engine Foundry](' + target + ')\n'
- existing = destination.read_text()
- if 'Athena Engine Foundry](' not in existing:
-  destination.write_text(existing + link)
+ # The Engineering navigation pages are preserved inputs, not produced by
+ # a standalone clean Learning catalog build. Update them only if supplied.
+ if destination.is_file():
+  existing = destination.read_text(encoding='utf-8')
+  if 'Athena Engine Foundry](' not in existing:
+   destination.write_text(existing + link, encoding='utf-8')
