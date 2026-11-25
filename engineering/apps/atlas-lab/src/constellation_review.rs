@@ -9,7 +9,7 @@ use std::{
     path::Path,
 };
 
-const LIMIT: u64 = 16 * 1024 * 1024;
+pub(crate) const LIMIT: u64 = 16 * 1024 * 1024;
 const SOURCE: &str = "f46d7bd7e7fbd8771278e66caa36ff77349e63e6";
 type Rows<'a> = Vec<&'a RawValue>;
 #[derive(Deserialize)]

@@ -4,6 +4,7 @@ pub mod athena_assets;
 mod atlas_archive;
 pub mod collection_failure;
 pub mod constellation_review;
+mod constellation_review_ui;
 pub mod learning_history;
 pub mod migration_readiness;
 mod storage_connection;
