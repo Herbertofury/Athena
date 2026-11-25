@@ -743,10 +743,30 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByRole('heading',{name:'Engine Foundry Play Lab',exact:true}).waitFor();
    const storage=()=>play.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
    const before=await storage();
-   await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   // Hold one boot dependency, not the whole document, to prove that a
+   // quick first click cannot be silently dropped while the module loads.
+   let releaseBoot;
+   const bootGate=new Promise(resolve=>{releaseBoot=resolve;});
+   let observedModuleResolve;
+   const observedModule=new Promise(resolve=>{observedModuleResolve=resolve;});
+   const dependency=origin+'/play/survivor/src/spatial-region.mjs';
+   await play.route(dependency,async route=>{
+    observedModuleResolve();
+    await bootGate;
+    await route.continue();
+   });
+   try{
+    await play.getByRole('link',{name:'Survivor Arena',exact:true}).click({noWaitAfter:true});
+    await Promise.race([observedModule,play.waitForTimeout(8000).then(()=>{throw Error('Frontier module not requested: '+errors.join('; '));})]);
+    const start=play.getByRole('button',{name:'Start run',exact:true});
+    assert.equal(await start.isDisabled(),true);
+    assert.match(await play.locator('#status').textContent(),/Loading Survivor Arena/);
+   }finally{releaseBoot();}
+   await play.locator('#status').filter({hasText:'Ready. Choose a seed or start with 42.'}).waitFor();
+   await play.unroute(dependency);
    const arena=play.locator('#arena');
    await play.getByRole('button',{name:'Start run',exact:true}).click();
-   await play.locator('#status').filter({hasText:'Run started.'}).waitFor();
+   assert.match(await play.locator('#status').textContent(),/Run started\./);
    assert.equal(await arena.evaluate(e=>e===document.activeElement),true);
    const pixels=()=>arena.evaluate(e=>e.toDataURL());
    const original=await pixels();assert.ok(original.length>100);

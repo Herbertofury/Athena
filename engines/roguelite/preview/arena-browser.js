@@ -323,3 +323,5 @@ for(const button of document.querySelectorAll('[data-code]')){
  for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>{delete keys[code];});
 }
 draw();
+setText(status,'Ready. Choose a seed or start with 42.');
+start.disabled=false;
