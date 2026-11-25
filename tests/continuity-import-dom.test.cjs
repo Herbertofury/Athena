@@ -7,3 +7,27 @@ test('imports once, deduplicates replay, refuses conflict without a save',async(
 test('latest selection wins; unmount prevents late saves; oversize never reads',async()=>{const x=await setup(),slow=deferred();const pending=x.load({size:100,arrayBuffer:()=>slow.promise});await x.load({size:100,arrayBuffer:async()=>buffer(state('b'))});slow.resolve(buffer(state('a')));await pending;assert.deepEqual(x.calls.map(c=>c.entries.map(e=>e.id)),[['b']]);let read=false;await x.load({size:16*1024*1024+1,arrayBuffer:()=>{read=true;}});assert.equal(read,false);const last=deferred(),ending=x.load({size:100,arrayBuffer:()=>last.promise});x.controller.abort();last.resolve(buffer(state('c')));await ending;assert.equal(x.calls.length,1);});
 test('false or thrown persistence leaves full admitted draft exportable, without false durable claim',async()=>{for(const save of [()=>false,()=>{throw Error('quota');}]){const x=await setup(save);await x.load({size:100,arrayBuffer:async()=>buffer(state('a'))});assert.match(x.root.querySelector('#notice').textContent,/Import is not saved/);assert.ok(x.root.querySelector('article[data-entry-id="a"]'));let exported;const old=URL.createObjectURL;URL.createObjectURL=blob=>{exported=blob;return 'blob:synthetic';};try{x.root.querySelector('#export').onclick();assert.equal(JSON.parse(await exported.text()).entries[0].id,'a');}finally{URL.createObjectURL=old;x.mounted.unmount();}}});
 test('merge after read retains edits made while the file was loading',async()=>{const x=await setup();await x.load({size:100,arrayBuffer:async()=>buffer(state('a'))});const slow=deferred(),pending=x.load({size:100,arrayBuffer:()=>slow.promise});const pin=x.root.querySelector('button[data-action="pin"]');x.root.querySelector('#entries').onclick({target:pin});slow.resolve(buffer(state('b')));await pending;assert.equal(x.calls.at(-1).entries.find(e=>e.id==='a').pinned,true);assert.equal(x.calls.at(-1).entries.length,2);x.mounted.unmount();});
+
+test('query retains matched cards, rendered context, original order and historical evidence without a save',async()=>{
+ const x=await setup();
+ const a=state('a').entries[0],b=state('b').entries[0];
+ a.project='Alpha';a.pinned=true;a.revisions=[{text:'Original hidden-in-history',source:'https://example.org/source/legacy',at:1},{text:'Current alpha',source:'',at:2}];
+ b.project='Beta';b.revisions=[{text:'Fresh beta',source:'',at:2}];
+ const fixture={schema:2,entries:[b,a]};
+ await x.load({size:100,arrayBuffer:async()=>buffer(fixture)});
+ const list=x.root.querySelector('#entries'),first=list.firstElementChild,ctx=x.root.querySelector('#context-packet').firstChild;
+ const details=first.querySelector('details');details.setAttribute('open','');
+ assert.deepEqual([...list.children].map(e=>e.dataset.entryId),['a','b']);
+ x.mounted.setSearch('SOURCE/LEGACY');
+ assert.equal(list.firstElementChild,first);assert.equal(first.querySelector('details'),details);
+ assert.equal(details.hasAttribute('open'),true);assert.equal(list.children.length,1);
+ assert.equal(x.root.querySelector('#context-packet').firstChild,ctx);
+ x.mounted.setSearch('fresh beta');assert.deepEqual([...list.children].map(e=>e.dataset.entryId),['b']);
+ x.mounted.setSearch('no-match-fixture');assert.equal(list.children.length,0);assert.match(list.textContent,/No matching entries/);
+ x.mounted.setSearch('');assert.deepEqual([...list.children].map(e=>e.dataset.entryId),['a','b']);
+ assert.equal(x.root.querySelector('#context-packet').firstChild,ctx);assert.equal(x.calls.length,1);
+ const pin=list.firstElementChild.querySelector('button[data-action="pin"]');list.onclick({target:pin});
+ assert.notEqual(x.root.querySelector('#context-packet').firstChild,ctx);
+ assert.equal(x.calls.length,2);assert.deepEqual(x.calls[1].entries.find(e=>e.id==='a').revisions,a.revisions);
+ x.mounted.unmount();
+});

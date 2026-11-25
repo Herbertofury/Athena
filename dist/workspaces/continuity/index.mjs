@@ -1,5 +1,5 @@
 import {attachArtifacts} from './artifacts.mjs';
-import {fresh, validate, apply, visible} from './model.mjs';
+import {fresh, validate, apply, prepareVisible} from './model.mjs';
 import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
 import {compileContext, contextMarkdown} from './context.mjs';
 
@@ -24,7 +24,10 @@ export function mount({container, state, search = '', setState, signal, theme = 
     if (dependencyId) item.dataset.dependencyId = dependencyId;
     return item;
   }
+  let contextData,contextProject,queryData,selectVisible,byId;
+  const cards=new Map();
   function renderContext() {
+    if (contextData === data && contextProject === project) return;
     const selector = $('#project-context'); selector.replaceChildren();
     const all = element('option', 'All projects'); all.value = ''; selector.append(all);
     for (const name of [...new Set(data.entries.map(entry => entry.project))].sort()) { const option = element('option', name); option.value = name; selector.append(option); }
@@ -38,14 +41,30 @@ export function mount({container, state, search = '', setState, signal, theme = 
     }
     if (!packet.warnings.length) warnings.append(element('li', 'No changed or missing linked evidence detected. This is not proof of correctness or completion.'));
     $('#context-packet').textContent = JSON.stringify(packet, null, 2);
+    contextData = data; contextProject = project;
   }
   function render() {
     if (disposed || !data) return;
     const focused = root.activeElement?.dataset;
     const restoreFocus = focused?.action ? {action: focused.action, id: focused.id, dependencyId: focused.dependencyId} : null;
-    const list = $('#entries'); list.replaceChildren();
-    const rows = visible(data, search, showIgnored), byId = new Map(data.entries.map(entry => [entry.id, entry]));
+    const list = $('#entries');
+    if (queryData !== data) {
+      selectVisible = prepareVisible(data);
+      byId = new Map(data.entries.map(entry => [entry.id, entry]));
+      queryData = data;
+      list.replaceChildren(); cards.clear();
+    }
+    const rows = selectVisible(search, showIgnored), visibleIds = new Set(rows.map(row => row.id));
+    for (const [id, card] of cards) if (!visibleIds.has(id)) { card.remove(); cards.delete(id); }
+    if (rows.length && !cards.size) list.replaceChildren();
+    let cursor = list.firstChild;
     for (const entry of rows) {
+      const retained = cards.get(entry.id);
+      if (retained) {
+        if (cursor !== retained) list.insertBefore(retained, cursor);
+        cursor = retained.nextSibling;
+        continue;
+      }
       const article = element('article'); article.dataset.entryId = entry.id;
       article.append(element('h3', entry.project + ' · ' + entry.kind + (entry.pinned ? ' · pinned' : '') + (entry.ignored ? ' · ignored' : '')));
       const revision = entry.revisions.at(-1); article.append(element('pre', revision.text));
@@ -67,7 +86,7 @@ export function mount({container, state, search = '', setState, signal, theme = 
         option.value = candidate.id; selector.append(option);
       }
       label.append(selector); dependencies.append(label);
-      const link = button('link', 'Link current evidence revision', entry.id); link.disabled = !selector.options.length; selector.disabled = link.disabled; dependencies.append(link); article.append(dependencies); list.append(article);
+      const link = button('link', 'Link current evidence revision', entry.id); link.disabled = !selector.options.length; selector.disabled = link.disabled; dependencies.append(link); article.append(dependencies); cards.set(entry.id, article); list.insertBefore(article, cursor);
     }
     if (!rows.length) list.textContent = 'No matching entries. Missing evidence does not mean work is complete.';
     renderContext();
@@ -136,9 +155,9 @@ export function mount({container, state, search = '', setState, signal, theme = 
   $('#export').onclick = () => { if (data) download(JSON.stringify(data, null, 2), 'athena-continuity.json', 'application/json'); };
   $('#export-context').onclick = () => { if (data) download(contextMarkdown(compileContext(data, project)), 'athena-project-context.md', 'text/markdown'); };
   if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal')) control.disabled = true;
-  function unmount() { if (disposed) return; disposed = true; artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
+  function unmount() { if (disposed) return; disposed = true; artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); cards.clear(); data=byId=selectVisible=contextData=queryData=null; signal?.removeEventListener('abort', unmount); }
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
   setTheme(theme); render(); signal?.addEventListener('abort', unmount, {once: true}); if (signal?.aborted) unmount();
-  return {ready: !!data, unmount, setTheme, setSearch(value) { search = String(value); render(); }};
+  return {ready: !!data, unmount, setTheme, setSearch(value) { const next=String(value); if(search===next)return; search=next; render(); }};
 }
 

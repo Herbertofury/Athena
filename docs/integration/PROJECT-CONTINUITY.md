@@ -174,3 +174,14 @@ Use one editing tab. This check does not lock browser storage, synchronize
 tabs, or make simultaneous reads and writes atomic. Browser quota, invalid
 persisted data and unconfirmed readback do not promote a local draft to the
 last confirmed save. No background sync is introduced.
+
+### Search without rebuilding unrelated notes
+
+Typing in the shared search reuses the current in-memory search projection and
+the cards that still match. Pin order, historical text and source matches,
+ignored-note visibility and full displayed evidence are unchanged. Expanded
+details and selected context stay intact for retained cards. The context packet
+rebuilds when notes or its selected project change, not on every keystroke.
+No search index persists to disk, and searching does not save, hide, truncate
+or transmit any note. The scope is the same local snapshot, not remote or
+full-scale SQLite search.
