@@ -158,3 +158,8 @@ compares theme and room names plus ecology names, shapes and roles. Missing
 legacy ecology data is unknown, not an empty catalog. No raw JSON, materials,
 assets, behaviors or custom labels are exported by this comparison. Even
 when every ID and selected field agrees, it is not a full parity test.
+
+The existing operator-configured Foundry legacy-review panel shows the same
+selected-field totals in collapsible groups. Invalid totals keep import
+disabled; an older store without comparisons is labeled unknown. Viewing
+the dry-run does not create or switch a database.
