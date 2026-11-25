@@ -15,8 +15,12 @@ Reference images are not cleared for new runtime redistribution. Artist authorit
 - MIT licensing and the original source-contract, authority and browser tests.
 - Original local contract/authority tests, TypeScript check and Vite production build pass. This is not a native build or browser pass.
 - The original snapshot reported no wiki or Pages and no issues/PRs/runs. Recheck before retirement: the 2026-11-14 authenticated inventory now includes open acceptance issue #1. Snapshot metadata is not a current completeness claim.
-- Six original v24.0.0 release assets are inventoried. Four files are preserved and hash-verified: source ZIP, Windows EXE/MSI and SHA256SUMS.txt. The web ZIP and complete-release ZIP remain unpreserved; see the release directory's partial-preservation report.
+- All six original v24.0.0 release assets are preserved and hash-verified. Four (source ZIP, Windows EXE/MSI and SHA256SUMS.txt) are in the migration directory; the exact web and complete-release ZIPs are independently verified in owner-held custody and are not distributed in Athena. See the [release custody and rebuild verification](releases/v24.0.0/README.md).
 - Fresh authenticated refs on 2026-11-14 show source main `07d66bde6b758992d04a6b580f159599c705de55`, three documentation commits beyond the bundled main. The reviewed competitive-landscape document and README link are now reconciled without reverting privacy redactions; the original bundle does not yet contain those three commit identities.
+
+## Current private Git history custody (2026-11-25)
+
+The archived bundle in this directory intentionally remains the earlier historical snapshot. A separate owner-held Git bundle was restored and verified through source main `20f95c7bac53b274f378de5e27206b7bcbe32003`. Its 15 commits, both named source branches and the v24.0.0 release tag match the verified source refs, and a clean mirror restore reproduced every reachable object and passed full Git integrity verification. Since the previous verified November 19 backup, main added only two repository-guidance commits, both independently matched to their original Git identities. This verifies Git history custody, not active workspace data, repository settings, CI artifacts or native Athena parity. No private bundle was published here.
 
 ## Restore independently of the original repository
 
@@ -46,7 +50,7 @@ This is **partial native parity**, not a substitute for all original functionali
 ## Deletion gates
 
 1. Verify exact target source blobs and independently restore the published history bundle.
-2. Download and verify all six original release assets, preserve them under Athena without executing installers, and verify the target copies.
+2. Maintain recoverable copies of all six original release assets and verify their hashes without executing installers. Keep originals that are not approved for public redistribution in verified owner-held custody separately from the Athena repository.
 3. Pass the derived workspace's real-browser parity, mount/unmount/abort and persistence tests, then full Athena navigation tests.
 4. Verify native source compilation/runtime or provide an explicitly accepted replacement. Do not silently drop SQLite and desktop functionality.
 5. Verify the exact deployed app identity, assets and source-independent links. Reconcile any new source changes immediately before deletion advice.
