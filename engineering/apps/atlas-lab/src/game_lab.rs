@@ -15,10 +15,18 @@ macro_rules! city {
     };
 }
 
+macro_rules! card {
+    ($file:literal) => {
+        include_str!(concat!("../../../../engines/card-game/", $file))
+    };
+}
+
 const ARENA: &str = survivor!("preview/arena-template.html");
 const CITY: &str = city!("preview/city.html");
+const WARDEN: &str = card!("preview/warden.html");
 static ARENA_HTML: OnceLock<String> = OnceLock::new();
 static CITY_HTML: OnceLock<String> = OnceLock::new();
+static WARDEN_HTML: OnceLock<String> = OnceLock::new();
 const LABEL: &str = r#"<nav aria-label="Engine Foundry"><a href="/play">Engine Foundry Play Lab</a> · <a href="/#build">Athena Foundry</a></nav>"#;
 
 fn page(template: &str, bundle_marker: &str, script: &str) -> String {
@@ -93,6 +101,27 @@ pub(crate) fn router() -> Router {
             }),
         )
         .route(
+            "/play/warden/",
+            get(|| async {
+                Html(WARDEN_HTML
+                    .get_or_init(|| page(WARDEN, "<script>__CODE__</script>", "./preview/host.mjs"))
+                    .as_str())
+            }),
+        )
+        .route(
+            "/play/warden/style.css",
+            get(|| async { ([(header::CONTENT_TYPE, "text/css")], style(WARDEN)) }),
+        )
+        .route(
+            "/play/warden/preview/host.mjs",
+            get(|| async {
+                js!(concat!(
+                    "import {cards,newMatch,replayTape,MAX_TAPE_BYTES} from '../src/warden-match.mjs';\n",
+                    card!("preview/warden-browser.js")
+                ))
+            }),
+        )
+        .route(
             "/play/survivor/style.css",
             get(|| async { ([(header::CONTENT_TYPE, "text/css")], style(ARENA)) }),
         )
@@ -132,6 +161,29 @@ pub(crate) fn router() -> Router {
             "src/legacy-survivor-run.mjs"
         ]
     );
+    let router = route_modules!(
+        router,
+        "/play/warden/",
+        card,
+        [
+            "src/warden-match.mjs",
+            "src/replay-fixture.mjs",
+            "src/replay-entropy.mjs"
+        ]
+    );
+    let router = router
+        .route(
+            "/play/warden/src/engine.mjs",
+            get(|| async { js!(card!("generated/engine.mjs")) }),
+        )
+        .route(
+            "/play/warden/src/match-state.mjs",
+            get(|| async { js!(card!("generated/match-state.mjs")) }),
+        )
+        .route(
+            "/play/warden/src/card-terms.mjs",
+            get(|| async { js!(card!("generated/card-terms.mjs")) }),
+        );
     route_modules!(
         router,
         "/play/city/",
@@ -145,7 +197,7 @@ mod tests {
     use super::*;
     #[test]
     fn native_templates_keep_preview_controls_and_use_external_styles_and_modules() {
-        for (doc, marker) in [(ARENA, "BUNDLE"), (CITY, "CODE")] {
+        for (doc, marker) in [(ARENA, "BUNDLE"), (CITY, "CODE"), (WARDEN, "CODE")] {
             let expected = format!("<script>__{marker}__</script>");
             let out = page(doc, &expected, "./preview/host.mjs");
             assert!(out.contains(LABEL));
