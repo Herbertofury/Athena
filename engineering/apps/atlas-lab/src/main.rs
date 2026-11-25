@@ -103,6 +103,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
+    if (args.len() == 3 || args.len() == 4) && args[1] == "windows-directory-observation" {
+        let limit = args
+            .get(3)
+            .map(|text| text.parse())
+            .transpose()?
+            .unwrap_or(10_000);
+        let observation =
+            atlas_lab::storage_windows_observation::observe(Path::new(&args[2]), limit)?;
+        println!("{}", serde_json::to_string_pretty(&observation)?);
+        return Ok(());
+    }
     if args.len() == 3 && args[1] == "storage-lab" {
         println!(
             "{}",

@@ -636,6 +636,7 @@ pub mod jobs;
 pub mod server;
 
 pub mod storage_lab;
+pub mod storage_windows_observation;
 
 pub mod validated_raw;
 

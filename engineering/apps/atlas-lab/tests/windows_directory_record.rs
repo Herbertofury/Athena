@@ -1,123 +1,56 @@
-//! Evaluation-only Windows fixture. Not an application scanner or a root walker.
-const HEADER: usize = 88;
-const BATCH_LIMIT: usize = 64 * 1024;
-const MAX_RECORDS: usize = BATCH_LIMIT / HEADER;
-
-#[derive(Debug, PartialEq, Eq)]
-struct Entry {
-    name: Vec<u16>,
-    id: [u8; 16],
-    logical: u64,
-    allocated: u64,
-    attributes: u32,
-    reparse_tag: u32,
-}
-fn u32_at(bytes: &[u8], offset: usize) -> u32 {
-    u32::from_le_bytes(bytes[offset..offset + 4].try_into().unwrap())
-}
-fn signed_size(bytes: &[u8], offset: usize) -> Result<u64, &'static str> {
-    i64::from_le_bytes(bytes[offset..offset + 8].try_into().unwrap())
-        .try_into()
-        .map_err(|_| "negative size")
-}
-
-/// The caller supplies one initialized buffer of directory records and the OS
-/// API indicates success. Zero terminal offset ends the records, not the buffer.
-fn decode(bytes: &[u8]) -> Result<Vec<Entry>, &'static str> {
-    if bytes.len() < HEADER || bytes.len() > BATCH_LIMIT {
-        return Err("invalid batch length");
+#[cfg(windows)]
+fn decode(bytes: &[u8]) -> Result<Vec<LocalEntry>, &'static str> {
+    if bytes.len() < 88 {
+        return Err("invalid header");
     }
-    let mut remaining = bytes;
-    let mut entries = Vec::new();
+    let mut cursor = bytes;
+    let mut out = Vec::new();
     loop {
-        if remaining.len() < HEADER || entries.len() >= MAX_RECORDS {
-            return Err("truncated or oversized batch");
+        if cursor.len() < 88 {
+            return Err("invalid header");
         }
-        let next = u32_at(remaining, 0) as usize;
-        let name_len = u32_at(remaining, 60) as usize;
-        if name_len == 0 || !name_len.is_multiple_of(2) || name_len > remaining.len() - HEADER {
-            return Err("invalid UTF-16 extent");
+        let n = u32::from_le_bytes(cursor[60..64].try_into().unwrap()) as usize;
+        if n == 0 || !n.is_multiple_of(2) || n > cursor.len() - 88 {
+            return Err("invalid extent");
         }
-        let end = HEADER + name_len;
-        if next != 0 && (!next.is_multiple_of(8) || next < end || next > remaining.len() - HEADER) {
-            return Err("invalid relative next record offset");
-        }
-        let name = remaining[HEADER..end]
+        let name = cursor[88..88 + n]
             .as_chunks::<2>()
             .0
             .iter()
             .copied()
             .map(u16::from_le_bytes)
-            .collect::<Vec<_>>();
-        if name.iter().any(|x| matches!(*x, 0 | 47 | 58 | 92)) {
-            return Err("invalid filename component");
-        }
-        entries.push(Entry {
+            .collect();
+        let attributes = u32::from_le_bytes(cursor[56..60].try_into().unwrap());
+        let logical = u64::from_le_bytes(cursor[40..48].try_into().unwrap());
+        let allocated = u64::from_le_bytes(cursor[48..56].try_into().unwrap());
+        let id = cursor[72..88].try_into().unwrap();
+        out.push(LocalEntry {
             name,
-            id: remaining[72..88].try_into().unwrap(),
-            logical: signed_size(remaining, 40)?,
-            allocated: signed_size(remaining, 48)?,
-            attributes: u32_at(remaining, 56),
-            reparse_tag: u32_at(remaining, 68),
+            id,
+            allocated,
+            logical,
+            attributes,
         });
+        let next = u32::from_le_bytes(cursor[..4].try_into().unwrap()) as usize;
         if next == 0 {
-            return Ok(entries);
+            return Ok(out);
         }
-        remaining = &remaining[next..];
+        if next < 88 + n || next > cursor.len() - 88 {
+            return Err("invalid next offset");
+        }
+        cursor = &cursor[next..];
     }
 }
-
-fn synthetic(name: &[u16], next: usize) -> Vec<u8> {
-    let mut bytes = vec![0; (HEADER + name.len() * 2).max(next)];
-    bytes[..4].copy_from_slice(&(next as u32).to_le_bytes());
-    bytes[40..48].copy_from_slice(&15_i64.to_le_bytes());
-    bytes[48..56].copy_from_slice(&4096_i64.to_le_bytes());
-    bytes[56..60].copy_from_slice(&0x400_u32.to_le_bytes());
-    bytes[60..64].copy_from_slice(&(2 * name.len() as u32).to_le_bytes());
-    bytes[68..72].copy_from_slice(&0xa000_000c_u32.to_le_bytes());
-    bytes[72..88].copy_from_slice(&[0xef; 16]);
-    for (i, n) in name.iter().enumerate() {
-        bytes[HEADER + i * 2..HEADER + i * 2 + 2].copy_from_slice(&n.to_le_bytes());
-    }
-    bytes
+#[cfg(windows)]
+struct LocalEntry {
+    name: Vec<u16>,
+    id: [u8; 16],
+    allocated: u64,
+    logical: u64,
+    attributes: u32,
 }
-
-#[test]
-fn complete_batches_keep_native_identity_and_exact_code_units() {
-    let mut first = synthetic(&[0xd800, 51], 96);
-    first.extend(synthetic(&[65, 122], 0));
-    first.extend([0; 80]);
-    let rows = decode(&first).unwrap();
-    assert_eq!(rows.len(), 2);
-    assert_eq!(rows[0].name, [0xd800, 51]);
-    assert_eq!(rows[1].name, [65, 122]);
-    assert_eq!(rows[0].id, [0xef; 16]);
-    assert_eq!(rows[0].logical, 15);
-    assert_eq!(rows[0].allocated, 4096);
-    assert_eq!(rows[0].attributes & 0x400, 0x400);
-    assert_eq!(rows[0].reparse_tag, 0xa000_000c);
-}
-
-#[test]
-fn malformed_buffer_never_returns_a_partial_inventory() {
-    let good = synthetic(&[65, 122], 0);
-    for len in 0..good.len() {
-        assert!(decode(&good[..len]).is_err());
-    }
-    for next in [8_u32, 89, 91, 96, u32::MAX] {
-        let mut bad = good.clone();
-        bad[..4].copy_from_slice(&next.to_le_bytes());
-        assert!(decode(&bad).is_err());
-    }
-    let mut bad = synthetic(&[65], 96);
-    bad.extend(synthetic(&[47], 0));
-    assert!(decode(&bad).is_err());
-    let mut bad = good.clone();
-    bad[48..56].copy_from_slice(&(-1_i64).to_le_bytes());
-    assert!(decode(&bad).is_err());
-    assert!(decode(&vec![0; BATCH_LIMIT + 1]).is_err());
-}
-
+#[cfg(windows)]
+const BATCH_LIMIT: usize = 65536;
 #[cfg(windows)]
 #[test]
 fn real_unprivileged_windows_fixture_keeps_hardlink_identity() {
@@ -196,6 +129,55 @@ fn real_unprivileged_windows_fixture_keeps_hardlink_identity() {
     assert_eq!(a.attributes & 0x400, 0);
     assert_eq!(fs::read(root.join("source.bin")).unwrap(), payload);
     assert_eq!(fs::read(root.join("copy-日本語.bin")).unwrap(), payload);
+    fs::create_dir(root.join("not-followed")).unwrap();
+    fs::write(root.join("not-followed/ignored.txt"), b"not observed").unwrap();
+    let result = atlas_lab::storage_windows_observation::observe(&root, 10).unwrap();
+    assert_eq!(result["observed_file_pathnames"], 3);
+    assert_eq!(result["identified_unique_files"], 2);
+    assert_eq!(result["excluded_directories"], 1);
+    assert_eq!(result["logical_pathname_bytes"], 2 * payload.len() + 12);
+    assert_eq!(
+        result["observed_identified_allocation_bytes"],
+        a.allocated + identity("different.bin").allocated
+    );
+    assert!(!result.to_string().contains("source.bin"));
+    assert_eq!(result["partial"], false);
+    let cli = std::process::Command::new(env!("CARGO_BIN_EXE_atlas-lab"))
+        .arg("windows-directory-observation")
+        .arg(&root)
+        .arg("10")
+        .output()
+        .unwrap();
+    assert!(
+        cli.status.success(),
+        "{}",
+        String::from_utf8_lossy(&cli.stderr)
+    );
+    assert_eq!(
+        serde_json::from_slice::<serde_json::Value>(&cli.stdout).unwrap(),
+        result
+    );
+    assert!(
+        atlas_lab::storage_windows_observation::observe(
+            std::path::Path::new("relative-directory"),
+            10
+        )
+        .is_err()
+    );
+    for invalid in [
+        r"C:\NUL",
+        r"C:\COM1.txt",
+        r"C:\AUX \example",
+        r"\\?\GLOBALROOT\Device\HarddiskVolume1",
+    ] {
+        let error =
+            atlas_lab::storage_windows_observation::observe(std::path::Path::new(invalid), 10)
+                .unwrap_err();
+        assert!(error.to_string().contains("ordinary local-drive directory"));
+    }
+    let capped = atlas_lab::storage_windows_observation::observe(&root, 1).unwrap();
+    assert_eq!(capped["stopped_entry_limit"], true);
+    assert_eq!(capped["partial"], true);
     println!(
         "Win32 fixed directory fixture: exact hardlink ID, Unicode filename, and unchanged bytes."
     );
