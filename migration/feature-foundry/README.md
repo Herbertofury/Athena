@@ -18,6 +18,10 @@ Reference images are not cleared for new runtime redistribution. Artist authorit
 - All six original v24.0.0 release assets are preserved and hash-verified. Four (source ZIP, Windows EXE/MSI and SHA256SUMS.txt) are in the migration directory; the exact web and complete-release ZIPs are independently verified in owner-held custody and are not distributed in Athena. See the [release custody and rebuild verification](releases/v24.0.0/README.md).
 - Fresh authenticated refs on 2026-11-14 show source main `07d66bde6b758992d04a6b580f159599c705de55`, three documentation commits beyond the bundled main. The reviewed competitive-landscape document and README link are now reconciled without reverting privacy redactions; the original bundle does not yet contain those three commit identities.
 
+## Current private Git history custody (2026-11-25)
+
+The archived bundle in this directory intentionally remains the earlier historical snapshot. A separate owner-held Git bundle was restored and verified through source main `20f95c7bac53b274f378de5e27206b7bcbe32003`. Its 15 commits, both named source branches and the v24.0.0 release tag match the verified source refs, and a clean mirror restore reproduced every reachable object and passed full Git integrity verification. Since the previous verified November 19 backup, main added only two repository-guidance commits, both independently matched to their original Git identities. This verifies Git history custody, not active workspace data, repository settings, CI artifacts or native Athena parity. No private bundle was published here.
+
 ## Restore independently of the original repository
 
 Verify the bundle's SHA-256 against history-recovery.json. Then:
