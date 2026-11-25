@@ -88,9 +88,11 @@ an independent temporary bare repository, checks complete object connectivity,
 and compares exact refs/HEAD before publishing the new bundle. Source files and
 refs are not modified. No checkout, source execution, remote refresh or upload
 occurs; lazy fetching is disabled. Shallow history, replacements and grafts are
-rejected. Existing outputs are never overwritten; the verified file is published
-with an exclusive hard link, so the output filesystem must support hard links.
-POSIX mode 0600 is requested; this is not a Windows ACL guarantee.
+rejected. Existing outputs are never overwritten. A staged, verified bundle
+or capsule is published by an exclusive same-volume rename on Windows or an
+exclusive hard link on POSIX. Each operation fails rather than falling back to
+a partial copy. The Windows path does not require hard links. POSIX mode 0600 is
+requested; this is not a Windows ACL guarantee.
 
 Keep the bundle private until complete history rights and private-data review.
 The summary emits only head/hash/count/verification flags, not names or content.

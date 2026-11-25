@@ -2,12 +2,11 @@
 """Private, local Git recovery capsule: bundle plus exact reference metadata."""
 import argparse
 import json
-import os
 from pathlib import Path
 import re
 import tempfile
 import zipfile
-from history_bundle import create as create_bundle, git, refs, head, checksum
+from history_bundle import create as create_bundle, git, refs, head, checksum, publish_new
 
 MAX_BUNDLE = 32 * 1024 * 1024
 MAX_MANIFEST = 1024 * 1024
@@ -107,7 +106,8 @@ def create(source, output):
         with zipfile.ZipFile(capsule,'w',compression=zipfile.ZIP_STORED) as archive:
             archive.write(raw,'history.bundle');archive.writestr('manifest.json',encoded)
         result=verify(capsule)
-        capsule.chmod(0o600);os.link(capsule,output)
+        publish_new(capsule,output)
+        if checksum(output)!=result['capsuleSha256']:raise ValueError('Published local capsule verification failed')
     return result
 
 def main():
