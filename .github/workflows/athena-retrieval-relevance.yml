@@ -1,0 +1,31 @@
+name: Athena synthetic retrieval relevance
+on:
+  pull_request:
+    paths:
+      - 'engineering/experiments/retrieval-relevance/**'
+      - 'engineering/data/sources.d/embedding-candidates-20261125.json'
+      - '.github/workflows/athena-retrieval-relevance.yml'
+permissions:
+  contents: read
+jobs:
+  fixture:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: engineering/experiments/retrieval-relevance
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.13'
+      - run: python -m unittest -v test_score.py
+      - run: python score.py
+      - run: python score.py > lexical-receipt.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: athena-retrieval-lexical-${{ matrix.os }}
+          path: engineering/experiments/retrieval-relevance/lexical-receipt.json
+          if-no-files-found: error

@@ -20,6 +20,8 @@ A practical, evolving research library for desktop apps, web services, Minecraft
 
 [Frontier engineering intelligence](research/2026-11-24-frontier-index.md) — 64 additional indexed primary-source observations across web acquisition, desktop/rendering, retrieval/data, native performance and current releases. These extend the research library; they are not yet integrated into the generated Explorer candidate snapshot or measured recommendations.
 
+[Local text and artwork retrieval qualification](research/2026-11-25-local-embeddings-qualification.md) adds a frozen synthetic BM25 baseline and a source-backed shortlist; no embedding model has been promoted.
+
 ## Ranked choices and measured experiments
 
 [Best choices and avoid guidance](docs/ranked-recommendations.md) · [2026 paper and Codeberg-linked watchlist](docs/paper-watchlist-2026.md) · [Measured JSON lab](experiments/json-lab/README.md)
