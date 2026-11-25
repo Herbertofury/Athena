@@ -73,3 +73,18 @@ node engines/roguelite/tools/build-survivor-movement.mjs --check
 node --test engines/roguelite/tests/*.test.mjs
 node engines/roguelite/examples/demo-encounter-lane.mjs
 ```
+
+### Legacy level-up choices
+
+`createLegacyUpgradeDirector({random})` rolls three inert display choices
+from the original templates, then applies only a currently offered choice
+to the same player object. Roll after the separately extracted XP gate.
+A newer draft invalidates the old one; one successful choice consumes that
+draft. Hosts must supply validated, mutable player state and own save,
+pause, and network authority. The extracted stat and weapon-addition logic
+does not fire weapons, play sound, or automatically choose an upgrade.
+
+This is the legacy mode: it retains the original JavaScript random-sort
+comparator and is only compared against the same engine/runtime. It does
+not promise unbiased selection or byte-identical cross-JavaScript-runtime
+transcripts. A fair seeded mode should be an explicitly separate version.
