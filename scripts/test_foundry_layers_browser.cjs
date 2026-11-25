@@ -95,5 +95,32 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   });
   assert.deepEqual(outcome,{same:true,nodes:0,aria:2,inspector:true,selected:true});
  });
+ await check('explicit layer filters narrow a 100-layer list without touching the scene or saves',async()=>{
+  const panel=one('[data-foundry-module="layers"]'),row=panel.locator('[data-layer-id]').first();
+  const id=await row.getAttribute('data-layer-id'),handle=await row.elementHandle();
+  const before=await page.evaluate(()=>JSON.stringify(Object.entries(localStorage).sort()));
+  const actors=await one('.foundry-scene .foundry-object').count();
+  await panel.getByRole('searchbox',{name:'Find a layer'}).fill(id);
+  assert.equal(await panel.locator('[data-layer-id]:visible').count(),1);
+  assert.equal(await panel.locator('[data-layer-id]').count(),100);
+  assert.equal(await one('.foundry-scene .foundry-object').count(),actors);
+  await panel.getByLabel('Layer status').selectOption('pinned');
+  assert.equal(await panel.locator('[data-layer-id]:visible').count(),0);
+  await panel.getByRole('button',{name:'Clear layer filters'}).click();
+  assert.equal(await panel.locator('[data-layer-id]:visible').count(),100);
+  assert.equal(await handle.evaluate(el=>el.isConnected),true);
+  assert.equal(await page.evaluate(()=>JSON.stringify(Object.entries(localStorage).sort())),before);
+  const search=panel.getByRole('searchbox',{name:'Find a layer'}),status=panel.getByLabel('Layer status');
+  await search.fill(id);
+  const pinned=row.locator('[data-layer-action="pin"]');
+  await pinned.focus();await page.keyboard.press('Space');assert.equal(await pinned.getAttribute('aria-pressed'),'true');
+  await status.selectOption('pinned');assert.equal(await panel.locator('[data-layer-id]:visible').count(),1);
+  await pinned.focus();await page.keyboard.press('Space');
+  assert.equal(await panel.locator('[data-layer-id]:visible').count(),0);
+  assert.equal(await status.evaluate(el=>el===el.getRootNode().activeElement),true);
+  await panel.getByRole('button',{name:'Clear layer filters'}).click();
+  assert.equal(await panel.locator('[data-layer-id]:visible').count(),100);
+
+ });
  assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);report.result='pass';
 })().catch(async e=>{report.result='failed';report.failure=e.stack;process.exitCode=1;if(page)try{await page.screenshot({path:path.join(out,'failure.png'),fullPage:true});}catch{}}).finally(async()=>{await browser?.close();if(server)await new Promise(r=>server.close(r));fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));});

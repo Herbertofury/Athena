@@ -12,11 +12,54 @@ function reorder(parent,nodes){
 }
 export function attachNativeLayers({host,signal,onSelect,onVisible,onPin}){
  const doc=host.ownerDocument;
- let disposed=false,room=null,priorSelected=null;
+ let disposed=false,room=null,priorSelected=null,terms=[],mode='all',hadFilter=false;
  const rendered=new Map(),sections=new Map();
- host.innerHTML='<h2>Room layers</h2><p>All authored instances, including hidden and filtered objects. Groups follow native surfaces, not original left/right worlds. Pin is a native position pin, not the original lock. Visibility toggles explicitly adopt format v7 when needed.</p><div data-layer-groups></div><p data-layer-status role="status"></p>';
+ host.innerHTML='<h2>Room layers</h2><p>All authored instances, including hidden and filtered objects. Groups follow native surfaces, not original left/right worlds. Pin is a native position pin, not the original lock. Visibility toggles explicitly adopt format v7 when needed.</p><div class="layer-filters"><label>Find a layer <input type="search" maxlength="160" data-layer-search placeholder="Name, instance ID or surface"></label><label>Layer status <select data-layer-filter><option value="all">All layers</option><option value="hidden">Hidden</option><option value="pinned">Pinned</option><option value="selected">Selected</option><option value="filtered">Filtered from scene</option><option value="unavailable">Unavailable anchor</option></select></label><button type="button" data-layer-clear disabled>Clear layer filters</button></div><div data-layer-groups></div><p data-layer-status role="status"></p>';
  const groups=host.querySelector('[data-layer-groups]'),status=host.querySelector('[data-layer-status]');
- function clear(){rendered.clear();sections.clear();groups.replaceChildren();priorSelected=null;}
+ const search=host.querySelector('[data-layer-search]'),filter=host.querySelector('[data-layer-filter]'),reset=host.querySelector('[data-layer-clear]');
+ const modes=new Set(['all','hidden','pinned','selected','filtered','unavailable']);
+ function clear(){rendered.clear();sections.clear();groups.replaceChildren();priorSelected=null;hadFilter=false;}
+ function statusMatches(row){
+  switch(mode){
+   case 'hidden':return !row.visible;
+   case 'pinned':return row.pinned;
+   case 'selected':return row.id===priorSelected;
+   case 'filtered':return row.filtered;
+   case 'unavailable':return row.unavailable;
+   default:return true;
+  }
+ }
+ function applyFilters(){
+  if(disposed||signal.aborted)return;
+  const active=Boolean(terms.length||mode!=='all'),total=rendered.size;
+  let shown=total;
+  if(active||hadFilter){
+   const focused=host.getRootNode().activeElement,shownGroups=new Set();
+   let returnFocus=false;
+   shown=0;
+   for(const {row,item,group} of rendered.values()){
+    const haystack=terms.length?(row.name+' '+row.id+' '+group).toLowerCase():'';
+    const visible=statusMatches(row)&&terms.every(term=>haystack.includes(term));
+    if(visible){shown++;shownGroups.add(group);}
+    if(Boolean(item.hidden)===visible){
+     if(!visible&&focused&&item.contains(focused))returnFocus=true;
+     item.hidden=!visible;
+    }
+   }
+   for(const [key,{section}] of sections){
+    const visible=shownGroups.has(key);
+    if(Boolean(section.hidden)===visible)section.hidden=!visible;
+   }
+   if(returnFocus)filter.focus({preventScroll:true});
+  }
+  hadFilter=active;
+  if(reset.disabled===active)reset.disabled=!active;
+  const next=!total?'Room has no object instances.':active?shown+' of '+total+' layers shown. Filter only changes this list.':total+' instances; selection does not change saved state.';
+  if(status.textContent!==next)status.textContent=next;
+ }
+ function readTerms(){terms=search.value.slice(0,160).trim().toLowerCase().split(/\s+/).filter(Boolean);applyFilters();}
+ function readMode(){mode=modes.has(filter.value)?filter.value:'all';applyFilters();}
+ function clearFilters(){search.value='';filter.value='all';terms=[];mode='all';applyFilters();search.focus({preventScroll:true});}
  function property(button,value,negative,positive){
   button.textContent=value?positive:negative;pressed(button,value);
  }
@@ -76,13 +119,12 @@ export function attachNativeLayers({host,signal,onSelect,onVisible,onPin}){
    if(focused&&groups.contains(focused)&&host.getRootNode().activeElement!==focused)focused.focus({preventScroll:true});
   }
   priorSelected=selected;
-  const next=rows.length?rows.length+' instances; selection does not change saved state.':'Room has no object instances.';
-  if(status.textContent!==next)status.textContent=next;
+  applyFilters();
  }
  function click(event){
   if(disposed||signal.aborted)return;
   const button=event.target.closest?.('[data-layer-action]'),item=button?.closest('[data-layer-id]');
-  if(!item||!groups.contains(item))return;
+  if(!item||item.hidden||!groups.contains(item))return;
   const entry=rendered.get(item.dataset.layerId),action=button.dataset.layerAction;
   if(entry?.item!==item||entry.buttons[action]!==button)return;
   const row=entry.row;
@@ -92,8 +134,11 @@ export function attachNativeLayers({host,signal,onSelect,onVisible,onPin}){
    else if(action==='pin')onPin(row.id,!row.pinned);
   }catch{status.textContent='Layer action failed; inspect the current workspace before retrying.';}
  }
- host.addEventListener('click',click);
- function dispose(){if(disposed)return;disposed=true;host.removeEventListener('click',click);signal.removeEventListener('abort',dispose);clear();}
+ host.addEventListener('click',click);search.addEventListener('input',readTerms);filter.addEventListener('change',readMode);reset.addEventListener('click',clearFilters);
+ function dispose(){
+  if(disposed)return;disposed=true;host.removeEventListener('click',click);search.removeEventListener('input',readTerms);
+  filter.removeEventListener('change',readMode);reset.removeEventListener('click',clearFilters);signal.removeEventListener('abort',dispose);clear();
+ }
  signal.addEventListener('abort',dispose,{once:true});if(signal.aborted)dispose();
  return {update,dispose};
 }
