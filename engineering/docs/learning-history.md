@@ -3,8 +3,12 @@
 Open `/learning` on the loopback Athena engine to browse recorded experiments.
 The engine advertises this address in `/api/runtime`; the page links back to the
 same Athena home and Engineering workspace. It is a compiled native route, not an
-iframe or imported application. Frozen packaged assets are unchanged. A permanent
-home-navigation entry remains a separate future integration step.
+iframe or imported application. The main navigation offers a Learning History link
+only at the exact native origin `http://127.0.0.1:41379`, after a bounded read of
+the engine's same-origin capability. A missing or invalid capability leaves other
+navigation usable and adds no link. Public Pages, local files, and other origins
+do not make this discovery request. Opening the link navigates to the read-only
+native page; discovery does not start an experiment.
 
 History is read-only: no new experiment, migration, restore, promotion or external
 service request is triggered by browsing. Lists use descending ID keyset pages of
