@@ -2,7 +2,7 @@
 const get=id=>document.getElementById(id);
 const board=get('arena'), ctx=board.getContext('2d'), start=get('start'), pause=get('pause'), seed=get('seed');
 const hud=Object.fromEntries(['hp','level','xp','kills','time','arsenal'].map(id=>[id,get(id)]));
-const choicePanel=get('choice'), choices=get('choices'), status=get('status');
+const choicePanel=get('choice'), choices=get('choices'), status=get('status'), formatField=get('run-format'), pressure=get('pressure');
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
@@ -39,6 +39,8 @@ function showFrameStats(){
  setText(hud.hp,Math.max(0,Math.ceil(player.hp))+' / '+player.maxHp);
  setText(hud.level,String(player.level));setText(hud.xp,player.xp+' / '+player.xpToNext);setText(hud.kills,String(run.kills));
  const t=Math.floor(gameTime);setText(hud.time,Math.floor(t/60)+':'+String(t%60).padStart(2,'0'));
+ const m=snapshot.arenaFormat;
+ setText(pressure,m?(m.seconds===null?'Endless':m.seconds/60+' min')+' · '+m.label+(m.wave?' '+m.wave:''):'Classic source rules');
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
 }
 function circle(x,y,r,color){
@@ -85,7 +87,7 @@ function frame(now){
    if(result==='choice'){
     transition('choice','Level '+snapshot.player.level+'. Choose an upgrade.');
     showChoices(snapshot.offers);
-   }else transition('finished',snapshot.run.won?'You survived five minutes.':'Run finished. Try another seed or play again.');
+   }else transition('finished',snapshot.run.won?(snapshot.arenaFormat?'Marathon complete.':'You survived five minutes.'):'Run finished. Try another seed or play again.');
   }
  }
  if(mode==='running')snapshot=host.snapshot();
@@ -99,7 +101,7 @@ function togglePause(){
 start.addEventListener('click',()=>{
  if(!seed.checkValidity()||seed.value===''){seed.focus();setText(status,'Enter a whole seed from 0 to 4294967295.');return;}
  let state=Number(seed.value)>>>0;
- host=createLegacySurvivorRun({random:()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;}});
+ host=createLegacySurvivorRun({format:formatField.value,random:()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;}});
  clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();prior=0;leftover=0;snapshot=host.snapshot();
  transition('running','Run started.');setText(start,'Restart run');board.focus();draw();
 });

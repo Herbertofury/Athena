@@ -115,3 +115,20 @@ sound, makes no network calls and stores nothing. It supports keyboard,
 pause/resume, seeded restart and selectable upgrades. The authored GameSync
 renderer, mascot art, audio, persistence, meta-progression and integration
 into native products are separate acceptance gates, not part of this build.
+
+### Optional endurance formats
+
+Classic remains the exact five-minute source rules. Experiment with separate
+20-, 30-, 60-, or 120-minute Marathon formats, or choose Endless. Marathons
+walk through five spawn-pressure stages; Endless crosses into repeating
+surges and breathers after 20 minutes and has no automatic win timer.
+Endless scales enemy health and damage progressively with a stated upper
+bound; position, movement and rolls still use the shared combat engine.
+
+Endurance formats use a stage-specific limit of 45–125 live enemies and
+count suppressed spawns instead of indefinitely growing the active set.
+This cap and timing curve are deliberate alternate rules, not performance
+or latency claims. Classic has not adopted them. The browser shows the
+active stage and upcoming selection; changing it starts a new run only
+when requested. This preview has no autosave, cross-app profile storage,
+or mod-manager integration.

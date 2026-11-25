@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
 const read=p=>readFileSync(new URL(p,import.meta.url),'utf8').replaceAll('\r\n','\n');
 // Explicit dependency order and fixed source paths. No downloaded input, dynamic imports or eval.
-const sources=['gamesync-spawn-formulas','gamesync-pickup-formulas','gamesync-movement-formulas','gamesync-upgrade-formulas','upgrade-draft','gamesync-combat-formulas','legacy-survivor-run'];
+const sources=['gamesync-spawn-formulas','gamesync-pickup-formulas','gamesync-movement-formulas','gamesync-upgrade-formulas','upgrade-draft','gamesync-combat-formulas','arena-formats','legacy-survivor-run'];
 const code=sources.map(name=>{
  const source=read('../src/'+name+'.mjs');
  const exposed=[...source.matchAll(/^export (?:const|function) ([\w$]+)/gm)].map(m=>m[1]);

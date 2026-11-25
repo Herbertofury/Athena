@@ -18,7 +18,7 @@ header{margin-bottom:1rem}.hud{display:grid;grid-template-columns:repeat(5,1fr);
 canvas{display:block;width:100%;height:auto;aspect-ratio:16/10;outline-offset:-4px}
 .controls{display:flex;gap:.55rem;flex-wrap:wrap;align-items:end;margin:.85rem 0}
 button,input{font:inherit;border:1px solid var(--line);border-radius:.6rem;background:#171a24;color:inherit;padding:.53em .7em}
-input{width:9em}label{display:grid;gap:.24em;color:var(--muted);font-size:.85rem}
+input{width:9em}select{font:inherit;color:inherit;background:#151b27;border:1px solid #47556d;border-radius:.4rem;padding:.45em}label{display:grid;gap:.24em;color:var(--muted);font-size:.85rem}
 button{cursor:pointer}button.primary{background:var(--mint);color:#07170f;font-weight:750}button:disabled{opacity:.52;cursor:default}
 :focus-visible{outline:3px solid var(--mint);outline-offset:3px}
 kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.85rem}.panel h2{margin:.1em 0 .45em;font-size:1.25rem}.cards,.touch{display:flex;gap:.5rem;flex-wrap:wrap}.cards button{text-align:left;flex:1 0 9rem}.cards span{display:block;color:var(--muted);font-size:.8rem}
@@ -29,7 +29,7 @@ kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.
 </head>
 <body>
 <main>
-<header><div class="eyebrow">Athena · Engine Foundry / Offline preview</div><h1>Survivor Arena</h1><p>Survive five minutes. Your weapons fire automatically; your build is up to you.</p></header>
+<header><div class="eyebrow">Athena · Engine Foundry / Offline preview</div><h1>Survivor Arena</h1><p>Play the original five-minute Classic or take on an endurance run. Your weapons fire automatically.</p></header>
 <div class="hud" aria-label="Run stats">
 <div class="metric"><small>Health</small><strong id="hp">100 / 100</strong></div>
 <div class="metric"><small>Level</small><strong id="level">1</strong></div>
@@ -40,6 +40,11 @@ kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.
 <div class="arena"><canvas id="arena" width="800" height="500" tabindex="0" aria-label="Survivor Arena game field" aria-describedby="help">This browser needs Canvas to display the game.</canvas></div>
 <div class="controls">
 <button id="start" class="primary">Start run</button><button id="pause" disabled>Pause</button>
+<label for="run-format">Format for next run<select id="run-format">
+<option value="classic">Classic · 5 min</option><option value="marathon-20">Marathon · 20 min</option><option value="marathon-30">Marathon · 30 min</option>
+<option value="marathon-60">Marathon · 60 min</option><option value="marathon-120">Marathon · 120 min</option><option value="endless">Endless</option>
+</select></label>
+<p id="pressure" aria-label="Run stage">Classic source rules</p>
 <label for="seed">Run seed<input id="seed" type="number" min="0" max="4294967295" value="42" step="1"></label>
 </div>
 <div class="touch" aria-label="Touch movement">

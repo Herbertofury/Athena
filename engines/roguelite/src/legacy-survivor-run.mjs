@@ -4,11 +4,13 @@ import {tickPlayerMovement,tickEnemyContact} from './gamesync-movement-formulas.
 import {tickPickupFormulas} from './gamesync-pickup-formulas.mjs';
 import {tickSpawnFormulas} from './gamesync-spawn-formulas.mjs';
 import {createLegacyUpgradeDirector} from './upgrade-draft.mjs';
+import {arenaFormat,endurancePressure} from './arena-formats.mjs';
 
 export const LEGACY_SURVIVOR_RUN_CONTRACT='athena.roguelite.gamesync-live.v1';
 const SURVIVE_TIME=300;
 
-export function createLegacySurvivorRun({random}={}) {
+export function createLegacySurvivorRun({random,format='classic'}={}) {
+ const recipe=arenaFormat(format),classic=recipe.id==='classic';
  if(typeof random!=='function')throw new TypeError('Explicit entropy source required');
  const rng=()=>{
   const n=random();
@@ -19,7 +21,7 @@ export function createLegacySurvivorRun({random}={}) {
  const run={kills:0,gameOver:false,won:false};
  const enemies=[],gems=[];
  const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng});
- let gameTime=0,spawnTimer=0,offers=null;
+ let gameTime=0,spawnTimer=0,offers=null,missedSpawns=0;
  const dispatch=(events)=>events.filter(cue=>{
   if(cue.type!=='particles')return true;
   combat.emit(cue.x,cue.y,cue.count,cue.style);
@@ -29,15 +31,23 @@ export function createLegacySurvivorRun({random}={}) {
   if(!Number.isFinite(dt)||dt<0||dt>SURVIVE_TIME)throw new RangeError('Invalid tick duration');
   if(run.gameOver||offers)return {status:offers?'choice':'finished',audio:[]};
   gameTime+=dt;
-  if(gameTime>=SURVIVE_TIME){
+  if(recipe.seconds!==null&&gameTime>=recipe.seconds){
    run.gameOver=true;run.won=true;
    return {status:'finished',audio:[]};
   }
   const input={...keys};
   const audio=dispatch(tickPlayerMovement({player,keys:input,dt}));
-  const next=tickSpawnFormulas({spawnTimer,dt,gameTime,SURVIVE_TIME,player,random:rng});
+  const current=classic?null:endurancePressure(recipe,gameTime);
+  const coordinate=classic?gameTime:current.pressure*SURVIVE_TIME;
+  const next=tickSpawnFormulas({spawnTimer,dt,gameTime:coordinate,SURVIVE_TIME,player,random:rng});
   spawnTimer=next.spawnTimer;
-  for(const enemy of next.enemies)enemies.push(enemy);
+  for(const enemy of next.enemies){
+   if(current&&enemies.length>=current.activeLimit){missedSpawns++;continue;}
+   if(current&&current.scale>1){
+    enemy.hp*=current.scale;enemy.maxHp*=current.scale;enemy.dmg*=current.scale;
+   }
+   enemies.push(enemy);
+  }
   combat.step(player,enemies,dt);
   audio.push(...dispatch(tickEnemyContact({player,enemies,gems,run,dt})));
   const levels=tickPickupFormulas({gems,player,dt});
@@ -58,7 +68,8 @@ export function createLegacySurvivorRun({random}={}) {
  }
  function snapshot(){
   return {contract:LEGACY_SURVIVOR_RUN_CONTRACT,gameTime,spawnTimer,offers,player:structuredClone(player),
-   run:{...run},enemies:structuredClone(enemies),gems:structuredClone(gems),...combat.snapshot(enemies)};
+   run:{...run},enemies:structuredClone(enemies),gems:structuredClone(gems),...combat.snapshot(enemies),
+   ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{})};
  }
  return Object.freeze({step,choose,snapshot});
 }

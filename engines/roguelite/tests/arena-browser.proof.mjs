@@ -45,6 +45,14 @@ try{
  await page.getByRole('button',{name:'Restart run'}).click();
  assert.equal(await page.locator('#kills').textContent(),'0');
  assert.equal(await page.locator('#level').textContent(),'1');
+ const profile=page.getByLabel('Format for next run');
+ assert.equal(await profile.locator('option').count(),6);
+ await profile.selectOption('marathon-120');
+ await page.getByRole('button',{name:'Restart run'}).click();
+ assert.match(await page.locator('#pressure').textContent(),/120 min · Onset/);
+ await profile.selectOption('endless');
+ await page.getByRole('button',{name:'Restart run'}).click();
+ assert.match(await page.locator('#pressure').textContent(),/Endless · Onset/);
  assert.deepEqual(errors,[]);
  assert.deepEqual(requests,[address]);
  console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, restart; zero external requests.');
