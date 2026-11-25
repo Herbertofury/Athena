@@ -88,3 +88,30 @@ This is the legacy mode: it retains the original JavaScript random-sort
 comparator and is only compared against the same engine/runtime. It does
 not promise unbiased selection or byte-identical cross-JavaScript-runtime
 transcripts. A fair seeded mode should be an explicitly separate version.
+
+### Playable legacy arena
+
+The standalone `createLegacySurvivorRun({random})` wires the exact original
+player, enemy waves, six weapons, projectile pierce / per-target hits, orbit,
+damage numbers, XP and upgrade choices into one five-minute simulation. It
+also runs the original shared **600-particle** lifecycle: effects consume the
+same injected random stream as target selection and upgrades, in the original
+order. The original game's update function and real particle system are
+the independent comparison; test inputs include explicit choices, loss/win
+boundaries, variable seeded waves and full combat, without copying the old
+renderer. `step({dt,keys})` pauses on a pending choice; `choose(id)` accepts
+only an offered choice; `snapshot()` is diagnostic display data, not a save or
+stable authoritative entity ID. This does not write to any app or user profile.
+
+```sh
+node engines/roguelite/tools/build-survivor-combat.mjs --check
+node --test engines/roguelite/tests/legacy-survivor-run.test.mjs
+node engines/roguelite/tools/build-survivor-arena.mjs
+```
+
+Open `Athena-Survivor-Arena.html` in a modern browser directly from disk. This
+original, minimal top-down preview loads no external files, fonts, images or
+sound, makes no network calls and stores nothing. It supports keyboard,
+pause/resume, seeded restart and selectable upgrades. The authored GameSync
+renderer, mascot art, audio, persistence, meta-progression and integration
+into native products are separate acceptance gates, not part of this build.

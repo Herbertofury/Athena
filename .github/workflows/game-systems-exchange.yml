@@ -72,5 +72,22 @@ jobs:
         run: node engines/roguelite/tools/build-survivor-movement.mjs --check && node --test engines/roguelite/tests/movement-formulas.test.mjs && node engines/roguelite/examples/demo-encounter-lane.mjs
       - name: Replay legacy upgrade offers and choice effects against GameSync
         run: node engines/roguelite/tools/build-survivor-upgrades.mjs --check && node --test engines/roguelite/tests/upgrade-draft.test.mjs
+      - name: Replay full legacy combat and entropy against the original GameSync update
+        run: node engines/roguelite/tools/build-survivor-combat.mjs --check && node --test engines/roguelite/tests/legacy-survivor-run.test.mjs
+      - name: Generate the standalone offline arena
+        run: node engines/roguelite/tools/build-survivor-arena.mjs
+      - name: Install locked browser-test dependency
+        run: npm ci --ignore-scripts
+      - name: Install Chromium for offline file acceptance
+        run: npx playwright install chromium
+      - name: Play the generated offline arena in Chromium
+        run: node engines/roguelite/tests/arena-browser.proof.mjs
+      - name: Retain the exact tested offline HTML
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: survivor-arena-${{ matrix.os }}
+          path: Athena-Survivor-Arena.html
+          if-no-files-found: error
+          retention-days: 14
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
