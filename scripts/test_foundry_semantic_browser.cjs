@@ -65,6 +65,26 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   assert.equal(await one('[data-semantic-undo]').isEnabled(),false);
   assert.equal(await page.evaluate(async u=>{try{await fetch(u);return false}catch{return true}},previous),true);
  });
+ await check('real private-format capsule reveals and exports only its verified room value',async()=>{
+  const os=require('node:os'),cp=require('node:child_process'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'athena-room-capsule-'));
+  const selected={...fixture,sourceName:'Verified capsule Ω scene'},record='\ufeff \n'+JSON.stringify(selected,null,2)+'\n';
+  const secret='non-room-capsule-marker-unsupported-export',source=path.join(temp,'values.json'),output=path.join(temp,'capsule.json');
+  try{
+   fs.writeFileSync(source,JSON.stringify({'ff-room-semantic-state':record,'ff.music-hub.v2':secret+'😀'+String.fromCharCode(0xd800)}));
+   cp.execFileSync(process.env.PYTHON||'python',['-B','tools/foundry-recovery/capsule/capsule.py','pack',source,output]);
+   const capsule=fs.readFileSync(output),file=one('[data-semantic-file]');await file.setInputFiles({name:'capsule.json',mimeType:'application/json',buffer:capsule});
+   await one('[data-semantic-status]').filter({hasText:'Recovery capsule verified locally'}).waitFor();
+   assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
+   assert.ok(!(await one('[data-foundry-module=semanticRoom]').textContent()).includes(secret));
+   const event=page.waitForEvent('download');await one('[data-semantic-export]').click();
+   assert.deepEqual(fs.readFileSync(await (await event).path()),Buffer.from(record));
+   const invalid=JSON.parse(capsule);invalid.entries.find(v=>v.key==='ff.music-hub.v2').value+='tamper';
+   await file.setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(invalid))});
+   await one('[data-semantic-status]').filter({hasText:'checksum mismatch'}).waitFor();
+   assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
+   assert.ok(!(await page.evaluate(()=>JSON.stringify(localStorage))).includes(secret));
+  }finally{fs.rmSync(temp,{force:true,recursive:true});}
+ });
  await check('close revokes export and route navigation discards session',async()=>{
   const href=await one('[data-semantic-export]').getAttribute('href');await one('[data-semantic-role]').selectOption('Decoration');await one('[data-semantic-close]').click();await one('[data-semantic-discard]').click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
   assert.equal(await page.evaluate(async url=>{try{await fetch(url);return false}catch{return true}},href),true);

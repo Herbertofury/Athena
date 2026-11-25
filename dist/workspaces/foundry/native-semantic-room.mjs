@@ -1,6 +1,8 @@
 // Local metadata adaptation of Feature Foundry prototype-v24.ts roomStateSnapshot.
 // Saved descriptions are claims from the file, not verified meshes, physics or actions.
-const MAX_BYTES=1024*1024,MAX_OBJECTS=500;
+const MAX_BYTES=1024*1024,MAX_CAPSULE_BYTES=2*MAX_BYTES,MAX_OBJECTS=500;
+const capsuleKeys=new Set(['ff-floating-vault','ff-living-ui-prefs','ff-mascot-prefs','ff-room-semantic-state','ff-scrapbook-layout','ff-visual-quality','ff-world-layout','ff-world-mascots','ff.browser-snapshot.v1','ff.premium-theme.v1','ff.music-hub.v2']);
+const capsuleFormat='athena-foundry-original-values',roomKey='ff-room-semantic-state';
 const rootKeys=['sourceName','imported','importMode','keepUnified','detachInteractables','autoPhysics','mascotAffordances','selectedId','stage','tableAssetId','objects'];
 const rowKeys=['id','name','icon','role','physics','interactive','detachable','visible','locked','state','actions','mascot','atlasId'];
 function fields(v,keys,label){if(!v||typeof v!=='object'||Array.isArray(v))throw Error(`${label} must be an object.`);for(const k of Object.keys(v))if(!keys.includes(k))throw Error(`${label} contains an unsupported field; original file retained outside this app.`);}
@@ -11,9 +13,15 @@ function unambiguous(text){
  function visit(depth=0){if(depth>24)throw Error('Snapshot nesting exceeds 24 levels.');const t=tokens[i++];if(t==='{'){const keys=new Set();if(tokens[i]==='}'){i++;return;}while(i<tokens.length){const key=JSON.parse(tokens[i++]);if(keys.has(key))throw Error('Duplicate JSON keys are ambiguous and unsupported.');keys.add(key);if(tokens[i++]!==':')throw Error('Invalid JSON object.');visit(depth+1);if(tokens[i++]==='}')return;}}else if(t==='['){if(tokens[i]===']'){i++;return;}while(i<tokens.length){visit(depth+1);if(tokens[i++]===']')return;}}}
  visit();
 }
+function parseJSON(bytes){
+ try{const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes),value=JSON.parse(text);unambiguous(text);return value;}
+ catch{throw Error('Snapshot must contain valid unambiguous UTF-8 JSON.');}
+}
 export function parseSemanticRoom(bytes){
  if(!(bytes instanceof Uint8Array)||bytes.byteLength===0||bytes.byteLength>MAX_BYTES)throw Error('Choose a nonempty UTF-8 JSON snapshot up to 1 MiB.');
- let value;try{const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);value=JSON.parse(text);unambiguous(text);}catch(error){throw Error('Snapshot must contain valid unambiguous UTF-8 JSON: '+error.message);}
+ return validateRoom(parseJSON(bytes));
+}
+function validateRoom(value){
  fields(value,rootKeys,'Room');for(const k of rootKeys)if(!Object.hasOwn(value,k))throw Error(`Missing room field: ${k}.`);
  for(const k of ['sourceName','importMode','stage'])string(value[k],k);
  for(const k of ['imported','keepUnified','detachInteractables','autoPhysics','mascotAffordances'])if(typeof value[k]!=='boolean')throw Error(`${k} must be boolean.`);
@@ -21,6 +29,44 @@ export function parseSemanticRoom(bytes){
  if(!Array.isArray(value.objects)||value.objects.length>MAX_OBJECTS)throw Error('Room objects must be an array of at most 500 records.');
  const ids=new Set();for(const row of value.objects){fields(row,rowKeys,'Object');for(const k of rowKeys.filter(k=>k!=='atlasId'))if(!Object.hasOwn(row,k))throw Error(`Missing object field: ${k}.`);for(const k of ['id','name','icon','role','physics','state','mascot'])string(row[k],k,k==='id'?256:1024);if(!row.id||ids.has(row.id))throw Error('Object IDs must be nonempty and unique.');ids.add(row.id);if(Object.hasOwn(row,'atlasId'))string(row.atlasId,'atlasId',256);for(const k of ['interactive','detachable','visible','locked'])if(typeof row[k]!=='boolean')throw Error(`${k} must be boolean.`);if(!Array.isArray(row.actions)||row.actions.length>64)throw Error('Object actions must contain at most 64 text labels.');row.actions.forEach(x=>string(x,'Action',256));}
  if(value.selectedId!==null&&!ids.has(value.selectedId))throw Error('Selected object does not exist in this snapshot.');return value;
+}
+// Verify Python capsule.py's exact UTF-16-LE hash, including lone code units
+// in unrelated entries. They are never surfaced or included in exports.
+function units(value){
+ const raw=new Uint8Array(value.length*2);
+ for(let i=0;i<value.length;i++){const n=value.charCodeAt(i);raw[i*2]=n&255;raw[i*2+1]=n>>>8;}
+ return raw;
+}
+export async function inspectSemanticSelection(bytes,subtle=globalThis.crypto?.subtle){
+ if(!(bytes instanceof Uint8Array)||!bytes.byteLength||bytes.byteLength>MAX_CAPSULE_BYTES)
+  throw Error('Choose a room snapshot up to 1 MiB or a recovery capsule up to 2 MiB.');
+ const value=parseJSON(bytes);
+ if(value?.format!==capsuleFormat){
+  if(bytes.byteLength>MAX_BYTES)throw Error('Room snapshots are limited to 1 MiB.');
+  return {value:validateRoom(value),bytes,fromCapsule:false};
+ }
+ fields(value,['format','version','native_import','entries'],'Recovery capsule');
+ if(value.version!==1||value.native_import!==false||!Array.isArray(value.entries)||value.entries.length>capsuleKeys.size)
+  throw Error('Unsupported recovery capsule.');
+ if(!subtle)throw Error('Recovery capsule integrity checks need a secure local or HTTPS session.');
+ let room=null;const seen=new Set();
+ for(const entry of value.entries){
+  fields(entry,['key','value','utf16_sha256'],'Recovery entry');
+  if(!capsuleKeys.has(entry.key)||seen.has(entry.key)||typeof entry.value!=='string'||
+     typeof entry.utf16_sha256!=='string'||!/^[a-f0-9]{64}$/.test(entry.utf16_sha256))
+   throw Error('Invalid or duplicated recovery entry.');
+  seen.add(entry.key);
+  const hash=Array.from(new Uint8Array(await subtle.digest('SHA-256',units(entry.value))),n=>n.toString(16).padStart(2,'0')).join('');
+  if(hash!==entry.utf16_sha256)throw Error('Recovery entry checksum mismatch.');
+  if(entry.key===roomKey)room=entry.value;
+ }
+ if(room===null)throw Error('Recovery capsule has no recorded room snapshot.');
+ // Encoding lone surrogates would silently substitute U+FFFD. The original
+ // capsule remains intact, but an exact UTF-8 room export is not possible.
+ if(/(?:[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF])/.test(room))
+  throw Error('The recorded room is not losslessly representable as UTF-8.');
+ const selected=new TextEncoder().encode(room);
+ return {value:parseSemanticRoom(selected),bytes:selected,fromCapsule:true};
 }
 // Source index.html410 and bindRoomIntelligence684–685. These are declarations,
 // never an instruction to run physics, reveal a mesh, or execute an action.
@@ -37,7 +83,7 @@ export function createSemanticEdits(value){
 }
 export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObjectURL(blob),revokeURL=url=>URL.revokeObjectURL(url)}){
  const doc=host.ownerDocument;let generation=0,disposed=false,active=null,url=null,editedURL=null,editor=null,pending=null;
- host.innerHTML='<h2>Original room metadata explorer</h2><p>Explicit local ff-room-semantic-state JSON only. Session-only metadata authoring: no upload, persistent storage, mesh import, physics generation or action execution. Original bytes remain unchanged; edited exports are separate derivatives. Descriptions below are unverified source metadata, not working capabilities.</p><label>Choose room snapshot (1 MiB maximum) <input type="file" accept=".json,application/json" data-semantic-file></label><button data-semantic-close disabled>Close and forget snapshot</button><a data-semantic-export hidden download="original-room-semantic-state.json">Export exact original bytes</a><p role="status" data-semantic-status>No snapshot selected.</p><div role="group" aria-label="Review discarding room metadata" data-semantic-discard-panel hidden><p data-semantic-discard-message></p><button type="button" data-semantic-keep>Keep current snapshot</button><button type="button" data-semantic-discard>Discard edits</button></div><div data-semantic-summary></div><label>Inspect saved object <select data-semantic-select disabled></select></label><dl data-semantic-details></dl><fieldset data-semantic-editor disabled><legend>Edit recorded metadata only</legend><label>Recorded role <select data-semantic-role></select></label><label>Recorded physics classification <select data-semantic-physics></select></label><label><input type="checkbox" data-semantic-visible> Recorded visible flag</label><label><input type="checkbox" data-semantic-locked> Recorded mapping lock (not an access control)</label><button data-semantic-apply>Apply metadata</button></fieldset><button data-semantic-undo disabled>Undo metadata edit</button><button data-semantic-redo disabled>Redo metadata edit</button><button data-semantic-prepare disabled>Prepare edited JSON export</button><a data-semantic-edited hidden download="edited-room-semantic-state.json">Download edited metadata (not original bytes)</a>';
+ host.innerHTML='<h2>Original room metadata explorer</h2><p>Open a local room snapshot or a verified Foundry recovery capsule. Only its room metadata is shown or exported. Session-only metadata authoring: no upload, persistent storage, mesh import, physics generation or action execution. Original bytes remain unchanged; edited exports are separate derivatives. Descriptions below are unverified source metadata, not working capabilities.</p><label>Choose room snapshot (1 MiB) or recovery capsule (2 MiB) <input type="file" accept=".json,application/json" data-semantic-file></label><button data-semantic-close disabled>Close and forget snapshot</button><a data-semantic-export hidden download="original-room-semantic-state.json">Export exact original room bytes</a><p role="status" data-semantic-status>No snapshot selected.</p><div role="group" aria-label="Review discarding room metadata" data-semantic-discard-panel hidden><p data-semantic-discard-message></p><button type="button" data-semantic-keep>Keep current snapshot</button><button type="button" data-semantic-discard>Discard edits</button></div><div data-semantic-summary></div><label>Inspect saved object <select data-semantic-select disabled></select></label><dl data-semantic-details></dl><fieldset data-semantic-editor disabled><legend>Edit recorded metadata only</legend><label>Recorded role <select data-semantic-role></select></label><label>Recorded physics classification <select data-semantic-physics></select></label><label><input type="checkbox" data-semantic-visible> Recorded visible flag</label><label><input type="checkbox" data-semantic-locked> Recorded mapping lock (not an access control)</label><button data-semantic-apply>Apply metadata</button></fieldset><button data-semantic-undo disabled>Undo metadata edit</button><button data-semantic-redo disabled>Redo metadata edit</button><button data-semantic-prepare disabled>Prepare edited JSON export</button><a data-semantic-edited hidden download="edited-room-semantic-state.json">Download edited metadata (not original bytes)</a>';
  const one=q=>host.querySelector(q),input=one('[data-semantic-file]'),close=one('[data-semantic-close]'),link=one('[data-semantic-export]'),status=one('[data-semantic-status]'),summary=one('[data-semantic-summary]'),select=one('[data-semantic-select]'),details=one('[data-semantic-details]');
  const panel=one('[data-semantic-discard-panel]'),message=one('[data-semantic-discard-message]'),keep=one('[data-semantic-keep]'),discard=one('[data-semantic-discard]');
  const controls=one('[data-semantic-editor]'),role=one('[data-semantic-role]'),physics=one('[data-semantic-physics]'),visible=one('[data-semantic-visible]'),locked=one('[data-semantic-locked]'),undo=one('[data-semantic-undo]'),redo=one('[data-semantic-redo]'),prepare=one('[data-semantic-prepare]'),edited=one('[data-semantic-edited]');
@@ -73,23 +119,24 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
  function revoke(){if(url){revokeURL(url);url=null;}link.removeAttribute('href');link.hidden=true;}
  function detail(){details.replaceChildren();const row=active?.value.objects.find(r=>r.id===select.value);controls.disabled=!row;if(!row)return;choices(role,SEMANTIC_ROLES,row.role);choices(physics,SEMANTIC_PHYSICS,row.physics);visible.checked=row.visible;locked.checked=row.locked;for(const [key,value] of Object.entries(row)){const dt=doc.createElement('dt'),dd=doc.createElement('dd');dt.textContent=key;dd.textContent=Array.isArray(value)?value.join(', '):String(value);details.append(dt,dd);}}
  function render(){const v=active.value;summary.replaceChildren();const warning=doc.createElement('p');warning.textContent='Recorded root metadata. Saved flags and descriptions are not validation of an actual room.';summary.append(warning);const list=doc.createElement('dl');for(const key of rootKeys.filter(k=>k!=='objects')){const dt=doc.createElement('dt'),dd=doc.createElement('dd');dt.textContent=key;dd.textContent=String(v[key]);list.append(dt,dd);}summary.append(list);select.replaceChildren();for(const row of v.objects){const option=doc.createElement('option');option.value=row.id;option.textContent=`${row.name} [${row.id}]`;select.append(option);}select.value=v.selectedId||v.objects[0]?.id||'';select.disabled=!v.objects.length;close.disabled=false;detail();sync();}
- function replaceSnapshot(bytes,value){
+ function replaceSnapshot(bytes,value,fromCapsule=false){
   const nextEditor=createSemanticEdits(value),nextURL=createURL(new Blob([bytes],{type:'application/json'}));
   try{retireEdited();revoke();}catch{try{revokeURL(nextURL);}catch{}throw Error('Export cleanup failed; export availability is unverified.');}
   editor=nextEditor;active={value:editor.value};url=nextURL;link.href=url;link.hidden=false;render();
-  status.textContent='Snapshot inspected locally. Exact original bytes available for export; no migration or scene modification performed.';
+  status.textContent=fromCapsule?'Recovery capsule verified locally. Only exact original room data are available to export. Other entries were not imported.':'Snapshot inspected locally. Exact original bytes available for export; no migration or scene modification performed.';
  }
  function reject(error){status.textContent=`Rejected: ${error.message} Previous snapshot metadata retained.`;}
  async function choose(){
   if(disposed||signal?.aborted)return;
   const file=input.files?.[0];input.value='';if(!file)return;
   const token=++generation;resetPending();
-  if(!Number.isFinite(file.size)||file.size<=0||file.size>MAX_BYTES){reject(Error('Choose a nonempty snapshot up to 1 MiB.'));return;}
+  if(!Number.isFinite(file.size)||file.size<=0||file.size>MAX_CAPSULE_BYTES){reject(Error('Choose a nonempty snapshot up to 1 MiB or recovery capsule up to 2 MiB.'));return;}
   close.disabled=false;status.textContent='Reading selected local snapshot…';
   try{
    const bytes=new Uint8Array(await file.arrayBuffer());if(disposed||signal?.aborted||token!==generation)return;
-   const value=parseSemanticRoom(bytes);
-   if(hasSessionWork())review({kind:'replace',bytes,value});else replaceSnapshot(bytes,value);
+   const selected=await inspectSemanticSelection(bytes);
+   if(disposed||signal?.aborted||token!==generation)return;
+   if(hasSessionWork())review({kind:'replace',...selected});else replaceSnapshot(selected.bytes,selected.value,selected.fromCapsule);
   }catch(error){if(!disposed&&token===generation){close.disabled=!active;reject(error);}}
  }
  function requestClose(){
@@ -100,7 +147,7 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
   if(disposed||signal?.aborted||!pending)return;
   const action=pending;++generation;resetPending();
   if(action.kind==='close')clear();
-  else try{replaceSnapshot(action.bytes,action.value);}catch(error){reject(error);}
+  else try{replaceSnapshot(action.bytes,action.value,action.fromCapsule);}catch(error){reject(error);}
   input.focus();
  }
  function clear(){generation++;resetPending();active=null;editor=null;controls.disabled=true;sync();let failed=false;for(const cleanup of [retireEdited,revoke])try{cleanup();}catch{failed=true;}link.removeAttribute('href');link.hidden=true;status.textContent=failed?'Snapshot closed; export cleanup failed.':'Snapshot closed; session exports released.';summary.replaceChildren();details.replaceChildren();select.replaceChildren();select.disabled=true;close.disabled=true;input.value='';}

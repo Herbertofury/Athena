@@ -10,6 +10,16 @@ Operator-prepared JSON maps the eleven allowlisted original Foundry keys to exac
 
 capsule/assess.py exposes assess(capsule_object): checksum-verified count-only structural diagnostics, not automatic import approval. It returns no original identifiers, selectors or values. Checksums detect accidental corruption, not malicious forgery. No browser capture or complete app backup is performed.
 
+The Foundry **Original room metadata explorer** can open a capsule up to
+2 MiB directly, or a room snapshot up to 1 MiB. It verifies every recorded
+UTF-16 checksum locally, then selects only `ff-room-semantic-state`. Original
+room data can be downloaded as exact UTF-8 (including whitespace and BOM);
+an edited export is separate. Other capsule entries are neither displayed
+nor exported. Keep the whole original capsule privately. The browser does
+not import or save scene files, other preferences, or a room database. For
+larger capsules or values not losslessly representable in UTF-8, retain the
+original and use the Python tool above. Checksums are not a digital signature.
+
 ## Preserve the separate native world snapshot
 
 Original `src-tauri/src/lib.rs` (`snapshot_path`, `save_world_snapshot`) at reviewed source `f009bbd491355009d6b46fdccc22e06803fc0426` writes a separate `living-world-snapshot.json` in the original app-data directory. It is **not** the SQLite database or the browser localStorage value. Browser capsules alone do not preserve this file.

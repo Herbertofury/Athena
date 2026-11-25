@@ -93,6 +93,10 @@ jobs:
         run: |
           node scripts/test_foundry_native_browser.mjs
           python -B candidate-extracted/launch.py --verify-only
+      - name: Extracted Foundry recovery capsule and original room editor
+        env:
+          ATHENA_BROWSER_ROOT: candidate-extracted/runtime
+        run: node scripts/test_foundry_semantic_browser.cjs
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs

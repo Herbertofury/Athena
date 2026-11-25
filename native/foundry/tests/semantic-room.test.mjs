@@ -63,3 +63,34 @@ test('a superseding rejected file cancels stale approval and a successful edit c
  assert.equal(s.one('[data-semantic-role]').value,'Decoration');assert.deepEqual(s.revoked,[]);
  s.controller.abort();assert.deepEqual(s.revoked,['blob:fixture-1']);
 });
+
+test('original capsule hashes both Unicode units and unrelated entries before selecting the room',async()=>{
+ const {inspectSemanticSelection}=await import('../../../dist/workspaces/foundry/native-semantic-room.mjs');
+ const {createHash,webcrypto}=await import('node:crypto');
+ const entry=(key,value)=>({key,value,utf16_sha256:createHash('sha256').update(Buffer.from(value,'utf16le')).digest('hex')});
+ const raw='\ufeff\n'+JSON.stringify({...fixture,sourceName:'😀 room'},null,2)+'\n';
+ const capsule={format:'athena-foundry-original-values',version:1,native_import:false,entries:[entry('ff-room-semantic-state',raw),entry('ff.music-hub.v2','secret-not-room'+String.fromCharCode(0xd800))]};
+ const result=await inspectSemanticSelection(bytes(capsule),webcrypto.subtle);
+ assert.deepEqual(Object.keys(result).sort(),['bytes','fromCapsule','value']);
+ assert.deepEqual(result.bytes,bytes(raw));assert.equal(result.value.sourceName,'😀 room');assert.equal(result.fromCapsule,true);
+ assert.equal((await inspectSemanticSelection(bytes(raw),null)).fromCapsule,false);
+ await assert.rejects(inspectSemanticSelection(bytes(capsule),null),/secure local/);
+ for(const change of [
+   v=>v.entries.push({...v.entries[0]}),v=>v.entries[1].value+='tamper',
+   v=>{v.entries[0]=entry('ff-room-semantic-state',raw+String.fromCharCode(0xd800));},
+   v=>v.entries.shift(),v=>v.extra='not supported',v=>v.native_import=true,
+ ]){const c=structuredClone(capsule);change(c);await assert.rejects(inspectSemanticSelection(bytes(c),webcrypto.subtle));}
+});
+
+test('digest verification resolving after a newer selection cannot replace it',async()=>{
+ const {createHash}=await import('node:crypto');const s=setup(),raw=JSON.stringify(fixture);
+ const capsule={format:'athena-foundry-original-values',version:1,native_import:false,entries:[{key:'ff-room-semantic-state',value:raw,utf16_sha256:createHash('sha256').update(Buffer.from(raw,'utf16le')).digest('hex')}]};
+ const before=Object.getOwnPropertyDescriptor(globalThis,'crypto');let finish;
+ Object.defineProperty(globalThis,'crypto',{configurable:true,value:{subtle:{digest:()=>new Promise(resolve=>finish=resolve)}}});
+ try{
+  await s.load(capsule);assert.equal(typeof finish,'function');assert.equal(s.blobs.length,0);
+  await s.load({...fixture,sourceName:'Newer direct selection'});const digest=Uint8Array.from(Buffer.from(capsule.entries[0].utf16_sha256,'hex'));
+  finish(digest.buffer);await tick();assert.equal(s.blobs.length,1);
+  assert.match(s.one('[data-semantic-summary]').textContent,/Newer direct selection/);
+ }finally{if(before)Object.defineProperty(globalThis,'crypto',before);else delete globalThis.crypto;s.api.dispose();}
+});
