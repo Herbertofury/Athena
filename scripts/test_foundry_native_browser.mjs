@@ -746,12 +746,14 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
    const arena=play.locator('#arena');
    await play.getByRole('button',{name:'Start run',exact:true}).click();
+   await play.locator('#status').filter({hasText:'Run started.'}).waitFor();
+   assert.equal(await arena.evaluate(e=>e===document.activeElement),true);
    const pixels=()=>arena.evaluate(e=>e.toDataURL());
    const original=await pixels();assert.ok(original.length>100);
    await play.keyboard.down('ArrowRight');
    await play.clock.runFor(260);
    await play.keyboard.up('ArrowRight');
-   assert.notEqual(await pixels(),original);
+   assert.ok(await pixels()!==original,'starting and moving the Arena must repaint its actual canvas');
    await play.clock.runFor(55000);
    const offer=play.locator('#choices button').first();
    await offer.waitFor();

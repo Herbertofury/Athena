@@ -264,3 +264,4 @@ for(const button of document.querySelectorAll('[data-code]')){
 readTape.disabled=false;
 controls(false);
 draw();
+start.disabled=false;
