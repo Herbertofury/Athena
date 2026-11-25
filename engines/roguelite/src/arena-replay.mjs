@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // A portable input stream, not a writable engine-state serialization. The
 // same deterministic engine is used to replay saved inputs and to resume.
-import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
+import {createLegacySurvivorRun,createVisualEntropy} from './legacy-survivor-run.mjs';
 import {arenaFormat} from './arena-formats.mjs';
 import {createRiftExpedition} from './rift-expedition.mjs';
 export const ARENA_TAPE_SCHEMA='athena.survivor-arena.tape.v1';
 export const ARENA_REPLAY_RULES='gamesync-live-v1+ramp-20261125+lcg32-60hz';
+export const ARENA_PARTITIONED_REPLAY_RULES='gamesync-live-v1+ramp-20261125+lcg32-60hz+visual32-v1';
+const supportedRules=rules=>rules===ARENA_REPLAY_RULES||rules===ARENA_PARTITIONED_REPLAY_RULES;
 export const ARENA_STEP=1/60;
 export const ARENA_TAPE_MAX_BYTES=8*1024*1024;
 export const ARENA_TAPE_MAX_TICKS=8*60*60*60;
@@ -19,12 +21,14 @@ function exact(a,fields){
     Object.keys(a).length!==fields.length||fields.some(k=>!Object.hasOwn(a,k)))throw Error('Invalid Arena tape shape');
 }
 
-export function createRecordedArena({seed,format='classic'}={}){
+export function createRecordedArena({seed,format='classic',rules=ARENA_REPLAY_RULES}={}){
+ if(!supportedRules(rules))throw RangeError('Unknown Arena rules');
  if(!uint(seed,2**32-1))throw RangeError('Invalid Arena seed');
  const recipe=arenaFormat(format);
  let cursor=seed>>>0,ticks=0,phase='running',truncated=false;
  const random=()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;};
- const host=recipe.rifts?createRiftExpedition({seed,random,withCamp:!!recipe.camp,withCavern:!!recipe.cavern,withEscort:!!recipe.escort,withRelay:!!recipe.relay,regionFormat:recipe.spatial?format:undefined}):createLegacySurvivorRun({format,seed,random});
+ const visuals=rules===ARENA_PARTITIONED_REPLAY_RULES?createVisualEntropy(seed):null, visualRandom=visuals?.next;
+ const host=recipe.rifts?createRiftExpedition({seed,random,visualRandom,withCamp:!!recipe.camp,withCavern:!!recipe.cavern,withEscort:!!recipe.escort,withRelay:!!recipe.relay,regionFormat:recipe.spatial?format:undefined}):createLegacySurvivorRun({format,seed,random,visualRandom});
  const input=[];
  function advance(mask){
   if(!uint(mask,31))throw Error('Invalid Arena input mask');
@@ -52,11 +56,11 @@ export function createRecordedArena({seed,format='classic'}={}){
  }
  function capture(){
   if(truncated)throw Error('This run is beyond the portable replay limit. You can keep playing.');
-  return {header:{schema:ARENA_TAPE_SCHEMA,rules:ARENA_REPLAY_RULES,seed,format,ticks,inputs:structuredClone(input)},
+  return {header:{schema:ARENA_TAPE_SCHEMA,rules,seed,format,ticks,inputs:structuredClone(input)},
    // Expedition introduces long-running movement with trig. Normalize sub-pixel
    // float noise for cross-runtime verification, not engine inputs or world state.
    // Existing formats keep their exact byte-for-byte tape state digests.
-   final:JSON.stringify({phase,cursor,world:host.snapshot(),...(recipe.rifts?{suspended:host.captureSuspended()}:{})},recipe.roaming
+   final:JSON.stringify({phase,cursor,...(visuals?{visualCursor:visuals.state()}:{}),world:host.snapshot(),...(recipe.rifts?{suspended:host.captureSuspended()}:{})},recipe.roaming
     ?(_key,value)=>typeof value==='number'&&!Number.isInteger(value)?Number(value.toFixed(6)):value
     :undefined)};
  }
@@ -79,10 +83,10 @@ export async function decodeArenaTape(text,{digest,yieldTask=()=>Promise.resolve
  if(typeof text!=='string'||new TextEncoder().encode(text).byteLength>ARENA_TAPE_MAX_BYTES)throw Error('Arena tape exceeds portable size limit');
  const data=JSON.parse(text);
  exact(data,['schema','rules','seed','format','ticks','inputs','state_sha256']);
- if(data.schema!==ARENA_TAPE_SCHEMA||data.rules!==ARENA_REPLAY_RULES||
+ if(data.schema!==ARENA_TAPE_SCHEMA||!supportedRules(data.rules)||
     !Array.isArray(data.inputs)||data.inputs.length>MAX_SEGMENTS||!uint(data.ticks,ARENA_TAPE_MAX_TICKS)||
     typeof data.state_sha256!=='string'||!/^[a-f0-9]{64}$/.test(data.state_sha256))throw Error('Incompatible Arena tape');
- const match=createRecordedArena({seed:data.seed,format:data.format});
+ const match=createRecordedArena({seed:data.seed,format:data.format,rules:data.rules});
  let observed=0;
  let prior=-1;
  for(const entry of data.inputs){

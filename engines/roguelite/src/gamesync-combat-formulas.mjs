@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Generated pinned GameSync Survivor combat and shared particle formulas.
 // Game SHA-256 1cd392de5cddcd14845b46324777fc762af8c95a4dc46c0e16ee61a54ff29cc7; core SHA-256 f6c4f182ec271a1aefe2decea72cd9da0d120cfa8e649126c04e55d15a4b038e.
-// A single caller-owned random stream is used, including particle emissions.
+// The legacy default shares entropy; new hosts can pass isolated visual entropy.
   const WEAPONS = {
     orb:      { name: "Magic Orb",     color: "#a855f7", dmg: 8,  rate: 0.8,  range: 120, projSpeed: 250, projSize: 5 },
     whip:     { name: "Whip",          color: "#f5a623", dmg: 12, rate: 1.2,  range: 80,  area: true },
@@ -30,33 +30,33 @@ export function createLegacyPlayer() {
     return player;
 }
 
-export function createLegacyCombat(random) {
+export function createLegacyCombat(random,visualRandom=random) {
   const Math=Object.create(globalThis.Math,{random:{value:random}});
-  const rand  = (lo, hi) => Math.random() * (hi - lo) + lo;
-  const randInt = (lo, hi) => Math.floor(rand(lo, hi + 1));
   const pick  = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  const TAU   = Math.PI * 2;
+const TAU=Math.PI*2;
+  const visualRange=(lo,hi)=>visualRandom()*(hi-lo)+lo;
+  const visualInt=(lo,hi)=>Math.floor(visualRange(lo,hi+1));
   const hsl = (h, s, l, a) => a != null ? `hsla(${h},${s}%,${l}%,${a})` : `hsl(${h},${s}%,${l}%)`;
   function createParticleSystem(maxParticles = 500) {
     const pool = [];
     return {
       emit(x, y, count, opts = {}) {
         for (let i = 0; i < count && pool.length < maxParticles; i++) {
-          const angle = opts.angle != null ? opts.angle + rand(-opts.spread || 0.3, opts.spread || 0.3) : rand(0, TAU);
-          const speed = rand(opts.speedMin || 40, opts.speedMax || 200);
+          const angle = opts.angle != null ? opts.angle + visualRange(-opts.spread || 0.3, opts.spread || 0.3) : visualRange(0, TAU);
+          const speed = visualRange(opts.speedMin || 40, opts.speedMax || 200);
           pool.push({
             x, y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
-            life: opts.life || rand(0.4, 1.2),
-            maxLife: opts.life || rand(0.4, 1.2),
-            size: opts.size || rand(2, 6),
-            color: opts.color || hsl(randInt(0, 360), 80, 60),
+            life: opts.life || visualRange(0.4, 1.2),
+            maxLife: opts.life || visualRange(0.4, 1.2),
+            size: opts.size || visualRange(2, 6),
+            color: opts.color || hsl(visualInt(0, 360), 80, 60),
             gravity: opts.gravity ?? 120,
             friction: opts.friction ?? 0.98,
             shape: opts.shape || "circle",
-            rotation: rand(0, TAU),
-            rotSpeed: rand(-4, 4),
+            rotation: visualRange(0, TAU),
+            rotSpeed: visualRange(-4, 4),
           });
         }
       },
@@ -196,7 +196,7 @@ export function createLegacyCombat(random) {
         for (const e of enemies) {
           if (Math.hypot(bx - e.x, by - e.y) < b.size + e.size) {
             e.hp -= b.dmg * dt * 3;
-            if (Math.random() < dt * 5) {
+            if (visualRandom() < dt * 5) {
               e.hitFlash = 0.05;
               showDmg(e.x, e.y - e.size, b.dmg, b.color);
             }
