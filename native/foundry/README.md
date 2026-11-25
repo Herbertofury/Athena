@@ -269,21 +269,28 @@ python3 /new/portable-athena/launch.py --database /private/new-athena.sqlite3
 ```
 
 Creation is explicit and separate from launch, verify-only and opening an existing
-store. It runs the bundled native init/upgrade sequence in a private temporary
-sibling directory, checks schema15 and integrity, then publishes through an
-exclusive hard link. Existing destinations, symlinks, paths inside the bundle,
-missing parents and unsupported hard-link filesystems refuse. No fallback rename
-or overwrite occurs. Failed setup removes only its owned staging directory;
+store. It runs the bundled native init/upgrade sequence in a temporary directory
+on the destination filesystem, checks schema 15 and integrity, and publishes under
+the requested name without replacing it. Windows uses [Python's no-replace rename
+behavior](https://docs.python.org/3.13/library/os.html#os.rename); POSIX uses an
+exclusive hard link, since POSIX rename can overwrite. Windows first-run creation
+no longer requires hard-link support. This does not establish acceptance on USB,
+exFAT or network volumes.
+
+Existing destinations and SQLite sidecars, linked or reparse parents, paths
+inside the bundle, missing parents and unsupported publication refuse. There is
+no fallback copy or overwrite. Failed setup removes only its own staging directory;
 original files and any destination created concurrently remain untouched.
 
-Each native step has a15-second deadline. The supplied executable must still be
-trusted reviewed code; hashes do not sandbox it. This creates a fresh empty
-workspace with catalog metadata, not a migration of old user data. Existing DBs
-are never upgraded automatically. POSIX private-file modes originate from the
-native creator; Windows ACL privacy and sudden-power-loss publication durability
-remain separate acceptance concerns. Synthetic regressions cover actual native
-creation/reopen, timeout cleanup, concurrent destination, unsupported hard links
-and path refusal. Hosted UI acceptance uses this explicit first-run command.
+Each native step has a 15-second deadline. The supplied executable must be trusted;
+hashes do not sandbox it. Creation gives you a fresh workspace with catalog
+metadata, not a migration of old data. Existing DBs are never upgraded automatically.
+POSIX private-file modes originate from the native creator; Windows privacy
+depends on the chosen folder and storage device. Sudden power loss is not covered.
+Tests use the actual native store to cover creation/reopen, timeout cleanup, a
+foreign file appearing at publication, two simultaneous initializers, and failed
+publication. Windows also tests first-run creation with hard-link calls disabled.
+Hosted UI acceptance uses this explicit first-run command.
 
 ### Whole native database backup outside the checkout
 
@@ -308,8 +315,10 @@ Byte comparisons cannot defeat a concurrent writer or an attacker changing and
 restoring files between checks. There is no global source lock; do not use this
 while the app is running. Capture/preparation is bounded by30 seconds, native
 validation by15 seconds. Existing targets, source/sidecar aliases, symlinks,
-internal package paths and unsupported hard links refuse. Failures remove only
-owned temporary staging; sources and racing destinations stay untouched.
+internal package paths and failed exclusive publication refuse. Verified staged
+copies use the same no-replace publication as first-run creation: a Windows
+rename or a POSIX hard link. Failures remove only owned temporary staging;
+sources and racing destinations stay untouched.
 
 The receipt prints checksum/size and verification states, not labels or records.
 The backup itself contains private application data; keep it private and review

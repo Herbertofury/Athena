@@ -49,8 +49,24 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   await one('[data-semantic-file]').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"objects":[],"objects":[]}')});
   await one('[data-semantic-status]').filter({hasText:'Rejected'}).waitFor();assert.match(await one('[data-semantic-details]').textContent(),/Unverified/);
  });
+ await check('Valid replacement keeps current edits and export until explicit discard',async()=>{
+  const file=one('[data-semantic-file]'),keep=one('[data-semantic-keep]'),discard=one('[data-semantic-discard]');
+  await one('[data-semantic-prepare]').click();
+  const previous=await one('[data-semantic-edited]').getAttribute('href');
+  const replacement=Buffer.from(JSON.stringify({...fixture,sourceName:'Replacement scene'}));
+  const choose=()=>file.setInputFiles({name:'replacement.json',mimeType:'application/json',buffer:replacement});
+  await choose();await keep.waitFor();
+  assert.equal(await keep.evaluate(button=>document.activeElement===button),true);
+  await page.keyboard.press('Enter');await keep.waitFor({state:'hidden'});
+  assert.equal(await one('[data-semantic-edited]').getAttribute('href'),previous);
+  assert.equal(await one('[data-semantic-visible]').isChecked(),false);
+  await choose();await discard.click();
+  assert.match(await one('[data-semantic-summary]').textContent(),/Replacement scene/);
+  assert.equal(await one('[data-semantic-undo]').isEnabled(),false);
+  assert.equal(await page.evaluate(async u=>{try{await fetch(u);return false}catch{return true}},previous),true);
+ });
  await check('close revokes export and route navigation discards session',async()=>{
-  const href=await one('[data-semantic-export]').getAttribute('href');await one('[data-semantic-close]').click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
+  const href=await one('[data-semantic-export]').getAttribute('href');await one('[data-semantic-role]').selectOption('Decoration');await one('[data-semantic-close]').click();await one('[data-semantic-discard]').click();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
   assert.equal(await page.evaluate(async url=>{try{await fetch(url);return false}catch{return true}},href),true);
   await page.evaluate(()=>{location.hash='#home'});await one('[data-semantic-file]').waitFor({state:'detached'});await page.evaluate(()=>{location.hash='#build'});await one('[data-semantic-file]').waitFor();assert.equal(await one('[data-semantic-export]').getAttribute('href'),null);
  });
