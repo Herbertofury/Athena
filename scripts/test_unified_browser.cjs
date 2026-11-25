@@ -26,6 +26,7 @@ function plan(root,temporary,env=process.env){
     {name:'rust-build',command:'cargo',args:['build','--locked','--bin','atlas-lab','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'verified-package',command:env.PYTHON||'python3',args:['scripts/package_app.py','--profile','public-preview','--allowlist','config/runtime-public-preview.json','--output',pkg],cwd:root,env,timeout:60000},
     {name:'guidance-browser',command:process.execPath,args:['scripts/test_guidance_browser.cjs'],cwd:root,env:{...env,ATHENA_PUBLIC_ROOT:pkg},timeout:180000},
+    {name:'storage-compare-browser',command:process.execPath,args:['scripts/test_storage_compare_browser.cjs'],cwd:root,env:{...env,ATHENA_PUBLIC_ROOT:pkg},timeout:180000},
     {name:'rust-browser',command:process.execPath,args:['scripts/test_lab_runtime.cjs'],cwd:root,env:{...env,ATHENA_LAB_BINARY:path.join(target,'debug',process.platform==='win32'?'atlas-lab.exe':'atlas-lab'),ATHENA_RUNTIME_PACKAGE:pkg,ATHENA_LAB_TEST_OUTPUT:path.join(output,'lab-runtime'),ATHENA_LAB_HTTP_ONLY:'0'},timeout:240000}
   ];
 }

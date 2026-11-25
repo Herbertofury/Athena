@@ -61,3 +61,13 @@ A local HTTP server started, but Cloud Browser could not reach `http://127.0.0.1
 - [ ] Add useful project-aware breakdowns and history only after measured data works. Never label all caches/build outputs disposable; active database snapshots or downloaded licensed assets may be irreplaceable.
 - [ ] If cleanup is later requested, design a separate preview/confirmation/recoverable-operation layer with revalidation, ownership proofs, busy-file handling and rollback. Permanent deletion requires action-time confirmation. This study authorizes no cleanup.
 - [ ] Review the merged workspace visually and with actual Athena workloads. The merge is not a deployment, source retirement, continuous monitor, or native Windows storage acceptance.
+
+### Compare by category
+
+Once both local reports pass the existing same-scope comparison gates, confirm
+that they measured the same folder and settings. Athena shows signed changes
+by exact category name and lets you sort by the size of the change. Shared
+search filters the comparison and reference list together. Categories that only
+occur in one report are labelled as such, never compared with an assumed zero.
+These are differences between observed inputs, not growth causation or
+reclaimable space. No file names, changes to data, or upload are introduced.

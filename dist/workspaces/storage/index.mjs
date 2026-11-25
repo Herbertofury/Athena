@@ -7,8 +7,9 @@ const labels={entryLimit:'entry limit',depthLimit:'depth limit',deadline:'time l
 export function mount({container,search='',theme='dark',signal}){
  const doc=container.ownerDocument,root=container.shadowRoot||container.attachShadow({mode:'open'});
  let comparison=null,comparisonGeneration=0,comparisonReading=false,sameScope=false;
+ let sortChanges='name';
  let report=null,generation=0,disposed=false,selected=null,reading=false,metric='allocatedBytes';
- root.innerHTML=`<section class="deck" aria-label="Storage observation report"><header><p class="eyebrow">LOCAL REPORTS ONLY</p><h2>See what a project actually uses.</h2><p>Compare every observed pathname with storage blocks counted once per file. This page never scans a directory, contacts a provider, or calculates reclaimable space.</p></header><div class="import"><label for="observation-file">Choose Athena observation JSON</label><input id="observation-file" type="file" accept=".json,application/json"><button id="clear" type="button" disabled>Clear report</button></div><p id="status" role="status" aria-live="polite">No report loaded. Pick a local file to begin. Reports are not saved.</p><p id="error" role="alert"></p><div id="evidence"></div><div id="category-controls" hidden><fieldset><legend>Compare category space by</legend><button type="button" id="allocated" aria-pressed="true">Allocated bytes</button><button type="button" id="logical" aria-pressed="false">Logical bytes</button></fieldset><p id="row-count"></p></div><ul id="rows" aria-label="Report categories"></ul><p id="detail" aria-live="polite"></p><section class="compare-box" aria-labelledby="comparison-title"><h3 id="comparison-title">Compare two local observations</h3><p>Use two already measured reports for a before/after review. This view cannot verify the folder or scan settings and does not show file or folder names from the reports.</p><label for="comparison-file">Choose a second Athena observation JSON</label><input id="comparison-file" type="file" accept=".json,application/json"><button id="clear-comparison" type="button" disabled>Clear second report</button><p id="compare-status" role="status" aria-live="polite">No second report loaded.</p><div id="comparison-result" hidden><div id="comparison-values"></div><label><input id="compare-same" type="checkbox" disabled> I measured the same folder with the same scan, category and filesystem settings</label><p id="comparison-guidance" role="status" aria-live="polite"></p><ul id="compare-metrics" aria-label="Observed change, second minus reference"></ul></div></section></section>`;
+ root.innerHTML=`<section class="deck" aria-label="Storage observation report"><header><p class="eyebrow">LOCAL REPORTS ONLY</p><h2>See what a project actually uses.</h2><p>Compare every observed pathname with storage blocks counted once per file. This page never scans a directory, contacts a provider, or calculates reclaimable space.</p></header><div class="import"><label for="observation-file">Choose Athena observation JSON</label><input id="observation-file" type="file" accept=".json,application/json"><button id="clear" type="button" disabled>Clear report</button></div><p id="status" role="status" aria-live="polite">No report loaded. Pick a local file to begin. Reports are not saved.</p><p id="error" role="alert"></p><div id="evidence"></div><div id="category-controls" hidden><fieldset><legend>Compare category space by</legend><button type="button" id="allocated" aria-pressed="true">Allocated bytes</button><button type="button" id="logical" aria-pressed="false">Logical bytes</button></fieldset><p id="row-count"></p></div><ul id="rows" aria-label="Report categories"></ul><p id="detail" aria-live="polite"></p><section class="compare-box" aria-labelledby="comparison-title"><h3 id="comparison-title">Compare two local observations</h3><p>Use two already measured reports for a before/after review. This view cannot verify the folder or scan settings and does not show file or folder names from the reports.</p><label for="comparison-file">Choose a second Athena observation JSON</label><input id="comparison-file" type="file" accept=".json,application/json"><button id="clear-comparison" type="button" disabled>Clear second report</button><p id="compare-status" role="status" aria-live="polite">No second report loaded.</p><div id="comparison-result" hidden><div id="comparison-values"></div><label><input id="compare-same" type="checkbox" disabled> I measured the same folder with the same scan, category and filesystem settings</label><p id="comparison-guidance" role="status" aria-live="polite"></p><ul id="compare-metrics" aria-label="Observed change, second minus reference"></ul><section id="compare-categories" hidden aria-labelledby="compare-categories-title"><h4 id="compare-categories-title">Observed category changes</h4><p>Only categories present in both reports have numeric changes. Shared hardlink blocks can move between categories.</p><label for="compare-sort">Sort changes by</label> <select id="compare-sort"><option value="name">Category name</option><option value="allocatedBytes">Size of allocated change</option><option value="logicalBytes">Size of logical change</option><option value="files">Size of pathname count change</option></select><p id="compare-count" role="status"></p><ul id="compare-category-rows" aria-label="Observed category changes"></ul></section></div></section></section>`;
  const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./style.css',import.meta.url);root.prepend(css);
  const $=q=>root.querySelector(q),input=$('#observation-file'),clear=$('#clear'),status=$('#status'),error=$('#error');
  const comparisonInput=$('#comparison-file'),compareStatus=$('#compare-status');
@@ -46,13 +47,39 @@ export function mount({container,search='',theme='dark',signal}){
   }
   redrawRows();updateComparison();
  }
+ const signed=(value,format)=>value<0?'−'+format(-value):value>0?'+'+format(value):format(0);
+ function updateCategoryChanges(changes){
+  const panel=$('#compare-categories'),list=$('#compare-category-rows');
+  panel.hidden=!Array.isArray(changes);list.replaceChildren();
+  if(!changes)return;
+  const term=search.trim().toLowerCase();
+  const visible=changes.filter(r=>r.name.toLowerCase().includes(term));
+  if(sortChanges!=='name')visible.sort((a,b)=>{
+   const amount=r=>r.changes===null?-1:Math.abs(r.changes[sortChanges]);
+   return amount(b)-amount(a)||a.name.localeCompare(b.name);
+  });
+  $('#compare-count').textContent=`${visible.length} of ${changes.length} categories shown.`;
+  for(const row of visible){
+   const li=item(doc,'li');li.append(item(doc,'strong',row.name));
+   const display=row.changes===null
+    ?(row.presence==='earlier-only'?'Reference report only; no numeric change.':'Second report only; no numeric change.')
+    :`${signed(row.changes.allocatedBytes,bytes)} allocated · ${signed(row.changes.logicalBytes,bytes)} logical · ${signed(row.changes.files,n=>n.toLocaleString())} pathnames`;
+   li.append(item(doc,'span',display));list.append(li);
+  }
+ }
+ $('#compare-sort').onchange=event=>{
+  if(disposed)return;
+  const value=event.target.value;
+  if(['name','allocatedBytes','logicalBytes','files'].includes(value))sortChanges=value;
+  updateCategoryChanges(compareObservations(report,comparison,sameScope&&!reading&&!comparisonReading).categoryChanges);
+ };
  function updateComparison(){
   const panel=$('#comparison-result'), rows=$('#comparison-values'), checked=$('#compare-same');
   panel.hidden=!comparison;$('#clear-comparison').disabled=!comparison&&!comparisonReading;
   rows.replaceChildren();$('#compare-metrics').replaceChildren();
   const result=compareObservations(report,comparison,sameScope&&!reading&&!comparisonReading);
   checked.disabled=reading||comparisonReading||!result.eligible;checked.checked=sameScope&&!checked.disabled;
-  $('#comparison-guidance').textContent=result.reason;
+  $('#comparison-guidance').textContent=result.reason;updateCategoryChanges(result.categoryChanges);
   if(!comparison)return;
   for(const [label,observation] of [['Reference',report],['Second observation',comparison]]){
    if(!observation)continue;
@@ -110,5 +137,5 @@ export function mount({container,search='',theme='dark',signal}){
  function setTheme(value){if(disposed)return;container.dataset.theme=value==='light'?'light':'dark';}setTheme(theme);
  function unmount(){if(disposed)return;disposed=true;generation++;comparisonGeneration++;report=null;comparison=null;sameScope=false;selected=null;signal?.removeEventListener('abort',unmount);root.replaceChildren();}
  signal?.addEventListener('abort',unmount,{once:true});if(signal?.aborted)unmount();
- return {unmount,setTheme,setSearch(value){if(disposed)return;search=String(value??'');redrawRows();}};
+ return {unmount,setTheme,setSearch(value){if(disposed)return;search=String(value??'');redrawRows();updateCategoryChanges(compareObservations(report,comparison,sameScope&&!reading&&!comparisonReading).categoryChanges);}};
 }

@@ -51,5 +51,12 @@ export function compareObservations(before,after,asserted=false){
  if(!eligible)return {reason,eligible};
  if(!asserted)return {reason:'No comparison change yet. Only confirm if you used the same folder and scan settings.',eligible};
  const metrics=[...observationKeys,'physicalFiles'];
- return {eligible,reason:'Observed later minus earlier. You supplied the same-folder/settings assertion; the reports cannot verify it. This is not free or reclaimable space.',changes:Object.fromEntries(metrics.map(k=>[k,after.totals[k]-before.totals[k]]))};
+ const existing=new Map(before.categories.map(row=>[row.name,row]));
+ const latest=new Map(after.categories.map(row=>[row.name,row]));
+ const categoryChanges=[...new Set([...existing.keys(),...latest.keys()])].sort().map(name=>{
+  const earlier=existing.get(name), later=latest.get(name);
+  return {name, presence:earlier&&later?'both':earlier?'earlier-only':'later-only',
+   changes:earlier&&later?Object.fromEntries(observationKeys.map(key=>[key,later[key]-earlier[key]])):null};
+ });
+ return {eligible,reason:'Observed later minus earlier. You supplied the same-folder/settings assertion; the reports cannot verify it. This is not free or reclaimable space.',changes:Object.fromEntries(metrics.map(k=>[k,after.totals[k]-before.totals[k]])),categoryChanges};
 }
