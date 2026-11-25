@@ -57,3 +57,19 @@ original checks the pre-movement distance. Multiple pickups can advance
 multiple gates in a single tick. The returned events preserve their original
 order. No upgrade choices, random draw, audio, combat rewards, or durable
 player progression are executed by the module.
+
+### Movement, dash, contact and drops
+
+`tickPlayerMovement` and `tickEnemyContact` run the exact pinned movement
+and enemy stages on engine-owned state. The host supplies validated player,
+keyboard, enemy, gem, run and tick values. It chooses stage order, applies
+weapons separately and respects terminal state. These primitives keep the
+original order of checks, including contact before a defeated enemy's drop.
+They return particle and audio cues without rendering or playing them.
+Do not use these standalone primitives as a trusted network authority.
+
+```sh
+node engines/roguelite/tools/build-survivor-movement.mjs --check
+node --test engines/roguelite/tests/*.test.mjs
+node engines/roguelite/examples/demo-encounter-lane.mjs
+```
