@@ -7,15 +7,82 @@ function checked(value,theme,room){
  if(value.updated_at!==null&&(!Number.isSafeInteger(value.updated_at)||value.updated_at<0))throw Error('Invalid metadata timestamp');
  if(value.updated_at_ms!=null&&(!Number.isSafeInteger(value.updated_at_ms)||value.updated_at_ms<0||value.updated_at===null||Math.floor(value.updated_at_ms/1000)!==value.updated_at))throw Error('Inconsistent metadata precision');return a;
 }
+// Room-scoped local audition. This doesn't read or persist any chosen path and
+// never forwards a file or its playback events to the bookmark backend.
+export function localSoundtrackPreview(host,{makeAudio=()=>host.ownerDocument.createElement('audio'),
+ createURL=file=>URL.createObjectURL(file),revokeURL=url=>URL.revokeObjectURL(url)}={}){
+ host.innerHTML='<h3>Audition a local soundtrack</h3><p>Room session only. No autoplay, upload, provider account, or saved file.</p><label>Choose local audio <input type="file" accept="audio/*" data-soundtrack-local-file></label><button type="button" data-soundtrack-local-play disabled>Play local preview</button><button type="button" data-soundtrack-local-close disabled>Close local preview</button><p role="status" data-soundtrack-local-status>No file selected.</p><div data-soundtrack-local-player></div>';
+ const q=s=>host.querySelector(s),input=q('[data-soundtrack-local-file]'),play=q('[data-soundtrack-local-play]'),close=q('[data-soundtrack-local-close]'),
+  status=q('[data-soundtrack-local-status]'),player=q('[data-soundtrack-local-player]');
+ let entry=null,disposed=false,attempt=0;
+ function message(text){status.textContent=text;}
+ function end(old){
+  let ok=true;
+  for(const [type,fn] of old.listeners)old.audio.removeEventListener(type,fn);
+  try{old.audio.pause();}catch{ok=false;}
+  try{old.audio.removeAttribute('src');old.audio.load();}catch{ok=false;}
+  try{revokeURL(old.url);}catch{ok=false;}
+  old.audio.remove();return ok;
+ }
+ function release(text='No file selected.'){
+  attempt++;const old=entry;entry=null;const ok=!old||end(old);
+  player.replaceChildren();input.value='';play.disabled=close.disabled=true;
+  message(ok?text:'Closed, but the browser did not confirm every cleanup operation.');
+  return ok;
+ }
+ function select(){
+  if(disposed)return;
+  const file=input.files?.[0];input.value='';if(!file)return;
+  if(!Number.isSafeInteger(file.size)||file.size<1||file.size>64*1024*1024||!/^audio\/[a-z0-9.+-]+$/i.test(file.type)){
+   message('Choose a nonempty audio file up to 64 MiB. Current preview was not replaced.');return;
+  }
+  let url,audio;
+  try{
+   audio=makeAudio();url=createURL(file);
+   audio.preload='none';audio.controls=true;audio.autoplay=false;audio.loop=false;
+   audio.setAttribute('aria-label','Room audio preview, session only');audio.src=url;
+  }catch{
+   const ok=url?end({audio,url,listeners:[]}):true;
+   message(ok?'Could not prepare this audio. Current preview was not replaced.':'Audio preparation failed; candidate cleanup is unverified.');return;
+  }
+  const ok=release(),current={audio,url,listeners:[]};entry=current;
+  const events={playing:'Browser is playing the local preview.',pause:'Local preview paused.',ended:'Local preview ended.',error:'Browser could not play this local file.'};
+  for(const [event,text] of Object.entries(events)){
+   const fn=e=>{
+    if(disposed||entry!==current||e.isTrusted!==true)return;
+    if(event!=='playing')attempt++;
+    if(event==='error')play.disabled=true;
+    message(text);
+   };
+   current.listeners.push([event,fn]);audio.addEventListener(event,fn);
+  }
+  player.append(audio);play.disabled=close.disabled=false;
+  message(ok?'Local audio selected. Press Play to audition.':'Local audio selected; prior cleanup is unverified.');
+ }
+ async function start(){
+  if(disposed||!entry||play.disabled)return;
+  const current=entry,token=++attempt;
+  message('Playback requested.');
+  try{await current.audio.play();}
+  catch{if(!disposed&&entry===current&&token===attempt)message('Browser refused playback. Use the player controls or choose another file.');}
+ }
+ const shut=()=>release('Local preview closed.');
+ input.addEventListener('change',select);play.addEventListener('click',start);close.addEventListener('click',shut);
+ return {roomChanged(){if(!disposed&&entry)release('Local preview closed when leaving the room.');}, dispose(){
+  if(disposed)return;disposed=true;release();input.removeEventListener('change',select);play.removeEventListener('click',start);close.removeEventListener('click',shut);host.replaceChildren();
+ }};
+}
+
 export function attachNativeSoundtrack({host,nativeStore,signal}){
- const doc=host.ownerDocument;host.innerHTML='<h2>Selected room soundtrack</h2><p data-soundtrack-status role="status"></p><div data-soundtrack-detail></div><button type="button" data-soundtrack-refresh>Refresh and review local bookmark</button><label>Provider <select data-soundtrack-provider><option value="spotify">Spotify</option><option value="apple">Apple Music</option><option value="deezer">Deezer</option><option value="soundcloud">SoundCloud</option><option value="tidal">Tidal</option><option value="youtube">YouTube Music</option></select></label><label>Public HTTPS URL <input type="url" data-soundtrack-url maxlength="4096"></label><label>Bookmark label <input data-soundtrack-label maxlength="256"></label><button type="button" data-soundtrack-save>Save bookmark for this room</button><p>Bookmark only, not playback or account authorization. Provider status is stored provenance, not verified access. No autoplay or provider requests. Refresh reviews native data but preserves typed inputs. Room drafts are retained in this mounted session only.</p>';
+ const doc=host.ownerDocument;host.innerHTML='<h2>Selected room soundtrack</h2><p data-soundtrack-status role="status"></p><div data-soundtrack-detail></div><button type="button" data-soundtrack-refresh>Refresh and review local bookmark</button><label>Provider <select data-soundtrack-provider><option value="spotify">Spotify</option><option value="apple">Apple Music</option><option value="deezer">Deezer</option><option value="soundcloud">SoundCloud</option><option value="tidal">Tidal</option><option value="youtube">YouTube Music</option></select></label><label>Public HTTPS URL <input type="url" data-soundtrack-url maxlength="4096"></label><label>Bookmark label <input data-soundtrack-label maxlength="256"></label><button type="button" data-soundtrack-save>Save bookmark for this room</button><p>Bookmark only, not playback or account authorization. Provider status is stored provenance, not verified access. No autoplay or provider requests. Refresh reviews native data but preserves typed inputs. Room drafts are retained in this mounted session only.</p><section data-soundtrack-local></section>';
+ const local=localSoundtrackPreview(host.querySelector('[data-soundtrack-local]'));
  const one=q=>host.querySelector(q),status=one('[data-soundtrack-status]'),detail=one('[data-soundtrack-detail]'),refresh=one('[data-soundtrack-refresh]'),save=one('[data-soundtrack-save]'),provider=one('[data-soundtrack-provider]'),url=one('[data-soundtrack-url]'),label=one('[data-soundtrack-label]');let disposed=false,key=null,selected=null,generation=0,request,busy=false,reviewed=false;const drafts=new Map();
  function fields(){return {provider:provider.value||'spotify',url:url.value,label:label.value};}
  function fill(v){provider.value=v.provider;url.value=v.url;label.value=v.label;}
  function enabled(){refresh.disabled=busy||typeof nativeStore?.soundtrack!=='function';save.disabled=busy||!reviewed||typeof nativeStore?.assignSoundtrack!=='function';}
  for(const el of [provider,url,label])el.addEventListener('input',()=>{if(key)drafts.set(key,fields());});provider.addEventListener('change',()=>{if(key)drafts.set(key,fields());});
  function render(value,theme,room){detail.replaceChildren();if(value===null)return;const a=checked(value,theme,room),text=doc.createElement('p');text.textContent=`Provider: ${a.provider}. Stored status: ${a.status}. ${value.updated_at_ms!=null?'Updated Unix milliseconds: '+value.updated_at_ms+' (original source precision).':value.updated_at===null?'Original timestamp unavailable.':'Updated Unix seconds: '+value.updated_at+'. Subsecond precision unavailable.'}`;const link=doc.createElement('a');link.textContent=a.label||'Open public bookmark';link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.referrerPolicy='no-referrer';detail.append(text,link);}
- async function update(theme,room,force=false){if(disposed)return;const next=theme+'/'+room;if(!force&&key===next)return;if(key&&key!==next)drafts.set(key,fields());key=next;selected=[theme,room];request?.abort();request=new AbortController();const run=++generation;detail.replaceChildren();reviewed=false;fill(drafts.get(key)||{provider:'spotify',url:'',label:''});
+ async function update(theme,room,force=false){if(disposed)return;const next=theme+'/'+room;if(!force&&key===next)return;if(key&&key!==next){drafts.set(key,fields());local.roomChanged();}key=next;selected=[theme,room];request?.abort();request=new AbortController();const run=++generation;detail.replaceChildren();reviewed=false;fill(drafts.get(key)||{provider:'spotify',url:'',label:''});
   if(typeof nativeStore?.soundtrack!=='function'){busy=false;status.textContent='Not connected. Browser-only authoring remains available.';enabled();return;}
   busy=true;enabled();status.textContent='Loading local soundtrack metadata…';
   try{const value=await nativeStore.soundtrack(theme,room,{signal:request.signal});if(disposed||run!==generation)return;render(value,theme,room);nativeStore.acceptSoundtrack?.(theme,room,value);reviewed=true;if(!drafts.has(key)&&value)fill(value.assignment);status.textContent=value===null?'No native soundtrack bookmark assigned to this room.':'Local bookmark loaded. Playback has not been tested.';
@@ -23,6 +90,6 @@ export function attachNativeSoundtrack({host,nativeStore,signal}){
  }
  save.addEventListener('click',async()=>{if(disposed||busy||!reviewed||typeof nativeStore?.assignSoundtrack!=='function')return;const [theme,room]=selected,run=generation,captured=fields();drafts.set(key,captured);busy=true;enabled();try{const assignment={theme_id:theme,room_id:room,...captured};checked({assignment:{...assignment,status:'USER_ASSIGNED'},updated_at:null},theme,room);const value=await nativeStore.assignSoundtrack(assignment,{signal:request.signal});if(disposed||run!==generation)return;render(value,theme,room);const unchanged=JSON.stringify(fields())===JSON.stringify(captured);if(unchanged)drafts.delete(key);status.textContent=unchanged?'Public bookmark saved locally for this room. No playback or account grant.':'Captured bookmark saved locally. Newer typed inputs were retained and are not yet saved.';}catch(e){if(!disposed&&run===generation){if(e.code==='NATIVE_CONFLICT')reviewed=false;status.textContent=`Bookmark not confirmed: ${e.message}. Typed inputs retained.`;}}finally{if(!disposed&&run===generation){busy=false;enabled();}}});
  refresh.addEventListener('click',()=>{if(selected){drafts.set(key,fields());update(...selected,true)}});
- function dispose(){if(disposed)return;disposed=true;generation++;request?.abort();signal?.removeEventListener('abort',dispose);host.replaceChildren();drafts.clear();}
+ function dispose(){if(disposed)return;disposed=true;generation++;request?.abort();local.dispose();signal?.removeEventListener('abort',dispose);host.replaceChildren();drafts.clear();}
  signal?.addEventListener('abort',dispose,{once:true});if(signal?.aborted)dispose();enabled();return {update,dispose};
 }

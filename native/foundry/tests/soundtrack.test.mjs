@@ -13,3 +13,26 @@ test('newer typed edits survive captured save and dispose aborts pending write',
 test('original millisecond precision is displayed without truncation',async()=>{for(const ms of [0,1672531200123,1672531200999]){const s=setup({soundtrack:async()=>({...value(),updated_at:Math.floor(ms/1000),updated_at_ms:ms})});await s.view.update('theme','one');assert.match(s.host.textContent,new RegExp('Updated Unix milliseconds: '+ms));assert.doesNotMatch(s.host.textContent,/Updated Unix seconds:/);s.view.dispose();}});
 test('seconds-only and unknown timestamps do not invent precision',async()=>{for(const extra of [{updated_at:1672531200},{updated_at:1672531200,updated_at_ms:null},{updated_at:null}]){const s=setup({soundtrack:async()=>({...value(),...extra})});await s.view.update('theme','one');assert.doesNotMatch(s.host.textContent,/Unix milliseconds:/);assert.match(s.host.textContent,extra.updated_at===null?/Original timestamp unavailable/:/Subsecond precision unavailable/);s.view.dispose();}});
 test('inconsistent milliseconds never become reviewed metadata or clickable links',async()=>{for(const ms of [-1,1.5,'1672531200123',1672531201000,Number.MAX_SAFE_INTEGER+1]){let accepted=false;const s=setup({soundtrack:async()=>({...value(),updated_at:1672531200,updated_at_ms:ms}),acceptSoundtrack:()=>{accepted=true;}});await s.view.update('theme','one');assert.equal(accepted,false);assert.equal(s.host.querySelector('a'),null);assert.match(s.host.textContent,/Inconsistent metadata precision/);assert.equal(s.host.querySelector('[data-soundtrack-save]').disabled,true);s.view.dispose();}});
+
+test('local audition is explicit, isolated and releases the clip on room change',async()=>{
+ const {localSoundtrackPreview}=await import('../../../dist/workspaces/foundry/native-soundtrack.mjs');
+ const {document,window}=parseHTML('<section></section>'),host=document.querySelector('section');
+ const calls=[];let reject;
+ const instance=localSoundtrackPreview(host,{
+  makeAudio(){const a=document.createElement('audio');a.pause=()=>calls.push('pause');a.load=()=>calls.push('release media');a.play=()=>{calls.push('play');return new Promise((_,r)=>{reject=r;});};return a;},
+  createURL:()=>{calls.push('create URL');return 'blob:local';},
+  revokeURL:url=>calls.push('revoke '+url),
+ });
+ const file=host.querySelector('[data-soundtrack-local-file]');
+ file.files=[{type:'audio/wav',size:100}];file.dispatchEvent(new window.Event('change'));
+ assert.deepEqual(calls,['create URL']);assert.equal(host.querySelector('audio').autoplay,false);
+ file.files=[{type:'text/html',size:10}];file.dispatchEvent(new window.Event('change'));
+ assert.notEqual(host.querySelector('audio'),null);assert.match(host.textContent,/Current preview was not replaced/);
+ host.querySelector('[data-soundtrack-local-play]').click();
+ assert.deepEqual(calls,['create URL','play']);
+ instance.roomChanged();assert.ok(!host.querySelector('audio'));
+ assert.deepEqual(calls,['create URL','play','pause','release media','revoke blob:local']);
+ reject(Error('late promise after leaving room'));await tick();
+ assert.match(host.textContent,/Local preview closed when leaving the room/);
+ instance.dispose();assert.equal(host.children.length,0);
+});
