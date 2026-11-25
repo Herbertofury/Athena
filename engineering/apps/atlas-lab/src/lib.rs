@@ -2,6 +2,7 @@
 extern crate self as atlas_lab;
 pub mod athena_assets;
 mod atlas_archive;
+mod atlas_run_ledger;
 pub mod collection_failure;
 pub mod constellation_review;
 mod constellation_review_ui;

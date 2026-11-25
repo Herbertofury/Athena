@@ -764,6 +764,7 @@ async fn serve_strategy(
         .merge(crate::learning_history::router(path_for_history))
         .merge(crate::migration_readiness::router())
         .merge(crate::atlas_archive::router())
+        .merge(crate::atlas_run_ledger::router())
         .merge(crate::constellation_review_ui::router());
     let unified = foundry.is_some();
     let app = if let Some(path) = foundry {

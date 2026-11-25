@@ -52,3 +52,14 @@ Still required before telling the user to delete the source:
 - Older Actions logs are not fully archived. The 509-run metadata snapshot, current artifact bytes and deployment inventory are preserved; expiring historical logs are not implied by those records.
 
 Do not delete, archive or change the visibility of Engineering Atlas as part of this transfer. No claim of complete migration or release is made while any gate remains open.
+
+## Read two original workflow observations offline
+
+Open **Recorded workflow runs** from Athena's native Engineering-Atlas
+archive. The read-only ledger searches by run ID, commit, or workflow name
+and filters changed statuses, failed runs, or runs found only in the later
+snapshot. Both state readings remain visible, with source links and exact
+SHA-256s. The November 7 and 14 snapshots contain 509 and 522 observations;
+509 run IDs appear in both, and two of those change from in-progress to
+completed successfully. That is evidence from these snapshots, not live workflow status,
+job logs, artifact contents, source retirement or current test acceptance.
