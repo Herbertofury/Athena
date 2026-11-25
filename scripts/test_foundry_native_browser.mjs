@@ -788,7 +788,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.goto(origin+'/play');
    const before=await common();
    await play.getByRole('link',{name:'Warden Duel',exact:true}).click();
-   assert.match(await play.locator('#status').textContent(),/Select your starting cards/);
+   await play.locator('#status').filter({hasText:'Select your starting cards.'}).waitFor();
    await play.locator('#keep-cards button').first().press('Enter');
    await play.locator('#keep-cards button').nth(2).press('Enter');
    await play.getByRole('button',{name:'Begin with selected cards',exact:true}).press('Enter');
