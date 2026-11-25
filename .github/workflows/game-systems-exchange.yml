@@ -47,3 +47,24 @@ jobs:
         run: python scripts/verify_engine_intake.py
       - name: Test engine intake and registry contracts
         run: python -m unittest discover -s tests -p 'test_*game_systems*.py' -v && python -m unittest discover -s tests -p test_engine_intake.py -v
+
+  survivor-spawn-proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Reproduce exact source-derived survivor spawn rules
+        run: node engines/roguelite/tools/build-survivor-spawns.mjs --check
+      - name: Prove complete headless spawn replay against pinned GameSync
+        run: node --test engines/roguelite/tests/spawn-director.test.mjs
+      - name: Run the offline spawn host demo
+        run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
