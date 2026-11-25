@@ -94,3 +94,29 @@ test('digest verification resolving after a newer selection cannot replace it',a
   assert.match(s.one('[data-semantic-summary]').textContent,/Newer direct selection/);
  }finally{if(before)Object.defineProperty(globalThis,'crypto',before);else delete globalThis.crypto;s.api.dispose();}
 });
+
+test('explicit large selection transfers exact owned bytes and terminates once per outcome',async()=>{
+ const {inspectSelectedRoom}=await import('../../../dist/workspaces/foundry/native-semantic-room.mjs');
+ const padded=new Uint8Array(130*1024+2);padded[0]=44;padded[padded.length-1]=99;
+ const input=padded.subarray(1,-1);
+ function harness(){
+  const w={terminated:0,postMessage(data,transfers){this.sent={data,transfers};},terminate(){this.terminated++;}};
+  return w;
+ }
+ for(const action of ['success','cancel','module-error','timeout']){
+  const w=harness(),c=new AbortController();
+  const work=inspectSelectedRoom(input,{signal:c.signal,makeWorker:()=>w,timeoutMs:action==='timeout'?1:15000});
+  assert.ok(w.sent.data instanceof Uint8Array);assert.equal(w.sent.data.byteLength,input.byteLength);
+  assert.notEqual(w.sent.data.buffer,padded.buffer);assert.deepEqual(w.sent.transfers,[w.sent.data.buffer]);
+  const handle=w.onmessage;const selected={value:fixture,bytes:bytes(fixture),fromCapsule:true};
+  if(action==='success'){handle({data:{selected}});assert.equal(await work,selected);}
+  else{
+   if(action==='cancel')c.abort();else if(action==='module-error')w.onerror();
+   await assert.rejects(work);
+  }
+  handle({data:{selected}});assert.equal(w.terminated,1);assert.equal(w.onmessage,null);
+  assert.equal(padded[0],44);assert.equal(padded[padded.length-1],99);
+ }
+ const selected=await inspectSelectedRoom(bytes(fixture),{makeWorker:()=>{throw Error('small file should not create a worker')}});
+ assert.equal(selected.fromCapsule,false);
+});

@@ -16,6 +16,16 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
  const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  await context.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin&&u.protocol!=='blob:'){report.outsideRequests.push(u.href);return route.abort();}return route.continue();});
  page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
+ await page.addInitScript(()=>{
+  window.athenaRoomWorkers={created:0,terminated:0,transferred:0};
+  const Base=window.Worker,stats=window.athenaRoomWorkers;
+  window.Worker=class extends Base{
+   constructor(url,options){super(url,options);this.room=String(url).endsWith('/native-semantic-room.mjs');if(this.room)stats.created++;}
+   postMessage(bytes,transfers){if(this.room&&transfers?.[0]===bytes.buffer)stats.transferred+=bytes.byteLength;return super.postMessage(bytes,transfers);}
+   terminate(){if(this.room)stats.terminated++;return super.terminate();}
+  };
+ });
+
  await page.goto(origin+'/index.html#build');
  await page.locator('[data-semantic-file]').waitFor();
  await page.locator('.workspace-status').filter({hasText:/workspace loaded/}).waitFor();
@@ -70,10 +80,15 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   const selected={...fixture,sourceName:'Verified capsule Ω scene'},record='\ufeff \n'+JSON.stringify(selected,null,2)+'\n';
   const secret='non-room-capsule-marker-unsupported-export',source=path.join(temp,'values.json'),output=path.join(temp,'capsule.json');
   try{
-   fs.writeFileSync(source,JSON.stringify({'ff-room-semantic-state':record,'ff.music-hub.v2':secret+'😀'+String.fromCharCode(0xd800)}));
+   fs.writeFileSync(source,JSON.stringify({'ff-room-semantic-state':record,'ff.music-hub.v2':secret+'a'.repeat(1_750_000)+'😀'+String.fromCharCode(0xd800)}));
    cp.execFileSync(process.env.PYTHON||'python',['-B','tools/foundry-recovery/capsule/capsule.py','pack',source,output]);
-   const capsule=fs.readFileSync(output),file=one('[data-semantic-file]');await file.setInputFiles({name:'capsule.json',mimeType:'application/json',buffer:capsule});
+   const capsule=fs.readFileSync(output),file=one('[data-semantic-file]');
+   assert.deepEqual(await page.evaluate(()=>window.athenaRoomWorkers),{created:0,terminated:0,transferred:0});
+   const started=page.waitForEvent('worker',w=>w.url().endsWith('/native-semantic-room.mjs'));
+   await file.setInputFiles({name:'capsule.json',mimeType:'application/json',buffer:capsule});
+   await started;
    await one('[data-semantic-status]').filter({hasText:'Recovery capsule verified locally'}).waitFor();
+   assert.deepEqual(await page.evaluate(()=>window.athenaRoomWorkers),{created:1,terminated:1,transferred:capsule.byteLength});
    assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
    assert.ok(!(await one('[data-foundry-module=semanticRoom]').textContent()).includes(secret));
    const event=page.waitForEvent('download');await one('[data-semantic-export]').click();
@@ -83,6 +98,9 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
    await one('[data-semantic-status]').filter({hasText:'checksum mismatch'}).waitFor();
    assert.match(await one('[data-semantic-summary]').textContent(),/Verified capsule Ω scene/);
    assert.ok(!(await page.evaluate(()=>JSON.stringify(localStorage))).includes(secret));
+   const workers=await page.evaluate(()=>window.athenaRoomWorkers);
+   assert.equal(workers.created,2);assert.equal(workers.terminated,2);assert.ok(workers.transferred>3_500_000);
+   report.largeWorker={...workers,successBytes:capsule.byteLength};
   }finally{fs.rmSync(temp,{force:true,recursive:true});}
  });
  await check('close revokes export and route navigation discards session',async()=>{

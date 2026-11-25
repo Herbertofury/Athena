@@ -18,7 +18,10 @@ an edited export is separate. Other capsule entries are neither displayed
 nor exported. Keep the whole original capsule privately. The browser does
 not import or save scene files, other preferences, or a room database. For
 larger capsules or values not losslessly representable in UTF-8, retain the
-original and use the Python tool above. Checksums are not a digital signature.
+original and use the Python tool above. Checksums are not a digital signature. In the local app, a selection over
+128 KiB uses a temporary worker for decoding and hashing. A newer selection
+or closing the explorer ends that worker; nothing runs in the background
+when the explorer is idle.
 
 ## Preserve the separate native world snapshot
 

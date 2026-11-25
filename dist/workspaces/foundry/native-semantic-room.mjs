@@ -68,12 +68,49 @@ export async function inspectSemanticSelection(bytes,subtle=globalThis.crypto?.s
  const selected=new TextEncoder().encode(room);
  return {value:parseSemanticRoom(selected),bytes:selected,fromCapsule:true};
 }
+const WORKER_THRESHOLD=128*1024;
+function newSelectionWorker(){
+ return new Worker(new URL(import.meta.url),{type:'module',name:'athena-private-room-check'});
+}
+// One worker per explicit large selection, never a resident service. Use
+// the same parser in both paths and transfer only selected file bytes.
+export function inspectSelectedRoom(bytes,{signal,makeWorker,timeoutMs=15000}={}){
+ if(signal?.aborted)return Promise.reject(new DOMException('Selection canceled.','AbortError'));
+ if(bytes.byteLength<=WORKER_THRESHOLD||!makeWorker)return inspectSemanticSelection(bytes);
+ return new Promise((resolve,reject)=>{
+  let worker,timer,settled=false;
+  const cleanup=()=>{
+   clearTimeout(timer);signal?.removeEventListener('abort',cancel);
+   if(worker){worker.onmessage=worker.onerror=worker.onmessageerror=null;worker.terminate();}
+  };
+  const finish=(error,selected)=>{if(settled)return;settled=true;cleanup();if(error)reject(error);else resolve(selected);};
+  const cancel=()=>finish(new DOMException('Selection canceled.','AbortError'));
+  try{
+   worker=makeWorker();
+   worker.onmessage=({data})=>data?.selected?finish(null,data.selected):finish(Error(data?.error||'Local verification failed.'));
+   worker.onerror=worker.onmessageerror=()=>finish(Error('Local verification could not run. Try a smaller room snapshot or use the recovery tool.'));
+   signal?.addEventListener('abort',cancel,{once:true});
+   timer=setTimeout(()=>finish(Error('Local verification timed out. No snapshot was replaced.')),timeoutMs);
+   const owned=(bytes.byteOffset===0&&bytes.byteLength===bytes.buffer.byteLength)?bytes:bytes.slice();
+   worker.postMessage(owned,[owned.buffer]);
+  }catch{finish(Error('Local verification could not start. Try a smaller room snapshot or use the recovery tool.'));}
+ });
+}
+if(typeof DedicatedWorkerGlobalScope!=='undefined'&&globalThis instanceof DedicatedWorkerGlobalScope){
+ globalThis.addEventListener('message',async ({data})=>{
+  try{const selected=await inspectSemanticSelection(data);globalThis.postMessage({selected},[selected.bytes.buffer]);}
+  catch(error){globalThis.postMessage({error:error.message});}
+ },{once:true});
+}
 // Source index.html410 and bindRoomIntelligence684–685. These are declarations,
 // never an instruction to run physics, reveal a mesh, or execute an action.
 export const SEMANTIC_ROLES=Object.freeze(['Couch / Seat','Table / Surface','TV / Screen','Lamp / Light','Window / Portal','Door','Floor / Navmesh','Wall / Collision','Decoration','Ignore']);
 export const SEMANTIC_PHYSICS=Object.freeze(['Static collision','Dynamic rigid body','Kinematic articulated','Soft body','No collision']);
 export function createSemanticEdits(value){
- let current=parseSemanticRoom(new TextEncoder().encode(JSON.stringify(value))),past=[],future=[];
+ return editValidatedRoom(parseSemanticRoom(new TextEncoder().encode(JSON.stringify(value))));
+}
+function editValidatedRoom(current){
+ let past=[],future=[];
  const keys=['role','physics','visible','locked'],MAX_HISTORY=50,MAX_HISTORY_BYTES=256*1024;
  const pick=row=>Object.fromEntries(keys.map(k=>[k,row[k]]));
  const trim=()=>{while(past.length+future.length>MAX_HISTORY||JSON.stringify([...past,...future]).length*2>MAX_HISTORY_BYTES){if(past.length)past.shift();else future.shift();}};
@@ -81,8 +118,8 @@ export function createSemanticEdits(value){
  function applyPatch(patch,side){const row=current.objects.find(x=>x.id===patch.id);if(!row)throw Error('Record identity changed.');Object.assign(row,patch[side]);}
  return {get value(){return current;},plan,apply(patch){if(!patch)return false;const checked=plan(patch.id,patch.after);if(!checked||!keys.every(k=>checked.before[k]===patch.before[k]))throw Error('Metadata changed; review again.');applyPatch(checked,'after');past.push(checked);future=[];trim();return true;},undo(){if(!past.length)return false;const p=past.pop();applyPatch(p,'before');future.push(p);trim();return true;},redo(){if(!future.length)return false;const p=future.pop();applyPatch(p,'after');past.push(p);trim();return true;},get canUndo(){return !!past.length;},get canRedo(){return !!future.length;},get retainedEdits(){return past.length+future.length;},get retainedBytes(){return JSON.stringify([...past,...future]).length*2;}};
 }
-export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObjectURL(blob),revokeURL=url=>URL.revokeObjectURL(url)}){
- const doc=host.ownerDocument;let generation=0,disposed=false,active=null,url=null,editedURL=null,editor=null,pending=null;
+export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObjectURL(blob),revokeURL=url=>URL.revokeObjectURL(url),makeWorker=typeof Worker==='function'&&globalThis.location?.protocol!=='file:'?newSelectionWorker:null}){
+ const doc=host.ownerDocument;let generation=0,disposed=false,active=null,url=null,editedURL=null,editor=null,pending=null,readController=null;
  host.innerHTML='<h2>Original room metadata explorer</h2><p>Open a local room snapshot or a verified Foundry recovery capsule. Only its room metadata is shown or exported. Session-only metadata authoring: no upload, persistent storage, mesh import, physics generation or action execution. Original bytes remain unchanged; edited exports are separate derivatives. Descriptions below are unverified source metadata, not working capabilities.</p><label>Choose room snapshot (1 MiB) or recovery capsule (2 MiB) <input type="file" accept=".json,application/json" data-semantic-file></label><button data-semantic-close disabled>Close and forget snapshot</button><a data-semantic-export hidden download="original-room-semantic-state.json">Export exact original room bytes</a><p role="status" data-semantic-status>No snapshot selected.</p><div role="group" aria-label="Review discarding room metadata" data-semantic-discard-panel hidden><p data-semantic-discard-message></p><button type="button" data-semantic-keep>Keep current snapshot</button><button type="button" data-semantic-discard>Discard edits</button></div><div data-semantic-summary></div><label>Inspect saved object <select data-semantic-select disabled></select></label><dl data-semantic-details></dl><fieldset data-semantic-editor disabled><legend>Edit recorded metadata only</legend><label>Recorded role <select data-semantic-role></select></label><label>Recorded physics classification <select data-semantic-physics></select></label><label><input type="checkbox" data-semantic-visible> Recorded visible flag</label><label><input type="checkbox" data-semantic-locked> Recorded mapping lock (not an access control)</label><button data-semantic-apply>Apply metadata</button></fieldset><button data-semantic-undo disabled>Undo metadata edit</button><button data-semantic-redo disabled>Redo metadata edit</button><button data-semantic-prepare disabled>Prepare edited JSON export</button><a data-semantic-edited hidden download="edited-room-semantic-state.json">Download edited metadata (not original bytes)</a>';
  const one=q=>host.querySelector(q),input=one('[data-semantic-file]'),close=one('[data-semantic-close]'),link=one('[data-semantic-export]'),status=one('[data-semantic-status]'),summary=one('[data-semantic-summary]'),select=one('[data-semantic-select]'),details=one('[data-semantic-details]');
  const panel=one('[data-semantic-discard-panel]'),message=one('[data-semantic-discard-message]'),keep=one('[data-semantic-keep]'),discard=one('[data-semantic-discard]');
@@ -91,6 +128,7 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
  function retireEdited(){edited.removeAttribute('href');edited.hidden=true;if(editedURL){revokeURL(editedURL);editedURL=null;}}
  function choices(control,values,value){control.replaceChildren();for(const v of values.includes(value)?values:[value,...values]){const option=doc.createElement('option');option.value=v;option.textContent=values.includes(v)?v:`Recorded unsupported classification: ${v}`;control.append(option);}control.value=value;}
  function sync(){undo.disabled=!editor?.canUndo;redo.disabled=!editor?.canRedo;prepare.disabled=!editor;}
+ function cancelSelection(){readController?.abort();readController=null;}
  function resetPending(){pending=null;panel.hidden=true;message.textContent='';}
  function formValues(){return {role:role.value,physics:physics.value,visible:visible.checked,locked:locked.checked};}
  function hasSessionWork(){
@@ -112,7 +150,7 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
   const target=pending.kind==='replace'?input:close;
   resetPending();status.textContent='Current snapshot kept. Edits and exports were not changed.';target.focus();
  }
- function mutate(kind){if(disposed||signal?.aborted||!editor)return;try{const patch=kind==='apply'?editor.plan(select.value,formValues()):null;if(kind==='apply'&&!patch){status.textContent='No metadata changed. Drafts and Redo retained.';return;}if(kind==='undo'&&!editor.canUndo||kind==='redo'&&!editor.canRedo)return;retireEdited();generation++;resetPending();if(kind==='apply')editor.apply(patch);else editor[kind]();active.value=editor.value;detail();sync();status.textContent='Recorded metadata changed in this session only. Original bytes unchanged; no physics, mesh or action executed.';}catch{status.textContent='Metadata edit could not complete. Review the current values; export availability may require cleanup.';}}
+ function mutate(kind){if(disposed||signal?.aborted||!editor)return;try{const patch=kind==='apply'?editor.plan(select.value,formValues()):null;if(kind==='apply'&&!patch){status.textContent='No metadata changed. Drafts and Redo retained.';return;}if(kind==='undo'&&!editor.canUndo||kind==='redo'&&!editor.canRedo)return;retireEdited();cancelSelection();generation++;resetPending();if(kind==='apply')editor.apply(patch);else editor[kind]();active.value=editor.value;detail();sync();status.textContent='Recorded metadata changed in this session only. Original bytes unchanged; no physics, mesh or action executed.';}catch{status.textContent='Metadata edit could not complete. Review the current values; export availability may require cleanup.';}}
  function exportEdited(){if(disposed||signal?.aborted||!editor)return;try{const bytes=new TextEncoder().encode(JSON.stringify(editor.value));parseSemanticRoom(bytes);retireEdited();editedURL=createURL(new Blob([bytes],{type:'application/json'}));edited.href=editedURL;edited.hidden=false;status.textContent='Edited JSON prepared locally. This is a derivative, not the original bytes or a verified scene.';}catch{status.textContent='Edited export could not be prepared. Session values and original export remain separate.';}}
  const applyClick=()=>mutate('apply'),undoClick=()=>mutate('undo'),redoClick=()=>mutate('redo');
  one('[data-semantic-apply]').addEventListener('click',applyClick);undo.addEventListener('click',undoClick);redo.addEventListener('click',redoClick);prepare.addEventListener('click',exportEdited);
@@ -120,7 +158,7 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
  function detail(){details.replaceChildren();const row=active?.value.objects.find(r=>r.id===select.value);controls.disabled=!row;if(!row)return;choices(role,SEMANTIC_ROLES,row.role);choices(physics,SEMANTIC_PHYSICS,row.physics);visible.checked=row.visible;locked.checked=row.locked;for(const [key,value] of Object.entries(row)){const dt=doc.createElement('dt'),dd=doc.createElement('dd');dt.textContent=key;dd.textContent=Array.isArray(value)?value.join(', '):String(value);details.append(dt,dd);}}
  function render(){const v=active.value;summary.replaceChildren();const warning=doc.createElement('p');warning.textContent='Recorded root metadata. Saved flags and descriptions are not validation of an actual room.';summary.append(warning);const list=doc.createElement('dl');for(const key of rootKeys.filter(k=>k!=='objects')){const dt=doc.createElement('dt'),dd=doc.createElement('dd');dt.textContent=key;dd.textContent=String(v[key]);list.append(dt,dd);}summary.append(list);select.replaceChildren();for(const row of v.objects){const option=doc.createElement('option');option.value=row.id;option.textContent=`${row.name} [${row.id}]`;select.append(option);}select.value=v.selectedId||v.objects[0]?.id||'';select.disabled=!v.objects.length;close.disabled=false;detail();sync();}
  function replaceSnapshot(bytes,value,fromCapsule=false){
-  const nextEditor=createSemanticEdits(value),nextURL=createURL(new Blob([bytes],{type:'application/json'}));
+  const nextEditor=editValidatedRoom(value),nextURL=createURL(new Blob([bytes],{type:'application/json'}));
   try{retireEdited();revoke();}catch{try{revokeURL(nextURL);}catch{}throw Error('Export cleanup failed; export availability is unverified.');}
   editor=nextEditor;active={value:editor.value};url=nextURL;link.href=url;link.hidden=false;render();
   status.textContent=fromCapsule?'Recovery capsule verified locally. Only exact original room data are available to export. Other entries were not imported.':'Snapshot inspected locally. Exact original bytes available for export; no migration or scene modification performed.';
@@ -129,18 +167,20 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
  async function choose(){
   if(disposed||signal?.aborted)return;
   const file=input.files?.[0];input.value='';if(!file)return;
-  const token=++generation;resetPending();
+  cancelSelection();const token=++generation;resetPending();
   if(!Number.isFinite(file.size)||file.size<=0||file.size>MAX_CAPSULE_BYTES){reject(Error('Choose a nonempty snapshot up to 1 MiB or recovery capsule up to 2 MiB.'));return;}
+  const controller=new AbortController();readController=controller;
   close.disabled=false;status.textContent='Reading selected local snapshot…';
   try{
    const bytes=new Uint8Array(await file.arrayBuffer());if(disposed||signal?.aborted||token!==generation)return;
-   const selected=await inspectSemanticSelection(bytes);
+   const selected=await inspectSelectedRoom(bytes,{signal:controller.signal,makeWorker});
    if(disposed||signal?.aborted||token!==generation)return;
    if(hasSessionWork())review({kind:'replace',...selected});else replaceSnapshot(selected.bytes,selected.value,selected.fromCapsule);
   }catch(error){if(!disposed&&token===generation){close.disabled=!active;reject(error);}}
+  finally{if(readController===controller)readController=null;}
  }
  function requestClose(){
-  generation++;resetPending();
+  cancelSelection();generation++;resetPending();
   if(hasSessionWork())review({kind:'close'});else clear();
  }
  function discardCurrent(){
@@ -150,7 +190,7 @@ export function attachSemanticRoom({host,signal,createURL=blob=>URL.createObject
   else try{replaceSnapshot(action.bytes,action.value,action.fromCapsule);}catch(error){reject(error);}
   input.focus();
  }
- function clear(){generation++;resetPending();active=null;editor=null;controls.disabled=true;sync();let failed=false;for(const cleanup of [retireEdited,revoke])try{cleanup();}catch{failed=true;}link.removeAttribute('href');link.hidden=true;status.textContent=failed?'Snapshot closed; export cleanup failed.':'Snapshot closed; session exports released.';summary.replaceChildren();details.replaceChildren();select.replaceChildren();select.disabled=true;close.disabled=true;input.value='';}
+ function clear(){cancelSelection();generation++;resetPending();active=null;editor=null;controls.disabled=true;sync();let failed=false;for(const cleanup of [retireEdited,revoke])try{cleanup();}catch{failed=true;}link.removeAttribute('href');link.hidden=true;status.textContent=failed?'Snapshot closed; export cleanup failed.':'Snapshot closed; session exports released.';summary.replaceChildren();details.replaceChildren();select.replaceChildren();select.disabled=true;close.disabled=true;input.value='';}
  function dispose(){if(disposed)return;disposed=true;clear();one('[data-semantic-apply]').removeEventListener('click',applyClick);undo.removeEventListener('click',undoClick);redo.removeEventListener('click',redoClick);prepare.removeEventListener('click',exportEdited);input.removeEventListener('change',choose);select.removeEventListener('change',detail);close.removeEventListener('click',requestClose);keep.removeEventListener('click',keepCurrent);discard.removeEventListener('click',discardCurrent);signal?.removeEventListener('abort',dispose);host.replaceChildren();}
  input.addEventListener('change',choose);select.addEventListener('change',detail);close.addEventListener('click',requestClose);keep.addEventListener('click',keepCurrent);discard.addEventListener('click',discardCurrent);signal?.addEventListener('abort',dispose,{once:true});if(signal?.aborted)dispose();return {dispose};
 }
