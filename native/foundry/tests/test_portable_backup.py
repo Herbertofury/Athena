@@ -44,9 +44,19 @@ class BackupTests(unittest.TestCase):
    with self.assertRaises(subprocess.TimeoutExpired):self.backup()
   self.assertEqual(before,self.fingerprints());self.assertFalse(self.out.exists());self.assertEqual(list(self.root.glob('.athena-backup-*')),[])
  def test_racing_destination_preserved(self):
-  link=os.link
-  def race(src,dst):self.out.write_bytes(b'OTHER');return link(src,dst)
-  with patch.object(launch.os,'link',side_effect=race):
+  operation='rename' if os.name=='nt' else 'link';actual=getattr(os,operation)
+  def race(src,dst):self.out.write_bytes(b'OTHER');return actual(src,dst)
+  with patch.object(launch.os,operation,side_effect=race):
    with self.assertRaises(FileExistsError):self.backup()
   self.assertEqual(self.out.read_bytes(),b'OTHER');self.assertEqual(list(self.root.glob('.athena-backup-*')),[])
+ @unittest.skipUnless(os.name=='nt','Windows publication behavior')
+ def test_windows_backup_and_upgrade_copy_need_no_hardlinks(self):
+  before=self.fingerprints()
+  with patch.object(launch.os,'link',side_effect=AssertionError('hard link attempted')):
+   for upgrade in (False,True):
+    self.out=self.root/('upgraded.sqlite' if upgrade else 'ordinary.sqlite')
+    receipt=launch.backup_database(self.bundle,self.data,self.db,self.out,True,upgrade=upgrade)
+    self.assertEqual(receipt['upgraded_copy'],upgrade)
+    self.assertEqual(receipt['sha256'],hashlib.sha256(self.out.read_bytes()).hexdigest())
+  self.assertEqual(self.fingerprints(),before)
 if __name__=='__main__':unittest.main()
