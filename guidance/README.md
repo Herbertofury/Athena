@@ -139,3 +139,15 @@ until rights and sensitive-data review; default stdout reports counts/hash only.
 Git LFS content, submodule repositories, working changes, reflogs, unreachable
 objects, remote freshness, wiki, release assets and consumer dependencies remain
 separate gates. This improves history recovery, **not deletion readiness**.
+
+### Check a reference pack in the native Guidance workspace
+
+Export selected standards as JSON, then open **Verify or compare a local
+guidance pack** in Athena and select the file. The workspace checks each
+selected standard against the exact local release, including content checksum
+and source metadata. It separates a bad checksum, changed text/source, an
+unknown ID, and a deliberately unselected standard. A version/source mismatch
+is reported even if the selected text still matches. The input remains local
+and unchanged. This verifies the reviewed fields against the installed
+Athena catalogue, not the raw JSON representation, a digital signature,
+a project's installed rules, or authority to install any guidance.
