@@ -99,7 +99,8 @@ Check that "python --version" reports a supported version.
    this evaluation. Keep the separate app and data directories.
 4. Start Athena:
       python -B app/launch.py --portable-data-dir data
-   Open the local address printed in the terminal. Stop Athena with Ctrl+C.
+   With the terminal still running, open http://127.0.0.1:41379/ in a browser.
+   To stop Athena, return to the terminal and press Ctrl+C.
    To move the portable profile, shut it down first, move the whole parent
    folder and start it again from the new parent. Do not copy open databases.
 
