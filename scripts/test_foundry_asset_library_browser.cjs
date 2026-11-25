@@ -52,5 +52,34 @@ assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),duplicateStat
 await page.locator('[data-ecology-close]').click();
 report.checks.push('Keyboard opens the local preview paused; duplicate targeting follows exact instance identity without saving');
 await page.locator('[data-undo]').click();assert.equal(await page.locator('.foundry-object').count(),1);assert.equal(await page.locator('[data-inspect-object]').inputValue(),id);report.checks.push('Two Enter presses on the same focused catalog button add two independent instances');await page.locator('[data-undo]').click();assert.equal(await page.locator('.foundry-object').count(),0);await page.locator('[data-redo]').click();assert.equal(await page.locator('[data-inspect-object]').inputValue(),id);report.checks.push('Delete last instance leaves full catalog available; Add uses new identity and one-step Undo/Redo');
-await page.locator('[data-inspect-x]').fill('25');await page.locator('[data-inspect-apply]').click();await page.locator('[data-add-catalog-object]').first().click();const id2=await page.locator('[data-inspect-object]').inputValue();assert.notEqual(id,id2);assert.equal(await page.locator('.foundry-object').count(),2);const downloadPromise=page.waitForEvent('download');await page.locator('[data-export-workspace]').click();const download=await downloadPromise;const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.equal(exported.active.placements[id].x,.25);assert.equal(exported.active.placements[id].objectId,exported.active.placements[id2].objectId);await page.reload();await page.locator('.workspace-status').filter({hasText:/workspace loaded/}).waitFor();assert.equal(await page.locator('.foundry-object').count(),2);await page.locator('[data-inspect-object]').selectOption(id);assert.equal(await page.locator('[data-inspect-x]').inputValue(),'25');report.checks.push('Same asset creates distinct instances; edit/export/reload retains exact object identities and position');await page.locator('[data-asset-library-summary]').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'asset-library.png')});assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);
+await page.locator('[data-inspect-x]').fill('25');await page.locator('[data-inspect-apply]').click();await page.locator('[data-add-catalog-object]').first().click();const id2=await page.locator('[data-inspect-object]').inputValue();assert.notEqual(id,id2);assert.equal(await page.locator('.foundry-object').count(),2);const downloadPromise=page.waitForEvent('download');await page.locator('[data-export-workspace]').click();const download=await downloadPromise;const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.equal(exported.active.placements[id].x,.25);assert.equal(exported.active.placements[id].objectId,exported.active.placements[id2].objectId);await page.reload();await page.locator('.workspace-status').filter({hasText:/workspace loaded/}).waitFor();assert.equal(await page.locator('.foundry-object').count(),2);await page.locator('[data-inspect-object]').selectOption(id);assert.equal(await page.locator('[data-inspect-x]').inputValue(),'25');report.checks.push('Same asset creates distinct instances; edit/export/reload retains exact object identities and position');await page.locator('[data-inspect-scale-x]').fill('-.7');
+await page.locator('[data-inspect-scale-y]').fill('.75');
+await page.locator('[data-inspect-rotation]').fill('21');
+await page.locator('[data-inspect-transform]').click();
+await page.locator('[data-filter-skewx]').fill('15');
+await page.locator('[data-filter-skewy]').fill('-10');
+await page.locator('[data-inspect-filters]').click();
+await page.locator('[data-inspect-origin]').selectOption('tr');
+await page.locator('[data-origin-apply]').click();
+const beforeTransformedPreview=await page.evaluate(()=>JSON.stringify(localStorage));
+await previewSelected.click();
+const currentGeometry=await page.evaluate(instance=>{
+ const editor=[...document.querySelectorAll('.foundry-scene .foundry-object')].find(e=>e.dataset.id===instance);
+ const preview=document.activeElement,stage=preview.closest('[data-ecology-stage]');
+ const [a,b]=[editor,preview].map(el=>{
+  const css=getComputedStyle(el),m=new DOMMatrix(css.transform),[x,y]=css.transformOrigin.split(' ').map(parseFloat);
+  return {matrix:[m.a,m.b,m.c,m.d],origin:[x/el.offsetWidth,y/el.offsetHeight]};
+ });
+ const rect=preview.getBoundingClientRect(),bounds=stage.getBoundingClientRect();
+ return {a,b,inBounds:rect.left>=bounds.left-1&&rect.right<=bounds.right+1&&rect.top>=bounds.top-1&&rect.bottom<=bounds.bottom+1};
+},id);
+currentGeometry.a.matrix.forEach((a,i)=>assert.ok(Math.abs(a-currentGeometry.b.matrix[i])<1e-5));
+assert.deepEqual(currentGeometry.a.origin,[1,0]);assert.deepEqual(currentGeometry.b.origin,[1,0]);
+assert.equal(currentGeometry.inBounds,true);
+assert.equal(await page.locator('[data-ecology-motion]').isChecked(),false);
+assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),beforeTransformedPreview);
+await previewStage.screenshot({path:path.join(out,'transformed-ecology-preview.png')});
+await page.locator('[data-ecology-close]').click();
+report.checks.push('Authoring and paused motion copy match mirror, scale, skew, rotation and anchor in computed CSS');
+await page.locator('[data-asset-library-summary]').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'asset-library.png')});assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);
 })().catch(e=>{report.failure=e.stack;process.exitCode=1}).finally(async()=>{await browser?.close();await new Promise(r=>server?server.close(r):r());fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(report);});

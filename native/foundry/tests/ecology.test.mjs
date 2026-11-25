@@ -1,5 +1,5 @@
 import {repoRoot,runtimeRoot,binaryPath,testTemp} from './paths.mjs';
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {createRequire} from 'node:module';import {attachNativeEcology,stepActor,RESTITUTION,motionBox} from '../../../dist/workspaces/foundry/native-ecology.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {createRequire} from 'node:module';import {attachNativeEcology,stepActor,RESTITUTION,motionBox,appearanceGeometry} from '../../../dist/workspaces/foundry/native-ecology.mjs';
 const require=createRequire(new URL('../../../package.json',import.meta.url)),{parseHTML}=require('linkedom'),themes=JSON.parse(fs.readFileSync(new URL('../../../dist/workspaces/foundry/catalog.json',import.meta.url))).themes;
 test('all85 restitution values match reviewed neutral source; physics step uses original formula',()=>{const source=JSON.parse(fs.readFileSync(new URL('../../../feature-foundry/source/src/data/theme-world-packages.json',import.meta.url)));const values=Object.fromEntries(source.flatMap(t=>t.objects.map(o=>[o.id,o.behavior.restitution])));assert.equal(Object.keys(RESTITUTION).length,85);for(const t of themes)for(const o of t.objects)assert.equal(RESTITUTION[o.id],values[o.id]);const s=stepActor({x:100,y:100,vx:4,vy:2},16.67,500,250,.3);assert.equal(s.vx,4*.987);assert.equal(s.vy,(2+.28)*.993);assert.equal(s.x,100+s.vx);assert.equal(s.y,100+s.vy);assert.throws(()=>stepActor({x:NaN,y:0,vx:0,vy:0},16,10,10,.3));});
 function setup(){const {document,window}=parseHTML('<html><body><section></section></body></html>'),host=document.querySelector('section'),frames=new Map();let id=0,clock=0,change,resize,resizeDisconnected=false;window.ResizeObserver=class{constructor(cb){resize=cb}observe(){}disconnect(){resizeDisconnected=true}};const media={matches:false,addEventListener(t,f){change=f},removeEventListener(){change=null}};window.matchMedia=()=>media;const controller=new AbortController();const adapter=attachNativeEcology({host,themes,signal:controller.signal,raf:fn=>{frames.set(++id,fn);return id},caf:n=>frames.delete(n),now:()=>clock});const stage=host.querySelector('[data-ecology-stage]');Object.defineProperty(stage,'clientWidth',{value:640,configurable:true});Object.defineProperty(stage,'clientHeight',{value:300,configurable:true});Object.defineProperty(window.HTMLElement.prototype,'offsetWidth',{configurable:true,get(){return this.tagName==='BUTTON'?100:640}});Object.defineProperty(window.HTMLElement.prototype,'offsetHeight',{configurable:true,get(){return this.tagName==='BUTTON'?50:300}});const value={themeId:themes[0].id,roomId:themes[0].rooms[0].id,placements:{[themes[0].objects[0].id]:{x:.2,y:.3,pinned:true}}};adapter.update(value);const one=q=>host.querySelector(q);function event(el,type,props={}){const e=new window.Event(type,{bubbles:true,cancelable:true});Object.assign(e,props);el.dispatchEvent(e)}function throwActor(cancel=false){const el=one('[data-ecology-object="'+themes[0].objects[1].id+'"]');event(el,'pointerdown',{button:0,pointerId:1,clientX:10,clientY:10});clock+=16;event(el,'pointermove',{pointerId:1,clientX:50,clientY:20});event(el,cancel?'pointercancel':'pointerup',{pointerId:1});return el}return {host,document,window,frames,adapter,media,controller,value,one,event,throwActor,resize:()=>resize(),resizeDisconnected:()=>resizeDisconnected,change:()=>change?.(),advance(){clock+=32;const pending=[...frames.values()];frames.clear();for(const fn of pending)fn(clock)}}}
@@ -64,4 +64,41 @@ test('targeted preview focuses the exact independent instance without replacing 
   assert.equal(s.adapter.focusPreview(copy),false);
   s.adapter.dispose();assert.equal(s.adapter.focusPreview(id),false);
  }finally{s.adapter.dispose();delete s.window.HTMLElement.prototype.focus;}
+});
+
+test('appearance footprint matches four affine corners for every origin, mirror and skew combination',()=>{
+ const w=110,h=82;
+ for(const [name,ox,oy] of [['tl',0,0],['tc',55,0],['tr',110,0],['ml',0,41],['mc',55,41],['mr',110,41],['bl',0,82],['bc',55,82],['br',110,82]]){
+  for(const [sx,sy,kx,ky] of [[.7,-2,-20,56],[-8,3,85,-85],[1,1,0,0],[1.5,-.05,30,30]]) for(const vx of [-80,0,80]){
+   const geom=appearanceGeometry({scaleX:sx,scaleY:sy,skewX:kx,skewY:ky,transformOrigin:name});
+   const b=motionBox(w,h,vx,30,geom);
+   const c=Math.cos(b.angle*Math.PI/180),s=Math.sin(b.angle*Math.PI/180);
+   const xs=[],ys=[];
+   for(const [x,y] of [[0,0],[w,0],[0,h],[w,h]]){
+    const i=(x-ox)*sx,j=(y-oy)*sy;
+    const q=i+Math.tan(kx*Math.PI/180)*j,r=Math.tan(ky*Math.PI/180)*i+j;
+    xs.push(ox+q*c-r*s+b.insetX);ys.push(oy+q*s+r*c+b.insetY);
+   }
+   assert.ok(Math.abs(Math.min(...xs))<1e-8&&Math.abs(Math.max(...xs)-b.width)<1e-8);
+   assert.ok(Math.abs(Math.min(...ys))<1e-8&&Math.abs(Math.max(...ys)-b.height)<1e-8);
+  }
+ }
+ assert.deepEqual(appearanceGeometry({scaleX:0,scaleY:Infinity,skewX:'80) url(x)',skewY:86,transformOrigin:{toString:null}}),
+  {scaleX:1,scaleY:1,skewX:0,skewY:0,origin:'mc'});
+});
+
+test('selected preview retains an independent mirrored, skewed and anchored copy while moving',()=>{
+ const s=setup(),id=themes[0].objects[0].id;
+ s.value.placements[id]={x:.4,y:.3,pinned:false,scaleX:-.7,scaleY:.75,skewX:15,skewY:-10,rotation:21,transformOrigin:'tr'};
+ const before=JSON.stringify(s.value);s.adapter.update(s.value);
+ try{
+  assert.equal(s.adapter.focusPreview(id),true);
+  const e=s.one('[data-ecology-instance="'+id+'"]');
+  assert.equal(e.style.transformOrigin,'100% 0%');
+  assert.match(e.style.transform,/rotate\(21deg\) skew\(15deg,-10deg\) scale\(-0\.7,0\.75\)$/);
+  const prior=e.style.transform;s.event(e,'keydown',{key:'ArrowRight'});
+  assert.notEqual(e.style.transform,prior);
+  assert.match(e.style.transform,/skew\(15deg,-10deg\) scale\(-0\.7,0\.75\)$/);
+  assert.equal(JSON.stringify(s.value),before);assert.equal(s.frames.size,0);
+ }finally{s.adapter.dispose()}
 });

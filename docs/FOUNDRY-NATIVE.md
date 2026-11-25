@@ -67,3 +67,8 @@ including duplicates. If the lab is already open, this only changes focus:
 existing preview positions and motion settings are retained. Hidden, filtered,
 UI and sticker objects are not eligible. The preview never changes authored
 positions, saves, history, or media state.
+
+The motion lab retains rotation, signed scale, skew and the authored origin.
+It measures the transformed footprint rather than the untransformed card
+when clamping the motion copy. A copy larger than the preview stage can
+still be clipped; this never rescales or changes the saved object.
