@@ -799,6 +799,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    const input=play.getByLabel('Run tape',{exact:true});
    const notice=play.locator('#tape-status');
    const load=async(name,buffer)=>{
+    await play.locator('#read-tape:not([disabled])').waitFor();
     await input.setInputFiles({name,mimeType:'application/json',buffer});
     await play.getByRole('button',{name:'Verify and load',exact:true}).click();
     try{await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();}

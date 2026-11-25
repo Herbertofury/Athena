@@ -260,4 +260,7 @@ for(const button of document.querySelectorAll('[data-code]')){
  button.addEventListener('pointerdown',e=>{if(mode==='running'){e.preventDefault();button.setPointerCapture(e.pointerId);keys[code]=true;}});
  for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>{delete keys[code];});
 }
+// Let the browser expose the picker only after all tape handlers are wired.
+readTape.disabled=false;
+controls(false);
 draw();
