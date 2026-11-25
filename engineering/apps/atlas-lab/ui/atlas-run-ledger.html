@@ -5,7 +5,9 @@
 <header><p class="eyebrow">RECOVERED RESEARCH</p><h1>Recorded Atlas workflow runs</h1><p>Two preserved snapshots, not a live status page. Job logs, artifact contents and unobserved later changes are not included.</p></header>
 <section class="runner"><h2>Find a recorded run</h2><div id="filters" class="history-controls" hidden>
 <label for="search">Run ID, exact commit or workflow name</label><input id="search" type="search" maxlength="120">
+<label for="view">Group results</label><select id="view"><option value="runs">By workflow run</option><option value="commits">By exact commit</option></select>
 <label for="scope">Snapshot evidence</label><select id="scope"><option value="">All runs</option><option value="changed">Changed status</option><option value="failed">Failed in later snapshot</option><option value="later">Only in later snapshot</option></select></div>
+<p id="commit-focus" hidden><span id="commit-label"></span> <button id="back-to-groups" type="button">Back to commit groups</button></p>
 <p role="status" id="status">Loading the embedded ledger…</p><details id="source-panel" hidden><summary>Pinned snapshots and checksums</summary><ul id="sources"></ul></details></section>
 <section class="runner" aria-labelledby="run-heading"><h2 id="run-heading" tabindex="-1">Recorded runs</h2><div id="records"></div>
 <div id="pages" hidden><button id="previous" type="button">Previous 25</button><button id="next" type="button">Next 25</button></div></section>

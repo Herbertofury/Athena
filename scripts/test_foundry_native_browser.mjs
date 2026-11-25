@@ -637,7 +637,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
  });
- if(unified)await check('Engineering-Atlas offline run ledger preserves both observations and exact workflow IDs',async()=>{
+ if(unified)await check('Engineering-Atlas offline run ledger preserves both observations and groups 522 exact runs into 305 commits',async()=>{
   const endpoint=origin+'/api/migration/atlas-runs',before=report.externalRequests.length;
   const stored=await (await fetch(endpoint)).json();
   assert.equal(stored.runs.length,522);assert.equal(stored.repeated_ids,509);assert.equal(stored.changed_readings,2);
@@ -666,6 +666,28 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.getByText('Commit and original run link',{exact:true}).click();
   const link=page.getByRole('link',{name:'Open original GitHub run',exact:true});
   assert.equal(await link.getAttribute('href'),'https://github.com/Herbertofury/Engineering-Atlas/actions/runs/42334871509');
+  const exactSha=stored.runs.find(r=>r.id===42334871509).head_sha;
+  await page.locator('#search').clear();
+  await page.getByLabel('Group results').selectOption('commits');
+  await status.filter({hasText:'Showing 1–25 of 305 matched commits · 522 matched runs'}).waitFor();
+  await page.getByRole('button',{name:'Next 25',exact:true}).click();
+  await status.filter({hasText:'Showing 26–50 of 305'}).waitFor();
+  await page.locator('#records article button').first().press('Enter');
+  assert.equal(await page.getByRole('heading',{name:'Recorded runs',exact:true}).evaluate(el=>el===document.activeElement),true);
+  await page.getByRole('button',{name:'Back to commit groups',exact:true}).press('Enter');
+  await status.filter({hasText:'Showing 26–50 of 305'}).waitFor();
+  await page.locator('#search').fill(exactSha);
+  await status.filter({hasText:'Showing 1–1 of 1 matched commit · 2 matched runs'}).waitFor();
+  await page.getByRole('button',{name:'Inspect 2 matched runs',exact:true}).press('Enter');
+  assert.match(await page.locator('#commit-label').textContent(),new RegExp(exactSha));
+  assert.equal(await page.locator('#records article').count(),2);
+  assert.equal(await page.locator('#records article').filter({hasText:'42334871509'}).count(),1);
+  assert.equal(await page.locator('#records article').filter({hasText:'42334861173'}).count(),1);
+  await page.getByRole('button',{name:'Back to commit groups',exact:true}).press('Enter');
+  await page.locator('#scope').selectOption('failed');
+  assert.equal(await page.locator('#records article').count(),0);
+  assert.equal(await status.textContent(),'No recorded runs match.');
+  assert.equal(await page.locator('#commit-focus').isHidden(),true);
   await page.getByText('Pinned snapshots and checksums',{exact:true}).click();
   assert.equal(await page.getByRole('link',{name:'View pinned source',exact:true}).count(),2);
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
