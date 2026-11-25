@@ -7,3 +7,39 @@ test('module stale rows/abort are inert, text-only catalog and limit state',()=>
 test('actual empty-room mount adds/selects/edits with one Undo, retains preset/environment and rejects stale catalog rows',async()=>{const {document,window}=parseHTML('<html><body><main></main></body></html>');Object.defineProperty(window.HTMLSelectElement.prototype,'value',{configurable:true,get(){return [...this.options].find(o=>o.selected)?.value||this.options[0]?.value||''},set(v){for(const o of this.options)o.removeAttribute('selected');[...this.options].find(o=>o.value===v)?.setAttribute('selected','')}});const active=m.upgradeBlendModes(m.initial());active.placements={};active.environment={...active.environment,target:'object',targetId:object};const state=m.workspace({version:11,active,layouts:{},view:m.view(),savedLayouts:[{name:'Kept',layout:active}]}),writes=[],oldFetch=globalThis.fetch;globalThis.fetch=async()=>({ok:true,json:async()=>catalog});const c=new AbortController();let api;try{api=await mount({container:document.querySelector('main'),signal:c.signal,state,setState:v=>writes.push(v),foundryModules:{cinema:false,weather:false,backup:false,soundtrack:false,legacyImport:false,ecology:false,localVideo:false,gizmo:false,environment:false,semanticRoom:false,tones:false,layers:false,canvasView:false,historyKeys:false,objectKeys:false}});}finally{globalThis.fetch=oldFetch;}const add=document.querySelector('[data-add-catalog-object]');add.click();assert.equal(writes.length,1);const after=api.exportState(),newId=Object.keys(after.active.placements)[0];assert.match(newId,/^instance-/);assert.equal(document.querySelector('[data-inspect-object]').value,newId);assert.deepEqual(after.savedLayouts,state.savedLayouts);assert.deepEqual(after.active.environment,state.active.environment);document.querySelector('[data-undo]').click();assert.deepEqual(JSON.parse(JSON.stringify(api.exportState())),JSON.parse(JSON.stringify(state)));document.querySelector('[data-redo]').click();assert.deepEqual(api.exportState(),after);document.querySelector('[data-inspect-x]').value='25';document.querySelector('[data-inspect-apply]').click();const edited=api.exportState();assert.equal(edited.active.placements[newId].x,.25);const dir=fs.mkdtempSync(testTemp('asset-library-')),db=path.join(dir,'fixture.db'),file=path.join(dir,'backup.json');try{execFileSync(binaryPath,['init',db]);for(const command of ['upgrade-history','upgrade-soundtracks','upgrade-transforms','upgrade-scopes','upgrade-environment','upgrade-targets','upgrade-instances','upgrade-appearance','upgrade-filters','upgrade-origins','upgrade-environments','upgrade-blend-modes'])execFileSync(binaryPath,[command,db]);fs.writeFileSync(file,JSON.stringify(edited));execFileSync(binaryPath,['save-backup',db],{input:JSON.stringify(edited)});assert.deepEqual(JSON.parse(execFileSync(binaryPath,['load-backup',db],{encoding:'utf8'})),JSON.parse(JSON.stringify(edited)));}finally{fs.rmSync(dir,{recursive:true,force:true});}const stale=document.querySelector('[data-add-catalog-object]'),room=document.querySelector('[data-room-select]');room.value=catalog.themes[0].rooms[1].id;room.dispatchEvent(new window.Event('change'));const count=writes.length;stale.click();assert.equal(writes.length,count);api.unmount();});
 
 test('catalog search matches name/shape/role, preserves scope/limit and invalidates filtered rows without adding',()=>{const {document,window}=parseHTML('<main></main>'),host=document.querySelector('main'),calls=[],controller=new AbortController(),api=attachNativeAssetLibrary({host,signal:controller.signal,onAdd:(...args)=>{calls.push(args);return id(1)}}),objects=[{id:'one',name:'Moon Lamp',shape:'orb',role:'light'},{id:'two',name:'Cloud',shape:'box',role:'decoration'}];api.update({key:'first',name:'Theme',objects,count:0});const stale=host.querySelector('button'),input=host.querySelector('input'),filter=q=>{input.value=q;input.dispatchEvent(new window.Event('input'));};filter(' LIGHT moon ');assert.equal(host.querySelectorAll('button').length,1);assert.match(host.querySelector('[data-asset-library-summary]').textContent,/1\/2 catalog objects/);stale.click();assert.equal(calls.length,0);filter('<img>');assert.equal(host.querySelectorAll('button').length,0);assert.equal(host.querySelector('img'),null);assert.match(host.textContent,/No matching/);filter('box');api.update({key:'second',name:'Next',objects,count:100});assert.equal(input.value,'box');assert.equal(host.querySelector('button').disabled,true);api.update({key:'second',name:'Next',objects,count:2});host.querySelector('button').click();assert.deepEqual(calls,[['second','two']]);filter('');assert.equal(host.querySelectorAll('button').length,2);controller.abort();filter('moon');assert.equal(host.children.length,0);assert.equal(calls.length,1);});
+
+test('a count-only redraw preserves the actual catalog control and checks the current room capacity', () => {
+  const {document,window}=parseHTML('<main></main>');
+  const host=document.querySelector('main'), calls=[], controller=new AbortController();
+  const objects=[{id:'same',name:'Moon Lamp',shape:'orb',role:'light'}];
+  let count=0;
+  let api;
+  const update=() => api.update({key:'theme/room',name:'Theme',objects,count});
+  api=attachNativeAssetLibrary({host,signal:controller.signal,onAdd:(...args)=>{
+    calls.push(args);
+    count++;
+    update();
+    return id(count);
+  }});
+  update();
+  const add=host.querySelector('button');
+  add.click();
+  assert.ok(host.querySelector('button') === add,'adding to the room must not replace the focused control');
+  add.click();
+  assert.deepEqual(calls,[['theme/room','same'],['theme/room','same']]);
+  assert.match(host.querySelector('[data-asset-library-summary]').textContent,/2\/100/);
+  count=100;
+  update();
+  assert.equal(host.querySelector('button'),add);
+  assert.equal(add.disabled,true);
+  add.dispatchEvent(new window.Event('click'));
+  assert.equal(calls.length,2,'manual event cannot add at capacity');
+  count=99;
+  update();
+  assert.equal(add.disabled,false);
+  api.update({key:'other room',name:'Theme',objects,count});
+  assert.notEqual(host.querySelector('button'),add);
+  add.click();
+  assert.equal(calls.length,2,'leaving the room invalidates the old control');
+  controller.abort();
+});

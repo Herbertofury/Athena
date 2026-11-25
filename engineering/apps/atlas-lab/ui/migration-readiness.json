@@ -3,7 +3,7 @@
   "snapshot_date": "2026-11-15",
   "source_snapshot_commit": "12ebe1e06707bdc1febd3369a43221e62c332f78",
   "retirement_certified": false,
-  "scope": "Read-only routing and evidence snapshot, not a new live repository audit. No source is certified safe to delete. Older evidence retains its original date.",
+  "scope": "Read-only routing and evidence snapshot, not a new live repository audit. No source is certified safe to delete. Dated follow-ups supplement, not replace, the historical snapshot.",
   "projects": [
     {
       "id": "atlas",
@@ -47,9 +47,19 @@
           "detail": "The 2026-11-14 audit explicitly records retirementReady=false, preserved history and selected release files."
         },
         {
+          "state": "recorded",
+          "label": "Original v24 release custody (2026-11-25)",
+          "detail": "All six original release assets were verified, including both ZIPs the historical audit listed as outstanding. This verifies preservation, not installer safety, live operation or rights for redistribution."
+        },
+        {
+          "state": "recorded",
+          "label": "Source history recovery (2026-11-25)",
+          "detail": "A separate owner-private restore reproduced all 15 commits through the reviewed source head, both named branches and the v24.0.0 tag. Git history alone does not preserve issues, settings, CI history or owner workspaces."
+        },
+        {
           "state": "open",
-          "label": "Archive and history reconciliation",
-          "detail": "That audit lists current-source history/issue preservation and two release archives as remaining gates. Recheck current authoritative sources before resolving them."
+          "label": "Non-Git records and owner data",
+          "detail": "Reconcile issues, external settings, workspace data, downstream dependencies and other non-Git records separately. Preserve the original repository and backups."
         },
         {
           "state": "open",
@@ -65,6 +75,16 @@
         {
           "label": "Native Foundry implementation scope",
           "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/docs/FOUNDRY-NATIVE.md"
+        },
+        {
+          "label": "November 25 verified v24 release custody",
+          "commit": "64954a16f8af349c27a2652649882d4ec0e3450a",
+          "url": "https://github.com/Herbertofury/Athena/blob/64954a16f8af349c27a2652649882d4ec0e3450a/migration/feature-foundry/releases/v24.0.0/README.md"
+        },
+        {
+          "label": "November 25 source history recovery and remaining gates",
+          "commit": "64954a16f8af349c27a2652649882d4ec0e3450a",
+          "url": "https://github.com/Herbertofury/Athena/blob/64954a16f8af349c27a2652649882d4ec0e3450a/migration/feature-foundry/README.md"
         }
       ]
     },
