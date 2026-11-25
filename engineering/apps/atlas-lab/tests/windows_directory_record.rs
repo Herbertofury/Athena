@@ -178,7 +178,21 @@ fn real_unprivileged_windows_fixture_keeps_hardlink_identity() {
     let capped = atlas_lab::storage_windows_observation::observe(&root, 1).unwrap();
     assert_eq!(capped["stopped_entry_limit"], true);
     assert_eq!(capped["partial"], true);
+    let mut long_root = root.clone();
+    for i in 0..15 {
+        long_root.push(format!("directory-for-volume-qualification-test-{i:02}"));
+    }
+    std::fs::create_dir_all(&long_root).unwrap();
+    std::fs::write(long_root.join("direct.bin"), [17_u8; 513]).unwrap();
+    let long_result = atlas_lab::storage_windows_observation::observe(&long_root, 10).unwrap();
+    assert_eq!(long_result["observed_file_pathnames"], 1);
+    assert_eq!(long_result["logical_pathname_bytes"], 513);
+    assert_eq!(long_result["partial"], false);
+    // Refuse direct UNC syntax before opening anything or contacting a host.
+    let unc = std::path::Path::new(r"\\not-a-real-network-host\share\directory");
+    let error = atlas_lab::storage_windows_observation::observe(unc, 10).unwrap_err();
+    assert!(error.to_string().contains("ordinary local-drive directory"));
     println!(
-        "Win32 fixed directory fixture: exact hardlink ID, Unicode filename, and unchanged bytes."
+        "Win32 fixed directory fixture: exact hardlink ID, Unicode filename, and unchanged bytes. Local-volume qualification also accepted a long path, and refused direct UNC syntax."
     );
 }

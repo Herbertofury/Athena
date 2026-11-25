@@ -189,3 +189,17 @@ Overview responses carry a public ephemeral instance label. A newly started engi
 `cargo run --locked -- serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY` serves the reviewed Athena shell and the native R&D Lab over the existing loopback-only origin. It preserves the original queue, journal, archive validation and baseline overview rather than promoting an isolated candidate. Assets are hash-verified and frozen at startup; arbitrary directory files are not served. Research and Media styles are local external files under the original strict CSP. External media is intentionally disabled in this database-privileged mode.
 
 See [startup, scope and acceptance evidence](../../../docs/athena-local-runtime.md). The retained `serve` and `serve-candidate` commands remain for historical reproduction. The public static app does not connect to localhost. Native-browser acceptance and other parity gaps are explicit in the integration evidence rather than inferred from unit tests.
+
+### Windows directory observation
+
+From Command Prompt in the portable application folder, select one ordinary directory on a supported local volume:
+
+```cmd
+atlas-lab.exe windows-directory-observation "C:\YourProject" 10000
+```
+
+Redirect to a new UTF-8 JSON file with Command Prompt or PowerShell 7 if you want to choose it under **Storage → Windows directory summary**. The command reads direct directory records only. It does not open children, recurse, use a background service, return names or paths, or infer reclaimable space. Logical bytes count each observed pathname, while known allocation counts each confirmed ID once. Missing IDs, conflicting evidence and observation caps are explicit partial outcomes.
+
+The command preflights the Win32 drive type, then requires an ordinary opened directory handle with a local Volume GUID path before enumerating records. Mapped network and unavailable drive types are rejected. Selecting a path can still involve Windows path resolution before this open-handle qualification; this is not an adversarial containment sandbox. Filesystems or local volumes without the necessary handle and GUID information are not supported. Do not substitute a device path, network share, file stream, junction or relative path.
+
+[Win32 drive-type API](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdrivetypew) · [Win32 final handle-path API](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew)

@@ -234,6 +234,71 @@ mod records {
     }
 }
 
+#[cfg(any(windows, test))]
+mod local_volume {
+    pub(super) fn supported_drive_type(value: u32) -> bool {
+        // DRIVE_REMOVABLE, DRIVE_FIXED, DRIVE_CDROM, DRIVE_RAMDISK.
+        matches!(value, 2..=3 | 5..=6)
+    }
+
+    pub(super) fn has_volume_guid_prefix(path: &[u16]) -> bool {
+        const PREFIX: &[u8] = br"\\?\Volume{";
+        let Some(guid) = path.get(PREFIX.len()..PREFIX.len() + 36) else {
+            return false;
+        };
+        path.iter()
+            .zip(PREFIX)
+            .all(|(p, want)| u8::try_from(*p).is_ok_and(|p| p.eq_ignore_ascii_case(want)))
+            && path.get(PREFIX.len() + 36..PREFIX.len() + 38) == Some(&[125, 92])
+            && guid.iter().enumerate().all(|(i, ch)| {
+                if matches!(i, 8 | 13 | 18 | 23) {
+                    *ch == u16::from(b'-')
+                } else {
+                    u8::try_from(*ch).is_ok_and(|ch| ch.is_ascii_hexdigit())
+                }
+            })
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        #[test]
+        fn only_known_local_drive_types_are_considered() {
+            let accepted = (0..128)
+                .filter(|x| supported_drive_type(*x))
+                .collect::<Vec<_>>();
+            assert_eq!(accepted, [2, 3, 5, 6]);
+            assert!(!supported_drive_type(u32::MAX));
+        }
+        #[test]
+        fn volume_guid_form_is_not_a_dos_letter_share_or_device_claim() {
+            for name in [
+                r"\\?\Volume{12345678-abcd-ABCD-0123-0123456789aB}\",
+                r"\\?\volume{12345678-abcd-ABCD-0123-0123456789aB}\folder",
+            ] {
+                assert!(
+                    has_volume_guid_prefix(&name.encode_utf16().collect::<Vec<_>>()),
+                    "{name}"
+                );
+            }
+            for name in [
+                r"\\?\UNC\host\Share\folder",
+                r"\\?\Z:\folder",
+                r"\\.\PhysicalDrive0",
+                r"\\?\Volume{12345678-abcd-ABCD-0123-0123456789xz}\folder",
+                r"\\?\Volume{12345678_abcd-ABCD-0123-0123456789ab}\folder",
+                r"\\?\Volume{12345678-abcd-ABCD-0123-0123456789ab}",
+                r"\\?\Volume{}\",
+            ] {
+                assert!(
+                    !has_volume_guid_prefix(&name.encode_utf16().collect::<Vec<_>>()),
+                    "{name}"
+                );
+            }
+        }
+    }
+}
+
 #[cfg(windows)]
 mod native {
     use super::*;
@@ -244,6 +309,13 @@ mod native {
     };
     #[link(name = "kernel32")]
     unsafe extern "system" {
+        fn GetDriveTypeW(root: *const u16) -> u32;
+        fn GetFinalPathNameByHandleW(
+            file: *mut c_void,
+            path: *mut u16,
+            capacity: u32,
+            flags: u32,
+        ) -> u32;
         fn GetFileInformationByHandleEx(
             file: *mut c_void,
             class: i32,
@@ -255,6 +327,45 @@ mod native {
     const DIRECTORY_INFO: i32 = 0x13;
     const DIRECTORY_RESTART: i32 = 0x14;
     const MAX_BATCHES: usize = 4096;
+    // Query the name opened by this handle with a volume GUID. Some local
+    // volumes lack GUID names; fail closed rather than weaken the condition.
+    // This qualifies the directory itself, not a guarantee about every
+    // ancestor or Win32 path resolution before the open.
+    fn verify_opened_volume(handle: *mut c_void) -> Result<(), &'static str> {
+        const GUID_AND_OPENED_NAME: u32 = 0x9;
+        const MAX_WINDOWS_PATH_UNITS: u32 = 32768;
+        fn read(handle: *mut c_void, buffer: &mut [u16]) -> u32 {
+            // The caller keeps the file handle alive. Bounded writable
+            // UTF-16 buffer exists for the duration of this Win32 call.
+            unsafe {
+                GetFinalPathNameByHandleW(
+                    handle,
+                    buffer.as_mut_ptr(),
+                    buffer.len() as u32,
+                    GUID_AND_OPENED_NAME,
+                )
+            }
+        }
+        fn verified(buffer: &[u16], written: u32) -> bool {
+            written != 0
+                && (written as usize) < buffer.len()
+                && local_volume::has_volume_guid_prefix(&buffer[..written as usize])
+        }
+        let mut small = [0; 512];
+        let written = read(handle, &mut small);
+        if verified(&small, written) {
+            return Ok(());
+        }
+        if written >= small.len() as u32 && written < MAX_WINDOWS_PATH_UNITS {
+            let mut large = vec![0; (written + 1) as usize];
+            let written = read(handle, &mut large);
+            if verified(&large, written) {
+                return Ok(());
+            }
+        }
+        Err("The opened directory is not on a supported local volume")
+    }
+
     pub(super) fn measure(path: &Path, limit: usize) -> Result<Value, Box<dyn std::error::Error>> {
         use std::{
             os::windows::ffi::OsStrExt,
@@ -287,12 +398,27 @@ mod native {
                     )
                 })
         }
+        const BAD_PATH: &str = "Select an absolute ordinary local-drive directory path";
         let mut components = path.components();
-        if !matches!(components.next(),Some(Component::Prefix(prefix)) if matches!(prefix.kind(),Prefix::Disk(_) | Prefix::VerbatimDisk(_)))
-            || components.next() != Some(Component::RootDir)
+        let Some(Component::Prefix(prefix)) = components.next() else {
+            return Err(BAD_PATH.into());
+        };
+        let drive = match prefix.kind() {
+            Prefix::Disk(drive) | Prefix::VerbatimDisk(drive) => drive,
+            _ => return Err(BAD_PATH.into()),
+        };
+        if components.next() != Some(Component::RootDir)
             || components.any(|c| !matches!(c,Component::Normal(name) if safe_name(name)))
         {
-            return Err("Select an absolute ordinary local-drive directory path".into());
+            return Err(BAD_PATH.into());
+        }
+        let root = [u16::from(drive), u16::from(b':'), 92, 0];
+        // Local type is a preflight, not an authority over the later open.
+        // root is Win32's NUL-terminated drive root for the duration of the call.
+        if !local_volume::supported_drive_type(unsafe { GetDriveTypeW(root.as_ptr()) }) {
+            return Err(
+                "Select a supported local drive, not a network or unavailable drive".into(),
+            );
         }
 
         let dir = fs::OpenOptions::new()
@@ -316,6 +442,7 @@ mod native {
         if tag[0] & 0x10 == 0 || tag[0] & 0x400 != 0 || tag[1] != 0 {
             return Err("Expected an ordinary non-reparse directory handle".into());
         }
+        verify_opened_volume(dir.as_raw_handle())?;
         let mut buffer = [0_u64; records::BATCH_LIMIT / 8];
         let mut summary = records::Summary::default();
         for batch in 0..MAX_BATCHES {
