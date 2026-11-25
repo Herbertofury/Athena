@@ -12,6 +12,7 @@ const frontierPanel=get('frontier-readout'),frontierEvent=get('frontier-event'),
 const cavernPanel=get('cavern-readout'),cavernEvent=get('cavern-event'),cavernDetails=get('cavern-details');
 const mirrorNames=Object.freeze(['Amber','Blue','Pearl']),mirrorColors=Object.freeze(['#ffc27f','#75d9ff','#dbb7ff']);
 const ferryPanel=get('escort-readout'),ferryEvent=get('escort-event'),ferryDetails=get('escort-details'),ferryHull=get('escort-hull');
+const relayPanel=get('relay-readout'),relayEvent=get('relay-event'),relayDetails=get('relay-details');
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
@@ -29,16 +30,16 @@ function showChoices(offers){
  if(lastOffer===offers)return;
  lastOffer=offers;choicePanel.hidden=false;choices.replaceChildren();
  const kind=offers[0]?.kind;
- setText(get('choice-title'),kind==='rift'?'Choose a rift route':kind==='camp'?'Choose a camp upgrade':kind==='region'?'Decide what to do at Skirmish Basin':'Choose an upgrade');
+ setText(get('choice-title'),kind==='rift'?'Choose a rift route':kind==='camp'?'Choose a camp upgrade':kind==='region'?'Decide what to do at Skirmish Basin':kind==='relay'?'Choose a Frontier relay task':'Choose an upgrade');
  for(const {id,name,icon,kind} of offers){
   const button=document.createElement('button');button.textContent=icon+' '+name;
-  const marker=document.createElement('span');marker.textContent=kind==='rift'?'Rift decision':kind==='camp'?'Camp decision':kind==='region'?'Frontier decision':kind==='weapon'?'New weapon':'Stat upgrade';
+  const marker=document.createElement('span');marker.textContent=kind==='rift'?'Rift decision':kind==='camp'?'Camp decision':kind==='region'?'Frontier decision':kind==='relay'?'Relay decision':kind==='weapon'?'New weapon':'Stat upgrade';
   button.append(marker);
   button.addEventListener('click',()=>{
    if(mode!=='choice'||lastOffer!==offers)return;
    if(loading){transfer++;controls(false);reportTape('Verification cancelled because you chose an upgrade.');}
    const result=host.choose(id);snapshot=host.frameView();choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
-   transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':kind==='rift'?(snapshot.rift.active?'Rift entered. Your main run is paused.':'Stayed in the main expedition.'):kind==='camp'?(result.camp?.recovery?'Ferryman remedy restored '+Number(result.camp.recovery.toFixed(1))+' HP.':result.camp?.perk?'Camp upgrade built.':'Left the camp.'):kind==='region'?(id==='region-intervene'?'Stay inside the basin to help the Amber Surveyors.':'You detoured around the skirmish.'):'Upgrade equipped: '+name);
+   transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':kind==='rift'?(snapshot.rift.active?'Rift entered. Your main run is paused.':'Stayed in the main expedition.'):kind==='camp'?(result.camp?.recovery?'Ferryman remedy restored '+Number(result.camp.recovery.toFixed(1))+' HP.':result.camp?.perk?'Camp upgrade built.':'Left the camp.'):kind==='region'?(id==='region-intervene'?'Stay inside the basin to help the Amber Surveyors.':'You detoured around the skirmish.'):kind==='relay'?(id==='relay-leave'?'You left the relay.':'Relay task accepted. Follow the objective.'):'Upgrade equipped: '+name);
    board.focus();draw();
   });
   choices.append(button);
@@ -111,6 +112,16 @@ function showFrameStats(){
   if(ferryHull.value!==Math.ceil(ferry.hull))ferryHull.value=Math.ceil(ferry.hull);
   const target=ferry.state==='docked'?ferry.dock:ferry.position;
   setText(ferryDetails,ferry.recruited?'Camp remedies left: '+ferry.remedies:ferry.state==='lost'?'No companion or rewards were earned.':'Hull '+Math.ceil(ferry.hull)+'% · '+direction(target.x-player.x,target.y-player.y));
+ }
+ const relay=snapshot.relay;
+ relayPanel.hidden=!relay||Boolean(route?.active);
+ if(!relayPanel.hidden){
+  const {sequence,completed,route:task,post,next,progress,checked,bank}=relay;
+  const point=next??post, reach=Math.round(Math.hypot(point.x-player.x,point.y-player.y));
+  const goal=task==='decision'?'Relay '+sequence+' reached. Pick a task.':task==='supply'||task==='watch'?point.name:'Find relay outpost '+sequence;
+  setText(relayEvent,goal);
+  const hold=task==='watch'&&checked<2&&progress>0?' · hold '+Math.floor(progress/2.2*100)+'%':'';
+  setText(relayDetails,direction(point.x-player.x,point.y-player.y)+' · '+reach+' m'+hold+' · Relays done '+completed+' · Gold '+bank.gold+' · Crystal '+bank.crystal);
  }
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
 }
@@ -257,6 +268,25 @@ function drawFloodplain(ferry,p,ox,oy){
  ctx.fillStyle='#172939';ctx.fillRect(x-21,y+15,42,4);
  ctx.fillStyle='#7af0bf';ctx.fillRect(x-21,y+15,42*hull/100,4);
 }
+function drawRelay(relay,p,ox,oy){
+ if(!relay)return;
+ const x=relay.post.x+ox,y=relay.post.y+oy;
+ if(Math.hypot(relay.post.x-p.x,relay.post.y-p.y)<=440){
+  circle(x,y,61,'#33213a');circle(x,y,49,'#512e49');
+  ctx.strokeStyle='#ba8ac2';ctx.lineWidth=2;ctx.strokeRect(x-37,y-24,74,48);
+  ctx.fillStyle='#f2c099';ctx.fillRect(x-18,y-18,36,36);
+  ctx.fillStyle='#352643';ctx.fillRect(x-11,y-11,22,22);
+  ctx.textAlign='center';ctx.font='bold 13px system-ui';ctx.fillStyle='#edcdeb';ctx.fillText('Relay '+relay.sequence,x,y-53);
+ }
+ const {next}=relay;
+ if(next.name!==relay.post.name&&Math.hypot(next.x-p.x,next.y-p.y)<=425){
+  const mx=next.x+ox,my=next.y+oy,hue=relay.route==='watch'?'#92c7ff':'#ffda9e';
+  circle(mx,my,23,'#322c46');ctx.strokeStyle=hue;ctx.lineWidth=3;
+  ctx.beginPath();ctx.arc(mx,my,26,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle=hue;ctx.fillRect(mx-8,my-7,16,14);
+  ctx.textAlign='center';ctx.font='bold 13px system-ui';ctx.fillText(next.name,mx,my-33);
+ }
+}
 function draw(){
  const W=board.width,H=board.height,p=snapshot?.player??{x:0,y:0}, ox=W/2-p.x, oy=H/2-p.y;
  ctx.fillStyle='#0b0d15';ctx.fillRect(0,0,W,H);
@@ -265,7 +295,7 @@ function draw(){
  for(let y=((oy%40)+40)%40;y<H;y+=40){ctx.moveTo(0,y);ctx.lineTo(W,y);}
  ctx.stroke();
  drawFrontier(snapshot?.rift?.active?null:snapshot?.region,p,ox,oy);
- if(!snapshot?.rift?.active){drawCavern(snapshot?.cavern,p,ox,oy);drawFloodplain(snapshot?.escort,p,ox,oy);}
+ if(!snapshot?.rift?.active){drawCavern(snapshot?.cavern,p,ox,oy);drawFloodplain(snapshot?.escort,p,ox,oy);drawRelay(snapshot?.relay,p,ox,oy);}
  for(const gem of snapshot?.gems??[]){
   ctx.fillStyle='#6ee7b7';ctx.beginPath();const x=gem.x+ox,y=gem.y+oy,r=Math.min(10,gem.size);
   ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath();ctx.fill();
@@ -304,7 +334,7 @@ function frame(now){
   if(result!=='running'){
    snapshot=host.frameView();
    if(result==='choice'){
-    transition('choice',snapshot.portal?.awaitingDecision?'Time is paused. Choose whether to enter the rift.':snapshot.camp?.prompt?'Time is paused. Review camp upgrades.':snapshot.region?.state==='decision'?'Time is paused. Choose a route through the skirmish.':'Level '+snapshot.player.level+'. Choose an upgrade.');
+    transition('choice',snapshot.portal?.awaitingDecision?'Time is paused. Choose whether to enter the rift.':snapshot.camp?.prompt?'Time is paused. Review camp upgrades.':snapshot.region?.state==='decision'?'Time is paused. Choose a route through the skirmish.':snapshot.relay?.route==='decision'?'Time is paused. Choose a relay task.':'Level '+snapshot.player.level+'. Choose an upgrade.');
     showChoices(snapshot.offers);
    }else transition('finished',snapshot.run.won?(snapshot.roaming?'Expedition complete.':snapshot.arenaFormat?'Marathon complete.':'You survived five minutes.'):'Run finished. Try another seed or play again.');
   }
@@ -362,7 +392,7 @@ verifyTapeButton.addEventListener('click',async()=>{
   host=candidate;clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();snapshot=host.frameView();
   const h=host.capture().header;
   seed.value=String(h.seed);formatField.value=h.format;
-  if(host.phase()==='choice'){transition('choice',snapshot.portal?.awaitingDecision?'Select your pending rift decision.':snapshot.camp?.prompt?'Select your pending camp decision.':snapshot.region?.state==='decision'?'Select your pending frontier decision.':'Select your pending upgrade.');showChoices(snapshot.offers);}
+  if(host.phase()==='choice'){transition('choice',snapshot.portal?.awaitingDecision?'Select your pending rift decision.':snapshot.camp?.prompt?'Select your pending camp decision.':snapshot.region?.state==='decision'?'Select your pending frontier decision.':snapshot.relay?.route==='decision'?'Select your pending relay task.':'Select your pending upgrade.');showChoices(snapshot.offers);}
   else if(host.phase()==='finished')transition('finished','Verified completed run.');
   else transition('paused','Verified run loaded, ready to resume.');
   setText(start,'Restart run');draw();reportTape('Verified and loaded the selected run.');

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
+import {createFrontierRelay} from './frontier-relay.mjs';
 import {createFloodplainEscort} from './floodplain-escort.mjs';
 import {createAshglassCavern} from './ashglass-cavern.mjs';
 import {createSpatialRegion} from './spatial-region.mjs';
@@ -7,7 +8,7 @@ import {createRiftDirector} from './rift-director.mjs';
 import {createRiftSession} from './rift-session.mjs';
 import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
 
-export function createRiftExpedition({seed,random,withCamp=false,withCavern=false,withEscort=false,regionFormat}) {
+export function createRiftExpedition({seed,random,withCamp=false,withCavern=false,withEscort=false,withRelay=false,regionFormat}) {
  const main=createLegacySurvivorRun({format:regionFormat??'roaming-expedition-20',seed,random});
  const director=createRiftDirector(seed),camp=withCamp?createCampWorkshop():null;
  const travel=createRiftSession({main,createSide:({minutes,seed})=>{
@@ -19,15 +20,21 @@ export function createRiftExpedition({seed,random,withCamp=false,withCavern=fals
  }});
  const wallet=()=>{
   const loot=main.balance(), earned=travel.bank();
-  return {crystal:loot.crystal+earned.crystal+regionBank,gold:loot.gold+earned.gold+cavernGold};
+  return {crystal:loot.crystal+earned.crystal+regionBank+relayBank.crystal,gold:loot.gold+earned.gold+cavernGold+relayBank.gold};
  };
- let decision=false, campPrompt=false, regionPrompt=false, inRift=false, regionBank=0, cavernGold=0, escortRemedies=0;
+ let decision=false, campPrompt=false, regionPrompt=false, relayPrompt=false, inRift=false, regionBank=0, cavernGold=0, escortRemedies=0;
+ const relay=withRelay?createFrontierRelay(seed):null,relayBank={gold:0,crystal:0};
+ const relayOptions=Object.freeze([
+  Object.freeze({id:'relay-supply',name:'Recover a supply sled · 24 gold',icon:'▣',kind:'relay'}),
+  Object.freeze({id:'relay-watch',name:'Light two watchline beacons · 12 crystal',icon:'◇',kind:'relay'}),
+  Object.freeze({id:'relay-leave',name:'Leave the relay',icon:'↶',kind:'relay'}),
+ ]);
  const escort=withEscort?createFloodplainEscort(seed):null;
  const canHeal=()=>escortRemedies>0&&main.canRecoverCampHealth();
  const cavern=withCavern?createAshglassCavern(seed):null;
  const region=regionFormat?createSpatialRegion(seed):null;
  function step(input) {
-  if(decision||campPrompt||regionPrompt)return {status:'choice',audio:[]};
+  if(decision||campPrompt||regionPrompt||relayPrompt)return {status:'choice',audio:[]};
   const result=travel.step(input);
   if(inRift){
    if(result.rift)inRift=false;
@@ -59,9 +66,18 @@ export function createRiftExpedition({seed,random,withCamp=false,withCavern=fals
    if(event?.kind==='recruit')escortRemedies=2;
    if(event)return {...result,escort:event};
   }
+  if(relay){
+   const next=relay.advance(player,input.dt,{choicePending:result.status==='choice'});
+   if(next?.prompt){relayPrompt=true;return {...result,status:'choice'};}
+   if(next?.earned){
+    relayBank.gold+=next.earned.gold;relayBank.crystal+=next.earned.crystal;
+    return {...result,relay:next};
+   }
+  }
   return result;
  }
  function choose(id){
+  if(relayPrompt){relay.choose(id);relayPrompt=false;return {choice:id,relay:{id},audio:[]};}
   if(regionPrompt){
    region.choose(id);regionPrompt=false;
    return {choice:id,region:id,audio:[]};
@@ -96,7 +112,8 @@ export function createRiftExpedition({seed,random,withCamp=false,withCavern=fals
   return {...view,portal,...(camp?{camp:camp.snapshot(wallet())}:{}),...(region?{region:{...region.snapshot(),bankedCrystal:regionBank}}:{}),
    ...(cavern?{cavern:{...cavern.snapshot(),bankedGold:cavernGold}}:{}),
    ...(escort?{escort:{...escort.snapshot(),remedies:escortRemedies}}:{}),
-   ...(regionPrompt?{offers:[
+   ...(relay?{relay:{...relay.snapshot(),bank:{...relayBank}}}:{}),
+   ...(relayPrompt?{offers:relayOptions.map(o=>({...o}))}:regionPrompt?{offers:[
     {id:'region-intervene',name:'Help the Amber Surveyors',icon:'◇',kind:'region'},
     {id:'region-detour',name:'Leave the factions to it',icon:'↶',kind:'region'},
    ]}:campPrompt?{offers:canHeal()?[{id:'camp-ferryman-remedy',name:'Use the ferryman’s remedy · restore up to 36 HP',icon:'✚',kind:'camp'},...camp.choices(wallet())]:camp.choices(wallet())}:decision?{offers:[
