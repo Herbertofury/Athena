@@ -25,7 +25,9 @@ def main(package):
         ).split()
         payload = {key: [] for key in keys}
         payload.update(schema="project-constellation", schemaVersion=7,
-                       summary={"events": 12001, "checkpoints": 1000},
+                       summary={"events": 12001, "checkpoints": 1000, "providers": 0, "projects": 0, "chats": 1,
+                                "turns": 3, "turnRevisions": 2, "outputSnapshots": 0, "files": 0,
+                                "knowledgeItems": 0, "continuityProjects": 0},
                        meta={"neverEcho": "fixture-private-marker https://example.invalid/secret"})
         payload["events"] = [{}] * 12000
         payload["checkpoints"] = [{}] * 1000
@@ -38,7 +40,7 @@ def main(package):
             {"id": "turn-C", "chatId": "chat-A", "bestRevisionId": "not-in-export"},
         ]
         payload["turnRevisions"] = [
-            {"id": "revision-A", "turnId": "turn-A", "text": "fixture-private-marker"},
+            {"id": "revision-A", "turnId": "turn-A", "chatId": "different-chat", "text": "fixture-private-marker"},
             {"id": "revision-B", "turnId": "not-in-export"},
         ]
         payload["groups"] = []
@@ -73,8 +75,21 @@ def main(package):
                 "under-cap collection incorrectly labeled")
         require(slices["groups"]["retained"] == 0 and slices["smartCollections"]["retained"] is None,
                 "absent versus present empty extension slice collapsed")
+        for kind, summary in {"providers": "providers", "projects": "projects", "chats": "chats",
+                              "turns": "turns", "turnRevisions": "turnRevisions", "outputSnapshots": "outputSnapshots",
+                              "files": "files", "knowledgeItems": "knowledgeItems",
+                              "projectContinuity": "continuityProjects"}.items():
+            require(slices[kind]["source_reported"] == len(payload[kind]) and slices[kind]["omitted"] == 0,
+                    f"writer's {summary} full group total was not verified")
+            mismatched = {**payload, "summary": {**payload["summary"], summary: len(payload[kind]) + 1}}
+            run(json.dumps(mismatched).encode(), success=False)
+        old = {**payload, "summary": {"events": 12001, "checkpoints": 1000}}
+        legacy = {r["kind"]: r for r in run(json.dumps(old).encode())["slices"]}
+        require(legacy["files"]["source_reported"] is None and legacy["files"]["omitted"] is None,
+                "missing older summary totals should stay unknown")
         require(report["references"] == {
             "turns_without_exported_chat": 1, "revisions_without_exported_turn": 1,
+            "revisions_with_conflicting_chat": 1,
             "best_revision_not_exported": 1, "best_revision_points_to_other_turn": 1,
         }, "turn/revision edges lost or conflated")
         run(raw.replace(b'"schemaVersion": 7', b'"schemaVersion": 8'), success=False)

@@ -15,6 +15,15 @@ type Rows<'a> = Vec<&'a RawValue>;
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Summary {
+    providers: Option<usize>,
+    projects: Option<usize>,
+    chats: Option<usize>,
+    turns: Option<usize>,
+    turn_revisions: Option<usize>,
+    output_snapshots: Option<usize>,
+    files: Option<usize>,
+    knowledge_items: Option<usize>,
+    continuity_projects: Option<usize>,
     events: usize,
     checkpoints: usize,
 }
@@ -84,6 +93,7 @@ struct Slice {
 struct References {
     turns_without_exported_chat: usize,
     revisions_without_exported_turn: usize,
+    revisions_with_conflicting_chat: usize,
     best_revision_not_exported: usize,
     best_revision_points_to_other_turn: usize,
 }
@@ -107,7 +117,7 @@ fn slice(
     if cap.is_some_and(|max| retained > max)
         || total.is_some_and(|reported| retained != reported.min(cap.unwrap_or(usize::MAX)))
     {
-        return Err("Source collection does not match the v7 export bounds");
+        return Err("Source collection does not match its reported total or the v7 export bounds");
     }
     let cap_reached = cap.is_some_and(|max| retained == max);
     let omitted = if let Some(total) = total {
@@ -138,15 +148,34 @@ fn unique<'a>(rows: &'a [Row<'_>]) -> Result<HashSet<&'a str>, &'static str> {
 }
 fn audit(s: &Snapshot<'_>) -> Result<References, &'static str> {
     let chats = unique(&s.chats)?;
-    let turns = unique(&s.turns)?;
-    unique(&s.turn_revisions)?;
+    let mut turns = HashMap::with_capacity(s.turns.len());
+    for turn in &s.turns {
+        let id = turn.id.as_ref();
+        let chat = turn.chat_id.as_deref().filter(|value| !value.is_empty());
+        if id.is_empty() || turns.insert(id, chat).is_some() {
+            return Err("Empty or duplicate source record ID");
+        }
+    }
     let mut revisions = HashMap::with_capacity(s.turn_revisions.len());
     let mut result = References::default();
     for row in &s.turn_revisions {
-        if !row.turn_id.as_deref().is_some_and(|id| turns.contains(id)) {
-            result.revisions_without_exported_turn += 1;
+        let id = row.id.as_ref();
+        if id.is_empty() || revisions.insert(id, row.turn_id.as_deref()).is_some() {
+            return Err("Empty or duplicate source record ID");
         }
-        revisions.insert(row.id.as_ref(), row.turn_id.as_deref());
+        match row.turn_id.as_deref().and_then(|id| turns.get(id)) {
+            None => result.revisions_without_exported_turn += 1,
+            Some(Some(parent_chat)) => {
+                if row
+                    .chat_id
+                    .as_deref()
+                    .is_some_and(|chat| !chat.is_empty() && chat != *parent_chat)
+                {
+                    result.revisions_with_conflicting_chat += 1;
+                }
+            }
+            Some(None) => {}
+        }
     }
     for row in &s.turns {
         if !row.chat_id.as_deref().is_some_and(|id| chats.contains(id)) {
@@ -174,19 +203,34 @@ pub fn review_bytes(bytes: &[u8]) -> Result<Report, &'static str> {
         return Err("Unrecognized source schema; only Constellation v7 is supported");
     }
     let slices = vec![
-        slice("providers", Some(s.providers.len()), None, None)?,
-        slice("projects", Some(s.projects.len()), None, None)?,
-        slice("chats", Some(s.chats.len()), None, None)?,
-        slice("turns", Some(s.turns.len()), None, None)?,
-        slice("turnRevisions", Some(s.turn_revisions.len()), None, None)?,
+        slice(
+            "providers",
+            Some(s.providers.len()),
+            None,
+            s.summary.providers,
+        )?,
+        slice("projects", Some(s.projects.len()), None, s.summary.projects)?,
+        slice("chats", Some(s.chats.len()), None, s.summary.chats)?,
+        slice("turns", Some(s.turns.len()), None, s.summary.turns)?,
+        slice(
+            "turnRevisions",
+            Some(s.turn_revisions.len()),
+            None,
+            s.summary.turn_revisions,
+        )?,
         slice(
             "outputSnapshots",
             Some(s.output_snapshots.len()),
             None,
-            None,
+            s.summary.output_snapshots,
         )?,
-        slice("files", Some(s.files.len()), None, None)?,
-        slice("knowledgeItems", Some(s.knowledge_items.len()), None, None)?,
+        slice("files", Some(s.files.len()), None, s.summary.files)?,
+        slice(
+            "knowledgeItems",
+            Some(s.knowledge_items.len()),
+            None,
+            s.summary.knowledge_items,
+        )?,
         slice(
             "knowledgeSources",
             Some(s.knowledge_sources.len()),
@@ -197,7 +241,7 @@ pub fn review_bytes(bytes: &[u8]) -> Result<Report, &'static str> {
             "projectContinuity",
             Some(s.project_continuity.len()),
             None,
-            None,
+            s.summary.continuity_projects,
         )?,
         slice(
             "events",

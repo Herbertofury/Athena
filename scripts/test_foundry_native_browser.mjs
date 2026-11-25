@@ -481,6 +481,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const reviewTraffic=()=>archiveRequests.filter(r=>!['GET','HEAD'].includes(r.method)||r.url.startsWith(archiveAPI)||r.body!==null);
   const exportBody=Object.fromEntries('providers projects chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns'.split(' ').map(key=>[key,[]]));
   Object.assign(exportBody,{schema:'project-constellation',schemaVersion:7,summary:{events:12001,checkpoints:0},events:Array.from({length:12000},()=>({})),meta:{token:'fixture-private-marker-never-render'}});
+  Object.assign(exportBody.summary,{files:1,outputSnapshots:0,continuityProjects:0,turnRevisions:1,chats:1,turns:1});
+  exportBody.files=[{id:'fixture-private-marker-never-render',filename:'fixture-private-marker-never-render'}];
+  exportBody.chats=[{id:'chat-a'}];exportBody.turns=[{id:'turn-a',chatId:'chat-a'}];
+  exportBody.turnRevisions=[{id:'revision-a',chatId:'different-chat',turnId:'turn-a'}];
   const exportBytes=Buffer.from(JSON.stringify(exportBody));
   await page.locator('#source').setInputFiles({name:'fixture.json',mimeType:'application/json',buffer:exportBytes});
   verifyNoArchiveDisclosure();
@@ -492,6 +496,8 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   if(reviewTraffic()[0].body!==null)assert.deepEqual(reviewTraffic()[0].body,exportBytes);
   assert.match(await page.locator('#digest').textContent(),new RegExp(createHash('sha256').update(exportBytes).digest('hex')));
   assert.match(await page.locator('#collections').textContent(),/Source reported [\d,]+ · 1 omitted/);
+  await page.locator('#collections article').filter({has:page.getByRole('heading',{name:'files',exact:true})}).getByText('Source reported 1 · 0 omitted.',{exact:true}).waitFor();
+  await page.getByText('Revisions naming a different chat than their turn: 1',{exact:true}).waitFor();
   assert.equal((await page.locator('main').textContent()).includes('fixture-private-marker-never-render'),false);
   await page.selectOption('#filter','needs');
   assert.match(await page.locator('#coverage').textContent(),/5 of 18 collections/);
@@ -502,6 +508,12 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.locator('#source').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{')});
   await page.getByRole('button',{name:'Run local review'}).click();
   await page.getByText('Invalid v7 export structure',{exact:true}).waitFor();
+  const mislabeled=Buffer.from(JSON.stringify({...exportBody,summary:{...exportBody.summary,files:2}}));
+  await page.locator('#source').setInputFiles({name:'mismatched.json',mimeType:'application/json',buffer:mislabeled});
+  await page.getByRole('button',{name:'Run local review'}).click();
+  await page.getByText('Source collection does not match its reported total or the v7 export bounds',{exact:true}).waitFor();
+  assert.equal(await page.locator('#results').isHidden(),true);
+  verifyNoArchiveDisclosure();
   assert.equal(await page.locator('#results').isVisible(),false);
   page.off('request',trackArchive);
   const sample={method:'POST',headers:{'x-atlas-request':'local-ui','content-type':'application/json'},body:'{}'};
