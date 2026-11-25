@@ -637,7 +637,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
  });
- if(unified)await check('Engineering-Atlas offline run ledger preserves both observations and groups 522 exact runs into 305 commits',async()=>{
+ if(unified)await check('Engineering-Atlas offline run ledger exports exact filtered rows beyond the visible page with both snapshot sources',async()=>{
   const endpoint=origin+'/api/migration/atlas-runs',before=report.externalRequests.length;
   const stored=await (await fetch(endpoint)).json();
   assert.equal(stored.runs.length,522);assert.equal(stored.repeated_ids,509);assert.equal(stored.changed_readings,2);
@@ -658,6 +658,19 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   }
   await page.locator('#scope').selectOption('failed');
   await status.filter({hasText:'Showing 1–25 of 49'}).waitFor();
+  const downloadRows=async()=>{
+   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Download matching runs (JSON)',exact:true}).click()]);
+   assert.equal(download.suggestedFilename(),'athena-atlas-recorded-runs.json');
+   return JSON.parse(fs.readFileSync(await download.path(),'utf8'));
+  };
+  await page.getByRole('button',{name:'Next 25',exact:true}).click();
+  await status.filter({hasText:'Showing 26–49 of 49'}).waitFor();
+  const failed=await downloadRows();
+  assert.equal(failed.schema,'athena-engineering-atlas-run-selection-v1');
+  assert.deepEqual(failed.selection,{snapshot_filter:'failed',exact_commit:null,matched_runs:49,archived_runs:522});
+  assert.deepEqual(failed.snapshots,[stored.early,stored.later].map(({date,rows,source,sha256})=>({date,rows,source,sha256})));
+  const expectedExport=rows=>rows.map(r=>({...r,early:r.early??null,later:r.later??null,original_url:'https://github.com/Herbertofury/Engineering-Atlas/actions/runs/'+r.id}));
+  assert.deepEqual(failed.runs,expectedExport(stored.runs.filter(r=>r.later?.conclusion==='failure')));
   await page.locator('#scope').selectOption('later');
   await status.filter({hasText:'Showing 1–13 of 13'}).waitFor();
   await page.locator('#scope').selectOption('');
@@ -683,10 +696,14 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('#records article').count(),2);
   assert.equal(await page.locator('#records article').filter({hasText:'42334871509'}).count(),1);
   assert.equal(await page.locator('#records article').filter({hasText:'42334861173'}).count(),1);
+  const drill=await downloadRows();
+  assert.deepEqual(drill.selection,{snapshot_filter:'all',exact_commit:exactSha,matched_runs:2,archived_runs:522});
+  assert.deepEqual(drill.runs,expectedExport(stored.runs.filter(r=>r.head_sha===exactSha)));
   await page.getByRole('button',{name:'Back to commit groups',exact:true}).press('Enter');
   await page.locator('#scope').selectOption('failed');
   assert.equal(await page.locator('#records article').count(),0);
   assert.equal(await status.textContent(),'No recorded runs match.');
+  assert.equal(await page.getByRole('button',{name:'Download matching runs (JSON)',exact:true}).isDisabled(),true);
   assert.equal(await page.locator('#commit-focus').isHidden(),true);
   await page.getByText('Pinned snapshots and checksums',{exact:true}).click();
   assert.equal(await page.getByRole('link',{name:'View pinned source',exact:true}).count(),2);
