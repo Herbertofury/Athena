@@ -8,6 +8,7 @@
 <label for="view">Group results</label><select id="view"><option value="runs">By workflow run</option><option value="commits">By exact commit</option></select>
 <label for="scope">Snapshot evidence</label><select id="scope"><option value="">All runs</option><option value="changed">Changed status</option><option value="failed">Failed in later snapshot</option><option value="later">Only in later snapshot</option></select></div>
 <p id="commit-focus" hidden><span id="commit-label"></span> <button id="back-to-groups" type="button">Back to commit groups</button></p>
+<div id="export-controls" hidden><button id="export" type="button" disabled>Download matching runs (JSON)</button><p id="export-count"></p><p id="export-status" role="status"></p></div>
 <p role="status" id="status">Loading the embedded ledger…</p><details id="source-panel" hidden><summary>Pinned snapshots and checksums</summary><ul id="sources"></ul></details></section>
 <section class="runner" aria-labelledby="run-heading"><h2 id="run-heading" tabindex="-1">Recorded runs</h2><div id="records"></div>
 <div id="pages" hidden><button id="previous" type="button">Previous 25</button><button id="next" type="button">Next 25</button></div></section>
