@@ -60,3 +60,10 @@ routing categories while using Athena's local controls. It changes only focus:
 it never moves a saved object, opens a remote provider, assigns a soundtrack,
 chooses a file, begins a motion preview, or starts playback. If the destination
 is disabled or the selected object is hidden, the action is unavailable.
+
+For an eligible world object, **Preview selected object in motion lab** opens
+the preview paused and focuses the copy with that exact instance identity,
+including duplicates. If the lab is already open, this only changes focus:
+existing preview positions and motion settings are retained. Hidden, filtered,
+UI and sticker objects are not eligible. The preview never changes authored
+positions, saves, history, or media state.
