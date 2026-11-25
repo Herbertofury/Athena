@@ -85,3 +85,14 @@ export function parseWindowsDirectoryReport(text){
   throw Error('Inconsistent Windows directory observation.');
  return {...v,...Object.fromEntries(windowsFlags.map(key=>[key,input[key]]))};
 }
+
+const windowsMetrics=['logical_pathname_bytes','observed_identified_allocation_bytes','observed_file_pathnames','identified_unique_files'];
+export function compareWindowsDirectoryReports(before,after,asserted=false){
+ if(!before||!after)return {eligible:false,reason:'Choose a Windows reference and a second observation.'};
+ if(before.partial||after.partial)return {eligible:false,reason:'No differences shown: at least one Windows observation was partial.'};
+ if(before.excluded_directories!==after.excluded_directories||before.excluded_reparse_entries!==after.excluded_reparse_entries)
+  return {eligible:false,reason:'No differences shown: excluded directory or reparse-entry counts differ.'};
+ if(!asserted)return {eligible:true,reason:'Only confirm if these are the same directory and settings, in the order you intend.'};
+ return {eligible:true,reason:'Second observation minus reference. Folder, order and settings were not verified by Athena. Not free or reclaimable space.',
+  changes:Object.fromEntries(windowsMetrics.map(key=>[key,after[key]-before[key]]))};
+}

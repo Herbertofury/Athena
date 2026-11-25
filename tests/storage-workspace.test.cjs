@@ -145,3 +145,33 @@ test('Windows summary stays separate, shows exact bytes and partial coverage, an
  await s.go('#foundations');done(JSON.stringify(windowsReport));await suspended;
  assert.equal(root.children.length,0);assert.equal(s.writes.length,0);
 });
+test('Windows compare requires complete matching scope and the user assertion for exact signed changes',async()=>{
+ const {parseWindowsDirectoryReport,compareWindowsDirectoryReports}=await import('../dist/workspaces/storage/model.mjs');
+ const before=parseWindowsDirectoryReport(JSON.stringify(windowsReport));
+ const after={...before,logical_pathname_bytes:10244,observed_identified_allocation_bytes:4096,
+  records_examined:5,observed_file_pathnames:4,identified_unique_files:3};
+ assert.equal(compareWindowsDirectoryReports(before,after).changes,undefined);
+ assert.deepEqual(compareWindowsDirectoryReports(before,after,true).changes,{
+  logical_pathname_bytes:4,observed_identified_allocation_bytes:-4096,
+  observed_file_pathnames:1,identified_unique_files:1,
+ });
+ assert.equal(compareWindowsDirectoryReports(before,{...after,partial:true},true).eligible,false);
+ assert.equal(compareWindowsDirectoryReports(before,{...after,excluded_reparse_entries:1},true).eligible,false);
+});
+test('Windows compare is independent; rejected or abandoned second reads never count as a paired approval',async()=>{
+ const s=await app(),root=s.root(),find=id=>root.querySelector('#'+id);
+ const loadWin=async(id,file)=>{const picker=find(id);picker.files=[file];await picker.onchange();};
+ await loadWin('windows-observation-file',contents(windowsReport));
+ await loadWin('windows-comparison-file',contents({...windowsReport,logical_pathname_bytes:10244}));
+ const scope=find('windows-same-scope'),diff=find('windows-differences');
+ assert.equal(scope.disabled,false);assert.equal(diff.children.length,0);
+ scope.checked=true;scope.onchange();
+ assert.match(diff.textContent,/Logical pathname bytes: \+4/);
+ await loadWin('windows-comparison-file',contents({...windowsReport,path:'Windows-Sensitive-Never-Display'}));
+ assert.equal(diff.children.length,0);assert.equal(scope.checked,false);
+ assert.match(find('windows-comparison-status').textContent,/Previous report preserved/);
+ assert.doesNotMatch(root.querySelector('.windows-report').textContent,/Windows-Sensitive-Never-Display/);
+ let done;const pending=loadWin('windows-comparison-file',{size:101,text:()=>new Promise(r=>done=r)});
+ find('windows-clear-comparison').onclick();done(JSON.stringify(windowsReport));await pending;
+ assert.equal(scope.disabled,true);assert.equal(diff.children.length,0);assert.equal(s.writes.length,0);
+});

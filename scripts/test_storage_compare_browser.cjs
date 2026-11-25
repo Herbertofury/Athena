@@ -55,6 +55,18 @@ const server=http.createServer((req,res)=>{
   assert.doesNotMatch(await windowsView.textContent(),/private-folder/);
   await windowsView.getByRole('button',{name:'Clear Windows report'}).click();
   assert.equal(await windowsView.locator('.windows-evidence article').count(),0);
+  const complete={...win,stopped_entry_limit:false,partial:false};
+  await choose('#windows-observation-file',complete);
+  await choose('#windows-comparison-file',{...complete,logical_pathname_bytes:8200});
+  const same=page.locator('#windows-same-scope'),changes=page.locator('#windows-differences li');
+  assert.equal(await changes.count(),0);
+  await same.check();
+  await page.getByText('Logical pathname bytes: +7',{exact:true}).waitFor();
+  await choose('#windows-comparison-file',win);
+  await page.locator('#windows-comparison-guidance').filter({hasText:'partial'}).waitFor();
+  assert.equal(await same.isDisabled(),true);
+  assert.equal(await changes.count(),0);
+  await page.getByRole('button',{name:'Clear second Windows report'}).click();
   if(process.env.ATHENA_TEST_PACKAGED_WIN_OBSERVATION){
    assert.equal(process.platform,'win32');
    const folder=fs.mkdtempSync(path.join(os.tmpdir(),'athena-windows-report-'));
@@ -72,6 +84,15 @@ const server=http.createServer((req,res)=>{
     await windowsView.getByText(/24,690 bytes/).waitFor();
     assert.match(await windowsView.textContent(),/1 directory; 0 reparse entries/);
     assert.doesNotMatch(await windowsView.textContent(),/private-original|private-alias|private-subdirectory|private-excluded/);
+    fs.writeFileSync(path.join(folder,'private-added'),Buffer.alloc(101,5));
+    const second=JSON.parse(execFileSync(path.resolve(process.env.ATHENA_TEST_PACKAGED_WIN_OBSERVATION),
+     ['windows-directory-observation',folder,'100'],{encoding:'utf8',timeout:30000}));
+    assert.equal(second.partial,false);
+    await choose('#windows-comparison-file',second);
+    await same.check();
+    await page.getByText('Logical pathname bytes: +101',{exact:true}).waitFor();
+    await page.getByText('Identified unique files: +1',{exact:true}).waitFor();
+    assert.doesNotMatch(await windowsView.textContent(),/private-original|private-alias|private-subdirectory|private-excluded|private-added/);
     await windowsView.screenshot({path:'browser-results/storage-windows-observation-real.png'});
     console.log('Extracted Windows atlas-lab generated the local hardlink report loaded by Chromium; the nested file was excluded.');
    }finally{fs.rmSync(folder,{recursive:true,force:true});}
