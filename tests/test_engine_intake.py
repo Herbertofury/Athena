@@ -23,7 +23,7 @@ class EngineIntakeTests(unittest.TestCase):
         manifest = json.loads((ROOT / "engines/card-game/SOURCE-MANIFEST.json").read_text(encoding="utf-8"))
         self.assertEqual(len(manifest["files"]), 23)
         self.assertEqual(manifest["consumerComparison"]["identical"], 19)
-        self.assertEqual(set(manifest["consumerComparison"]["diverged"]), {"board.js", "cardgame.css", "deck-select.js", "screens.js"})
+        self.assertEqual({x["file"] for x in manifest["consumerComparison"]["diverged"]}, {"board.js", "cardgame.css", "deck-select.js", "screens.js"})
 
     def test_world_engine_discloses_hybrid_spatial_model_and_external_renderer(self):
         manifest = json.loads((ROOT / "engines/mascot-open-world/SOURCE-MANIFEST.json").read_text(encoding="utf-8"))
