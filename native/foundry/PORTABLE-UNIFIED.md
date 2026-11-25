@@ -33,6 +33,32 @@ unverified shutdown if bounded waiting fails. Do not infer power-loss durability
 universal no-orphan behavior from a limited hosted test. No service or installation
 is registered and no OS security settings are changed.
 
+## Keep both stores in one movable folder
+
+Put the unpacked app in `app` and create a sibling folder `data`, both in the
+same outer directory. From that outer directory:
+
+```sh
+mkdir data
+python -B app/launch.py --init-portable-data data
+python -B app/launch.py --portable-data-dir data
+```
+
+Initialization explicitly creates a new `foundry.sqlite3`, refusing existing
+database or sidecar files for either store. An `engineering.sqlite3` journal is
+created on first launch if it does not already exist. Opening the folder uses
+those two fixed names, also used by `--fork-checkpoint`. It does not create a
+new Foundry database or repair or upgrade a previous one. The data folder must
+be an existing direct folder outside the verified app tree, without parent
+components, reparse points, symbolic links or hardlinked database/sidecar files. Explicit database and journal arguments
+remain available and cannot be mixed with these folder options.
+
+Stop Athena before moving the folder; keep both stores and any sidecars
+together. For a consistent named copy rather than a move, use the documented
+stopped checkpoint/fork operation. The linked package and external data remain
+separate so verifying and updating the app cannot cover or silently overwrite
+the data folder.
+
 ## Acceptance evidence and limits
 
 Workspace disk exhaustion blocked the first tests. A separately verified `/tmp`

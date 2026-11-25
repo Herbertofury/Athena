@@ -29,9 +29,22 @@ class CatalogNavigationTests(unittest.TestCase):
     self.assertEqual(readme.count('## Cross-project product requirements'),1)
     self.assertEqual(readme.split('\n## Cross-project product requirements')[1],expected)
     self.assertIn('[Universal engineering pillars](PRODUCT-PILLARS.md)',readme)
+    self.assertIn('# Athena Engine Foundry',(target/'wiki/Engineering-Engine-Foundry.md').read_text(encoding='utf-8'))
+    for page in ['Home.md','_Sidebar.md']:
+     self.assertEqual((target/'wiki'/page).read_text(encoding='utf-8').count('[Athena Engine Foundry](Engineering-Engine-Foundry)'),1)
+    for page in ['Engineering-Home.md','Engineering-Navigation.md']:
+     self.assertFalse((target/'wiki'/page).exists(),'missing preserved inputs are not regenerated')
     generated={str(p.relative_to(target)):p.read_bytes() for folder in ['docs','wiki','dist'] for p in (target/folder).rglob('*') if p.is_file()}
     if attempt: self.assertEqual(generated,previous)
     previous=generated
+   # The clean builder must not mutate these pages if a checkout supplies them.
+   preserved={}
+   for page in ['Engineering-Home.md','Engineering-Navigation.md']:
+    path=target/'wiki'/page
+    preserved[path]=b'# Maintained content\n'
+    path.write_bytes(preserved[path])
+   subprocess.run([sys.executable,str(target/'scripts/build_catalog.py')],check=True,capture_output=True)
+   for path,content in preserved.items(): self.assertEqual(path.read_bytes(),content)
 class DocumentationLinkTests(unittest.TestCase):
  def test_url_path_fragment_and_query(self):
   import sys

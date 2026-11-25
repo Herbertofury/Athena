@@ -35,7 +35,7 @@ def main():
   h={'Origin':'http://127.0.0.1:41379','X-Athena-Native':'1','Content-Type':'application/json','If-Match':'"empty"'}
   payload=(ROOT/'crates/athena-foundry-store/tests/fixtures/js-workspace.json').read_text()
   def start():
-   p=subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+   p=subprocess.Popen(command,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
    for _ in range(100):
     if p.poll() is not None:raise AssertionError(p.stderr.read().decode())
     try:
@@ -104,7 +104,11 @@ def main():
    fork=subprocess.run([sys.executable,'-B',str(package/'launch.py'),'--fork-checkpoint',str(checkpoint),'--working-directory',str(working),'--source-quiescent'],capture_output=True,timeout=90,check=True)
    assert json.loads(fork.stdout)['parent_checkpoint_sha256']==preserved['checkpoint.json']
    # Open only the fork, leaving the preserved checkpoint pair unchanged.
-   command=[sys.executable,'-B',str(package/'launch.py'),'--database',str(working/'foundry.sqlite3'),'--journal',str(working/'engineering.sqlite3')]
+   # Move the entire stopped profile; fixed filenames replace two absolute selections.
+   relocated=root/'relocated portable data'
+   working.rename(relocated)
+   assert not working.exists()
+   command=[sys.executable,'-B',str(package/'launch.py'),'--portable-data-dir',relocated.name]
    p=start()
    try:
     assert json.loads(request('GET','/__native/backup',headers=h)[2])==json.loads(payload)
@@ -112,6 +116,12 @@ def main():
    finally:stop(p)
    assert source_hashes()==original
    assert {path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in checkpoint.iterdir()}==preserved
+   fresh=root/'new portable profile';fresh.mkdir()
+   made=subprocess.run([sys.executable,'-B',str(package/'launch.py'),'--init-portable-data',fresh.name],cwd=root,capture_output=True,timeout=45,check=True)
+   assert json.loads(made.stdout)['created'] and not (fresh/'engineering.sqlite3').exists()
+   new_file=fresh/'foundry.sqlite3';good=new_file.read_bytes()
+   refused=subprocess.run([sys.executable,'-B',str(package/'launch.py'),'--init-portable-data',fresh.name],cwd=root,capture_output=True,timeout=10)
+   assert refused.returncode==2 and new_file.read_bytes()==good
    checkpoint_verified=True
-  print(json.dumps({'passed':True,'portable_launcher':portable,'dual_checkpoint_verified':checkpoint_verified,'checkpoint_fork_verified':checkpoint_verified,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
+  print(json.dumps({'passed':True,'portable_launcher':portable,'dual_checkpoint_verified':checkpoint_verified,'checkpoint_fork_verified':checkpoint_verified,'relocated_data_folder_verified':checkpoint_verified,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
 if __name__=='__main__':main()
