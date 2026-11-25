@@ -96,6 +96,18 @@ assert.equal(await scaleX.inputValue(),'-1.25');assert.equal(await scaleY.inputV
 await scaleLink.uncheck();await scaleX.fill('-2');
 assert.equal(await scaleY.inputValue(),'1.25');
 report.checks.push('Link magnitudes keeps the opposite mirror sign and a draft-only toggle; one Undo/Redo restores the exact pair');
+const ordering=()=>page.locator('.foundry-scene .foundry-object').evaluateAll(nodes=>nodes.map(node=>[node.dataset.id,Number(node.style.zIndex)]));
+const orderBefore=await ordering();
+const [backId,frontId]=orderBefore.map(row=>row[0]);
+assert.ok(backId&&frontId&&backId!==frontId);
+await selectObject.selectOption(frontId);await page.locator('[data-instance-back]').click();
+const atZero=await ordering();assert.deepEqual(atZero[0],[frontId,0]);
+await selectObject.selectOption(backId);await page.locator('[data-instance-back]').click();
+assert.deepEqual(await ordering(),[[backId,0],[frontId,1]]);
+await page.locator('[data-undo]').click();assert.deepEqual(await ordering(),atZero);
+await page.locator('[data-redo]').click();assert.deepEqual(await ordering(),[[backId,0],[frontId,1]]);
+report.checks.push('A second Send to back works when the first object occupies zero; the full surface order undoes exactly');
+
 
 await page.locator('[data-asset-library-summary]').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'asset-library.png')});assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);
 })().catch(e=>{report.failure=e.stack;process.exitCode=1}).finally(async()=>{await browser?.close();await new Promise(r=>server?server.close(r):r());fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(report);});

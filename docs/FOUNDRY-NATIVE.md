@@ -87,3 +87,10 @@ without saving while typing. Enabling the link does not change an existing
 unequal pair. **Apply rotation and scale** saves both in one Undo step.
 The link is optional for the current workspace session, not a saved room
 setting; pinned objects keep both scale fields locked.
+
+**Send to back** and **Bring to front** keep working when a layer already
+occupies the minimum or maximum stack number. A move normally preserves
+every other number. At the numeric limit it renumbers only the selected
+surface in the same order, including hidden objects, without touching other
+surfaces or appearance. Undo restores the exact prior numbers. Choosing an
+edge the object already occupies does not save or consume Undo.
