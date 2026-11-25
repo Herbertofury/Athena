@@ -75,7 +75,7 @@
 [data-layer-id] p{flex-basis:100%;margin:0 0 .22rem;min-width:0;overflow-wrap:anywhere;color:var(--layer-muted);line-height:1.4}
 [data-layer-id]:has([data-layer-action=select][aria-pressed=true]){border-color:var(--layer-accent)}
 [data-layer-id] button{
- box-sizing:border-box;max-width:100%;min-height:2.75rem;padding:.45rem .7rem;border:1px solid var(--layer-line);border-radius:.55rem;
+ box-sizing:border-box;max-width:100%;min-height:max(44px,2.75rem);padding:.45rem .7rem;border:1px solid var(--layer-line);border-radius:.55rem;
  color:var(--layer-fg);background:var(--layer-base);font:inherit;font-size:.85rem;line-height:1.15;text-align:left;cursor:pointer;
 }
 [data-layer-id] button:is(:hover,:focus-visible){border-color:var(--layer-accent)}

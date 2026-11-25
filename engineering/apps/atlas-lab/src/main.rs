@@ -2,7 +2,43 @@ use atlas_lab::journal::Journal;
 use std::path::Path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = std::env::args().collect();
+    let mut input = std::env::args_os();
+    let program = input.next();
+    let command = input.next();
+    if command.as_deref() == Some(std::ffi::OsStr::new("windows-directory-observation")) {
+        const USAGE: &str =
+            "Usage: atlas-lab windows-directory-observation LOCAL_DIRECTORY [MAX_ENTRIES]";
+        let directory = input.next().ok_or(USAGE)?;
+        let limit = input
+            .next()
+            .map(|value| {
+                value
+                    .to_str()
+                    .and_then(|text| text.parse().ok())
+                    .ok_or("Entry cap must be an integer from 1 to 100000")
+            })
+            .transpose()?
+            .unwrap_or(10_000);
+        if input.next().is_some() {
+            return Err(USAGE.into());
+        }
+        let observation =
+            atlas_lab::storage_windows_observation::observe(Path::new(&directory), limit)?;
+        println!("{}", serde_json::to_string_pretty(&observation)?);
+        return Ok(());
+    }
+    // Other commands retain their existing Unicode argument contract. Refuse
+    // non-Unicode input without Rust's argument-decoding panic reflecting it.
+    let args: Vec<String> = [program, command]
+        .into_iter()
+        .flatten()
+        .chain(input)
+        .map(|value| {
+            value
+                .into_string()
+                .map_err(|_| "This command requires Unicode arguments")
+        })
+        .collect::<Result<_, _>>()?;
     if args.len() == 3 && args[1] == "review-constellation-v7" {
         let report = atlas_lab::constellation_review::review_file(Path::new(&args[2]))?;
         println!("{}", serde_json::to_string_pretty(&report)?);
@@ -103,17 +139,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    if (args.len() == 3 || args.len() == 4) && args[1] == "windows-directory-observation" {
-        let limit = args
-            .get(3)
-            .map(|text| text.parse())
-            .transpose()?
-            .unwrap_or(10_000);
-        let observation =
-            atlas_lab::storage_windows_observation::observe(Path::new(&args[2]), limit)?;
-        println!("{}", serde_json::to_string_pretty(&observation)?);
-        return Ok(());
-    }
     if args.len() == 3 && args[1] == "storage-lab" {
         println!(
             "{}",
@@ -181,7 +206,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     if args.len() != 3 || args[1] != "dedup-lab" {
         eprintln!(
-            "Usage: atlas-lab review-constellation-v7 EXISTING_EXPORT.json\n       atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
+            "Usage: atlas-lab review-constellation-v7 EXISTING_EXPORT.json\n       atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab windows-directory-observation LOCAL_DIRECTORY [MAX_ENTRIES]\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
         );
         std::process::exit(2);
     }
