@@ -13,12 +13,17 @@ This is a source inventory, not a claim that every feature is shipped or fully r
 | [JetSetCraft](https://github.com/Herbertofury/JetSetCraft) | Rival Rush has seeded server-owned run state, a six-room route, upgrade drafts, rerolls/banishes, evolution recipes, bounded data-pack arena profiles, optional room contracts and immutable reward receipts. | Rival Rush is an arena roguelite. Adventure Mode is a separate approved platformer/Metroidvania/roguelike, but its run graph, stage builder, entry/return and boss gameplay remain unfinished. Do not conflate them. |
 | [Modhunter](https://github.com/Herbertofury/Modhunter) | Siege has five hero classes, a survivor-style upgrade pool, bosses and authored regional contracts; Atlas Campaign and Shiverfell have distinct mission/world progression. Chronicle supplies profile-scoped events, idempotent purchases, save revisions and atomic persistence. | Game-only rewards must never mint or impersonate Forge Sigils earned by verified MO2 updates. The practical mod manager must remain usable without the game modes. |
 | [CrownFold](https://github.com/Herbertofury/CrownFold) | Technology/research-card catalog has limited equip slots and explicit synergies; the war simulation documents deterministic same-seed/same-action outcomes, campaigns, doctrines and expeditions. | These are RTS research cards and loadouts, not a deckbuilder with draw/hand/discard, turns and card resolution. Keep Fold/Echo and strategic command identity. |
+| [GameSync](https://github.com/Herbertofury/Gamesync) | A substantial 23-module card-game platform plus Mascot Survivors, Midnight Mascot Syndicate's open-world game, a Three.js WebGPU renderer and the original Dev Room toolkit. | The card game is a real engine candidate, not merely UI cards. It remains browser/host-integrated and its rules engine uses Math.random; the open-world simulation is a 2D spatial model rendered in 3D, not full volumetric 3D physics. |
 | [Games](https://github.com/Herbertofury/Games) | Roguelites research page contains 198 unique entries, plus individual release, official-source and media records. It includes card/roguelike hybrids for discovery. | This is a game-discovery library, not an engine or proof of hands-on testing. Keep release state, source freshness and editorial judgments distinct. |
 | [Athena](https://github.com/Herbertofury/Athena) | Card-density and card-receiver experiments study generated-data rendering, complete records and integrity validation. | These are UI/data-card experiments, not a game-card rules engine. Reuse measurement lessons, not their closed schemas as arbitrary game payload validators. |
 
-**Card-game gap:** no complete reusable deck/hand/discard/turn-resolution engine was established in the inspected main-branch sources. Upgrade drafts, reward cards and CrownFold technology cards are valuable primitives, but they are not a full deckbuilder. The registry deliberately keeps this as a research/implementation gap.
+**Card-game gap correction (2026-11-24):** GameSync already has a substantial deck/hand/discard/turn-resolution engine and full collection/deckbuilding/progression surfaces. GameSync Next carries a mostly identical copy (19/23 files byte-identical; four presentation files diverged). The gap is not invention from scratch: it is extraction into Athena's deterministic, storage-agnostic, versioned engine package, followed by two real consumer acceptances.
 
-## 2. Capabilities to share
+## 2. Athena Engine Foundry
+
+Athena is now the canonical host for the three flagship engine families and their shared runtime. See [Engine Foundry architecture](ENGINE-FOUNDRY.md), [engine catalog](../engines/catalog.json), and [source intake manifests](../engines/README.md). Source snapshots are immutable GPL-licensed provenance; new refactored code belongs in Athena package `src/` folders. GameSync and GameSync Next remain protected consumers until migration is accepted. No consumer needs a live Athena connection.
+
+## 3. Capabilities to share
 
 | Capability | Reusable contract | Best initial sources |
 |---|---|---|
@@ -34,7 +39,7 @@ This is a source inventory, not a claim that every feature is shipped or fully r
 
 The existing shared capability registry records exact source commits, evidence level, limitations and next actions for every candidate. No universal implementation is selected yet.
 
-## 3. Contracts and data boundaries
+## 4. Contracts and data boundaries
 
 The versioned JSON Schemas in [guidance/schemas](../guidance/schemas/) define four portable envelopes:
 
@@ -53,7 +58,7 @@ JSON Schema cannot by itself prove gameplay invariants. Host tests must addition
 - Save migrations preserve known and unknown user data, reject stale revisions, and recover from interrupted writes. Rollback is claimed only when tested.
 - Content and asset licenses, attribution, runtime requirements and data ownership travel with the package manifest.
 
-## 4. What should be shared — and what must remain local
+## 5. What should be shared — and what must remain local
 
 **Share when proven:** stable IDs, schemas, typed effect vocabulary, deterministic test fixtures, seed/replay contracts, reward receipt semantics, encounter validation, save migration tests, card metadata, synergy graph representation and versioned compatibility evidence.
 
@@ -61,7 +66,7 @@ JSON Schema cannot by itself prove gameplay invariants. Host tests must addition
 
 A Java Forge run manager, a Python desktop-game save ledger, a JavaScript browser RTS and a future card-game engine are not one drop-in runtime. Across different languages, share contracts and fixtures first. Extract a library only when its license, dependency, runtime, portability and behavior match and at least two compatible real hosts accept it.
 
-## 5. Required agent workflow
+## 6. Required agent workflow
 
 1. **At task start:** read the owning repository's instructions/backlog; consult this guide and the gameplay capability registry; inspect current source, tests and active work in other game repositories. Do not build a duplicate because a similarly named file or feature exists.
 2. **During implementation:** preserve the local game's identity and accepted baseline. Use stable capability IDs and content IDs. Keep rules separate from UI, game-only rewards separate from external verified-maintenance rewards, and run-local effects separate from permanent progression.
@@ -70,8 +75,9 @@ A Java Forge run manager, a Python desktop-game save ledger, a JavaScript browse
 5. **Share improvements back:** when a project adds a genuinely better card, relic, perk, upgrade, encounter, map generator, boss phase, run lifecycle, reward ledger, save migration or synergy, contribute its reusable behavior, fixtures and evidence to Athena. Other agents then compare and adopt compatible parts in their own game.
 6. **Research releases:** use the [Games roguelite catalog](https://github.com/Herbertofury/Games/blob/main/wiki/Roguelites.md) and daily [Roguelike & Card Game Radar](https://github.com/Herbertofury/Athena/issues/364) coordination. Verify official release, actual mechanics, license, engine and performance before recommending an addition. Notifications are reserved for exceptional new releases or major updates, not routine patches.
 
-## 6. First implementation queue
+## 7. First implementation queue
 
+- **GameSync / GameSync Next:** preserve both accepted applications and the four divergent presentation files; migrate card rules and Mascot Games through Athena's pinned packages, then remove local engine duplication only after independent acceptance.
 - **JetSetCraft:** preserve the already tested Rival Rush run/build/arena system; keep Adventure Mode separate and finish its own deterministic region graph, traversal prerequisites, checkpoints, run-local upgrades and bosses. Reuse only validated shared schemas/fixtures.
 - **Modhunter:** compare Siege's hero/upgrade/evolution system with JetSetCraft's build paths; compare Chronicle's idempotent receipts/revision saves with JetSetCraft's receipt semantics. Keep Siege, Atlas Campaign and Shiverfell distinct and preserve the MO2 trust boundary.
 - **CrownFold:** register the technology-card definitions and synergy graph as a loadout pattern; compare save migration and deterministic simulation contracts. Do not relabel the RTS as a roguelike or deckbuilder.

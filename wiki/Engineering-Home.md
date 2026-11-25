@@ -35,6 +35,10 @@ A research home for building apps, mods, programs and game tooling. **Reviewed f
 
 [Archive indexing and trustworthy change tracking](https://github.com/Herbertofury/Athena/wiki/Engineering-Archives-and-Change-Tracking): eliminate repeated parsing, bound independent readers, and recover honestly from lost filesystem events.
 
+## Athena Engine Foundry
+
+[Engine Foundry](https://github.com/Herbertofury/Athena/wiki/Engineering-Engine-Foundry) hosts the reusable card-game, roguelite and mascot open-world engine families, immutable source baselines, package contracts, tests and consumer adoption.
+
 ## Game systems exchange
 
 [Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange) coordinates reusable roguelike and card-game mechanics across the app repositories. It distinguishes actual run systems, upgrade drafts, research cards, card presentation and complete deck rules, with versioned contracts and exact evidence.

@@ -51,11 +51,14 @@ class GameSystemsRegistryTests(unittest.TestCase):
         data["capabilities"][0]["canonicalImplementation"] = {"repository": "Herbertofury/JetSetCraft"}
         self.assertTrue(any("canonical implementation requires verified status" in error for error in MODULE.validate(data)))
 
-    def test_card_engine_stays_a_gap_until_real_host_acceptance(self):
+    def test_card_engine_candidate_stays_noncanonical_until_host_acceptance(self):
         data = registry()
         row = next(x for x in data["capabilities"] if x["id"] == "gameplay.card-game-engine")
         row["status"] = "verified"
         self.assertTrue(any("keep status comparison_needed" in error for error in MODULE.validate(data)))
+        row["status"] = "comparison_needed"
+        row["canonicalImplementation"] = None
+        self.assertEqual(MODULE.validate(data), [])
 
 if __name__ == "__main__":
     unittest.main()

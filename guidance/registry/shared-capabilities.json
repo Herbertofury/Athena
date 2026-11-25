@@ -171,6 +171,30 @@
       "nextAction": "M1a-e / Athena #363: compare exact operation-level coverage with Modhunter native release methods, Enderloom batch/fast paths, GameSync shared profiles, Vault and Modding-Knowledge. Adopt compatible scoped improvements, preserve native implementations and validate public-live/authorized fixtures; fix failed CI before promotion."
     },
     {
+      "id": "acquisition.request-coalescing",
+      "name": "Exact-request coalescing and independent response consumption",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "engineering/docs/adapters/contract.md"
+      ],
+      "researchRefs": [
+        "guidance/registry/web-acquisition-watch.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/request-dedup-module.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/request-dedup-module.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Maintained active GameSync implementation: normalized header/options identity, independent response bodies, cancellation separation and stale-entry ownership. Both local regression groups passed on Node 22.16; exact source and test blobs matched.",
+          "limits": "Browser integration and memory/throughput comparison open; CI failed with unavailable logs. No unconditional sharing of authenticated requests or forced mutation coalescing."
+        }
+      ],
+      "nextAction": "Evaluate the maintained GameSync module in compatible GameSync Next/browser consumers with equivalent requests, response streams, credentials and cancellation; port behavior/fixtures rather than adding a competing copy. Keep host-specific isolation."
+    },
+    {
       "id": "acquisition.web-extraction",
       "name": "Web extraction and browser routing",
       "status": "comparison_needed",
@@ -215,27 +239,6 @@
       "nextAction": "Compare authorized parsing and provider-specific APIs/metadata before general crawler fallback. Review GameSync/Next site registries, MediaForge and UltraDeck specialized actions, and Noxviola browser integration once actual source is available. Do not replace proven specialized functionality with generic extraction."
     },
     {
-      "id": "engineering.release-checkout",
-      "name": "Shared release policy and receipt validation",
-      "status": "canonical_policy_available",
-      "canonicalImplementation": {
-        "repository": "Herbertofury/Athena",
-        "path": "guidance/tools/release_checkout.py",
-        "commit": "3509ebf8f8c06ec3305ddd0a7cc0491507eb9741",
-        "scope": "Reference receipt validator; structure checks only, not evidence verification or fleet CI adoption."
-      },
-      "contractRefs": [
-        "guidance/PRE_RELEASE_OPTIMIZATION.md",
-        "guidance/WEB_ACQUISITION_FRONTIER.md",
-        "guidance/CLI_FIRST_EXECUTION.md"
-      ],
-      "researchRefs": [
-        "guidance/registry/release-checkout-tools.json"
-      ],
-      "candidates": [],
-      "nextAction": "Reuse the maintained Athena policy and pinned validator rather than cloning a different release standard; validate consumer integration and actual acceptance evidence."
-    },
-    {
       "id": "engineering.browser-runtime-proof",
       "name": "Reusable isolated browser and native test routes",
       "status": "comparison_needed",
@@ -270,175 +273,25 @@
       "nextAction": "M2: refresh actual toolchains, compare existing host harnesses, trial versioned evidence contract in two compatible consuming repositories."
     },
     {
-      "id": "modding.package-index",
-      "name": "Read-only Sims package indexing and preview metadata",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
+      "id": "engineering.release-checkout",
+      "name": "Shared release policy and receipt validation",
+      "status": "canonical_policy_available",
+      "canonicalImplementation": {
+        "repository": "Herbertofury/Athena",
+        "path": "guidance/tools/release_checkout.py",
+        "commit": "3509ebf8f8c06ec3305ddd0a7cc0491507eb9741",
+        "scope": "Reference receipt validator; structure checks only, not evidence verification or fleet CI adoption."
+      },
       "contractRefs": [
-        "guidance/CLI_FIRST_EXECUTION.md",
-        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+        "guidance/PRE_RELEASE_OPTIMIZATION.md",
+        "guidance/WEB_ACQUISITION_FRONTIER.md",
+        "guidance/CLI_FIRST_EXECUTION.md"
       ],
       "researchRefs": [
-        "docs/PORTFOLIO-ALIGNMENT.md"
+        "guidance/registry/release-checkout-tools.json"
       ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/TS4-Accelerator",
-          "commit": "5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7",
-          "path": "README.md",
-          "source": "https://github.com/Herbertofury/TS4-Accelerator/blob/5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7/README.md",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Recovered DBPF metadata and SQLite cache flow documented.",
-          "limits": "Reconcile source lineage and exact supported formats; full real game behavior unverified."
-        },
-        {
-          "repository": "Herbertofury/External-CAS",
-          "commit": "48bb971359b0306b2ecee39fcc376beaec73d99d",
-          "path": "Cargo.toml",
-          "source": "https://github.com/Herbertofury/External-CAS/blob/48bb971359b0306b2ecee39fcc376beaec73d99d/Cargo.toml",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Workspace catalog/assets/renderer boundaries declared.",
-          "limits": "Inspect actual parsing, ordering and asset behavior before shared extraction."
-        },
-        {
-          "repository": "Herbertofury/Hover-App",
-          "commit": "81026214982851d67c7d798f32be68d499ce8813",
-          "path": "README.md",
-          "source": "https://github.com/Herbertofury/Hover-App/blob/81026214982851d67c7d798f32be68d499ce8813/README.md",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Native preview project documents development MSI evidence; tree contains DBPF format code.",
-          "limits": "Compare actual read-only parser and preview contracts, no released parity claim."
-        }
-      ],
-      "nextAction": "M3: inspect DBPF parser and cache call sites, compare exact package inventory, conflicts, malformed input and real CAS/preview acceptance; share versioned core only if no loss."
-    },
-    {
-      "id": "acquisition.request-coalescing",
-      "name": "Exact-request coalescing and independent response consumption",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
-      "contractRefs": [
-        "engineering/docs/adapters/contract.md"
-      ],
-      "researchRefs": [
-        "guidance/registry/web-acquisition-watch.json"
-      ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/Gamesync",
-          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
-          "path": "app/shared/request-dedup-module.js",
-          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/request-dedup-module.js",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Maintained active GameSync implementation: normalized header/options identity, independent response bodies, cancellation separation and stale-entry ownership. Both local regression groups passed on Node 22.16; exact source and test blobs matched.",
-          "limits": "Browser integration and memory/throughput comparison open; CI failed with unavailable logs. No unconditional sharing of authenticated requests or forced mutation coalescing."
-        }
-      ],
-      "nextAction": "Evaluate the maintained GameSync module in compatible GameSync Next/browser consumers with equivalent requests, response streams, credentials and cancellation; port behavior/fixtures rather than adding a competing copy. Keep host-specific isolation."
-    },
-    {
-      "id": "gameplay.seeded-run-state",
-      "name": "Seeded run state and deterministic replay",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
-      "contractRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md",
-        "guidance/schemas/game-system-package.schema.json",
-        "guidance/schemas/roguelike-run-snapshot.schema.json"
-      ],
-      "researchRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Server-owned mode-only run state with stable run/owner IDs, seed, bounded counters, upgrade ranks, rerolls/banishes, offer revision and deterministic per-run critical/offer sequences.",
-          "limits": "Java Random/seed behavior is host-specific; compare stream isolation, snapshot/replay and schema evolution before sharing."
-        },
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Server-held six-room route with run ID, seed, phase, offered choices, room history and deterministic seeded room selection.",
-          "limits": "Rival Rush arena circuit is not Adventure Mode's nonlinear region graph; keep those modes distinct."
-        },
-        {
-          "repository": "Herbertofury/Modhunter",
-          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
-          "path": "mo2_update_arsenal/gameplay.py",
-          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Chronicle profile-scoped state, siege-state revision compare-and-swap and local atomic persistence; game state is explicitly separate from authoritative MO2 reward evidence.",
-          "limits": "Python save contract is host-specific; do not let game-only state mint verified update currency."
-        },
-        {
-          "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
-          "path": "src/war.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Source comments and deterministic rift-surge/war simulation state document same-seed/same-action reproducibility.",
-          "limits": "RTS campaign simulation, not a roguelike run manager; verify the full seed ingress and save lifecycle separately."
-        }
-      ],
-      "nextAction": "Compare seed derivation, named random streams, run phases, deterministic replay and checkpoint recovery. Prefer shared behavioral fixtures and versioned snapshot contracts first; only share a PRNG/runtime library after equivalent two-host evidence."
-    },
-    {
-      "id": "gameplay.encounter-content",
-      "name": "Validated encounter catalogs, map/room graphs and boss contracts",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
-      "contractRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "researchRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushArenaCatalog.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushArenaCatalog.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Bounded server-owned data-pack arena catalog, max 32 profiles, validated geometry/material/optional provider requirements and room contracts.",
-          "limits": "Catalog currently builds arena room profiles, not Adventure Mode's authored Metroidvania graph or boss progression."
-        },
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushArenaContract.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushArenaContract.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Optional relay/paint/hunt side contracts observe accepted server events and do not independently grant rewards or clear rooms.",
-          "limits": "Minecraft collision, movement and server authority remain host-specific."
-        },
-        {
-          "repository": "Herbertofury/Modhunter",
-          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
-          "path": "mo2_update_arsenal/web/siege.js",
-          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/web/siege.js",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Authored 12-region identities, eight named contracts per region, five mastery tiers, hero classes, upgrade pool and boss-oriented campaign data.",
-          "limits": "Browser simulation is distinct from Minecraft/RTS world engines; preserve game-only reward boundaries."
-        },
-        {
-          "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
-          "path": "src/war.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Five authored war campaigns, enemy doctrines, sortie/expedition catalogs and objective phases.",
-          "limits": "RTS objective graphs are not automatically card-game encounters or roguelike room graphs."
-        }
-      ],
-      "nextAction": "Extract only engine-independent encounter schemas (stable IDs, prerequisites, legal exits, objective/phase IDs, reward refs and test fixtures). Prove graph reachability, authored-content integrity and actual native encounter behavior before sharing."
+      "candidates": [],
+      "nextAction": "Reuse the maintained Athena policy and pinned validator rather than cloning a different release standard; validate consumer integration and actual acceptance evidence."
     },
     {
       "id": "gameplay.build-synergies",
@@ -532,9 +385,45 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Level-up upgrade choice pool and hero-specific builds provide a roguelite draft precedent.",
           "limits": "Not a collectible deckbuilder or reusable card rules engine; code is browser-mode-specific."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/cardgame/engine.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/cardgame/engine.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "46 KB turn-based rules/state-machine engine with combat resolution, targeting, keywords, action/event flow and stepped AI-turn APIs.",
+          "limits": "Source baseline only. 17 Math.random calls; deterministic RNG, full zone/effect invariants and reusable host package not yet proven."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/cardgame/index.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/cardgame/index.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "63 KB platform mount and integration wiring for deckbuilder, collection, packs, progression, AI and additional modes.",
+          "limits": "DOM/local profile integration and GameSync-specific card pool; keep as host adapter/reference, not the headless rules core."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/cardgame/ai.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/cardgame/ai.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Layered AI candidate with lethal solver, move generation, board evaluation and personality profiles.",
+          "limits": "AI and random decisions require deterministic injected RNG and benchmark/quality evaluation."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/extension-v2/assets/shared/cardgame/engine.js",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/extension-v2/assets/shared/cardgame/engine.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Byte-identical rules-engine copy; confirms consumer duplication, not an independent implementation.",
+          "limits": "Same 17 Math.random calls; keep one Athena source and pin consumer copies after package extraction."
         }
       ],
-      "nextAction": "Research and implement a genuine card-game vertical slice only in an approved host: stable card definitions, card instances, deck/hand/discard/exhaust/removed/resolving zones, turn phases, resource costs, targets, typed effects, deterministic resolution/action log, save/migration and full zone-conservation tests. Current repositories do not establish a complete shared card-game engine."
+      "nextAction": "M5 Engine Foundry: Athena hosts a 23-module GPL source intake snapshot. Extract a headless deterministic rules core (inject RNG, typed effect registry, zone invariants, storage adapters), retain UI/collection/content host adapters, then prove GameSync and GameSync Next against the same fixtures before declaring a canonical release."
     },
     {
       "id": "gameplay.card-presentation",
@@ -568,90 +457,6 @@
         }
       ],
       "nextAction": "Use these studies as measurement/integrity references only. Each host owns its card art, typography, animation, accessibility and interaction; benchmark real game cards and retain all rules/metadata."
-    },
-    {
-      "id": "gameplay.reward-ledger",
-      "name": "Idempotent game rewards, receipts and separate maintenance evidence",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
-      "contractRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "researchRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/Modhunter",
-          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
-          "path": "mo2_update_arsenal/gameplay.py",
-          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Chronicle stores profile-scoped event sequences, idempotent transaction receipts, version-checked Siege saves and atomic persistence.",
-          "limits": "The Forge Sigil wallet is intentionally backed by native verified MO2 update events; never reuse that authority model to fabricate game rewards."
-        },
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Immutable schema-versioned reward receipt with bounds validation; display history is explicitly not payout authority.",
-          "limits": "Minecraft account/crew reward and settlement manager remains authoritative; the bounded recent history is not a general event store."
-        },
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardHistory.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardHistory.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Deduplicates display receipts by stable ID and caps recent presentation history.",
-          "limits": "A 16-row UI history is not a complete persistent reward ledger."
-        }
-      ],
-      "nextAction": "Share receipt shape and idempotency test patterns, not a shared currency. Prove duplicate/reconnect/reload handling and authoritative settlement in each host; preserve MO2 maintenance and game-only economies as separate trust domains."
-    },
-    {
-      "id": "gameplay.save-progression",
-      "name": "Game save schemas, permanent unlocks and safe progression migration",
-      "status": "comparison_needed",
-      "canonicalImplementation": null,
-      "contractRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "researchRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
-      ],
-      "candidates": [
-        {
-          "repository": "Herbertofury/Modhunter",
-          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
-          "path": "mo2_update_arsenal/gameplay.py",
-          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Chronicle has schemaVersion, atomic temp-file replacement, profile-scoped events, compare-and-swap revisions for Siege and persistent-world state.",
-          "limits": "Validate old saves, interruption and concurrent writer behavior per host; local Python file persistence is not portable to all targets."
-        },
-        {
-          "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
-          "path": "src/lineage.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "migrateLineage allowlists known research IDs, deduplicates researched/equipped entries and caps equipped technology slots.",
-          "limits": "This is a small subsystem migration, not proof of complete game save migration/rollback."
-        },
-        {
-          "repository": "Herbertofury/JetSetCraft",
-          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
-          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
-          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Schema-1 immutable receipt serialization rejects malformed optional history rows without changing authoritative balances.",
-          "limits": "NBT persistence and account/crew save lifecycle are Minecraft-specific."
-        }
-      ],
-      "nextAction": "Share migration fixtures and invariants: preserve known and unknown user data, reject invalid IDs, detect stale revisions, make writes recoverable, and keep run-only upgrades separate from permanent unlocks. Never replace a complete save with partial/corrupt state."
     },
     {
       "id": "gameplay.card-run-bridge",
@@ -696,6 +501,57 @@
       "nextAction": "Compose a card engine with a run envelope only after each is independently proven. Define run-local deck mutations, permanent unlocks, relics, card reward choice, boss intent and map events as explicit adapters; test reset, loss, replay and save migration."
     },
     {
+      "id": "gameplay.encounter-content",
+      "name": "Validated encounter catalogs, map/room graphs and boss contracts",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushArenaCatalog.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushArenaCatalog.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Bounded server-owned data-pack arena catalog, max 32 profiles, validated geometry/material/optional provider requirements and room contracts.",
+          "limits": "Catalog currently builds arena room profiles, not Adventure Mode's authored Metroidvania graph or boss progression."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushArenaContract.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushArenaContract.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Optional relay/paint/hunt side contracts observe accepted server events and do not independently grant rewards or clear rooms.",
+          "limits": "Minecraft collision, movement and server authority remain host-specific."
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
+          "path": "mo2_update_arsenal/web/siege.js",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/web/siege.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Authored 12-region identities, eight named contracts per region, five mastery tiers, hero classes, upgrade pool and boss-oriented campaign data.",
+          "limits": "Browser simulation is distinct from Minecraft/RTS world engines; preserve game-only reward boundaries."
+        },
+        {
+          "repository": "Herbertofury/CrownFold",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
+          "path": "src/war.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Five authored war campaigns, enemy doctrines, sortie/expedition catalogs and objective phases.",
+          "limits": "RTS objective graphs are not automatically card-game encounters or roguelike room graphs."
+        }
+      ],
+      "nextAction": "Extract only engine-independent encounter schemas (stable IDs, prerequisites, legal exits, objective/phase IDs, reward refs and test fixtures). Prove graph reachability, authored-content integrity and actual native encounter behavior before sharing."
+    },
+    {
       "id": "gameplay.game-research-radar",
       "name": "Source-backed roguelike and card-game mechanic discovery",
       "status": "comparison_needed",
@@ -727,6 +583,349 @@
         }
       ],
       "nextAction": "Use Games as the existing discovery catalog and the daily Roguelike & Card Game Radar for exceptional new releases. Record exact mechanic, official evidence, version, license, platform/runtime and adopt/adapt/skip recommendation; route genuinely reusable implementation back into this registry."
+    },
+    {
+      "id": "gameplay.mascot-actor-runtime",
+      "name": "Reusable mascot character and animation runtime",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/ENGINE-FOUNDRY.md",
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "engines/catalog.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/Mascot_Engine.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/Mascot_Engine.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "608 KB legacy mascot engine for Shimeji-style packs, browser overlay, settings, memory, animation and pack import/export.",
+          "limits": "Monolithic browser-extension integration; keep actor runtime separate from open-world simulation and do not copy character assets."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/extension-v2/src/content/mascot/engineMascot.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/extension-v2/src/content/mascot/engineMascot.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Modular TypeScript mascot runtime candidate; related registry, type and XML parser sources are split into modules.",
+          "limits": "Source inspection only; compare supported actions, pack compatibility, animation parity and runtime cost before selecting."
+        }
+      ],
+      "nextAction": "Compare GameSync's legacy mascot runtime with GameSync Next's modular TypeScript implementation. Define a generic actor/animation adapter for the open-world engine; do not couple world simulation to one mascot pack format."
+    },
+    {
+      "id": "gameplay.mascot-open-world-engine",
+      "name": "Reusable mascot open-world exploration engine",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/ENGINE-FOUNDRY.md",
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "engines/catalog.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/mascot-games/game-openworld.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/mascot-games/game-openworld.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "209 KB Midnight Mascot Syndicate world simulation with districts, buildings, interiors, NPCs, vehicles, weapons, pickups, missions, mascot packs and save flow.",
+          "limits": "Browser globals, host messaging and 2D x/y world simulation; not a standalone engine or full volumetric 3D physics."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/mascot-games/game-openworld-3d.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/mascot-games/game-openworld-3d.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "62 KB Three.js WebGPU renderer with third-/first-person camera, actor/vehicle/pickup meshes, interior groups and mascot-derived first-person rig.",
+          "limits": "Renders a hybrid 2D world model in 3D; requires host-provided Three.js WebGPU and actor runtime."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/mascot-games/devroom/README.md",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/mascot-games/devroom/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Explicit reusable 2D systems reference for physics, movement, camera, combat, AI, world, animation bridge, weather, vehicles, dialogue and missions.",
+          "limits": "README states copy-friendly reference/testing ground, not extracted package; 2D toolkit, not the 3D open-world engine."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/extension-v2/assets/shared/mascot-games/game-openworld-3d.js",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/extension-v2/assets/shared/mascot-games/game-openworld-3d.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Diverged consumer renderer copy; GameSync's renderer includes delta-time camera smoothing absent here.",
+          "limits": "Do not assume newer/better based on repo name; full feature and visual comparison required."
+        }
+      ],
+      "nextAction": "Athena hosts the source intake and defines a host-neutral world/actor API. Split simulation, renderer, mascot actor runtime, persistence and host adapters. Preserve GameSync and Next as independent consumers until 3D/native parity and two-host acceptance."
+    },
+    {
+      "id": "gameplay.reward-ledger",
+      "name": "Idempotent game rewards, receipts and separate maintenance evidence",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
+          "path": "mo2_update_arsenal/gameplay.py",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Chronicle stores profile-scoped event sequences, idempotent transaction receipts, version-checked Siege saves and atomic persistence.",
+          "limits": "The Forge Sigil wallet is intentionally backed by native verified MO2 update events; never reuse that authority model to fabricate game rewards."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Immutable schema-versioned reward receipt with bounds validation; display history is explicitly not payout authority.",
+          "limits": "Minecraft account/crew reward and settlement manager remains authoritative; the bounded recent history is not a general event store."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardHistory.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardHistory.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Deduplicates display receipts by stable ID and caps recent presentation history.",
+          "limits": "A 16-row UI history is not a complete persistent reward ledger."
+        }
+      ],
+      "nextAction": "Share receipt shape and idempotency test patterns, not a shared currency. Prove duplicate/reconnect/reload handling and authoritative settlement in each host; preserve MO2 maintenance and game-only economies as separate trust domains."
+    },
+    {
+      "id": "gameplay.roguelite-engine",
+      "name": "Reusable configurable roguelite run engine",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/ENGINE-FOUNDRY.md",
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "engines/catalog.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/mascot-games/game-survivors.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/mascot-games/game-survivors.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "35 KB five-minute survivor-style loop with automatic weapons, enemy families, XP gems and level-up upgrades.",
+          "limits": "Browser/canvas host, fixed duration and Math.random; not a general deterministic run engine."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "b60dab2c01b9d403a835714fce6e63152619e5d1",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/b60dab2c01b9d403a835714fce6e63152619e5d1/src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "31 KB mode-only run rules, seeded Java Random, run-scoped upgrade ranks, rerolls/banishes, capped effects and 30-minute session target.",
+          "limits": "Forge/Minecraft host-specific; adapt invariants and fixtures, do not copy into browser package as a drop-in."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "b60dab2c01b9d403a835714fce6e63152619e5d1",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/b60dab2c01b9d403a835714fce6e63152619e5d1/src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Server-owned seeded six-room route, versioned legal choice/arrival phases, bounded arenas and stable reward IDs.",
+          "limits": "Minecraft world/position APIs; route contract is reusable but implementation is host-specific."
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "b9b7e688983f0d3d3cc371c1c2e8cc5562467835",
+          "path": "mo2_update_arsenal/web/siege.js",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/b9b7e688983f0d3d3cc371c1c2e8cc5562467835/mo2_update_arsenal/web/siege.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "66 KB browser survivor-style squad game with hero classes, enemy combat and boss gameplay.",
+          "limits": "Uses DOM/localStorage and MO2 bridge; game rewards must never mint verified maintenance currency."
+        }
+      ],
+      "nextAction": "Use GameSync Survivors as the playable action loop, JetSetCraft RushRun/RushCircuit as seeded authoritative run and encounter-state patterns, and Modhunter Siege as a challenger. Extract a configurable deterministic core; no one source is yet the winner."
+    },
+    {
+      "id": "gameplay.save-progression",
+      "name": "Game save schemas, permanent unlocks and safe progression migration",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
+          "path": "mo2_update_arsenal/gameplay.py",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Chronicle has schemaVersion, atomic temp-file replacement, profile-scoped events, compare-and-swap revisions for Siege and persistent-world state.",
+          "limits": "Validate old saves, interruption and concurrent writer behavior per host; local Python file persistence is not portable to all targets."
+        },
+        {
+          "repository": "Herbertofury/CrownFold",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
+          "path": "src/lineage.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "migrateLineage allowlists known research IDs, deduplicates researched/equipped entries and caps equipped technology slots.",
+          "limits": "This is a small subsystem migration, not proof of complete game save migration/rollback."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/crew/CrewRewardReceipt.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Schema-1 immutable receipt serialization rejects malformed optional history rows without changing authoritative balances.",
+          "limits": "NBT persistence and account/crew save lifecycle are Minecraft-specific."
+        }
+      ],
+      "nextAction": "Share migration fixtures and invariants: preserve known and unknown user data, reject invalid IDs, detect stale revisions, make writes recoverable, and keep run-only upgrades separate from permanent unlocks. Never replace a complete save with partial/corrupt state."
+    },
+    {
+      "id": "gameplay.seeded-run-state",
+      "name": "Seeded run state and deterministic replay",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md",
+        "guidance/schemas/game-system-package.schema.json",
+        "guidance/schemas/roguelike-run-snapshot.schema.json"
+      ],
+      "researchRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Server-owned mode-only run state with stable run/owner IDs, seed, bounded counters, upgrade ranks, rerolls/banishes, offer revision and deterministic per-run critical/offer sequences.",
+          "limits": "Java Random/seed behavior is host-specific; compare stream isolation, snapshot/replay and schema evolution before sharing."
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "1683b6deb194603e8b6b4daaddc97f33c64a6b9d",
+          "path": "src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+          "source": "https://github.com/Herbertofury/JetSetCraft/blob/1683b6deb194603e8b6b4daaddc97f33c64a6b9d/src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Server-held six-room route with run ID, seed, phase, offered choices, room history and deterministic seeded room selection.",
+          "limits": "Rival Rush arena circuit is not Adventure Mode's nonlinear region graph; keep those modes distinct."
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "f5bf5e616baf04600d92a532509b3475d2d5e1ba",
+          "path": "mo2_update_arsenal/gameplay.py",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/f5bf5e616baf04600d92a532509b3475d2d5e1ba/mo2_update_arsenal/gameplay.py",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Chronicle profile-scoped state, siege-state revision compare-and-swap and local atomic persistence; game state is explicitly separate from authoritative MO2 reward evidence.",
+          "limits": "Python save contract is host-specific; do not let game-only state mint verified update currency."
+        },
+        {
+          "repository": "Herbertofury/CrownFold",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
+          "path": "src/war.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Source comments and deterministic rift-surge/war simulation state document same-seed/same-action reproducibility.",
+          "limits": "RTS campaign simulation, not a roguelike run manager; verify the full seed ingress and save lifecycle separately."
+        }
+      ],
+      "nextAction": "Compare seed derivation, named random streams, run phases, deterministic replay and checkpoint recovery. Prefer shared behavioral fixtures and versioned snapshot contracts first; only share a PRNG/runtime library after equivalent two-host evidence."
+    },
+    {
+      "id": "gameplay.shared-browser-game-runtime",
+      "name": "Shared browser game runtime",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/ENGINE-FOUNDRY.md",
+        "docs/GAME-SYSTEMS-EXCHANGE.md"
+      ],
+      "researchRefs": [
+        "engines/catalog.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/mascot-games/game-core.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/mascot-games/game-core.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "50 KB canvas/input/drawing/collision/particle runtime used by mascot games including Survivors and Open World.",
+          "limits": "Global namespace and browser canvas host; no stable cross-host API or deterministic replay contract yet."
+        }
+      ],
+      "nextAction": "Refactor the shared canvas runtime into an explicit disposable host adapter with fixed-step scheduling and injected input/RNG; do not duplicate it inside each game engine."
+    },
+    {
+      "id": "modding.package-index",
+      "name": "Read-only Sims package indexing and preview metadata",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "guidance/CLI_FIRST_EXECUTION.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "docs/PORTFOLIO-ALIGNMENT.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/TS4-Accelerator",
+          "commit": "5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7",
+          "path": "README.md",
+          "source": "https://github.com/Herbertofury/TS4-Accelerator/blob/5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Recovered DBPF metadata and SQLite cache flow documented.",
+          "limits": "Reconcile source lineage and exact supported formats; full real game behavior unverified."
+        },
+        {
+          "repository": "Herbertofury/External-CAS",
+          "commit": "48bb971359b0306b2ecee39fcc376beaec73d99d",
+          "path": "Cargo.toml",
+          "source": "https://github.com/Herbertofury/External-CAS/blob/48bb971359b0306b2ecee39fcc376beaec73d99d/Cargo.toml",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Workspace catalog/assets/renderer boundaries declared.",
+          "limits": "Inspect actual parsing, ordering and asset behavior before shared extraction."
+        },
+        {
+          "repository": "Herbertofury/Hover-App",
+          "commit": "81026214982851d67c7d798f32be68d499ce8813",
+          "path": "README.md",
+          "source": "https://github.com/Herbertofury/Hover-App/blob/81026214982851d67c7d798f32be68d499ce8813/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Native preview project documents development MSI evidence; tree contains DBPF format code.",
+          "limits": "Compare actual read-only parser and preview contracts, no released parity claim."
+        }
+      ],
+      "nextAction": "M3: inspect DBPF parser and cache call sites, compare exact package inventory, conflicts, malformed input and real CAS/preview acceptance; share versioned core only if no loss."
     }
   ],
   "coverage": {

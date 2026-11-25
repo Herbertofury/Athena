@@ -27,6 +27,11 @@
 - [Collection and Media Contract](https://github.com/Herbertofury/Athena/wiki/Engineering-Collection-and-Media-Contract)
 - [Upstream Candidates](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Upstream-Candidates)
 
+### Game Engine Foundry
+
+- [Engine Foundry](https://github.com/Herbertofury/Athena/wiki/Engineering-Engine-Foundry)
+- [Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange)
+
 ### Frontier research
 
 - [November 24 frontier engineering intelligence](https://github.com/Herbertofury/Athena/wiki/Engineering-Frontier-Research-2026-11-24)

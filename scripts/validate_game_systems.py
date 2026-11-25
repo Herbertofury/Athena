@@ -8,6 +8,7 @@ REQUIRED_IDS = {
     "gameplay.seeded-run-state", "gameplay.encounter-content", "gameplay.build-synergies",
     "gameplay.card-game-engine", "gameplay.card-presentation", "gameplay.reward-ledger",
     "gameplay.save-progression", "gameplay.card-run-bridge", "gameplay.game-research-radar",
+    "gameplay.roguelite-engine", "gameplay.mascot-open-world-engine", "gameplay.mascot-actor-runtime", "gameplay.shared-browser-game-runtime",
 }
 EVIDENCE_LEVELS = {"source_inspected_not_runtime_verified", "synthetic_tested", "local_fixture_tested", "runtime_verified", "consumer_verified", "research_only"}
 SHA_RE = re.compile(r"^[0-9a-f]{40}$")
@@ -64,7 +65,7 @@ def validate(data: object) -> list[str]:
     card_engine = next((row for row in gameplay if row.get("id") == "gameplay.card-game-engine"), None)
     if card_engine:
         if card_engine.get("canonicalImplementation") is not None:
-            errors.append("gameplay.card-game-engine: no complete deck/hand rules engine has been verified")
+            errors.append("gameplay.card-game-engine: source candidate exists, but no Athena-hosted package has passed deterministic and two-consumer acceptance")
         if card_engine.get("status") != "comparison_needed":
             errors.append("gameplay.card-game-engine: keep status comparison_needed until a real card-game host is accepted")
     return errors

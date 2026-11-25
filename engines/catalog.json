@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-24",
+  "hostRepository": "Herbertofury/Athena",
+  "policy": "docs/ENGINE-FOUNDRY.md",
+  "lifecycle": [
+    "intake_snapshot",
+    "extracted_core",
+    "fixture_tested",
+    "native_runtime_tested",
+    "two_consumer_accepted",
+    "canonical_release"
+  ],
+  "packages": [
+    {
+      "id": "athena.card-game",
+      "name": "Card Game Engine",
+      "kind": "card-game",
+      "version": "0.1.0-intake",
+      "status": "intake_snapshot",
+      "license": "GPL-3.0-or-later",
+      "sourceOfTruth": "Athena package src/ after extraction; upstream snapshot is immutable provenance",
+      "upstream": {
+        "repository": "Herbertofury/Gamesync",
+        "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+        "path": "app/shared/cardgame",
+        "fileCount": 23
+      },
+      "consumerComparison": {
+        "repository": "Herbertofury/GameSync-Next",
+        "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+        "identicalFiles": 19,
+        "totalFiles": 23,
+        "divergedFiles": [
+          "board.js",
+          "cardgame.css",
+          "deck-select.js",
+          "screens.js"
+        ]
+      },
+      "strengths": [
+        "turn-based state machine and event output",
+        "card/hero/keyword/effect definitions",
+        "deckbuilding, collection, AI, packs and progression",
+        "solo adventure, boss, gauntlet, puzzle and other modes"
+      ],
+      "gaps": [
+        "17 Math.random calls in current rules engine; inject versioned deterministic RNG",
+        "localStorage in state layer; isolate storage adapters",
+        "GameSync-specific game/mod card derivation mixed with generic rules",
+        "typed allowlisted effects, deterministic replay, zone invariants and consumer acceptance"
+      ],
+      "consumers": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "status": "legacy-source"
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "status": "copied-consumer-with-four-ui-divergences"
+        }
+      ]
+    },
+    {
+      "id": "athena.roguelite",
+      "name": "Roguelite Engine",
+      "kind": "roguelike",
+      "version": "0.1.0-intake",
+      "status": "intake_snapshot",
+      "license": "GPL-3.0-or-later",
+      "sourceOfTruth": "Athena package src/ after extraction; source candidates remain immutable",
+      "upstream": {
+        "repository": "Herbertofury/Gamesync",
+        "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+        "path": "app/shared/mascot-games/game-survivors.js",
+        "sharedRuntime": "engines/shared-game-runtime/upstream/gamesync/game-core.js"
+      },
+      "challengers": [
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "commit": "b60dab2c01b9d403a835714fce6e63152619e5d1",
+          "paths": [
+            "src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+            "src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+            "src/main/java/com/herberto/jetsetcraft/rush/RushBuildPaths.java"
+          ],
+          "strength": "server-owned seeded runs, legal phases, upgrade drafts, rerolls/banishes, evolutions and reward receipts",
+          "limitation": "Minecraft/Forge host-specific; reference, not portable package"
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "b9b7e688983f0d3d3cc371c1c2e8cc5562467835",
+          "paths": [
+            "mo2_update_arsenal/web/siege.js"
+          ],
+          "strength": "survivor-style squad combat, hero builds, bosses and enemy simulation",
+          "limitation": "browser host and MO2 trust boundaries; game-only rewards must remain separate"
+        }
+      ],
+      "gaps": [
+        "current GameSync Survivors uses Math.random and fixed five-minute duration",
+        "define configurable modes rather than assuming every roguelite is bullet-heaven",
+        "extract seeded RNG, fixed-step simulation, spawn director, typed upgrades/synergies, bosses, run snapshot, rewards and meta progression",
+        "prove replay and save recovery across hosts"
+      ],
+      "consumers": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "status": "legacy-source"
+        },
+        {
+          "repository": "Herbertofury/JetSetCraft",
+          "status": "host-specific-challenger"
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "status": "host-specific-challenger"
+        }
+      ]
+    },
+    {
+      "id": "athena.mascot-open-world",
+      "name": "Mascot Open-World Engine",
+      "kind": "shared-gameplay",
+      "version": "0.1.0-intake",
+      "status": "intake_snapshot",
+      "license": "GPL-3.0-or-later",
+      "sourceOfTruth": "Athena package src/ after extraction; GameSync source is immutable intake",
+      "upstream": {
+        "repository": "Herbertofury/Gamesync",
+        "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+        "paths": [
+          "app/shared/mascot-games/game-openworld.js",
+          "app/shared/mascot-games/game-openworld-3d.js"
+        ],
+        "support": "app/shared/mascot-games/devroom"
+      },
+      "consumerComparison": {
+        "repository": "Herbertofury/GameSync-Next",
+        "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+        "divergedFiles": [
+          "game-openworld.js",
+          "game-openworld-3d.js"
+        ],
+        "observedDifference": "GameSync renderer has delta-time camera smoothing absent in Next copy; full behavior comparison remains open"
+      },
+      "externalDependencies": [
+        {
+          "path": "app/shared/vendor/three.webgpu.min.js",
+          "blob": "7bbc0eae60d67f8eda493b81bd336826bc3511ce",
+          "license": "MIT",
+          "copied": false
+        },
+        {
+          "path": "app/Mascot_Engine.js",
+          "blob": "ed4b9460e9508f8e718361193d66c473f6eba213",
+          "license": "GPL-3.0-or-later",
+          "copied": false,
+          "role": "legacy mascot actor runtime; compare against GameSync Next modular TypeScript runtime"
+        }
+      ],
+      "strengths": [
+        "city districts, buildings, interiors, NPCs, vehicles, weapons, pickups and missions",
+        "third-person and first-person presentation through Three.js WebGPU",
+        "mascot actor animation and pack runtime integration",
+        "Dev Room has reusable 2D physics, movement, camera, combat, AI, vehicle, weather, dialogue and mission modules"
+      ],
+      "gaps": [
+        "current world simulation is primarily 2D x/y mapped to 3D x/z; not full volumetric 3D physics",
+        "separate world simulation, renderer, actor runtime, persistence, content packs and host adapters",
+        "world streaming/sectors, navmesh/pathfinding, LOD, physics, save migrations and profiling require native proof"
+      ],
+      "consumers": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "status": "legacy-source"
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "status": "diverged-consumer-copy"
+        }
+      ]
+    },
+    {
+      "id": "athena.shared-game-runtime",
+      "name": "Shared Browser Game Runtime",
+      "kind": "shared-gameplay",
+      "version": "0.1.0-intake",
+      "status": "intake_snapshot",
+      "license": "GPL-3.0-or-later",
+      "sourceOfTruth": "Athena package src/ after extraction",
+      "upstream": {
+        "repository": "Herbertofury/Gamesync",
+        "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+        "path": "app/shared/mascot-games/game-core.js"
+      },
+      "role": "Shared canvas/input/draw/collision/particle runtime consumed by GameSync mascot games; separate from rules, run logic and 3D world renderer.",
+      "gaps": [
+        "replace globals with explicit host API",
+        "fixed-step scheduling, deterministic input/replay and disposal lifecycle",
+        "measure allocation/particle budgets and background-tab behavior"
+      ],
+      "consumers": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "status": "legacy-source"
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "status": "copied-consumer"
+        }
+      ]
+    }
+  ]
+}

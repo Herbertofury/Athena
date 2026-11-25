@@ -13,8 +13,22 @@ This is the cross-project routing and prioritization view of the owner's existin
 | M2 | **Frontier stack and reusable runtime tools** — Athena research, Ferrum isolated browser harness, Vault TestGrid for supported game workflows; owners retain native requirements. | Refresh official channels, repair newer versions, adopt every verified compatible improvement; compare CPU/RAM/latency/build size and real full output. Share CLI/API contracts, not unverified code merges. |
 | M3 | **Finish real product workflows and parity** — each owning repository. | Protected features, exact current native/packaged runtime, portable data, compatibility, rollback, mandatory applicable optimizers, stack/fix-forward and wiki closeout receipt. Ship incremental vertical slices rather than waiting for all portfolio milestones. |
 | M4 | **Consolidate knowledge and historic duplicates** — Athena coordinates evidence and links; product/data owners maintain canonical source. | Versioned provenance/exports, recoverable history, no unique feature/data loss. Verify actual consumers, docs/wiki and independently accepted replacement before retiring anything; no delete without owner authorization. |
+| M5 | **Athena Engine Foundry** — Athena owns reusable card-game, roguelite, mascot open-world and shared runtime packages; each project owns its adapters, content, identity and acceptance. | Extract and version deterministic cores, preserve immutable source provenance/licenses, test complete workflows, publish docs/benchmarks/migrations and obtain two compatible consumer acceptances before canonical promotion. See [Engine Foundry](ENGINE-FOUNDRY.md). |
 
 Priority P0 means start/reconcile first because of broad dependencies or concrete drift; P1 means next product-critical work; P2 means scoped follow-up; HOLD is an explicit placeholder/constraint. These are ordering labels, not dates or GitHub milestone objects. A missing optional experiment does not stop unrelated releases. Existing mandatory checkout and opt-in security rules remain unchanged.
+
+
+## M5 — Athena Engine Foundry: canonical game engines for every project
+
+**Owner-directed, shared milestone · coordination issue:** [Athena #365](https://github.com/Herbertofury/Athena/issues/365). Athena hosts the engine catalog, package roots, immutable source-intake baselines, licenses, provenance and cross-project adoption contracts. This is the shared source-of-truth destination; package promotion remains gated on extraction, deterministic tests and real consumer acceptance.
+
+- [ ] **M5a — card-game engine:** extract GameSync's 23-module platform into a headless deterministic rules core plus card/content, AI, deckbuilder, collection, progression and presentation adapters. Inject versioned RNG (current rules source has 17 Math.random calls), remove browser storage from the core, validate typed effects and zone conservation. Keep GameSync Next's four divergent UI files as host-specific presentation.
+- [ ] **M5b — roguelite engine:** compose a configurable run core from GameSync Survivors' action loop, JetSetCraft's seeded/server-owned run and encounter contracts, and Modhunter Siege as a gameplay challenger. Support survivor, arena, platformer and card-roguelite adapters without forcing a single camera, combat model or run length. Deterministic replays and idempotent rewards are mandatory.
+- [ ] **M5c — mascot open-world engine:** split Midnight Mascot Syndicate's world simulation, 3D renderer, mascot actor runtime, content and persistence. Preserve the current hybrid as an accepted baseline; establish true 3D spatial physics/streaming only as a measured, staged capability, not a label change. Compare GameSync's more complete 3D camera smoothing against GameSync Next's diverged renderer.
+- [ ] **M5d — common kernel and authoring:** versioned RNG, event/action log, effect registry, content IDs, save migrations, reward receipts, world/encounter/card schemas, deterministic fixture/replay tools, docs and benchmark harnesses. Keep engine families independently deployable; no universal mega-engine.
+- [ ] **M5e — consumers:** prove GameSync and GameSync Next card-engine parity first; prove at least two compatible consumers for the roguelite and mascot-world engines before marking packages canonical. JetSetCraft, Modhunter, CrownFold, Games and future apps adopt only the capabilities they need. Pin exact versions, keep local adapters/portable data, test rollback and retire old copies only after acceptance.
+
+Current intake is source evidence, not a production-ready universal engine. See [Engine Foundry](ENGINE-FOUNDRY.md) and [package catalog](../engines/catalog.json).
 
 ## M1 — provider and site adapters: first cross-repository execution lane
 
@@ -47,7 +61,7 @@ Upstream verified on 2026-11-24: [Rust 1.100.0](https://blog.rust-lang.org/2026/
 
 **P0 · M0/M1/M2 · open.** Rust lab pin 1.99.1 and Playwright lock 1.62.1; 64 frontier sources are indexed but not in the generated Explorer. Adapter lab documents 426 scopes, not production coverage. [Observed source](https://github.com/Herbertofury/Athena/blob/main/engineering/README.md).
 
-- [ ] Own the shared adapter contract and comparison queue; integrate the new research into the existing Explorer and source/operation freshness. Stage Rust 1.100 and Playwright 1.65.1; verify Linux/Windows and live Wiki/Pages. Finish the existing unified app migration and preservation gates.
+- [ ] Own the shared adapter contract and comparison queue; integrate the new research into the existing Explorer and source/operation freshness. Stage Rust 1.100 and Playwright 1.65.1; verify Linux/Windows and live Wiki/Pages. Finish the existing unified app migration and preservation gates. Coordinate M5 Engine Foundry extraction and protect GameSync's card, roguelite and mascot-world source until Athena packages are accepted.
 - **Existing local owner/work record:** [issue 60](https://github.com/Herbertofury/Athena/issues/60). Review actual active work first, record exact evidence and next action there, then link the updated status here.
 
 ### Enderloom
