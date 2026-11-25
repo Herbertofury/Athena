@@ -1,5 +1,6 @@
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),http=require('node:http'),path=require('node:path');
+const {execFileSync}=require('node:child_process'),os=require('node:os');
 const root=path.resolve(process.env.ATHENA_PUBLIC_ROOT||'dist');
 const report=(date,media,source)=>({schema:'athena-storage-observation-v1',platform:'linux',observedAt:date,partial:false,
  stops:{entryLimit:0,depthLimit:0,deadline:0,unreadable:0,changed:0},skipped:{links:0,mounts:0,special:0},
@@ -18,7 +19,7 @@ const server=http.createServer((req,res)=>{
  try{
   const origin='http://127.0.0.1:'+server.address().port;
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});
-  const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce',locale:'en-US'});
   const external=[];await page.route('**/*',r=>r.request().url().startsWith(origin+'/')?r.continue():(external.push(r.request().url()),r.abort()));
   await page.goto(origin+'/#storage');await page.getByRole('heading',{name:'Compare two local observations'}).waitFor();
   const choose=(query,value)=>page.locator(query).setInputFiles({name:'report.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
@@ -35,7 +36,47 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   fs.mkdirSync('browser-results',{recursive:true});await panel.screenshot({path:'browser-results/storage-category-changes.png'});
   await page.locator('#clear-comparison').click();assert.equal(await panel.isVisible(),false);
+  const win={schema:'athena-windows-directory-observation-v1',
+   scope:'Explicit directory direct children only. No child content, recursion, names, IDs or paths returned.',
+   records_examined:4,observed_file_pathnames:3,logical_pathname_bytes:8193,
+   identified_unique_files:2,observed_identified_allocation_bytes:8192,excluded_directories:1,
+   excluded_reparse_entries:0,files_without_stable_id:0,identity_or_name_conflicts:0,
+   stopped_entry_limit:true,stopped_batch_limit:false,partial:true,point_in_time_snapshot:false,reclaimable_space_inferred:false};
+  const windowsView=page.locator('.windows-report');
+  await choose('#windows-observation-file',win);
+  await windowsView.getByText('Partial observation: entry limit reached.').waitFor();
+  await windowsView.getByText('8 KiB (8,192 bytes)',{exact:true}).waitFor();
+  assert.match(await windowsView.textContent(),/not a point-in-time snapshot or an estimate of reclaimable space/i);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.equal(await panel.isVisible(),false);
+  await windowsView.screenshot({path:'browser-results/storage-windows-observation.png'});
+  await choose('#windows-observation-file',{...win,path:'C:/private-folder'});
+  await windowsView.getByText(/Previous report preserved/).waitFor();
+  assert.doesNotMatch(await windowsView.textContent(),/private-folder/);
+  await windowsView.getByRole('button',{name:'Clear Windows report'}).click();
+  assert.equal(await windowsView.locator('.windows-evidence article').count(),0);
+  if(process.env.ATHENA_TEST_PACKAGED_WIN_OBSERVATION){
+   assert.equal(process.platform,'win32');
+   const folder=fs.mkdtempSync(path.join(os.tmpdir(),'athena-windows-report-'));
+   try{
+    fs.writeFileSync(path.join(folder,'private-original'),Buffer.alloc(12345,7));
+    fs.linkSync(path.join(folder,'private-original'),path.join(folder,'private-alias'));
+    fs.mkdirSync(path.join(folder,'private-subdirectory'));
+    fs.writeFileSync(path.join(folder,'private-subdirectory','private-excluded'),Buffer.alloc(9999,2));
+    const real=JSON.parse(execFileSync(path.resolve(process.env.ATHENA_TEST_PACKAGED_WIN_OBSERVATION),
+     ['windows-directory-observation',folder,'100'],{encoding:'utf8',timeout:30000}));
+    assert.equal(real.partial,false);assert.equal(real.logical_pathname_bytes,24690);
+    assert.equal(real.observed_file_pathnames,2);assert.equal(real.identified_unique_files,1);
+    assert.equal(real.excluded_directories,1);
+    await choose('#windows-observation-file',real);
+    await windowsView.getByText(/24,690 bytes/).waitFor();
+    assert.match(await windowsView.textContent(),/1 directory; 0 reparse entries/);
+    assert.doesNotMatch(await windowsView.textContent(),/private-original|private-alias|private-subdirectory|private-excluded/);
+    await windowsView.screenshot({path:'browser-results/storage-windows-observation-real.png'});
+    console.log('Extracted Windows atlas-lab generated the local hardlink report loaded by Chromium; the nested file was excluded.');
+   }finally{fs.rmSync(folder,{recursive:true,force:true});}
+  }
   assert.deepEqual(external,[]);
-  console.log('Native Storage category changes: scope confirmation, signs, sorting, search, clear and no network egress.');
+  console.log('Native Storage: Linux category comparison and separate Windows aggregate report with no network egress.');
  }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

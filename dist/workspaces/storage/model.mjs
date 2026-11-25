@@ -60,3 +60,28 @@ export function compareObservations(before,after,asserted=false){
  });
  return {eligible,reason:'Observed later minus earlier. You supplied the same-folder/settings assertion; the reports cannot verify it. This is not free or reclaimable space.',changes:Object.fromEntries(metrics.map(k=>[k,after.totals[k]-before.totals[k]])),categoryChanges};
 }
+
+const windowsCounters=['records_examined','observed_file_pathnames','logical_pathname_bytes',
+ 'identified_unique_files','observed_identified_allocation_bytes','excluded_directories',
+ 'excluded_reparse_entries','files_without_stable_id','identity_or_name_conflicts'];
+const windowsFlags=['stopped_entry_limit','stopped_batch_limit','partial','point_in_time_snapshot','reclaimable_space_inferred'];
+const windowsFields=new Set(['schema','scope',...windowsCounters,...windowsFlags]);
+export function parseWindowsDirectoryReport(text){
+ if(typeof text!=='string'||new TextEncoder().encode(text).length>4096)throw Error('Select Windows directory observation JSON up to 4 KiB.');
+ const input=JSON.parse(text);
+ if(input?.schema!=='athena-windows-directory-observation-v1'||
+    input.scope!=='Explicit directory direct children only. No child content, recursion, names, IDs or paths returned.'||
+    Object.keys(input).some(key=>!windowsFields.has(key))||
+    windowsFlags.some(key=>typeof input[key]!=='boolean')||
+    input.point_in_time_snapshot||input.reclaimable_space_inferred)throw Error('Invalid Windows directory observation v1.');
+ const v=runSums(input,windowsCounters);
+ const {records_examined:entries,observed_file_pathnames:files,identified_unique_files:identified,
+  files_without_stable_id:unknown,identity_or_name_conflicts:conflicts,excluded_directories:dirs,
+  excluded_reparse_entries:reparse,observed_identified_allocation_bytes:allocated,logical_pathname_bytes:logical}=v;
+ const counted=files+dirs+reparse;
+ if(entries>100000||counted>entries||entries-counted>conflicts||conflicts>entries||
+    unknown>files||identified>files-unknown||(!identified&&(allocated!==0||files!==unknown))||(!files&&logical!==0)||
+    input.partial!==Boolean(input.stopped_entry_limit||input.stopped_batch_limit||unknown||conflicts))
+  throw Error('Inconsistent Windows directory observation.');
+ return {...v,...Object.fromEntries(windowsFlags.map(key=>[key,input[key]]))};
+}

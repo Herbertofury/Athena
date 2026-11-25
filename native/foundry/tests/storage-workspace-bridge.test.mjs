@@ -34,7 +34,7 @@ test('real native bridge serves the main Storage route, imports an observation w
   const origin=await ready(child),read=async f=>{
    const res=await originalFetch(new URL(f,origin));assert.equal(res.status,200);return await res.text();
   };
-  const paths=['workspaces/storage/index.mjs','workspaces/storage/style.css','workspaces/storage/model.mjs'];
+  const paths=['workspaces/storage/index.mjs','workspaces/storage/style.css','workspaces/storage/model.mjs','workspaces/storage/windows-view.mjs'];
   for(const asset of paths) assert.equal(await read('/'+asset),fs.readFileSync(path.join(checkedRuntime,asset),'utf8'));
   for(const unsanctioned of ['/__native/storage','/__native/storage-scan','/workspaces/storage/measure.py','/native.sqlite'])assert.equal((await originalFetch(new URL(unsanctioned,origin),{headers:{'X-Athena-Native':'1'}})).status,404);
   const shell=await read('/');assert.match(shell,/href="#storage"/);
