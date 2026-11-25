@@ -47,6 +47,12 @@ kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.
 <p id="pressure" aria-label="Run stage">Classic source rules</p>
 <label for="seed">Run seed<input id="seed" type="number" min="0" max="4294967295" value="42" step="1"></label>
 </div>
+<details id="run-tapes"><summary>Save or resume an offline run</summary>
+<div class="controls"><button type="button" id="write-tape" disabled>Download run tape</button>
+<label>Run tape <input type="file" id="read-tape" accept="application/json,.json"></label>
+<button type="button" id="verify-tape" disabled>Verify and load</button>
+<button type="button" id="cancel-tape" hidden>Cancel verification</button></div>
+<p id="tape-status" role="status">Nothing is stored automatically. A tape contains the seed, inputs and upgrade choices for this run.</p></details>
 <div class="touch" aria-label="Touch movement">
 <button type="button" data-code="ArrowLeft" aria-label="Move left">←</button><button type="button" data-code="ArrowUp" aria-label="Move up">↑</button><button type="button" data-code="ArrowDown" aria-label="Move down">↓</button><button type="button" data-code="ArrowRight" aria-label="Move right">→</button><button type="button" data-code="ShiftLeft">Dash</button>
 </div>

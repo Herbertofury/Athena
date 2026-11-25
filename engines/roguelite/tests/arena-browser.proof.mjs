@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
+import {readFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {chromium} from 'playwright';
 const address=pathToFileURL(resolve(process.argv[2]??'Athena-Survivor-Arena.html')).href;
@@ -42,6 +43,28 @@ try{
  }else await page.keyboard.press('Enter');
  assert.equal(await page.locator('#choice').isHidden(),true);
  assert.match(await page.getByRole('status').textContent(),/Upgrade equipped/);
+ const priorKills=await page.locator('#kills').textContent();
+ const priorHp=await page.locator('#hp').textContent();
+ await page.getByText('Save or resume an offline run',{exact:true}).click();
+ const dl=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Download run tape'}).click();
+ const tape=await readFile(await (await dl).path());
+ const saved=JSON.parse(tape.toString());
+ assert.ok(saved.ticks>1000&&saved.ticks<4096);
+ await page.getByRole('button',{name:'Restart run'}).click();
+ const file=page.getByLabel('Run tape',{exact:true});
+ await file.setInputFiles({name:'altered.json',mimeType:'application/json',buffer:Buffer.from(tape.toString().replace('"seed":42','"seed":6'))});
+ await page.getByRole('button',{name:'Verify and load'}).click();
+ await page.locator('#tape-status').filter({hasText:'Not loaded.'}).waitFor();
+ assert.equal(await page.locator('#kills').textContent(),'0');
+ await file.setInputFiles({name:'saved.json',mimeType:'application/json',buffer:tape});
+ await page.getByRole('button',{name:'Verify and load'}).click();
+ await page.locator('#tape-status').filter({hasText:'Verified and loaded'}).waitFor();
+ assert.equal(await page.locator('#kills').textContent(),priorKills);
+ assert.equal(await page.locator('#hp').textContent(),priorHp);
+ await page.getByRole('button',{name:'Resume',exact:true}).click();
+ await page.clock.runFor(120);
+ assert.match(await page.locator('#status').textContent(),/Run resumed/);
  await page.getByRole('button',{name:'Restart run'}).click();
  assert.equal(await page.locator('#kills').textContent(),'0');
  assert.equal(await page.locator('#level').textContent(),'1');
@@ -55,5 +78,5 @@ try{
  assert.match(await page.locator('#pressure').textContent(),/Endless · Onset/);
  assert.deepEqual(errors,[]);
  assert.deepEqual(requests,[address]);
- console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, restart; zero external requests.');
+ console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, local tape download and exact recovery, tamper refusal, format selection; zero external requests.');
 }finally{await browser.close();}
