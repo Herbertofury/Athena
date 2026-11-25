@@ -51,13 +51,36 @@ class DualCheckpoint(unittest.TestCase):
   with self.assertRaises(ValueError):self.checkpoint()
   self.assertFalse(self.dest.exists())
  def test_failure_retains_incomplete_directory_without_marker(self):
-  original=os.link;calls=[]
+  operation='rename' if os.name=='nt' else 'link';original=getattr(os,operation);calls=[]
   def fail(source,destination):
    calls.append(destination)
    if len(calls)==2:raise OSError('synthetic publication failure')
    return original(source,destination)
-  with mock.patch.object(launch.os,'link',fail),self.assertRaises(OSError):self.checkpoint()
+  with mock.patch.object(launch.os,operation,fail),self.assertRaises(OSError):self.checkpoint()
   self.assertTrue((self.dest/'foundry.sqlite3').exists());self.assertFalse((self.dest/'checkpoint.json').exists());self.assertEqual([p.read_bytes() for p in self.sources],self.before)
+ def test_racing_checkpoint_member_is_preserved_and_marker_not_published(self):
+  operation='rename' if os.name=='nt' else 'link';actual=getattr(os,operation)
+  def race(src,dst):
+   if dst.name=='engineering.sqlite3':dst.write_bytes(b'OTHER WRITER')
+   return actual(src,dst)
+  with mock.patch.object(launch.os,operation,side_effect=race),self.assertRaises(FileExistsError):
+   self.checkpoint()
+  self.assertEqual((self.dest/'engineering.sqlite3').read_bytes(),b'OTHER WRITER')
+  self.assertFalse((self.dest/'checkpoint.json').exists())
+  with self.assertRaisesRegex(ValueError,'Incomplete checkpoint'):launch.verify_checkpoint(self.dest)
+  self.assertEqual([p.read_bytes() for p in self.sources],self.before)
+ @unittest.skipUnless(os.name=='nt','Windows publication behavior')
+ def test_windows_checkpoint_and_fork_need_no_hardlinks(self):
+  with mock.patch.object(launch.os,'link',side_effect=AssertionError('hard link attempted')):
+   receipt=self.checkpoint()
+   snapshot_before={p.name:p.read_bytes() for p in self.dest.iterdir()}
+   target=self.root/'working'
+   with mock.patch.object(launch.subprocess,'run',self.run_child):
+    fork=launch.fork_checkpoint(self.package,self.data,self.dest,target,True)
+  self.assertEqual(launch.verify_checkpoint(self.dest)[0],receipt)
+  self.assertEqual(launch.verify_checkpoint(target)[0],fork)
+  self.assertEqual({p.name:p.read_bytes() for p in self.dest.iterdir()},snapshot_before)
+  self.assertEqual([p.read_bytes() for p in self.sources],self.before)
  def test_old_python_wal_gate_unchanged(self):
   if sqlite3.sqlite_version_info>=(3,54,0):self.skipTest('Runtime patched; production WAL test covers forced older gate')
   pathlib.Path(str(self.sources[1])+'-wal').write_bytes(b'captured WAL fixture')

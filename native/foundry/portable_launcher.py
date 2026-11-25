@@ -14,6 +14,15 @@ def destination_clear(destination):
     if any(os.path.lexists(str(destination)+suffix) for suffix in ('','-wal','-shm','-journal')):
         raise FileExistsError('Destination database or sidecar exists; preserve it and choose a new name')
 
+def publish_new(staged,destination):
+    # Both paths are staged on the destination volume. Windows rename refuses
+    # an existing name; POSIX rename can overwrite, so use an exclusive link.
+    # Do not fall back to a partial copy or replace on failure.
+    if os.name=='nt':
+        os.rename(staged,destination)
+    else:
+        os.link(staged,destination)
+
 def portable_name(name):
     if not isinstance(name,str) or not name or len(name)>512 or any(ord(c)<32 or ord(c)>126 for c in name):return False
     relative=pathlib.PurePosixPath(name)
@@ -105,14 +114,8 @@ def create_database(root,data,destination):
         status=json.loads(run('status'))
         if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Native setup verification failed')
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
-        # Stage and target are on the same volume. Windows rename refuses an
-        # existing name and needs no hard links (unlike POSIX rename, which can
-        # replace a file). Neither path may degrade to a non-exclusive copy.
         destination_clear(destination)
-        if os.name=='nt':
-            os.rename(staged,destination)
-        else:
-            os.link(staged,destination)
+        publish_new(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
 def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
@@ -147,7 +150,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         payload=staged.read_bytes();final_sha=hashlib.sha256(payload).hexdigest()
         if not upgrade and final_sha!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
         destination_clear(destination)
-        os.link(staged,destination)
+        publish_new(staged,destination)
     return {'backed_up':True,'upgraded_copy':upgrade,'source_schema':original_schema,'schema':status['schema'],'integrity':'ok','bytes':len(payload),
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
@@ -198,13 +201,13 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expec
                 'engineering_validation':'SQLite integrity only; semantic/native acceptance remains separate',
                 'stores':{name:{'sha256':receipt['destination_sha256'],'bytes':receipt['destination_bytes'],'source_file_hashes':receipt['source_file_hashes'],'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime']} for name,receipt in zip(names,receipts)}}
         if parent_checkpoint_sha256 is not None:result['parent_checkpoint_sha256']=parent_checkpoint_sha256
-        # Exclusive directory. Completion marker is linked last; any partial new
+        # Exclusive directory. Completion marker is published last; any partial new
         # directory on failure is retained for inspection, never called complete.
         marker=stage/'checkpoint.json'
         with marker.open('x',encoding='utf-8') as stream:
             json.dump(result,stream,indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
         destination.mkdir(mode=0o700)
-        for name in (*names,'checkpoint.json'):os.link(stage/name,destination/name)
+        for name in (*names,'checkpoint.json'):publish_new(stage/name,destination/name)
     return result
 
 def verify_checkpoint(directory):
