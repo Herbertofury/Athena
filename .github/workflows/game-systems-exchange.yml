@@ -80,6 +80,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Install Chromium for offline file acceptance
         run: npx playwright install chromium
+      - name: Exercise every marathon boundary and endless wave with real simulated inputs
+        run: node --test engines/roguelite/tests/arena-formats.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML
