@@ -505,6 +505,37 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await page.screenshot({path:path.join(out,'constellation-v7-review-narrow.png'),fullPage:true});
   await page.setViewportSize({width:1440,height:1000});
+  await page.getByText('Keep or compare a redacted review',{exact:true}).click();
+  const receiptButton=page.getByRole('button',{name:'Download redacted receipt',exact:true});
+  const downloadReceipt=async file=>{
+   const event=page.waitForEvent('download');await receiptButton.click();
+   const save=path.join(temporary,file);await (await event).saveAs(save);return fs.readFileSync(save);
+  };
+  const savedReceipt=await downloadReceipt('constellation-redacted-default.json');
+  assert.equal(savedReceipt.toString().includes('fixture-private-marker-never-render'),false);
+  assert.equal(savedReceipt.toString().includes('revision-a'),false);
+  const first=JSON.parse(savedReceipt);assert.equal(first.input_sha256,null);
+  assert.equal(first.counts.length,18);assert.ok(/^[a-f0-9]{64}$/.test(first.checksum_sha256));
+  await page.getByLabel('Include the export fingerprint').check();
+  const linked=JSON.parse(await downloadReceipt('constellation-redacted-linked.json'));
+  assert.equal(linked.input_sha256,createHash('sha256').update(exportBytes).digest('hex'));
+  const compare=async (name,buffer)=>{
+   await page.locator('#saved-receipt').setInputFiles({name,mimeType:'application/json',buffer});
+   await page.getByRole('button',{name:'Compare saved counts',exact:true}).click();
+   return page.locator('#receipt-status');
+  };
+  await (await compare('receipt.json',savedReceipt)).filter({hasText:'No count or limit changes.'}).waitFor();
+  first.counts[0].retained++;
+  await (await compare('edited-receipt.json',Buffer.from(JSON.stringify(first)))).filter({hasText:'Receipt checksum does not match.'}).waitFor();
+  assert.equal(reviewTraffic().length,1,'receipt comparisons and downloads stay local');
+  const changed=Buffer.from(JSON.stringify({...exportBody,summary:{...exportBody.summary,files:2},files:[...exportBody.files,{id:'fixture-extra'}]}));
+  await page.locator('#source').setInputFiles({name:'changed-export.json',mimeType:'application/json',buffer:changed});
+  assert.equal(await page.locator('#receipt-status').textContent(),'');
+  await page.getByRole('button',{name:'Run local review'}).click();
+  await page.getByText('Review complete. Nothing was imported or changed.',{exact:true}).waitFor();
+  await (await compare('original-receipt.json',savedReceipt)).filter({hasText:'2 count or limit changes.'}).waitFor();
+  assert.match(await page.locator('#receipt-differences').textContent(),/files retained: 1 → 2/);
+  assert.equal(reviewTraffic().length,2);
   await page.locator('#source').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{')});
   await page.getByRole('button',{name:'Run local review'}).click();
   await page.getByText('Invalid v7 export structure',{exact:true}).waitFor();
