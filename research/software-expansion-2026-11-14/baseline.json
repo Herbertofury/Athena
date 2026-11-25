@@ -27,12 +27,28 @@
     },
     {
       "path": "engineering/data/research-catalog.json",
-      "sha256": "eb304c0395adad82b45e12d3da0fc545b28cc012d6f0dac18d95de0d19266a2e",
+      "sha256": "2f9c3880b820a17e69fdb151550b71a76c7dac6e7bf39ca5f50460120a6e759b",
       "arrays": {
         "categories": 18,
         "tracks": 152,
-        "entries": 283,
+        "entries": 392,
         "layers": 20
+      },
+      "reviewed_update": {
+        "as_of": "2026-11-25",
+        "source_commit": "333649f3783fd6711dea28f66b62d10ef58f74a0",
+        "reason": "Reviewed additive reconciliation preserves all283current records, all388prior records and dated source observations/layer memberships; restores105missing candidates and adds4new roles. Existing exact-hash guard remains unchanged.",
+        "previous": {
+          "path": "engineering/data/research-catalog.json",
+          "sha256": "eb304c0395adad82b45e12d3da0fc545b28cc012d6f0dac18d95de0d19266a2e",
+          "arrays": {
+            "categories": 18,
+            "tracks": 152,
+            "entries": 283,
+            "layers": 20
+          }
+        },
+        "evidence": "research/web-scraping-2026-11-25/athena-research-reconciliation.json"
       }
     }
   ]
