@@ -200,6 +200,13 @@ class ReleaseCheckoutTests(unittest.TestCase):
         doc["knowledge_map"] = []
         self.assertIn("must be an object", " ".join(validate(r, HEAD)))
 
+    def test_wiki_closeout_mirror_matches_its_shared_generator_source(self):
+        root = Path(__file__).resolve().parents[2]
+        template = root / "guidance/templates/WIKI_CLOSEOUT_OVERVIEW.md"
+        mirror = root / "wiki/Engineering-Documentation-Closeout.md"
+        self.assertEqual(mirror.read_text(encoding="utf-8"), template.read_text(encoding="utf-8"))
+        self.assertIn("small, source-linked map", template.read_text(encoding="utf-8"))
+
     def test_high_risk_requires_extra_proof(self):
         r = receipt()
         r["lane"] = "high-risk"
