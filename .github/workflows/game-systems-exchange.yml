@@ -96,6 +96,8 @@ jobs:
         run: node --test engines/roguelite/tests/spatial-region.test.mjs
       - name: Walk actual Ashglass paths and restore the earned vault state across a true 60-minute parent
         run: node --test engines/roguelite/tests/ashglass-cavern.test.mjs
+      - name: Play the floodplain escort, recruit and heal from real Arena movement at the 90-minute boundary
+        run: node --test engines/roguelite/tests/floodplain-escort.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML

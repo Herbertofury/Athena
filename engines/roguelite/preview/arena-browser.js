@@ -11,6 +11,7 @@ const campPanel=get('camp-readout'),campEvent=get('camp-event'),campWallet=get('
 const frontierPanel=get('frontier-readout'),frontierEvent=get('frontier-event'),frontierDetails=get('frontier-details');
 const cavernPanel=get('cavern-readout'),cavernEvent=get('cavern-event'),cavernDetails=get('cavern-details');
 const mirrorNames=Object.freeze(['Amber','Blue','Pearl']),mirrorColors=Object.freeze(['#ffc27f','#75d9ff','#dbb7ff']);
+const ferryPanel=get('escort-readout'),ferryEvent=get('escort-event'),ferryDetails=get('escort-details'),ferryHull=get('escort-hull');
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
@@ -37,7 +38,7 @@ function showChoices(offers){
    if(mode!=='choice'||lastOffer!==offers)return;
    if(loading){transfer++;controls(false);reportTape('Verification cancelled because you chose an upgrade.');}
    const result=host.choose(id);snapshot=host.frameView();choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
-   transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':kind==='rift'?(snapshot.rift.active?'Rift entered. Your main run is paused.':'Stayed in the main expedition.'):kind==='camp'?(result.camp?.perk?'Camp upgrade built.':'Left the camp.'):kind==='region'?(id==='region-intervene'?'Stay inside the basin to help the Amber Surveyors.':'You detoured around the skirmish.'):'Upgrade equipped: '+name);
+   transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':kind==='rift'?(snapshot.rift.active?'Rift entered. Your main run is paused.':'Stayed in the main expedition.'):kind==='camp'?(result.camp?.recovery?'Ferryman remedy restored '+Number(result.camp.recovery.toFixed(1))+' HP.':result.camp?.perk?'Camp upgrade built.':'Left the camp.'):kind==='region'?(id==='region-intervene'?'Stay inside the basin to help the Amber Surveyors.':'You detoured around the skirmish.'):'Upgrade equipped: '+name);
    board.focus();draw();
   });
   choices.append(button);
@@ -101,6 +102,15 @@ function showFrameStats(){
   setText(cavernEvent,label);
   setText(cavernDetails,taken?'Gold banked: '+bankedGold:(entered?'Cairns: '+order.map(i=>mirrorNames[i]).join(' → ')+' · ':'')+
    (target?'Next: '+direction(target.x-player.x,target.y-player.y):'')+(wrongTurns?' · Realignments '+wrongTurns:''));
+ }
+ const ferry=snapshot.escort;
+ ferryPanel.hidden=!ferry||Boolean(route?.active)||ferry.state==='unseen';
+ if(!ferryPanel.hidden){
+  const status=ferry.recruited?ferry.companion+' joined this run.':ferry.state==='docked'?'Ferry reached the dock. Walk over to recruit.':ferry.state==='lost'?'The ferry did not survive the crossing.':ferry.state==='waiting'?'The ferry is waiting. Approach the gangway to launch.':'Stay alongside the moving ferry.';
+  setText(ferryEvent,status);
+  if(ferryHull.value!==Math.ceil(ferry.hull))ferryHull.value=Math.ceil(ferry.hull);
+  const target=ferry.state==='docked'?ferry.dock:ferry.position;
+  setText(ferryDetails,ferry.recruited?'Camp remedies left: '+ferry.remedies:ferry.state==='lost'?'No companion or rewards were earned.':'Hull '+Math.ceil(ferry.hull)+'% · '+direction(target.x-player.x,target.y-player.y));
  }
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
 }
@@ -225,6 +235,28 @@ function drawCavern(cave,p,ox,oy){
  const px=cave.pedestal.x+ox,py=cave.pedestal.y+oy;
  circle(px,py,23,'#2e3349');circle(px,py,15,cave.vaultOpen&&!cave.taken?'#ffd66d':'#566075');
 }
+function drawFloodplain(ferry,p,ox,oy){
+ if(!ferry)return;
+ const {start,bend,dock,position,state,hull,recruited}=ferry;
+ if(Math.min(Math.hypot(p.x-start.x,p.y-start.y),Math.hypot(p.x-dock.x,p.y-dock.y))>440)return;
+ ctx.lineCap='round';ctx.lineJoin='round';
+ for(const [width,color] of [[115,'#213d46'],[79,'#24596a'],[46,'#316c83']]){
+  ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(start.x+ox,start.y+oy);
+  ctx.lineTo(bend.x+ox,bend.y+oy);ctx.lineTo(dock.x+ox,dock.y+oy);ctx.stroke();
+ }
+ ctx.lineCap='butt';ctx.lineJoin='miter';
+ for(const [label,node] of [['Skiff launch',start],['Far dock',dock]]){
+  const x=node.x+ox,y=node.y+oy;
+  for(let n=0;n<5;n++){ctx.fillStyle=n%2?'#855742':'#aa7352';ctx.fillRect(x-32,y-18+n*8,64,5);}
+  ctx.textAlign='center';ctx.font='bold 13px system-ui';ctx.fillStyle='#d8e9ed';ctx.fillText(label,x,y-31);
+ }
+ if(recruited)return;
+ const x=position.x+ox,y=position.y+oy;
+ ctx.fillStyle=state==='lost'?'#694c54':'#edb975';ctx.beginPath();ctx.moveTo(x-14,y-9);ctx.lineTo(x+13,y-9);ctx.lineTo(x+21,y);ctx.lineTo(x+11,y+10);ctx.lineTo(x-14,y+10);ctx.lineTo(x-21,y);ctx.closePath();ctx.fill();
+ circle(x,y,5,'#28253f');
+ ctx.fillStyle='#172939';ctx.fillRect(x-21,y+15,42,4);
+ ctx.fillStyle='#7af0bf';ctx.fillRect(x-21,y+15,42*hull/100,4);
+}
 function draw(){
  const W=board.width,H=board.height,p=snapshot?.player??{x:0,y:0}, ox=W/2-p.x, oy=H/2-p.y;
  ctx.fillStyle='#0b0d15';ctx.fillRect(0,0,W,H);
@@ -233,7 +265,7 @@ function draw(){
  for(let y=((oy%40)+40)%40;y<H;y+=40){ctx.moveTo(0,y);ctx.lineTo(W,y);}
  ctx.stroke();
  drawFrontier(snapshot?.rift?.active?null:snapshot?.region,p,ox,oy);
- if(!snapshot?.rift?.active)drawCavern(snapshot?.cavern,p,ox,oy);
+ if(!snapshot?.rift?.active){drawCavern(snapshot?.cavern,p,ox,oy);drawFloodplain(snapshot?.escort,p,ox,oy);}
  for(const gem of snapshot?.gems??[]){
   ctx.fillStyle='#6ee7b7';ctx.beginPath();const x=gem.x+ox,y=gem.y+oy,r=Math.min(10,gem.size);
   ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath();ctx.fill();

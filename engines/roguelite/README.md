@@ -184,3 +184,7 @@ regions are claimed here, and the older recipes retain their previous tape data.
 ### Ashglass Frontier
 
 Choose **Ashglass Frontier · 60 min**. Fights, roaming resources, Rifts and Camp remain; a distant basalt entrance adds a route-dependent cavern, not another enemy wave. Follow three cairns in their displayed order, then walk onto the opened vault pedestal. A wrong alignment resets the sequence without consuming anything. Colored mirrors have text labels and the clue shows the active objective. The 34 gold is earned once, in this run's Camp wallet, and can pay for a weapon rack. The entrance appears only as you approach its seeded region. Optional discovery; no world timer gate, persistence outside the user-exported run tape, or new media assets.
+
+### Floodplain Frontier
+
+Choose **Floodplain Frontier · 90 min**. In addition to the Ashglass cavern and earlier discoveries, a far river route reveals a moving ferry. Walk to the gangway to launch, stay close so its hull survives both bends, and physically reach the far dock to recruit the ferryman. Losing the ferry grants nothing. A recruited companion offers two optional 36-HP remedies at Camp when hurt; each use spends one charge, not crystals or gold. Its route, status and remedy balance remain inside this run and its user-selected replay tape. No permanent unlock or background timer.
