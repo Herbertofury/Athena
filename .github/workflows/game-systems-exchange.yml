@@ -98,6 +98,8 @@ jobs:
         run: node --test engines/roguelite/tests/ashglass-cavern.test.mjs
       - name: Play the floodplain escort, recruit and heal from real Arena movement at the 90-minute boundary
         run: node --test engines/roguelite/tests/floodplain-escort.test.mjs
+      - name: Complete both real Frontier relay routes and play beyond the 90-minute boundary
+        run: node --test engines/roguelite/tests/frontier-relay.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML
