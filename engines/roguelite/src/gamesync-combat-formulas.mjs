@@ -217,6 +217,15 @@ export function createLegacyCombat(random) {
       }
       particles.update(dt);
     },
+    // Paint does not use hit identities. Preserve them in the durable snapshot,
+    // and project everything the canvas draws without walking or cloning Sets.
+    frameView() {
+      return {
+        projectiles:projectiles.map(({x,y,size,color})=>({x,y,size,color})),
+        bibles:bibles.map(({angle,r,size,color})=>({angle,r,size,color})),
+        damageNumbers:damageNumbers.map(({x,y,val,color})=>({x,y,val,color})),
+      };
+    },
     snapshot(enemies) {
       return {
         projectiles:projectiles.map(({hit,...p})=>({...p,hit:[...hit].map(e=>enemies.indexOf(e))})),

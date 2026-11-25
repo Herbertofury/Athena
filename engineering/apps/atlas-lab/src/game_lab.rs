@@ -165,7 +165,8 @@ pub(crate) fn router() -> Router {
             "src/roaming-points.mjs",
             "src/rift-director.mjs",
             "src/rift-expedition.mjs",
-            "src/rift-session.mjs"
+            "src/rift-session.mjs",
+            "src/camp-workshop.mjs"
         ]
     );
     let router = route_modules!(

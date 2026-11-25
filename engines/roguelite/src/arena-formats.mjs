@@ -6,6 +6,7 @@ export const ARENA_FORMATS=Object.freeze([
  make('marathon-60',60),make('marathon-120',120),make('endless',null),
  Object.freeze({id:'roaming-expedition-20',seconds:20*60,roaming:true}),
  Object.freeze({id:'rift-expedition-20',seconds:20*60,roaming:true,rifts:true}),
+ Object.freeze({id:'camp-expedition-20',seconds:20*60,roaming:true,rifts:true,camp:true}),
 ]);
 const formats=new Map(ARENA_FORMATS.map(p=>[p.id,p]));
 // Isolated side hosts are internal and never appear as standalone choices.

@@ -24,7 +24,7 @@ export function createRecordedArena({seed,format='classic'}={}){
  const recipe=arenaFormat(format);
  let cursor=seed>>>0,ticks=0,phase='running',truncated=false;
  const random=()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;};
- const host=recipe.rifts?createRiftExpedition({seed,random}):createLegacySurvivorRun({format,seed,random});
+ const host=recipe.rifts?createRiftExpedition({seed,random,withCamp:!!recipe.camp}):createLegacySurvivorRun({format,seed,random});
  const input=[];
  function advance(mask){
   if(!uint(mask,31))throw Error('Invalid Arena input mask');
@@ -62,7 +62,7 @@ export function createRecordedArena({seed,format='classic'}={}){
  }
  return Object.freeze({
   step:({keys}={})=>advance(readMask(keys)),advance,choose,capture,
-  snapshot:host.snapshot,phase:()=>phase,canSave:()=>!truncated,
+  snapshot:host.snapshot,frameView:host.frameView,phase:()=>phase,canSave:()=>!truncated,
  });
 }
 
