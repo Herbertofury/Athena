@@ -63,3 +63,43 @@ test('coverage is distinct from intentional exclusions and remains visible durin
  assert.equal(root.querySelector('#error').textContent,'');
  await s.go('#home');assert.equal(root.children.length,0);assert.equal(s.writes.length,0);
 });
+
+test('Storage refuses duplicate escaped keys at any report level and invalid calendar dates',async()=>{
+ const {parseStorageReport}=await import('../dist/workspaces/storage/model.mjs');
+ const exact=JSON.stringify(record);
+ assert.deepEqual(parseStorageReport(exact).totals,record.totals);
+ for(const text of [
+  exact.replace('"linux"', '"other","plat\\u0066orm":"linux"'),
+  exact.replace('"allocatedBytes":12288','"allocatedBytes":99,"allocated\\u0042ytes":12288'),
+  exact.replace('"name":"Media"','"name":"wrong","n\\u0061me":"Media"'),
+  exact.replace('"linux"','"linux","extra":[{"unknown":0,"unknown":1}]'),
+ ])assert.throws(()=>parseStorageReport(text),/Duplicate observation property/);
+ const invalid={...record,observedAt:'2026-02-31T00:00:00Z'};
+ assert.throws(()=>parseStorageReport(JSON.stringify(invalid)),/Invalid observation scope/);
+ const strange=structuredClone(record);
+ strange.categories[0].name='Just text: [ { "totals": null } ]';
+ assert.equal(parseStorageReport(JSON.stringify(strange)).categories[0].name,strange.categories[0].name);
+ assert.deepEqual(parseStorageReport(JSON.stringify({...record,extra:[{unknown:0},{unknown:1}]})).totals,record.totals);
+});
+
+test('ambiguous or impossible replacements keep both last good Storage observations',async()=>{
+ const s=await app(),root=s.root();await load(root,contents(record));
+ const other=root.querySelector('#comparison-file');
+ const second={...record,observedAt:'2026-11-22T00:00:00Z'};
+ other.files=[contents(second)];await other.onchange();
+ const agree=root.querySelector('#compare-same');assert.equal(agree.disabled,false);
+ agree.checked=true;agree.onchange();
+ assert.equal(root.querySelectorAll('#compare-metrics li').length,4);
+ await load(root,{size:300,text:async()=>JSON.stringify(record).replace('"linux"','"unsupported","platform":"linux"')});
+ assert.match(root.querySelector('#error').textContent,/Previous report preserved/);
+ assert.match(root.querySelector('#evidence').textContent,/2026-11-21T00:00:00Z/);
+ assert.equal(root.querySelectorAll('#compare-metrics li').length,0);
+ other.files=[contents({...second,observedAt:'2026-02-30T00:00:00Z'})];await other.onchange();
+ assert.match(root.querySelector('#compare-status').textContent,/Previous report preserved/);
+ assert.match(root.querySelector('#comparison-values').textContent,/2026-11-22T00:00:00Z/);
+ assert.equal(agree.checked,false);
+ assert.equal(agree.disabled,false);
+ agree.checked=true;agree.onchange();
+ assert.equal(root.querySelectorAll('#compare-metrics li').length,4);
+ assert.equal(s.writes.length,0);
+});
