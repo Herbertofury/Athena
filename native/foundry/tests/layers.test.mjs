@@ -25,7 +25,7 @@ test('100 layer rows retain exact controls through updates and move without rebu
  const manager=attachNativeLayers({host,signal:controller.signal,onSelect:id=>calls.push(['select',id]),
   onVisible:(...v)=>calls.push(['visible',...v]),onPin:(...v)=>calls.push(['pin',...v])});
  const rows=Array.from({length:100},(_,i)=>({id:'layer-'+i,name:'Object '+i,scope:'world',anchor:null,zIndex:i,visible:true,pinned:false,filtered:false,unavailable:false}));
- const list=()=>[...host.querySelectorAll('[data-layer-id]')],controls=()=>[...host.querySelectorAll('button')];
+ const list=()=>[...host.querySelectorAll('[data-layer-id]')],controls=()=>[...host.querySelectorAll('[data-layer-id] button')];
  manager.update(rows,rows[0].id,'old-room');
  const first=list(),buttons=controls(),pin=first[0].querySelector('[data-layer-action="pin"]');
  manager.update(rows.map(r=>({...r})),rows[1].id,'old-room');
@@ -45,4 +45,29 @@ test('100 layer rows retain exact controls through updates and move without rebu
  manager.update(rows,rows[2].id,'new-room');assert.equal(list().length,100);assert.notEqual(list()[2],first[2]);assert.equal(first[2].isConnected,false);
  pin.click();assert.deepEqual(calls,[]);
  controller.abort();assert.equal(list().length,0);
+});
+
+test('explicit Layer filters narrow labels, exact IDs and status without rebuilding or writing',async()=>{
+ const {m,a,ids,copy}=fixture(),s=await setup(mount,{foundryModules:{...allOff,layers:true},state:m.workspace({version:11,active:a,layouts:{}})});
+ try{
+  const before=m.encodeWorkspace(s.mounted.exportState()),writes=s.writes.length;
+  const host=s.document.querySelector('[data-foundry-module="layers"]');
+  const search=host.querySelector('[data-layer-search]'),mode=host.querySelector('[data-layer-filter]');
+  const all=[...host.querySelectorAll('[data-layer-id]')],visible=()=>all.filter(e=>!e.hidden).map(e=>e.dataset.layerId);
+  const fill=text=>{search.value=text;search.dispatchEvent(new s.window.Event('input'));};
+  const view=value=>{mode.value=value;mode.dispatchEvent(new s.window.Event('change'));};
+  assert.equal(visible().length,all.length);
+  fill(copy.toUpperCase());assert.deepEqual(visible(),[copy]);
+  view('pinned');assert.deepEqual(visible(),[copy]);
+  view('selected');assert.deepEqual(visible(),[]);
+  assert.match(host.querySelector('[data-layer-status]').textContent,/0 of .*layers shown/);
+  const n=s.writes.length;button(s,copy,'pin').click();assert.equal(s.writes.length,n);
+  view('hidden');assert.deepEqual(visible(),[copy]);
+  fill('Sticker: lost-anchor');assert.deepEqual(visible(),[copy]);
+  view('unavailable');assert.deepEqual(visible(),[copy]);
+  host.querySelector('[data-layer-clear]').click();
+  assert.deepEqual([...host.querySelectorAll('[data-layer-id]')],all);assert.equal(visible().length,all.length);
+  assert.equal(m.encodeWorkspace(s.mounted.exportState()),before);assert.equal(s.writes.length,writes);
+  assert.ok(ids.every(id=>row(s,id)));
+ }finally{s.mounted.unmount();}
 });
