@@ -108,9 +108,15 @@ export async function mount(context){
  function position(button,p){button.style.mixBlendMode=p.blendMode||'normal';button.style.transformOrigin=({tl:"0% 0%",tc:"50% 0%",tr:"100% 0%",ml:"0% 50%",mc:"50% 50%",mr:"100% 50%",bl:"0% 100%",bc:"50% 100%",br:"100% 100%"})[p.transformOrigin||"mc"];button.style.left=`clamp(var(--foundry-edge-x, 60px), ${p.x*100}%, calc(100% - var(--foundry-edge-x, 60px)))`;button.style.top=`clamp(85px, ${p.y*100}%, calc(100% - 85px))`;button.setAttribute('aria-pressed',String(p.pinned));button.style.filter=`brightness(${p.brightness??1}) contrast(${p.contrast??1}) saturate(${p.saturation??1}) hue-rotate(${p.hue??0}deg) blur(${p.blur??0}px)`;button.style.opacity=String(p.opacity??1);button.style.zIndex=String(p.zIndex??0);button.dataset.scope=p.scope||'world';button.dataset.anchor=p.anchor||'';if(p.scope&&p.scope!=='world'){button.style.left=`${p.x*100}%`;button.style.top=`${p.y*100}%`;}button.style.transform=`translate(-50%,-50%) rotate(${p.rotation??0}deg) skew(${p.skewX??0}deg,${p.skewY??0}deg) scale(${p.scaleX??1},${p.scaleY??1})`;}
  function syncInspector(){
   const t=themeView(),select=one('[data-inspect-object]');
-  for(const e of root.querySelectorAll('.foundry-inspector input,.foundry-inspector select,.foundry-inspector button'))e.disabled=!t.objects.length;if(!t.objects.length){select.replaceChildren();selectedObject=null;syncLayers();syncGizmo();one('[data-inspect-description]').textContent='Room has no object instances. Reset room arrangement to restore its default kit.';syncObjectAction(null,null);return;}
+  for(const e of root.querySelectorAll('.foundry-inspector input,.foundry-inspector select,.foundry-inspector button'))e.disabled=!t.objects.length;if(!t.objects.length){select.replaceChildren();selectedObject=null;syncLayers(t);syncGizmo();one('[data-inspect-description]').textContent='Room has no object instances. Reset room arrangement to restore its default kit.';syncObjectAction(null,null);return;}
   if(!t.objects.some(o=>o.id===selectedObject))selectedObject=t.objects[0].id;
-  select.replaceChildren();for(const o of t.objects){const option=doc.createElement('option');option.value=o.id;option.textContent=o.name;select.append(option);}select.value=selectedObject;
+  const options=select.options;
+  if(options.length!==t.objects.length||t.objects.some((o,i)=>options[i].value!==o.id||options[i].textContent!==o.name)){
+   const fragment=doc.createDocumentFragment();
+   for(const o of t.objects){const option=doc.createElement('option');option.value=o.id;option.textContent=o.name;fragment.append(option);}
+   select.replaceChildren(fragment);
+  }
+  if(select.value!==selectedObject)select.value=selectedObject;
   const i=t.objects.findIndex(o=>o.id===selectedObject),o=t.objects[i],p=pos(o.id,i);
   one('[data-inspect-blend]').value=p.blendMode||'normal';
   one("[data-inspect-origin]").value=p.transformOrigin||"mc";
@@ -121,7 +127,7 @@ export async function mount(context){
   syncObjectAction(o,p);
   one('[data-inspect-x]').value=String(Math.round(p.x*10000)/100);one('[data-inspect-y]').value=String(Math.round(p.y*10000)/100);one('[data-inspect-pin]').checked=p.pinned;
   for(const [selector,value] of [['rotation',p.rotation??0],['scale-x',p.scaleX??1],['scale-y',p.scaleY??1]]){one('[data-inspect-'+selector+']').value=String(value);one('[data-inspect-'+selector+']').disabled=p.pinned;}one('[data-inspect-transform]').disabled=p.pinned;one('[data-inspect-link-scale]').disabled=p.pinned;
-  one('[data-inspect-x]').disabled=p.pinned;one('[data-inspect-y]').disabled=p.pinned;one('[data-inspect-apply]').disabled=p.pinned;syncLayers();syncGizmo();
+  one('[data-inspect-x]').disabled=p.pinned;one('[data-inspect-y]').disabled=p.pinned;one('[data-inspect-apply]').disabled=p.pinned;syncLayers(t);syncGizmo();
  }
  const sourceActionLabels={localVideo:'Open local video controls',soundtrack:'Open room soundtrack controls',ecology:'Open object motion controls'};
  function resolveObjectAction(object,placement){
@@ -163,7 +169,19 @@ export async function mount(context){
  function commitGizmo(key,original,value){const selected=gizmoSelected();if(!selected||selected.key!==key||selected.p.pinned||JSON.stringify(selected.p)!==JSON.stringify(original))return false;const old=selected.p;if((old.rotation??0)===value.rotation&&(old.scaleX??1)===value.scaleX&&(old.scaleY??1)===value.scaleY)return false;const next=model.upgradeLayout(current);next.placements[selectedObject]={...old,rotation:0,scaleX:1,scaleY:1,...value};const checked=model.validate(next);checkpoint();importGeneration++;drag=null;current=checked;draw();return save();}
  function syncAssetLibrary(){try{const t=themes.find(t=>t.id===current.themeId);nativeAssetLibrary?.update({key:JSON.stringify([current.themeId,current.roomId]),name:t.name,objects:t.objects,count:themeView().objects.length});}catch{report('assetLibrary','catalog unavailable; authoring remains available');}}
  function addCatalogObject(key,objectId){if(disposed||signal.aborted||key!==JSON.stringify([current.themeId,current.roomId]))throw Error('Room changed; review its catalog before adding.');const id='instance-'+crypto.randomUUID(),next=model.addCatalogObject(current,objectId,id);checkpoint();importGeneration++;drag=null;current=next;selectedObject=id;draw();save();return id;}
- function syncLayers(){try{nativeLayers?.update(themeView().objects.map((o,i)=>{const p=pos(o.id,i);return {id:o.id,name:o.name,scope:p.scope||'world',anchor:p.anchor||null,zIndex:p.zIndex??0,visible:p.visible??true,pinned:p.pinned,unavailable:p.scope==='sticker'&&(!['scene','inspector'].includes(p.anchor)||(p.anchor==='inspector'&&view.inspectorDock==='hidden')),filtered:!!query&&!`${themeView().name} ${o.name} ${o.shape} ${o.role}`.toLowerCase().includes(query.toLowerCase())};}),selectedObject);}catch{report('layers','update failed; authoring remains available');}}
+ function syncLayers(theme){
+  if(!nativeLayers)return;
+  try{
+   theme??=themeView();
+   const term=query.toLowerCase();
+   nativeLayers.update(theme.objects.map((o,i)=>{
+    const p=pos(o.id,i);
+    return {id:o.id,name:o.name,scope:p.scope||'world',anchor:p.anchor||null,zIndex:p.zIndex??0,
+     visible:p.visible??true,pinned:p.pinned,unavailable:p.scope==='sticker'&&(!['scene','inspector'].includes(p.anchor)||(p.anchor==='inspector'&&view.inspectorDock==='hidden')),
+     filtered:!!term&&!(theme.name+' '+o.name+' '+o.shape+' '+o.role).toLowerCase().includes(term)};
+   }),selectedObject,JSON.stringify([current.themeId,current.roomId]));
+  }catch{report('layers','update failed; authoring remains available');}
+ }
  function changeLayer(id,key,value){if(disposed||signal.aborted)return;const objects=themeView().objects,i=objects.findIndex(o=>o.id===id);if(i<0)return;const old=pos(id,i);if((key==='visible'?(old.visible??true):old.pinned)===value)return;const next=key==='visible'?model.upgradeAppearance(current):model.validate(current);next.placements[id]={...(next.placements[id]||old),[key]:value};const checked=model.validate(next);checkpoint();importGeneration++;drag=null;current=checked;draw();save();}
  function syncPresets(){
   const select=one('[data-preset-select]'),old=select.value;select.replaceChildren();

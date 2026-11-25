@@ -17,3 +17,32 @@ test('detached prior-room rows cannot change same-ID objects in new room',async(
 
 test('within each surface layer order is topmost first with deterministic equal-stack IDs',async()=>{const {m,a,ids}=fixture();for(const id of Object.keys(a.placements))a.placements[id]={...a.placements[id],scope:'world',anchor:null,zIndex:5};a.placements[ids[1]].zIndex=9;const s=await setup(mount,{foundryModules:{...allOff,layers:true},state:m.workspace({version:11,active:a,layouts:{}})});try{const actual=[...s.document.querySelectorAll('[data-layer-id]')].map(e=>e.dataset.layerId),expected=Object.keys(a.placements).sort((x,y)=>a.placements[y].zIndex-a.placements[x].zIndex||(x<y?-1:x>y?1:0));assert.deepEqual(actual,expected);}finally{s.mounted.unmount();}});
 test('deleting final instance clears layer rows and Undo restores exact identity',async()=>{const {m,a,ids}=fixture();a.placements={[ids[0]]:a.placements[ids[0]]};const s=await setup(mount,{foundryModules:{...allOff,layers:true},state:m.workspace({version:11,active:a,layouts:{}})});try{assert.equal(s.document.querySelectorAll('[data-layer-id]').length,1);s.document.querySelector('[data-instance-delete]').click();assert.equal(s.document.querySelectorAll('[data-layer-id]').length,0);assert.match(s.document.querySelector('[data-layer-status]').textContent,/no object instances/);s.document.querySelector('[data-undo]').click();assert.equal(s.document.querySelectorAll('[data-layer-id]').length,1);assert.equal(s.document.querySelector('[data-layer-id]').dataset.layerId,ids[0]);}finally{s.mounted.unmount();}});
+
+test('100 layer rows retain exact controls through updates and move without rebuilding',async()=>{
+ const {attachNativeLayers}=await import('../../../dist/workspaces/foundry/native-layers.mjs');
+ const {document}=parseHTML('<html><body><main></main></body></html>');
+ const host=document.querySelector('main'),controller=new AbortController(),calls=[];
+ const manager=attachNativeLayers({host,signal:controller.signal,onSelect:id=>calls.push(['select',id]),
+  onVisible:(...v)=>calls.push(['visible',...v]),onPin:(...v)=>calls.push(['pin',...v])});
+ const rows=Array.from({length:100},(_,i)=>({id:'layer-'+i,name:'Object '+i,scope:'world',anchor:null,zIndex:i,visible:true,pinned:false,filtered:false,unavailable:false}));
+ const list=()=>[...host.querySelectorAll('[data-layer-id]')],controls=()=>[...host.querySelectorAll('button')];
+ manager.update(rows,rows[0].id,'old-room');
+ const first=list(),buttons=controls(),pin=first[0].querySelector('[data-layer-action="pin"]');
+ manager.update(rows.map(r=>({...r})),rows[1].id,'old-room');
+ assert.deepEqual(list(),first);assert.deepEqual(controls(),buttons);
+ assert.equal(first[98].querySelector('[data-layer-action="select"]').getAttribute('aria-pressed'),'true');
+ assert.equal(first[99].querySelector('[data-layer-action="select"]').getAttribute('aria-pressed'),'false');
+ manager.update(rows.map(r=>({...r,filtered:true})),rows[1].id,'old-room');
+ assert.deepEqual(list(),first);assert.equal(controls().filter((b,i)=>b===buttons[i]).length,300);
+ assert.ok(first.every(e=>e.textContent.includes('filtered from scene')));
+ const visibility=first[0].querySelector('[data-layer-action="visible"]');
+ manager.update(rows.map(r=>({...r,visible:r.id!=='layer-99'})),rows[1].id,'old-room');
+ visibility.click();assert.deepEqual(calls.pop(),['visible','layer-99',true]);
+ manager.update(rows.map(r=>r.id==='layer-99'?{...r,scope:'sticker',anchor:'missing',zIndex:0,unavailable:true}:r),rows[1].id,'old-room');
+ assert.equal(list().at(-1),first[0]);assert.match(first[0].textContent,/anchor unavailable/);
+ assert.equal(pin.getAttribute('aria-describedby'),first[0].querySelector('p').id);pin.click();assert.deepEqual(calls.pop(),['pin','layer-99',true]);
+ manager.update(rows.slice(0,98),rows[1].id,'old-room');assert.equal(list().length,98);assert.equal(pin.isConnected,false);
+ manager.update(rows,rows[2].id,'new-room');assert.equal(list().length,100);assert.notEqual(list()[2],first[2]);assert.equal(first[2].isConnected,false);
+ pin.click();assert.deepEqual(calls,[]);
+ controller.abort();assert.equal(list().length,0);
+});

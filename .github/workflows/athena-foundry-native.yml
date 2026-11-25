@@ -107,6 +107,10 @@ jobs:
         env:
           ATHENA_BROWSER_ROOT: candidate-extracted/runtime
         run: node scripts/test_foundry_semantic_browser.cjs
+      - name: Extracted Foundry stable layer rows and keyboard focus in Chromium
+        env:
+          ATHENA_BROWSER_ROOT: candidate-extracted/runtime
+        run: node scripts/test_foundry_layers_browser.cjs
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs
@@ -153,5 +157,6 @@ jobs:
             browser-results/foundry-asset-library/
             browser-results/foundry-drag-offset/
             browser-results/foundry-drag-grid/
+            browser-results/foundry-layers/
             browser-results/storage-windows-observation*.png
           if-no-files-found: error
