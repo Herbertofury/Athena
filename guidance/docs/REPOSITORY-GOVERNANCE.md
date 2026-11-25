@@ -19,3 +19,24 @@ Policy wording is repository engineering guidance, not a new authorization grant
 ## Additive owner directives
 
 When adopting guidance into a new repository, append project-owned root AGENTS.md references to the [CLI-first execution standard](../CLI_FIRST_EXECUTION.md) and [pre-release optimization standard](../PRE_RELEASE_OPTIMIZATION.md), without replacing local instructions or editing pinned snapshots. Apply the CLI-first rule to all tasks and release checks; these additive policies are outside the versioned 16-document snapshot bundle. Existing external host/branch permissions still apply.
+
+### Verify an explicit legacy transition
+
+Save the JSON emitted by `transition_consumer.py plan` and keep its reviewed
+digest. After explicitly authorized application, verify the exact result:
+
+```sh
+python guidance/tools/transition_consumer.py verify \
+  --source guidance --target /path/to/reviewed-consumer \
+  --review-file /path/to/transition-plan.json --review-sha256 REVIEWED_DIGEST
+```
+
+This read-only command requires the exact clean Athena source revision in the
+plan, and the reviewed consumer base or a descendant. It verifies the new
+pin, its 16 policy files and root router, and all 17 preserved legacy lock
+and snapshot files against the reviewed bytes. It returns counts and commit
+identities without exposing instruction contents or private absolute paths.
+Keep the generic adoption guard: `repository_governance.py status` still
+refuses consumers carrying the legacy lock; it is not the transition verifier.
+The report does not certify installed agent discovery, browser runtime, other
+consumers, legacy source retirement or untouched files outside the plan.

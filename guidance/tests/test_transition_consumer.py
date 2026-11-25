@@ -44,6 +44,44 @@ class ReviewedTransitionTests(unittest.TestCase):
   self.assertEqual(after['AGENTS.md'],self.router);self.assertFalse(result['retirementReady'])
   with self.assertRaises(ValueError):governance.plan(self.source,self.target)
   with self.assertRaises(ValueError):transition.apply(self.source,self.target,self.router,r['reviewSha256'])
+ def test_verify_exact_plan_after_apply_and_after_consumer_commit(self):
+  plan,_=transition.prepare(self.source,self.target,self.router)
+  with self.assertRaises(ValueError):transition.verify(self.source,self.target,plan,plan['reviewSha256'])
+  transition.apply(self.source,self.target,self.router,plan['reviewSha256'])
+  for committed in (False,True):
+   if committed:self.commit(self.target)
+   before=snapshot(self.target)
+   result=transition.verify(self.source,self.target,plan,plan['reviewSha256'])
+   self.assertEqual(result['verifiedNewFiles'],18)
+   self.assertEqual(result['preservedLegacyFiles'],17)
+   self.assertFalse(result['writesPerformed']);self.assertFalse(result['retirementReady'])
+   self.assertEqual(before,snapshot(self.target))
+ def test_verify_refuses_changed_plan_digests_or_scoped_files_without_repair(self):
+  plan,_=transition.prepare(self.source,self.target,self.router)
+  transition.apply(self.source,self.target,self.router,plan['reviewSha256'])
+  extra={**plan,'payloads':{**plan['payloads'],'../outside':plan['oldRouterSha256']}}
+  extra['reviewSha256']=transition.review_digest({k:v for k,v in extra.items() if k!='reviewSha256'})
+  for record,expected in [(plan,'0'*64),(extra,plan['reviewSha256']),(extra,extra['reviewSha256'])]:
+   with self.assertRaises(ValueError):transition.verify(self.source,self.target,record,expected)
+  for name in ['AGENTS.md',governance.LOCK,'.agents/foundry/RUNTIME_PROOF.md','.agents/athena/RUNTIME_PROOF.md']:
+   p=self.target/name;prior=p.read_bytes();p.write_bytes(prior+b' local edit')
+   before=snapshot(self.target)
+   with self.assertRaises(ValueError):transition.verify(self.source,self.target,plan,plan['reviewSha256'])
+   self.assertEqual(before,snapshot(self.target));p.write_bytes(prior)
+ def test_verify_cli_emits_counts_and_rejects_oversized_review_file(self):
+  plan,_=transition.prepare(self.source,self.target,self.router)
+  transition.apply(self.source,self.target,self.router,plan['reviewSha256'])
+  path=self.target.parent/'review.json';path.write_text(json.dumps(plan),encoding='utf-8')
+  cmd=[sys.executable,'-B',str(ROOT/'tools/transition_consumer.py'),'verify',
+       '--source',str(self.source),'--target',str(self.target),'--review-file',str(path),'--review-sha256',plan['reviewSha256']]
+  before=snapshot(self.target);r=subprocess.run(cmd,capture_output=True,text=True)
+  self.assertEqual(r.returncode,0,r.stderr)
+  self.assertEqual(json.loads(r.stdout)['verifiedNewFiles'],18)
+  self.assertNotIn(str(self.target),r.stdout);self.assertEqual(before,snapshot(self.target))
+  path.write_bytes(b' '*transition.LIMIT+b'{}')
+  r=subprocess.run(cmd,capture_output=True,text=True)
+  self.assertEqual(r.returncode,2)
+  self.assertEqual(before,snapshot(self.target))
  def test_wrong_digest_and_changed_router_do_not_write(self):
   r,_=transition.prepare(self.source,self.target,self.router);before=snapshot(self.target)
   for router,digest in [(self.router,'bad'),(self.router+b'changed',r['reviewSha256'])]:

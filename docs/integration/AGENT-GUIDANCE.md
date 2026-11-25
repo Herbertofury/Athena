@@ -28,6 +28,12 @@ The Athena-owned `guidance/tools/audit_consumers.py` audits explicitly named che
 
 A real read-only pass on public Noxviola main `424f49946956de6ce36b6212c7682d46e179f228` found its unchanged Agent-Foundry 1.1.2 pin at `87166b5f6a621c61b90bbbfe90835a3752c1c51b`, all 16 snapshots matching, three legacy-reference files, 26 tracked text files inspected and two images uninspected. No consumer migration was performed. The [sanitized receipt](../../guidance/evidence/noxviola-consumer-audit-2026-11-15.json) retains hashes/statuses, not private instruction text. Fleet coverage and source retirement remain incomplete.
 
+The [exact Noxviola transition rehearsal](../../guidance/evidence/noxviola-consumer-transition-rehearsal-2026-11-25.md)
+installed and verified the reviewed bytes in a disposable copy of a later
+public snapshot, preserved its complete legacy core, and passed the same
+557 project tests before and after. It did not change the live repository
+or establish installed-client discovery.
+
 ## Retirement gates
 
 1. Reconcile every source capability against an implemented Athena capability, an explicitly accepted replacement, or a retained archive dependency. A filename inventory is not parity.
