@@ -36,6 +36,8 @@ jobs:
           toolchain: '1.99.1'
           components: rustfmt, clippy
       - run: npm ci --ignore-scripts
+      - name: Prove all ten artist concept plates and twenty bounded weather choices
+        run: node --test tests/artist-concept.test.mjs
       - name: Native store formatting
         run: cargo fmt --manifest-path crates/athena-foundry-store/Cargo.toml -- --check
       - name: Native store tests

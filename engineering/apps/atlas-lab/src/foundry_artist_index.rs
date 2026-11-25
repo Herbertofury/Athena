@@ -18,6 +18,30 @@ pub(crate) fn router() -> Router {
             }),
         )
         .route(
+            "/migration/foundry-artists/concept.mjs",
+            get(|| async {
+                (
+                    [
+                        (header::CONTENT_TYPE, "text/javascript"),
+                        (header::X_CONTENT_TYPE_OPTIONS, "nosniff"),
+                    ],
+                    include_str!("../ui/foundry-artist-concept.mjs"),
+                )
+            }),
+        )
+        .route(
+            "/migration/foundry-artists/concept.css",
+            get(|| async {
+                (
+                    [
+                        (header::CONTENT_TYPE, "text/css"),
+                        (header::X_CONTENT_TYPE_OPTIONS, "nosniff"),
+                    ],
+                    include_str!("../ui/foundry-artist-concept.css"),
+                )
+            }),
+        )
+        .route(
             "/api/migration/foundry-artists",
             get(|| async {
                 (
