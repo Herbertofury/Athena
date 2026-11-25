@@ -1,7 +1,9 @@
 import struct
+import json
+from hashlib import sha256
 import unittest
 import zlib
-from audit import audit, channels, paeth, SIGNATURE
+from audit import audit, audit_manifest, channels, paeth, SIGNATURE
 
 
 def chunk(kind, data):
@@ -75,6 +77,40 @@ class ReadOnlyRGBA(unittest.TestCase):
         other=SIGNATURE+chunk(b'IHDR',struct.pack('>IIBBBBB',3,3,16,6,0,0,0))+chunk(b'IDAT',b'x')+chunk(b'IEND',b'')
         with self.assertRaises(ValueError):
             channels(other)
+
+    def test_authored_manifest_preserves_original_order_and_timing(self):
+        rows=[bytearray(12*4) for _ in range(6)]
+        rows[2][(12*0+2)*4+3]=255
+        rows[1][(12*0+9)*4+3]=8
+        image=png(rows)
+        meta={'schema':'athena-sprite-frames-v1','source_sha256':sha256(image).hexdigest(),'frames':[
+            {'x':7,'y':0,'width':4,'height':4,'duration_ms':75},
+            {'x':0,'y':1,'width':4,'height':4,'duration_ms':180}]}
+        raw=json.dumps(meta).encode()
+        result=audit_manifest(image,raw,gutter=1,min_gap=2)
+        self.assertEqual(result['duration_ms'],255)
+        self.assertEqual([f['duration_ms'] for f in result['frames']],[75,180])
+        self.assertEqual(result['frames'][0]['rect'],[7,0,4,4])
+        self.assertEqual(result['frames'][0]['low_alpha_pixels'],1)
+        self.assertEqual(result['frames'][1]['nonzero_gutter_pixels'],0)
+        self.assertEqual(result['manifest_sha256'],sha256(raw).hexdigest())
+
+    def test_manifest_rejects_wrong_png_overlap_short_gap_and_extra_keys(self):
+        image=png([bytes(12*4)]*6)
+        a={'x':0,'y':0,'width':4,'height':4,'duration_ms':20}
+        b={'x':6,'y':0,'width':5,'height':5,'duration_ms':90}
+        meta={'schema':'athena-sprite-frames-v1','source_sha256':sha256(image).hexdigest(),'frames':[a,b]}
+        self.assertEqual(audit_manifest(image,json.dumps(meta).encode(),min_gap=2)['frame_count'],2)
+        for newer,hint in [
+            (dict(meta,source_sha256='0'*64),'exact PNG'),
+            (dict(meta,frames=[a,dict(b,x=2)]),'overlaps'),
+            (dict(meta,frames=[a,dict(b,x=5)]),'geometric gap'),
+            (dict(meta,frames=[a,dict(b,width=12)]),'outside PNG bounds'),
+            (dict(meta,frames=[a,dict(b,duration_ms=True)]),'integer'),
+            (dict(meta,extra=True),'Unsupported')
+        ]:
+            with self.assertRaisesRegex(ValueError,hint):
+                audit_manifest(image,json.dumps(newer).encode(),min_gap=2)
 
 
 if __name__=='__main__':

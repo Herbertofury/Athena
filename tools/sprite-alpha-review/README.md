@@ -22,3 +22,27 @@ describes external sheet metadata and optional edge extrusion. [Godot's image
 import documentation](https://docs.godotengine.org/en/latest/tutorials/assets_pipeline/importing_images.html)
 describes alpha-border processing; that processing is not applied by this tool.
 Preserve the editor source and actual runtime tuning evidence separately.
+
+## Authored frame geometry
+
+Use `python audit.py sheet.png --manifest frames.json --gutter 0 --min-gap 2`
+when you already have approved frame positions and durations. The small
+manifest is Athena's own interchange shape, not an Aseprite importer:
+
+```json
+{
+  "schema": "athena-sprite-frames-v1",
+  "source_sha256": "<SHA-256 of the exact sheet bytes>",
+  "frames": [
+    {"x": 0, "y": 0, "width": 16, "height": 16, "duration_ms": 80}
+  ]
+}
+```
+
+Entries keep their authored order and exact millisecond durations. Rectangles
+must be non-overlapping and wholly inside the PNG. A minimum gap checks only
+rectangle separation on at least one axis; it does not certify transparent
+padding or edge extrusion. Packed/trimmed content may intentionally touch
+its declared rectangle, so manifest mode defaults to a zero internal gutter.
+This audit does not infer offsets, edit pixels, drop duplicate poses, or verify
+animation playback. Do not fabricate a manifest from a rough grid estimate.
