@@ -104,3 +104,13 @@ and volume controls, never autoplays, and releases the clip on room change,
 workspace exit, or **Close local preview**. The input accepts nonempty audio
 files up to 64 MiB; decoding still depends on the browser’s codecs. This does
 not add streaming-provider sign-in or playback.
+
+### Browse the archived artist world index
+
+The native Migration readiness page links the **Foundry artist index**.
+Search reviewed artist names, worlds, districts and weather from the original
+artist catalog. The grouping is by artist, not a proof that a district is
+assigned to a particular world. The index deliberately leaves out artwork,
+provider URLs and captured source paths. Artist-world rendering, provider
+playback and importing personal legacy records remain separate acceptance
+gates. No artist rights are granted by the presence of a reference name.

@@ -27,6 +27,8 @@ jobs:
           python-version: '3.13'
       - name: Verify exact authored object labels without changing the native database catalog
         run: python scripts/build_foundry_catalog_labels.py --check
+      - name: Verify the artist index projection against pinned source
+        run: python scripts/build_foundry_artist_index.py --check
       - name: Record actual Python SQLite runtime
         run: python -c "import json,sqlite3,sys; print(json.dumps({'python':sys.version,'sqlite':sqlite3.sqlite_version,'source_id':sqlite3.connect(':memory:').execute('select sqlite_source_id()').fetchone()[0],'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}))"
       - uses: dtolnay/rust-toolchain@master

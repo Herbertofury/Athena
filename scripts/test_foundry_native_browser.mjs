@@ -671,6 +671,26 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,before);
  });
+ if(unified)await check('Native artist index filters original artist worlds without disclosing media',async()=>{
+  const endpoint=origin+'/api/migration/foundry-artists',external=report.externalRequests.length;
+  const payload=await (await fetch(endpoint)).text(),index=JSON.parse(payload);
+  assert.equal(index.source_sha256,'474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920');
+  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,music_routes:21});
+  assert.doesNotMatch(payload,/local_filename|spotify_uri|open_search|instagram|tiktok/);
+  await page.goto(origin+'/migration?source=foundry');
+  await page.getByRole('link',{name:'Foundry artist index',exact:true}).click();
+  const status=page.locator('#status');
+  await status.filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+  await page.getByRole('searchbox',{name:'Artist, world, district or weather'}).fill('Sporelight Marsh');
+  await status.filter({hasText:'Showing 1 of 5 artists.'}).waitFor();
+  const card=page.locator('#artists article:visible');
+  await card.getByRole('heading',{name:'Frawgy',exact:true}).waitFor();
+  await card.getByText('Districts (4)',{exact:true}).click();
+  await card.getByText(/Sporelight Marsh/).waitFor();
+  assert.equal(await page.locator('#artists img,#artists iframe,#artists audio,#artists video').count(),0);
+  assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
+  assert.equal(report.externalRequests.length,external);
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});

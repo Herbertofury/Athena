@@ -1,0 +1,310 @@
+{
+  "schema": "athena-foundry-artist-index-v1",
+  "source_sha256": "474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920",
+  "pinned_source": "https://github.com/Herbertofury/Athena/blob/7d335a740ea92a66674bf4412c48f5e03faf6e9f/feature-foundry/source/src/data/artist-worlds-v4.0.1.json",
+  "coverage": {
+    "artists": 5,
+    "worlds": 10,
+    "districts": 20,
+    "weather": 20,
+    "music_routes": 21
+  },
+  "scope": "Public curated names only. Grouped by artist as in the original authority, not a per-world district assignment or a rendered scene.",
+  "artists": [
+    {
+      "id": "artist.frawgy006",
+      "name": "Frawgy",
+      "family": "Playful bioluminescent creature fantasy",
+      "rights_note": "Reference/curation only until artist permission or license is recorded",
+      "worlds": [
+        {
+          "id": "world.frawgy.verdant-conservatory",
+          "name": "Verdant Conservatory",
+          "variant": "Green / daylight"
+        },
+        {
+          "id": "world.frawgy.lilypad-nocturne",
+          "name": "Lilypad Nocturne",
+          "variant": "Purple / night"
+        }
+      ],
+      "districts": [
+        {
+          "id": "district.frawgy.sporelight-marsh",
+          "name": "Sporelight Marsh"
+        },
+        {
+          "id": "district.frawgy.candy-bog-arcade",
+          "name": "Candy Bog Arcade"
+        },
+        {
+          "id": "district.frawgy.lilypad-village",
+          "name": "Lilypad Village"
+        },
+        {
+          "id": "district.frawgy.moon-orchid-grotto",
+          "name": "Moon Orchid Grotto"
+        }
+      ],
+      "weather": [
+        {
+          "id": "weather.frawgy.dew-bloom",
+          "name": "Dew Bloom",
+          "intensity": "gentle"
+        },
+        {
+          "id": "weather.frawgy.spore-shower",
+          "name": "Spore Shower",
+          "intensity": "medium"
+        },
+        {
+          "id": "weather.frawgy.candy-rain",
+          "name": "Candy Rain",
+          "intensity": "playful"
+        },
+        {
+          "id": "weather.frawgy.moon-mist",
+          "name": "Lilypad Moon Mist",
+          "intensity": "gentle"
+        }
+      ],
+      "recorded_music_routes": 4
+    },
+    {
+      "id": "artist.lightweaverart",
+      "name": "Lightweaverart",
+      "family": "Neon sigil cyber-portrait futurism",
+      "rights_note": "Reference/curation only until artist permission or license is recorded",
+      "worlds": [
+        {
+          "id": "world.lightweaver.sigil-neon-atelier",
+          "name": "Sigil Neon Atelier",
+          "variant": "Blue-magenta portrait studio"
+        },
+        {
+          "id": "world.lightweaver.chromatic-rain-alley",
+          "name": "Chromatic Rain Alley",
+          "variant": "Rain / street"
+        }
+      ],
+      "districts": [
+        {
+          "id": "district.lightweaver.electric-shrine",
+          "name": "Electric Shrine District"
+        },
+        {
+          "id": "district.lightweaver.chromatic-rain",
+          "name": "Chromatic Rain Alley"
+        },
+        {
+          "id": "district.lightweaver.deco-cyborg-salon",
+          "name": "Deco Cyborg Salon"
+        },
+        {
+          "id": "district.lightweaver.iris-signal-lab",
+          "name": "Iris Signal Lab"
+        }
+      ],
+      "weather": [
+        {
+          "id": "weather.lightweaver.neon-rain",
+          "name": "Chromatic Neon Rain",
+          "intensity": "medium"
+        },
+        {
+          "id": "weather.lightweaver.sigil-storm",
+          "name": "Electric Sigil Storm",
+          "intensity": "dramatic"
+        },
+        {
+          "id": "weather.lightweaver.iris-haze",
+          "name": "Iris Signal Haze",
+          "intensity": "gentle"
+        },
+        {
+          "id": "weather.lightweaver.glass-condensation",
+          "name": "Glass-Skin Condensation",
+          "intensity": "subtle"
+        }
+      ],
+      "recorded_music_routes": 4
+    },
+    {
+      "id": "artist.dreamrelicc",
+      "name": "Dreamrelicc",
+      "family": "Divine machinery / sacred retrospace futurism",
+      "rights_note": "Reference/curation only until artist permission or license is recorded",
+      "worlds": [
+        {
+          "id": "world.dreamrelicc.cathedral-orbit",
+          "name": "Cathedral Orbit",
+          "variant": "Silver / orbital basilica"
+        },
+        {
+          "id": "world.dreamrelicc.astral-relic-market",
+          "name": "Astral Relic Market",
+          "variant": "Night / processional bazaar"
+        }
+      ],
+      "districts": [
+        {
+          "id": "district.dreamrelicc.halo-console-sanctum",
+          "name": "Halo Console Sanctum"
+        },
+        {
+          "id": "district.dreamrelicc.processional-night-market",
+          "name": "Processional Night Market"
+        },
+        {
+          "id": "district.dreamrelicc.moss-reliquary-grotto",
+          "name": "Moss Reliquary Grotto"
+        },
+        {
+          "id": "district.dreamrelicc.guardian-vault",
+          "name": "Guardian Vault"
+        }
+      ],
+      "weather": [
+        {
+          "id": "weather.dreamrelicc.star-incense",
+          "name": "Star Incense",
+          "intensity": "gentle"
+        },
+        {
+          "id": "weather.dreamrelicc.halo-flare",
+          "name": "Halo Flare",
+          "intensity": "medium"
+        },
+        {
+          "id": "weather.dreamrelicc.relic-drift",
+          "name": "Relic Drift",
+          "intensity": "playful"
+        },
+        {
+          "id": "weather.dreamrelicc.red-eye-omen",
+          "name": "Red-Eye Omen",
+          "intensity": "dramatic"
+        }
+      ],
+      "recorded_music_routes": 4
+    },
+    {
+      "id": "artist.karoline-georges",
+      "name": "Karoline Georges",
+      "family": "Post-organic rococo metamorphosis / embroidered algorithmic menagerie",
+      "rights_note": "Reference/curation only until artist permission or license is recorded",
+      "worlds": [
+        {
+          "id": "world.karoline.entomorphosis-cabinet",
+          "name": "Entomorphosis Cabinet",
+          "variant": "Ivory / embroidered entomology"
+        },
+        {
+          "id": "world.karoline.physis-metamorphosis-atelier",
+          "name": "PHYSIS Metamorphosis Atelier",
+          "variant": "Textile / post-organic body"
+        }
+      ],
+      "districts": [
+        {
+          "id": "district.karoline.mirabilia-specimen-hall",
+          "name": "MIRABILIA Specimen Hall"
+        },
+        {
+          "id": "district.karoline.physis-cocoon-studio",
+          "name": "PHYSIS Cocoon Studio"
+        },
+        {
+          "id": "district.karoline.self-menagerie-aviary",
+          "name": "Self-Menagerie Aviary"
+        },
+        {
+          "id": "district.karoline.poiesis-anatomy-loom",
+          "name": "POIESIS Anatomy Loom"
+        }
+      ],
+      "weather": [
+        {
+          "id": "weather.karoline.gold-threadfall",
+          "name": "Gold Threadfall",
+          "intensity": "gentle"
+        },
+        {
+          "id": "weather.karoline.wing-pollen",
+          "name": "Wing Pollen",
+          "intensity": "playful"
+        },
+        {
+          "id": "weather.karoline.silk-veil",
+          "name": "Silk Veil",
+          "intensity": "calm"
+        },
+        {
+          "id": "weather.karoline.porcelain-hairline",
+          "name": "Porcelain Hairline",
+          "intensity": "dramatic"
+        }
+      ],
+      "recorded_music_routes": 4
+    },
+    {
+      "id": "artist.saveroom",
+      "name": "saveroom",
+      "family": "Nostalgia-wave PS2/Dreamcast paradise fantasy",
+      "rights_note": "Reference/curation only until artist permission or license is recorded",
+      "worlds": [
+        {
+          "id": "world.saveroom.paradise-zero-archipelago",
+          "name": "Paradise Zero Archipelago",
+          "variant": "Cobalt / high-sun voyage"
+        },
+        {
+          "id": "world.saveroom.last-island-starcaster-sanctuary",
+          "name": "The Last Island: Starcaller Sanctuary",
+          "variant": "Lavender / moonlit save room"
+        }
+      ],
+      "districts": [
+        {
+          "id": "district.saveroom.mooncastle-anchorage",
+          "name": "Mooncastle Anchorage"
+        },
+        {
+          "id": "district.saveroom.paradise-zero-lagoon",
+          "name": "Azure Save Coast"
+        },
+        {
+          "id": "district.saveroom.sapphire-chain-obelisk",
+          "name": "Sapphire Chain Obelisk"
+        },
+        {
+          "id": "district.saveroom.angelhold-waterfall-garden",
+          "name": "Angelhold Waterfall Garden"
+        }
+      ],
+      "weather": [
+        {
+          "id": "weather.saveroom.sunshower-bloom",
+          "name": "Sunshower Bloom",
+          "intensity": "gentle"
+        },
+        {
+          "id": "weather.saveroom.moonfall-threads",
+          "name": "Moonfall Threads",
+          "intensity": "medium"
+        },
+        {
+          "id": "weather.saveroom.sapphire-tide",
+          "name": "Sapphire Tide",
+          "intensity": "playful"
+        },
+        {
+          "id": "weather.saveroom.lavender-afterglow",
+          "name": "Lavender Afterglow",
+          "intensity": "gentle"
+        }
+      ],
+      "recorded_music_routes": 5
+    }
+  ]
+}
