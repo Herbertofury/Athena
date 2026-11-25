@@ -1,11 +1,14 @@
 //! Verified connection contract; configured synchronization is not a power-loss test.
 use rusqlite::Connection;
+use std::time::Duration;
+
+pub(crate) const JOURNAL_BUSY_WINDOW: Duration = Duration::from_secs(5);
 
 pub(crate) fn configure(c: &Connection) -> rusqlite::Result<()> {
     if !c.is_autocommit() {
         return Err(rusqlite::Error::InvalidQuery);
     }
-    c.busy_timeout(std::time::Duration::from_secs(5))?;
+    c.busy_timeout(JOURNAL_BUSY_WINDOW)?;
     // EXTRA additionally synchronizes the directory after DELETE-journal unlink.
     // Do not silently migrate an existing database's journal mode.
     c.execute_batch("PRAGMA foreign_keys=ON; PRAGMA synchronous=EXTRA;")?;

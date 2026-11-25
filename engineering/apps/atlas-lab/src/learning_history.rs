@@ -6,9 +6,9 @@ use axum::{
     response::{Html, IntoResponse},
     routing::get,
 };
-use rusqlite::{Connection, OpenFlags, OptionalExtension, params};
+use rusqlite::{Connection, ErrorCode, OpenFlags, OptionalExtension, params};
 use serde::Deserialize;
-use std::{path::PathBuf, sync::Arc};
+use std::{path::PathBuf, sync::Arc, time::Duration};
 #[derive(Clone)]
 struct History {
     path: PathBuf,
@@ -19,9 +19,9 @@ struct History {
 struct Cursor {
     before: Option<i64>,
 }
-fn connection(path: &std::path::Path) -> rusqlite::Result<Connection> {
+fn connection(path: &std::path::Path, wait: Duration) -> rusqlite::Result<Connection> {
     let c = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY)?;
-    c.busy_timeout(std::time::Duration::from_secs(1))?;
+    c.busy_timeout(wait)?;
     Ok(c)
 }
 fn exists(c: &Connection, name: &str) -> rusqlite::Result<bool> {
@@ -32,7 +32,7 @@ fn exists(c: &Connection, name: &str) -> rusqlite::Result<bool> {
     )
 }
 fn page(path: &std::path::Path, before: Option<i64>) -> rusqlite::Result<serde_json::Value> {
-    let c = connection(path)?;
+    let c = connection(path, Duration::from_secs(1))?;
     if !exists(&c, "experiments")? {
         return Ok(serde_json::json!({"records":[],"next_before":null}));
     }
@@ -52,7 +52,7 @@ fn page(path: &std::path::Path, before: Option<i64>) -> rusqlite::Result<serde_j
     )
 }
 fn detail(path: &std::path::Path, id: i64) -> rusqlite::Result<Option<serde_json::Value>> {
-    let c = connection(path)?;
+    let c = connection(path, Duration::from_secs(1))?;
     if !exists(&c, "experiments")? {
         return Ok(None);
     }
@@ -111,7 +111,14 @@ async fn record(
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
 }
 fn job_status(path: &std::path::Path, id: i64) -> rusqlite::Result<Option<serde_json::Value>> {
-    let c = connection(path)?;
+    job_status_with_window(path, id, crate::storage_connection::JOURNAL_BUSY_WINDOW)
+}
+fn job_status_with_window(
+    path: &std::path::Path,
+    id: i64,
+    wait: Duration,
+) -> rusqlite::Result<Option<serde_json::Value>> {
+    let c = connection(path, wait)?;
     let row:Option<(String,Option<String>)>=c.query_row("SELECT state,CASE WHEN length(CAST(result AS BLOB))<=2097152 THEN result END FROM jobs WHERE id=?1 AND payload='\"DedupExperiment\"'",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
     let Some((state, raw)) = row else {
         return Ok(None);
@@ -124,6 +131,14 @@ fn job_status(path: &std::path::Path, id: i64) -> rusqlite::Result<Option<serde_
     Ok(Some(
         serde_json::json!({"id":id.to_string(),"state":state,"experiment_id":experiment_id,"history_retained":experiment_id.is_some()}),
     ))
+}
+fn job_read_error(error: rusqlite::Error) -> StatusCode {
+    match error.sqlite_error_code() {
+        Some(ErrorCode::DatabaseBusy | ErrorCode::DatabaseLocked) => {
+            StatusCode::SERVICE_UNAVAILABLE
+        }
+        _ => StatusCode::INTERNAL_SERVER_ERROR,
+    }
 }
 async fn job(
     State(s): State<History>,
@@ -139,7 +154,7 @@ async fn job(
     tokio::task::spawn_blocking(move || {
         let _permit = permit;
         job_status(&s.path, id)
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+            .map_err(job_read_error)?
             .map(Json)
             .ok_or(StatusCode::NOT_FOUND)
     })
@@ -230,5 +245,49 @@ mod tests {
         assert!(detail(&p, 99).unwrap().is_none());
         assert_eq!(std::fs::read(&p).unwrap(), before);
         std::fs::remove_file(p).unwrap();
+    }
+
+    #[test]
+    fn accepted_job_read_distinguishes_busy_and_keeps_exact_receipt_across_writer_lock() {
+        let root = std::env::temp_dir().join(format!(
+            "athena-job-status-busy-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let path = root.join("receipt.sqlite");
+        let writer = Connection::open(&path).unwrap();
+        writer.execute_batch(r#"PRAGMA journal_mode=DELETE;
+            CREATE TABLE jobs(id INTEGER PRIMARY KEY,payload TEXT NOT NULL,state TEXT NOT NULL,result TEXT);
+            INSERT INTO jobs VALUES(44, '"DedupExperiment"', 'succeeded', '{"experiment_id_text":"815"}');"#).unwrap();
+        let expected = job_status(&path, 44).unwrap().unwrap();
+        assert_eq!(expected["id"], "44");
+        assert_eq!(expected["experiment_id"], "815");
+        let before = std::fs::read(&path).unwrap();
+        writer.execute_batch("BEGIN EXCLUSIVE").unwrap();
+        let busy = job_status_with_window(&path, 44, Duration::from_millis(35)).unwrap_err();
+        assert_eq!(job_read_error(busy), StatusCode::SERVICE_UNAVAILABLE);
+        assert_eq!(
+            job_read_error(rusqlite::Error::InvalidQuery),
+            StatusCode::INTERNAL_SERVER_ERROR
+        );
+        let wrapped = path.clone();
+        let (ready, start) = std::sync::mpsc::channel();
+        let reader = std::thread::spawn(move || {
+            ready.send(()).unwrap();
+            job_status(&wrapped, 44)
+        });
+        start.recv_timeout(Duration::from_secs(3)).unwrap();
+        // Longer than the previous status-only one-second window.
+        std::thread::sleep(Duration::from_millis(1_200));
+        writer.execute_batch("ROLLBACK").unwrap();
+        assert_eq!(reader.join().unwrap().unwrap().unwrap(), expected);
+        assert!(job_status(&path, 45).unwrap().is_none());
+        drop(writer);
+        assert_eq!(std::fs::read(&path).unwrap(), before);
+        std::fs::remove_dir_all(root).unwrap();
     }
 }
