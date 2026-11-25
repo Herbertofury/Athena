@@ -8,6 +8,7 @@ pub mod constellation_review;
 mod constellation_review_ui;
 pub mod continuity_archive;
 mod foundry_artist_index;
+mod game_lab;
 pub mod learning_history;
 pub mod migration_readiness;
 mod storage_connection;
