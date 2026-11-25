@@ -4,7 +4,7 @@
 
 The source is GameSync's **Midnight Mascot Syndicate**: a world simulation in `game-openworld.js`, a Three.js WebGPU renderer in `game-openworld-3d.js`, plus a copy-friendly Dev Room toolkit for 2D physics/movement/camera/combat/AI/vehicles/weather/dialogue/missions.
 
-It already models districts, buildings, interiors, NPCs, vehicles, pickups, weapons, missions, mascot packs and first-/third-person views. The world state is primarily 2D x/y mapped into 3D x/z, with jump/roof offsets. That is a useful foundation, not full 3D physics, navmesh or large-world streaming.
+The exact 16-file source baseline (world simulation, 3D renderer and Dev Room toolkit) is now preserved under `upstream/gamesync/` and pinned by [SOURCE-MANIFEST.json](SOURCE-MANIFEST.json). It already models districts, buildings, interiors, NPCs, vehicles, pickups, weapons, missions, mascot packs and first-/third-person views. The world state is primarily 2D x/y mapped into 3D x/z, with jump/roof offsets. That is a useful foundation, not full 3D physics, navmesh or large-world streaming.
 
 ## Athena target package
 
