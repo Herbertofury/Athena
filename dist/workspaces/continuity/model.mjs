@@ -86,8 +86,20 @@ export function apply(value, action, now = Date.now()) {
   }
   return validate(next);
 }
+// Used with an immutable, already validated snapshot; no subscriptions or persisted cache.
+export function prepareVisible(validated) {
+  const rows = validated.entries.map(entry => ({entry, haystack:null})).sort(({entry:a}, {entry:b}) => Number(b.pinned) - Number(a.pinned) || b.revisions.at(-1).at - a.revisions.at(-1).at || a.id.localeCompare(b.id));
+  return (query = '', includeIgnored = false) => {
+    const q = query.toLowerCase();
+    return rows.filter(row => {
+      const {entry}=row;
+      if (!includeIgnored && entry.ignored) return false;
+      if (!q) return true;
+      row.haystack ??= [entry.project, entry.kind, ...entry.revisions.flatMap(rev => [rev.text, rev.source])].join(' ').toLowerCase();
+      return row.haystack.includes(q);
+    }).map(row => row.entry);
+  };
+}
 export function visible(value, query = '', includeIgnored = false) {
-  const q = query.toLowerCase();
-  return validate(value).entries.filter(entry => (includeIgnored || !entry.ignored) && [entry.project, entry.kind, ...entry.revisions.flatMap(revision => [revision.text, revision.source])].join(' ').toLowerCase().includes(q))
-    .sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.revisions.at(-1).at - a.revisions.at(-1).at || a.id.localeCompare(b.id));
+  return prepareVisible(validate(value))(query, includeIgnored);
 }
