@@ -25,3 +25,25 @@ The exact 16-file source baseline (world simulation, 3D renderer and Dev Room to
 ## Promotion gate
 
 Prove world traversal, collisions, roofs/interiors, vehicles, NPC pathing, mission lifecycle, saves/migrations, cleanup, camera modes, low/high entity counts and performance in actual compatible hosts. A renderer demo is not proof of a complete open world.
+
+## Playable offline city traversal
+
+The source-pinned traversal adapter exposes all five authored districts, ten
+building footprints and four interior rooms. `createCityTraversal()` walks
+through the original outdoor/indoor collision tests and door/exit locations;
+returning exits to the exact prior sidewalk position. Practice starts only
+supply an outdoor approach. The low-level legacy stages separately prove the
+roof detach height handoff without simulating a 3D pose. Host increments are
+bounded; this is not continuous swept collision or network authority.
+
+```sh
+node engines/mascot-open-world/tools/build-city-traversal.mjs --check
+node --test engines/mascot-open-world/tests/city-traversal.test.mjs
+node engines/mascot-open-world/tools/build-city-preview.mjs
+```
+
+Open `Athena-Midnight-City-Walk.html` from disk. Original, asset-free top-down
+preview uses live keyboard controls and real source interior transitions. No
+saved progress, original 3D rendering, climb/vehicle traversal, missions, or
+mascot art is included. The keyboard movement amount is host-side; the geometry,
+collision and transition routines are captured from the original.
