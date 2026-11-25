@@ -66,5 +66,7 @@ jobs:
         run: node engines/roguelite/tools/build-survivor-spawns.mjs --check
       - name: Prove complete headless spawn replay against pinned GameSync
         run: node --test engines/roguelite/tests/spawn-director.test.mjs
+      - name: Verify original gem pickup and level gates against GameSync
+        run: node engines/roguelite/tools/build-survivor-pickups.mjs --check && node --test engines/roguelite/tests/pickup-formulas.test.mjs
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300

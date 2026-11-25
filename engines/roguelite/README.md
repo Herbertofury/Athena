@@ -45,3 +45,15 @@ node engines/roguelite/tools/build-survivor-spawns.mjs --check
 node --test engines/roguelite/tests/spawn-director.test.mjs
 node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
 ```
+
+### Experience pickup and level gates
+
+The separately generated pickup module exposes `spawnExperienceGem` and
+`tickPickupFormulas`. Pass only engine-owned, validated gems and player state:
+these synchronous primitives mutate the arrays and counters in place, just as
+the original game does. Expiry is applied before pickup; magnet movement
+crossing into the pickup radius is collected on a later tick, because the
+original checks the pre-movement distance. Multiple pickups can advance
+multiple gates in a single tick. The returned events preserve their original
+order. No upgrade choices, random draw, audio, combat rewards, or durable
+player progression are executed by the module.
