@@ -38,6 +38,30 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   await room.selectOption(old);assert.equal(await pin.count(),1);
  });
  await one('[data-layer-groups]').screenshot({path:path.join(out,'layers.png')});
+ await check('dark and light layer action states remain readable at narrow width',async()=>{
+  const panel=one('[data-foundry-module="layers"]'),first=panel.locator('[data-layer-id]').first();
+  await page.setViewportSize({width:375,height:860});
+  await panel.scrollIntoViewIfNeeded();
+  const dark=await panel.evaluate(el=>getComputedStyle(el).backgroundColor);
+  assert.equal(dark,'rgb(9, 9, 9)');
+  const action=first.locator('[data-layer-action="select"]');
+  await action.focus();
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Shift+Tab');
+  const geometry=await first.evaluate(row=>{
+   const buttons=[...row.querySelectorAll('button')],style=getComputedStyle(row);
+   const rect=row.getBoundingClientRect();
+   return {keyboard:buttons[0]===row.getRootNode().activeElement,rowFits:rect.left>=0&&rect.right<=innerWidth,minTargets:buttons.every(b=>b.getBoundingClientRect().height>=43),
+    outline:getComputedStyle(buttons[0]).outlineStyle,wrapping:style.flexWrap};
+  });
+  assert.deepEqual(geometry,{keyboard:true,rowFits:true,minTargets:true,outline:'solid',wrapping:'wrap'});
+  await panel.evaluate(el=>el.closest('.foundry-workspace').dataset.theme='light');
+  assert.equal(await panel.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(245, 247, 250)');
+  await panel.screenshot({path:path.join(out,'layers-light-narrow.png')});
+  await panel.evaluate(el=>el.closest('.foundry-workspace').dataset.theme='dark');
+  await panel.screenshot({path:path.join(out,'layers-dark-narrow.png')});
+  await page.setViewportSize({width:1440,height:1000});
+ });
  await one('.foundry-scene').scrollIntoViewIfNeeded();await one('.foundry-grid').screenshot({path:path.join(out,'layer-scene.png')});
  await check('public import keeps all 300 real controls on a selection in a full 100-layer room',async()=>{
   const {createLayoutModel}=await import(require('node:url').pathToFileURL(path.join(root,'workspaces/foundry/layout-state.mjs')).href);
