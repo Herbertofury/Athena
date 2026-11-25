@@ -637,6 +637,40 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
  });
+ if(unified)await check('Engineering-Atlas offline run ledger preserves both observations and exact workflow IDs',async()=>{
+  const endpoint=origin+'/api/migration/atlas-runs',before=report.externalRequests.length;
+  const stored=await (await fetch(endpoint)).json();
+  assert.equal(stored.runs.length,522);assert.equal(stored.repeated_ids,509);assert.equal(stored.changed_readings,2);
+  assert.equal(stored.early.sha256,'5e19fabe50551bb3bcf7f122f5eee9d3c0326c0ec230c6858e0605a128726f65');
+  assert.equal(stored.later.sha256,'b1321421c23f0600be368d997231786287e4173e9f483eeb191022d16ff72f05');
+  await page.goto(origin+'/migration/atlas');
+  await page.getByRole('link',{name:'Recorded workflow runs',exact:true}).click();
+  const status=page.locator('#status');
+  await status.filter({hasText:'Showing 1–25 of 522'}).waitFor();
+  assert.equal(await page.locator('#records article').count(),25);
+  await page.getByRole('button',{name:'Next 25',exact:true}).click();
+  await status.filter({hasText:'Showing 26–50 of 522'}).waitFor();
+  assert.equal(await page.locator('#run-heading').evaluate(node=>document.activeElement===node),true);
+  await page.locator('#scope').selectOption('changed');
+  await status.filter({hasText:'Showing 1–2 of 2'}).waitFor();
+  for(const e of await page.locator('#records article').all()){
+   const line=await e.textContent();assert.match(line,/Nov 7: in progress · Nov 14: success/);
+  }
+  await page.locator('#scope').selectOption('failed');
+  await status.filter({hasText:'Showing 1–25 of 49'}).waitFor();
+  await page.locator('#scope').selectOption('later');
+  await status.filter({hasText:'Showing 1–13 of 13'}).waitFor();
+  await page.locator('#scope').selectOption('');
+  await page.locator('#search').fill('42334871509');
+  await status.filter({hasText:'Showing 1–1 of 1'}).waitFor();
+  await page.getByText('Commit and original run link',{exact:true}).click();
+  const link=page.getByRole('link',{name:'Open original GitHub run',exact:true});
+  assert.equal(await link.getAttribute('href'),'https://github.com/Herbertofury/Engineering-Atlas/actions/runs/42334871509');
+  await page.getByText('Pinned snapshots and checksums',{exact:true}).click();
+  assert.equal(await page.getByRole('link',{name:'View pinned source',exact:true}).count(),2);
+  assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
+  assert.equal(report.externalRequests.length,before);
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});

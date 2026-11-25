@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Athena · Engineering-Atlas workflow ledger</title><link rel="stylesheet" href="/learning/style.css"></head>
+<body><main><nav aria-label="Athena native pages"><a href="/">ATHENA / HOME</a><a href="/migration/atlas">Engineering-Atlas archive</a><a href="/migration?source=atlas">Migration readiness</a></nav>
+<header><p class="eyebrow">RECOVERED RESEARCH</p><h1>Recorded Atlas workflow runs</h1><p>Two preserved snapshots, not a live status page. Job logs, artifact contents and unobserved later changes are not included.</p></header>
+<section class="runner"><h2>Find a recorded run</h2><div id="filters" class="history-controls" hidden>
+<label for="search">Run ID, exact commit or workflow name</label><input id="search" type="search" maxlength="120">
+<label for="scope">Snapshot evidence</label><select id="scope"><option value="">All runs</option><option value="changed">Changed status</option><option value="failed">Failed in later snapshot</option><option value="later">Only in later snapshot</option></select></div>
+<p role="status" id="status">Loading the embedded ledger…</p><details id="source-panel" hidden><summary>Pinned snapshots and checksums</summary><ul id="sources"></ul></details></section>
+<section class="runner" aria-labelledby="run-heading"><h2 id="run-heading" tabindex="-1">Recorded runs</h2><div id="records"></div>
+<div id="pages" hidden><button id="previous" type="button">Previous 25</button><button id="next" type="button">Next 25</button></div></section>
+<footer>Local read-only data · Original site links open only when selected</footer></main>
+<script type="module" src="/migration/atlas-runs/app.js"></script></body></html>

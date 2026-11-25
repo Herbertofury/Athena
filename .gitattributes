@@ -3,3 +3,6 @@
 dist/** -text
 # Exact historical manifest and reviewed Markdown served by the offline Atlas reader.
 migration/engineering-atlas/historical-evidence/** -text
+# Historical workflow sources are embedded and identified by exact blob digests.
+migration/engineering-atlas/workflow-runs.json -text
+migration/engineering-atlas/retirement-2026-11-14/workflow-summary.json -text
