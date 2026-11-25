@@ -91,3 +91,28 @@ alternate streams before accepting real comparisons. A
 [volume-wide USN enumeration](https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ni-winioctl-fsctl_enum_usn_data)
 requires a different scope and is not used by this fixture. No scan speed or
 disk-reclaimability claim follows from the batch decoder.
+
+### Windows top-level observation command
+
+The optional native preview command is explicit and nonrecursive. Point it at
+an ordinary local-drive directory you want to observe:
+
+```powershell
+.\atlas-lab.exe windows-directory-observation "C:\YourProject" 10000
+```
+
+It reads metadata for direct entries only. It does not open or follow children.
+It rejects a final reparse-directory handle and skips child reparse entries and
+directories. Windows resolves the path you select when opening the initial
+handle; this is not a recursive containment or adversarial-path scanner.
+Logical bytes count pathnames; reported allocation is attributed once per
+observed, nonzero file ID. Missing IDs, repeated or conflicting observations,
+and entry or batch limits produce a partial result. Unsupported or malformed
+inputs fail rather than returning guessed totals.
+
+Output contains aggregate metadata only, not file names, paths or IDs. It is
+not a point-in-time snapshot, free or reclaimable space, full drive usage,
+stream enumeration, cross-volume measurement, or an input to the existing
+Linux v1 report importer. It does not modify the selected folder, install a
+service or perform background sweeps. No administrator setup is required for
+the CI fixture; real access is limited by Windows permissions.
