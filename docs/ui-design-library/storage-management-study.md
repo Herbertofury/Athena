@@ -71,3 +71,23 @@ search filters the comparison and reference list together. Categories that only
 occur in one report are labelled as such, never compared with an assumed zero.
 These are differences between observed inputs, not growth causation or
 reclaimable space. No file names, changes to data, or upload are introduced.
+
+### Windows directory-record qualification
+
+A Rust acceptance fixture targets Microsoft's documented
+[handle-based directory record](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_id_extd_dir_info)
+and [record layout](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/36172f0b-8dce-435a-8748-859978d632f8).
+It reads one buffer from an isolated test directory on Windows and checks that
+two names for the same hardlink share an exact 128-bit ID, a separate file has a
+different ID, Unicode name units round-trip, and all bytes remain unchanged.
+Portable synthetic tests reject invalid offsets, truncated records and invalid
+name extents instead of returning a partly decoded inventory. No production
+scanner, recursive walk, provider dependency or administrator setup is added.
+
+For a product scanner, verify identity together with the volume, use anchored
+child access, skip reparse points without following them, report access and
+change limits as partial, and distinguish sparse/compressed allocation and
+alternate streams before accepting real comparisons. A
+[volume-wide USN enumeration](https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ni-winioctl-fsctl_enum_usn_data)
+requires a different scope and is not used by this fixture. No scan speed or
+disk-reclaimability claim follows from the batch decoder.

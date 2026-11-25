@@ -2,6 +2,7 @@ use atlas_lab::{modrinth::Project, snapshots::SnapshotStore};
 use std::{
     fs::OpenOptions,
     path::PathBuf,
+    sync::atomic::{AtomicU64, Ordering},
     time::{SystemTime, UNIX_EPOCH},
 };
 struct Scratch(PathBuf);
@@ -11,14 +12,24 @@ impl Scratch {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let path =
-            std::env::temp_dir().join(format!("atlas-lab-test-{}-{n}.sqlite", std::process::id()));
-        OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(&path)
-            .unwrap();
-        Self(path)
+        Self::at(n)
+    }
+
+    fn at(n: u128) -> Self {
+        static NEXT: AtomicU64 = AtomicU64::new(0);
+        for _ in 0..8 {
+            let sequence = NEXT.fetch_add(1, Ordering::Relaxed);
+            let path = std::env::temp_dir().join(format!(
+                "atlas-lab-test-{}-{n}-{sequence}.sqlite",
+                std::process::id()
+            ));
+            match OpenOptions::new().create_new(true).write(true).open(&path) {
+                Ok(_) => return Self(path),
+                Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {}
+                Err(error) => panic!("could not create isolated SQLite test file: {error}"),
+            }
+        }
+        panic!("could not allocate an unused SQLite test path");
     }
 }
 impl Drop for Scratch {
@@ -368,4 +379,27 @@ fn held_writer_reports_busy_without_partial_snapshot_then_explicit_call_succeeds
         assert_eq!(report.stages.len(), 4);
         assert_eq!(store.attempts().unwrap(), 1);
     }
+}
+
+#[test]
+fn isolated_persistence_fixtures_remain_unique_at_the_same_clock_tick() {
+    let barrier = std::sync::Arc::new(std::sync::Barrier::new(16));
+    let scratches = (0..16)
+        .map(|_| {
+            let barrier = barrier.clone();
+            std::thread::spawn(move || {
+                barrier.wait();
+                Scratch::at(12345)
+            })
+        })
+        .collect::<Vec<_>>()
+        .into_iter()
+        .map(|thread| thread.join().unwrap())
+        .collect::<Vec<_>>();
+    let paths = scratches
+        .iter()
+        .map(|scratch| &scratch.0)
+        .collect::<std::collections::HashSet<_>>();
+    assert_eq!(paths.len(), 16);
+    assert!(paths.iter().all(|path| path.is_file()));
 }
