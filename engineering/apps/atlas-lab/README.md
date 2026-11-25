@@ -203,3 +203,16 @@ Redirect to a new UTF-8 JSON file with Command Prompt or PowerShell 7 if you wan
 The command preflights the Win32 drive type, then requires an ordinary opened directory handle with a local Volume GUID path before enumerating records. Mapped network and unavailable drive types are rejected. Selecting a path can still involve Windows path resolution before this open-handle qualification; this is not an adversarial containment sandbox. Filesystems or local volumes without the necessary handle and GUID information are not supported. Do not substitute a device path, network share, file stream, junction or relative path.
 
 [Win32 drive-type API](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdrivetypew) · [Win32 final handle-path API](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew)
+
+### Compare Windows directory observations
+
+In **Athena Storage → Windows directory summary**, choose two existing
+`windows-directory-observation` JSON files. The view does not scan or
+persist anything. It refuses numeric differences when either report is
+partial or their exclusion counts differ. Otherwise it requires an
+explicit assertion that both observations used the same folder and
+settings in the intended order. The JSON intentionally omits folder
+identity and timestamps, so Athena cannot verify that assertion.
+Output is exact second-minus-reference for logical pathname bytes,
+identified allocation, pathnames, and unique files. It is not a verified
+filesystem audit, a point-in-time snapshot, or a reclaimable-space estimate.
