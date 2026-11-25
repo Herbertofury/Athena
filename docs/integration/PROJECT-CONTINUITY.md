@@ -121,6 +121,12 @@ MIME label, timestamp, sequence and SHA-256 are retained in one IndexedDB transa
 Identical latest bytes/name/MIME are a no-op. Parallel connections append against
 the latest committed sequence rather than replacing another revision.
 
+Use **Refresh revision list** to see another tab’s committed revisions without
+reloading the workspace, replacing the selected file or writing new data. If a
+refresh cannot read the journal, the last displayed list remains available.
+If a save succeeds but its list update fails, refresh before trying to retain
+the same file again. This is an on-demand read, not background polling.
+
 This newly authored shared storage module is not a second Modding-Knowledge database:
 it holds private operator-selected bytes, not shared public knowledge. Existing
 Foundry image/video adapters are session renderers; the Engineering snapshot archive

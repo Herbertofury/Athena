@@ -74,12 +74,46 @@ mod tests {
                 ));
             }
             for source in row["evidence"].as_array().unwrap() {
+                let referenced_commit = source["commit"].as_str().unwrap_or(pin);
+                assert_eq!(referenced_commit.len(), 40);
+                assert!(
+                    referenced_commit
+                        .bytes()
+                        .all(|byte| byte.is_ascii_hexdigit())
+                );
                 let url = source["url"].as_str().unwrap();
                 assert!(url.starts_with(&format!(
-                    "https://github.com/Herbertofury/Athena/blob/{pin}/"
+                    "https://github.com/Herbertofury/Athena/blob/{referenced_commit}/"
                 )));
                 assert!(!url.contains(".."));
             }
         }
+    }
+    #[test]
+    fn foundry_followups_keep_history_and_retirement_gates_distinct() {
+        let snapshot: serde_json::Value = serde_json::from_str(SNAPSHOT).unwrap();
+        let foundry = snapshot["projects"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|row| row["id"] == "foundry")
+            .unwrap();
+        let gates = foundry["gates"].as_array().unwrap();
+        assert_eq!(gates[0]["label"], "Preserved audit");
+        assert_eq!(gates[1]["state"], "recorded");
+        assert!(gates[1]["detail"].as_str().unwrap().contains("All six"));
+        assert_eq!(gates[2]["state"], "recorded");
+        assert!(gates[2]["detail"].as_str().unwrap().contains("15 commits"));
+        assert_eq!(gates[3]["state"], "open");
+        assert_eq!(gates[4]["state"], "open");
+        let evidence = foundry["evidence"].as_array().unwrap();
+        assert_eq!(evidence.len(), 4);
+        assert!(evidence[0]["commit"].is_null());
+        assert_eq!(
+            evidence[2]["commit"],
+            "64954a16f8af349c27a2652649882d4ec0e3450a"
+        );
+        assert_eq!(evidence[3]["commit"], evidence[2]["commit"]);
+        assert!(!SNAPSHOT.contains("libfile_"));
     }
 }
