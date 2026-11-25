@@ -89,3 +89,7 @@ A Java Forge run manager, a Python desktop-game save ledger, a JavaScript browse
 ## 7. Validate the exchange
 
 From the repository root, run `python scripts/validate_game_systems.py` and `python -m unittest discover -s tests -p test_game_systems_registry.py -v`. The dedicated `Game Systems Exchange validation` workflow runs the same checks for relevant pushes and pull requests. These checks validate registry identity/evidence pins and schema JSON structure; they do not prove a game engine, live release, native runtime, benchmark or two-host adoption.
+
+## Task-scoped developer preflight
+
+Use [Game development skill routing](GAME-DEV-SKILLS-REVIEW.md) to pick up to three relevant local checks for replay, save compatibility, artwork import or handoff. It reads the selected Athena package's current catalog state and emits portable JSON; it installs nothing and does not claim a runtime test.
