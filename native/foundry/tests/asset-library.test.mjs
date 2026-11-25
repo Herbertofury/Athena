@@ -43,3 +43,35 @@ test('a count-only redraw preserves the actual catalog control and checks the cu
   assert.equal(calls.length,2,'leaving the room invalidates the old control');
   controller.abort();
 });
+
+test('all original materials, tags and affordances enrich only the rendered catalogue, and filters do not add anything',()=>{
+ const base=JSON.parse(fs.readFileSync(new URL('../../../crates/athena-foundry-store/catalog.json',import.meta.url)));
+ const original=JSON.parse(fs.readFileSync(new URL('../../../feature-foundry/source/src/data/theme-world-packages.json',import.meta.url)));
+ const plain=structuredClone(catalog);
+ for(const theme of plain.themes){
+  const old=original.find(row=>row.id===theme.id);
+  for(const o of theme.objects){
+   const evidence=old.objects.find(row=>row.id===o.id);
+   const {material,tags,affordances}=evidence;
+   assert.deepEqual(o.sourceLabels,{material,tags,affordances});
+   delete o.sourceLabels;
+  }
+ }
+ assert.deepEqual(plain,base);
+ assert.equal(catalog.themes.flatMap(t=>t.objects).length,85);
+ const {document,window}=parseHTML('<main></main>');
+ const host=document.querySelector('main'),calls=[],c=new AbortController(),a=attachNativeAssetLibrary({host,signal:c.signal,onAdd:(...v)=>calls.push(v)});
+ const sample=catalog.themes[0];
+ a.update({key:'first',name:sample.name,objects:sample.objects,count:0});
+ const choice=host.querySelector('select');
+ Object.defineProperty(choice,'value',{configurable:true,writable:true,value:'glass'});
+ choice.dispatchEvent(new window.Event('change'));
+ const matches=sample.objects.filter(o=>o.sourceLabels.material==='glass');
+ assert.deepEqual([...host.querySelectorAll('[data-add-catalog-object]')].map(b=>b.dataset.addCatalogObject),matches.map(o=>o.id));
+ const input=host.querySelector('input');input.value='spin';input.dispatchEvent(new window.Event('input'));
+ assert.deepEqual([...host.querySelectorAll('[data-add-catalog-object]')].map(b=>b.dataset.addCatalogObject),matches.filter(o=>o.sourceLabels.affordances.includes('spin')).map(o=>o.id));
+ assert.match(host.textContent,/Material: glass/);
+ assert.match(host.textContent,/Source affordances:/);
+ assert.deepEqual(calls,[]);
+ c.abort();
+});

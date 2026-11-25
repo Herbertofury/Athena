@@ -33,3 +33,18 @@ Room and object backdrops now support original procedural Frutiger, Aurora, Ocea
 Choosing an expanded preset explicitly upgrades that room's authoring JSON to version10, retaining instances/origins and previous properties; old version1–9 layouts still reject the new enum. For SQLite saves, preserve a verified backup and run `upgrade-environments DB` **after** the existing `upgrade-origins` step, then relaunch the bridge. This validates active and historical records before committing schema13. No startup migration occurs. Old schema12 writers refuse schema13; previous formats remain accepted by the new writer. Cancellation or downgrade is not guessed. Reset and Undo retain the expanded environment format and configuration.
 
 The original drawing-command comparisons and real-browser framebuffer checks prove the bounded static rendition, not complete original living-world behavior, GPU equivalence, live user-data migration or retirement readiness.
+
+### Source-aware object catalog
+
+The native current-theme object catalog now displays the exact reviewed
+material, tags and affordance labels from all 85 preserved Feature Foundry
+object records. Search combines those fields with existing name, shape and
+role, and the Material control filters the current theme exactly. Changing
+a filter does not add an instance, edit a room, change its appearance or save
+anything. Adding still creates an independent instance and supports one-step
+Undo. The labels describe the original design; full behavior, surface
+rendering and interaction parity are not implied.
+
+Run `python scripts/build_foundry_catalog_labels.py --check` to verify the
+projection against the preserved authored source and the unchanged native
+SQLite catalog, without using owner data.
