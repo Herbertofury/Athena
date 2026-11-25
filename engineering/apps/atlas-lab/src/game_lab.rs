@@ -167,7 +167,10 @@ pub(crate) fn router() -> Router {
             "src/rift-expedition.mjs",
             "src/rift-session.mjs",
             "src/camp-workshop.mjs",
-            "src/spatial-region.mjs"
+            "src/spatial-region.mjs",
+            "src/ashglass-cavern.mjs",
+            "src/floodplain-escort.mjs",
+            "src/frontier-relay.mjs"
         ]
     );
     let router = route_modules!(
