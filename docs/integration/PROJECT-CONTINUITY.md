@@ -215,3 +215,15 @@ extension's original storage.
 
 The existing SQLite backup preserves a different native data store. It cannot
 serve as a substitute for this browser-local artifact archive.
+
+### Checking a Constellation export before any migration
+
+The native reader now reconciles the writer's declared totals for nine
+uncapped collections, including Files, Output Snapshots, and Project
+Continuity, in addition to checking the capped events and checkpoints.
+Declared totals that disagree with the exported rows refuse the review.
+Older snapshots without a declared total remain readable; a missing total is
+unknown, not verified zero. The report also counts revisions that explicitly
+name a different chat than their parent turn. No chat, filename, link or
+revision text is printed, rendered or stored. These counts are consistency
+checks against the selected file, not source completeness or restore proof.

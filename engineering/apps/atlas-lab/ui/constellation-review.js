@@ -6,6 +6,7 @@ let rows=[], active;
 const refs={
   turns_without_exported_chat:'Turns without their chat in this export',
   revisions_without_exported_turn:'Revisions without their turn in this export',
+  revisions_with_conflicting_chat:'Revisions naming a different chat than their turn',
   best_revision_not_exported:'Best-revision links absent from this export',
   best_revision_points_to_other_turn:'Best-revision links pointing to another turn'
 };
