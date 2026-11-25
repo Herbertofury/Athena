@@ -730,6 +730,51 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(await preview.locator('img,iframe,audio,video').count(),0);
   }finally{page.off('request',track);}
  });
+ if(portableUnified)await check('Extracted Athena app plays both shared game engines through native same-origin routes',async()=>{
+  const play=await context.newPage();
+  const external=report.externalRequests.length, errors=[];
+  play.on('pageerror',error=>errors.push(String(error)));
+  play.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
+  try{
+   await play.clock.install();
+   await play.goto(origin+'/migration?source=foundry');
+   await play.clock.pauseAt(new Date(Date.now()+1000));
+   await play.getByRole('link',{name:'Engine Foundry Play Lab',exact:true}).click();
+   await play.getByRole('heading',{name:'Engine Foundry Play Lab',exact:true}).waitFor();
+   const storage=()=>play.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+   const before=await storage();
+   await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   const arena=play.locator('#arena');
+   await play.getByRole('button',{name:'Start run',exact:true}).click();
+   const pixels=()=>arena.evaluate(e=>e.toDataURL());
+   const original=await pixels();assert.ok(original.length>100);
+   await play.keyboard.down('ArrowRight');
+   await play.clock.runFor(260);
+   await play.keyboard.up('ArrowRight');
+   assert.notEqual(await pixels(),original);
+   await play.clock.runFor(55000);
+   const offer=play.locator('#choices button').first();
+   await offer.waitFor();
+   await offer.press('Enter');
+   assert.match(await play.locator('#status').textContent(),/Upgrade equipped/);
+   assert.ok(Number(await play.locator('#kills').textContent())>=10);
+   await play.getByRole('link',{name:'Engine Foundry Play Lab',exact:true}).click();
+   await play.getByRole('link',{name:'Midnight City Walk',exact:true}).click();
+   await play.getByLabel('Practice start').selectOption('hideout');
+   await play.getByRole('button',{name:'Go to practice start',exact:true}).click();
+   const position=await play.locator('#point').textContent();
+   await play.keyboard.press('e');assert.equal(await play.locator('#scene').textContent(),'Hideout Loft');
+   await play.keyboard.down('ArrowDown');
+   await play.clock.runFor(405);
+   await play.keyboard.up('ArrowDown');
+   await play.getByRole('button',{name:'Exit to street',exact:true}).click();
+   assert.equal(await play.locator('#point').textContent(),position);
+   assert.equal(await play.locator('iframe,video,audio').count(),0);
+   assert.deepEqual(errors,[]);
+   assert.equal(await storage(),before);
+   assert.equal(report.externalRequests.length,external);
+  }finally{await play.close();}
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});

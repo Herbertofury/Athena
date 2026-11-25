@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+import assert from 'node:assert/strict';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {chromium} from 'playwright';
+const address=pathToFileURL(resolve(process.argv[2]??'Athena-Survivor-Arena.html')).href;
+const browser=await chromium.launch({headless:true});
+try{
+ const page=await browser.newPage({viewport:{width:1120,height:900},reducedMotion:'reduce',offline:true});
+ const errors=[],requests=[];
+ page.on('pageerror',error=>errors.push(error.message));
+ page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
+ page.on('request',request=>requests.push(request.url()));
+ await page.clock.install();
+ await page.goto(address);
+ await page.clock.pauseAt(new Date(Date.now()+1000));
+ await page.getByRole('button',{name:'Start run'}).click();
+ const arena=page.locator('#arena');
+ assert.equal(await arena.evaluate(el=>el===document.activeElement),true);
+ const readFrame=()=>arena.evaluate(el=>el.toDataURL());
+ const before=await readFrame();
+ await page.keyboard.down('ArrowRight');
+ await page.clock.runFor(260);
+ await page.keyboard.up('ArrowRight');
+ assert.notEqual(await readFrame(),before,'keyboard movement must change the actual canvas');
+ await page.keyboard.press('Escape');
+ assert.match(await page.getByRole('status').textContent(),/Paused/);
+ const paused=await readFrame();
+ await page.clock.runFor(1000);
+ assert.equal(await readFrame(),paused,'paused preview must not advance');
+ await page.getByRole('button',{name:'Resume'}).click();
+ await page.clock.runFor(55000);
+ assert.equal(await page.locator('#level').textContent(),'2');
+ assert.ok(Number(await page.locator('#kills').textContent())>=10,'actual run killed enemies');
+ const offers=page.locator('#choices button');
+ assert.equal(await offers.count(),3);
+ assert.equal(await offers.first().evaluate(el=>el===document.activeElement),true);
+ const hp=page.getByRole('button',{name:/Max HP/});
+ if(await hp.count()){
+  await hp.focus();await page.keyboard.press('Enter');
+  assert.match(await page.locator('#hp').textContent(),/\/ 120$/);
+ }else await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#choice').isHidden(),true);
+ assert.match(await page.getByRole('status').textContent(),/Upgrade equipped/);
+ await page.getByRole('button',{name:'Restart run'}).click();
+ assert.equal(await page.locator('#kills').textContent(),'0');
+ assert.equal(await page.locator('#level').textContent(),'1');
+ assert.deepEqual(errors,[]);
+ assert.deepEqual(requests,[address]);
+ console.log('Offline file launch, keyboard/canvas, pause, live kills, upgrade selection, restart; zero external requests.');
+}finally{await browser.close();}
