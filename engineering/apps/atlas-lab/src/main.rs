@@ -3,6 +3,11 @@ use std::path::Path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
+    if args.len() == 3 && args[1] == "review-constellation-v7" {
+        let report = atlas_lab::constellation_review::review_file(Path::new(&args[2]))?;
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
     if args.len() == 4 && args[1] == "show-experiment" {
         let id: i64 = args[3].parse()?;
         let run = Journal::read_run(Path::new(&args[2]), id)?;
@@ -165,7 +170,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     if args.len() != 3 || args[1] != "dedup-lab" {
         eprintln!(
-            "Usage: atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
+            "Usage: atlas-lab review-constellation-v7 EXISTING_EXPORT.json\n       atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
         );
         std::process::exit(2);
     }
