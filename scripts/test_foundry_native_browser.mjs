@@ -688,6 +688,11 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await page.emulateMedia({reducedMotion:'reduce'});
    assert.equal(await canvas.evaluate(el=>getComputedStyle(el).animationName),'none');
    assert.equal(await canvas.evaluate(el=>getComputedStyle(el).transform),'matrix(1, 0, 0, 1, -336, 0)');
+   jobState='queued';
+   await page.locator('#run-status').filter({hasText:'Job 991: queued.'}).waitFor();
+   assert.equal(await activity.isHidden(),true);
+   jobState='running';await canvas.waitFor();
+   assert.equal(await canvas.evaluate(el=>getComputedStyle(el).animationName),'none');
    jobState='failed';
    await page.locator('#run-status').filter({hasText:'Job 991: failed.'}).waitFor();
    assert.equal(await activity.isHidden(),true);assert.equal(await stop.isHidden(),true);

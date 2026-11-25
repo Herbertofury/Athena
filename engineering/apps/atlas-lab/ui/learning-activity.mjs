@@ -35,9 +35,16 @@ export function learningActivity({indicator,canvas,doc,view=doc.defaultView}){
   else if(indicator.hasAttribute('data-strip'))indicator.removeAttribute('data-strip');
   if(!show||!art||ready||active.attempted===art||typeof view?.createImageBitmap!=='function')return;
   const asset=art,job=active;job.attempted=asset;
-  Promise.resolve().then(()=>view.createImageBitmap(asset)).then(frame=>{
+  const obsolete=()=>disposed||active!==job||art!==asset;
+  const pause=()=>{
+   if(obsolete())return true;
+   if(doc.hidden||job.phase!=='running'){job.attempted=null;return true;}
+   return false;
+  };
+  Promise.resolve().then(()=>pause()?null:view.createImageBitmap(asset)).then(frame=>{
+   if(!frame)return;
    try {
-    if(disposed||active!==job||art!==asset||frame.width!==WIDTH||frame.height!==HEIGHT)return;
+    if(pause()||frame.width!==WIDTH||frame.height!==HEIGHT)return;
     const context=canvas.getContext('2d',{alpha:true});
     if(!context)return;
     context.clearRect(0,0,WIDTH,HEIGHT);context.drawImage(frame,0,0);
@@ -52,8 +59,7 @@ export function learningActivity({indicator,canvas,doc,view=doc.defaultView}){
   return Object.freeze({
    observe(row){
     if(active!==job)return 'stale';
-    if(row?.id!==id||!['queued','running'].includes(row.state)&&!terminal.has(row.state)||
-     row.state==='queued'&&job.phase==='running'){stop();return 'uncertain';}
+    if(row?.id!==id||!['queued','running'].includes(row.state)&&!terminal.has(row.state)){stop();return 'uncertain';}
     if(terminal.has(row.state)){stop();return row.state;}
     job.phase=row.state;draw();return row.state;
    },

@@ -48,3 +48,17 @@ test('hidden tab does not decode, pagehide drops the session asset, and late cal
  h.control.begin('2').observe(state('2','running'));await turn();assert.equal(h.requests.length,1);
  h.control.dispose();assert.equal(h.control.begin('3'),null);
 });
+
+test('a real worker-lease requeue pauses animation and drops any unfinished paint until running resumes',async()=>{
+ const h=harness();h.control.setArtwork({});
+ const a=h.control.begin('5');a.observe(state('5','running'));await turn();
+ assert.equal(h.requests.length,1);
+ assert.equal(a.observe(state('5','queued')),'queued');
+ assert.equal(h.indicator.hidden,true);
+ let closed=0;h.requests[0].resolve({width:768,height:96,close(){closed++;}});await turn();
+ assert.equal(closed,1);assert.equal(h.paints.length,0);
+ a.observe(state('5','running'));await turn();assert.equal(h.requests.length,2);
+ h.requests[1].resolve({width:768,height:96,close(){closed++;}});await turn();
+ assert.equal(h.indicator.dataset.strip,'ready');assert.equal(closed,2);
+ a.observe(state('5','failed'));assert.equal(h.indicator.hidden,true);
+});
