@@ -86,3 +86,16 @@ The GameSync source baseline is **GPL-3.0-or-later**. Its engine intake snapshot
 5. Benchmark, document and accept in two real compatible consumers before marking any engine canonical.
 
 See [Engine Foundry package catalog](../engines/catalog.json), [Game Systems Exchange](GAME-SYSTEMS-EXCHANGE.md) and [portfolio M5](PORTFOLIO-ALIGNMENT.md#m5--athena-engine-foundry).
+
+## 8. Current Athena source-intake status · 2026-11-24
+
+Athena now stores **41 immutable source files**, each copied byte-for-byte from pinned GameSync commit `bce6c1bcb31c63d31c64185fef143a53d9c4d35f` and described by an exact per-file Git blob SHA:
+
+- Card Game: 23 modules under `engines/card-game/upstream/gamesync/`.
+- Mascot Open World: 16 files (world simulation, Three.js renderer and 14 Dev Room files) under `engines/mascot-open-world/upstream/gamesync/`.
+- Roguelite: GameSync's survivor loop under `engines/roguelite/upstream/gamesync/`.
+- Shared Browser Game Runtime: one shared canvas core under `engines/shared-game-runtime/upstream/gamesync/`.
+
+The [engine catalog](../engines/catalog.json) and four [source manifests](../engines/README.md) record provenance and consumer drift. [`verify_engine_intake.py`](../scripts/verify_engine_intake.py) checks each local file's actual Git blob hash against its upstream pin. GameSync Next's card copy comparison confirms 19/23 identical modules and four presentation divergences. Its open-world renderer/simulation copies are divergent and remain comparison candidates.
+
+**This is an actual Athena-hosted source intake, not yet an extracted reusable engine API.** All four package statuses remain `intake_snapshot`; their canonical `src/` implementations, replay/fixture suites, native runtime acceptance and two-consumer proofs are still open. The immutable snapshots are not to be edited or imported directly by consumers. Work the M5 queue in [Athena issue #365](https://github.com/Herbertofury/Athena/issues/365).
