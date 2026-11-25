@@ -79,3 +79,11 @@ workspace prevents new queued imports and late attachments; browser imports
 already in flight may finish without changing the closed room. Optional
 module failures still leave ordinary authoring usable. No background
 polling or eager loading from other Athena routes is added.
+
+In the object inspector, **Link scale magnitudes** makes a valid edit to one
+scale field fill the same magnitude on the other, retaining the partner's
+signed mirror direction. This preserves the original linked-axis behavior
+without saving while typing. Enabling the link does not change an existing
+unequal pair. **Apply rotation and scale** saves both in one Undo step.
+The link is optional for the current workspace session, not a saved room
+setting; pinned objects keep both scale fields locked.

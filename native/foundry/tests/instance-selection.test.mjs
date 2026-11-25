@@ -10,3 +10,28 @@ test('hidden and filtered instances remain selectable without writing or adding 
 test('duplicate identity labels, targeted editing, deletion and Undo retain the correct instance',async()=>{const s=await setup(mount,{foundryModules:allOff});try{const original=one(s,'[data-inspect-object]').value;one(s,'[data-instance-duplicate]').click();const duplicate=one(s,'[data-inspect-object]').value;assert.notEqual(duplicate,original);const options=[...one(s,'[data-inspect-object]').options],label=options.find(o=>o.value===duplicate).textContent;assert.ok(label.includes(duplicate.slice(-8)));assert.notEqual(label,options.find(o=>o.value===original).textContent);select(s,original);const before=state(s),writes=s.writes.length;select(s,duplicate);assert.equal(state(s),before);assert.equal(s.writes.length,writes);one(s,'[data-inspect-opacity]').value='.3';one(s,'[data-inspect-appearance]').click();const p=s.mounted.exportState().active.placements;assert.equal(p[duplicate].opacity,.3);assert.equal(p[original].opacity,1);one(s,'[data-instance-delete]').click();assert.equal(one(s,'[data-inspect-object]').value,original);assert.ok(!Object.hasOwn(s.mounted.exportState().active.placements,duplicate));one(s,'[data-undo]').click();select(s,duplicate);assert.equal(one(s,'[data-inspect-opacity]').value,'0.3');}finally{s.mounted.unmount();}});
 test('unavailable anchored and pinned hidden instance remains reachable and safely unpinned',async()=>{const initial=await setup(mount,{foundryModules:allOff});one(initial,'[data-inspect-appearance]').click();const value=JSON.parse(state(initial)),id=Object.keys(value.active.placements)[0];initial.mounted.unmount();value.active.placements[id]={...value.active.placements[id],scope:'sticker',anchor:'missing-anchor',pinned:true,visible:false};const s=await setup(mount,{foundryModules:allOff,state:value});try{select(s,id);assert.match(one(s,'[data-scope-status]').textContent,/unavailable/);assert.equal(one(s,'[data-inspect-pin]').checked,true);assert.equal(one(s,'[data-inspect-apply]').disabled,true);const before=state(s),writes=s.writes.length;const ids=[...one(s,'[data-inspect-object]').options].map(o=>o.value);select(s,ids[1]);select(s,id);assert.equal(state(s),before);assert.equal(s.writes.length,writes);one(s,'[data-inspect-pin]').checked=false;one(s,'[data-inspect-pin]').dispatchEvent(new s.window.Event('change'));assert.equal(s.mounted.exportState().active.placements[id].anchor,'missing-anchor');assert.equal(one(s,'[data-inspect-apply]').disabled,false);one(s,'[data-inspect-visible]').checked=true;one(s,'[data-inspect-appearance]').click();assert.equal(s.mounted.exportState().active.placements[id].visible,true);assert.equal(s.mounted.exportState().active.placements[id].anchor,'missing-anchor');}finally{s.mounted.unmount();}});
 test('empty room disables selector and Undo restores selectable identities',async()=>{const s=await setup(mount,{foundryModules:allOff});try{let count=one(s,'[data-inspect-object]').options.length;assert.ok(count>0);while(count--){one(s,'[data-instance-delete]').click();}assert.equal(one(s,'[data-inspect-object]').options.length,0);assert.equal(one(s,'[data-inspect-object]').disabled,true);assert.equal(one(s,'[data-inspect-appearance]').disabled,true);one(s,'[data-undo]').click();assert.equal(one(s,'[data-inspect-object]').options.length,1);assert.equal(one(s,'[data-inspect-object]').disabled,false);assert.equal(one(s,'[data-inspect-appearance]').disabled,false);}finally{s.mounted.unmount();}});
+
+test('linked scale inputs only change the draft until Apply and preserve independent mirrored signs',async()=>{
+ const s=await setup(mount,{foundryModules:allOff});
+ try{
+  const id=one(s,'[data-inspect-object]').value,x=one(s,'[data-inspect-scale-x]'),y=one(s,'[data-inspect-scale-y]');
+  const link=one(s,'[data-inspect-link-scale]'),apply=one(s,'[data-inspect-transform]');
+  const typed=(input,value)=>{input.value=value;input.dispatchEvent(new s.window.Event('input'));};
+  typed(x,'-0.7');typed(y,'0.75');apply.click();
+  const saved=state(s),writes=s.writes.length;
+  link.checked=true;link.dispatchEvent(new s.window.Event('change'));
+  assert.equal(x.value,'-0.7');assert.equal(y.value,'0.75');
+  for(const invalid of ['', '0', '0.04','8.1']){typed(y,invalid);assert.equal(x.value,'-0.7');}
+  typed(y,'1.25');assert.equal(x.value,'-1.25');
+  typed(x,'-1.5');assert.equal(y.value,'1.5');
+  assert.equal(state(s),saved);assert.equal(s.writes.length,writes);
+  apply.click();assert.equal(s.writes.length,writes+1);
+  const result=s.mounted.exportState().active.placements[id];
+  assert.equal(result.scaleX,-1.5);assert.equal(result.scaleY,1.5);
+  one(s,'[data-undo]').click();assert.equal(state(s),saved);
+  one(s,'[data-redo]').click();assert.equal(one(s,'[data-inspect-scale-x]').value,'-1.5');
+  link.checked=false;typed(x,'-2');assert.equal(y.value,'1.5');
+  const position=one(s,'[data-inspect-pin]');position.checked=true;position.dispatchEvent(new s.window.Event('change'));
+  one(s,'[data-inspect-apply]').click();assert.equal(link.disabled,true);assert.equal(apply.disabled,true);
+ }finally{s.mounted.unmount();}
+});
