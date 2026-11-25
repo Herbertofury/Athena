@@ -1,0 +1,719 @@
+{
+  "runtime": "v24.22.3",
+  "platform": "linux",
+  "baseline": "scraping-baseline-exact",
+  "fixture_items": 512,
+  "fixture_body_bytes": 67777,
+  "iterations": 10,
+  "interpretation": "Controlled local HTTP expired-owner overlap; network requests/bytes are the target. Timings include deliberate 10ms expiry wait, do not represent UI or production provider speed.",
+  "variants": [
+    {
+      "name": "shared core",
+      "path": "packages/shared/src/requestDeduplicator.ts",
+      "summary": {
+        "baseline": {
+          "total_requests": 30,
+          "total_wire_body_bytes": 2033310,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 14.060403000000008,
+            "p95": 38.239785999999995,
+            "p99": 38.239785999999995
+          }
+        },
+        "candidate": {
+          "total_requests": 20,
+          "total_wire_body_bytes": 1355540,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 13.01028199999999,
+            "p95": 18.25931300000002,
+            "p99": 18.25931300000002
+          }
+        }
+      },
+      "measurements": {
+        "baseline": [
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 38.239785999999995
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 18.286193999999995
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 17.389122999999984
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.98225100000002
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 16.09779999999995
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.951614999999947
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.229893000000004
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.060403000000008
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.743916000000013
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.061088999999981
+          }
+        ],
+        "candidate": [
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 18.25931300000002
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 17.534621999999985
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 15.144453999999996
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.01028199999999
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.228676000000007
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.598643000000038
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.024076999999977
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.512593999999979
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.035356000000036
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.312943000000018
+          }
+        ]
+      }
+    },
+    {
+      "name": "typed extension",
+      "path": "apps/extension-v2/src/shared/requestDedup.ts",
+      "summary": {
+        "baseline": {
+          "total_requests": 30,
+          "total_wire_body_bytes": 2033310,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 13.578979000000004,
+            "p95": 48.54837199999997,
+            "p99": 48.54837199999997
+          }
+        },
+        "candidate": {
+          "total_requests": 20,
+          "total_wire_body_bytes": 1355540,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 12.465683000000013,
+            "p95": 15.958509999999933,
+            "p99": 15.958509999999933
+          }
+        }
+      },
+      "measurements": {
+        "baseline": [
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 16.279262000000017
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.226436999999919
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.771968000000015
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 48.54837199999997
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 18.349909000000025
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.762784999999894
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.06429300000002
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.243503000000032
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.578979000000004
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.564395999999988
+          }
+        ],
+        "candidate": [
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.61545799999999
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.930883999999992
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.348386000000005
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.151234000000045
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 15.958509999999933
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.581963000000087
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.465683000000013
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.464201000000003
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.504390999999941
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.188424999999938
+          }
+        ]
+      }
+    },
+    {
+      "name": "legacy extension page",
+      "path": "apps/extension-v2/assets/shared/request-dedup.js",
+      "summary": {
+        "baseline": {
+          "total_requests": 30,
+          "total_wire_body_bytes": 2033310,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 13.139387000000056,
+            "p95": 17.833657000000017,
+            "p99": 17.833657000000017
+          }
+        },
+        "candidate": {
+          "total_requests": 20,
+          "total_wire_body_bytes": 1355540,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 12.351029999999923,
+            "p95": 15.068110000000047,
+            "p99": 15.068110000000047
+          }
+        }
+      },
+      "measurements": {
+        "baseline": [
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 17.833657000000017
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.973986999999966
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.431851999999935
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 15.747671999999966
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 15.30827099999999
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.990638000000104
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.70029599999998
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.642158999999992
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.139387000000056
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.004367999999886
+          }
+        ],
+        "candidate": [
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.353649000000019
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.351029999999923
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.138630999999918
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.203748000000019
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 15.068110000000047
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.193182000000093
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.432928999999945
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.84663999999998
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.9808119999999
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.95265100000006
+          }
+        ]
+      }
+    },
+    {
+      "name": "legacy extension module",
+      "path": "apps/extension-v2/assets/shared/request-dedup-module.js",
+      "summary": {
+        "baseline": {
+          "total_requests": 30,
+          "total_wire_body_bytes": 2033310,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 13.02449300000012,
+            "p95": 14.16966699999989,
+            "p99": 14.16966699999989
+          }
+        },
+        "candidate": {
+          "total_requests": 20,
+          "total_wire_body_bytes": 1355540,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 12.122557000000143,
+            "p95": 13.563540000000103,
+            "p99": 13.563540000000103
+          }
+        }
+      },
+      "measurements": {
+        "baseline": [
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.826581000000033
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.03379800000016
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.308219999999892
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.215281000000004
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.16966699999989
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.633344999999963
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.852059000000054
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.979461999999785
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.02449300000012
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.292330999999876
+          }
+        ],
+        "candidate": [
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.332572000000027
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.30872700000009
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.122557000000143
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.051860000000033
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.058671000000004
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.968903999999839
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.831883999999945
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.14027800000008
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.197434000000158
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.563540000000103
+          }
+        ]
+      }
+    }
+  ],
+  "baseline_commit": "0cdd327e53bf1d70485f4e4a1917a07778c79566",
+  "baseline_source_blobs": {
+    "packages/shared/src/requestDeduplicator.ts": "1c9b6be5ea96d538f10aa9f0b354264c6dc13a95",
+    "apps/extension-v2/src/shared/requestDedup.ts": "a345597d6ad520292314ad85cda6604f4126ec62",
+    "apps/extension-v2/assets/shared/request-dedup.js": "f33e90eb744baef255812a034ff6ef2324749a04",
+    "apps/extension-v2/assets/shared/request-dedup-module.js": "e348d1c308ebc8a6efc84b56d75dd6b724bbd183"
+  },
+  "baseline_materialization": "Authenticated upstream file bytes; all baseline source blob SHAs matched GitHub. Local baseline is a targeted source snapshot, not a complete repository.",
+  "candidate_source_sha256": {
+    "packages/shared/src/requestDeduplicator.ts": "38529bbabfbc4c2fed5c0cbb2c0a744563cf934758ea66881e88bc50e3f0cad3",
+    "apps/extension-v2/src/shared/requestDedup.ts": "e6081328e38d72ca275dd426c174102d93734a56baa886974dfd8e310475a28f",
+    "apps/extension-v2/assets/shared/request-dedup.js": "8b30a765a3a22bdfc3636a6794e298adc8e9407fc7c2d468276dbf934cfae26d",
+    "apps/extension-v2/assets/shared/request-dedup-module.js": "88f243b78b7a5ffd49ad6b8fae47f7d112c21462178c5a98c2b9872c50fa2fcd"
+  },
+  "challenge_verification": {
+    "tests_passed": 23,
+    "finding": "Mutating URL, Headers or RequestInit before the deferred fetch changed the actual request behind an unchanged key.",
+    "repair": "Transport now consumes the exact copied key inputs. Native Request objects, signals, complex bodies, inherited and non-enumerable dictionary fields retain their intended semantics.",
+    "scope_note": "Equivalent-work benchmark still measures expired-owner overlap. It is not an app-wide latency or CPU claim."
+  }
+}

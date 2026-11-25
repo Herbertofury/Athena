@@ -1,0 +1,87 @@
+{
+  "repository": "Athena",
+  "commands": [
+    {
+      "name": "shrink-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena",
+        "doctor"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "shrink-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena/guidance",
+        "scan",
+        "--json",
+        "--lib"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "fast-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena",
+        "doctor"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "fast-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena",
+        "scan",
+        "--",
+        "python3",
+        "research/web-scraping-2026-11-25/benchmark_collector.py",
+        "--output",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessment-results/Athena/fast-workload.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "rust-analyze",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "analyze",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena/guidance",
+        "--lang",
+        "python",
+        "--json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "rust-profile",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "profile",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Athena",
+        "--lang",
+        "python",
+        "--json",
+        "--",
+        "python3",
+        "research/web-scraping-2026-11-25/benchmark_collector.py",
+        "--output",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessment-results/Athena/rust-workload.json"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "scope": "Collector benchmark with real loopback HTTP; isolated baseline plus current collector/watch/tests.",
+  "decision": {
+    "shrink": "No deletion promoted: public/library entrypoints and callback use are not proven absent by a scoped scan.",
+    "fast": "No eligible large CPU hotspot. Dominant acquisition work is I/O; nested fixtures and import attribution limit static conclusions.",
+    "rust": "Source/profile reviewed; no native port justified by measured workload. Collector concurrency is tested separately with equivalent complete outputs."
+  }
+}

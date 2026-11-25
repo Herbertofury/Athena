@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-25",
+  "failedRun": 45690424878,
+  "failedJob": 139474097955,
+  "rootCause": "The software build preservation guard still expected the283-entry catalog hash, although reviewed additive reconciliation had392entries.",
+  "changed": "Only the engineering catalog baseline entry now uses the reviewed source hash and array counts, with its exact previous entry retained as dated provenance.",
+  "guard": "scripts/build_software_catalog.py exact SHA256 check unchanged.",
+  "evidence": "athena-research-reconciliation.json",
+  "checks": {
+    "npmRunBuild": "passed",
+    "pythonSoftwareTests": 29,
+    "nodeSoftwareTests": 40,
+    "negativeChallenge": "An injected unreviewed all-zero catalog hash is rejected by the unchanged guard before build.",
+    "runtimeDiff": "No generated runtime file changed during complete npm build; only baseline.json changed."
+  },
+  "reviewedCatalogSha256": "2f9c3880b820a17e69fdb151550b71a76c7dac6e7bf39ca5f50460120a6e759b"
+}

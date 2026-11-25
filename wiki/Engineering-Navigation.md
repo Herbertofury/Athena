@@ -89,3 +89,7 @@
 
 ### Game systems
 - [Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange) — shared card-game/roguelike mechanics, source owners, contracts and cross-host acceptance.
+
+- [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+- [Web acquisition research and reliability](Engineering-Web-Acquisition)

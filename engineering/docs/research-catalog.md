@@ -1,12 +1,12 @@
 # Research catalog
 
-**Snapshot: 2026-10-31 (America/Denver).** Source checks use UTC dates.
+**Snapshot: 2026-11-25 (America/Denver).** Source checks use UTC dates.
 
 [Interactive Explorer](https://herbertofury.github.io/Athena/#research) · [Ranking methodology](research-explorer.md) · [Test queue](research-test-queue.md)
 
 Every entry below is a research candidate. Priority is an editorial test queue, not a performance score. Existing local measurements are exposed separately by exact cohort. No universal winner is implied.
 
-## AI systems (18)
+## AI systems (24)
 
 ### MLX LM
 
@@ -14,19 +14,19 @@ Every entry below is a research candidate. Priority is an editorial test queue, 
 
 MLX package for language-model generation, quantization, and fine-tuning on Apple Silicon.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Languages & runtimes.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Compare inference and a small LoRA training task against equivalent Apple Silicon alternatives.
 
-**Measure:** TTFT; tokens/s; unified memory peak; training time; held-out task accuracy.
+**Measure:** TTFT; tokens/s; unified memory peak; training time; held-out task accuracy; quality at fixed weights; time to first token; inter-token latency; complete-request throughput; peak device memory.
 
-**Constraints:** Apple Silicon results do not imply NVIDIA or CPU performance. Keep model and quantization equivalent.
+**Constraints:** Apple Silicon results do not imply NVIDIA or CPU performance. Keep model and quantization equivalent. It is not an RTX 4090 backend; OS and MLX feature requirements must be matched to the selected model and operation. Python >=3.11. Optional providers and native backends have separate prerequisites. README explicitly targets Apple silicon; some wired-memory behavior requires macOS 15+. Linux metadata alone is not promoted to equivalent feature support. License scope: MIT
 
 **Priority rationale:** Establish a quality-controlled device and serving baseline before adding kernel, cache or distributed complexity.
 
-**Sources:** [RX006](https://github.com/ml-explore/mlx-lm)
+**Sources:** [RX006](https://github.com/ml-explore/mlx-lm) · [FNAI066](https://raw.githubusercontent.com/ml-explore/mlx-lm/HEAD/README.md) · [FNAI067](https://pypi.org/pypi/mlx-lm/json) · [FNAI068](https://raw.githubusercontent.com/ml-explore/mlx-lm/HEAD/LICENSE)
 
 ### SGLang
 
@@ -34,19 +34,19 @@ MLX package for language-model generation, quantization, and fine-tuning on Appl
 
 Serving framework with prefix reuse, speculative decoding, and separate prefill/decode execution.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Languages & runtimes.
 
 **Current signal:** Opened release notes describe Rust-backed prefix caching and live switching between prefill and decode roles.
 
 **Test:** Replay the same desktop assistant and multi-turn workload used for vLLM, with cache reuse reported separately.
 
-**Measure:** p95 TTFT; p95 inter-token latency; requests/s under SLO; peak VRAM; failure rate.
+**Measure:** p95 TTFT; p95 inter-token latency; requests/s under SLO; peak VRAM; failure rate; quality at fixed weights; time to first token; inter-token latency; complete-request throughput; peak device memory.
 
-**Constraints:** Model architecture and kernel support differ by hardware. Document cache hit distribution and queueing.
+**Constraints:** Model architecture and kernel support differ by hardware. Document cache hit distribution and queueing. Current package wheels and hardware-specific installation paths differ; do not map an advertised GPU family to an untested model configuration. Python >=3.11. Optional providers and native backends have separate prerequisites. Current PyPI wheels target Linux; README separately documents Apple Silicon through Metal/MLX. These are different backend configurations, not parity proof. License scope: Apache-2.0
 
 **Priority rationale:** Establish a quality-controlled device and serving baseline before adding kernel, cache or distributed complexity.
 
-**Sources:** [RX002](https://github.com/sgl-project/sglang/releases)
+**Sources:** [RX002](https://github.com/sgl-project/sglang/releases) · [FNAI056](https://raw.githubusercontent.com/sgl-project/sglang/HEAD/README.md) · [FNAI057](https://pypi.org/pypi/sglang/json) · [FNAI058](https://raw.githubusercontent.com/sgl-project/sglang/HEAD/LICENSE) · [FNAI059](https://docs.sglang.io/docs/get-started/install)
 
 ### llama.cpp
 
@@ -108,6 +108,46 @@ Kernel library for serving language models, including attention and mixture-of-e
 
 **Sources:** [RX003](https://github.com/flashinfer-ai/flashinfer/releases)
 
+### Guidance
+
+**framework · emerging · P2** · ID: guidance
+
+Model programming library that interleaves generation with control flow and grammar constraints.
+
+**Stack layers:** Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI guidance 0.3.1 (first current-file upload 2026-02-03T19:51:50.660903Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare for exact constrained extraction and offline negative-control grammar tests before connecting a model.
+
+**Measure:** schema validity; semantic accuracy; unsupported-schema cases; retry count; total latency.
+
+**Constraints:** Full constraint behavior depends on backend support; syntax guarantees do not prove semantic truth or superior speed. No explicit supported OS matrix was established for the chosen backend. Versioned library; no backend execution or timing measured. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI050](https://raw.githubusercontent.com/guidance-ai/guidance/HEAD/README.md) · [FNAI051](https://pypi.org/pypi/guidance/json) · [FNAI052](https://raw.githubusercontent.com/guidance-ai/guidance/HEAD/LICENSE.md)
+
+### Instructor
+
+**framework · emerging · P2** · ID: instructor
+
+Pydantic-oriented extraction library that validates model responses and retries failed structured outputs.
+
+**Stack layers:** Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI instructor 1.17.0 (first current-file upload 2026-09-09T02:25:54.888746Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare for bounded entity/metadata extraction when a full autonomous agent runtime is unnecessary.
+
+**Measure:** schema validity; semantic accuracy; unsupported-schema cases; retry count; total latency.
+
+**Constraints:** Post-response validation and retries differ from generation-time grammar constraints; track extra calls and unsupported-fact errors separately. No explicit operating-system support contract was established from the reviewed package and overview. Versioned library; provider behavior and retry budgets are not qualified by package version alone. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI053](https://raw.githubusercontent.com/567-labs/instructor/HEAD/README.md) · [FNAI054](https://pypi.org/pypi/instructor/json) · [FNAI055](https://raw.githubusercontent.com/567-labs/instructor/HEAD/LICENSE)
+
 ### LMCache
 
 **framework · emerging · P2** · ID: lmcache
@@ -128,6 +168,26 @@ KV-cache layer offering shared caching and separate cache processes for serving 
 
 **Sources:** [RX036](https://docs.lmcache.ai/mp/)
 
+### LMDeploy
+
+**framework · emerging · P2** · ID: lmdeploy
+
+Language and vision-language serving toolkit with TurboMind and PyTorch engines, quantization and deployment interfaces.
+
+**Stack layers:** Optional AI & developer tools; Languages & runtimes.
+
+**Current signal:** 2026-11-24 source review: PyPI lmdeploy 0.18.0 (first current-file upload 2026-09-28T15:48:50.021327Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Supported model, engine and GPU combinations differ; upstream throughput claims are workload-specific and were not reproduced.
+
+**Measure:** quality at fixed weights; time to first token; inter-token latency; complete-request throughput; peak device memory.
+
+**Constraints:** Supported model, engine and GPU combinations differ; upstream throughput claims are workload-specific and were not reproduced. Python version floor not specified in reviewed metadata. Optional providers and native backends have separate prerequisites. Observed release includes win_amd64 and manylinux wheels; README documents Windows TurboMind limits. No macOS package support was established. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI060](https://raw.githubusercontent.com/InternLM/lmdeploy/HEAD/README.md) · [FNAI061](https://pypi.org/pypi/lmdeploy/json) · [FNAI062](https://raw.githubusercontent.com/InternLM/lmdeploy/HEAD/LICENSE)
+
 ### MLC LLM
 
 **framework · established · P2** · ID: mlc-llm
@@ -147,6 +207,26 @@ Compiler-based model deployment across desktop GPUs, mobile devices, and browser
 **Priority rationale:** Establish a quality-controlled device and serving baseline before adding kernel, cache or distributed complexity.
 
 **Sources:** [RX007](https://github.com/mlc-ai/mlc-llm/blob/main/README.md)
+
+### Outlines
+
+**framework · emerging · P2** · ID: outlines
+
+Python interface for constrained structured generation using typed schemas and model adapters.
+
+**Stack layers:** Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI outlines 1.3.3 (first current-file upload 2026-08-06T12:27:13.488500Z). A current registry listing alone does not establish recent maintenance activity. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** A valid structure can still contain unsupported facts; supported constraints differ by model backend and need adversarial schema tests.
+
+**Measure:** schema validity; semantic accuracy; unsupported-schema cases; retry count; total latency.
+
+**Constraints:** A valid structure can still contain unsupported facts; supported constraints differ by model backend and need adversarial schema tests. Python <3.14,>=3.10. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python <3.14,>=3.10. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI044](https://raw.githubusercontent.com/dottxt-ai/outlines/HEAD/README.md) · [FNAI045](https://pypi.org/pypi/outlines/json) · [FNAI046](https://raw.githubusercontent.com/dottxt-ai/outlines/HEAD/LICENSE)
 
 ### PEFT
 
@@ -194,19 +274,19 @@ Post-training library providing supervised fine-tuning, preference optimization,
 
 NVIDIA-oriented inference library with a Python runtime, quantization, speculative decoding, and distributed serving.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Languages & runtimes.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Compare against vLLM and SGLang on the same NVIDIA GPU, checkpoint, quantization, and latency SLO.
 
-**Measure:** tokens/s under SLO; TTFT; inter-token latency; VRAM; startup time.
+**Measure:** tokens/s under SLO; TTFT; inter-token latency; VRAM; startup time; quality at fixed weights; time to first token; complete-request throughput; peak device memory.
 
-**Constraints:** Hardware-specific results should not become a cross-platform winner. Include conversion and engine preparation costs.
+**Constraints:** Hardware-specific results should not become a cross-platform winner. Include conversion and engine preparation costs. Datacenter and new-generation GPU results do not transfer automatically to RTX 4090; package, container and accelerator prerequisites require exact matching. This review did not close the exact supported OS/container/GPU contract; retain in the engineering comparison queue rather than assigning broad platform compatibility. PyPI classifier Beta; repository license declares Apache-2.0 and enumerates third-party notices. Exact binary/container and accelerator requirements remain unresolved. Retained in engineering research only; the software catalog evidence gate remains unmet.
 
 **Priority rationale:** Establish a quality-controlled device and serving baseline before adding kernel, cache or distributed complexity.
 
-**Sources:** [RX004](https://developer.nvidia.com/tensorrt-llm)
+**Sources:** [RX004](https://developer.nvidia.com/tensorrt-llm) · [FNAI063](https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/HEAD/README.md) · [FNAI064](https://pypi.org/pypi/tensorrt-llm/json) · [FNAI065](https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/HEAD/LICENSE)
 
 ### Unsloth
 
@@ -227,6 +307,46 @@ Local model running and training toolkit with an open-source user interface.
 **Priority rationale:** Establish a quality-controlled device and serving baseline before adding kernel, cache or distributed complexity.
 
 **Sources:** [RX035](https://unsloth.ai/docs)
+
+### XGrammar
+
+**framework · emerging · P2** · ID: xgrammar
+
+Structured decoding library supporting JSON, regex and grammar constraints across inference engines and language bindings.
+
+**Stack layers:** Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI xgrammar 0.2.9 (first current-file upload 2026-11-09T16:08:21.648420Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Validate every required JSON Schema keyword and tool-call interaction against the chosen engine; upstream universal-correctness claims do not replace those tests.
+
+**Measure:** schema validity; semantic accuracy; unsupported-schema cases; retry count; total latency.
+
+**Constraints:** Validate every required JSON Schema keyword and tool-call interaction against the chosen engine; upstream universal-correctness claims do not replace those tests. Python <4,>=3.8. Optional providers and native backends have separate prerequisites. README explicitly documents Linux, macOS and Windows, with Python/C++/JavaScript/Swift interfaces. Backend and hardware combinations still require testing. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI047](https://raw.githubusercontent.com/mlc-ai/xgrammar/HEAD/README.md) · [FNAI048](https://pypi.org/pypi/xgrammar/json) · [FNAI049](https://raw.githubusercontent.com/mlc-ai/xgrammar/HEAD/LICENSE)
+
+### mistral.rs
+
+**framework · emerging · P2** · ID: mistral-rs
+
+Rust inference system with native model loading, multimodal support, CLI/SDK interfaces and compatible serving APIs.
+
+**Stack layers:** Optional AI & developer tools; Languages & runtimes.
+
+**Current signal:** 2026-11-24 source review: PyPI mistralrs 0.9.5 (first current-file upload 2026-10-19T18:12:04.233077Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Model and accelerator support must be pinned; version 0.9.5 changes memory/device planning and Metal paged-attention defaults.
+
+**Measure:** quality at fixed weights; time to first token; inter-token latency; complete-request throughput; peak device memory.
+
+**Constraints:** Model and accelerator support must be pinned; version 0.9.5 changes memory/device planning and Metal paged-attention defaults. Python >=3.10. Optional providers and native backends have separate prerequisites. README provides macOS/Linux and Windows installation paths. Published Python wheels and acceleration features are target-specific. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI069](https://raw.githubusercontent.com/EricLBuehler/mistral.rs/HEAD/README.md) · [FNAI070](https://pypi.org/pypi/mistralrs/json) · [FNAI071](https://raw.githubusercontent.com/EricLBuehler/mistral.rs/HEAD/LICENSE)
 
 ### DFlash
 
@@ -368,7 +488,7 @@ Distributed reinforcement-learning post-training framework integrating training 
 
 **Sources:** [RX034](https://github.com/verl-project/verl)
 
-## AI agents (6)
+## AI agents (14)
 
 ### LangGraph
 
@@ -376,19 +496,19 @@ Distributed reinforcement-learning post-training framework integrating training 
 
 Stateful agent orchestration framework with durable execution, checkpoints, and human review points.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Implement a resumable code-maintenance workflow and inject interruptions at model and tool boundaries.
 
-**Measure:** task completion; resume correctness; duplicate side effects; latency; implementation effort.
+**Measure:** task completion; resume correctness; duplicate side effects; latency; implementation effort; task completion with evidence; tool-effect correctness; total model and tool cost; end-to-end latency.
 
-**Constraints:** A framework does not determine the base model capability. Persistence configuration and side-effect semantics matter.
+**Constraints:** A framework does not determine the base model capability. Persistence configuration and side-effect semantics matter. Persistence does not make external writes exactly once; tool effects, replay and idempotency require explicit application contracts. An explicit OS support contract was not established from the reviewed upstream package and overview; retain as engineering research until that field is verified. Upstream classifies the Python package Production/Stable; a backend-specific deployment remains untested. Retained in engineering research only; the software catalog evidence gate remains unmet.
 
 **Priority rationale:** Compare orchestration overhead, interruption and recovery against one simple agent using the same model and tools.
 
-**Sources:** [RX012](https://github.com/langchain-ai/langgraph/blob/main/README.md)
+**Sources:** [RX012](https://github.com/langchain-ai/langgraph/blob/main/README.md) · [FNAI001](https://raw.githubusercontent.com/langchain-ai/langgraph/HEAD/README.md) · [FNAI002](https://pypi.org/pypi/langgraph/json) · [FNAI003](https://raw.githubusercontent.com/langchain-ai/langgraph/HEAD/LICENSE)
 
 ### Pydantic AI
 
@@ -396,19 +516,61 @@ Stateful agent orchestration framework with durable execution, checkpoints, and 
 
 Agent framework with typed integrations and durable execution backends for recoverable model and tool workflows.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Build a typed maintenance agent and verify recovery after process termination using one selected durable backend.
 
-**Measure:** schema errors; resume correctness; duplicate effects; latency; task completion.
+**Measure:** schema errors; resume correctness; duplicate effects; latency; task completion; task completion with evidence; tool-effect correctness; total model and tool cost; end-to-end latency.
 
-**Constraints:** Check exactly which operations the chosen backend journals. Snapshot persistence and durable execution are different capabilities.
+**Constraints:** Check exactly which operations the chosen backend journals. Snapshot persistence and durable execution are different capabilities. Validation proves shape rather than truth; durable execution requires the selected backend and its recovery semantics to be tested. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: MIT
 
 **Priority rationale:** Compare orchestration overhead, interruption and recovery against one simple agent using the same model and tools.
 
-**Sources:** [RX016](https://pydantic.dev/docs/ai/capabilities/durable_execution/overview/)
+**Sources:** [RX016](https://pydantic.dev/docs/ai/capabilities/durable_execution/overview/) · [FNAI004](https://raw.githubusercontent.com/pydantic/pydantic-ai/HEAD/README.md) · [FNAI005](https://pypi.org/pypi/pydantic-ai/json) · [FNAI006](https://raw.githubusercontent.com/pydantic/pydantic-ai/HEAD/LICENSE)
+
+### Agno
+
+**framework · emerging · P2** · ID: agno
+
+Agent platform with teams, workflows and AgentOS services for durable execution, human approvals and inspectable activity.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI agno 3.2.1 (first current-file upload 2026-11-17T17:06:48.794071Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** A larger platform increases operational surface; scheduling and autonomous improvement features must remain explicitly enabled and bounded.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** A larger platform increases operational surface; scheduling and autonomous improvement features must remain explicitly enabled and bounded. Python <4,>=3.9. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python <4,>=3.9. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI017](https://raw.githubusercontent.com/agno-agi/agno/HEAD/README.md) · [FNAI018](https://pypi.org/pypi/agno/json) · [FNAI019](https://raw.githubusercontent.com/agno-agi/agno/HEAD/LICENSE)
+
+### Browser Use
+
+**framework · emerging · P2** · ID: browser-use
+
+Browser agent library whose 1.0 line uses a persistent Python REPL and Chrome DevTools Protocol.
+
+**Stack layers:** Optional AI & developer tools; APIs & shared services.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Agent-driven interactive browser workflows. Optional final escalation for extraction requiring actual interactions. Turn repeatable routes into deterministic adapters once understood. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Cloud browser is the documented default; choose isolated local Chromium explicitly for local trials. Model use, telemetry, permissions and step completion need separate review.
+
+2026-11-25 integration review: Optional final escalation for extraction requiring actual interactions. Turn repeatable routes into deterministic adapters once understood.
+
+**Measure:** verified task completion; action authority boundaries; false completion rate; browser and model cost; recovery behavior.
+
+**Constraints:** Cloud browser is the documented default; choose isolated local Chromium explicitly for local trials. Model use, telemetry, permissions and step completion need separate review. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. OS-independent Python >=3.11 package; local Chrome/Chromium/Edge and profile behavior remain host-dependent. License scope: MIT Current browser and model defaults are cloud-backed Version pinning is needed because the 1.x interface differs materially from older examples Agent planning is not the default low-latency path for metadata, RSS or simple HTTP catalogs No feedback or telemetry message was sent during this review
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB002](https://raw.githubusercontent.com/browser-use/browser-use/main/README.md) · [FNWEB360](https://raw.githubusercontent.com/browser-use/browser-use/main/LICENSE) · [FNWEB361](https://pypi.org/pypi/browser-use/json) · [FNWEB102](https://github.com/browser-use/browser-use/releases/tag/1.0.8) · [SCRP25003](https://github.com/browser-use/browser-use)
 
 ### CrewAI
 
@@ -442,13 +604,93 @@ Framework for composing and optimizing language-model programs with structured s
 
 **Test:** Optimize a repository triage workflow on training tasks, then evaluate unseen repositories with a fixed budget.
 
-**Measure:** held-out accuracy; optimization cost; inference cost; schema validity; run variance.
+**Measure:** held-out accuracy; optimization cost; inference cost; schema validity; run variance; held-out task accuracy; training leakage.
 
-**Constraints:** Keep optimization data out of the final test set. Compare against a simple fixed-prompt baseline.
+**Constraints:** Keep optimization data out of the final test set. Compare against a simple fixed-prompt baseline. Optimization can overfit its metric or development examples; preserve independent test data and total optimization cost. Python <3.16,>=3.10. Optional providers and native backends have separate prerequisites. The reviewed package metadata explicitly classifies POSIX/Linux. Other operating systems were not qualified in this sweep. License scope: MIT
 
 **Priority rationale:** Compare orchestration overhead, interruption and recovery against one simple agent using the same model and tools.
 
-**Sources:** [RX011](https://dspy.ai/current/)
+**Sources:** [RX011](https://dspy.ai/current/) · [FNAI020](https://raw.githubusercontent.com/stanfordnlp/dspy/HEAD/README.md) · [FNAI021](https://pypi.org/pypi/dspy/json) · [FNAI022](https://raw.githubusercontent.com/stanfordnlp/dspy/HEAD/LICENSE)
+
+### Deep Agents
+
+**framework · emerging · P2** · ID: deepagents
+
+LangGraph-based agent harness adding planning, context management, subagents and pluggable filesystem backends.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI deepagents 0.7.41 (first current-file upload 2026-11-20T02:07:11.783832Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare a reusable research-agent harness while retaining explicit permissions and evidence-linked outputs.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** A pluggable backend is not automatically a security boundary; prove cancellation, state recovery and restricted tool scope. Reviewed harness overview did not close explicit OS support for its filesystem and execution backends. Python package classifier Beta; Deep Agents Code is a separate user-facing distribution. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI118](https://raw.githubusercontent.com/langchain-ai/deepagents/HEAD/README.md) · [FNAI119](https://pypi.org/pypi/deepagents/json) · [FNAI120](https://raw.githubusercontent.com/langchain-ai/deepagents/HEAD/LICENSE)
+
+### Google Agent Development Kit
+
+**framework · emerging · P2** · ID: google-adk
+
+Code-first agent toolkit combining graph workflows, structured delegation, tool confirmation and deployment adapters.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI google-adk 2.15.0 (first current-file upload 2026-11-20T00:30:35.991579Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** The Python package version does not certify Java, Kotlin, Go or TypeScript parity; cloud deployment is a separate authorized choice.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** The Python package version does not certify Java, Kotlin, Go or TypeScript parity; cloud deployment is a separate authorized choice. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI008](https://raw.githubusercontent.com/google/adk-python/HEAD/README.md) · [FNAI009](https://pypi.org/pypi/google-adk/json) · [FNAI010](https://raw.githubusercontent.com/google/adk-python/HEAD/LICENSE)
+
+### Mastra
+
+**framework · emerging · P2** · ID: mastra
+
+TypeScript framework for agent applications with workflows, memory, retrieval and evaluation components.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: npm @mastra/core 1.85.0 (latest dist-tag observed 2026-11-24; publication date not established) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare for Athena's JavaScript/TypeScript integration boundary where a native language fit reduces adapter complexity.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** Core and ee/ enterprise modules have different licenses; deployment and durability behavior must be verified for the selected packages. No explicit OS support contract was established for the selected package/runtime combination. Versioned TypeScript framework; core package and hosted platform remain separate. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI121](https://raw.githubusercontent.com/mastra-ai/mastra/HEAD/README.md) · [FNAI122](https://registry.npmjs.org/@mastra/core/latest) · [FNAI123](https://raw.githubusercontent.com/mastra-ai/mastra/HEAD/LICENSE.md)
+
+### Microsoft Agent Framework
+
+**framework · emerging · P2** · ID: microsoft-agent-framework
+
+Multi-language agent and workflow framework with checkpointing, human review and OpenTelemetry integration.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI agent-framework 1.26.0 (first current-file upload 2026-11-12T18:24:57.279380Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. Adoption hold: November 17 compromised uploads 1.26.1/1.26.2 are excluded; verify provenance and current maintainer recovery guidance before any installation. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Hold adoption pending provenance review: PyPI 1.26.1 and 1.26.2 were malicious uploads removed after November 17; this is not an instruction to install an unpinned latest package.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** Hold adoption pending provenance review: PyPI 1.26.1 and 1.26.2 were malicious uploads removed after November 17; this is not an instruction to install an unpinned latest package. Python >=3.11. Optional providers and native backends have separate prerequisites. The reviewed PyPI project explicitly lists Windows, macOS and Linux and Python 3.11–3.15, with integration-specific restrictions. License scope: MIT (PyPI metadata); package provenance and the November 17 incident must be reviewed independently.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI007](https://pypi.org/pypi/agent-framework/json) · [FNAI133](https://github.com/advisories/GHSA-764m-3ppc-5m73)
 
 ### OpenHands Software Agent SDK
 
@@ -470,27 +712,67 @@ SDK for coding agents with local or ephemeral workspaces and Python, TypeScript,
 
 **Sources:** [RX013](https://github.com/OpenHands/software-agent-sdk)
 
+### Stagehand
+
+**framework · emerging · P2** · ID: stagehand
+
+Browser-agent SDK with act, observe and structured extraction, plus a separate local browse CLI.
+
+**Stack layers:** Optional AI & developer tools; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: GitHub release @browserbasehq/stagehand@3.7.4 published 2026-11-18; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Latest GitHub release observed 3.7.4 while main documentation shows v4. Do not combine APIs from those channels; browser/extension and Lightpanda compatibility must be checked per version.
+
+**Measure:** verified task completion; action authority boundaries; false completion rate; browser and model cost; recovery behavior.
+
+**Constraints:** Latest GitHub release observed 3.7.4 while main documentation shows v4. Do not combine APIs from those channels; browser/extension and Lightpanda compatibility must be checked per version. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Hosted-browser/MCP route documented. Local SDK requires Chrome and a supported language runtime; native OS support is not asserted here. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB003](https://raw.githubusercontent.com/browserbase/stagehand/main/README.md) · [FNWEB362](https://raw.githubusercontent.com/browserbase/stagehand/main/LICENSE) · [FNWEB103](https://github.com/browserbase/stagehand/releases/tag/%40browserbasehq/stagehand%403.7.4)
+
+### Strands Agents
+
+**framework · emerging · P2** · ID: strands-agents
+
+In-process agent SDK and harness ecosystem with model adapters, lifecycle controls, sessions and multi-agent patterns.
+
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI strands-agents 1.66.0 (first current-file upload 2026-11-23T17:42:43.821860Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Harness, SDK, CLI and language packages have distinct channels; persistence and provider cleanup need per-host acceptance.
+
+**Measure:** task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
+
+**Constraints:** Harness, SDK, CLI and language packages have distinct channels; persistence and provider cleanup need per-host acceptance. Python >=3.10. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.10. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI011](https://raw.githubusercontent.com/strands-agents/harness-sdk/HEAD/README.md) · [FNAI012](https://pypi.org/pypi/strands-agents/json) · [FNAI013](https://raw.githubusercontent.com/strands-agents/harness-sdk/HEAD/LICENSE.APACHE)
+
 ### smolagents
 
 **framework · emerging · P2** · ID: smolagents
 
 Small agent library supporting executable code actions and conventional structured tool calls.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Background work & recovery.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Compare code actions with JSON tool calls on the same tools and model inside an isolated sandbox.
 
-**Measure:** task completion; model calls; tool error rate; cost; wall time.
+**Measure:** task completion; model calls; tool error rate; cost; wall time; task completion with evidence; tool-effect correctness; resume correctness; total model and tool cost; end-to-end latency.
 
-**Constraints:** Executed model code needs a real sandbox. Development documentation and stable package versions may differ.
+**Constraints:** Executed model code needs a real sandbox. Development documentation and stable package versions may differ. Code generation is not sandboxing; the actual execution backend, filesystem access and network authority must be enforced independently. Reviewed overview did not establish an explicit supported operating-system matrix for the selected execution backend. Published Python library; no local agent run or containment proof in this review. Retained in engineering research only; the software catalog evidence gate remains unmet.
 
 **Priority rationale:** Compare orchestration overhead, interruption and recovery against one simple agent using the same model and tools.
 
-**Sources:** [RX014](https://huggingface.co/docs/smolagents/main/index)
+**Sources:** [RX014](https://huggingface.co/docs/smolagents/main/index) · [FNAI014](https://raw.githubusercontent.com/huggingface/smolagents/HEAD/README.md) · [FNAI015](https://pypi.org/pypi/smolagents/json) · [FNAI016](https://raw.githubusercontent.com/huggingface/smolagents/HEAD/LICENSE)
 
-## AI evaluation & methods (18)
+## AI evaluation & methods (22)
 
 ### ProgramBench
 
@@ -592,6 +874,26 @@ Versioned terminal-agent tasks with calibrated resources and revised task enviro
 
 **Sources:** [RX021](https://www.tbench.ai/news/terminal-bench-4-0)
 
+### Arize Phoenix
+
+**tool · emerging · P2** · ID: arize-phoenix
+
+Self-hosted AI observability platform for OpenTelemetry traces, versioned datasets, experiments and prompt debugging.
+
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: PyPI arize-phoenix 22.0.1 (first current-file upload 2026-11-21T20:32:54.265022Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current repository LICENSE is Elastic License 2.0, so classify it as source-available despite broad open-source wording in its README.
+
+**Measure:** label agreement; false pass rate; grader variance; trace completeness; evaluation cost.
+
+**Constraints:** Current repository LICENSE is Elastic License 2.0, so classify it as source-available despite broad open-source wording in its README. Python <3.16,>=3.11. Optional providers and native backends have separate prerequisites. Browser interface served by a separately deployed Phoenix backend. Native host OS support was not qualified in this sweep. License scope: Elastic License 2.0 (ELv2)
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI032](https://raw.githubusercontent.com/Arize-ai/phoenix/HEAD/README.md) · [FNAI033](https://pypi.org/pypi/arize-phoenix/json) · [FNAI034](https://raw.githubusercontent.com/Arize-ai/phoenix/HEAD/LICENSE)
+
 ### Berkeley Function Calling Leaderboard V4
 
 **benchmark · established · P2** · ID: bfcl-v4
@@ -632,6 +934,26 @@ Goal-oriented software-engineering benchmark where agents evolve codebases acros
 
 **Sources:** [RX043](https://codeclash.ai/)
 
+### EvalScope
+
+**tool · emerging · P2** · ID: evalscope
+
+ModelScope evaluation framework covering model capabilities, multimodal workloads, agent traces and serving stress tests.
+
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: PyPI evalscope 1.15.0 (first current-file upload 2026-11-13T15:45:18.834512Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Load-test throughput does not establish agent task quality; sandbox or hosted backends are optional and unexecuted here.
+
+**Measure:** label agreement; false pass rate; grader variance; trace completeness; evaluation cost.
+
+**Constraints:** Load-test throughput does not establish agent task quality; sandbox or hosted backends are optional and unexecuted here. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI041](https://raw.githubusercontent.com/modelscope/evalscope/HEAD/README.md) · [FNAI042](https://pypi.org/pypi/evalscope/json) · [FNAI043](https://raw.githubusercontent.com/modelscope/evalscope/HEAD/LICENSE)
+
 ### Harbor
 
 **framework · emerging · P2** · ID: harbor
@@ -658,19 +980,19 @@ Framework for sandboxed agent evaluations, reusable environments, and optimizati
 
 Evaluation framework with datasets, agents, tools, scorers, sandboxing, and inspectable execution logs.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Build a small coding and document-grounding suite with inspectable scorer decisions and replayable logs.
 
-**Measure:** scorer agreement; replay consistency; trace completeness; evaluation cost.
+**Measure:** scorer agreement; replay consistency; trace completeness; evaluation cost; label agreement; false pass rate; grader variance.
 
-**Constraints:** Judge-based metrics need calibration against human or deterministic checks. Do not let task code alter evaluation artifacts.
+**Constraints:** Judge-based metrics need calibration against human or deterministic checks. Do not let task code alter evaluation artifacts. A benchmark score is only valid for its dataset, model and evaluator configuration; remote models and executable tasks require separate authorization. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: MIT
 
 **Priority rationale:** Resolve benchmark validity and protocol differences before using any coding-agent leaderboard to choose a stack.
 
-**Sources:** [RX026](https://inspect.aisi.org.uk/)
+**Sources:** [RX026](https://inspect.aisi.org.uk/) · [FNAI038](https://raw.githubusercontent.com/UKGovernmentBEIS/inspect_ai/HEAD/README.md) · [FNAI039](https://pypi.org/pypi/inspect-ai/json) · [FNAI040](https://raw.githubusercontent.com/UKGovernmentBEIS/inspect_ai/HEAD/LICENSE)
 
 ### LM Evaluation Harness
 
@@ -712,25 +1034,65 @@ Versioned coding benchmark supporting generation, execution, and test-output pre
 
 **Sources:** [RX024](https://github.com/LiveCodeBench/LiveCodeBench)
 
+### MemEval
+
+**tool · emerging · P2** · ID: memeval
+
+Memory evaluation framework that aligns models, embeddings and scoring across multiple memory systems.
+
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Current repository README observed 2026-11-24; exact latest release not established No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Use its experimental design as a challenger for Athena's temporal recall, correction, abstention and provenance acceptance suite.
+
+**Measure:** label agreement; false pass rate; grader variance; trace completeness; evaluation cost.
+
+**Constraints:** Published token totals exclude embedding and judge calls; benchmark scope differs by dataset and does not establish a universal memory winner. No explicit supported OS/package distribution contract was established; keep as a source-grounded research method. Research framework with PropMem reference method; published results have not been reproduced here. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI101](https://raw.githubusercontent.com/ProsusAI/MemEval/HEAD/README.md) · [FNAI102](https://raw.githubusercontent.com/ProsusAI/MemEval/HEAD/LICENSE)
+
+### Opik
+
+**tool · emerging · P2** · ID: opik
+
+Tracing and evaluation platform with datasets, experiments, prompt management and agent optimization tooling.
+
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: PyPI opik 2.3.1 (first current-file upload 2026-11-24T15:18:29.321452Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Model-graded evaluation incurs model work; redact private content before retaining/exporting traces and measure telemetry overhead.
+
+**Measure:** label agreement; false pass rate; grader variance; trace completeness; evaluation cost.
+
+**Constraints:** Model-graded evaluation incurs model work; redact private content before retaining/exporting traces and measure telemetry overhead. Python >=3.10. Optional providers and native backends have separate prerequisites. README gives Linux/Mac and Windows setup paths plus a web application; Docker/backend prerequisites remain separate. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI035](https://raw.githubusercontent.com/comet-ml/opik/HEAD/README.md) · [FNAI036](https://pypi.org/pypi/opik/json) · [FNAI037](https://raw.githubusercontent.com/comet-ml/opik/HEAD/LICENSE)
+
 ### Ragas
 
 **framework · established · P2** · ID: ragas
 
 Evaluation toolkit with metrics for retrieval, grounding, answers, and tool-use workflows.
 
-**Stack layers:** Optional AI & developer tools.
+**Stack layers:** Optional AI & developer tools; Testing, profiling & correctness.
 
 **Current signal:** See the dated primary sources.
 
 **Test:** Calibrate faithfulness and retrieval metrics on manually adjudicated project-document questions.
 
-**Measure:** human agreement; false acceptance; faithfulness; context precision; judge cost.
+**Measure:** human agreement; false acceptance; faithfulness; context precision; judge cost; label agreement; false pass rate; grader variance; trace completeness; evaluation cost.
 
-**Constraints:** LLM-based scores inherit judge bias and variability. Store judge model, prompt, and rubric versions.
+**Constraints:** LLM-based scores inherit judge bias and variability. Store judge model, prompt, and rubric versions. Generated tests and model judges can share blind spots with the system being tested; keep fixed references and measure judge agreement. Reviewed sources did not establish an explicit operating-system support matrix. Versioned Python toolkit; starter templates advertised as coming soon are not counted as implemented capabilities. Retained in engineering research only; the software catalog evidence gate remains unmet.
 
 **Priority rationale:** Resolve benchmark validity and protocol differences before using any coding-agent leaderboard to choose a stack.
 
-**Sources:** [RX031](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/)
+**Sources:** [RX031](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/) · [FNAI029](https://raw.githubusercontent.com/explodinggradients/ragas/HEAD/README.md) · [FNAI030](https://pypi.org/pypi/ragas/json) · [FNAI031](https://raw.githubusercontent.com/explodinggradients/ragas/HEAD/LICENSE)
 
 ### SWE-Skills-Bench: Do Agent Skills Actually Help in Real-World Software Engineering?
 
@@ -852,7 +1214,169 @@ Prompt optimizer that reflects on execution traces and evolves candidates along 
 
 **Sources:** [RX017](https://proceedings.iclr.cc/paper_files/paper/2026/hash/0e9e708b6f48e14fd0ac29e167413f76-Abstract-Conference.html)
 
-## Retrieval & search (9)
+## Retrieval & search (54)
+
+### ArchiveBox
+
+**tool · experimental · P2** · ID: archivebox
+
+Self-hosted archive manager retaining website captures in several reusable formats.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v0.9.77 published 2026-10-27; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current 0.9.77 package is beta and requires Python >=3.13. Extractor dependencies and storage amplification matter; default-branch instructions may target development images.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Current 0.9.77 package is beta and requires Python >=3.13. Extractor dependencies and storage amplification matter; default-branch instructions may target development images. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. README documents Linux/macOS installations and Docker. No native Windows distribution is asserted. License scope: MIT (reviewed current source; retained third-party extractors keep their own terms)
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB011](https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/main/README.md) · [FNWEB373](https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/main/LICENSE) · [FNWEB374](https://pypi.org/pypi/archivebox/json) · [FNWEB111](https://github.com/ArchiveBox/ArchiveBox/releases/tag/v0.9.77)
+
+### ArchiveWeb.page
+
+**tool · emerging · P2** · ID: archiveweb-page
+
+Interactive browser capture tool exporting web sessions as WARC/WACZ archives.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v0.17.1 published 2026-09-04; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** A successful download is not proof that every interaction/media resource replays; inspect the archive and keep sensitive captures private.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** A successful download is not proof that every interaction/media resource replays; inspect the archive and keep sensitive captures private. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official download page and 0.17.1 release offer Windows EXE, macOS DMG and Linux AppImage. License scope: AGPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB008](https://raw.githubusercontent.com/webrecorder/archiveweb.page/main/README.md) · [FNWEB368](https://raw.githubusercontent.com/webrecorder/archiveweb.page/main/LICENSE.md) · [FNWEB108](https://github.com/webrecorder/archiveweb.page/releases/tag/v0.17.1) · [FNWEB369](https://webrecorder.net/archivewebpage/)
+
+### AutoScraper
+
+**tool · experimental · P2** · ID: autoscraper
+
+Example-driven learned DOM extraction rules.
+
+**Stack layers:** Files, hashing & archives; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Example-driven learned DOM extraction rules. Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies.
+
+2026-11-25 integration review: Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies.
+
+**Measure:** complete output and required-field parity; end-to-end completion and tail latency; peak memory, CPU and network work; cancellation and recovery correctness; integration and maintenance burden.
+
+**Constraints:** Source _fetch_html uses direct requests.get with no default timeout/status check request_args.pop('headers') mutates the caller's dictionary Learned rules rely on class/style attributes and structural/positional traversal No-maintenance claims are not justified
+
+**Priority rationale:** Evaluate only its documented role against the owning application baseline; source review is not target acceptance.
+
+**Sources:** [SCRP25009](https://github.com/alirezamika/autoscraper/blob/master/autoscraper/auto_scraper.py)
+
+### Bellingcat Auto Archiver
+
+**tool · emerging · P2** · ID: auto-archiver
+
+Configurable pipeline for archiving URLs and recording capture outcomes.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v1.3.1 published 2026-11-09; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Python package requires >=3.11,<3.13; remote destinations need separate credentials and authorization. Adapter success is not complete-site coverage.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Python package requires >=3.11,<3.13; remote destinations need separate credentials and authorization. Adapter success is not complete-site coverage. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Documented Docker deployment; native Windows/macOS support was not established in the reviewed instructions. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB014](https://raw.githubusercontent.com/bellingcat/auto-archiver/main/README.md) · [FNWEB377](https://raw.githubusercontent.com/bellingcat/auto-archiver/main/LICENSE) · [FNWEB378](https://pypi.org/pypi/auto-archiver/json) · [FNWEB114](https://github.com/bellingcat/auto-archiver/releases/tag/v1.3.1)
+
+### Brave Search API
+
+**platform · emerging · P2** · ID: brave-search-api
+
+Hosted web-search and model-context service backed by Brave's own index.
+
+**Stack layers:** Local storage & search; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Current service documentation reviewed; a hosted service has no single pinned binary version in this review. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Provider-owned comparisons are reported claims. Benchmark answer-source correctness, fresh coverage and total cost on Athena queries before selecting a default.
+
+**Measure:** primary-source recall; citation correctness; freshness; complete-query cost; query latency.
+
+**Constraints:** Provider-owned comparisons are reported claims. Benchmark answer-source correctness, fresh coverage and total cost on Athena queries before selecting a default. Documentation reviewed only; retrieval quality, latency, coverage and cost were not independently benchmarked. Hosted HTTP service; API key/account and applicable service authorization required. SDK availability is not an offline or native-server claim. License scope: Hosted service terms; SDK license does not establish rights to the service.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB032](https://brave.com/search/api/)
+
+### Browsertrix Crawler
+
+**tool · emerging · P2** · ID: browsertrix-crawler
+
+Containerized browser crawler for preserving replayable web captures.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v1.15.4 published 2026-11-11; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Crawl completion does not establish faithful replay; inspect missing resources, blocked pages and capture/replay QA. Container and real browser costs must be measured.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Crawl completion does not establish faithful replay; inspect missing resources, blocked pages and capture/replay QA. Container and real browser costs must be measured. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Documented Docker-container deployment; do not treat this as a portable native desktop app. License scope: AGPL-3.0-or-later
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB007](https://raw.githubusercontent.com/webrecorder/browsertrix-crawler/main/README.md) · [FNWEB366](https://raw.githubusercontent.com/webrecorder/browsertrix-crawler/main/LICENSE) · [FNWEB107](https://github.com/webrecorder/browsertrix-crawler/releases/tag/v1.15.4) · [FNWEB367](https://crawler.docs.browsertrix.com/user-guide/)
+
+### Chandra OCR
+
+**tool · emerging · P2** · ID: chandra
+
+Vision-language OCR workflow producing layout-aware HTML, Markdown and JSON with local or remote inference and a web viewer.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI chandra-ocr 0.3.0 (first current-file upload 2026-11-16T20:18:21.821030Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Open code does not remove model restrictions; commercial self-hosting and competitive API use have separate model terms.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Open code does not remove model restrictions; commercial self-hosting and competitive API use have separate model terms. Python >=3.10. Optional providers and native backends have separate prerequisites. README documents an interactive web viewer; the serving backend's native OS/GPU envelope is a separate prerequisite. License scope: Apache-2.0 code; modified OpenRAIL-M model terms, including commercial and competing-service restrictions.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI115](https://raw.githubusercontent.com/datalab-to/chandra/HEAD/README.md) · [FNAI116](https://pypi.org/pypi/chandra-ocr/json) · [FNAI117](https://raw.githubusercontent.com/datalab-to/chandra/HEAD/LICENSE)
+
+### Cognee
+
+**framework · emerging · P2** · ID: cognee
+
+Knowledge-graph memory platform with local extraction and embeddings, source retrieval and optional model-generated answers.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI cognee 1.6.10 (first current-file upload 2026-11-18T21:49:02.126821Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Local models download on first use; retrieval without an LLM is different from generated answers and media processing. The bundled GLiNER extractor is explicitly described as a demo; production accuracy and label coverage require a separate acceptance decision.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Local models download on first use; retrieval without an LLM is different from generated answers and media processing. The bundled GLiNER extractor is explicitly described as a demo; production accuracy and label coverage require a separate acceptance decision. Python <3.15,>=3.10. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly lists Windows, macOS and Linux classifiers. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python <3.15,>=3.10. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI095](https://raw.githubusercontent.com/topoteretes/cognee/HEAD/README.md) · [FNAI096](https://pypi.org/pypi/cognee/json) · [FNAI097](https://raw.githubusercontent.com/topoteretes/cognee/HEAD/LICENSE)
 
 ### ColBERTv2
 
@@ -874,6 +1398,112 @@ Late-interaction retriever that compares token-level query and passage embedding
 
 **Sources:** [RX030](https://github.com/stanford-futuredata/ColBERT/blob/main/README.md)
 
+### Crawl4AI
+
+**tool · experimental · P2** · ID: crawl4ai
+
+Python crawler for Markdown and structured extraction with distinct local and hosted routes.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Async Python web extraction and browser orchestration. Candidate Athena extraction worker using deterministic schemas, pooled browser resources and complete recorded responses. Preserve original HTML alongside parsed results. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** PyPI marks 0.9.6 beta. Library, Docker and cloud capabilities/costs differ; benchmark complete records and cold browser cost.
+
+2026-11-25 integration review: Candidate Athena extraction worker using deterministic schemas, pooled browser resources and complete recorded responses. Preserve original HTML alongside parsed results.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** The inspected LICENSE adds a project-specific attribution requirement for distributions, publications and public uses. Preserve and review those conditions for the exact selected version. PyPI marks 0.9.6 beta. Library, Docker and cloud capabilities/costs differ; benchmark complete records and cold browser cost. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. README documents Docker server and hosted HTTP API; other local host combinations require browser dependency validation. License scope: Apache-2.0 text plus a project-specific attribution requirement in the inspected LICENSE AdaptiveCrawler may stop when it judges a query answered; this is unsuitable as the completion condition for exhaustive catalogs Hosted cloud and local library have different setup and cost models Current source describes v0.9.6 dated 2026-11-20; do not assume older APIs Do not adopt source performance claims as measured host results
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB021](https://raw.githubusercontent.com/unclecode/crawl4ai/main/README.md) · [FNWEB390](https://raw.githubusercontent.com/unclecode/crawl4ai/main/LICENSE) · [FNWEB391](https://pypi.org/pypi/crawl4ai/json) · [FNWEB121](https://github.com/unclecode/crawl4ai/releases/tag/v0.9.6) · [SCRP25002](https://github.com/unclecode/crawl4ai)
+
+### Crawlee
+
+**tool · emerging · P2** · ID: crawlee
+
+JavaScript/TypeScript crawl framework with HTTP/browser paths and persistent storage.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: TypeScript crawler orchestration across HTTP and browser transports. Reuse queue/transport/parser separation and resource-aware scheduling in compatible Node/TypeScript workers. Keep all discovered work queued while controlling simultaneous work. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Current README requires Node >=22.13. Browser engines are installed separately; hosted Apify execution is distinct from running the library locally.
+
+2026-11-25 integration review: Reuse queue/transport/parser separation and resource-aware scheduling in compatible Node/TypeScript workers. Keep all discovered work queued while controlling simultaneous work.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** Current README requires Node >=22.13. Browser engines are installed separately; hosted Apify execution is distinct from running the library locally. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Linux is explicitly targeted by the inspected upstream CI configuration. This review did not observe a passing run or certify every feature or other operating system. License scope: Apache-2.0 AdaptivePlaywrightCrawler is explicitly experimental and constrains its handler interface Concurrency limits must not become catalog/result limits Old guessed source path packages/core/src/autoscaling/autoscaled_pool.ts returned 404; authoritative API documentation was used instead
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB022](https://raw.githubusercontent.com/apify/crawlee/master/README.md) · [FNWEB392](https://raw.githubusercontent.com/apify/crawlee/master/LICENSE.md) · [FNWEB122](https://github.com/apify/crawlee/releases/tag/v3.18.2) · [FNWEB393](https://github.com/apify/crawlee/blob/master/.github/workflows/test-ci.yml) · [SCRP25004](https://crawlee.dev/js/api/playwright-crawler/class/AdaptivePlaywrightCrawler)
+
+### Exa
+
+**platform · emerging · P2** · ID: exa
+
+Search and content APIs with a separate Websets dataset-discovery product.
+
+**Stack layers:** Local storage & search; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Current service documentation reviewed; a hosted service has no single pinned binary version in this review. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Websets V2 was announced Nov17; vendor speed/recall/cost claims are not reproduced. Search endpoints and asynchronous Websets jobs have different contracts.
+
+**Measure:** primary-source recall; citation correctness; freshness; complete-query cost; query latency.
+
+**Constraints:** Websets V2 was announced Nov17; vendor speed/recall/cost claims are not reproduced. Search endpoints and asynchronous Websets jobs have different contracts. Documentation reviewed only; retrieval quality, latency, coverage and cost were not independently benchmarked. Hosted HTTP service; API key/account and applicable service authorization required. SDK availability is not an offline or native-server claim. License scope: Hosted service terms; SDK license does not establish rights to the service.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB029](https://docs.exa.ai/reference/search) · [FNWEB403](https://exa.ai/blog/websets-v2)
+
+### FastEmbed
+
+**framework · emerging · P2** · ID: fastembed
+
+ONNX Runtime-based embedding toolkit with dense, sparse, late-interaction and image model interfaces.
+
+**Stack layers:** Local storage & search; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI fastembed 0.9.1 (first current-file upload 2026-10-24T18:23:45.012385Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare same-model embedding generation where reducing heavyweight runtime dependencies may help local startup and packaging.
+
+**Measure:** source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
+
+**Constraints:** Do not compare different embedding models as if runtime speed alone explained quality; verify ONNX operator and provider support. An explicit OS support contract for the selected ONNX provider/model combination was not established. Versioned library; model/provider compatibility remains distinct from the Python package. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI081](https://raw.githubusercontent.com/qdrant/fastembed/HEAD/README.md) · [FNAI082](https://pypi.org/pypi/fastembed/json) · [FNAI083](https://raw.githubusercontent.com/qdrant/fastembed/HEAD/LICENSE)
+
+### Firecrawl
+
+**tool · emerging · P2** · ID: firecrawl
+
+Acquisition system with separate hosted, self-hosted server, SDK and local-CLI channels.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Scrape, crawl, map and extraction platform; optional Rust Firecrawl Local executable. Evaluate the native Local adapter for Athena/document acquisition and compatible Rust workers, retaining the host's durable queue, exact identities, complete results and provenance. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Repository release v2.11.0 is not the current version of every component. Local, server and cloud feature/license boundaries must be checked independently.
+
+2026-11-25 integration review: Evaluate the native Local adapter for Athena/document acquisition and compatible Rust workers, retaining the host's durable queue, exact identities, complete results and provenance.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** Repository release v2.11.0 is not the current version of every component. Local, server and cloud feature/license boundaries must be checked independently. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Firecrawl Local falls back to Firecrawl Cloud when a local single-page scrape fails unless FIRECRAWL_CLOUD=off. Inspect the returned source field and disable fallback for a strictly local trial. Documented local/server and hosted routes. No standalone Windows-portability or all-cloud-features-local claim. License scope: AGPL-3.0 repository; inspect per-component licenses before selecting an SDK/local crate Local jobs live in memory and expire one hour after starting Default local crawl limit is 100; do not mistake this for exhaustive completion Local skips JSON and summary formats with warnings and ignores browser actions Blocked local single-page requests may fall back to cloud; FIRECRAWL_CLOUD=off explicitly disables cloud handoff No benchmark here establishes performance in our hosts
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB020](https://raw.githubusercontent.com/firecrawl/firecrawl/main/README.md) · [FNWEB388](https://raw.githubusercontent.com/firecrawl/firecrawl/main/LICENSE) · [FNWEB120](https://github.com/firecrawl/firecrawl/releases/tag/v2.11.0) · [FNWEB389](https://github.com/firecrawl/firecrawl/blob/main/apps/local/README.md) · [SCRP25001](https://github.com/firecrawl/firecrawl/blob/main/apps/local/README.md)
+
 ### FlashRAG
 
 **framework · established · P2** · ID: flashrag
@@ -893,6 +1523,106 @@ Research toolkit providing reusable retrieval, reranking, generation, compressio
 **Priority rationale:** Start with a small labeled corpus and simple retrieval controls; only pursue complexity if quality improves within budget.
 
 **Sources:** [RX032](https://github.com/RUC-NLPIR/FlashRAG/blob/main/README.md)
+
+### Graphiti
+
+**framework · emerging · P2** · ID: graphiti
+
+Temporal context-graph framework that links derived facts to source episodes and preserves validity windows.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI graphiti-core 0.32.1 (first current-file upload 2026-11-24T16:30:07.307343Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Graphiti is a framework, not the full Zep enterprise service; tenancy, authorization, ingestion and operations are application responsibilities. The provided REST server is a reference implementation without authentication, authorization or prompt-injection protection; it must not be treated as a production service.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Graphiti is a framework, not the full Zep enterprise service; tenancy, authorization, ingestion and operations are application responsibilities. The provided REST server is a reference implementation without authentication, authorization or prompt-injection protection; it must not be treated as a production service. Python <4,>=3.10. Optional providers and native backends have separate prerequisites. The reference server publishes linux/amd64 and linux/arm64 containers. This is a documented Linux deployment path, not a guarantee for every graph database or model backend. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI091](https://raw.githubusercontent.com/getzep/graphiti/HEAD/README.md) · [FNAI092](https://pypi.org/pypi/graphiti-core/json) · [FNAI093](https://raw.githubusercontent.com/getzep/graphiti/HEAD/LICENSE) · [FNAI094](https://raw.githubusercontent.com/getzep/graphiti/HEAD/server/README.md)
+
+### Haystack
+
+**framework · emerging · P2** · ID: haystack
+
+Component-based framework for retrieval and agent applications with configurable data pipelines and integrations.
+
+**Stack layers:** Local storage & search; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI haystack-ai 3.5.0 (first current-file upload 2026-11-10T12:34:32.015851Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Integration packages and remote services add their own maintenance and storage requirements; framework choice does not establish retrieval quality.
+
+**Measure:** source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
+
+**Constraints:** Integration packages and remote services add their own maintenance and storage requirements; framework choice does not establish retrieval quality. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI023](https://raw.githubusercontent.com/deepset-ai/haystack/HEAD/README.md) · [FNAI024](https://pypi.org/pypi/haystack-ai/json) · [FNAI025](https://raw.githubusercontent.com/deepset-ai/haystack/HEAD/LICENSE)
+
+### Hindsight
+
+**framework · emerging · P2** · ID: hindsight
+
+Agent memory system with retain, recall and reflect operations, memory banks, observations and derived mental models.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI hindsight-client 1.3.0 (first current-file upload 2026-11-24T13:05:03.060028Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Published benchmark superiority is not a local result; derived mental models need traceable evidence and explicit stale-fact handling.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Published benchmark superiority is not a local result; derived mental models need traceable evidence and explicit stale-fact handling. Python >=3.10. Optional providers and native backends have separate prerequisites. README documents a local control UI and separately configured API server. Embedded/native support must be selected and validated independently. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI124](https://raw.githubusercontent.com/vectorize-io/hindsight/HEAD/README.md) · [FNAI125](https://pypi.org/pypi/hindsight-client/json) · [FNAI126](https://raw.githubusercontent.com/vectorize-io/hindsight/HEAD/LICENSE)
+
+### Immich
+
+**tool · emerging · P2** · ID: immich
+
+Self-hosted photo/video library with metadata, search, albums and mobile clients.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v3.4.2 published 2026-11-18; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Not a general web crawler or sole backup. Official requirements recommend Linux and discourage non-Linux Docker hosts; test backup/restore and database/media consistency.
+
+**Measure:** creator and source metadata retention; full-file integrity; search and playback correctness; backup and restore parity; storage cost.
+
+**Constraints:** Not a general web crawler or sole backup. Official requirements recommend Linux and discourage non-Linux Docker hosts; test backup/restore and database/media consistency. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official server requirements recommend a 64-bit Linux/*nix host; web client and separately documented mobile apps are distinct. License scope: AGPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB028](https://raw.githubusercontent.com/immich-app/immich/main/README.md) · [FNWEB401](https://raw.githubusercontent.com/immich-app/immich/main/LICENSE) · [FNWEB128](https://github.com/immich-app/immich/releases/tag/v3.4.2) · [FNWEB402](https://docs.immich.app/install/requirements/)
+
+### Jina Reader
+
+**tool · emerging · P2** · ID: jina-reader
+
+Web/document reading API with an available self-hosted source branch.
+
+**Stack layers:** Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: No latest GitHub release resolved. Documentation was reviewed; this is not evidence of inactivity. Pin the applicable commit/package/image before evaluation. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Hosted and OSS deployments differ, and README flags separately licensed assets. No latest GitHub release resolved; pin the actual source/image. Generated captions must not become original-source facts.
+
+**Measure:** text and metadata recall; table and code preservation; source-span correctness; failure transparency; complete-input time.
+
+**Constraints:** Hosted and OSS deployments differ, and README flags separately licensed assets. No latest GitHub release resolved; pin the actual source/image. Generated captions must not become original-source facts. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Documented Linux-container/server route and hosted HTTP service; no native desktop distribution asserted. License scope: Apache-2.0 code; separately licensed assets and hosted terms need independent review
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB018](https://raw.githubusercontent.com/jina-ai/reader/main/README.md) · [FNWEB385](https://raw.githubusercontent.com/jina-ai/reader/main/LICENSE)
 
 ### LanceDB
 
@@ -914,6 +1644,26 @@ Local and service retrieval candidate combining vector indexing with the Lance d
 
 **Sources:** [RX099](https://www.lancedb.com/blog/newsletter-september-2026) · [ST128](https://docs.lancedb.com/search/full-text-search)
 
+### Letta Code
+
+**framework · emerging · P2** · ID: letta
+
+Stateful agent harness with persistent memory, a terminal interface, browser access and messaging-channel integrations.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: npm @letta-ai/letta-code 0.34.70 (latest dist-tag observed 2026-11-24; publication date not established). Current registry availability is verified; publication timing was not established, so maintenance remains unverified. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** The old letta repository now points to letta-code; retired V1 server tags are historical compatibility evidence, not the current default.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** The old letta repository now points to letta-code; retired V1 server tags are historical compatibility evidence, not the current default. Runtime engines: bun >=1.3.2, node ^22.23.4 || ^24.22.1 || ^26.12.1. The current README explicitly documents browser access at chat.letta.com. The CLI has separate Node/Bun prerequisites; Web does not assert all native OS targets. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI087](https://raw.githubusercontent.com/letta-ai/letta-code/HEAD/README.md) · [FNAI088](https://registry.npmjs.org/@letta-ai/letta-code/latest) · [FNAI089](https://raw.githubusercontent.com/letta-ai/letta-code/HEAD/LICENSE)
+
 ### LightRAG
 
 **framework · emerging · P2** · ID: lightrag
@@ -926,13 +1676,135 @@ Retrieval framework combining graph-oriented knowledge access with configurable 
 
 **Test:** Evaluate project-document search with incremental updates, fixed embeddings, and identical answer generation.
 
-**Measure:** retrieval recall; answer correctness; citation precision; index/update time; query cost.
+**Measure:** retrieval recall; answer correctness; citation precision; index/update time; query cost; source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
 
-**Constraints:** Chunking and reranking can dominate outcome. Record document-processing configurations.
+**Constraints:** Chunking and reranking can dominate outcome. Record document-processing configurations. A knowledge graph is derived data; keep canonical evidence outside it and test deleted or superseded facts across every index. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: MIT
 
 **Priority rationale:** Start with a small labeled corpus and simple retrieval controls; only pursue complexity if quality improves within budget.
 
-**Sources:** [RX029](https://github.com/HKUDS/LightRAG)
+**Sources:** [RX029](https://github.com/HKUDS/LightRAG) · [FNAI072](https://raw.githubusercontent.com/HKUDS/LightRAG/HEAD/README.md) · [FNAI073](https://pypi.org/pypi/lightrag-hku/json) · [FNAI074](https://raw.githubusercontent.com/HKUDS/LightRAG/HEAD/LICENSE)
+
+### LiteParse
+
+**tool · emerging · P2** · ID: liteparse
+
+Local document parser with a Rust/PDFium core, spatial text and bounding boxes, optional OCR, and language bindings for application integration.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: npm @llamaindex/liteparse 2.21.2 (latest dist-tag observed 2026-11-24; publication date not established). Current registry availability is verified; publication timing was not established, so maintenance remains unverified. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Native text, Tesseract, optional ocria-nano and external OCR modes have different capabilities; Office conversion requires additional software. Upstream throughput and accuracy tables are not measurements from Athena.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Native text, Tesseract, optional ocria-nano and external OCR modes have different capabilities; Office conversion requires additional software. Upstream throughput and accuracy tables are not measurements from Athena. Runtime engines: node >=18.0.0. README explicitly lists Linux, macOS Intel/ARM and Windows, plus a browser WASM interface. WASM and native CLI capability parity is not assumed. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI130](https://raw.githubusercontent.com/run-llama/liteparse/HEAD/README.md) · [FNAI131](https://registry.npmjs.org/@llamaindex/liteparse/latest) · [FNAI132](https://raw.githubusercontent.com/run-llama/liteparse/HEAD/LICENSE)
+
+### LlamaIndex Framework
+
+**framework · emerging · P2** · ID: llamaindex
+
+Open toolkit for data-connected agents and retrieval with separate core and integration packages.
+
+**Stack layers:** Local storage & search; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI llama-index 0.14.26 (first current-file upload 2026-11-13T22:38:11.236664Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare existing integrations where a connector is costly to reproduce; keep the smallest needed core/plugin set.
+
+**Measure:** source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
+
+**Constraints:** The company states its primary focus has moved toward LlamaParse, LiteParse and parsing benchmarks; the OSS framework is still available, not evidence of identical priorities or hosted features. An explicit operating-system support contract was not established for the selected core/integration set. Framework distribution and hosted LlamaParse are separate products. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI026](https://raw.githubusercontent.com/run-llama/llama_index/HEAD/README.md) · [FNAI027](https://pypi.org/pypi/llama-index/json) · [FNAI028](https://raw.githubusercontent.com/run-llama/llama_index/HEAD/LICENSE)
+
+### MarkItDown
+
+**tool · established · P2** · ID: markitdown
+
+Document-to-Markdown conversion after acquisition.
+
+**Stack layers:** Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Document-to-Markdown conversion after acquisition. Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs.
+
+2026-11-25 integration review: Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs.
+
+**Measure:** complete output and required-field parity; end-to-end completion and tail latency; peak memory, CPU and network work; cancellation and recovery correctness; integration and maintenance burden.
+
+**Constraints:** convert_response collects the body in BytesIO convert_stream buffers an entire nonseekable stream Markdown is not a high-fidelity source-artifact replacement Image captioning and speech transcription can depend on hosted services It is not crawl orchestration
+
+**Priority rationale:** Evaluate only its documented role against the owning application baseline; source review is not target acceptance.
+
+**Sources:** [SCRP25006](https://github.com/microsoft/markitdown/blob/main/packages/markitdown/src/markitdown/_markitdown.py)
+
+### Marker
+
+**tool · emerging · P2** · ID: marker
+
+Document conversion pipeline producing Markdown, JSON, chunks and HTML with images, tables, equations and layout handling.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI marker-pdf 2.2.0 (first current-file upload 2026-11-12T17:46:07.979170Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Code is Apache-2.0, but bundled model terms are modified OpenRAIL-M; modes trade model work differently and must preserve every required output.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Code is Apache-2.0, but bundled model terms are modified OpenRAIL-M; modes trade model work differently and must preserve every required output. Python <4,>=3.10. Optional providers and native backends have separate prerequisites. README explicitly documents the macOS llama.cpp path for CPU/Apple-silicon use. Other host/container combinations remain research candidates pending exact platform proof. License scope: Apache-2.0 code; modified AI Pubs OpenRAIL-M model weights with separate commercial conditions.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI103](https://raw.githubusercontent.com/datalab-to/marker/HEAD/README.md) · [FNAI104](https://pypi.org/pypi/marker-pdf/json) · [FNAI105](https://raw.githubusercontent.com/datalab-to/marker/HEAD/LICENSE)
+
+### Mem0
+
+**framework · emerging · P2** · ID: mem0
+
+Memory layer offering user/session/agent recall through a library, self-hosted service and separate managed platform.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI mem0ai 2.2.1 (first current-file upload 2026-09-25T17:36:07.480270Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current headline benchmark scores are for managed-platform proprietary optimizations; they do not establish OSS SDK parity.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Current headline benchmark scores are for managed-platform proprietary optimizations; they do not establish OSS SDK parity. Python <4.0,>=3.10. Optional providers and native backends have separate prerequisites. The reviewed README documents self-hosted and cloud dashboards. SDK native OS combinations were not qualified here. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI084](https://raw.githubusercontent.com/mem0ai/mem0/HEAD/README.md) · [FNAI085](https://pypi.org/pypi/mem0ai/json) · [FNAI086](https://raw.githubusercontent.com/mem0ai/mem0/HEAD/LICENSE)
+
+### MemOS
+
+**framework · emerging · P2** · ID: memos
+
+Memory management framework with graph-structured records, multimodal content, memory cubes and feedback/correction APIs.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI MemoryOS 2.0.33 (first current-file upload 2026-09-03T11:30:01.114524Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Local plugin capabilities, the Python framework and hosted cloud service are separate channels; headline benchmarks do not certify all of them.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Local plugin capabilities, the Python framework and hosted cloud service are separate channels; headline benchmarks do not certify all of them. Python >=3.10. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.10. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI098](https://raw.githubusercontent.com/MemTensor/MemOS/HEAD/README.md) · [FNAI099](https://pypi.org/pypi/MemoryOS/json) · [FNAI100](https://raw.githubusercontent.com/MemTensor/MemOS/HEAD/LICENSE)
 
 ### Microsoft GraphRAG
 
@@ -974,6 +1846,66 @@ Vector retrieval service candidate for larger corpora and multi-stage search pip
 
 **Sources:** [RX102](https://milvus.io/docs/release_notes.md)
 
+### Monolith
+
+**tool · emerging · P2** · ID: monolith
+
+Rust page archiver with self-contained HTML and additional archive output modes.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v2.12.0 published 2026-11-02; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Browser-assisted mode requires a browser. Current options exceed historical HTML-only descriptions; validate exact format fidelity and content-security behavior before adoption.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Browser-assisted mode requires a browser. Current options exceed historical HTML-only descriptions; validate exact format fidelity and content-security behavior before adoption. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Upstream install table and release assets explicitly cover Windows, macOS and Linux. License scope: 0BSD (Zero-Clause BSD)
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB013](https://raw.githubusercontent.com/Y2Z/monolith/master/README.md) · [FNWEB376](https://raw.githubusercontent.com/Y2Z/monolith/master/LICENSE) · [FNWEB113](https://github.com/Y2Z/monolith/releases/tag/v2.12.0)
+
+### PaddleOCR
+
+**tool · emerging · P2** · ID: paddleocr
+
+OCR and document-analysis toolkit with scene-text recognition, structure extraction and vision-language parsing routes.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI paddleocr 3.7.0 (first current-file upload 2026-06-11T12:09:51.204074Z). A current registry listing alone does not establish recent maintenance activity. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Python package, Paddle backend and model families have independent versions and hardware support; their benchmark scores are not interchangeable.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Python package, Paddle backend and model families have independent versions and hardware support; their benchmark scores are not interchangeable. Python >=3.8. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.8. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI109](https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/HEAD/README.md) · [FNAI110](https://pypi.org/pypi/paddleocr/json) · [FNAI111](https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/HEAD/LICENSE)
+
+### Parallel Web APIs
+
+**platform · emerging · P2** · ID: parallel-web
+
+Hosted search and URL extraction tools with explicit current v1 contracts.
+
+**Stack layers:** Local storage & search; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Current service documentation reviewed; a hosted service has no single pinned binary version in this review. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current docs use /v1/search and /v1/extract; v1 Extract nests content/fetch controls under advanced_settings. Older beta examples are incompatible, and excerpts are not complete captures.
+
+**Measure:** primary-source recall; citation correctness; freshness; complete-query cost; query latency.
+
+**Constraints:** Current docs use /v1/search and /v1/extract; v1 Extract nests content/fetch controls under advanced_settings. Older beta examples are incompatible, and excerpts are not complete captures. Documentation reviewed only; retrieval quality, latency, coverage and cost were not independently benchmarked. Hosted HTTP service; API key/account and applicable service authorization required. SDK availability is not an offline or native-server claim. License scope: Hosted service terms; SDK license does not establish rights to the service.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB031](https://docs.parallel.ai/extract/extract-quickstart)
+
 ### Qdrant
 
 **repository · established · P2** · ID: qdrant
@@ -993,6 +1925,210 @@ Vector and hybrid retrieval engine candidate for searchable code, asset, and res
 **Priority rationale:** Start with a small labeled corpus and simple retrieval controls; only pursue complexity if quality improves within budget.
 
 **Sources:** [RX101](https://qdrant.tech/blog/qdrant-1.20.x/)
+
+### RAGFlow
+
+**framework · emerging · P2** · ID: ragflow
+
+Document-centric RAG platform with inspectable chunks, citations, agentic retrieval and knowledge-artifact compilation.
+
+**Stack layers:** Local storage & search; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: README announces RAGFlow 1.0.0 on 2026-11-06; exact newest release tag not independently checked. The dated upstream announcement supports recent activity; no install or Go migration was attempted. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Generated wiki/graph content must remain derived and reviewable; server requirements and current Go deployment compatibility need separate planning.
+
+**Measure:** source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
+
+**Constraints:** Generated wiki/graph content must remain derived and reviewable; server requirements and current Go deployment compatibility need separate planning. Linux x86-64/ARM64 Docker deployment; reviewed build guide recommends 4 CPU cores, 16 GB RAM and 50 GB free space as a starting point, with workload-dependent needs. The 1.0 Docker build document supports Linux x86-64 and ARM64 and explicitly excludes macOS for the Go backend. Web identifies the browser interface; it does not establish native Windows or macOS hosting. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI075](https://raw.githubusercontent.com/infiniflow/ragflow/HEAD/README.md) · [FNAI076](https://raw.githubusercontent.com/infiniflow/ragflow/HEAD/LICENSE) · [FNAI077](https://raw.githubusercontent.com/infiniflow/ragflow/HEAD/docs/develop/build_docker_image.mdx)
+
+### ReplayWeb.page
+
+**tool · emerging · P2** · ID: replayweb-page
+
+Client-side web-archive viewer that can run locally or be embedded in a site.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v2.5.5 published 2026-11-19; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Service workers require localhost or HTTPS. Replay depends on capture completeness; this viewer does not itself prove collection coverage.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Service workers require localhost or HTTPS. Replay depends on capture completeness; this viewer does not itself prove collection coverage. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Release assets provide Windows/macOS/Linux desktop builds; official documentation describes browser use and static HTTP hosting. License scope: AGPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB009](https://raw.githubusercontent.com/webrecorder/replayweb.page/main/README.md) · [FNWEB370](https://raw.githubusercontent.com/webrecorder/replayweb.page/main/LICENSE) · [FNWEB109](https://github.com/webrecorder/replayweb.page/releases/tag/v2.5.5)
+
+### Scrapling
+
+**tool · experimental · P2** · ID: scrapling
+
+Python acquisition framework combining HTTP/browser fetching, selectors and resumable spider workflows.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: HTTP/browser sessions, parser and crawling framework. Candidate parsing/adapter layer for changing markup, with fixture replay and validation of recovered fields. Reuse already fetched responses. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** PyPI marks the package beta; 0.5.1 changes remote-session APIs. Adaptive matches need identity/field checks. Use authorized access and isolated profiles.
+
+2026-11-25 integration review: Candidate parsing/adapter layer for changing markup, with fixture replay and validation of recovered fields. Reuse already fetched responses.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** PyPI marks the package beta; 0.5.1 changes remote-session APIs. Adaptive matches need identity/field checks. Use authorized access and isolated profiles. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. PyPI declares OS-independent Python >=3.10; optional browser dependencies need separate host verification. License scope: BSD-3-Clause A similarity match is not proof of field identity or correctness Preserve required fields, pagination and type checks before accepting selector recovery Upstream universal access/bypass marketing was not verified and is not an acceptance claim
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB001](https://raw.githubusercontent.com/D4Vinci/Scrapling/main/README.md) · [FNWEB358](https://raw.githubusercontent.com/D4Vinci/Scrapling/main/LICENSE) · [FNWEB359](https://pypi.org/pypi/scrapling/json) · [FNWEB101](https://github.com/D4Vinci/Scrapling/releases/tag/v0.5.1) · [SCRP25007](https://github.com/D4Vinci/Scrapling)
+
+### Scrapy
+
+**tool · emerging · P2** · ID: scrapy
+
+Python crawling framework for controlled request scheduling and item pipelines.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Python request scheduling, middleware, extraction and resumable crawls. Transfer per-origin fairness, retry classification, durable request state and error-aware delay behavior to host acquisition layers without introducing an unnecessary replacement framework. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Dynamic JavaScript rendering needs a separate route. Python >=3.11 is required by the observed 2.20.0 package; compare middleware and recovery behavior, not headline request rate alone.
+
+2026-11-25 integration review: Transfer per-origin fairness, retry classification, durable request state and error-aware delay behavior to host acquisition layers without introducing an unnecessary replacement framework.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** Dynamic JavaScript rendering needs a separate route. Python >=3.11 is required by the observed 2.20.0 package; compare middleware and recovery behavior, not headline request rate alone. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official PyPI metadata declares OS independence and Python >=3.11; system dependencies still require target-host testing. License scope: BSD-3-Clause A JOBDIR is owned by one run and must not be shared between spiders/jobs Documented resume uses clean shutdown JavaScript rendering remains a separate transport concern
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB023](https://raw.githubusercontent.com/scrapy/scrapy/master/README.rst) · [FNWEB394](https://raw.githubusercontent.com/scrapy/scrapy/master/LICENSE) · [FNWEB395](https://pypi.org/pypi/scrapy/json) · [FNWEB123](https://github.com/scrapy/scrapy/releases/tag/2.20.0) · [SCRP25005](https://github.com/scrapy/scrapy/blob/master/scrapy/extensions/throttle.py)
+
+### SearXNG
+
+**platform · emerging · P2** · ID: searxng
+
+Self-hostable metasearch service aggregating configured external search engines.
+
+**Stack layers:** Local storage & search; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: No latest GitHub release resolved. Documentation was reviewed; this is not evidence of inactivity. Pin the applicable commit/package/image before evaluation. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Aggregation depends on upstream engines and their availability; no latest GitHub release resolved. Pin an image/commit and evaluate coverage instead of assuming a local independent web index.
+
+**Measure:** primary-source recall; citation correctness; freshness; complete-query cost; query latency.
+
+**Constraints:** Aggregation depends on upstream engines and their availability; no latest GitHub release resolved. Pin an image/commit and evaluate coverage instead of assuming a local independent web index. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official administration guide provides Linux/container installation; web UI can be accessed remotely. License scope: AGPL-3.0-or-later
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB017](https://raw.githubusercontent.com/searxng/searxng/master/README.rst) · [FNWEB383](https://raw.githubusercontent.com/searxng/searxng/master/LICENSE) · [FNWEB384](https://docs.searxng.org/admin/installation.html)
+
+### Selectolax
+
+**tool · emerging · P2** · ID: selectolax
+
+Python HTML parsing and CSS-selection bindings over native parser technology.
+
+**Stack layers:** Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: GitHub release v1.0.2 published 2026-10-22; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** It is a parser, not a JavaScript browser or crawl scheduler. Match malformed HTML, encoding and selector behavior before relying on upstream speed claims.
+
+**Measure:** text and metadata recall; table and code preservation; source-span correctness; failure transparency; complete-input time.
+
+**Constraints:** It is a parser, not a JavaScript browser or crawl scheduler. Match malformed HTML, encoding and selector behavior before relying on upstream speed claims. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. PyPI classifiers and published Windows/macOS/Linux wheels document platforms; Python >=3.9,<3.16 observed. License scope: MIT wrapper; Lexbor engine Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB016](https://raw.githubusercontent.com/rushter/selectolax/master/README.md) · [FNWEB381](https://raw.githubusercontent.com/rushter/selectolax/master/LICENSE) · [FNWEB382](https://pypi.org/pypi/selectolax/json) · [FNWEB116](https://github.com/rushter/selectolax/releases/tag/v1.0.2)
+
+### SimpleMem
+
+**framework · experimental · P2** · ID: simplemem
+
+Research memory system with text, multimodal and retrieval-optimization paths under a unified Python interface.
+
+**Stack layers:** Optional AI & developer tools; Local storage & search; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: PyPI simplemem 0.1.0 (first current-file upload 2026-01-21T01:53:07.877370Z) No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare memory compaction and retrieval quality on complete source-preserving histories with corrections, adversarial queries and media references.
+
+**Measure:** temporal answer correctness; source attribution; conflicting-fact handling; deletion and isolation correctness; update and retrieval cost.
+
+**Constraints:** Upstream calls its compression lossless, but this requires task-specific fidelity proof; MCP/Docker text support differs from full Python multimodal support. No explicit supported OS matrix was established for full multimodal and self-evolution paths. Research-oriented unified package; headline method versions do not equal the package release tag. PyPI simplemem 0.1.0 dates to January 21, while the repository describes a later unified system; package/source feature parity is unresolved. Retained in engineering research only; the software catalog evidence gate remains unmet.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI127](https://raw.githubusercontent.com/aiming-lab/SimpleMem/HEAD/README.md) · [FNAI128](https://pypi.org/pypi/simplemem/json) · [FNAI129](https://raw.githubusercontent.com/aiming-lab/SimpleMem/HEAD/LICENSE)
+
+### SingleFile
+
+**tool · emerging · P2** · ID: singlefile
+
+Browser extension and CLI workflow for saving a page as one self-contained HTML document.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v1.40.0 published 2026-11-20; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** A single HTML snapshot differs from a navigable multi-page archive. Dynamic/media replay and completeness need source-specific checks.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** A single HTML snapshot differs from a navigable multi-page archive. Dynamic/media replay and completeness need source-specific checks. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official README lists Chrome, Firefox, Edge, Safari and other compatible browsers including Opera; browser extension rather than native desktop OS claim. License scope: AGPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB012](https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/README.MD) · [FNWEB375](https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/LICENSE) · [FNWEB112](https://github.com/gildas-lormeau/SingleFile/releases/tag/v1.40.0)
+
+### Spider
+
+**tool · emerging · P2** · ID: spider-rs
+
+Rust crawler with streaming HTTP and browser-backed acquisition paths.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: GitHub release v2.54.2 published 2026-11-19; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** HTTP and rendered paths are separate workloads. Confirm platform dependencies and complete-output parity; cloud features must remain an explicit authorized choice.
+
+**Measure:** complete-record recall; source identity and provenance; resume and cancellation correctness; browser startup cost; complete-crawl time.
+
+**Constraints:** HTTP and rendered paths are separate workloads. Confirm platform dependencies and complete-output parity; cloud features must remain an explicit authorized choice. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Linux is explicitly targeted by the inspected upstream CI configuration. This review did not observe a passing run or certify every feature or other operating system. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB019](https://raw.githubusercontent.com/spider-rs/spider/main/README.md) · [FNWEB386](https://raw.githubusercontent.com/spider-rs/spider/main/LICENSE) · [FNWEB119](https://github.com/spider-rs/spider/releases/tag/v2.54.2) · [FNWEB387](https://github.com/spider-rs/spider/blob/main/.github/workflows/rust.yml)
+
+### Surya
+
+**tool · emerging · P2** · ID: surya
+
+OCR and layout pipeline whose current client orchestrates local or remote vision-model servers and returns reading order and structured tables.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI surya-ocr 0.24.0 (first current-file upload 2026-11-13T15:25:11.354862Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current architecture differs from older embedded-model setups; code and model licenses differ, and the MLX backend is explicitly experimental.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Current architecture differs from older embedded-model setups; code and model licenses differ, and the MLX backend is explicitly experimental. Python <4,>=3.10. Optional providers and native backends have separate prerequisites. README explicitly gives macOS/Apple-silicon llama.cpp and experimental MLX paths. Other deployment targets require their own serving prerequisites. License scope: Apache-2.0 code; modified AI Pubs OpenRAIL-M model weights with separate commercial conditions.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI106](https://raw.githubusercontent.com/datalab-to/surya/HEAD/README.md) · [FNAI107](https://pypi.org/pypi/surya-ocr/json) · [FNAI108](https://raw.githubusercontent.com/datalab-to/surya/HEAD/LICENSE)
 
 ### Tantivy
 
@@ -1014,6 +2150,106 @@ Embedded Rust lexical search library for evaluating tokenized catalog search aga
 
 **Sources:** [ST115](https://github.com/quickwit-oss/tantivy) · [ST116](https://github.com/quickwit-oss/tantivy/releases) · [ST117](https://www.sqlite.org/fts5.html) · [IO31054](https://api.github.com/repos/quickwit-oss/tantivy/releases/latest)
 
+### Tavily
+
+**platform · emerging · P2** · ID: tavily
+
+Hosted search API with recency/domain options and optional extracted result content.
+
+**Stack layers:** Local storage & search; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Current service documentation reviewed; a hosted service has no single pinned binary version in this review. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Generated answer and raw source content are different fields. Validate publication filters, caching, failure coverage and completeness against the same gold queries.
+
+**Measure:** primary-source recall; citation correctness; freshness; complete-query cost; query latency.
+
+**Constraints:** Generated answer and raw source content are different fields. Validate publication filters, caching, failure coverage and completeness against the same gold queries. Documentation reviewed only; retrieval quality, latency, coverage and cost were not independently benchmarked. Hosted HTTP service; API key/account and applicable service authorization required. SDK availability is not an offline or native-server claim. License scope: Hosted service terms; SDK license does not establish rights to the service.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB030](https://docs.tavily.com/documentation/api-reference/endpoint/search)
+
+### Trafilatura
+
+**tool · emerging · P2** · ID: trafilatura
+
+Python text and metadata extraction with feed/sitemap discovery and structured outputs.
+
+**Stack layers:** Files, hashing & archives; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: GitHub release v2.4.0 published 2026-11-23; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Article extraction deliberately selects content; retain the original capture and test tables, code, multilingual text and recall before using it for complete evidence.
+
+**Measure:** text and metadata recall; table and code preservation; source-span correctness; failure transparency; complete-input time.
+
+**Constraints:** Article extraction deliberately selects content; retain the original capture and test tables, code, multilingual text and recall before using it for complete evidence. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. PyPI declares Microsoft, MacOS and POSIX support; Python >=3.10 observed. License scope: Apache-2.0 (versions before 1.8.0 used GPLv3+)
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB015](https://raw.githubusercontent.com/adbar/trafilatura/master/README.md) · [FNWEB379](https://raw.githubusercontent.com/adbar/trafilatura/master/LICENSE) · [FNWEB380](https://pypi.org/pypi/trafilatura/json) · [FNWEB115](https://github.com/adbar/trafilatura/releases/tag/v2.4.0)
+
+### Tube Archivist
+
+**tool · emerging · P2** · ID: tubearchivist
+
+Self-hosted video-archive manager with metadata indexing and a playback interface.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v0.6.0 published 2026-10-25; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Requires Docker and an indexing stack; budget RAM/storage and verify browser codec support. It is not a universal social-media archiver.
+
+**Measure:** creator and source metadata retention; full-file integrity; search and playback correctness; backup and restore parity; storage cost.
+
+**Constraints:** Requires Docker and an indexing stack; budget RAM/storage and verify browser codec support. It is not a universal social-media archiver. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Docker-based server and web interface documented; backend memory/index/storage requirements differ from a simple downloader. License scope: GPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB027](https://raw.githubusercontent.com/tubearchivist/tubearchivist/master/README.md) · [FNWEB400](https://raw.githubusercontent.com/tubearchivist/tubearchivist/master/LICENSE) · [FNWEB127](https://github.com/tubearchivist/tubearchivist/releases/tag/v0.6.0)
+
+### gallery-dl
+
+**tool · emerging · P2** · ID: gallery-dl
+
+Command-line collection tool for supported image-gallery and media sources.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v1.32.21 published 2026-11-21; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Supported-site adapters change independently and may require authentication. Preserve creator/source metadata; an extractor name is not proof of exhaustive collection.
+
+**Measure:** creator and source metadata retention; full-file integrity; search and playback correctness; backup and restore parity; storage cost.
+
+**Constraints:** Supported-site adapters change independently and may require authentication. Preserve creator/source metadata; an extractor name is not proof of exhaustive collection. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. PyPI declares OS independence; README documents Windows executables and cross-platform Python setup. License scope: GPL-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB026](https://raw.githubusercontent.com/mikf/gallery-dl/master/README.rst) · [FNWEB398](https://raw.githubusercontent.com/mikf/gallery-dl/master/LICENSE) · [FNWEB399](https://pypi.org/pypi/gallery-dl/json) · [FNWEB126](https://github.com/mikf/gallery-dl/releases/tag/v1.32.21)
+
+### olmOCR
+
+**tool · emerging · P2** · ID: olmocr
+
+AI2 document conversion toolkit with natural reading-order output and a separate reproducible OCR benchmark suite.
+
+**Stack layers:** Files, hashing & archives; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI olmocr 0.4.27 (first current-file upload 2026-03-12T16:39:25.349561Z). A current registry listing alone does not establish recent maintenance activity. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Local inference needs a suitable GPU and environment; historical benchmark tables compare specific older model/tool versions.
+
+**Measure:** text and reading-order accuracy; table and formula fidelity; source-page attribution; failure coverage; complete-document latency.
+
+**Constraints:** Local inference needs a suitable GPU and environment; historical benchmark tables compare specific older model/tool versions. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream installation gives Ubuntu/Debian packages and an NVIDIA GPU path; README lists RTX 4090 among tested GPUs, not proof for the user's exact setup. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI112](https://raw.githubusercontent.com/allenai/olmocr/HEAD/README.md) · [FNAI113](https://pypi.org/pypi/olmocr/json) · [FNAI114](https://raw.githubusercontent.com/allenai/olmocr/HEAD/LICENSE)
+
 ### pgvector
 
 **repository · established · P2** · ID: pgvector
@@ -1033,6 +2269,46 @@ PostgreSQL vector-search extension for comparing integrated relational retrieval
 **Priority rationale:** Start with a small labeled corpus and simple retrieval controls; only pursue complexity if quality improves within budget.
 
 **Sources:** [RX100](https://github.com/pgvector/pgvector)
+
+### pywb
+
+**tool · emerging · P2** · ID: pywb
+
+Python web-archive replay and recording toolkit for managed collections.
+
+**Stack layers:** Files, hashing & archives; Local storage & search; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v-2.11.1 published 2026-11-14; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Deployment and index operation add service responsibilities. PyPI currently labels the package beta; release tags do not certify replay parity on Athena fixtures.
+
+**Measure:** original-resource completeness; replay fidelity; capture provenance; storage amplification; capture and reopen time.
+
+**Constraints:** Deployment and index operation add service responsibilities. PyPI currently labels the package beta; release tags do not certify replay parity on Athena fixtures. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. README explicitly documents Linux setup; Python >=3.9 package observed. Other host support is not asserted. License scope: GPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB010](https://raw.githubusercontent.com/webrecorder/pywb/main/README.rst) · [FNWEB371](https://raw.githubusercontent.com/webrecorder/pywb/main/LICENSE) · [FNWEB372](https://pypi.org/pypi/pywb/json) · [FNWEB110](https://github.com/webrecorder/pywb/releases/tag/v-2.11.1)
+
+### txtai
+
+**framework · emerging · P2** · ID: txtai
+
+Local-first AI framework combining sparse/dense indexes, graph and SQL-oriented retrieval with model pipelines and APIs.
+
+**Stack layers:** Local storage & search; Optional AI & developer tools.
+
+**Current signal:** 2026-11-24 source review: PyPI txtai 9.15.0 (first current-file upload 2026-11-23T10:57:56.599464Z). Recent registry upload supports activity; it does not establish stability or maintained support for every integration. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** A combined stack still requires source/version isolation, deletion propagation and exact model/configuration identity.
+
+**Measure:** source-grounded recall; citation correctness; index and update cost; query latency; retained evidence completeness.
+
+**Constraints:** A combined stack still requires source/version isolation, deletion propagation and exact model/configuration identity. Python >=3.11. Optional providers and native backends have separate prerequisites. Upstream package metadata explicitly classifies the library as OS Independent. These are library-level host labels; selected model providers, databases and native accelerator dependencies may have narrower requirements. Python >=3.11. Optional providers and native backends have separate prerequisites. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNAI078](https://raw.githubusercontent.com/neuml/txtai/HEAD/README.md) · [FNAI079](https://pypi.org/pypi/txtai/json) · [FNAI080](https://raw.githubusercontent.com/neuml/txtai/HEAD/LICENSE)
 
 ## Languages & runtimes (21)
 
@@ -1456,7 +2732,7 @@ Experimental functional language exploring a compact language model and native o
 
 **Sources:** [RX053](https://github.com/roc-lang/roc)
 
-## Compilers & build tools (19)
+## Compilers & build tools (29)
 
 ### CXX Rust–C++ bridge
 
@@ -1530,13 +2806,13 @@ Rust-based JavaScript bundler with a Rollup-compatible plugin interface and conf
 
 **Test:** Bundle a pinned fixture corpus across Rolldown, Rollup, and esbuild with matched output targets and plugins.
 
-**Measure:** build seconds; peak RSS MiB; gzip bytes; sourcemap validity; runtime conformance pass rate.
+**Measure:** build seconds; peak RSS MiB; gzip bytes; sourcemap validity; runtime conformance pass rate; module and output parity; clean build time; edit-to-ready latency; source-map fidelity; peak memory.
 
-**Constraints:** Chunking and dead-code decisions can change without API changes. Report unsupported plugins instead of silently dropping them.
+**Constraints:** Chunking and dead-code decisions can change without API changes. Report unsupported plugins instead of silently dropping them. Verify every plugin, emitted chunk, source map and runtime path; compatibility intent is not universal plugin parity. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
 
 **Priority rationale:** Build loops are a bounded, reproducible comparison with direct developer-time and diagnostic-correctness effects.
 
-**Sources:** [RX060](https://voidzero.dev/posts/announcing-rolldown-1-0)
+**Sources:** [RX060](https://voidzero.dev/posts/announcing-rolldown-1-0) · [FNDO017](https://raw.githubusercontent.com/rolldown/rolldown/HEAD/README.md) · [FNDO018](https://raw.githubusercontent.com/rolldown/rolldown/HEAD/LICENSE) · [FNDO019](https://github.com/rolldown/rolldown/releases/tag/v1.3.3)
 
 ### Slang shader compiler
 
@@ -1550,13 +2826,13 @@ Modular shader language and compiler for generating target-specific GPU programs
 
 **Test:** Port one existing compute or material kernel while preserving numerical behavior, and compare clean/incremental shader builds and complete dispatch cost on each target.
 
-**Measure:** clean and incremental shader-build seconds; shader cache hit rate; GPU kernel and complete operation milliseconds; register and memory use; numerical or visual error; target compile pass rate.
+**Measure:** clean and incremental shader-build seconds; shader cache hit rate; GPU kernel and complete operation milliseconds; register and memory use; numerical or visual error; target compile pass rate; image and output parity; shader build time; p95/p99 frame time; GPU memory; backend compatibility.
 
-**Constraints:** Compiler v2026.20 and language mode 2026 are different pins; the documented default remains legacy 2018 and next/202c is development. Generated code still depends on target compilers, drivers and feature capabilities; one portable source does not imply identical performance. Match precision, fast-math, subgroup behavior and specialization count; avoid accepting a faster but numerically weaker kernel. Include migration diagnostics, reflection/ABI compatibility and target-specific failures in the comparison.
+**Constraints:** Compiler v2026.20 and language mode 2026 are different pins; the documented default remains legacy 2018 and next/202c is development. Generated code still depends on target compilers, drivers and feature capabilities; one portable source does not imply identical performance. Match precision, fast-math, subgroup behavior and specialization count; avoid accepting a faster but numerically weaker kernel. Include migration diagnostics, reflection/ABI compatibility and target-specific failures in the comparison. Cross-target language support is not identical; exact shader outputs and driver behavior need validation. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: Apache-2.0 with LLVM exception; bundled dependencies retain their licenses.
 
 **Priority rationale:** A focused shared-kernel experiment can expose build duplication and shader portability costs without replacing the application renderer.
 
-**Sources:** [GP31003](https://github.com/shader-slang/slang/releases/tag/v2026.20) · [GP31004](https://shader-slang.org/) · [GP31005](https://docs.shader-slang.org/en/stable/external/slang/docs/user-guide/11-language-version.html)
+**Sources:** [GP31003](https://github.com/shader-slang/slang/releases/tag/v2026.20) · [GP31004](https://shader-slang.org/) · [GP31005](https://docs.shader-slang.org/en/stable/external/slang/docs/user-guide/11-language-version.html) · [FNNAT017](https://github.com/shader-slang/slang/blob/master/README.md) · [FNNAT018](https://github.com/shader-slang/slang/releases/tag/v2026.22.1)
 
 ### Vite
 
@@ -1630,13 +2906,13 @@ Parallel ELF linker candidate for reducing native build feedback time while pres
 
 **Test:** Compare pinned mold, lld and the target's current linker on identical object files, libraries and link options; count successful complete builds separately from link-only timing.
 
-**Measure:** link wall time seconds; complete build seconds; peak linker RSS MiB; compatibility failures; binary bytes.
+**Measure:** link wall time seconds; complete build seconds; peak linker RSS MiB; compatibility failures; binary bytes; link compatibility; full clean build time; incremental edit time; debugger and symbol parity; peak memory.
 
-**Constraints:** mold 3.0.0 is a Rust rewrite; release notes describe performance on par with 2.42.1, so the rewrite alone is not a speedup claim. Linux ELF and supported linker-script behavior define eligibility; unusual memory layouts and target-specific scripts require independent checks. Preserve exported symbols, TLS, exceptions/unwinding, debug information, LTO and identical ICF/dead-strip options before comparing timings.
+**Constraints:** mold 3.0.0 is a Rust rewrite; release notes describe performance on par with 2.42.1, so the rewrite alone is not a speedup claim. Linux ELF and supported linker-script behavior define eligibility; unusual memory layouts and target-specific scripts require independent checks. Preserve exported symbols, TLS, exceptions/unwinding, debug information, LTO and identical ICF/dead-strip options before comparing timings. Published benchmark ratios depend on workload and hardware; Windows support is not claimed. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
 
 **Priority rationale:** Linker substitution is a bounded experiment that may improve developer feedback without rewriting application logic.
 
-**Sources:** [RT31001](https://github.com/rui314/mold/releases/tag/v3.0.0) · [RT31002](https://github.com/rui314/mold)
+**Sources:** [RT31001](https://github.com/rui314/mold/releases/tag/v3.0.0) · [RT31002](https://github.com/rui314/mold) · [FNNAT060](https://github.com/rui314/mold/blob/main/README.md) · [FNNAT061](https://raw.githubusercontent.com/rui314/mold/main/LICENSE) · [FNNAT062](https://github.com/rui314/mold/releases/tag/v3.0.0)
 
 ### sccache
 
@@ -1678,6 +2954,46 @@ Python package and project manager providing lockfiles, workspaces, environment 
 
 **Sources:** [RX064](https://docs.astral.sh/uv/) · [RX065](https://astral.sh/blog/uv-ty-integration)
 
+### Halide
+
+**framework · emerging · P2** · ID: halide
+
+C++/Python image and array processing language with CPU/GPU targets.
+
+**Stack layers:** Files, hashing & archives; Games, graphics & physics; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v22.1.0 published 2026-10-31. This is a repository-channel observation, not a universal package version. Released image/array compiler with stable and development package channels.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare complete image/array outputs, startup, transfer costs and peak memory with existing processing.
+
+**Measure:** bitwise or declared numeric tolerance; CPU-feature compatibility; full-pipeline latency; peak memory; dispatch and compilation cost.
+
+**Constraints:** Compiler host support differs from generated target support; generated pixels and numerical tolerances need comparison. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT for core; included components retain their listed terms.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT078](https://github.com/halide/Halide/blob/main/README.md) · [FNNAT079](https://raw.githubusercontent.com/halide/Halide/main/LICENSE.txt) · [FNNAT080](https://github.com/halide/Halide/releases/tag/v22.1.0)
+
+### Highway
+
+**framework · emerging · P2** · ID: highway-simd
+
+C++ portable SIMD intrinsics with runtime dispatch.
+
+**Stack layers:** Files, hashing & archives; Games, graphics & physics; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release 1.4.0 published 2026-04-23. This is a repository-channel observation, not a universal package version. Released portable SIMD library with compiler/architecture requirements.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Preserve exact/toleranced outputs, tail cases and unsupported-ISA fallbacks before throughput claims.
+
+**Measure:** bitwise or declared numeric tolerance; CPU-feature compatibility; full-pipeline latency; peak memory; dispatch and compilation cost.
+
+**Constraints:** Numerical behavior, alignment and dispatch fallback need explicit tests; upstream speedups are workload-specific. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: Apache-2.0 OR BSD-3-Clause
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT076](https://github.com/google/highway/blob/master/README.md) · [FNNAT077](https://github.com/google/highway/releases/tag/1.4.0)
+
 ### LLVM BOLT
 
 **tool · established · P2** · ID: llvm-bolt
@@ -1718,6 +3034,26 @@ Cross-module optimization using a combined summary index and parallel backend co
 
 **Sources:** [RT31008](https://clang.llvm.org/docs/ThinLTO.html)
 
+### Nx
+
+**tool · emerging · P2** · ID: nx
+
+Monorepo build tooling with a project graph, task execution, caching and extensible plugins.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed 24.0.7, published 2026-11-24T16:49:12Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Cloud services and plugin behavior need separate evaluation; pin migrations and verify generated changes.
+
+**Measure:** task-graph correctness; cache invalidation correctness; clean and warm completion time; reproducibility; diagnostic retention.
+
+**Constraints:** Cloud services and plugin behavior need separate evaluation; pin migrations and verify generated changes. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO056](https://raw.githubusercontent.com/nrwl/nx/HEAD/README.md) · [FNDO057](https://raw.githubusercontent.com/nrwl/nx/HEAD/LICENSE) · [FNDO058](https://github.com/nrwl/nx/releases/tag/24.0.7) · [FNDO059](https://nx.dev/docs/getting-started/installation) · [FNDO060](https://registry.npmjs.org/nx/latest)
+
 ### OpenTofu
 
 **tool · established · P2** · ID: opentofu
@@ -1744,19 +3080,39 @@ Infrastructure-as-code candidate for reproducible remote benchmark environments 
 
 Rust-based JavaScript tooling family for parsing, transformation, linting, minification, and formatting.
 
-**Stack layers:** Builds & reproducibility.
+**Stack layers:** Builds & reproducibility; Testing, profiling & correctness.
 
 **Current signal:** Upstream lists Oxlint 1.90.0 and Oxfmt 0.75.0 releases on 2026-10-27.
 
 **Test:** Use a fixed corpus with matched lint rules and formatting policy; compare diagnostics and safe-fix behavior before timing.
 
-**Measure:** analysis seconds; peak RSS MiB; diagnostic precision; diagnostic recall; format idempotence rate.
+**Measure:** analysis seconds; peak RSS MiB; diagnostic precision; diagnostic recall; format idempotence rate; required rule coverage; unsafe fix count; format idempotence; complete-workspace latency; migration effort.
 
-**Constraints:** Oxc components have independent versions and maturity. Rule coverage and type-aware mode must be matched.
+**Constraints:** Oxc components have independent versions and maturity. Rule coverage and type-aware mode must be matched. Oxlint, Oxfmt and library crates have separate release channels; one repository tag does not version every component. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
 
 **Priority rationale:** Build loops are a bounded, reproducible comparison with direct developer-time and diagnostic-correctness effects.
 
-**Sources:** [RX061](https://github.com/oxc-project/oxc/releases)
+**Sources:** [RX061](https://github.com/oxc-project/oxc/releases) · [FNDO014](https://raw.githubusercontent.com/oxc-project/oxc/HEAD/README.md) · [FNDO015](https://raw.githubusercontent.com/oxc-project/oxc/HEAD/LICENSE) · [FNDO016](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.95.0)
+
+### Pants
+
+**tool · emerging · P2** · ID: pants
+
+Monorepo build system with explicit dependency modeling, invalidation, caching and concurrent execution.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed release_2.32.2, published 2026-11-01T20:04:51Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Repository modeling and plugin integration add setup work; listed release artifacts do not establish native Windows support.
+
+**Measure:** task-graph correctness; cache invalidation correctness; clean and warm completion time; reproducibility; diagnostic retention.
+
+**Constraints:** Repository modeling and plugin integration add setup work; listed release artifacts do not establish native Windows support. Source review only; target adoption and performance comparison remain unexecuted. Observed release provides macOS ARM64 and Linux x86-64/ARM64 artifacts. Other targets are not asserted. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO049](https://raw.githubusercontent.com/pantsbuild/pants/HEAD/README.md) · [FNDO050](https://raw.githubusercontent.com/pantsbuild/pants/HEAD/LICENSE) · [FNDO051](https://github.com/pantsbuild/pants/releases/tag/release_2.32.2)
 
 ### Resolvo
 
@@ -1790,13 +3146,33 @@ Rust-based bundler designed around webpack compatibility, incremental compilatio
 
 **Test:** Migrate a pinned webpack application and measure cold builds, rebuilds, plugin coverage, and migration effort.
 
-**Measure:** cold build seconds; incremental build milliseconds; peak RSS MiB; plugin pass rate; migration hours.
+**Measure:** cold build seconds; incremental build milliseconds; peak RSS MiB; plugin pass rate; migration hours; module and output parity; clean build time; edit-to-ready latency; source-map fidelity; peak memory.
 
-**Constraints:** Record unsupported webpack APIs explicitly. Pin plugin and loader versions as part of the experiment.
+**Constraints:** Record unsupported webpack APIs explicitly. Pin plugin and loader versions as part of the experiment. Check exact loader/plugin behavior, development updates and generated assets; Rspack is not a drop-in guarantee for every webpack extension. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
 
 **Priority rationale:** Build loops are a bounded, reproducible comparison with direct developer-time and diagnostic-correctness effects.
 
-**Sources:** [RX062](https://www.rspack.dev/blog/announcing-2-0)
+**Sources:** [RX062](https://www.rspack.dev/blog/announcing-2-0) · [FNDO026](https://raw.githubusercontent.com/web-infra-dev/rspack/HEAD/README.md) · [FNDO027](https://raw.githubusercontent.com/web-infra-dev/rspack/HEAD/LICENSE) · [FNDO028](https://github.com/web-infra-dev/rspack/releases/tag/v2.3.4) · [FNDO029](https://registry.npmjs.org/@rspack/binding/latest)
+
+### Turborepo
+
+**tool · emerging · P2** · ID: turborepo
+
+Task and package graph build system with local and remote result caching.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v2.11.13, published 2026-11-18T15:26:56Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Remote cache is a separate service choice; incomplete environment or output declarations can invalidate correctness.
+
+**Measure:** task-graph correctness; cache invalidation correctness; clean and warm completion time; reproducibility; diagnostic retention.
+
+**Constraints:** Remote cache is a separate service choice; incomplete environment or output declarations can invalidate correctness. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO052](https://raw.githubusercontent.com/vercel/turborepo/HEAD/README.md) · [FNDO053](https://raw.githubusercontent.com/vercel/turborepo/HEAD/LICENSE) · [FNDO054](https://github.com/vercel/turborepo/releases/tag/v2.11.13) · [FNDO055](https://turborepo.dev/docs/core-concepts)
 
 ### Wild linker
 
@@ -1810,13 +3186,113 @@ Parallel linker written in Rust with an expanding target and feature set; increm
 
 **Test:** Compare Wild 0.11.0 with pinned lld and mold on the same eligible full-link workloads, retaining missing-feature and mislink cases as failures.
 
-**Measure:** full-link seconds; complete build seconds; peak RSS MiB; supported-workload pass rate; debugger and unwinder pass rate.
+**Measure:** full-link seconds; complete build seconds; peak RSS MiB; supported-workload pass rate; debugger and unwinder pass rate; link compatibility; full clean build time; incremental edit time; debugger and symbol parity; peak memory.
 
-**Constraints:** The README says incremental linking is planned, not implemented; do not advertise changed-input speed as an incremental-linker result. 0.11.0 WebAssembly support lacks debug information, and the macOS port is experimental; required unsupported targets disqualify the configuration. The release caps default threading at 32 because of contention and accepts a COMDAT correctness cost; use explicit worker budgets and preserve correctness.
+**Constraints:** The README says incremental linking is planned, not implemented; do not advertise changed-input speed as an incremental-linker result. 0.11.0 WebAssembly support lacks debug information, and the macOS port is experimental; required unsupported targets disqualify the configuration. The release caps default threading at 32 because of contention and accepts a COMDAT correctness cost; use explicit worker budgets and preserve correctness. Windows is not supported; experimental targets and LLVM LTO require separate qualification. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT OR Apache-2.0
 
 **Priority rationale:** A useful challenger for measured linker bottlenecks, subject to a stricter compatibility gate than mature controls.
 
-**Sources:** [RT31003](https://github.com/wild-linker/wild/releases/tag/0.11.0) · [RT31004](https://github.com/wild-linker/wild)
+**Sources:** [RT31003](https://github.com/wild-linker/wild/releases/tag/0.11.0) · [RT31004](https://github.com/wild-linker/wild) · [FNNAT058](https://github.com/wild-linker/wild/blob/main/README.md) · [FNNAT059](https://github.com/wild-linker/wild/releases/tag/0.11.0)
+
+### cargo-pgo
+
+**tool · emerging · P2** · ID: cargo-pgo
+
+Cargo helper for profile-guided optimization and BOLT workflows.
+
+**Stack layers:** Builds & reproducibility; Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v0.3.0 published 2026-01-25. This is a repository-channel observation, not a universal package version. Released helper; BOLT and Docker support explicitly experimental.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Use held-out workloads and complete outputs, then compare runtime, size, build cost and memory.
+
+**Measure:** held-out application latency; quality and output parity; profile generation cost; binary size; training sensitivity.
+
+**Constraints:** Unrepresentative profiles can slow unseen workloads; LLVM tools and target compatibility are prerequisites. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT063](https://github.com/Kobzol/cargo-pgo/blob/main/README.md) · [FNNAT064](https://raw.githubusercontent.com/Kobzol/cargo-pgo/main/.github/workflows/check.yml) · [FNNAT065](https://github.com/Kobzol/cargo-pgo/releases/tag/v0.3.0)
+
+### devenv
+
+**tool · emerging · P2** · ID: devenv
+
+Declarative Nix-based development environments with services, tasks and composable configuration.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v2.4.0, published 2026-09-24T18:27:35Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Nix store, downloads and host integration remain prerequisites; experimental machine installation is outside a normal development-shell trial.
+
+**Measure:** lock and toolchain parity; clean setup time; environment drift; supported host coverage; maintenance burden.
+
+**Constraints:** Nix store, downloads and host integration remain prerequisites; experimental machine installation is outside a normal development-shell trial. Source review only; target adoption and performance comparison remain unexecuted. Nix-based Linux and macOS environments are documented. WSL2 is an additional Windows route; native Windows support is not claimed. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO046](https://raw.githubusercontent.com/cachix/devenv/HEAD/README.md) · [FNDO047](https://raw.githubusercontent.com/cachix/devenv/HEAD/LICENSE) · [FNDO048](https://github.com/cachix/devenv/releases/tag/v2.4.0)
+
+### moon
+
+**tool · emerging · P2** · ID: moon
+
+Repository task orchestrator with dependency-aware hashing, caching and managed toolchains.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v2.6.6, published 2026-11-24T19:54:02Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Cache correctness depends on full inputs; the current release fixes inherited Cargo dependency hashing.
+
+**Measure:** task-graph correctness; cache invalidation correctness; clean and warm completion time; reproducibility; diagnostic retention.
+
+**Constraints:** Cache correctness depends on full inputs; the current release fixes inherited Cargo dependency hashing. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO036](https://raw.githubusercontent.com/moonrepo/moon/HEAD/README.md) · [FNDO037](https://raw.githubusercontent.com/moonrepo/moon/HEAD/LICENSE) · [FNDO038](https://github.com/moonrepo/moon/releases/tag/v2.6.6)
+
+### proto
+
+**tool · emerging · P2** · ID: proto
+
+Multi-language tool version manager with contextual detection and WebAssembly plugins.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v0.64.1, published 2026-11-23T18:45:21Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Plugin trust, shell setup and portable state require separate review; checksums alone do not establish publisher trust.
+
+**Measure:** lock and toolchain parity; clean setup time; environment drift; supported host coverage; maintenance burden.
+
+**Constraints:** Plugin trust, shell setup and portable state require separate review; checksums alone do not establish publisher trust. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO039](https://raw.githubusercontent.com/moonrepo/proto/HEAD/README.md) · [FNDO040](https://raw.githubusercontent.com/moonrepo/proto/HEAD/LICENSE) · [FNDO041](https://github.com/moonrepo/proto/releases/tag/v0.64.1)
+
+### tsdown
+
+**tool · emerging · P2** · ID: tsdown
+
+Library bundler built on Rolldown with TypeScript declaration generation.
+
+**Stack layers:** Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v0.23.7, published 2026-11-06T09:54:45Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** The observed release changes declaration entry filtering; verify all exports and declaration consumers before migration.
+
+**Measure:** module and output parity; clean build time; edit-to-ready latency; source-map fidelity; peak memory.
+
+**Constraints:** The observed release changes declaration entry filtering; verify all exports and declaration consumers before migration. Source review only; target adoption and performance comparison remain unexecuted. Listed hosts occur in the reviewed upstream test matrix. This does not establish every CPU architecture or optional plugin; the declared Node.js runtime remains required. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO020](https://raw.githubusercontent.com/rolldown/tsdown/HEAD/README.md) · [FNDO021](https://raw.githubusercontent.com/rolldown/tsdown/HEAD/LICENSE) · [FNDO022](https://github.com/rolldown/tsdown/releases/tag/v0.23.7) · [FNDO023](https://raw.githubusercontent.com/rolldown/tsdown/HEAD/.github/workflows/unit-test.yml) · [FNDO024](https://registry.npmjs.org/tsdown/latest) · [FNDO025](https://tsdown.dev/guide/getting-started)
 
 ### Dagger
 
@@ -1830,15 +3306,15 @@ Programmable container-based CI candidate for repeatable local builds and reusab
 
 **Test:** Run identical clean, incremental, and no-op builds locally and in CI; compare outputs and cache correctness.
 
-**Measure:** cold build time; incremental build time; cache hit correctness; developer setup effort.
+**Measure:** cold build time; incremental build time; cache hit correctness; developer setup effort; task-graph correctness; cache invalidation correctness; clean and warm completion time; reproducibility; diagnostic retention.
 
-**Constraints:** Dagger 1.0 is beta, not stable. Include engine startup and cache storage in cost accounting.
+**Constraints:** Dagger 1.0 is beta, not stable. Include engine startup and cache storage in cost accounting. Requires a Linux container runtime; stable 0.21 and 1.0 beta must be evaluated as different channels. Source review only; target adoption and performance comparison remain unexecuted. CLI assets exist for Windows, macOS and Linux. Execution requires a Linux container runtime; macOS and Windows use Docker Desktop or equivalent. License scope: Apache-2.0
 
 **Priority rationale:** Watch-stage proposal: Build loops are a bounded, reproducible comparison with direct developer-time and diagnostic-correctness effects.
 
-**Sources:** [RX130](https://dagger.io/blog/dagger-10-beta/)
+**Sources:** [RX130](https://dagger.io/blog/dagger-10-beta/) · [FNDO042](https://raw.githubusercontent.com/dagger/dagger/HEAD/README.md) · [FNDO043](https://raw.githubusercontent.com/dagger/dagger/HEAD/LICENSE) · [FNDO044](https://github.com/dagger/dagger/releases/tag/v0.21.12) · [FNDO045](https://dagger.io/changelog/)
 
-## Web & API stacks (24)
+## Web & API stacks (30)
 
 ### CSS content-visibility
 
@@ -2020,6 +3496,26 @@ Rust HTTP routing and request-handling library using the Tokio, Hyper, and Tower
 
 **Sources:** [RX080](https://docs.rs/axum/latest/axum/)
 
+### Browserless
+
+**platform · emerging · P2** · ID: browserless
+
+Containerized browser service with configurable sessions, queueing and debugging interfaces.
+
+**Stack layers:** APIs & shared services; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v2.64.3 published 2026-11-23; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Current source is SSPL-1.0 or commercial, not a permissive open-source grant. Premium features and commercial-use conditions differ from the core image.
+
+**Measure:** required web API parity; complete capture output; session isolation; cold start and idle resources; end-to-end latency.
+
+**Constraints:** Current source is SSPL-1.0 or commercial, not a permissive open-source grant. Premium features and commercial-use conditions differ from the core image. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Linux container image and remotely accessible browser endpoints; no standalone native Windows/macOS distribution is claimed. License scope: SSPL-1.0 OR Browserless Commercial License
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB006](https://raw.githubusercontent.com/browserless/browserless/main/README.md) · [FNWEB365](https://raw.githubusercontent.com/browserless/browserless/main/LICENSE) · [FNWEB106](https://github.com/browserless/browserless/releases/tag/v2.64.3)
+
 ### Comlink
 
 **tool · established · P2** · ID: comlink
@@ -2080,6 +3576,26 @@ Python API framework with typed request models, dependency injection, and OpenAP
 
 **Sources:** [RX077](https://fastapi.tiangolo.com/release-notes/)
 
+### Ghost Downloader
+
+**tool · emerging · P2** · ID: ghost-downloader
+
+Desktop download manager with multi-protocol transfers and automation interfaces.
+
+**Stack layers:** Downloads, transfer & sync; Files, hashing & archives.
+
+**Current signal:** 2026-11-24 source review: GitHub release v4.5.11 published 2026-11-20; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Protocol coverage and chunking claims require exact-file/hash/interruption testing. Review CLI/backend prerequisites; no throughput improvement is established here.
+
+**Measure:** full-file hash equality; resume identity; cancellation and disk-full handling; atomic publication; complete-transfer time.
+
+**Constraints:** Protocol coverage and chunking claims require exact-file/hash/interruption testing. Review CLI/backend prerequisites; no throughput improvement is established here. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. README: Windows10+, macOS13+, Linux glibc2.35+, x86_64/arm64; Qt/CPU requirements need exact target review. License scope: GPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB024](https://raw.githubusercontent.com/XiaoYouChR/Ghost-Downloader-3/main/README.md) · [FNWEB396](https://raw.githubusercontent.com/XiaoYouChR/Ghost-Downloader-3/main/LICENSE) · [FNWEB124](https://github.com/XiaoYouChR/Ghost-Downloader-3/releases/tag/v4.5.11)
+
 ### Hono
 
 **framework · established · P2** · ID: hono
@@ -2099,6 +3615,26 @@ HTTP framework built around Web Standard APIs, intended for multiple JavaScript 
 **Priority rationale:** Use an identical vertical slice including validation, persistence and deployment; isolated request speed is insufficient.
 
 **Sources:** [RX075](https://hono.dev/)
+
+### Lightpanda
+
+**platform · emerging · P2** · ID: lightpanda
+
+Purpose-built headless browser with JavaScript and CDP interfaces for acquisition workloads.
+
+**Stack layers:** APIs & shared services; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release 1.0.5 published 2026-11-20; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** No native Windows binary; Windows uses WSL. Incomplete browser/extension/visual parity disqualifies it from replacing a full browser without workload proof. Vendor speed figures are not local measurements.
+
+**Measure:** required web API parity; complete capture output; session isolation; cold start and idle resources; end-to-end latency.
+
+**Constraints:** No native Windows binary; Windows uses WSL. Incomplete browser/extension/visual parity disqualifies it from replacing a full browser without workload proof. Vendor speed figures are not local measurements. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Official binaries cover Linux/macOS x86_64 and aarch64; Linux glibc requirements differ by architecture. WSL is a Linux environment. License scope: AGPL-3.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB004](https://raw.githubusercontent.com/lightpanda-io/browser/main/README.md) · [FNWEB363](https://raw.githubusercontent.com/lightpanda-io/browser/main/LICENSE) · [FNWEB104](https://github.com/lightpanda-io/browser/releases/tag/1.0.5)
 
 ### Next.js
 
@@ -2220,6 +3756,26 @@ Reactive UI framework that tracks dependencies and updates affected computations
 
 **Sources:** [RT31015](https://docs.solidjs.com/advanced-concepts/fine-grained-reactivity)
 
+### Steel Browser
+
+**platform · experimental · P2** · ID: steel-browser
+
+Self-hostable browser service exposing sessions and scrape, screenshot and PDF operations.
+
+**Stack layers:** APIs & shared services; Downloads, transfer & sync.
+
+**Current signal:** 2026-11-24 source review: GitHub release v0.5.5-beta published 2026-10-31; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Observed tag v0.5.5-beta is labelled beta even though GitHub prerelease is false. Commands API is experimental and off by default; configure isolation and service access before use.
+
+**Measure:** required web API parity; complete capture output; session isolation; cold start and idle resources; end-to-end latency.
+
+**Constraints:** Observed tag v0.5.5-beta is labelled beta even though GitHub prerelease is false. Commands API is experimental and off by default; configure isolation and service access before use. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. README documents local Node/Chrome paths for Windows, macOS and Linux, plus Docker and Apple Silicon setup. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB005](https://raw.githubusercontent.com/steel-dev/steel-browser/main/README.md) · [FNWEB364](https://raw.githubusercontent.com/steel-dev/steel-browser/main/LICENSE) · [FNWEB105](https://github.com/steel-dev/steel-browser/releases/tag/v0.5.5-beta)
+
 ### SvelteKit
 
 **framework · established · P2** · ID: sveltekit
@@ -2280,6 +3836,48 @@ Component-based UI framework with stable and prerelease branches that should be 
 
 **Sources:** [RX072](https://github.com/vuejs/core/releases)
 
+### changedetection.io
+
+**tool · emerging · P2** · ID: changedetection-io
+
+Self-hostable page-change monitor with extraction and notification configuration.
+
+**Stack layers:** Downloads, transfer & sync; Background work & recovery.
+
+**Current signal:** 2026-11-24 source review: GitHub release 0.70.4 published 2026-11-19; checked 2026-11-24. Repository tag is not proof of latest SDK/container/service channel or tested compatibility. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Monitoring schedules and external notifications are optional user actions; this catalog entry activates none. Selectors, noise and inaccessible-page states need fixtures.
+
+**Measure:** meaningful-change recall; noise rate; missed or inaccessible-page reporting; schedule recovery; notification duplication.
+
+**Constraints:** Monitoring schedules and external notifications are optional user actions; this catalog entry activates none. Selectors, noise and inaccessible-page states need fixtures. Official documentation and release metadata reviewed; no installation, local performance comparison or target-project acceptance performed in this sweep. Documented container/server deployment and browser UI; no standalone native desktop distribution asserted. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNWEB025](https://raw.githubusercontent.com/dgtlmoon/changedetection.io/master/README.md) · [FNWEB397](https://raw.githubusercontent.com/dgtlmoon/changedetection.io/master/LICENSE) · [FNWEB125](https://github.com/dgtlmoon/changedetection.io/releases/tag/0.70.4)
+
+### curl-impersonate
+
+**tool · experimental · P2** · ID: curl-impersonate
+
+Browser-compatible TLS/HTTP handshakes through modified curl/libcurl.
+
+**Stack layers:** Downloads, transfer & sync.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Browser-compatible TLS/HTTP handshakes through modified curl/libcurl. Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package.
+
+2026-11-25 integration review: Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package.
+
+**Measure:** complete output and required-field parity; end-to-end completion and tail latency; peak memory, CPU and network work; cancellation and recovery correctness; integration and maintenance burden.
+
+**Constraints:** Inspected original profile table includes Chrome 116/Firefox 117 and older profiles Does not execute application JavaScript Handshake emulation is not every browser behavior and does not guarantee access
+
+**Priority rationale:** Evaluate only its documented role against the owning application baseline; source review is not target acceptance.
+
+**Sources:** [SCRP25010](https://github.com/lexiforest/curl_cffi) · [SCRP25012](https://github.com/lexiforest/curl_cffi)
+
 ### Elysia 2
 
 **framework · experimental · P3** · ID: elysia2
@@ -2320,7 +3918,7 @@ Experimental verified blob and range transfer over QUIC for a separately scoped 
 
 **Sources:** [ST113](https://github.com/n0-computer/iroh-blobs) · [ST114](https://github.com/n0-computer/iroh-blobs/blob/main/CHANGELOG.md) · [IO31049](https://github.com/n0-computer/iroh-blobs/blob/main/CHANGELOG.md)
 
-## Desktop & game engines (34)
+## Desktop & game engines (40)
 
 ### Avalonia
 
@@ -2454,13 +4052,13 @@ Entity-component framework with cached queries, relationships and scheduled syst
 
 **Test:** Compare the existing object layout, a simple SoA control and Flecs on the same deterministic state-update and editor-query workload, varying structural mutation and worker count independently.
 
-**Measure:** update p50/p95/p99 milliseconds; query setup and iteration milliseconds; structural-change milliseconds; allocations per frame; peak RSS MiB; state equivalence pass rate.
+**Measure:** update p50/p95/p99 milliseconds; query setup and iteration milliseconds; structural-change milliseconds; allocations per frame; peak RSS MiB; state equivalence pass rate; complete-scene correctness; frame-time distribution; simulation determinism; load and export time; editor integration burden.
 
-**Constraints:** Query cache and archetype benefits depend on mutation/query shape; retain high-churn and cold-cache cases. Declare read/write access and deferred structural changes; staged merges and system ordering are correctness obligations. Integrate with an existing task scheduler or cap workers rather than stacking independently saturated thread pools. No entity-count marketing number or release speed claim establishes application frame-time improvement.
+**Constraints:** Query cache and archetype benefits depend on mutation/query shape; retain high-churn and cold-cache cases. Declare read/write access and deferred structural changes; staged merges and system ordering are correctness obligations. Integrate with an existing task scheduler or cap workers rather than stacking independently saturated thread pools. No entity-count marketing number or release speed claim establishes application frame-time improvement. Engine integration, serialization policy and dynamic behavior remain application responsibilities. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. Web behavior is separately documented in the README. The list is conservative, not an exhaustive support denial. License scope: MIT
 
 **Priority rationale:** An isolated data-layout benchmark can reveal a plausible cache/allocation bottleneck while preserving existing simulation behavior.
 
-**Sources:** [GP31006](https://github.com/SanderMertens/flecs/releases/tag/v4.1.6) · [GP31007](https://www.flecs.dev/flecs/Systems.html)
+**Sources:** [GP31006](https://github.com/SanderMertens/flecs/releases/tag/v4.1.6) · [GP31007](https://www.flecs.dev/flecs/Systems.html) · [FNNAT025](https://github.com/SanderMertens/flecs/blob/master/README.md) · [FNNAT026](https://raw.githubusercontent.com/SanderMertens/flecs/master/.github/workflows/ci.yml) · [FNNAT027](https://github.com/SanderMertens/flecs/releases/tag/v4.2.0)
 
 ### Identity-preserving collection virtualization
 
@@ -2668,19 +4266,39 @@ Mesh processing library and tooling for vertex/index optimization, compression, 
 
 Portable Rust graphics abstraction supporting native GPU backends and browser WebGPU or WebGL2 paths, with related C bindings.
 
-**Stack layers:** Games, graphics & physics.
+**Stack layers:** Games, graphics & physics; Builds & reproducibility.
 
 **Current signal:** v30.0.1 published 2026-08-22; synchronization, Metal color-space and failed browser adapter requests remain deployment test cases.
 
 **Test:** Render an identical public 2D/3D scene and shader set through the actual target backends; test low-end integrated GPUs, device loss, resize, missing features, and browser fallback independently.
 
-**Measure:** GPU frame p95 milliseconds; CPU submission p95 milliseconds; VRAM MiB; shader compilation milliseconds; visual parity pass rate; adapter and fallback pass rate; device recovery success rate.
+**Measure:** GPU frame p95 milliseconds; CPU submission p95 milliseconds; VRAM MiB; shader compilation milliseconds; visual parity pass rate; adapter and fallback pass rate; device recovery success rate; image and output parity; shader build time; p95/p99 frame time; GPU memory; backend compatibility.
 
-**Constraints:** MIT OR Apache-2.0; backend coverage differs across Windows, macOS, Linux, and browser targets. A graphics abstraction is not a UI toolkit, game engine, media stack, or plugin sandbox. Do not compare native DX12/Vulkan to browser WebGL2 without recording changed capabilities and visual output. Downlevel backends and adapter features require explicit detection rather than assumption. Exercise browser adapter-request failure with the pinned wasm-bindgen toolchain and preserve Vulkan validation checks during measurement.
+**Constraints:** MIT OR Apache-2.0; backend coverage differs across Windows, macOS, Linux, and browser targets. A graphics abstraction is not a UI toolkit, game engine, media stack, or plugin sandbox. Do not compare native DX12/Vulkan to browser WebGL2 without recording changed capabilities and visual output. Downlevel backends and adapter features require explicit detection rather than assumption. Exercise browser adapter-request failure with the pinned wasm-bindgen toolchain and preserve Vulkan validation checks during measurement. Backend features and downlevel support differ; a successful build is not driver parity. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: Apache-2.0 option inspected; consult the repository for alternative licenses and dependencies.
 
 **Priority rationale:** Useful shared graphics foundation when the same rendering workload must run on desktop and in browsers.
 
-**Sources:** [ST039](https://github.com/gfx-rs/wgpu) · [ST040](https://github.com/gfx-rs/wgpu/releases) · [GP31044](https://github.com/gfx-rs/wgpu/releases/tag/v30.0.1)
+**Sources:** [ST039](https://github.com/gfx-rs/wgpu) · [ST040](https://github.com/gfx-rs/wgpu/releases) · [GP31044](https://github.com/gfx-rs/wgpu/releases/tag/v30.0.1) · [FNNAT014](https://github.com/gfx-rs/wgpu/blob/trunk/README.md) · [FNNAT015](https://raw.githubusercontent.com/gfx-rs/wgpu/trunk/LICENSE.APACHE) · [FNNAT016](https://github.com/gfx-rs/wgpu/releases/tag/v30.0.2)
+
+### AccessKit
+
+**framework · emerging · P2** · ID: accesskit
+
+Accessibility schema and native adapters for custom-rendered interfaces.
+
+**Stack layers:** Desktop shells & native UI; Large collections & interaction.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release accesskit_winit-v0.34.2 published 2026-10-25. This is a repository-channel observation, not a universal package version. Released platform adapters; not complete UI-element coverage. Latest repository release is accesskit_winit 0.34.2; it is not the core accesskit crate version. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Test screen readers, editable text, focus and full collection navigation on each actual host.
+
+**Measure:** input-to-visible latency; accessibility parity; first-use latency; idle CPU; peak memory.
+
+**Constraints:** Upstream says rich text and hypertext support remain incomplete; toolkit integration can lag adapters. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Windows UI Automation, macOS NSAccessibility and Unix AT-SPI adapters are documented; Linux integration still requires real assistive-technology tests. License scope: MIT OR Apache-2.0, with BSD-style Chromium-derived portions.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT008](https://github.com/AccessKit/accesskit/blob/main/README.md) · [FNNAT009](https://github.com/AccessKit/accesskit/releases/tag/accesskit_winit-v0.34.2)
 
 ### Bevy
 
@@ -2694,13 +4312,13 @@ Rust game engine organized around data-driven entities, reusable systems, and pr
 
 **Test:** Build the same deterministic native/browser game and editor slice as the established engine control; pin backend, shaders, assets, texture compressor, mipmaps, and renderer features, and measure both authoring and shipped behavior.
 
-**Measure:** CPU and GPU frame p95 milliseconds; first-interactive milliseconds; asset processing and loading seconds; peak RSS and VRAM MiB; build and iteration seconds; asset fidelity pass rate; platform parity pass rate; changed-column fraction; extraction p95 milliseconds; mutation-side tick overhead.
+**Measure:** CPU and GPU frame p95 milliseconds; first-interactive milliseconds; asset processing and loading seconds; peak RSS and VRAM MiB; build and iteration seconds; asset fidelity pass rate; platform parity pass rate; changed-column fraction; extraction p95 milliseconds; mutation-side tick overhead; complete-scene correctness; frame-time distribution; simulation determinism; load and export time; editor integration burden.
 
-**Constraints:** New renderer features are not automatically available on every platform; match visual quality and feature sets before comparing. Bevy 0.20 introduces a new CompressedImageSaver backend and mipmap generation; preserve codec, colorspace, normal-map, and mip-chain semantics. Renderer-specific upscaling or neural features require separate quality and hardware cohorts. Public editor widgets do not alone establish a complete editor workflow; count authoring, migration, and integration work. Column summary ticks avoid unchanged-column work but add mutation-side bookkeeping; measure sparse and dense mutation independently. Use schedule randomization to expose unintended order dependencies before interpreting parallel speed; it does not replace explicit ordering contracts. Bevy 0.20 Solari disables ReSTIR by default, which can reduce shadow quality or omit moving shadows in many-light scenes; hold lighting and denoising quality settings fixed across engine versions.
+**Constraints:** New renderer features are not automatically available on every platform; match visual quality and feature sets before comparing. Bevy 0.20 introduces a new CompressedImageSaver backend and mipmap generation; preserve codec, colorspace, normal-map, and mip-chain semantics. Renderer-specific upscaling or neural features require separate quality and hardware cohorts. Public editor widgets do not alone establish a complete editor workflow; count authoring, migration, and integration work. Column summary ticks avoid unchanged-column work but add mutation-side bookkeeping; measure sparse and dense mutation independently. Use schedule randomization to expose unintended order dependencies before interpreting parallel speed; it does not replace explicit ordering contracts. Bevy 0.20 Solari disables ReSTIR by default, which can reduce shadow quality or omit moving shadows in many-light scenes; hold lighting and denoising quality settings fixed across engine versions. Upstream warns about missing features and migration work; do not infer product parity. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT OR Apache-2.0; some components/assets carry additional notices.
 
 **Priority rationale:** The existing Atlas focus makes native integration, responsiveness, asset fidelity and target-device behavior central.
 
-**Sources:** [RX083](https://bevy.org/news/bevy-0-20/) · [ST071](https://bevy.org/news/bevy-0-20/) · [ST072](https://bevy.org/learn/quick-start/getting-started/setup/) · [GP31045](https://github.com/bevyengine/bevy/releases/tag/v0.20.1) · [GP31046](https://bevy.org/news/bevy-0-20/)
+**Sources:** [RX083](https://bevy.org/news/bevy-0-20/) · [ST071](https://bevy.org/news/bevy-0-20/) · [ST072](https://bevy.org/learn/quick-start/getting-started/setup/) · [GP31045](https://github.com/bevyengine/bevy/releases/tag/v0.20.1) · [GP31046](https://bevy.org/news/bevy-0-20/) · [FNNAT019](https://github.com/bevyengine/bevy/blob/main/README.md) · [FNNAT020](https://bevy.org/learn/quick-start/getting-started/setup/) · [FNNAT021](https://github.com/bevyengine/bevy/releases/tag/v0.20.1)
 
 ### EnTT ECS
 
@@ -2721,6 +4339,46 @@ C++ entity-component library centered on sparse-set component pools and applicat
 **Priority rationale:** Provides a contrasting sparse-set design to archetype ECS candidates; adoption cost is meaningful for existing C++ applications.
 
 **Sources:** [GP31008](https://github.com/skypjack/entt/releases/tag/v4.0.0) · [GP31009](https://github.com/skypjack/entt/wiki/Entity-Component-System)
+
+### Floem
+
+**framework · experimental · P2** · ID: floem
+
+Rust native UI framework using fine-grained reactive signals.
+
+**Stack layers:** Desktop shells & native UI; Large collections & interaction.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v0.2.0 published 2024-11-15. This is a repository-channel observation, not a universal package version. Pre-1.0; upstream explicitly anticipates breaking changes.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Evaluate the complete widget, IME, keyboard and assistive-technology requirements before selecting it.
+
+**Measure:** input-to-visible latency; accessibility parity; first-use latency; idle CPU; peak memory.
+
+**Constraints:** Current development documentation can differ from the old tagged 0.2.0 release. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT003](https://github.com/lapce/floem/blob/main/README.md) · [FNNAT004](https://raw.githubusercontent.com/lapce/floem/main/LICENSE) · [FNNAT005](https://github.com/lapce/floem/releases/tag/v0.2.0)
+
+### Fyrox
+
+**framework · emerging · P2** · ID: fyrox
+
+Rust 2D/3D game engine with a scene editor.
+
+**Stack layers:** Games, graphics & physics.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v1.0.0 published 2026-03-29. This is a repository-channel observation, not a universal package version. 1.0 release; upstream calls it production-ready, not independently certified here.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Reproduce the same scene and editing tasks in Fyrox, Bevy and Godot.
+
+**Measure:** complete-scene correctness; frame-time distribution; simulation determinism; load and export time; editor integration burden.
+
+**Constraints:** Existing assets, editor workflows and project data need explicit migration testing. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT022](https://github.com/FyroxEngine/Fyrox/blob/master/README.md) · [FNNAT023](https://raw.githubusercontent.com/FyroxEngine/Fyrox/master/.github/workflows/ci.yml) · [FNNAT024](https://github.com/FyroxEngine/Fyrox/releases/tag/v1.0.0)
 
 ### Godot
 
@@ -2754,13 +4412,33 @@ C++ rigid-body physics engine with multithreaded simulation and integration poin
 
 **Test:** Run identical public collision and constraint scenes against the current engine, recording fixed timestep, solver settings, broadphase filters and deterministic replay scope.
 
-**Measure:** simulation p95/p99 milliseconds; contact and constraint correctness; peak RSS MiB; parallel scaling; replay divergence; integration effort.
+**Measure:** simulation p95/p99 milliseconds; contact and constraint correctness; peak RSS MiB; parallel scaling; replay divergence; integration effort; collision and contact parity; step-time distribution; memory; supported shape coverage.
 
-**Constraints:** v5.6.0 changes friction behavior; accepting a changed physical result as a faster solve is invalid. Cross-build and cross-architecture determinism must be tested under declared compiler/floating-point settings. Collision shapes, CCD, sleeping, constraints and update frequency must match the target behavior. Experimental GPU hair work is a separate subsystem and does not establish GPU rigid-body acceleration.
+**Constraints:** v5.6.0 changes friction behavior; accepting a changed physical result as a faster solve is invalid. Cross-build and cross-architecture determinism must be tested under declared compiler/floating-point settings. Collision shapes, CCD, sleeping, constraints and update frequency must match the target behavior. Experimental GPU hair work is a separate subsystem and does not establish GPU rigid-body acceleration. Determinism has documented constraints; compiler flags and floating-point behavior matter. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
 
 **Priority rationale:** Useful when physical simulation is a measured frame-time bottleneck and contact/replay equivalence can be stated precisely.
 
-**Sources:** [GP31010](https://github.com/jrouwe/JoltPhysics/releases/tag/v5.6.0) · [GP31011](https://github.com/jrouwe/JoltPhysics)
+**Sources:** [GP31010](https://github.com/jrouwe/JoltPhysics/releases/tag/v5.6.0) · [GP31011](https://github.com/jrouwe/JoltPhysics) · [FNNAT028](https://github.com/jrouwe/JoltPhysics/blob/master/README.md) · [FNNAT029](https://github.com/jrouwe/JoltPhysics/releases/tag/v5.7.0)
+
+### Rapier
+
+**framework · emerging · P2** · ID: rapier
+
+Rust 2D/3D physics engines with several language and engine bindings.
+
+**Stack layers:** Games, graphics & physics.
+
+**Current signal:** 2026-11-24 source review: Published rapier3d documentation version 0.36.1 observed. Publication date and all related binding versions remain unverified. Published physics crates; host/binding support varies.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Compare complete collision, replay and concurrent simulation behavior with Jolt.
+
+**Measure:** collision and contact parity; replay divergence; step-time distribution; memory; supported shape coverage.
+
+**Constraints:** Choose binding, precision and determinism settings explicitly; feature combinations need tests. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. Web behavior is separately documented in the README. The list is conservative, not an exhaustive support denial. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT030](https://github.com/dimforge/rapier/blob/master/README.md) · [FNNAT031](https://raw.githubusercontent.com/dimforge/rapier/master/.github/workflows/rapier-ci-build.yml) · [FNNAT032](https://docs.rs/rapier3d/0.36.1/rapier3d/)
 
 ### Rapier JavaScript / WASM physics
 
@@ -2808,19 +4486,39 @@ Portable command-based render and compute API for applications that need explici
 
 Declarative UI toolkit targeting desktop and embedded applications with Rust, C++, and additional language integrations.
 
-**Stack layers:** Desktop shells & native UI.
+**Stack layers:** Desktop shells & native UI; Large collections & interaction.
 
 **Current signal:** Current release list includes 1.18.1; the 1.18 announcement adds layout/text improvements and an experimental Vello renderer.
 
 **Test:** Build the same desktop collection slice with identical card content, input behavior, file integration, and platform coverage; compare Slint's default renderer separately from experimental Vello.
 
-**Measure:** startup milliseconds; input-to-paint p95 milliseconds; frame p95 milliseconds; peak RSS MiB; binary and installer MiB; platform parity pass rate; accessibility and IME pass rate.
+**Measure:** startup milliseconds; input-to-paint p95 milliseconds; frame p95 milliseconds; peak RSS MiB; binary and installer MiB; platform parity pass rate; accessibility and IME pass rate; input-to-visible latency; accessibility parity; first-use latency; idle CPU; peak memory.
 
-**Constraints:** Licensing is GPLv3 or another offered license with conditions; do not label this a permissively licensed MIT toolkit. Confirm permitted deployment type, attribution, and applicable license for each evaluated configuration. The 1.18 Vello backend is experimental and must not silently replace the production renderer baseline. Small packaged size cannot compensate for missing media, accessibility, or native-integration requirements.
+**Constraints:** Licensing is GPLv3 or another offered license with conditions; do not label this a permissively licensed MIT toolkit. Confirm permitted deployment type, attribution, and applicable license for each evaluated configuration. The 1.18 Vello backend is experimental and must not silently replace the production renderer baseline. Small packaged size cannot compensate for missing media, accessibility, or native-integration requirements. License choice and binding stability depend on the deployment; renderer fidelity needs target testing. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: GPL-3.0-only, Slint Royalty-free 2.0 or commercial license, at the user's choice.
 
 **Priority rationale:** Credible native UI challenger for constrained app surfaces; require licensing and end-to-end parity gates.
 
-**Sources:** [ST034](https://slint.dev/blog/slint-1.18-released) · [ST035](https://github.com/slint-ui/slint/releases) · [ST036](https://slint.dev/pricing)
+**Sources:** [ST034](https://slint.dev/blog/slint-1.18-released) · [ST035](https://github.com/slint-ui/slint/releases) · [ST036](https://slint.dev/pricing) · [FNNAT001](https://github.com/slint-ui/slint/blob/master/README.md) · [FNNAT002](https://github.com/slint-ui/slint/releases/tag/v1.19.1)
+
+### Taffy
+
+**framework · emerging · P2** · ID: taffy
+
+Reusable Rust layout engine implementing CSS Block, Flexbox and Grid.
+
+**Stack layers:** Desktop shells & native UI; Large collections & interaction.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v0.16.0 published 2026-11-23. This is a repository-channel observation, not a universal package version. Versioned layout library; 0.16 introduces API changes. 0.16.0 was released November 23; calc handles and scroll overflow APIs changed. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Check layout conformance, text measurement and resize latency without omitting offscreen records.
+
+**Measure:** input-to-visible latency; accessibility parity; first-use latency; idle CPU; peak memory.
+
+**Constraints:** It is a layout engine, not a windowing, rendering, text shaping or accessibility stack. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT010](https://github.com/DioxusLabs/taffy/blob/main/README.md) · [FNNAT011](https://raw.githubusercontent.com/DioxusLabs/taffy/main/LICENSE) · [FNNAT012](https://raw.githubusercontent.com/DioxusLabs/taffy/main/.github/workflows/ci.yml) · [FNNAT013](https://github.com/DioxusLabs/taffy/releases/tag/v0.16.0)
 
 ### Vello CPU/GPU and Sparse Strips
 
@@ -2854,13 +4552,13 @@ Immediate-mode Rust GUI library with native and web application integrations, su
 
 **Test:** Implement a tool-oriented collection inspector with the same data, visible assets, selection, filtering, and editing; compare virtualized visible-item rendering and a deliberately bounded nonvirtualized control.
 
-**Measure:** input-to-paint p95 milliseconds; frame p95 milliseconds; idle CPU percent; peak RSS MiB; realized item count; keyboard and screen-reader pass rate.
+**Measure:** input-to-paint p95 milliseconds; frame p95 milliseconds; idle CPU percent; peak RSS MiB; realized item count; keyboard and screen-reader pass rate; input-to-visible latency; accessibility parity; first-use latency; idle CPU; peak memory.
 
-**Constraints:** MIT OR Apache-2.0; eframe supports native targets and browser WebAssembly, but backend and platform differences must be pinned. Immediate-mode layout still needs explicit control of large scrollable content; stable IDs are required for reliable item state. Full HTML/media fidelity and native controls are not implied by web/native availability. Treat experimental StyleProvider behavior separately from stable public APIs.
+**Constraints:** MIT OR Apache-2.0; eframe supports native targets and browser WebAssembly, but backend and platform differences must be pinned. Immediate-mode layout still needs explicit control of large scrollable content; stable IDs are required for reliable item state. Full HTML/media fidelity and native controls are not implied by web/native availability. Treat experimental StyleProvider behavior separately from stable public APIs. Immediate-mode layout may need extra passes; accessibility depends on the host integration. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT OR Apache-2.0; bundled fonts retain their own licenses.
 
 **Priority rationale:** Strong candidate for inspectors and mod tools; qualify richer consumer UI requirements before comparing resource use.
 
-**Sources:** [ST037](https://github.com/emilk/egui) · [ST038](https://github.com/emilk/egui/releases/tag/0.37.0)
+**Sources:** [ST037](https://github.com/emilk/egui) · [ST038](https://github.com/emilk/egui/releases/tag/0.37.0) · [FNNAT006](https://github.com/emilk/egui/blob/main/README.md) · [FNNAT007](https://github.com/emilk/egui/releases/tag/0.37.0)
 
 ### libplacebo
 
@@ -3002,7 +4700,29 @@ Multi-instance training, selective pruning, and adaptive batch sizes reduce seed
 
 **Sources:** [RX164](https://research.nvidia.com/labs/rtr/publication/bitterli2026taming/) · [RX165](https://research.nvidia.com/labs/rtr/publication/bitterli2026taming/bitterli2026taming.pdf) · [RX166](https://github.com/NVlabs/neuralappearance)
 
-## WebAssembly & sandboxes (10)
+### scrcpy
+
+**tool · established · P3** · ID: scrcpy
+
+Android screen mirroring and input control.
+
+**Stack layers:** Desktop shells & native UI.
+
+**Current signal:** 2026-11-25 scoped primary-source review: Android screen mirroring and input control. Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies. Earlier observations retain their original dates. No complete-host benchmark or automatic adoption is asserted.
+
+**Test:** Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies.
+
+2026-11-25 integration review: Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies.
+
+**Measure:** complete output and required-field parity; end-to-end completion and tail latency; peak memory, CPU and network work; cancellation and recovery correctness; integration and maintenance burden.
+
+**Constraints:** Not a web crawler, HTML parser or structured extraction engine Requires an Android device and applicable device permissions
+
+**Priority rationale:** Evaluate only its documented role against the owning application baseline; source review is not target acceptance.
+
+**Sources:** [SCRP25008](https://github.com/Genymobile/scrcpy)
+
+## WebAssembly & sandboxes (11)
 
 ### Wasmtime
 
@@ -3016,13 +4736,13 @@ WebAssembly runtime with native code generation, embedding APIs, configurable re
 
 **Test:** Run equivalent deterministic plugins behind an explicit capability interface, with fixed CPU/memory/output budgets; test malformed modules, infinite loops, memory growth, denied paths/network, blocked host I/O, and cancellation before throughput.
 
-**Measure:** compile and instantiate milliseconds; host call microseconds; throughput; peak host RSS MiB; linear memory MiB; cancellation latency milliseconds; capability and limit-enforcement pass rate; trap correctness pass rate.
+**Measure:** compile and instantiate milliseconds; host call microseconds; throughput; peak host RSS MiB; linear memory MiB; cancellation latency milliseconds; capability and limit-enforcement pass rate; trap correctness pass rate; output and diagnostic parity; capability enforcement; cold initialization; complete-task latency; memory and cancellation behavior.
 
-**Constraints:** Native execution is a performance control with a different isolation contract, so it cannot rank as an equivalent sandbox. Fuel and epoch interruption trade determinism for overhead; record the configured mechanism. Store memory limits apply per linear memory and are unlimited by default; also bound total host memory, instance count, outputs, and host work. Host capabilities and blocking APIs require their own validation and timeouts; a Wasm memory boundary does not enforce application permissions. Record compilation separately and pin stable runtime, interface, and binding versions; latest online API docs may track a development branch.
+**Constraints:** Native execution is a performance control with a different isolation contract, so it cannot rank as an equivalent sandbox. Fuel and epoch interruption trade determinism for overhead; record the configured mechanism. Store memory limits apply per linear memory and are unlimited by default; also bound total host memory, instance count, outputs, and host work. Host capabilities and blocking APIs require their own validation and timeouts; a Wasm memory boundary does not enforce application permissions. Record compilation separately and pin stable runtime, interface, and binding versions; latest online API docs may track a development branch. Host imports, filesystem/network rights and resource accounting define the real isolation boundary. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: Apache-2.0 with LLVM exception.
 
 **Priority rationale:** Primary portable isolation candidate once capability, cancellation, and complete host-resource budgets are enforceable.
 
-**Sources:** [RX088](https://wasmtime.dev/) · [RX089](https://github.com/bytecodealliance/wasmtime/releases) · [ST074](https://docs.wasmtime.dev/security.html) · [ST075](https://docs.wasmtime.dev/examples-interrupting-wasm.html) · [ST076](https://docs.rs/wasmtime/latest/wasmtime/struct.StoreLimitsBuilder.html)
+**Sources:** [RX088](https://wasmtime.dev/) · [RX089](https://github.com/bytecodealliance/wasmtime/releases) · [ST074](https://docs.wasmtime.dev/security.html) · [ST075](https://docs.wasmtime.dev/examples-interrupting-wasm.html) · [ST076](https://docs.rs/wasmtime/latest/wasmtime/struct.StoreLimitsBuilder.html) · [FNNAT053](https://github.com/bytecodealliance/wasmtime/blob/main/README.md) · [FNNAT054](https://raw.githubusercontent.com/bytecodealliance/wasmtime/main/LICENSE) · [FNNAT055](https://github.com/bytecodealliance/wasmtime/releases/tag/v51.0.0)
 
 ### Windows AppContainer and LPAC
 
@@ -3103,6 +4823,26 @@ Portable component interfaces with native asynchronous operations for composable
 **Priority rationale:** Portable plugin execution needs a concrete capability and cancellation contract before runtime speed matters.
 
 **Sources:** [RX086](https://bytecodealliance.org/articles/WASI-0.3) · [RX087](https://wasi.dev/releases) · [ST077](https://wasi.dev/releases) · [ST078](https://wasi.dev/roadmap)
+
+### Wasmer
+
+**platform · emerging · P2** · ID: wasmer
+
+WebAssembly runtime and CLI for local application sandboxes.
+
+**Stack layers:** Plugins & process isolation; Shared core & native boundaries.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v7.5.0 published 2026-10-01. This is a repository-channel observation, not a universal package version. Released runtime/CLI; separate sandbox SDK is alpha.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Check filesystem/network boundaries, complete outputs, startup and cache portability against Wasmtime.
+
+**Measure:** output and diagnostic parity; capability enforcement; cold initialization; complete-task latency; memory and cancellation behavior.
+
+**Constraints:** SDK maturity and platform support differ from the CLI; package downloads and caches are separate effects. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT056](https://github.com/wasmerio/wasmer/blob/main/README.md) · [FNNAT057](https://github.com/wasmerio/wasmer/releases/tag/v7.5.0)
 
 ### Wasure: A Modular Toolkit for Comprehensive WebAssembly Benchmarking
 
@@ -3278,13 +5018,13 @@ Pure Rust embedded key-value store using copy-on-write B-trees for local transac
 
 **Test:** Replay persistent manifest/key-value traces against RocksDB and an SQLite key-value schema with equal durability acknowledgements. Preserve full values/errors, pin types and encoding, test savepoint/migration paths and inject failures during commit, reopen and recovery.
 
-**Measure:** full value and error parity; p95/p99 operation latency; database size; peak RSS; committed-write survival; recovery correctness.
+**Measure:** full value and error parity; p95/p99 operation latency; database size; peak RSS; committed-write survival; recovery correctness; acknowledged-write durability; p99 query latency; write amplification; migration cost.
 
-**Constraints:** Use supported stable APIs for the baseline. Do not translate upstream benchmark claims into Atlas rankings. Immediate and None durability have different persistence guarantees; record the selected mode. The 4.4.0 changelog includes type/encoding changes; pin schema and migration behavior instead of treating a version upgrade as transparent. A key-value store comparison does not replace SQL joins or FTS without equivalent application work.
+**Constraints:** Use supported stable APIs for the baseline. Do not translate upstream benchmark claims into Atlas rankings. Immediate and None durability have different persistence guarantees; record the selected mode. The 4.4.0 changelog includes type/encoding changes; pin schema and migration behavior instead of treating a version upgrade as transparent. A key-value store comparison does not replace SQL joins or FTS without equivalent application work. Version 5 changes several Option encodings; old tables need Legacy wrappers and migration. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT OR Apache-2.0
 
 **Priority rationale:** Complete imports, indexed reads and crash recovery directly serve Atlas-style local catalogs and archives.
 
-**Sources:** [RX104](https://github.com/cberner/redb) · [ST123](https://docs.rs/crate/redb/latest/source/CHANGELOG.md) · [ST124](https://docs.rs/redb/latest/redb/enum.Durability.html)
+**Sources:** [RX104](https://github.com/cberner/redb) · [ST123](https://docs.rs/crate/redb/latest/source/CHANGELOG.md) · [ST124](https://docs.rs/redb/latest/redb/enum.Durability.html) · [FNNAT033](https://github.com/cberner/redb/blob/master/README.md) · [FNNAT034](https://raw.githubusercontent.com/cberner/redb/master/.github/workflows/ci.yml) · [FNNAT035](https://github.com/cberner/redb/releases/tag/v5.0.0)
 
 ### Fjall
 
@@ -3298,13 +5038,13 @@ Rust embedded LSM key-value engine with atomic cross-keyspace operations and opt
 
 **Test:** Compare Fjall with the current store, redb and RocksDB under identical transaction, index and durability contracts including long imports and crash/reopen recovery.
 
-**Measure:** durable commit latency; p99 lookup latency; write amplification; compaction stalls; peak RSS; recovery parity.
+**Measure:** durable commit latency; p99 lookup latency; write amplification; compaction stalls; peak RSS; recovery parity; acknowledged-write durability; recovery correctness; p99 query latency; migration cost.
 
-**Constraints:** Background compaction and write stalls must be included in the run, not deferred past measurement. Pin persistence settings and preserve acknowledged writes; default settings are not automatically equivalent. Recent journal-replay fix makes old/new version identity material to recovery evidence.
+**Constraints:** Background compaction and write stalls must be included in the run, not deferred past measurement. Pin persistence settings and preserve acknowledged writes; default settings are not automatically equivalent. Recent journal-replay fix makes old/new version identity material to recovery evidence. Compaction and durability settings affect latency and I/O; background maintenance must be measured. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT OR Apache-2.0
 
 **Priority rationale:** A Rust LSM option extends durable local-store comparisons, but compaction and application indexing make this a planned migration study.
 
-**Sources:** [IO31017](https://github.com/fjall-rs/fjall) · [IO31018](https://api.github.com/repos/fjall-rs/fjall/releases/latest)
+**Sources:** [IO31017](https://github.com/fjall-rs/fjall) · [IO31018](https://api.github.com/repos/fjall-rs/fjall/releases/latest) · [FNNAT036](https://github.com/fjall-rs/fjall/blob/main/README.md) · [FNNAT037](https://raw.githubusercontent.com/fjall-rs/fjall/main/.github/workflows/test.yml) · [FNNAT038](https://github.com/fjall-rs/fjall/releases/tag/3.1.13)
 
 ### PGlite
 
@@ -3378,13 +5118,13 @@ Evolving Rust embedded SQL engine pursuing SQLite compatibility, asynchronous I/
 
 **Test:** Run a shadow catalog against the pinned current SQLite implementation, with identical SQL, FTS/extension requirements, transaction conflicts, crash recovery and export/rollback checks.
 
-**Measure:** full SQL corpus parity; durable import time; p99 read/write latency; conflict rate; migration and recovery correctness.
+**Measure:** full SQL corpus parity; durable import time; p99 read/write latency; conflict rate; migration and recovery correctness; acknowledged-write durability; recovery correctness; p99 query latency; write amplification; migration cost.
 
-**Constraints:** The README describes SQLite compatibility tracking 3.50.4; verify every required current SQLite feature. The Postgres frontend is experimental and does not imply PostgreSQL feature parity. Keep 0.8.3 and 0.9.0-pre.2 in separate cohorts; never replace the production baseline with a preview by default.
+**Constraints:** The README describes SQLite compatibility tracking 3.50.4; verify every required current SQLite feature. The Postgres frontend is experimental and does not imply PostgreSQL feature parity. Keep 0.8.3 and 0.9.0-pre.2 in separate cohorts; never replace the production baseline with a preview by default. Compatibility tracks a documented SQLite target, not universal drop-in parity. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
 
 **Priority rationale:** A new SQLite-compatible engine is worth watching when concurrency or I/O architecture is limiting; feature parity and release maturity require a controlled migration gate.
 
-**Sources:** [IO31021](https://github.com/tursodatabase/turso) · [IO31022](https://api.github.com/repos/tursodatabase/turso/releases?per_page=3)
+**Sources:** [IO31021](https://github.com/tursodatabase/turso) · [IO31022](https://api.github.com/repos/tursodatabase/turso/releases?per_page=3) · [FNNAT039](https://github.com/tursodatabase/turso/blob/main/README.md) · [FNNAT040](https://github.com/tursodatabase/turso/releases/tag/v0.8.4)
 
 ### libmdbx
 
@@ -3406,7 +5146,7 @@ Memory-mapped transactional B+tree key-value storage with explicit durability mo
 
 **Sources:** [IO31035](https://libmdbx.dqdkfa.ru/docs/en/reference/api/usage.html) · [IO31036](https://libmdbx.dqdkfa.ru/docs/en/reference/changelog.html) · [IO31037](https://libmdbx.dqdkfa.ru/docs/en/getting-started/durability-modes.html) · [IO31038](https://libmdbx.dqdkfa.ru/docs/en/overview/restrictions.html)
 
-## Analytics & data formats (11)
+## Analytics & data formats (13)
 
 ### DuckDB
 
@@ -3514,19 +5254,19 @@ Demand-driven image-processing library suited to bounded-memory thumbnail, trans
 
 Rust query engine toolkit for embedding SQL and custom analytical operators in engineering tools.
 
-**Stack layers:** Analytics & result formats.
+**Stack layers:** Analytics & result formats; Local storage & search.
 
 **Current signal:** DataFusion 55.0.0 release documents range partitioning, MERGE INTO planning, and runtime pruning.
 
 **Test:** Embed a fixed SQL workload in a Rust tool; compare default and custom physical operators with reproducible inputs.
 
-**Measure:** query latency; peak RSS; startup time; extension complexity.
+**Measure:** query latency; peak RSS; startup time; extension complexity; full query equivalence; schema evolution correctness; cold and warm query latency; bytes read and written; peak memory.
 
-**Constraints:** A toolkit needs application integration; compare whole deployed implementations. Lock optimizer configuration and spill backends.
+**Constraints:** A toolkit needs application integration; compare whole deployed implementations. Lock optimizer configuration and spill backends. SQL coverage, memory budgets and custom-source behavior must fit the actual workload. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: Apache-2.0
 
 **Priority rationale:** Saved experiment results make a realistic controlled corpus for equivalent analytics and memory-pressure tests.
 
-**Sources:** [RX096](https://datafusion.apache.org/blog/output/2026/08/25/datafusion-55.0.0/)
+**Sources:** [RX096](https://datafusion.apache.org/blog/output/2026/08/25/datafusion-55.0.0/) · [FNNAT043](https://github.com/apache/datafusion/blob/main/README.md) · [FNNAT044](https://raw.githubusercontent.com/apache/datafusion/main/.github/workflows/rust.yml) · [FNNAT045](https://docs.rs/datafusion/56.0.0/datafusion/)
 
 ### Apache Iceberg
 
@@ -3568,25 +5308,65 @@ Column-oriented analytical database candidate for larger telemetry and benchmark
 
 **Sources:** [RX097](https://clickhouse.com/blog/clickhouse-release-26-09)
 
+### Icechunk
+
+**framework · emerging · P2** · ID: icechunk
+
+Transactional storage engine for Zarr multidimensional arrays.
+
+**Stack layers:** Analytics & result formats; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v2.3.1 published 2026-10-27. This is a repository-channel observation, not a universal package version. Released transactional array storage with format and API version policies.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Test concurrent writers, interrupted commits, full array equality and restore against current Zarr storage.
+
+**Measure:** full query equivalence; schema evolution correctness; cold and warm query latency; bytes read and written; peak memory.
+
+**Constraints:** Zarr integration and API compatibility are separate from on-disk format compatibility. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT050](https://github.com/earth-mover/icechunk/blob/main/README.md) · [FNNAT051](https://raw.githubusercontent.com/earth-mover/icechunk/main/.github/workflows/python-ci.yaml) · [FNNAT052](https://github.com/earth-mover/icechunk/releases/tag/v2.3.1)
+
+### Lance data format
+
+**framework · emerging · P2** · ID: lance-format
+
+Versioned multimodal storage format with indexing and hybrid search.
+
+**Stack layers:** Analytics & result formats; Local storage & search.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v14.0.3 published 2026-11-15. This is a repository-channel observation, not a universal package version. Stable storage versions with separately evolving SDK APIs.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Verify full records, citations, updates and cross-version restore before latency comparisons.
+
+**Measure:** full query equivalence; schema evolution correctness; cold and warm query latency; bytes read and written; peak memory.
+
+**Constraints:** Pin stable data_storage_version; the next alias is explicitly experimental. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT046](https://github.com/lance-format/lance/blob/main/README.md) · [FNNAT047](https://raw.githubusercontent.com/lance-format/lance/main/LICENSE) · [FNNAT048](https://raw.githubusercontent.com/lance-format/lance/main/.github/workflows/rust.yml) · [FNNAT049](https://github.com/lance-format/lance/releases/tag/v14.0.3)
+
 ### Vortex columnar format
 
 **repository · emerging · P2** · ID: vortex
 
 Compressed columnar format candidate for local analytical files and fast selective scans.
 
-**Stack layers:** Analytics & result formats.
+**Stack layers:** Analytics & result formats; Local storage & search.
 
 **Current signal:** Official 2026-10-21 integration post documents Vortex as a DuckDB core extension on Linux and macOS.
 
 **Test:** Store identical telemetry in Vortex, Parquet, and a native database; verify results before cold and warm scans.
 
-**Measure:** compressed size; scan latency; decode CPU; cross-version readability.
+**Measure:** compressed size; scan latency; decode CPU; cross-version readability; full query equivalence; schema evolution correctness; cold and warm query latency; bytes read and written; peak memory.
 
-**Constraints:** Match encodings, compression effort, and projected columns. Frozen format editions and draft extensions have different compatibility guarantees.
+**Constraints:** Match encodings, compression effort, and projected columns. Frozen format editions and draft extensions have different compatibility guarantees. Upstream performance ratios are not Athena measurements; edition/encoding and API migration matter. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. The observed release provides vx binaries for Windows, Linux and macOS. Library bindings and GPU features have separate prerequisites. License scope: Apache-2.0
 
 **Priority rationale:** Saved experiment results make a realistic controlled corpus for equivalent analytics and memory-pressure tests.
 
-**Sources:** [RX131](https://spiraldb.com/blog/duckdb-and-vortex) · [RX132](https://docs.vortex.dev/specs/file-format)
+**Sources:** [RX131](https://spiraldb.com/blog/duckdb-and-vortex) · [RX132](https://docs.vortex.dev/specs/file-format) · [FNNAT041](https://github.com/vortex-data/vortex/blob/develop/README.md) · [FNNAT042](https://github.com/vortex-data/vortex/releases/tag/0.94.0)
 
 ### Zstandard
 
@@ -3628,7 +5408,7 @@ CPU AV1 decoder maintained by VideoLAN and exposed through an official GitLab up
 
 **Sources:** [GP31028](https://github.com/videolan/dav1d) · [GP31029](https://raw.githubusercontent.com/videolan/dav1d/master/NEWS)
 
-## Durable workflows (6)
+## Durable workflows (9)
 
 ### Journaled staged installation
 
@@ -3696,19 +5476,59 @@ CRDT-based local-first document changes and synchronization for offline edits an
 
 PostgreSQL-backed durable workflows for recoverable Python and TypeScript engineering pipelines.
 
-**Stack layers:** Background work & recovery.
+**Stack layers:** Background work & recovery; APIs & shared services.
 
 **Current signal:** September update announces Python v3.0, TypeScript v5.0, and improved fair queueing.
 
 **Test:** Use the same failure-injected processing pipeline with an existing PostgreSQL instance and bounded concurrency.
 
-**Measure:** completed jobs/s; p95 step overhead; recovery correctness; database growth.
+**Measure:** completed jobs/s; p95 step overhead; recovery correctness; database growth; effect deduplication; queue and retry latency; operator burden; migration compatibility.
 
-**Constraints:** Include PostgreSQL operations in resource accounting. The documented major-version upgrade has directional compatibility constraints.
+**Constraints:** Include PostgreSQL operations in resource accounting. The documented major-version upgrade has directional compatibility constraints. PostgreSQL operations, idempotent external effects and schema/version migration still need explicit acceptance. Source review only; target adoption and performance comparison remain unexecuted. The maintainer package metadata declares Operating System Independent. Windows, macOS and Linux refer to the Python package with a supported interpreter; external services and transitive native dependencies require separate verification. License scope: MIT
 
 **Priority rationale:** Adoption depends on a real recovery need; compare against a simple durable queue before adding operational dependencies.
 
-**Sources:** [RX107](https://www.dbos.dev/blog/whats-new-in-dbos-september-2026)
+**Sources:** [RX107](https://www.dbos.dev/blog/whats-new-in-dbos-september-2026) · [FNDO068](https://raw.githubusercontent.com/dbos-inc/dbos-transact-py/HEAD/README.md) · [FNDO069](https://raw.githubusercontent.com/dbos-inc/dbos-transact-py/HEAD/LICENSE) · [FNDO070](https://github.com/dbos-inc/dbos-transact-py/releases/tag/3.7.0) · [FNDO071](https://pypi.org/pypi/dbos/json)
+
+### Hatchet
+
+**platform · emerging · P2** · ID: hatchet
+
+Background task and durable workflow engine with queues, retries, worker SDKs and monitoring.
+
+**Stack layers:** Background work & recovery; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v0.120.24, published 2026-11-23T17:43:41Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Self-hosting adds database and service operations; inspect fairness settings, retry behavior and acknowledged-task recovery.
+
+**Measure:** effect deduplication; recovery correctness; queue and retry latency; operator burden; migration compatibility.
+
+**Constraints:** Self-hosting adds database and service operations; inspect fairness settings, retry behavior and acknowledged-task recovery. Source review only; target adoption and performance comparison remain unexecuted. Release CLI assets include Windows, macOS and Linux. README local setup uses Docker and documents macOS, Linux or WSL; Windows CLI is not proof of a native server. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO072](https://raw.githubusercontent.com/hatchet-dev/hatchet/HEAD/README.md) · [FNDO073](https://raw.githubusercontent.com/hatchet-dev/hatchet/HEAD/LICENSE) · [FNDO074](https://github.com/hatchet-dev/hatchet/releases/tag/v0.120.24)
+
+### Inngest
+
+**platform · emerging · P2** · ID: inngest
+
+Event-triggered durable functions with steps, scheduling and configurable flow control.
+
+**Stack layers:** Background work & recovery; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v1.53.0, published 2026-11-12T23:02:00Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Server/CLI use SSPL with delayed Apache publication; SDK licenses differ and hosted service pricing is separate.
+
+**Measure:** effect deduplication; recovery correctness; queue and retry latency; operator burden; migration compatibility.
+
+**Constraints:** Server/CLI use SSPL with delayed Apache publication; SDK licenses differ and hosted service pricing is separate. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: SSPL-1.0 server/CLI with delayed Apache-2.0 publication; SDKs Apache-2.0.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO075](https://raw.githubusercontent.com/inngest/inngest/HEAD/README.md) · [FNDO076](https://raw.githubusercontent.com/inngest/inngest/HEAD/LICENSE.md) · [FNDO077](https://github.com/inngest/inngest/releases/tag/v1.53.0)
 
 ### Restate
 
@@ -3716,19 +5536,19 @@ PostgreSQL-backed durable workflows for recoverable Python and TypeScript engine
 
 Durable execution system candidate for resumable services and recoverable multi-step tooling tasks.
 
-**Stack layers:** Background work & recovery.
+**Stack layers:** Background work & recovery; APIs & shared services.
 
 **Current signal:** Shared-log architecture reviewed against the primary article; no unverified 2026 release number is asserted.
 
 **Test:** Implement the same crash-injected task pipeline as Temporal and DBOS, including idempotent external writes.
 
-**Measure:** completion correctness; recovery time; p95 task overhead; storage growth.
+**Measure:** completion correctness; recovery time; p95 task overhead; storage growth; effect deduplication; recovery correctness; queue and retry latency; operator burden; migration compatibility.
 
-**Constraints:** Replay and external side effects must be tested separately. The opened shared-log architecture article is dated 2025, despite a newer date in a search index.
+**Constraints:** Replay and external side effects must be tested separately. The opened shared-log architecture article is dated 2025, despite a newer date in a search index. Server uses Business Source License 1.1; SDK licenses differ. Review queue migration and rollback requirements before a server upgrade. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Business Source License 1.1 server with Additional Use Grant; SDK licensing is separate.
 
 **Priority rationale:** Adoption depends on a real recovery need; compare against a simple durable queue before adding operational dependencies.
 
-**Sources:** [RX106](https://restate.dev/blog/every-system-is-a-log-avoiding-coordination-in-distributed-applications)
+**Sources:** [RX106](https://restate.dev/blog/every-system-is-a-log-avoiding-coordination-in-distributed-applications) · [FNDO064](https://raw.githubusercontent.com/restatedev/restate/HEAD/README.md) · [FNDO065](https://raw.githubusercontent.com/restatedev/restate/HEAD/LICENSE) · [FNDO066](https://github.com/restatedev/restate/releases/tag/v1.8.1) · [FNDO067](https://restate.dev/blog/announcing-restate-1-8)
 
 ### Temporal
 
@@ -3736,21 +5556,41 @@ Durable execution system candidate for resumable services and recoverable multi-
 
 Durable execution platform candidate for recoverable test orchestration and long-running evaluation jobs.
 
-**Stack layers:** Background work & recovery.
+**Stack layers:** Background work & recovery; APIs & shared services.
 
 **Current signal:** Official changelog lists Standalone Activities GA on 2026-09-15.
 
 **Test:** Run a multi-step benchmark pipeline with worker crashes, retries, duplicate delivery, and version upgrades.
 
-**Measure:** completion correctness; duplicate side effects; recovery time; CPU/storage per job.
+**Measure:** completion correctness; duplicate side effects; recovery time; CPU/storage per job; effect deduplication; recovery correctness; queue and retry latency; operator burden; migration compatibility.
 
-**Constraints:** Activities can repeat; external effects need explicit idempotency. Separate managed-cloud and self-hosted measurements.
+**Constraints:** Activities can repeat; external effects need explicit idempotency. Separate managed-cloud and self-hosted measurements. Workflow determinism, activity idempotency, history growth and deployment versioning require design; retries do not make external effects exactly-once. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
 
 **Priority rationale:** Adoption depends on a real recovery need; compare against a simple durable queue before adding operational dependencies.
 
-**Sources:** [RX105](https://temporal.io/changelog)
+**Sources:** [RX105](https://temporal.io/changelog) · [FNDO061](https://raw.githubusercontent.com/temporalio/temporal/HEAD/README.md) · [FNDO062](https://raw.githubusercontent.com/temporalio/temporal/HEAD/LICENSE) · [FNDO063](https://github.com/temporalio/temporal/releases/tag/v1.32.2)
 
-## Profiling & observability (11)
+### Windmill
+
+**platform · emerging · P2** · ID: windmill
+
+Code-first automation platform that exposes scripts as workflows, APIs and interfaces.
+
+**Stack layers:** Background work & recovery; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v1.884.0, published 2026-11-24T22:05:19Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Server, clients and enterprise features have different licenses; preserve worker isolation and secrets boundaries.
+
+**Measure:** effect deduplication; recovery correctness; queue and retry latency; operator burden; migration compatibility.
+
+**Constraints:** Server, clients and enterprise features have different licenses; preserve worker isolation and secrets boundaries. Source review only; target adoption and performance comparison remain unexecuted. Linux release binary/container server with browser UI. Language clients and workers have separate platform requirements. License scope: AGPL-3.0 server, Apache-2.0 clients, proprietary enterprise portions; inspect component boundaries.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO078](https://raw.githubusercontent.com/windmill-labs/windmill/HEAD/README.md) · [FNDO079](https://raw.githubusercontent.com/windmill-labs/windmill/HEAD/LICENSE) · [FNDO080](https://github.com/windmill-labs/windmill/releases/tag/v1.884.0)
+
+## Profiling & observability (19)
 
 ### CodSpeed measurement instruments
 
@@ -3892,6 +5732,46 @@ Sampling CPU profiler with a Firefox Profiler interface for inspecting applicati
 
 **Sources:** [EV31001](https://github.com/mstange/samply) · [EV31002](https://github.com/mstange/samply/releases/tag/samply-v0.13.1)
 
+### ClickStack
+
+**tool · emerging · P2** · ID: clickstack
+
+ClickHouse-backed observability stack and interface, formerly HyperDX.
+
+**Stack layers:** Testing, profiling & correctness; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed cli-v0.9.2, published 2026-11-23T10:15:32Z. This is the repository release channel for the CLI only, not a whole-stack version. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Requires instrumentation and storage operations; the latest repository release observed here is its CLI channel, not a whole-stack version.
+
+**Measure:** event completeness; trace correlation; backpressure behavior; storage and ingestion cost; query latency.
+
+**Constraints:** Requires instrumentation and storage operations; the latest repository release observed here is its CLI channel, not a whole-stack version. Source review only; target adoption and performance comparison remain unexecuted. All-in-one container deployment with browser UI and ClickHouse storage. The observed CLI release has Linux/macOS binaries; no native Windows server claim. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO113](https://raw.githubusercontent.com/ClickHouse/ClickStack/HEAD/README.md) · [FNDO114](https://raw.githubusercontent.com/ClickHouse/ClickStack/HEAD/LICENSE) · [FNDO115](https://github.com/ClickHouse/ClickStack/releases/tag/cli-v0.9.2)
+
+### Divan
+
+**tool · emerging · P2** · ID: divan
+
+Rust benchmark harness with parameterized measurements.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Published divan documentation version 0.1.21 observed. Publication date and all related binding versions remain unverified. Published pre-1.0 benchmark library.  No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Pair repeated timing measurements with correctness checks and actual application workflows.
+
+**Measure:** measurement repeatability; observer overhead; known-bottleneck recovery; failed-run retention; wall time versus counter agreement.
+
+**Constraints:** Microbenchmarks do not establish end-to-end application performance. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Listed native hosts are explicitly present in the inspected upstream build/test configuration. This is not a claim that its current CI passed or every target workflow works. The list is conservative, not an exhaustive support denial. License scope: MIT OR Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT066](https://github.com/nvzqz/divan/blob/main/README.md) · [FNNAT067](https://raw.githubusercontent.com/nvzqz/divan/main/.github/workflows/ci.yml) · [FNNAT068](https://docs.rs/divan/0.1.21/divan/)
+
 ### Grafana Beyla
 
 **tool · established · P2** · ID: grafana-beyla
@@ -3911,6 +5791,46 @@ Linux eBPF instrumentation candidate for collecting service metrics and traces w
 **Priority rationale:** Reliable diagnosis and its overhead should precede a performance rewrite.
 
 **Sources:** [RX109](https://grafana.com/docs/beyla/latest/)
+
+### Gungraun
+
+**tool · emerging · P2** · ID: gungraun
+
+Rust performance harness using Valgrind tools and Linux perf.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release v0.20.0 published 2026-09-26. This is a repository-channel observation, not a universal package version. Released harness; minor versions may change APIs and output schemas. 0.20 adds Linux perf and summary schema v7; old Iai-Callgrind names are historical. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Pair counters with Divan or application timing and preserve equivalent full output.
+
+**Measure:** measurement repeatability; observer overhead; known-bottleneck recovery; failed-run retention; wall time versus counter agreement.
+
+**Constraints:** Native Windows is unsupported; simulated cycle estimates are not wall-clock timings. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT OR Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT069](https://github.com/gungraun/gungraun/blob/main/README.md) · [FNNAT070](https://github.com/gungraun/gungraun/releases/tag/v0.20.0)
+
+### OpenTelemetry Collector
+
+**tool · emerging · P2** · ID: opentelemetry-collector
+
+Vendor-neutral receiver, processor and exporter for traces, metrics and logs.
+
+**Stack layers:** Testing, profiling & correctness; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v0.166.0, published 2026-11-23T22:26:33Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Component stability and distribution contents vary; configure queues, retention and sensitive-field handling before use.
+
+**Measure:** event completeness; trace correlation; backpressure behavior; storage and ingestion cost; query latency.
+
+**Constraints:** Component stability and distribution contents vary; configure queues, retention and sensitive-field handling before use. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO106](https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector/HEAD/README.md) · [FNDO107](https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector/HEAD/LICENSE) · [FNDO108](https://github.com/open-telemetry/opentelemetry-collector/releases/tag/v0.166.0) · [FNDO109](https://opentelemetry.io/docs/collector/install/binary/)
 
 ### OpenTelemetry Collector and OTTL
 
@@ -3972,7 +5892,87 @@ Frame-capture graphics debugger for inspecting rendering state, resources, and d
 
 **Sources:** [RX112](https://github.com/baldurk/renderdoc)
 
-## Testing & verification (22)
+### SigNoz
+
+**tool · emerging · P2** · ID: signoz
+
+OpenTelemetry-based observability application combining logs, metrics, traces and dashboards.
+
+**Stack layers:** Testing, profiling & correctness; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v0.151.0, published 2026-11-18T06:30:01Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Release 0.151 dual-ingests logs during native-JSON migration and needs extra CPU, memory and disk; budget this before adoption.
+
+**Measure:** event completeness; trace correlation; backpressure behavior; storage and ingestion cost; query latency.
+
+**Constraints:** Release 0.151 dual-ingests logs during native-JSON migration and needs extra CPU, memory and disk; budget this before adoption. Source review only; target adoption and performance comparison remain unexecuted. Self-hosted Linux/container deployment with browser UI. Native release assets also exist for macOS; server operations were not tested. License scope: MIT community code; enterprise directories use separate terms.
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO110](https://raw.githubusercontent.com/SigNoz/signoz/HEAD/README.md) · [FNDO111](https://raw.githubusercontent.com/SigNoz/signoz/HEAD/LICENSE) · [FNDO112](https://github.com/SigNoz/signoz/releases/tag/v0.151.0)
+
+### Vector (observability)
+
+**tool · emerging · P2** · ID: vector-observability
+
+Rust telemetry pipeline for collecting, transforming and routing logs and metrics.
+
+**Stack layers:** Testing, profiling & correctness; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v0.62.0, published 2026-11-16T17:00:40Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Trace support is limited to selected components; check event-type coverage, backpressure and loss behavior for the actual pipeline.
+
+**Measure:** event completeness; trace correlation; backpressure behavior; storage and ingestion cost; query latency.
+
+**Constraints:** Trace support is limited to selected components; check event-type coverage, backpressure and loss behavior for the actual pipeline. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MPL-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO119](https://raw.githubusercontent.com/vectordotdev/vector/HEAD/README.md) · [FNDO120](https://raw.githubusercontent.com/vectordotdev/vector/HEAD/LICENSE) · [FNDO121](https://github.com/vectordotdev/vector/releases/tag/v0.62.0)
+
+### VictoriaMetrics
+
+**tool · emerging · P2** · ID: victoriametrics
+
+Time-series monitoring storage with single-node and cluster deployment options.
+
+**Stack layers:** Testing, profiling & correctness; APIs & shared services.
+
+**Current signal:** 2026-11-24 source review: Observed v1.157.0, published 2026-11-23T12:36:45Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Metrics storage is not a complete logs/traces stack; enterprise artifacts and community artifacts must be distinguished.
+
+**Measure:** event completeness; trace correlation; backpressure behavior; storage and ingestion cost; query latency.
+
+**Constraints:** Metrics storage is not a complete logs/traces stack; enterprise artifacts and community artifacts must be distinguished. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO116](https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/HEAD/README.md) · [FNDO117](https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/HEAD/LICENSE) · [FNDO118](https://github.com/VictoriaMetrics/VictoriaMetrics/releases/tag/v1.157.0)
+
+### tokio-console
+
+**tool · emerging · P2** · ID: tokio-console
+
+Diagnostic console for instrumented asynchronous Rust programs.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed GitHub release console-subscriber-v0.5.0 published 2025-10-30. This is a repository-channel observation, not a universal package version. Released diagnostic components with versioned protocol dependencies. Latest repository release belongs to console-subscriber 0.5.0, not necessarily the tokio-console CLI. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Reproduce the same workload with instrumentation disabled and enabled before reporting overhead.
+
+**Measure:** measurement repeatability; observer overhead; known-bottleneck recovery; failed-run retention; wall time versus counter agreement.
+
+**Constraints:** Requires application instrumentation; instrumentation overhead and exposed diagnostic endpoints need control. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Windows UTF-8 terminal setup is explicitly documented. Other host support is not inferred from Rust or Unix-socket references. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNNAT071](https://github.com/tokio-rs/console/blob/main/README.md) · [FNNAT072](https://github.com/tokio-rs/console/releases/tag/console-subscriber-v0.5.0)
+
+## Testing & verification (28)
 
 ### Ajv standalone schema validation
 
@@ -4026,13 +6026,13 @@ Property-based testing for Python parsers, serializers, transformation pipelines
 
 **Test:** Use seeded parser and state-machine defects; compare discovered bugs and minimized counterexamples under equal budgets.
 
-**Measure:** unique defects found; time to first failure; counterexample size; reproducibility.
+**Measure:** unique defects found; time to first failure; counterexample size; reproducibility; required failure detection; false positives; diagnostic quality; complete-suite latency.
 
-**Constraints:** Properties and generators determine test effectiveness. Report seeded and naturally occurring failures separately.
+**Constraints:** Properties and generators determine test effectiveness. Report seeded and naturally occurring failures separately. Properties must encode the full contract; generation is not an exhaustive proof and a weak oracle can miss errors. Source review only; target adoption and performance comparison remain unexecuted. The maintainer package metadata lists Windows, POSIX and Unix support. Listed desktop OS families refer to the Python library, not a standalone bundled application; interpreter support is version-specific. License scope: MPL-2.0
 
 **Priority rationale:** First establish that the method catches known defects while preserving complete results; then measure execution cost.
 
-**Sources:** [RX115](https://hypothesis.readthedocs.io/en/latest/)
+**Sources:** [RX115](https://hypothesis.readthedocs.io/en/latest/) · [FNDO085](https://raw.githubusercontent.com/HypothesisWorks/hypothesis/HEAD/README.md) · [FNDO086](https://raw.githubusercontent.com/HypothesisWorks/hypothesis/HEAD/LICENSE.txt) · [FNDO087](https://github.com/HypothesisWorks/hypothesis/releases/tag/v6.170.17) · [FNDO088](https://pypi.org/pypi/hypothesis/json)
 
 ### Loom
 
@@ -4220,19 +6220,19 @@ Coverage-guided fuzzing candidate for native file parsers, archive readers, code
 
 Integrated formatter and linter with expanding language support and configurable analysis rules.
 
-**Stack layers:** Testing, profiling & correctness.
+**Stack layers:** Testing, profiling & correctness; Builds & reproducibility.
 
 **Current signal:** Biome 2.6 announcement dated 2026-10-15 adds Markdown, YAML, and SCSS support; JavaScript plugins are preview.
 
 **Test:** Compare a shared rule subset and complete formatting corpus with ESLint, Prettier, and Oxc.
 
-**Measure:** analysis seconds; peak RSS MiB; diagnostic precision; safe-fix regression count; format idempotence rate.
+**Measure:** analysis seconds; peak RSS MiB; diagnostic precision; safe-fix regression count; format idempotence rate; required rule coverage; unsafe fix count; format idempotence; complete-workspace latency; migration effort.
 
-**Constraints:** Preview plugins must be separated from stable features. Do not count unimplemented rules as passing.
+**Constraints:** Preview plugins must be separated from stable features. Do not count unimplemented rules as passing. Rule and formatting coverage differ from existing plugins; review fixes and preserve diagnostics rather than disabling unmatched rules. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT or Apache-2.0; reviewed MIT license and upstream package README.
 
 **Priority rationale:** First establish that the method catches known defects while preserving complete results; then measure execution cost.
 
-**Sources:** [RX063](https://biomejs.dev/blog/)
+**Sources:** [RX063](https://biomejs.dev/blog/) · [FNDO010](https://raw.githubusercontent.com/biomejs/biome/HEAD/packages/@biomejs/biome/README.md) · [FNDO011](https://raw.githubusercontent.com/biomejs/biome/HEAD/LICENSE-MIT) · [FNDO012](https://github.com/biomejs/biome/releases/tag/%40biomejs/biome%402.6.9) · [FNDO013](https://biomejs.dev/)
 
 ### Criterion.rs
 
@@ -4294,6 +6294,86 @@ Failure-injection and consistency-testing framework for databases, queues, and d
 
 **Sources:** [RX118](https://jepsen.io/)
 
+### Mock Service Worker
+
+**tool · emerging · P2** · ID: mock-service-worker
+
+HTTP request interception and response mocking for browser and Node.js development.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed v3.0.7, published 2026-11-18T01:12:43Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Mock responses are synthetic evidence; retain a separate real-provider contract test and avoid confusing mocks with live acceptance.
+
+**Measure:** required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
+
+**Constraints:** Mock responses are synthetic evidence; retain a separate real-provider contract test and avoid confusing mocks with live acceptance. Source review only; target adoption and performance comparison remain unexecuted. Browser Service Worker integration; Node.js interception is a separate supported integration. Web classification does not claim a standalone desktop application. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO100](https://raw.githubusercontent.com/mswjs/msw/HEAD/README.md) · [FNDO101](https://raw.githubusercontent.com/mswjs/msw/HEAD/LICENSE.md) · [FNDO102](https://github.com/mswjs/msw/releases/tag/v3.0.7)
+
+### Pyrefly
+
+**tool · emerging · P2** · ID: pyrefly
+
+Python type checker and language server with framework-aware analysis and editor support.
+
+**Stack layers:** Testing, profiling & correctness; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed 1.5.0, published 2026-11-19T01:22:55Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Minor and patch releases may introduce diagnostics; tensor shape checking remains experimental.
+
+**Measure:** required diagnostic recall; false positive rate; incremental check time; peak memory; configuration migration effort.
+
+**Constraints:** Minor and patch releases may introduce diagnostics; tensor shape checking remains experimental. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO005](https://raw.githubusercontent.com/pyrefly-org/pyrefly/HEAD/README.md) · [FNDO006](https://raw.githubusercontent.com/pyrefly-org/pyrefly/HEAD/LICENSE) · [FNDO007](https://github.com/pyrefly-org/pyrefly/releases/tag/1.5.0) · [FNDO008](https://pyrefly.org/blog/v1.5/) · [FNDO009](https://pypi.org/project/pyrefly/1.5.0/)
+
+### Rstest
+
+**tool · emerging · P2** · ID: rstest
+
+Rspack-powered JavaScript testing framework with Jest-style APIs and TypeScript support.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed v0.12.6, published 2026-11-03T12:47:28Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Pre-1.0 release; verify hooks, mocking, coverage and browser integration on the actual suite.
+
+**Measure:** required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
+
+**Constraints:** Pre-1.0 release; verify hooks, mocking, coverage and browser integration on the actual suite. Source review only; target adoption and performance comparison remain unexecuted. Listed hosts occur in the reviewed upstream test matrix. This does not establish every CPU architecture or optional plugin; the declared Node.js runtime remains required. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO030](https://raw.githubusercontent.com/web-infra-dev/rstest/HEAD/README.md) · [FNDO031](https://raw.githubusercontent.com/web-infra-dev/rstest/HEAD/LICENSE) · [FNDO032](https://github.com/web-infra-dev/rstest/releases/tag/v0.12.6) · [FNDO033](https://rstest.rs/guide/start/quick-start) · [FNDO034](https://raw.githubusercontent.com/web-infra-dev/rstest/HEAD/.github/workflows/test.yml) · [FNDO035](https://registry.npmjs.org/@rstest/core/latest)
+
+### Schemathesis
+
+**tool · emerging · P2** · ID: schemathesis
+
+Schema-driven API testing for OpenAPI, GraphQL and gRPC with generated and stateful requests.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed v4.34.2, published 2026-11-24T11:05:09Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Generated requests can create, modify or delete data; use disposable fixtures and retain reproducing cases.
+
+**Measure:** required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
+
+**Constraints:** Generated requests can create, modify or delete data; use disposable fixtures and retain reproducing cases. Source review only; target adoption and performance comparison remain unexecuted. The maintainer package metadata declares Operating System Independent. Windows, macOS and Linux refer to the Python package with a supported interpreter; external services and transitive native dependencies require separate verification. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO081](https://raw.githubusercontent.com/schemathesis/schemathesis/HEAD/README.md) · [FNDO082](https://raw.githubusercontent.com/schemathesis/schemathesis/HEAD/LICENSE) · [FNDO083](https://github.com/schemathesis/schemathesis/releases/tag/v4.34.2) · [FNDO084](https://pypi.org/pypi/schemathesis/json)
+
 ### Stateright
 
 **tool · emerging · P2** · ID: stateright
@@ -4354,6 +6434,46 @@ Disposable real-service dependencies for repeatable local and CI integration tes
 
 **Sources:** [RX119](https://testcontainers.com/guides/introducing-testcontainers/)
 
+### Testcontainers for Node.js
+
+**tool · emerging · P2** · ID: testcontainers-node
+
+Node.js library for disposable container-backed integration-test dependencies.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed v12.2.2, published 2026-11-19T15:05:17Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Requires a supported container runtime, image access and resource cleanup; image pulls and startup are part of end-to-end cost.
+
+**Measure:** required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
+
+**Constraints:** Requires a supported container runtime, image access and resource cleanup; image pulls and startup are part of end-to-end cost. Source review only; target adoption and performance comparison remain unexecuted. Node.js client requires a supported Docker-compatible runtime. Official runtime setup and current Windows credential-helper release fix were reviewed; native Windows containers are not asserted. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO094](https://raw.githubusercontent.com/testcontainers/testcontainers-node/HEAD/README.md) · [FNDO095](https://raw.githubusercontent.com/testcontainers/testcontainers-node/HEAD/LICENSE) · [FNDO096](https://github.com/testcontainers/testcontainers-node/releases/tag/v12.2.2) · [FNDO097](https://node.testcontainers.org/) · [FNDO098](https://node.testcontainers.org/supported-container-runtimes/) · [FNDO099](https://registry.npmjs.org/testcontainers/latest)
+
+### Toxiproxy
+
+**tool · emerging · P2** · ID: toxiproxy
+
+Configurable TCP proxy for injecting network latency, faults and connection interruptions in tests.
+
+**Stack layers:** Testing, profiling & correctness.
+
+**Current signal:** 2026-11-24 source review: Observed v2.13.0, published 2026-10-14T18:26:53Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Use isolated test endpoints; TCP fault injection does not model every browser, DNS, TLS or provider failure.
+
+**Measure:** required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
+
+**Constraints:** Use isolated test endpoints; TCP fault injection does not model every browser, DNS, TLS or provider failure. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO103](https://raw.githubusercontent.com/Shopify/toxiproxy/HEAD/README.md) · [FNDO104](https://raw.githubusercontent.com/Shopify/toxiproxy/HEAD/LICENSE) · [FNDO105](https://github.com/Shopify/toxiproxy/releases/tag/v2.13.0)
+
 ### Vitest
 
 **tool · established · P2** · ID: vitest
@@ -4386,13 +6506,13 @@ Property-based testing for JavaScript and TypeScript data handling and asynchron
 
 **Test:** Exercise the same serialization and state-machine contracts as the Python lane with equivalent seeded defects.
 
-**Measure:** unique defects found; failure discovery time; shrink quality; test runtime.
+**Measure:** unique defects found; failure discovery time; shrink quality; test runtime; required failure detection; reproducibility; false positives; diagnostic quality; complete-suite latency.
 
-**Constraints:** Compare equivalent properties rather than raw generated-case counts. Pin plugin APIs and preserve replay seeds.
+**Constraints:** Compare equivalent properties rather than raw generated-case counts. Pin plugin APIs and preserve replay seeds. Main documentation is a 5.x preview while the observed stable package is 4.11; use matching versioned documentation. Source review only; target adoption and performance comparison remain unexecuted. Browser JavaScript library; Node.js usage is also documented. Stable 4.x and preview 5.x documentation must stay distinct. License scope: MIT
 
 **Priority rationale:** First establish that the method catches known defects while preserving complete results; then measure execution cost.
 
-**Sources:** [RX116](https://fast-check.dev/blog/)
+**Sources:** [RX116](https://fast-check.dev/blog/) · [FNDO089](https://raw.githubusercontent.com/dubzzz/fast-check/HEAD/packages/fast-check/README.md) · [FNDO090](https://raw.githubusercontent.com/dubzzz/fast-check/HEAD/LICENSE) · [FNDO091](https://github.com/dubzzz/fast-check/releases/tag/v4.11.0) · [FNDO092](https://fast-check.dev/) · [FNDO093](https://fast-check.dev/blog/2023/09/04/dual-packages-or-supporting-both-cjs-and-esm/)
 
 ### ty
 
@@ -4400,21 +6520,21 @@ Property-based testing for JavaScript and TypeScript data handling and asynchron
 
 Python type checker and language server implemented in Rust, with incremental analysis and editor diagnostics.
 
-**Stack layers:** Testing, profiling & correctness.
+**Stack layers:** Testing, profiling & correctness; Builds & reproducibility.
 
 **Current signal:** The 2026-10-13 uv integration announcement still describes work toward ty's stable release.
 
 **Test:** Compare ty, mypy, and Pyright on the same typed projects and a labeled defect suite.
 
-**Measure:** cold check seconds; incremental milliseconds; peak RSS MiB; diagnostic precision; diagnostic recall.
+**Measure:** cold check seconds; incremental milliseconds; peak RSS MiB; diagnostic precision; diagnostic recall; required diagnostic recall; false positive rate; incremental check time; peak memory; configuration migration effort.
 
-**Constraints:** A faster checker is not better if it misses relevant defects. Pin stubs, dependency environments, and strictness settings.
+**Constraints:** A faster checker is not better if it misses relevant defects. Pin stubs, dependency environments, and strictness settings. Upstream still labels ty beta; compare diagnostic coverage and complete file discovery before replacing a checker. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
 
 **Priority rationale:** First establish that the method catches known defects while preserving complete results; then measure execution cost.
 
-**Sources:** [RX067](https://docs.astral.sh/ty/) · [RX065](https://astral.sh/blog/uv-ty-integration)
+**Sources:** [RX067](https://docs.astral.sh/ty/) · [RX065](https://astral.sh/blog/uv-ty-integration) · [FNDO001](https://raw.githubusercontent.com/astral-sh/ty/HEAD/README.md) · [FNDO002](https://raw.githubusercontent.com/astral-sh/ty/HEAD/LICENSE) · [FNDO003](https://github.com/astral-sh/ty/releases/tag/0.0.109) · [FNDO004](https://docs.astral.sh/ty/installation/)
 
-## Software supply chain (11)
+## Software supply chain (15)
 
 ### DOMPurify
 
@@ -4448,13 +6568,13 @@ Dependency vulnerability scanner using the OSV advisory ecosystem and machine-re
 
 **Test:** Scan known-vulnerable, fixed, unknown-version, vendored and local-workspace fixture dependencies against a frozen OSV snapshot. Compare Trivy only on shared supported ecosystems and separate unknown identity from clean. Verify network silence in full offline mode.
 
-**Measure:** advisory precision; advisory recall; package identity coverage; unknown package count; scan p95; offline network requests.
+**Measure:** advisory precision; advisory recall; package identity coverage; unknown package count; scan p95; offline network requests; inventory completeness; verification correctness; false findings; offline behavior; artifact-to-evidence latency.
 
-**Constraints:** Apache-2.0; official Linux, macOS and Windows binaries are documented. Record scanner digest and each ecosystem database snapshot; advisory churn must not masquerade as a tool improvement. --offline-vulnerabilities is not equivalent to no network; full --offline and explicit database availability need separate tests. Unmapped local modules, unknown versions or unsupported extractors are unresolved inventory, not evidence of safety.
+**Constraints:** Apache-2.0; official Linux, macOS and Windows binaries are documented. Record scanner digest and each ecosystem database snapshot; advisory churn must not masquerade as a tool improvement. --offline-vulnerabilities is not equivalent to no network; full --offline and explicit database availability need separate tests. Unmapped local modules, unknown versions or unsupported extractors are unresolved inventory, not evidence of safety. Coverage and reachability vary by ecosystem; evaluate proposed upgrades against the full application contract. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
 
 **Priority rationale:** Conditional dependency-advisory baseline for supported source manifests; compare package identity and actionable recall before raw finding totals.
 
-**Sources:** [RX128](https://google.github.io/osv-scanner/) · [ST181](https://github.com/google/osv-scanner/releases/tag/v2.7.0) · [ST182](https://google.github.io/osv-scanner/usage/offline-mode/) · [ST183](https://google.github.io/osv-scanner/installation/) · [ST184](https://github.com/google/osv-scanner)
+**Sources:** [RX128](https://google.github.io/osv-scanner/) · [ST181](https://github.com/google/osv-scanner/releases/tag/v2.7.0) · [ST182](https://google.github.io/osv-scanner/usage/offline-mode/) · [ST183](https://google.github.io/osv-scanner/installation/) · [ST184](https://github.com/google/osv-scanner) · [FNDO131](https://raw.githubusercontent.com/google/osv-scanner/HEAD/README.md) · [FNDO132](https://raw.githubusercontent.com/google/osv-scanner/HEAD/LICENSE) · [FNDO133](https://github.com/google/osv-scanner/releases/tag/v2.7.1)
 
 ### Sigstore Cosign
 
@@ -4468,13 +6588,13 @@ Artifact signing and verification candidate for trusted test binaries, datasets,
 
 **Test:** Verify identical public release artifacts and bundles under exact trusted identity and issuer policies. Include tampering, wrong workflow identity, wrong repository, wrong digest, untrusted roots and offline operation with captured trust material. Check the actual installer verification path.
 
-**Measure:** invalid artifact rejection; wrong identity rejection; verification p95; bundle bytes; offline verification success; release-path enforcement.
+**Measure:** invalid artifact rejection; wrong identity rejection; verification p95; bundle bytes; offline verification success; release-path enforcement; inventory completeness; verification correctness; false findings; offline behavior; artifact-to-evidence latency.
 
-**Constraints:** Apache-2.0; official Linux, macOS and Windows binaries are available. A valid signature authenticates an artifact under a policy; it does not establish code quality, update freshness or safe data migration. Pin the exact expected identity/issuer and preserve digest claims; broad matching or skipped claim verification changes the security contract. Sigstore verification does not replace platform-specific Developer ID/notarization, Authenticode or TUF update metadata.
+**Constraints:** Apache-2.0; official Linux, macOS and Windows binaries are available. A valid signature authenticates an artifact under a policy; it does not establish code quality, update freshness or safe data migration. Pin the exact expected identity/issuer and preserve digest claims; broad matching or skipped claim verification changes the security contract. Sigstore verification does not replace platform-specific Developer ID/notarization, Authenticode or TUF update metadata. A valid signature establishes origin under a policy, not software correctness; identity and issuer constraints must be pinned. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
 
 **Priority rationale:** Baseline release-artifact verification layer when trust identity and offline requirements are explicit; test enforcement before adding popularity or benchmark scores.
 
-**Sources:** [RX123](https://github.com/sigstore/cosign/releases) · [ST176](https://github.com/sigstore/cosign/releases) · [ST177](https://docs.sigstore.dev/cosign/verifying/verify/) · [ST178](https://github.com/sigstore/cosign)
+**Sources:** [RX123](https://github.com/sigstore/cosign/releases) · [ST176](https://github.com/sigstore/cosign/releases) · [ST177](https://docs.sigstore.dev/cosign/verifying/verify/) · [ST178](https://github.com/sigstore/cosign) · [FNDO128](https://raw.githubusercontent.com/sigstore/cosign/HEAD/README.md) · [FNDO129](https://raw.githubusercontent.com/sigstore/cosign/HEAD/LICENSE) · [FNDO130](https://github.com/sigstore/cosign/releases/tag/v3.1.5)
 
 ### Sparkle
 
@@ -4516,6 +6636,66 @@ Versioned update-metadata protocol for authenticating targets and limiting rollb
 
 **Sources:** [ST138](https://theupdateframework.github.io/specification/latest/) · [ST139](https://github.com/theupdateframework/python-tuf)
 
+### Changesets
+
+**tool · emerging · P2** · ID: changesets
+
+Version and changelog management for packages with explicit contributor-authored change records.
+
+**Stack layers:** Signed distribution & updates; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed @changesets/cli@3.0.3, published 2026-09-14T15:27:19Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** v3 and maintenance/v2 are separate lines; registry publishing remains a consequential step and needs real package tests.
+
+**Measure:** version intent correctness; artifact reproducibility; provenance continuity; rollback correctness; operator effort.
+
+**Constraints:** v3 and maintenance/v2 are separate lines; registry publishing remains a consequential step and needs real package tests. Source review only; target adoption and performance comparison remain unexecuted. Listed hosts occur in the reviewed upstream test matrix. This does not establish every CPU architecture or optional plugin; the declared Node.js runtime remains required. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO141](https://raw.githubusercontent.com/changesets/changesets/HEAD/README.md) · [FNDO142](https://raw.githubusercontent.com/changesets/changesets/HEAD/LICENSE) · [FNDO143](https://github.com/changesets/changesets/releases/tag/%40changesets/cli%403.0.3) · [FNDO144](https://raw.githubusercontent.com/changesets/changesets/HEAD/.github/workflows/ci.yml) · [FNDO145](https://registry.npmjs.org/@changesets/cli/latest)
+
+### GoReleaser
+
+**tool · emerging · P2** · ID: goreleaser
+
+Release packaging and publishing automation with configurable build and distribution stages.
+
+**Stack layers:** Signed distribution & updates; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v2.20.3, published 2026-11-20T04:31:19Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Target toolchains, credentials and paid Pro features are separate prerequisites; inspect dry-run outputs before publication.
+
+**Measure:** version intent correctness; artifact reproducibility; provenance continuity; rollback correctness; operator effort.
+
+**Constraints:** Target toolchains, credentials and paid Pro features are separate prerequisites; inspect dry-run outputs before publication. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: MIT
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO137](https://raw.githubusercontent.com/goreleaser/goreleaser/HEAD/README.md) · [FNDO138](https://raw.githubusercontent.com/goreleaser/goreleaser/HEAD/LICENSE.md) · [FNDO139](https://github.com/goreleaser/goreleaser/releases/tag/v2.20.3) · [FNDO140](https://goreleaser.com/getting-started/)
+
+### Grype
+
+**tool · emerging · P2** · ID: grype
+
+Vulnerability matcher for container images, filesystems and software bills of materials.
+
+**Stack layers:** Signed distribution & updates; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v0.122.1, published 2026-11-18T14:14:20Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Match results depend on database freshness and package identity; review false positives and do not label unmatched artifacts safe.
+
+**Measure:** inventory completeness; verification correctness; false findings; offline behavior; artifact-to-evidence latency.
+
+**Constraints:** Match results depend on database freshness and package identity; review false positives and do not label unmatched artifacts safe. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO125](https://raw.githubusercontent.com/anchore/grype/HEAD/README.md) · [FNDO126](https://raw.githubusercontent.com/anchore/grype/HEAD/LICENSE) · [FNDO127](https://github.com/anchore/grype/releases/tag/v0.122.1)
+
 ### OpenSSF Scorecard
 
 **tool · established · P2** · ID: openssf-scorecard
@@ -4535,6 +6715,26 @@ Automated repository-security signals for evaluating dependency hygiene with vis
 **Priority rationale:** Verify artifact identity, dependency coverage and actionable findings independently of popularity.
 
 **Sources:** [RX125](https://openssf.org/scorecard/)
+
+### Release Please
+
+**tool · emerging · P2** · ID: release-please
+
+Conventional-commit-based versioning, changelog and GitHub release pull-request automation.
+
+**Stack layers:** Signed distribution & updates; Builds & reproducibility.
+
+**Current signal:** 2026-11-24 source review: Observed v17.11.2, published 2026-08-24T21:20:30Z. This is the repository release channel; recheck the package/SDK channel before adoption. No installation, target-workload benchmark or acceptance is asserted.
+
+**Test:** Does not publish packages to registries or manage complex branch policy; those remain separate workflows.
+
+**Measure:** version intent correctness; artifact reproducibility; provenance continuity; rollback correctness; operator effort.
+
+**Constraints:** Does not publish packages to registries or manage complex branch policy; those remain separate workflows. Source review only; target adoption and performance comparison remain unexecuted. Listed hosts occur in the reviewed upstream test matrix. This does not establish every CPU architecture or optional plugin; the declared Node.js runtime remains required. License scope: Apache-2.0
+
+**Priority rationale:** Primary-source candidate for a controlled workload comparison; source review alone establishes neither measured advantage nor target acceptance.
+
+**Sources:** [FNDO146](https://raw.githubusercontent.com/googleapis/release-please/HEAD/README.md) · [FNDO147](https://raw.githubusercontent.com/googleapis/release-please/HEAD/LICENSE) · [FNDO148](https://github.com/googleapis/release-please/releases/tag/v17.11.2) · [FNDO149](https://raw.githubusercontent.com/googleapis/release-please/HEAD/.github/workflows/ci.yaml) · [FNDO150](https://registry.npmjs.org/release-please/latest)
 
 ### SLSA supply-chain framework
 
@@ -4568,13 +6768,13 @@ Software bill-of-materials generator for inventorying container images, filesyst
 
 **Test:** Inventory a public app bundle, its unpacked tree and build container with known direct, transitive, vendored and generated dependencies. Compare canonical package identities and relationships against a fixture manifest; validate SPDX/CycloneDX serialization and unexplained omissions.
 
-**Measure:** inventory precision; inventory recall; relationship recall; unknown component count; schema validity; scan p95.
+**Measure:** inventory precision; inventory recall; relationship recall; unknown component count; schema validity; scan p95; inventory completeness; verification correctness; false findings; offline behavior; artifact-to-evidence latency.
 
-**Constraints:** Apache-2.0; official Linux, macOS and Windows builds are documented. SBOM generation is distinct from vulnerability matching, licensing conclusions and runtime reachability. Packed and unpacked artifacts may expose different metadata; report scan target, enabled catalogers and missing parser coverage. A signed inventory can still omit a bundled dependency; preserve an independent fixture ground truth.
+**Constraints:** Apache-2.0; official Linux, macOS and Windows builds are documented. SBOM generation is distinct from vulnerability matching, licensing conclusions and runtime reachability. Packed and unpacked artifacts may expose different metadata; report scan target, enabled catalogers and missing parser coverage. A signed inventory can still omit a bundled dependency; preserve an independent fixture ground truth. Inventory coverage depends on package evidence; an SBOM is not a vulnerability verdict or proof of source authenticity. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
 
 **Priority rationale:** Conditional SBOM baseline for release inventory; promote on measured coverage and traceable package identity, not document length.
 
-**Sources:** [RX127](https://github.com/anchore/syft/blob/main/README.md) · [ST185](https://github.com/anchore/syft/releases) · [ST186](https://github.com/anchore/syft/blob/main/README.md) · [ST187](https://oss.anchore.com/docs/installation/syft/) · [ST188](https://github.com/anchore/syft)
+**Sources:** [RX127](https://github.com/anchore/syft/blob/main/README.md) · [ST185](https://github.com/anchore/syft/releases) · [ST186](https://github.com/anchore/syft/blob/main/README.md) · [ST187](https://oss.anchore.com/docs/installation/syft/) · [ST188](https://github.com/anchore/syft) · [FNDO122](https://raw.githubusercontent.com/anchore/syft/HEAD/README.md) · [FNDO123](https://raw.githubusercontent.com/anchore/syft/HEAD/LICENSE) · [FNDO124](https://github.com/anchore/syft/releases/tag/v1.57.2)
 
 ### Trivy
 
@@ -4588,13 +6788,13 @@ Scanner candidate for dependency, container, and configuration findings in repro
 
 **Test:** Compare pinned official Trivy artifacts with OSV-Scanner on shared known-vulnerable/fixed fixtures and record the scanner/database pair. Separate dependency findings, misconfiguration and secrets into different outputs. Test unsupported packages and stale database behavior explicitly.
 
-**Measure:** advisory precision; advisory recall; unknown package coverage; scan p95; database freshness; finding reproducibility.
+**Measure:** advisory precision; advisory recall; unknown package coverage; scan p95; database freshness; finding reproducibility; inventory completeness; verification correctness; false findings; offline behavior; artifact-to-evidence latency.
 
-**Constraints:** Apache-2.0; official Linux, macOS/Homebrew and Windows install paths are documented. Different database sources, ecosystem coverage and severity mappings prevent a direct ranking by finding count. Pin and verify the scanner itself, including container/base-image identity; a scanner is another supply-chain component. Do not turn advisory severity into a universal project score or suppress unresolved packages to improve precision.
+**Constraints:** Apache-2.0; official Linux, macOS/Homebrew and Windows install paths are documented. Different database sources, ecosystem coverage and severity mappings prevent a direct ranking by finding count. Pin and verify the scanner itself, including container/base-image identity; a scanner is another supply-chain component. Do not turn advisory severity into a universal project score or suppress unresolved packages to improve precision. Select supported scanners intentionally; databases, false positives and target scope affect results. This catalog does not enable an audit gate. Source review only; target adoption and performance comparison remain unexecuted. Listed platform binaries or official runtime documentation were reviewed; no installation, runtime benchmark or portable-state audit was performed. License scope: Apache-2.0
 
 **Priority rationale:** Challenger or complementary scanner when its container/configuration coverage is needed; compare shared scopes independently from extra scanners.
 
-**Sources:** [RX126](https://github.com/aquasecurity/trivy/releases) · [ST189](https://github.com/aquasecurity/trivy/releases) · [ST190](https://trivy.dev/docs/latest/getting-started/installation/) · [ST191](https://github.com/aquasecurity/trivy)
+**Sources:** [RX126](https://github.com/aquasecurity/trivy/releases) · [ST189](https://github.com/aquasecurity/trivy/releases) · [ST190](https://trivy.dev/docs/latest/getting-started/installation/) · [ST191](https://github.com/aquasecurity/trivy) · [FNDO134](https://raw.githubusercontent.com/aquasecurity/trivy/HEAD/README.md) · [FNDO135](https://raw.githubusercontent.com/aquasecurity/trivy/HEAD/LICENSE) · [FNDO136](https://github.com/aquasecurity/trivy/releases/tag/v0.76.2)
 
 ### Velopack
 
@@ -4750,13 +6950,13 @@ General-purpose allocator with recent profiling and memory-management changes fo
 
 **Test:** Keep the application and workload fixed while comparing its system allocator with a pinned mimalloc build during imports, searches, cancellation and repeated open/close cycles.
 
-**Measure:** full operation latency; p95/p99 input delay; peak and retained RSS; allocation count; fragmentation after churn.
+**Measure:** full operation latency; p95/p99 input delay; peak and retained RSS; allocation count; fragmentation after churn; full-application completion; peak and retained memory; tail latency; allocator contention; recovery correctness.
 
-**Constraints:** Keep security mode and allocation-failure behavior fixed; a less protected build is a separate configuration. Measure process-tree memory and long-lived fragmentation, not just malloc/free microbenchmarks. Verify allocator ownership across foreign-library and DLL boundaries.
+**Constraints:** Keep security mode and allocation-failure behavior fixed; a less protected build is a separate configuration. Measure process-tree memory and long-lived fragmentation, not just malloc/free microbenchmarks. Verify allocator ownership across foreign-library and DLL boundaries. An allocator switch can trade throughput, RSS and latency; allocation boundaries must remain correct. Documentation reviewed; no installation, candidate benchmark or target-product acceptance performed. Capabilities describe the inspected source documentation; verify them against the exact package or tag selected for a trial. Officially documented hosts; exact OS versions, dependencies and application integration were not executed in this review. License scope: MIT
 
 **Priority rationale:** An allocator-only build comparison is relatively isolated and useful after profiles identify allocation churn; whole-session memory determines whether it helps.
 
-**Sources:** [IO31010](https://github.com/microsoft/mimalloc) · [IO31011](https://api.github.com/repos/microsoft/mimalloc/releases/latest)
+**Sources:** [IO31010](https://github.com/microsoft/mimalloc) · [IO31011](https://api.github.com/repos/microsoft/mimalloc/releases/latest) · [FNNAT073](https://github.com/microsoft/mimalloc/blob/dev3/readme.md) · [FNNAT074](https://raw.githubusercontent.com/microsoft/mimalloc/dev3/LICENSE) · [FNNAT075](https://github.com/microsoft/mimalloc/releases/tag/v3.7.1)
 
 ### notify filesystem watching
 

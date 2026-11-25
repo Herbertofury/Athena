@@ -1,0 +1,192 @@
+{
+  "observed_at": "2026-11-25T19:51:12.006Z",
+  "runs": [
+    {
+      "repo": "Enderloom",
+      "run_id": 45688254024,
+      "jobs": [
+        {
+          "id": 139466511059,
+          "name": "fabric-ui-access-widener-conversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511601,
+          "name": "fabric-aoba-production-conversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511670,
+          "name": "fabric-conversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511672,
+          "name": "port-engine-qa",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511677,
+          "name": "neoforge-conversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511705,
+          "name": "northpoint",
+          "status": "in_progress",
+          "conclusion": null,
+          "current_or_failed": [
+            {
+              "name": "Simple 1.20.1 source conversion build smoke",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 28
+            }
+          ]
+        },
+        {
+          "id": 139466511797,
+          "name": "fabric-keyevent-materialization",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466511805,
+          "name": "fabric-dependency-conversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        }
+      ]
+    },
+    {
+      "repo": "Enderloom",
+      "run_id": 45688254038,
+      "jobs": [
+        {
+          "id": 139466509285,
+          "name": "real-stonecutter (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466509775,
+          "name": "real-stonecutter (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139466509788,
+          "name": "aoba-multiversion",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        }
+      ]
+    },
+    {
+      "repo": "Modhunter",
+      "run_id": 45688584656,
+      "jobs": [
+        {
+          "id": 139467666298,
+          "name": "mo2",
+          "status": "completed",
+          "conclusion": "success",
+          "current_or_failed": []
+        },
+        {
+          "id": 139467667023,
+          "name": "visual",
+          "status": "in_progress",
+          "conclusion": null,
+          "current_or_failed": [
+            {
+              "name": "Compare the actual release UI against v0.12.0",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 4
+            }
+          ]
+        },
+        {
+          "id": 139467667128,
+          "name": "contracts",
+          "status": "in_progress",
+          "conclusion": null,
+          "current_or_failed": [
+            {
+              "name": "Exercise actual dashboard in Chromium",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 139467667146,
+          "name": "windows",
+          "status": "in_progress",
+          "conclusion": null,
+          "current_or_failed": [
+            {
+              "name": "Test native Windows code",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 13
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_path_gates": {
+    "Enderloom": [
+      {
+        "name": "Browse request lifecycle regressions",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Browse provider identity regression",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Browse provider pane static QA",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Browse provider pane Electron runtime QA",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      }
+    ],
+    "Modhunter": [
+      {
+        "name": "Verify Rust, MO2 lifecycle, and existing features",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "baseline": {
+    "bodyBytes": 2097152,
+    "fullBodySha256": "6932fd31e5daf4739b9fa78ff777b2831b0995cc1d0b0093cac80601902013bc",
+    "outputs": {
+      "head": {
+        "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+        "textBytes": 65536,
+        "bytesRead": 65536,
+        "truncated": true
+      },
+      "media": {
+        "sha256": "427965f49a857174e308658227325dbd23ff4eccbe399d5ad4817dda3ec79f87",
+        "textBytes": 32768,
+        "bytesRead": 32768,
+        "truncated": true,
+        "mediaMarker": false
+      },
+      "prefix": {
+        "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+        "textBytes": 65536,
+        "bytesRead": 65536,
+        "truncated": true
+      },
+      "full": {
+        "sha256": "6932fd31e5daf4739b9fa78ff777b2831b0995cc1d0b0093cac80601902013bc",
+        "textBytes": 2097152,
+        "bytesRead": 2097152,
+        "complete": true
+      }
+    },
+    "copies": [
+      {
+        "inputBytes": 65358,
+        "allocatedBytes": 65358
+      },
+      {
+        "inputBytes": 102400,
+        "allocatedBytes": 102400
+      },
+      {
+        "inputBytes": 102400,
+        "allocatedBytes": 102400
+      },
+      {
+        "inputBytes": 2097152,
+        "allocatedBytes": 2097152
+      }
+    ],
+    "allocatedCopyBytes": 2367310
+  },
+  "candidate": {
+    "bodyBytes": 2097152,
+    "fullBodySha256": "6932fd31e5daf4739b9fa78ff777b2831b0995cc1d0b0093cac80601902013bc",
+    "outputs": {
+      "head": {
+        "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+        "textBytes": 65536,
+        "bytesRead": 65536,
+        "truncated": true
+      },
+      "media": {
+        "sha256": "427965f49a857174e308658227325dbd23ff4eccbe399d5ad4817dda3ec79f87",
+        "textBytes": 32768,
+        "bytesRead": 32768,
+        "truncated": true,
+        "mediaMarker": false
+      },
+      "prefix": {
+        "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+        "textBytes": 65536,
+        "bytesRead": 65536,
+        "truncated": true
+      },
+      "full": {
+        "sha256": "6932fd31e5daf4739b9fa78ff777b2831b0995cc1d0b0093cac80601902013bc",
+        "textBytes": 2097152,
+        "bytesRead": 2097152,
+        "complete": true
+      }
+    },
+    "copies": [
+      {
+        "inputBytes": 65358,
+        "allocatedBytes": 32768
+      },
+      {
+        "inputBytes": 102400,
+        "allocatedBytes": 65536
+      },
+      {
+        "inputBytes": 102400,
+        "allocatedBytes": 65536
+      },
+      {
+        "inputBytes": 2097152,
+        "allocatedBytes": 2097152
+      }
+    ],
+    "allocatedCopyBytes": 2260992
+  },
+  "outputsIdentical": true,
+  "savedAllocatedCopyBytes": 106318,
+  "baselineCommit": "e23eaea97d46348144d1706736c157282abfd44a",
+  "command": "node scripts/benchmark-progressive-copy.js <worktree>",
+  "disposition": "retained: exact allocation reduction with identical complete and staged outputs"
+}

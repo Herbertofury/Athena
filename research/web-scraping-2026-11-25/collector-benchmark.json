@@ -1,0 +1,139 @@
+{
+  "baselineCommit": "7d335a740ea92a66674bf4412c48f5e03faf6e9f",
+  "candidateSourceSha256": "ea13757cf226fc0723252bf1c82ad2c63fb638c777cf35469d939b79d3e06fc0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "transport": "real loopback HTTP",
+  "fixtureDelayMs": 15,
+  "releaseRows": 32,
+  "discoveryCandidatesPerCategory": 3,
+  "completeOutputEquivalent": true,
+  "summary": {
+    "baseline": {
+      "medianSeconds": 0.5609585199999856,
+      "medianCpuSeconds": 0.030912008000000005,
+      "requests": [
+        35
+      ],
+      "bodyBytes": [
+        5803
+      ],
+      "peakConcurrentRequests": 1
+    },
+    "candidate": {
+      "medianSeconds": 0.14829863499994644,
+      "medianCpuSeconds": 0.030603641999999986,
+      "requests": [
+        35
+      ],
+      "bodyBytes": [
+        5803
+      ],
+      "peakConcurrentRequests": 4
+    }
+  },
+  "runs": [
+    {
+      "mode": "baseline",
+      "repeat": 0,
+      "seconds": 0.5609585199999856,
+      "cpuSeconds": 0.030912008000000005,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 1
+    },
+    {
+      "mode": "candidate",
+      "repeat": 0,
+      "seconds": 0.14713159600000836,
+      "cpuSeconds": 0.030603641999999986,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 4
+    },
+    {
+      "mode": "candidate",
+      "repeat": 1,
+      "seconds": 0.14858010900002228,
+      "cpuSeconds": 0.02985617700000001,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 4
+    },
+    {
+      "mode": "baseline",
+      "repeat": 1,
+      "seconds": 0.5839909119999902,
+      "cpuSeconds": 0.054172314,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 1
+    },
+    {
+      "mode": "baseline",
+      "repeat": 2,
+      "seconds": 0.5573245500000894,
+      "cpuSeconds": 0.02764092600000001,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 1
+    },
+    {
+      "mode": "candidate",
+      "repeat": 2,
+      "seconds": 0.14582337000001644,
+      "cpuSeconds": 0.02867862900000001,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 4
+    },
+    {
+      "mode": "candidate",
+      "repeat": 3,
+      "seconds": 0.14829863499994644,
+      "cpuSeconds": 0.030875433000000008,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 4
+    },
+    {
+      "mode": "baseline",
+      "repeat": 3,
+      "seconds": 0.5590277109999988,
+      "cpuSeconds": 0.02912292500000002,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 1
+    },
+    {
+      "mode": "baseline",
+      "repeat": 4,
+      "seconds": 0.5663926220000803,
+      "cpuSeconds": 0.03362973899999999,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 1
+    },
+    {
+      "mode": "candidate",
+      "repeat": 4,
+      "seconds": 0.1483627659999911,
+      "cpuSeconds": 0.03193479100000002,
+      "requests": 35,
+      "bytes": 5803,
+      "active": 0,
+      "peak": 4
+    }
+  ],
+  "limitations": "Local fixed-latency fixture, not live GitHub throughput or a whole-app benchmark. CPU includes fixture server; peak RSS not isolated.",
+  "latencySpeedup": 3.782627668826407
+}

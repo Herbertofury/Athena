@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-11-24",
+  "reviewedOn": "2026-11-25",
   "purpose": "Routing index for overlapping internal capabilities; authoritative implementation and detailed evidence remain at their linked owners. Not a separate upstream technology catalog or a declaration of shared-package parity.",
   "policy": "docs/REUSABLE-PACKAGE-COORDINATION.md",
   "capabilities": [
@@ -179,7 +179,9 @@
         "engineering/docs/adapters/contract.md"
       ],
       "researchRefs": [
-        "guidance/registry/web-acquisition-watch.json"
+        "guidance/registry/web-acquisition-watch.json",
+        "research/web-scraping-2026-11-25/README.md",
+        "research/web-scraping-2026-11-25/implementation-receipt.json"
       ],
       "candidates": [
         {
@@ -190,9 +192,45 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Maintained active GameSync implementation: normalized header/options identity, independent response bodies, cancellation separation and stale-entry ownership. Both local regression groups passed on Node 22.16; exact source and test blobs matched.",
           "limits": "Browser integration and memory/throughput comparison open; CI failed with unavailable logs. No unconditional sharing of authenticated requests or forced mutation coalescing."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "02fa1f21dc5da473023df41d430ad69e608c190b",
+          "path": "app/shared/request-dedup-module.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/02fa1f21dc5da473023df41d430ad69e608c190b/app/shared/request-dedup-module.js",
+          "evidence": "portable_runtime_verified",
+          "observed": "16 regression tests; immutable request snapshots, ownership-safe cleanup and independently readable complete bodies; both classic and background callers repaired.",
+          "limits": "Portable tests only; native Opera and hosted workflow acceptance separate."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "6f8b483617f6c44ac8a474388d74a6ccef361e9d",
+          "path": "packages/shared/src/requestDeduplicator.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/6f8b483617f6c44ac8a474388d74a6ccef361e9d/packages/shared/src/requestDeduplicator.ts",
+          "evidence": "portable_runtime_verified",
+          "observed": "23 regression tests and strict TypeScript pass across the shared and extension implementations; equivalent requests share one executor and response streams remain independent.",
+          "limits": "No whole-app/browser performance or release claim."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "ab16cf64e87d5aca772c81bf5c210ab42560ad63",
+          "path": "src/public-http.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/ab16cf64e87d5aca772c81bf5c210ab42560ad63/src/public-http.js",
+          "evidence": "portable_runtime_verified",
+          "observed": "14 new HTTP/worker lifecycle cases pass; complete response preserved while fixture Buffer.concat copy bytes fall by106318.",
+          "limits": "Resource measurement is fixture-scoped; no full native or authenticated-provider certification."
+        },
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "e553f389fdea95fc69a5ea6b4c63e93fca0993a1",
+          "path": "native/crates/modhunter-core/src/source_adapters/http.rs",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/e553f389fdea95fc69a5ea6b4c63e93fca0993a1/native/crates/modhunter-core/src/source_adapters/http.rs",
+          "evidence": "portable_runtime_verified",
+          "observed": "242 core tests plus strict Clippy; overlapping verified aliases share exact public API observations; benchmark4to3requests with identical full rows.",
+          "limits": "Transient overlap only. Existing size/output policy unchanged. Windows/MO2 and declared1.99.1 Rust gates remain open."
         }
       ],
-      "nextAction": "Evaluate the maintained GameSync module in compatible GameSync Next/browser consumers with equivalent requests, response streams, credentials and cancellation; port behavior/fixtures rather than adding a competing copy. Keep host-specific isolation."
+      "nextAction": "Review the published tested changes and complete host-specific acceptance. Preserve common semantics through shared fixtures; select a reusable package only after host APIs, response ownership and cancellation contracts agree."
     },
     {
       "id": "acquisition.web-extraction",
@@ -205,7 +243,8 @@
       ],
       "researchRefs": [
         "guidance/registry/web-acquisition-watch.json",
-        "engineering/data/research-catalog.json"
+        "engineering/data/research-catalog.json",
+        "research/web-scraping-2026-11-25/README.md"
       ],
       "candidates": [
         {

@@ -53,3 +53,7 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 ## Cross-project product requirements
 
 [Universal engineering pillars](PRODUCT-PILLARS.md) apply across repositories. Its separate project-goal index links domain-specific requirements to their owning repositories; MO2R features, External CAS photo fitting and game mechanics are not global pillars. Requirements and acceptance evidence remain distinct from shipped completion.
+
+## Web acquisition
+
+[All-ten source analysis, implemented reliability fixes and measured evidence](../research/web-scraping-2026-11-25/README.md).

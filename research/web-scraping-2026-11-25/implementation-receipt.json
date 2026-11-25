@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-25",
+  "scope": "All ten post repositories analyzed; actual source improvements in five owned repositories.",
+  "sourcePost": "https://x.com/Lucy_love_AI/status/2125396894784561159",
+  "sourcePostAccess": "Direct X access returned HTTP 403. Initial indexed attributed copies agreed on all ten names. During final review, the live teapawt mirror displayed the complete attributed post, and its individual status page matched the exact requested status ID2125396894784561159 and all ten GitHub links: https://teapawt.org/Lucy_love_AI/status/2125396894784561159. Technical claims were checked against primary project sources.",
+  "repositories": [
+    {
+      "repository": "Herbertofury/Athena",
+      "baseline": "7d335a740ea92a66674bf4412c48f5e03faf6e9f",
+      "collectorCheckpoint": "62f081cd4f10bb08db0c7922ae19a3e7544e4b0b",
+      "branch": "scraping-reliability-2026-11-25",
+      "tests": {
+        "collector": 14,
+        "researchAndExplorer": 149
+      },
+      "catalog": {
+        "candidates": 392,
+        "comparisonPlans": 69,
+        "watchedRepositories": 19,
+        "registeredSources": 2796,
+        "sourceFiles": 45,
+        "restoredCandidates": 105,
+        "historicalCheckpoint": "b78bdc5a86ce5174012790bf92f8f403753288b3"
+      },
+      "measurement": {
+        "scope": "32 release lookups plus3 discovery calls; five interleaved real loopback HTTP runs; fixed15ms response delay",
+        "requestsBeforeAndAfter": 35,
+        "bodyBytesBeforeAndAfter": 5803,
+        "medianSecondsBefore": 0.56095852,
+        "medianSecondsAfter": 0.148298635,
+        "completeOutputsEqual": true
+      },
+      "evidence": [
+        "collector-benchmark.json",
+        "athena-research-reconciliation.json"
+      ],
+      "package": {
+        "profile": "public-preview",
+        "sourceFiles": 134,
+        "artifactFiles": 137,
+        "workspaceTests": 13,
+        "packageGuardrailTests": 14,
+        "sameWorkspaceTestsAgainstPackage": 13,
+        "catalogSha256": "1a6357e2056952462cf6a39120dbd661fd7c13a56e7dc67aa11af64e40cda3a5",
+        "completeProfileGate": "Pre-existing missing workspaces/foundry/index.js",
+        "verification": "athena-runtime-package-verification.json"
+      }
+    },
+    {
+      "repository": "Herbertofury/Gamesync",
+      "baseline": "c1d9cc2239ead31d20244e4353e6dd705ec36cda",
+      "commit": "02fa1f21dc5da473023df41d430ad69e608c190b",
+      "tree": "aa8d8aa992a9130591ebb7d48c2c57dc2b074504",
+      "pullRequest": "https://github.com/Herbertofury/Gamesync/pull/7",
+      "tests": 16,
+      "measurement": {
+        "scope": "10 repeated overlap scenarios per helper",
+        "requestsBefore": 30,
+        "requestsAfter": 20,
+        "bodyBytesBefore": 2033310,
+        "bodyBytesAfter": 1355540,
+        "completeItemCopiesBeforeAndAfter": 15360
+      },
+      "challenge": "Copied URL/Headers/RequestInit snapshot now drives both identity and deferred transport; independent Request, signal and complex options passthrough retained.",
+      "evidence": [
+        "gamesync-benchmark.json"
+      ]
+    },
+    {
+      "repository": "Herbertofury/GameSync-Next",
+      "baseline": "0cdd327e53bf1d70485f4e4a1917a07778c79566",
+      "commit": "6f8b483617f6c44ac8a474388d74a6ccef361e9d",
+      "tree": "5d45740af333ec57d0aeb36f748180ed439f7982",
+      "pullRequest": "https://github.com/Herbertofury/GameSync-Next/pull/56",
+      "tests": 23,
+      "typecheck": "Strict TypeScript6.0.3, both modules",
+      "measurement": {
+        "scope": "10 repeated overlap scenarios per helper",
+        "requestsBefore": 30,
+        "requestsAfter": 20,
+        "bodyBytesBefore": 2033310,
+        "bodyBytesAfter": 1355540,
+        "completeItemCopiesBeforeAndAfter": 15360
+      },
+      "evidence": [
+        "gamesync-next-benchmark.json"
+      ]
+    },
+    {
+      "repository": "Herbertofury/Enderloom",
+      "baseline": "e23eaea97d46348144d1706736c157282abfd44a",
+      "commit": "ab16cf64e87d5aca772c81bf5c210ab42560ad63",
+      "tree": "a476abc0b95d5ba1b9ca62239e69582d7c69b8b3",
+      "localEquivalentCommit": "7395ffbdc9a70da2882ba91757ae6cabb9480baa",
+      "pullRequest": "https://github.com/Herbertofury/Enderloom/pull/97",
+      "tests": {
+        "newLifecycle": 14,
+        "existingProviderDomainAssertions": 204,
+        "otherExistingSuites": "media-performance, media-transport, provider-media, curseforge-author-fanout, media-identity, parser-pool"
+      },
+      "measurement": {
+        "scope": "One complete2MiB loopbackHTTP response",
+        "bodyBytes": 2097152,
+        "transportConcatCopyBytesBefore": 2367310,
+        "transportConcatCopyBytesAfter": 2260992,
+        "allOutputHashesEqual": true
+      },
+      "rejectedOptimization": "Parser queue cursor removed after inconsistent timing; complete raw batches retained.",
+      "evidence": [
+        "provider-progressive-copy-20261125.json",
+        "provider-queue-experiment-20261125.json"
+      ]
+    },
+    {
+      "repository": "Herbertofury/Modhunter",
+      "baseline": "a7f9173ecce36f16cf04f8b42689f533a4bf405f",
+      "commit": "e553f389fdea95fc69a5ea6b4c63e93fca0993a1",
+      "tree": "ffd77642540b3a3bafefe9b5d98eb39f5c645d02",
+      "localEquivalentCommit": "23dab1b2fa2054ce485904a13acee056b6641916",
+      "pullRequest": "https://github.com/Herbertofury/Modhunter/pull/75",
+      "tests": 242,
+      "lint": "StrictClippy alltargets -D warnings; Rust1.100.0",
+      "measurement": {
+        "scope": "24 repetitions with24rows,16versions,64files/version and overlapping verified aliases",
+        "requestsBefore": 4,
+        "requestsAfter": 3,
+        "bodyBytesBefore": 613638,
+        "bodyBytesAfter": 307119,
+        "completeOutputDigest": "ff68282cbc40eac4bede623ea4b33ff91e623a8a8e4c562f0911dfb33343fcfb"
+      },
+      "challenge": "Public Observation.value remains Value; shared Arc<Observation> is private.",
+      "liveEvidence": "Final CLI read all4providers and cache repeats used0queries; overlap depends on arrival timing. Nonoverlapping final alias sample correctly retained4queries/1revalidation.",
+      "evidence": [
+        "modhunter-receipt.json"
+      ]
+    }
+  ],
+  "limits": [
+    "Fixture/resource results are not whole-app or live-site speed claims.",
+    "These are source review branches; no merge or installed release is claimed.",
+    "Native Windows/Opera/MO2/installer acceptance remains separate.",
+    "Modhunter repository-pinned Rust1.99.1 was not exercised; available1.100.0 was used.",
+    "Initial private hosted workflows stopped before any runner step; no test assertion was executed. Exact remote state is tracked in final publication receipt.",
+    "Wiki mirrors are reviewable; live wiki publication is not established by a repository file.",
+    "No complete private repository archive is claimed without verified archive download."
+  ],
+  "optimizerEvidence": "optimizer-assessments/; scopes and source hashes preserved; no speculative deletion/native port promoted.",
+  "hostedCI": {
+    "privateRepositoryBlocker": "GitHub reports jobs not started because recent account payments failed or spending limit must increase; no checkout or test steps ran.",
+    "GamesyncRun": 45688568381,
+    "GameSyncNextRun": 45688581373,
+    "Enderloom": "Changed provider lifecycle gates passed Windows/macOS/Linux; see exact per-job receipt.",
+    "evidence": "hosted-ci-review.json",
+    "latestObservation": "hosted-ci-final-observation.json"
+  },
+  "sourceArchives": {
+    "Gamesync": "4,997 files; all exact blobs and modes verified; tree aa8d8aa992a9130591ebb7d48c2c57dc2b074504",
+    "GameSyncNext": "5,040 files; all exact blobs and modes verified; tree5d45740af333ec57d0aeb36f748180ed439f7982",
+    "route": "Normal authenticated GitHub Download ZIP for exact commit; no credential export or billing change",
+    "evidence": "gamesync-source-archives.json"
+  }
+}

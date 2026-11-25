@@ -1,0 +1,155 @@
+{
+  "disposition": "rejected: inconsistent timing; original queue.shift retained in final source",
+  "batches": [
+    {
+      "baseline": "e23eaea97d46348144d1706736c157282abfd44a",
+      "results": [
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 888.210109,
+          "cpuMs": 2957.733,
+          "maxRssKb": 228284,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 702.269538,
+          "cpuMs": 2401.11,
+          "maxRssKb": 228032,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 776.078661,
+          "cpuMs": 2572.493,
+          "maxRssKb": 230576,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 801.062136,
+          "cpuMs": 2676.927,
+          "maxRssKb": 227536,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 746.291932,
+          "cpuMs": 2608.774,
+          "maxRssKb": 229180,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 690.319058,
+          "cpuMs": 2508.191,
+          "maxRssKb": 233172,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        }
+      ],
+      "outputIdentical": true,
+      "elapsedMs": {
+        "baseline": 801.062136,
+        "candidate": 702.269538
+      },
+      "cpuMs": {
+        "baseline": 2676.927,
+        "candidate": 2508.191
+      },
+      "maxRssKb": {
+        "baseline": 228284,
+        "candidate": 230576
+      }
+    },
+    {
+      "baseline": "e23eaea97d46348144d1706736c157282abfd44a",
+      "candidate_source_checkpoint": "d575cb4",
+      "environment": {
+        "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+        "node": "v24.22.3",
+        "coordination": "Rust compilation finished; other agents asked to hold heavy work during these six runs; shared cloud host cannot guarantee external load isolation."
+      },
+      "results": [
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 933.8743589999999,
+          "cpuMs": 2960.149,
+          "maxRssKb": 228020,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 802.280958,
+          "cpuMs": 2753.726,
+          "maxRssKb": 230328,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 587.916072,
+          "cpuMs": 2173.081,
+          "maxRssKb": 227964,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 671.65052,
+          "cpuMs": 2241.503,
+          "maxRssKb": 227684,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 764.1661780000001,
+          "cpuMs": 2427.626,
+          "maxRssKb": 227956,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "baseline"
+        },
+        {
+          "count": 24000,
+          "workers": 4,
+          "elapsedMs": 813.661891,
+          "cpuMs": 2621.975,
+          "maxRssKb": 228416,
+          "outputSha256": "a0a91fbcdf7939a02376de099a508db1f2157cd9db26dcb3bd0168eb55e26a95",
+          "variant": "candidate"
+        }
+      ],
+      "outputIdentical": true,
+      "elapsedMs": {
+        "baseline": 764.1661780000001,
+        "candidate": 802.280958
+      },
+      "cpuMs": {
+        "baseline": 2427.626,
+        "candidate": 2621.975
+      },
+      "maxRssKb": {
+        "baseline": 227956,
+        "candidate": 228416
+      }
+    }
+  ]
+}

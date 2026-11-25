@@ -95,3 +95,7 @@ Native Lab continuation ports the preserved cancellation/deadline and malformed-
 ## Portfolio catch-up
 
 - [Portfolio alignment and shared capability milestones](https://github.com/Herbertofury/Athena/wiki/Engineering-Portfolio-Alignment) — prioritized repository tasks and existing local work links.
+
+- [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+- [Web acquisition research and reliability](Engineering-Web-Acquisition)

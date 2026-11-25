@@ -166,3 +166,5 @@
 ## Game engines
 
 - [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+- [Web acquisition research and reliability](Engineering-Web-Acquisition)

@@ -16,7 +16,7 @@ function setup(){
 test('Research mounts actual catalog, filters, shortlist and exports without global routing',async()=>{
  const env=setup();let controller;const routes=[];
  try{controller=await(await component('research')).mount({container:env.container,theme:'light',navigate:(...x)=>routes.push(x)});const root=env.container.shadowRoot;
- assert.equal(controller.ready,true,root.getElementById('results').textContent);assert.match(root.getElementById('result-count').textContent,/283/,root.getElementById('results').textContent);assert.equal(root.querySelector('iframe'),null);assert.equal(root.querySelector('.masthead'),null);
+ assert.equal(controller.ready,true,root.getElementById('results').textContent);assert.match(root.getElementById('result-count').textContent,/392/,root.getElementById('results').textContent);assert.equal(root.querySelector('iframe'),null);assert.equal(root.querySelector('.masthead'),null);
  controller.setSearch('rust');assert.equal(controller.exportState().query,'q=rust');assert.match(routes.at(-1)[0],/^#research\?q=rust$/);
  controller.setRoute('#research?q=storage&sort=name');assert.equal(controller.exportState().query,'q=storage&sort=name');
  controller.setSearch('');const box=root.querySelector('input[type="checkbox"]');assert.ok(box);box.checked=true;box.dispatchEvent(new env.window.Event('change'));assert.equal(controller.exportState().shortlist.length,1);
