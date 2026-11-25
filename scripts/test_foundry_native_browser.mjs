@@ -90,6 +90,34 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await context.request.post(origin+'/__native/backup',{headers:{'X-Athena-Native':'1','Content-Type':'application/json','If-Match':'"empty"'},data:'{}'})).status(),403);
   assert.equal((await context.request.post(origin+'/api/jobs',{headers:{Origin:origin,'X-Athena-Native':'1'},data:{kind:'dedup'}})).status(),403);
  });
+ if(portableUnified)await check('Extracted portable Athena browses exact offline frontier source evidence',async()=>{
+  const evidencePath='/workspaces/engineering/research/frontier-observations.json';
+  const events=[];
+  const track=request=>{if(new URL(request.url()).pathname===evidencePath)events.push(request.url());};
+  page.on('request',track);
+  try{
+   await page.goto(origin+'/#research');
+   await page.locator('.workspace-status').filter({hasText:'Athena research workspace loaded.'}).waitFor();
+   const panel=page.locator('#frontier-observations');
+   const matches=panel.locator('[data-source-observation]');
+   assert.equal(events.length,0);
+   const loaded=page.waitForResponse(r=>new URL(r.url()).pathname===evidencePath);
+   await panel.locator('summary').press('Space');
+   const response=await loaded;
+   assert.equal(response.status(),200);
+   const payload=await response.body();
+   assert.equal(createHash('sha256').update(payload).digest('hex'),
+    createHash('sha256').update(fs.readFileSync(path.join(portable,'runtime',evidencePath.slice(1)))).digest('hex'));
+   await panel.getByRole('status').filter({hasText:'64 of 64 source observations'}).waitFor();
+   assert.equal(await matches.count(),64);
+   await panel.getByLabel('Source batch').selectOption('releases');
+   await panel.getByLabel('Search observations').fill('VulkanMod');
+   assert.equal(await matches.count(),1);
+   assert.equal(await matches.first().getByRole('link').getAttribute('href'),'https://github.com/xCollateral/VulkanMod/releases/tag/0.6.0');
+   assert.equal(events.length,1);
+   assert.equal(report.externalRequests.length,0);
+  }finally{page.off('request',track);}
+ });
  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
   assert.equal(await page.locator('.foundry-workspace iframe').count(),0);
