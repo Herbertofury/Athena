@@ -1,6 +1,7 @@
 //! Evidence gates for bounded implementation experiments, not a general self-rewriting AI.
 extern crate self as atlas_lab;
 pub mod athena_assets;
+mod atlas_archive;
 pub mod collection_failure;
 pub mod learning_history;
 pub mod migration_readiness;
