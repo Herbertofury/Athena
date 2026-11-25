@@ -9,6 +9,8 @@ The goal is one configurable run engine for several game shapes, not a clone of 
 - action / platformer: authored encounter graphs, traversal unlocks, checkpoints and boss phases;
 - card roguelite: deck mutations, card rewards, relics, map events and card-battle encounters.
 
+The GameSync five-minute Survivors source file is now preserved in `upstream/gamesync/` with an exact source blob pin. The shared canvas runtime is maintained once in [Shared Browser Game Runtime](../shared-game-runtime/README.md).
+
 ## Source candidates
 
 - GameSync `game-survivors.js` is a playable five-minute survivor-style loop; it currently uses Math.random and a fixed duration. Its canvas runtime is shared with other mascot games.
