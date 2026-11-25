@@ -48,3 +48,15 @@ rendering and interaction parity are not implied.
 Run `python scripts/build_foundry_catalog_labels.py --check` to verify the
 projection against the preserved authored source and the unchanged native
 SQLite catalog, without using owner data.
+
+### Open an object's source action
+
+Select a visible object in the inspector, then activate its source action.
+An original screen or video affordance opens the **Local video surface** controls;
+music or note opens **Selected room soundtrack**; other authored objects open
+the **Object ecology motion lab** controls. Screen/video takes precedence when
+the original object describes more than one route. This matches the original
+routing categories while using Athena's local controls. It changes only focus:
+it never moves a saved object, opens a remote provider, assigns a soundtrack,
+chooses a file, begins a motion preview, or starts playback. If the destination
+is disabled or the selected object is hidden, the action is unavailable.
