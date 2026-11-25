@@ -166,6 +166,15 @@
       "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
     },
     {
+      "id": "understand-anything",
+      "upstream": "https://github.com/Egonex-AI/Understand-Anything",
+      "lane": "targeted",
+      "trigger": "Material cross-file impact, architecture or onboarding delta too complex for a direct source walk alone",
+      "use": "Optional pinned graph evidence; distinguish observed, inferred and runtime-verified relationships. Verify candidate and component scope freshness before linking a reviewed wiki summary.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Reviewed reference b232f356446295e4eaa05b9b285e08ce5cd5e8a0. No auto-install, model egress, private source ingestion or raw graph publication."
+    },
+    {
       "id": "diagram-design",
       "upstream": "https://github.com/cathrynlavery/diagram-design",
       "lane": "targeted",

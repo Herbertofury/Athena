@@ -6,12 +6,13 @@ Athena maintains shared guidance for all participating projects. Documentation i
 
 1. Consult the [canonical closeout standard](https://github.com/Herbertofury/Athena/blob/main/guidance/WIKI_CLOSEOUT.md) and the owning project's accepted feature inventory.
 2. Use the [feature guide template](https://github.com/Herbertofury/Athena/blob/main/guidance/templates/WIKI_FEATURE_GUIDE.md) to update the affected pages; retain existing useful documentation.
-3. Verify instructions against the actual supported app or deliverable. Check redundant steps, duplicate implementations and missing features; repair and retest safe improvements.
-4. Publish and verify the required live Wiki, then attach the evidence to the [release checkout receipt](https://github.com/Herbertofury/Athena/blob/main/guidance/PRE_RELEASE_OPTIMIZATION.md). Record blockers honestly.
+3. Turn material changes into a small, source-linked map: entry point, changed component, one important dependency or stored result, and a real walkthrough. Mark inferred links and stale/unknown coverage.
+4. Verify instructions against the actual supported app or deliverable. Check redundant steps, duplicate implementations and missing features; repair and retest safe improvements.
+5. Publish and verify the required live Wiki, then attach the evidence to the [release checkout receipt](https://github.com/Herbertofury/Athena/blob/main/guidance/PRE_RELEASE_OPTIMIZATION.md). Record blockers honestly.
 
 ## Tooling and shared knowledge
 
-- [Documentation tool routing](https://github.com/Herbertofury/Athena/blob/main/guidance/WIKI_CLOSEOUT.md#4-documentation-tool-routing) covers RAG-Anything, Diagram Design and lightweight alternatives.
+- [Documentation tool routing](https://github.com/Herbertofury/Athena/blob/main/guidance/WIKI_CLOSEOUT.md#4-documentation-tool-routing) covers optional Understand Anything, RAG-Anything, Diagram Design and lightweight alternatives. A graph helps explain a slice; it never replaces exact source links or runtime proof.
 - [Shared capability coordination](https://github.com/Herbertofury/Athena/blob/main/docs/REUSABLE-PACKAGE-COORDINATION.md) tracks reusable implementations and protects distinct project features.
 - [Frontier stack advancement](https://github.com/Herbertofury/Athena/blob/main/guidance/WEB_ACQUISITION_FRONTIER.md) requires current evidence and fix-forward repair before holding eligible older versions.
 

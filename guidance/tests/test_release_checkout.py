@@ -166,6 +166,40 @@ class ReleaseCheckoutTests(unittest.TestCase):
         publication["mode"] = "pending"
         self.assertTrue(validate(r, HEAD))
 
+    def test_documentation_knowledge_map_checks_current_and_stale_graph_evidence(self):
+        r = receipt()
+        doc = r["checks"]["documentation_closeout"]
+        self.assertEqual(validate(r, HEAD), [])  # Existing validated receipts survive.
+        doc["knowledge_map"] = {
+            "mode": "changed", "method": "generated_graph", "head": HEAD,
+            "graph_head": HEAD, "scope": "fixture importer", "evidence": "fixture wiki component map",
+        }
+        self.assertEqual(validate(r, HEAD), [])
+        graph = doc["knowledge_map"]
+        graph["graph_head"] = "c" * 40
+        self.assertIn("different graph head needs scope diff evidence", " ".join(validate(r, HEAD)))
+        graph["scope_diff_evidence"] = "fixture: dependency and component scope unchanged"
+        self.assertEqual(validate(r, HEAD), [])
+        graph["graph_head"] = "main"
+        self.assertIn("full generated graph head required", " ".join(validate(r, HEAD)))
+
+    def test_documentation_knowledge_map_requires_source_walk_or_reason(self):
+        r = receipt()
+        doc = r["checks"]["documentation_closeout"]
+        doc["knowledge_map"] = {"mode": "changed", "head": HEAD, "method": "source_walk",
+                                "scope": "fixture importer", "evidence": "fixture paths and command readback"}
+        self.assertEqual(validate(r, HEAD), [])
+        doc["knowledge_map"]["scope"] = ""
+        self.assertIn("changed component scope required", " ".join(validate(r, HEAD)))
+        doc["knowledge_map"]["head"] = "c" * 40
+        self.assertIn("exact candidate head required", " ".join(validate(r, HEAD)))
+        doc["knowledge_map"] = {"mode": "not_applicable", "reason": "typo-only; no change to scope"}
+        self.assertEqual(validate(r, HEAD), [])
+        doc["knowledge_map"]["reason"] = ""
+        self.assertIn("inapplicability reason required", " ".join(validate(r, HEAD)))
+        doc["knowledge_map"] = []
+        self.assertIn("must be an object", " ".join(validate(r, HEAD)))
+
     def test_high_risk_requires_extra_proof(self):
         r = receipt()
         r["lane"] = "high-risk"
