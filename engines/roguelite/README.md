@@ -24,3 +24,24 @@ Deterministic seeded RNG streams, fixed-step simulation, configurable run profil
 ## Promotion gate
 
 Same seed + ruleset + content lock + action stream must reproduce the same eligible result. Test early/mid/late runs, cancellation, pause/resume, reload, defeat, reward duplication, save migration and complete native/packaged gameplay. No source candidate is selected as universal winner yet.
+
+## Executable intake slice: GameSync survivor spawn director
+
+The native game is not replaced. This optional standalone ESM module extracts
+the original enemy templates and exact spawn/tick formulas from the pinned
+GameSync source, with the original random helper math. It accepts explicit
+host ticks, player positions and an injected random stream. It runs without
+DOM, storage, renderer, game assets or network calls.
+
+`createSpawnDirector({duration, random, checkpoint?})` returns a `step` method
+and a versioned `checkpoint()` receipt. The default duration is the original
+300 seconds. Original one-batch hitch behavior is unchanged; death, movement,
+pauses, weapon effects, rewards and upgrades stay with the host. A host must
+save its own random cursor and replay inputs when restoring. This is a first
+rules-extraction proof, not a canonical engine or a two-host acceptance.
+
+```sh
+node engines/roguelite/tools/build-survivor-spawns.mjs --check
+node --test engines/roguelite/tests/spawn-director.test.mjs
+node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
+```
