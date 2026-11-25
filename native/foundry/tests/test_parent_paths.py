@@ -1,5 +1,5 @@
 """Parent-component boundary tests; no database files or native processes created."""
-import contextlib,importlib.util,io,pathlib,sys,unittest
+import contextlib,importlib.util,io,pathlib,stat,sys,types,unittest
 from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('parent_launcher',ROOT/'native/foundry/portable_launcher.py')
@@ -20,7 +20,8 @@ class ParentPathTests(unittest.TestCase):
   stack.enter_context(patch.object(launch.os.path,'lexists',return_value=False))
   stack.enter_context(patch.object(launch.tempfile,'TemporaryDirectory',side_effect=AssertionError('unexpected staging')))
   stack.enter_context(patch.object(launch.subprocess,'run',side_effect=AssertionError('unexpected process')))
-  stack.enter_context(patch.object(launch.os,'link',side_effect=AssertionError('unexpected publication')))
+  for operation in ('link','rename'):
+   stack.enter_context(patch.object(launch.os,operation,side_effect=AssertionError('unexpected publication')))
   return stack
  def test_create_rejects_parent_path_before_work(self):
   with self.guards(),self.assertRaisesRegex(ValueError,'Parent path'):
@@ -38,8 +39,10 @@ class ParentPathTests(unittest.TestCase):
   for value in (self.good,pathlib.Path('external')/'db.sqlite',pathlib.Path('..db')/'db.sqlite'):
    with self.subTest(value=str(value)):
     self.assertEqual(launch.external_path(value),pathlib.Path(value).absolute())
- def test_direct_create_still_checks_symlink(self):
-  with patch.object(pathlib.Path,'is_dir',return_value=True),patch.object(pathlib.Path,'is_symlink',return_value=True),patch.object(launch.tempfile,'TemporaryDirectory',side_effect=AssertionError('unexpected staging')),self.assertRaisesRegex(ValueError,'New external'):
-   launch.create_database(self.root,self.data,self.good)
+ def test_direct_create_refuses_symlink_and_reparse_parents_before_staging(self):
+  for mode,attributes in ((stat.S_IFLNK,0),(stat.S_IFDIR,0x400)):
+   metadata=types.SimpleNamespace(st_mode=mode,st_file_attributes=attributes)
+   with self.subTest(mode=mode,attributes=attributes),self.guards(),patch.object(pathlib.Path,'lstat',return_value=metadata),self.assertRaisesRegex(ValueError,'New external'):
+    launch.create_database(self.root,self.data,self.good)
 
 if __name__=='__main__':unittest.main()
