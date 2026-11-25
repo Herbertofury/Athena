@@ -99,3 +99,49 @@ test('workspace filters category comparisons without saving or treating earlier 
  assert.equal(panel.hidden,true);assert.equal(yes.checked,false);
  assert.ok(s.writes.every(([,v])=>!String(v).includes('Shared across categories')));
 });
+
+const windowsReport={
+ schema:'athena-windows-directory-observation-v1',
+ scope:'Explicit directory direct children only. No child content, recursion, names, IDs or paths returned.',
+ records_examined:4, observed_file_pathnames:3,logical_pathname_bytes:10240,
+ identified_unique_files:2,observed_identified_allocation_bytes:8192,excluded_directories:1,
+ excluded_reparse_entries:0,files_without_stable_id:0,identity_or_name_conflicts:0,
+ stopped_entry_limit:false,stopped_batch_limit:false,partial:false,
+ point_in_time_snapshot:false,reclaimable_space_inferred:false
+};
+test('Windows v1 rejects claims beyond its evidence, unexpected private fields, and inaccurate numbers',async()=>{
+ const {parseWindowsDirectoryReport,parseStorageReport}=await import('../dist/workspaces/storage/model.mjs');
+ const parse=r=>parseWindowsDirectoryReport(JSON.stringify(r));
+ assert.equal(parse(windowsReport).identified_unique_files,2);
+ assert.equal(parse({...windowsReport,files_without_stable_id:1,partial:true}).partial,true);
+ assert.equal(parse({...windowsReport,records_examined:5,identity_or_name_conflicts:1,partial:true}).partial,true);
+ for(const bad of [
+  {path:'C:/secret'}, {reclaimable_space_inferred:true}, {point_in_time_snapshot:true},
+  {records_examined:3},{records_examined:5},{stopped_entry_limit:true},{partial:true},
+  {files_without_stable_id:2,partial:true},{logical_pathname_bytes:2**53},
+  {observed_identified_allocation_bytes:-1},{observed_identified_allocation_bytes:1.5},
+  {identified_unique_files:0}, {records_examined:100001}
+ ])assert.throws(()=>parse({...windowsReport,...bad}));
+ assert.throws(()=>parse(record));
+ assert.throws(()=>parseStorageReport(JSON.stringify(windowsReport)));
+ assert.throws(()=>parseWindowsDirectoryReport(' '.repeat(4097)));
+});
+test('Windows summary stays separate, shows exact bytes and partial coverage, and clears safely',async()=>{
+ const s=await app(),root=s.root(),input=root.querySelector('#windows-observation-file');
+ const panel=root.querySelector('.windows-report'),status=panel.querySelector('[role=status]');
+ const loadWin=async file=>{input.files=[file];await input.onchange();};
+ await load(root,contents(record));await loadWin(contents(windowsReport));
+ assert.match(panel.textContent,/8 KiB \(8,192 bytes\)/);assert.match(panel.textContent,/not verified here/i);
+ assert.match(panel.textContent,/1 directory/);assert.equal(root.querySelectorAll('#rows li').length,3);
+ assert.equal(root.querySelector('#comparison-result').hidden,true);
+ await loadWin(contents({...windowsReport,stopped_batch_limit:true,partial:true}));
+ assert.match(panel.textContent,/Partial observation: batch limit reached/);
+ await loadWin(contents({...windowsReport,name:'PRIVATE'}));assert.match(status.textContent,/Previous report preserved/);
+ assert.doesNotMatch(panel.textContent,/PRIVATE/);assert.match(panel.textContent,/Partial observation/);
+ let done;const pending=loadWin({size:300,text:()=>new Promise(resolve=>done=resolve)});
+ panel.querySelector('button').onclick();done(JSON.stringify(windowsReport));await pending;
+ assert.match(status.textContent,/cleared/);assert.equal(panel.querySelector('.windows-evidence').children.length,0);
+ const suspended=loadWin({size:300,text:()=>new Promise(resolve=>done=resolve)});
+ await s.go('#foundations');done(JSON.stringify(windowsReport));await suspended;
+ assert.equal(root.children.length,0);assert.equal(s.writes.length,0);
+});

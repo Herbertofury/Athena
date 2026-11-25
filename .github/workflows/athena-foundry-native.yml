@@ -97,6 +97,12 @@ jobs:
         run: |
           node scripts/test_foundry_native_browser.mjs
           python -B candidate-extracted/launch.py --verify-only
+      - name: Extracted Windows directory report in Chromium
+        if: runner.os == 'Windows'
+        env:
+          ATHENA_PUBLIC_ROOT: candidate-extracted/runtime
+          ATHENA_TEST_PACKAGED_WIN_OBSERVATION: candidate-extracted/atlas-lab.exe
+        run: node scripts/test_storage_compare_browser.cjs
       - name: Extracted Foundry recovery capsule and original room editor
         env:
           ATHENA_BROWSER_ROOT: candidate-extracted/runtime
@@ -147,4 +153,5 @@ jobs:
             browser-results/foundry-asset-library/
             browser-results/foundry-drag-offset/
             browser-results/foundry-drag-grid/
+            browser-results/storage-windows-observation*.png
           if-no-files-found: error
