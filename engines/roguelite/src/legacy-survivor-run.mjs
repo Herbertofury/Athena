@@ -4,15 +4,15 @@ import {tickPlayerMovement,tickEnemyContact} from './gamesync-movement-formulas.
 import {tickPickupFormulas,spawnExperienceGem} from './gamesync-pickup-formulas.mjs';
 import {tickSpawnFormulas} from './gamesync-spawn-formulas.mjs';
 import {createLegacyUpgradeDirector} from './upgrade-draft.mjs';
-import {arenaFormat,endurancePressure} from './arena-formats.mjs';
+import {arenaFormat,endurancePressure,arcSideFormat} from './arena-formats.mjs';
 
 import {createRoamingPoints} from './roaming-points.mjs';
 
 export const LEGACY_SURVIVOR_RUN_CONTRACT='athena.roguelite.gamesync-live.v1';
 const SURVIVE_TIME=300;
 
-export function createLegacySurvivorRun({random,format='classic',seed}={}) {
- const recipe=arenaFormat(format),classic=recipe.id==='classic';
+export function createLegacySurvivorRun({random,format='classic',seed,sideMinutes}={}) {
+ const recipe=sideMinutes===undefined?arenaFormat(format):arcSideFormat(sideMinutes),classic=recipe.id==='classic';
  if(typeof random!=='function')throw new TypeError('Explicit entropy source required');
  const rng=()=>{
   const n=random();
@@ -23,7 +23,7 @@ export function createLegacySurvivorRun({random,format='classic',seed}={}) {
  const player=createLegacyPlayer();
  const run={kills:0,gameOver:false,won:false};
  const enemies=[],gems=[];
- const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng,portable:!!roaming});
+ const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng,portable:!!roaming||sideMinutes!==undefined});
  let gameTime=0,spawnTimer=0,offers=null,missedSpawns=0;
  const dispatch=(events)=>events.filter(cue=>{
   if(cue.type!=='particles')return true;
@@ -86,5 +86,5 @@ export function createLegacySurvivorRun({random,format='classic',seed}={}) {
    ...(roamingView?{roaming:roamingView}:{}),
    ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{})};
  }
- return Object.freeze({step,choose,snapshot});
+ return Object.freeze({step,choose,snapshot,location:()=>({gameTime,player:{x:player.x,y:player.y}})});
 }

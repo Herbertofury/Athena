@@ -86,6 +86,8 @@ jobs:
         run: node --test engines/roguelite/tests/arena-replay.test.mjs
       - name: Hunt roaming geodes and fleeing goblins; collect and replay exact rewards
         run: node --test engines/roguelite/tests/roaming-points.test.mjs
+      - name: Prove 10, 20 and 30 minute side-run isolation and portable return
+        run: node --test engines/roguelite/tests/rift-director.test.mjs engines/roguelite/tests/rift-session.test.mjs engines/roguelite/tests/rift-expedition.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML

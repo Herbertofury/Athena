@@ -3,6 +3,7 @@
 // same deterministic engine is used to replay saved inputs and to resume.
 import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
 import {arenaFormat} from './arena-formats.mjs';
+import {createRiftExpedition} from './rift-expedition.mjs';
 export const ARENA_TAPE_SCHEMA='athena.survivor-arena.tape.v1';
 export const ARENA_REPLAY_RULES='gamesync-live-v1+ramp-20261125+lcg32-60hz';
 export const ARENA_STEP=1/60;
@@ -20,9 +21,10 @@ function exact(a,fields){
 
 export function createRecordedArena({seed,format='classic'}={}){
  if(!uint(seed,2**32-1))throw RangeError('Invalid Arena seed');
- arenaFormat(format);
+ const recipe=arenaFormat(format);
  let cursor=seed>>>0,ticks=0,phase='running',truncated=false;
- const host=createLegacySurvivorRun({format,seed,random:()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;}});
+ const random=()=>{cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;};
+ const host=recipe.rifts?createRiftExpedition({seed,random}):createLegacySurvivorRun({format,seed,random});
  const input=[];
  function advance(mask){
   if(!uint(mask,31))throw Error('Invalid Arena input mask');
@@ -41,7 +43,8 @@ export function createRecordedArena({seed,format='classic'}={}){
   return next;
  }
  function choose(id){
-  if(phase!=='choice'||typeof id!=='string'||id.length>96)throw Error('No such pending Arena choice');
+  const abandoning=recipe.rifts&&id==='rift-abandon'&&phase!=='finished'&&!!host.riftActive();
+  if((phase!=='choice'&&!abandoning)||typeof id!=='string'||id.length>96)throw Error('No such pending Arena choice');
   const next=host.choose(id),view=host.snapshot();
   if(!truncated){if(input.length===MAX_SEGMENTS)truncated=true;else input.push([id]);}
   phase=view.run.gameOver?'finished':'running';
@@ -53,7 +56,7 @@ export function createRecordedArena({seed,format='classic'}={}){
    // Expedition introduces long-running movement with trig. Normalize sub-pixel
    // float noise for cross-runtime verification, not engine inputs or world state.
    // Existing formats keep their exact byte-for-byte tape state digests.
-   final:JSON.stringify({phase,cursor,world:host.snapshot()},format==='roaming-expedition-20'
+   final:JSON.stringify({phase,cursor,world:host.snapshot(),...(recipe.rifts?{suspended:host.captureSuspended()}:{})},recipe.roaming
     ?(_key,value)=>typeof value==='number'&&!Number.isInteger(value)?Number(value.toFixed(6)):value
     :undefined)};
  }
