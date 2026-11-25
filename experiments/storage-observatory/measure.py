@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """One-shot Linux storage observation, reporting aggregate metadata only."""
 import argparse
+import ctypes
 from datetime import datetime, timezone
+from functools import lru_cache
 import json
 import os
 import re
 import stat
+import struct
 import sys
 import time
 
@@ -37,7 +40,40 @@ def open_root(path):
         raise
 
 
+# Linux UAPI, not native struct stat: the fixed 256-byte struct statx has
+# stx_mask at byte 0 and stx_mnt_id at byte 144 on all Linux architectures.
+AT_EMPTY_PATH = 0x1000
+STATX_MNT_ID = 0x1000
+_STATX_BUFFER = ctypes.c_uint64 * (256 // 8)
+
+
+@lru_cache(maxsize=1)
+def _statx():
+    # Use the process libc when the symbol exists. A smaller or older Linux
+    # userspace can continue to use descriptor metadata under /proc.
+    try:
+        fn = getattr(ctypes.CDLL(None), 'statx', None)
+    except OSError:
+        return None
+    if fn is not None:
+        fn.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_uint, ctypes.c_void_p]
+        fn.restype = ctypes.c_int
+    return fn
+
+
 def mount_id(fd):
+    # This asks about the exact already-open descriptor, never about a path
+    # that could be retargeted after the caller checked it.
+    fn = _statx()
+    if fn is not None:
+        buf = _STATX_BUFFER()
+        if fn(fd, b'', AT_EMPTY_PATH, STATX_MNT_ID, ctypes.byref(buf)) == 0:
+            if struct.unpack_from('=I', buf)[0] & STATX_MNT_ID:
+                return struct.unpack_from('=Q', buf, 144)[0]
+    return proc_mount_id(fd)
+
+
+def proc_mount_id(fd):
     # Same-device bind mounts also cut across the selected directory boundary.
     # This reads only metadata for our own opened descriptor, never scan data.
     with open(f'/proc/self/fdinfo/{fd}', encoding='ascii', errors='strict') as info:

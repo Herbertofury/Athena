@@ -138,3 +138,30 @@ class MeasurementTests(unittest.TestCase):
         self.assertEqual(result['skipped']['mounts'],1)
         self.assertEqual(result['totals']['files'],2)
         self.assertFalse(result['partial'])
+
+    def test_descriptor_statx_matches_proc_identity_for_exact_objects(self):
+        from measure import _statx, proc_mount_id
+        if _statx() is None:
+            self.skipTest('libc statx unavailable')
+        for path in (self.fixture.root, self.fixture.normal, self.fixture.sparse):
+            fd = os.open(path, os.O_PATH | os.O_NOFOLLOW)
+            try:
+                expected = proc_mount_id(fd)
+                with patch('measure.proc_mount_id', side_effect=AssertionError('unexpected fallback')):
+                    self.assertEqual(mount_id(fd), expected)
+            finally:
+                os.close(fd)
+
+    def test_unavailable_or_incomplete_statx_uses_original_boundary_check(self):
+        from measure import proc_mount_id
+        fd = os.open(self.fixture.normal, os.O_PATH | os.O_NOFOLLOW)
+        try:
+            expected = proc_mount_id(fd)
+            for implementation in (None, lambda *args: -1, lambda *args: 0):
+                with self.subTest(implementation=implementation), patch('measure._statx', return_value=implementation):
+                    self.assertEqual(mount_id(fd), expected)
+                    with patch('measure.proc_mount_id', side_effect=OSError('independent mount ID unavailable')):
+                        with self.assertRaises(OSError):
+                            mount_id(fd)
+        finally:
+            os.close(fd)
