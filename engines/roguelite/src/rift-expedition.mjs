@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
+import {createSpatialRegion} from './spatial-region.mjs';
 import {createCampWorkshop} from './camp-workshop.mjs';
 import {createRiftDirector} from './rift-director.mjs';
 import {createRiftSession} from './rift-session.mjs';
 import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
 
-export function createRiftExpedition({seed,random,withCamp=false}) {
- const main=createLegacySurvivorRun({format:'roaming-expedition-20',seed,random});
+export function createRiftExpedition({seed,random,withCamp=false,regionFormat}) {
+ const main=createLegacySurvivorRun({format:regionFormat??'roaming-expedition-20',seed,random});
  const director=createRiftDirector(seed),camp=withCamp?createCampWorkshop():null;
  const travel=createRiftSession({main,createSide:({minutes,seed})=>{
   let cursor=seed>>>0;
@@ -16,11 +17,12 @@ export function createRiftExpedition({seed,random,withCamp=false}) {
  }});
  const wallet=()=>{
   const loot=main.balance(), earned=travel.bank();
-  return {crystal:loot.crystal+earned.crystal,gold:loot.gold+earned.gold};
+  return {crystal:loot.crystal+earned.crystal+regionBank,gold:loot.gold+earned.gold};
  };
- let decision=false, campPrompt=false, inRift=false;
+ let decision=false, campPrompt=false, regionPrompt=false, inRift=false, regionBank=0;
+ const region=regionFormat?createSpatialRegion(seed):null;
  function step(input) {
-  if(decision||campPrompt)return {status:'choice',audio:[]};
+  if(decision||campPrompt||regionPrompt)return {status:'choice',audio:[]};
   const result=travel.step(input);
   if(inRift){
    if(result.rift)inRift=false;
@@ -37,9 +39,18 @@ export function createRiftExpedition({seed,random,withCamp=false}) {
    campPrompt=true;
    return {...result,status:'choice'};
   }
+  if(region){
+   const regional=region.advance({player,dt:input.dt,choicePending:result.status==='choice'});
+   if(regional.crystal){regionBank+=regional.crystal;return {...result,region:{amount:regional.crystal}};}
+   if(regional.prompt){regionPrompt=true;return {...result,status:'choice'};}
+  }
   return result;
  }
  function choose(id){
+  if(regionPrompt){
+   region.choose(id);regionPrompt=false;
+   return {choice:id,region:id,audio:[]};
+  }
   if(campPrompt){
    const choice=camp.choose(id,wallet(),main.applyCampPerk);
    campPrompt=false;
@@ -61,7 +72,11 @@ export function createRiftExpedition({seed,random,withCamp=false}) {
  return Object.freeze({step,choose,riftActive:()=>inRift,captureSuspended:travel.captureSuspended,snapshot:()=>project(false),frameView:()=>project(true)});
  function project(frame){
   const view=frame?travel.frameView():travel.snapshot(), portal=director.snapshot();
-  return {...view,portal,...(camp?{camp:camp.snapshot(wallet())}:{}),...(campPrompt?{offers:camp.choices(wallet())}:decision?{offers:[
+  return {...view,portal,...(camp?{camp:camp.snapshot(wallet())}:{}),...(region?{region:{...region.snapshot(),bankedCrystal:regionBank}}:{}),
+   ...(regionPrompt?{offers:[
+    {id:'region-intervene',name:'Help the Amber Surveyors',icon:'◇',kind:'region'},
+    {id:'region-detour',name:'Leave the factions to it',icon:'↶',kind:'region'},
+   ]}:campPrompt?{offers:camp.choices(wallet())}:decision?{offers:[
    {id:'rift-enter',icon:'◈',name:'Enter '+portal.marker.minutes+'-minute rift',kind:'rift'},
    {id:'rift-stay',icon:'↶',name:'Stay in the main Expedition',kind:'rift'},
   ]}:{})};
