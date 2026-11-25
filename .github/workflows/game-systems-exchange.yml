@@ -92,6 +92,8 @@ jobs:
         run: node --test engines/roguelite/tests/arena-frame-view.test.mjs
       - name: Build camp upgrades using real earned expedition loot and exact tape replay
         run: node --test engines/roguelite/tests/camp-workshop.test.mjs
+      - name: Prove distinct same-seed routes, true 30-minute endpoint and exact frontier replay
+        run: node --test engines/roguelite/tests/spatial-region.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML

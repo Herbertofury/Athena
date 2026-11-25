@@ -14,7 +14,7 @@ function expected(s){
   projectiles:s.projectiles.map(e=>pick(e,['x','y','size','color'])),
   bibles:s.bibles.map(e=>pick(e,['angle','r','size','color'])),
   damageNumbers:s.damageNumbers.map(e=>pick(e,['x','y','val','color'])),
-  ...Object.fromEntries(['roaming','arenaFormat','rift','portal','camp'].filter(x=>Object.hasOwn(s,x)).map(x=>[x,s[x]])),
+  ...Object.fromEntries(['roaming','arenaFormat','rift','portal','camp','region'].filter(x=>Object.hasOwn(s,x)).map(x=>[x,s[x]])),
  };
 }
 function verify(host){
