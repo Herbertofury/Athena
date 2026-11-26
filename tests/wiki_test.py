@@ -32,6 +32,20 @@ class CatalogNavigationTests(unittest.TestCase):
     generated={str(p.relative_to(target)):p.read_bytes() for folder in ['docs','wiki','dist'] for p in (target/folder).rglob('*') if p.is_file()}
     if attempt: self.assertEqual(generated,previous)
     previous=generated
+   engineering_pages=[target/'wiki/Engineering-Home.md',target/'wiki/Engineering-Navigation.md']
+   for path in engineering_pages:
+    self.assertFalse(path.exists(), f'Learning catalog must not create {path.name}')
+    path.write_bytes(b'# Existing Engineering navigation\n\nKeep this exact content.\n')
+   before={path:path.read_bytes() for path in engineering_pages}
+   subprocess.run([sys.executable,str(target/'scripts/build_catalog.py')],check=True,capture_output=True)
+   for path,body in before.items(): self.assertEqual(path.read_bytes(),body)
+   for name in ('Home.md','_Sidebar.md'):
+    page=(target/'wiki'/name).read_text()
+    self.assertEqual(page.count('## Game engines'),1)
+    self.assertIn('## Game engines\n\n- [Athena Engine Foundry](Engineering-Engine-Foundry)',page)
+   founder=(target/'wiki/Engineering-Engine-Foundry.md').read_bytes()
+   self.assertIn(b'[Game Systems Exchange](Engineering-Game-Systems-Exchange)',founder)
+   self.assertTrue(founder.endswith(b'\n') and not founder.endswith(b'\n\n'))
 class DocumentationLinkTests(unittest.TestCase):
  def test_url_path_fragment_and_query(self):
   import sys
