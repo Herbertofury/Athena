@@ -12,7 +12,7 @@
 <label for="filter">Show collections</label> <select id="filter"><option value="all">All collections</option><option value="needs">Missing or uncertain</option></select>
 <p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div>
 <details><summary>Keep or compare a redacted review</summary>
-<p>The receipt contains only collection and reference counts. Add the JSON fingerprint only if you need to identify its exact decoded bytes later. A gzip file also shows its separate archive fingerprint above. A receipt checksum detects edits, but does not prove authorship or import safety.</p>
+<p>The receipt contains only collection counts and counts of links, including files and output snapshots. Older receipts can still be compared but do not cover those links. Add the JSON fingerprint only if you need to identify its exact decoded bytes later. A gzip file also shows its separate archive fingerprint above. A receipt checksum detects edits, but does not prove authorship or import safety.</p>
 <label><input id="include-fingerprint" type="checkbox"> Include the export fingerprint</label>
 <button id="save-receipt" type="button">Download redacted receipt</button>
 <label for="saved-receipt">Saved redacted receipt JSON</label><input type="file" id="saved-receipt" accept=".json,application/json">

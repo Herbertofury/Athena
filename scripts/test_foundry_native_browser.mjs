@@ -573,7 +573,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(savedReceipt.toString().includes('fixture-private-marker-never-render'),false);
   assert.equal(savedReceipt.toString().includes('revision-a'),false);
   const first=JSON.parse(savedReceipt);assert.equal(first.input_sha256,null);
-  assert.equal(first.counts.length,18);assert.equal(Object.hasOwn(first,'artifact_references'),false);assert.ok(/^[a-f0-9]{64}$/.test(first.checksum_sha256));
+  assert.equal(first.counts.length,18);assert.equal(first.schema,'athena-constellation-redacted-receipt-v2');
+  assert.equal(first.artifact_reference_counts.files.no_chat_link,1);
+  assert.equal(first.artifact_reference_counts.output_snapshots.no_chat_link,0);
+  assert.ok(/^[a-f0-9]{64}$/.test(first.checksum_sha256));
   await page.getByLabel('Include the export fingerprint').check();
   const linked=JSON.parse(await downloadReceipt('constellation-redacted-linked.json'));
   assert.equal(linked.input_sha256,createHash('sha256').update(exportBytes).digest('hex'));
@@ -583,6 +586,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    return page.locator('#receipt-status');
   };
   await (await compare('receipt.json',savedReceipt)).filter({hasText:'No count or limit changes.'}).waitFor();
+  const {source_schema,counts,reference_counts,input_sha256}=first;
+  const oldBody={schema:'athena-constellation-redacted-receipt-v1',source_schema,counts,reference_counts,input_sha256};
+  const oldReceipt=Buffer.from(JSON.stringify({...oldBody,checksum_sha256:createHash('sha256').update(JSON.stringify(oldBody)).digest('hex')}));
+  await (await compare('older-receipt.json',oldReceipt)).filter({hasText:'Older receipts did not track file or output links.'}).waitFor();
   first.counts[0].retained++;
   await (await compare('edited-receipt.json',Buffer.from(JSON.stringify(first)))).filter({hasText:'Receipt checksum does not match.'}).waitFor();
   assert.equal(reviewTraffic().length,1,'receipt comparisons and downloads stay local');
@@ -591,9 +598,22 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('#receipt-status').textContent(),'');
   await page.getByRole('button',{name:'Run local review'}).click();
   await page.getByText('Review complete. Nothing was imported or changed.',{exact:true}).waitFor();
-  await (await compare('original-receipt.json',savedReceipt)).filter({hasText:'2 count or limit changes.'}).waitFor();
+  await (await compare('original-receipt.json',savedReceipt)).filter({hasText:'3 count or limit changes.'}).waitFor();
   assert.match(await page.locator('#receipt-differences').textContent(),/files retained: 1 → 2/);
   assert.equal(reviewTraffic().length,2);
+  await check('Saved Constellation receipts detect changed file links at identical totals',async()=>{
+   const sameTotals=Buffer.from(JSON.stringify({...exportBody,files:[{...exportBody.files[0],chatId:'chat-a'}]}));
+   await page.locator('#source').setInputFiles({name:'linked-export.json',mimeType:'application/json',buffer:sameTotals});
+   await page.getByRole('button',{name:'Run local review'}).click();
+   await page.getByText('Files: Linked to an exported chat: 1.',{exact:true}).waitFor();
+   await (await compare('original-receipt.json',savedReceipt)).filter({hasText:'2 count or limit changes.'}).waitFor();
+   const differences=await page.locator('#receipt-differences').textContent();
+   assert.match(differences,/Files · Linked to an exported chat: 0 → 1/);
+   assert.match(differences,/Files · No chat link: 1 → 0/);
+   assert.doesNotMatch(differences,/chat-a|fixture-private-marker-never-render/);
+   await (await compare('legacy-receipt.json',oldReceipt)).filter({hasText:'No count or limit changes. Older receipts did not track file or output links.'}).waitFor();
+   assert.equal(reviewTraffic().length,3);
+  });
   await page.locator('#source').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{')});
   await page.getByRole('button',{name:'Run local review'}).click();
   await page.getByText('Invalid v7 export structure',{exact:true}).waitFor();
