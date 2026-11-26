@@ -1,4 +1,4 @@
-//! Read-only historical evidence. Only reviewed Markdown is available offline;
+//! Read-only historical evidence. Only specifically reviewed Markdown and JSON are available offline;
 //! the manifest also indexes archived files that the runtime does not serve.
 use axum::{
     Router,
@@ -42,8 +42,27 @@ documents! {
     "bab282e3b75965d3391b37b259273658904b78da" => "README.md",
 }
 
+const RECEIPTS: &[(&str, &str, &str)] = &[
+    (
+        "2d78181ff6884e546fb3e02a7400a6261681ab30",
+        "verification.json",
+        include_str!("../../../../migration/engineering-atlas/historical-evidence/2d78181ff6884e546fb3e02a7400a6261681ab30/verification.json"),
+    ),
+    (
+        "4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff",
+        "final-summary.json",
+        include_str!("../../../../migration/engineering-atlas/historical-evidence/4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff/final-summary.json"),
+    ),
+    (
+        "0fc77cfd619dccd21deed7ed0bec60e9ccce2da5",
+        "summary.json",
+        include_str!("../../../../migration/engineering-atlas/historical-evidence/0fc77cfd619dccd21deed7ed0bec60e9ccce2da5/summary.json"),
+    ),
+];
+
 fn document(object: &str, file: &str) -> Option<&'static str> {
     DOCS.iter()
+        .chain(RECEIPTS)
         .find(|(id, name, _)| *id == object && *name == file)
         .map(|(_, _, content)| *content)
 }
@@ -98,7 +117,7 @@ pub(crate) fn router() -> Router {
 mod tests {
     use super::*;
     #[test]
-    fn only_reviewed_markdown_targets_are_embedded() {
+    fn only_reviewed_notes_and_exact_receipts_are_embedded() {
         let manifest: serde_json::Value = serde_json::from_str(MANIFEST).unwrap();
         let targets = manifest["targets"].as_array().unwrap();
         assert_eq!(targets.len(), 19);
@@ -108,8 +127,14 @@ mod tests {
             for file in target["files"].as_array().unwrap() {
                 let name = file["path"].as_str().unwrap();
                 let doc = document(id, name);
-                if matches!(name, "README.md" | "results-table.md") {
+                if matches!(name, "README.md" | "results-table.md")
+                    || RECEIPTS.iter().any(|(key, file, _)| *key == id && *file == name)
+                {
                     let text = doc.expect("manifest document must be available offline");
+                    if name.ends_with(".json") {
+                        let receipt: serde_json::Value = serde_json::from_str(text).unwrap();
+                        assert!(receipt.is_object());
+                    }
                     assert!(!text.is_empty());
                     assert!(text.len() <= 64 * 1024);
                     count += 1;
@@ -118,8 +143,8 @@ mod tests {
                 }
             }
         }
-        assert_eq!(count, 20);
-        assert_eq!(count, DOCS.len());
+        assert_eq!(count, 23);
+        assert_eq!(count, DOCS.len() + RECEIPTS.len());
         assert!(document("../../", "README.md").is_none());
     }
 }

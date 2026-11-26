@@ -3,6 +3,38 @@ const element = (tag, text = '') => Object.assign(document.createElement(tag), {
 const sha = /^[a-f0-9]{40}$/;
 const source = /^https:\/\/github\.com\/Herbertofury\/Engineering-Atlas\/(tree|blob)\/[a-f0-9]{40}\/([A-Za-z0-9_.\/-]+)$/;
 const notes = new Set(['README.md', 'results-table.md']);
+const receipts = new Map([
+ ['2d78181ff6884e546fb3e02a7400a6261681ab30/verification.json', 'Media identity'],
+ ['4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff/final-summary.json','Process memory'],
+ ['0fc77cfd619dccd21deed7ed0bec60e9ccce2da5/summary.json','Native archive'],
+]);
+const offlineFile = (target, file) => notes.has(file.path) || receipts.has(target.source_object+'/'+file.path);
+function renderReceipt(title, bytes) {
+ const data = JSON.parse(bytes);
+ const section=element('section'); section.id='receipt-facts';
+ section.setAttribute('aria-label','Verified receipt summary');
+ section.append(element('h3',title+' · historical receipt'));
+ const list=element('ul');
+ if(title==='Media identity') {
+  for(const [label,n] of [['Cards',data.fixture_counts?.cards],['Gallery images',data.fixture_counts?.gallery_images],
+    ['Videos',data.fixture_counts?.video_entries],['Rejected input cases',data.generated_bad_cases]]) {
+   if(Number.isSafeInteger(n))list.append(element('li',label+': '+n));
+  }
+  if(typeof data.live_browser==='string') list.append(element('li','Historical browser gate: '+data.live_browser));
+ } else if(title==='Process memory') {
+  for(const [scenario,r] of Object.entries(data)) {
+   const a=r?.baseline?.status_high_water_rss_bytes,b=r?.candidate?.status_high_water_rss_bytes;
+   if(Number.isSafeInteger(a)&&Number.isSafeInteger(b))
+    list.append(element('li',scenario+': baseline '+a.toLocaleString()+' B → candidate '+b.toLocaleString()+' B peak RSS'));
+  }
+ } else if (title==='Native archive') {
+  if(typeof data.experiment?.gate==='string') list.append(element('li','Historical experiment gate: '+data.experiment.gate));
+  if(Number.isSafeInteger(data.archive_bytes)) list.append(element('li','Archive bytes: '+data.archive_bytes.toLocaleString()));
+  for(const limit of data.limitations||[]) if(typeof limit==='string') list.append(element('li',limit));
+ }
+ section.append(list,element('p','These are retained observations, not current reruns or compatibility recommendations. Exact source text follows.'));
+ return section;
+}
 const safePath = path => typeof path === 'string' && /^[A-Za-z0-9_.\/-]+$/.test(path)
   && path.split('/').every(s => s && s !== '.' && s !== '..');
 const hex = async (algorithm, bytes) => [...new Uint8Array(await crypto.subtle.digest(algorithm,bytes))]
@@ -19,7 +51,7 @@ function makeTarget(t) {
       || t.files.some(f=>!safePath(f.path) || !sha.test(f.blob))
       || new Set(t.files.map(f=>f.path)).size !== t.files.length)
     throw Error('Invalid historical target. The archive was not displayed.');
-  const files = t.files.filter(f=>notes.has(f.path));
+  const files = t.files.filter(f=>offlineFile(t,f));
   const card = element('article'); card.className='runner';
   const upstream = element('a', 'Open pinned original on GitHub'); upstream.href=t.original;
   card.append(element('h2', parsed[2]), element('p', `${t.kind} · ${t.files.length} indexed files · ${t.source_object}`), upstream);
@@ -42,6 +74,7 @@ async function showDocument(t, file) {
   $('reader-title').textContent=file.path;
   $('reader-title').focus();
   $('reader-status').textContent='Verifying original Git blob…';
+  $('receipt-facts')?.remove();
   $('document').textContent='';
   try {
     const r = await read(`/api/migration/atlas/${t.source_object}/${file.path}`);
@@ -52,6 +85,8 @@ async function showDocument(t, file) {
     if (await hex('SHA-1',blob) !== file.blob) throw Error('Git blob checksum mismatch. Document not shown.');
     const content = new TextDecoder('utf-8',{fatal:true}).decode(bytes);
     if (current !== selection) return;
+    const receipt=receipts.get(t.source_object+'/'+file.path);
+    if(receipt) $('document').before(renderReceipt(receipt,content));
     $('document').textContent=content;
     $('reader-status').textContent=`Verified original Git blob ${file.blob}. This is historical source text.`;
   } catch(error) { if (current===selection) $('reader-status').textContent=error.message; }
