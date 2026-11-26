@@ -73,6 +73,14 @@ c=sqlite3.connect(sys.argv[1]); raw=c.execute('SELECT output FROM experiment_run
 raw='{\"large_integer\":18446744073709551617,'+raw[1:]
 c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(sys.argv[2])));c.execute('UPDATE experiments SET candidate=? WHERE id=?',('<img src=x onerror=alert(1)>',int(sys.argv[2])));c.commit();c.close();sys.stdout.write(raw)`,journal,String(offlineRun.experiment_id)],{encoding:'utf8',timeout:15000});
   if(!portableUnified)execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
+  if(!portableUnified){
+   const component=path.join(temporary,'components','foundry-artist-concept');
+   fs.mkdirSync(component,{recursive:true});
+   for(const ext of ['mjs','css']){
+    const name='foundry-artist-concept.'+ext;
+    fs.copyFileSync(path.join(repoRoot,'engineering/apps/atlas-lab/ui',name),path.join(component,name));
+   }
+  }
   report.portableUnified=portableUnified;
   report.scope='Actual unified Rust evidence and Foundry native stores in one origin; synthetic fixtures, no private migration or installer acceptance';
  }
@@ -719,6 +727,176 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.getByRole('link',{name:'View pinned source',exact:true}).count(),2);
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,before);
+ });
+ if(unified)await check('Native artist index filters original artist worlds without disclosing media',async()=>{
+  const endpoint=origin+'/api/migration/foundry-artists',external=report.externalRequests.length;
+  const payload=await (await fetch(endpoint)).text(),index=JSON.parse(payload);
+  assert.equal(index.source_sha256,'474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920');
+  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,timeflow:20,music_routes:21});
+  assert.doesNotMatch(payload,/local_filename|spotify_uri|open_search|instagram|tiktok/);
+  await page.goto(origin+'/migration?source=foundry');
+  await page.getByRole('link',{name:'Foundry artist index',exact:true}).click();
+  const status=page.locator('#status');
+  await status.filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+  await page.getByRole('searchbox',{name:'Artist, world, district or weather'}).fill('Sporelight Marsh');
+  await status.filter({hasText:'Showing 1 of 5 artists.'}).waitFor();
+  const card=page.locator('#artists article:visible');
+  await card.getByRole('heading',{name:'Frawgy',exact:true}).waitFor();
+  await card.getByText('Districts (4)',{exact:true}).click();
+  await card.getByText(/Sporelight Marsh/).waitFor();
+  assert.equal(await page.locator('#artists img,#artists iframe,#artists audio,#artists video').count(),0);
+  assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
+  assert.equal(report.externalRequests.length,external);
+ });
+ if(unified)await check('Native artist concept lighting and weather compare and export matching PNGs without requests or storage writes',async()=>{
+  const modulePath='/migration/foundry-artists/concept.mjs';
+  const stylesheetPath='/migration/foundry-artists/concept.css';
+  const styleRequests=[];
+  const requested=[],outbound=report.externalRequests.length;
+  const track=req=>{const route=new URL(req.url()).pathname;if(route===modulePath)requested.push(req.url());if(route===stylesheetPath)styleRequests.push(req.url());};
+  page.on('request',track);
+  try{
+   await page.goto(origin+'/migration/foundry-artists');
+   await page.locator('#status').filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+   assert.equal(requested.length,0);
+   assert.equal(styleRequests.length,0);
+   const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+   const open=page.getByRole('button',{name:'Preview Frawgy worlds',exact:true});
+   await open.focus();await page.keyboard.press('Enter');
+   const preview=page.locator('#concept');
+   await preview.getByRole('status').filter({hasText:'Verdant Conservatory · Clear study'}).waitFor();
+   assert.equal(await page.locator('#concept-title').evaluate(e=>e===document.activeElement),true);
+   assert.equal(requested.length,1);
+   assert.equal(styleRequests.length,1);
+   const frame=selector=>page.locator(selector+' canvas').evaluate(e=>e.toDataURL());
+   const clear=await frame('#primary');
+   assert.ok(clear.length>2048);
+   await preview.getByLabel('Weather study').selectOption('weather.frawgy.spore-shower');
+   const weather=await frame('#primary');
+   assert.notEqual(weather,clear);
+   await preview.getByLabel('Compare both variants').check();
+   await preview.getByRole('heading',{name:'Lilypad Nocturne',exact:true}).waitFor();
+   assert.notEqual(await frame('#alternate'),weather);
+   for(const [figure,world] of [['#primary','Verdant Conservatory'],['#alternate','Lilypad Nocturne']]){
+    const pending=page.waitForEvent('download');
+    await preview.getByRole('button',{name:'Save '+world+' concept PNG',exact:true}).click();
+    const file=await pending, chunks=[];
+    assert.match(file.suggestedFilename(),/^athena-concept-world\.frawgy\.[a-z-]+--weather\.frawgy\.spore-shower\.png$/);
+    for await(const chunk of await file.createReadStream())chunks.push(chunk);
+    const bytes=Buffer.concat(chunks);
+    assert.equal(bytes.readUInt32BE(16),640);
+    assert.equal(bytes.readUInt32BE(20),320);
+    assert.deepEqual(bytes,Buffer.from((await frame(figure)).split(',')[1],'base64'));
+    await file.delete();
+   }
+   assert.equal(await preview.locator('.swatches span').count(),10);
+   const light=preview.getByLabel('Lighting phase');
+   assert.equal(await light.locator('option').count(),5);
+   const companionBefore=await frame('#alternate');
+   await light.selectOption('time.frawgy.dusk');
+   await preview.getByRole('status').filter({hasText:'Dusk'}).waitFor();
+   assert.notEqual(await frame('#primary'),weather);
+   assert.notEqual(await frame('#alternate'),companionBefore);
+   const [phased]=await Promise.all([page.waitForEvent('download'),
+    preview.getByRole('button',{name:'Save Verdant Conservatory concept PNG',exact:true}).click()]);
+   assert.match(phased.suggestedFilename(),/--weather\.frawgy\.spore-shower--time\.frawgy\.dusk\.png$/);
+   const phasedChunks=[];
+   for await(const chunk of await phased.createReadStream())phasedChunks.push(chunk);
+   assert.deepEqual(Buffer.concat(phasedChunks),Buffer.from((await frame('#primary')).split(',')[1],'base64'));
+   await phased.delete();
+   await light.selectOption('');
+   assert.equal(await frame('#primary'),weather);
+   assert.equal(await frame('#alternate'),companionBefore);
+
+   await preview.getByLabel('Weather study').selectOption('');
+   assert.equal(await frame('#primary'),clear);
+   await preview.getByRole('button',{name:'Close preview',exact:true}).click();
+   assert.equal(await open.evaluate(e=>e===document.activeElement),true);
+   await page.getByRole('button',{name:'Preview Dreamrelicc worlds',exact:false}).click();
+   await preview.getByRole('status').filter({hasText:'Cathedral Orbit · Clear study'}).waitFor();
+   assert.notEqual(await frame('#primary'),clear);
+   assert.equal(requested.length,1,'Optional module loaded once in this page');
+   assert.equal(await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}})),baseline);
+   assert.equal(report.externalRequests.length,outbound);
+   assert.equal(await preview.locator('img,iframe,audio,video').count(),0);
+  }finally{page.off('request',track);}
+ });
+ if(unified)await check('Artist preview code restores exact pixels after a fresh page and rejects cross-artist settings',async()=>{
+  const url=origin+'/migration/foundry-artists',start=report.externalRequests.length;
+  await page.goto(url);
+  await page.getByRole('button',{name:'Preview Frawgy worlds'}).click();
+  const preview=page.locator('#concept'),read=()=>page.locator('#primary canvas').evaluate(e=>e.toDataURL());
+  await preview.getByRole('status').filter({hasText:'Clear study'}).waitFor();
+  await preview.getByLabel('Weather study').selectOption('weather.frawgy.spore-shower');
+  await preview.getByLabel('Lighting phase').selectOption('time.frawgy.dusk');
+  await preview.getByLabel('Compare both variants').check();
+  const original=await read();
+  await preview.getByRole('button',{name:'Get preview code',exact:true}).click();
+  const field=page.getByRole('textbox',{name:'Preview code',exact:true}),code=await field.inputValue();
+  assert.ok(code.length>100&&code.length<512);
+  await page.goto(url);
+  const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+  await page.getByText('Keep or restore a concept preview',{exact:true}).click();
+  const restore=page.getByRole('button',{name:'Restore preview code',exact:true});
+  await field.fill(code);
+  await restore.click();
+  await preview.getByRole('status').filter({hasText:'Dusk'}).waitFor();
+  assert.equal(await read(),original);
+  assert.equal(await preview.getByLabel('Compare both variants').isChecked(),true);
+  const bad=JSON.parse(code);bad[4]='weather.karoline.silk-veil';
+  await field.fill(JSON.stringify(bad));await restore.click();
+  await page.locator('#preview-code-status').filter({hasText:'current preview was not changed'}).waitFor();
+  assert.equal(await read(),original);
+  const outdated=JSON.parse(code);outdated[1]='0'.repeat(64);
+  await field.fill(JSON.stringify(outdated));await restore.click();
+  await page.locator('#preview-code-status').filter({hasText:'different catalog'}).waitFor();
+  assert.equal(await read(),original);
+  assert.equal(await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}})),baseline);
+  assert.equal(report.externalRequests.length,start);
+ });
+ if(suppliedPackage)await check('Extracted Athena artist catalog survives optional renderer removal, tamper and exact restore',async()=>{
+  const leaf=path.join(portable,'components','foundry-artist-concept','foundry-artist-concept.mjs');
+  const original=fs.readFileSync(leaf);
+  const url=origin+'/migration/foundry-artists';
+  const endpoint=origin+'/api/migration/foundry-artists';
+  const checked=await (await context.request.get(endpoint)).body();
+  const requests=[],track=req=>{
+   if(/\/concept\.(mjs|css)$/.test(new URL(req.url()).pathname))requests.push(req.url());
+  };
+  page.on('request',track);
+  const catalog=async()=>{
+   await page.goto(url);
+   await page.locator('#status').filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+   const got=await context.request.get(endpoint);
+   assert.deepEqual(await got.body(),checked);
+   await page.getByRole('searchbox',{name:'Artist, world, district or weather'}).fill('Sporelight Marsh');
+   await page.locator('#status').filter({hasText:'Showing 1 of 5 artists.'}).waitFor();
+   await page.getByRole('link',{name:'View pinned public source'}).waitFor();
+  };
+  const restart=async mutate=>{await stopBridge();mutate();origin=await startBridge();};
+  try{
+   await restart(()=>fs.unlinkSync(leaf));
+   await catalog();
+   assert.equal(await page.getByRole('button',{name:/Preview .* worlds/}).count(),0);
+   await page.locator('#optional-concept-note').waitFor();
+   assert.deepEqual(requests,[]);
+   await restart(()=>fs.writeFileSync(leaf,"throw Error('Unreviewed renderer must never load')"));
+   await catalog();
+   assert.equal(await page.getByRole('button',{name:/Preview .* worlds/}).count(),0);
+   await page.locator('#optional-concept-note').waitFor();
+   assert.deepEqual(requests,[]);
+   await restart(()=>fs.writeFileSync(leaf,original));
+   await catalog();
+   const open=page.getByRole('button',{name:'Preview Frawgy worlds',exact:true});
+   assert.deepEqual(requests,[]);
+   await open.click();
+   await page.locator('#concept-status').filter({hasText:'Verdant Conservatory · Clear study'}).waitFor();
+   assert.equal(requests.length,2);
+   assert.ok((await page.locator('#primary canvas').evaluate(e=>e.toDataURL())).length>2048);
+  }finally{
+   if(!fs.existsSync(leaf)||!fs.readFileSync(leaf).equals(original))fs.writeFileSync(leaf,original);
+   page.off('request',track);
+  }
  });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
