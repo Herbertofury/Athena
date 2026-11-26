@@ -460,6 +460,16 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const blockedApp=origin+'/api/migration/atlas/67c4eff92b07230c1a9385028f8d2e539dbabdac/run_pinned_audit.py';
   assert.equal((await fetch(blockedApp)).status,404);
   assert.equal((await fetch(origin+'/api/migration/atlas',{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
+  await page.selectOption('#scope','');
+  await page.fill('#search','0fc77cfd619dccd21deed7ed0bec60e9ccce2da5');
+  await page.getByRole('button',{name:'Read offline: summary.json',exact:true}).click();
+  await page.locator('#reader-status').filter({hasText:'Verified original Git blob'}).waitFor();
+  await page.getByText('Historical experiment gate: Incomplete',{exact:true}).waitFor();
+  const receipt=await fetch(origin+'/api/migration/atlas/0fc77cfd619dccd21deed7ed0bec60e9ccce2da5/summary.json');
+  assert.equal(receipt.headers.get('content-type'),'text/plain; charset=utf-8');
+  assert.equal(await page.locator('#document').textContent(),await receipt.text());
+  assert.equal((await fetch(origin+'/api/migration/atlas/4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff/summary.json')).status,404);
+  assert.equal(await page.locator('#reader iframe, #reader img, #reader script').count(),0);
   await page.setViewportSize({width:1440,height:1000});
   assert.deepEqual(readinessWrites,[]);page.off('request',observeReadiness);
   assert.equal((await fetch(origin+'/api/migration/readiness',{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
