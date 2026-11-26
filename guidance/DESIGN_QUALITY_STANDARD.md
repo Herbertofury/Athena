@@ -8,8 +8,6 @@ Use the user's references, audience, tasks, content density, platform and existi
 
 Use deliberate hierarchy, type scale, spacing, alignment, color and interaction states. Reuse accessible primitives and the project's tokens when they fit. For greenfield work, compare suitable current approaches against the actual requirements rather than selecting a fashionable stack by default.
 
-For a practical way to compare themes without making products look interchangeable, use [Give a theme a job](THEME_DIRECTION_PLAYBOOK.md).
-
 ## Inspect and exercise the result
 
 - Inspect the real affected screens at representative narrow and wide viewports, including zoom/reflow, long content, and relevant themes.

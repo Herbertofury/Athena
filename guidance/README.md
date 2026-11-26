@@ -5,6 +5,7 @@ Athena's shared repository-alignment and reusable-agent capability. The first na
 - [Repository guidance and explicit adoption](docs/REPOSITORY-GOVERNANCE.md)
 - [Shared adapter](templates/AGENTS.repository.md)
 - [Product invariants](PRODUCT_INVARIANTS.md)
+- [Design Quality Standard](DESIGN_QUALITY_STANDARD.md) and its optional [task-first theming playbook](THEME_DIRECTION_PLAYBOOK.md).
 - [Wiki closeout and documentation-driven product review](WIKI_CLOSEOUT.md) — [feature guide template](templates/WIKI_FEATURE_GUIDE.md), real workflow verification, simplification, and live Wiki parity.
 - [Portfolio catch-up milestones and repository routing](../docs/PORTFOLIO-ALIGNMENT.md) — all 42 repositories, existing local work and priority shared provider/stack catch-up.
 - [Shared capability coordination](../docs/REUSABLE-PACKAGE-COORDINATION.md) — [reuse and ownership index](registry/shared-capabilities.json); existing research and implementation sources remain authoritative.
