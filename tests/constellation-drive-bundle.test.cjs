@@ -225,3 +225,42 @@ test('a candidate never overwrites source or existing destination, and failed ve
  assert.match(replay(f,output).stderr,/existing path is never overwritten/);
  assert.equal(fs.readFileSync(output,'utf8'),'existing data');
 });
+
+test('intact but stale bundle exposes missing, stale, and same-tick edits against a private independent export',t=>{
+ const f=fixture(t);
+ const r=(id,updatedAt,body)=>({id,updatedAt,body});
+ const secret='omission-test-private';
+ const exact=r('a',t0-1,secret), sameTick=r('b',t0,'old'), older=r('c',t0-1,'old');
+ f.snapshot.chats=[exact,sameTick,older,r('d',t0+2,'later'),r('e',t0,'a'),r('e',t0,'b'),r('g',t0,'old')];
+ f.journal.chats=[r('g',t0,'equal tick conflict')];f.bundle.journal.recordCount=2;
+ const source={...f.snapshot,exportedAt:at(t0+4),chats:[{body:secret,updatedAt:t0-1,id:'a'},
+  r('b',t0,'edit in same tick'),r('c',t0,'changed'),r('d',t0,'earlier'),
+  r('e',t0,'ambiguous'),r('f',t0,'absent'),r('g',t0,'unknown'),r('h',null,'unknown')]};
+ delete source.groups;delete f.snapshot.smartCollections;source.smartCollections=[r('some',t0,secret)];
+ f.store();const before=Object.values(f.paths).map(p=>fs.readFileSync(p));
+ const compare=path.join(path.dirname(f.paths.index),'SECRET-LOCAL-reference.json'),raw=encode(source);
+ fs.writeFileSync(compare,raw);
+ const result=f.run(true,'--compare-source',compare);
+ assert.equal(result.status,0,result.stderr);
+ const {sourceComparison:c,warnings}=JSON.parse(result.stdout);
+ assert.deepEqual(warnings,[],'index and clocks alone did not expose the absent edit');
+ assert.deepEqual(c.collections.chats.counts,{exact:1,notRetained:1,backupOlder:1,
+  backupNewer:1,sameTimeDifferent:1,unresolved:3});
+ assert.equal(c.collections.smartCollections.coverage,'not-in-backup-snapshot');
+ assert.equal(c.collections.smartCollections.counts.unresolved,1);
+ assert.equal(c.collections.groups.coverage,'not-in-reference');
+ assert.doesNotMatch(result.stdout+result.stderr,/omission-test-private|edit in same tick/);
+ assert.deepEqual(Object.values(f.paths).map(p=>fs.readFileSync(p)),before);
+ assert.deepEqual(fs.readFileSync(compare),raw);
+});
+
+test('comparison refuses a malformed export and does not weaken base verification',t=>{
+ const f=fixture(t);f.store();
+ const compare=path.join(path.dirname(f.paths.index),'SECRET-LOCAL-reference.json');
+ fs.writeFileSync(compare,encode({...f.snapshot,chats:'opaque'}));
+ assert.match(f.run(true,'--compare-source',compare).stderr,/invalid known collection/);
+ fs.writeFileSync(compare,gzipSync(encode(f.snapshot)));
+ assert.match(f.run(true,'--compare-source',compare).stderr,/not a UTF-8 JSON object/);
+ fs.appendFileSync(f.paths.snapshot,'corrupt');
+ assert.match(f.run(true,'--compare-source',compare).stderr,/does not match the index bytes/);
+});

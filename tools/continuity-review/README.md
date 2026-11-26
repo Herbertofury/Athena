@@ -211,3 +211,31 @@ prints only counts and checksums. The exclusive-create output is limited to
 the OS honors it, not as a Windows ACL guarantee. A failed write may leave
 a partial new file. Existing files are not overwritten. No network, live
 browser storage, imports or cutovers are used.
+
+### Compare against an independent direct export
+
+The original writer captures snapshot rows before uploading, but records the
+later completion time as the next journal's strict lower bound. An edit made
+in that window may be absent from both files even when all hashes pass.
+See [snapshot reads](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2311)
+and the [legacy checkpoint and journal writer](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2754-L2852).
+
+If you already have a separately saved plain v7 JSON export from the original
+source, select it locally alongside the verified Drive bundle. Prefer a
+direct export taken with editing stopped for the comparison, not a copy of
+the Drive snapshot.
+
+```sh
+node tools/continuity-review/verify-constellation-drive.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz \
+  --compare-source IndependentExport.json
+```
+
+The report counts absent, older, newer, exactly retained and equal-timestamp
+but different selected records. Duplicate IDs, unknown timestamps and
+ambiguous equal-time backup rows are unresolved rather than guessed.
+Comparison is one-way from the selected reference, not a test of everything
+ever captured, root settings or media bytes. Later edits can also produce
+differences. No content or identities are printed. The plain private input is
+limited to 16 MiB; it is never uploaded or changed. Do not delete the old
+extension, source records or original backup files based on this report.
