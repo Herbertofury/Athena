@@ -1,11 +1,15 @@
 const q=id=>document.getElementById(id),el=(tag,t)=>Object.assign(document.createElement(tag),{textContent:t});
 const sections=[['worlds','Worlds','variant'],['districts','Districts'],['weather','Weather','intensity']];
-let cards=[],active=null,caller=null,loadRevision=0;
+let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0;
 const menu=(id,rows)=>q(id).replaceChildren(...rows.map(([value,name])=>Object.assign(el('option',name),{value})));
 const setStatus=t=>{q('concept-status').textContent=t;};
 function showPlate(preview,figure,world,weather) {
  const node=q(figure),{motif,swatches}=preview.describePlate(world.id);
  preview.drawPlate(node.querySelector('canvas'),world.id,weather);
+ const save=node.querySelector('.save-plate');
+ save.dataset.filename=`athena-concept-${world.id}--${weather?.id??'clear'}.png`;
+ save.setAttribute('aria-label','Save '+world.name+' concept PNG');
+ save.disabled=false;
  node.querySelector('h3').textContent=world.name;
  node.querySelector('p').textContent=`${world.variant} · ${motif}`;
  node.querySelector('.swatches').replaceChildren(...swatches.map(color=>{
@@ -13,7 +17,40 @@ function showPlate(preview,figure,world,weather) {
   chip.setAttribute('aria-hidden','true');tag.append(chip,document.createTextNode(color.toUpperCase()));return tag;
  }));
 }
+function resetExports(){
+ ++plateRevision;
+ q('plate-export-status').textContent='';
+ for(const id of ['primary','alternate'])q(id).querySelector('.save-plate').disabled=true;
+}
+function savePlate(event){
+ const button=event.currentTarget,node=button.closest('figure');
+ const name=button.dataset.filename;
+ if(!active||node.hidden||button.disabled||!/^athena-concept-[a-z0-9.-]+--[a-z0-9.-]+\.png$/.test(name))return;
+ const revision=plateRevision;
+ const status=q('plate-export-status');
+ button.disabled=true;
+ const current=()=>revision===plateRevision&&!node.hidden&&active;
+ const failed=()=>{if(current()){button.disabled=false;status.textContent='Could not prepare this concept PNG.';}};
+ try{
+  node.querySelector('canvas').toBlob(blob=>{
+   if(!current())return;
+   if(!blob||blob.type!=='image/png'||!blob.size){failed();return;}
+   let url;
+   try{
+    url=URL.createObjectURL(blob);
+    const link=document.createElement('a');
+    link.download=name;link.href=url;link.hidden=true;
+    document.body.append(link);
+    try{link.click();}finally{link.remove();}
+    button.disabled=false;status.textContent='PNG download requested.';
+   }catch{failed();}
+   finally{if(url)setTimeout(()=>URL.revokeObjectURL(url),5000);}
+  },'image/png');
+ }catch{failed();}
+}
+for(const id of ['primary','alternate'])q(id).querySelector('.save-plate').addEventListener('click',savePlate);
 function draw(){
+ resetExports();
  if(!active)return;
  const {artist,preview}=active;
  const world=artist.worlds.find(w=>w.id===q('concept-world').value);
@@ -27,6 +64,7 @@ function draw(){
   q('alternate').hidden=!other;
   setStatus(`${world.name}${other?' and '+other.name:''} · ${weather?weather.name:'Clear study'}`);
  }catch{
+  resetExports();
   for(const id of ['primary','alternate'])q(id).hidden=true;
   setStatus('Concept rendering is unavailable. The separate artist index remains usable.');
  }
@@ -35,7 +73,7 @@ async function openPreview(artist,button){
  const revision=++loadRevision;
  caller=button;
  q('concept').hidden=false;q('concept-title').textContent=artist.name+' concept preview';q('concept-title').focus();
- active=null;q('primary').hidden=true;q('alternate').hidden=true;
+ active=null;resetExports();q('primary').hidden=true;q('alternate').hidden=true;
  setStatus('Loading optional concept tools…');
  for(const id of ['concept-world','concept-weather','concept-compare'])q(id).disabled=true;
  try{
@@ -52,7 +90,7 @@ async function openPreview(artist,button){
 }
 for(const id of ['concept-world','concept-weather','concept-compare'])q(id).addEventListener('change',draw);
 q('concept-close').addEventListener('click',()=>{
- ++loadRevision;active=null;q('concept').hidden=true;
+ ++loadRevision;active=null;resetExports();q('concept').hidden=true;
  if(caller?.closest('article')?.hidden)q('find').focus();else caller?.focus();caller=null;
 });
 
