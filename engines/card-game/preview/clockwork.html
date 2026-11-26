@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-__HASH__'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Clockwork Sentinel | Athena</title>
+<style>
+:root{color-scheme:dark;font:16px/1.55 system-ui;background:#050607;color:#e9eef5}
+main{max-width:46rem;padding:1.4rem;margin:auto} h1{margin:.1rem 0;color:#d9f4ff;font-size:clamp(2rem,8vw,3.4rem);line-height:1.04}
+p,li{color:#c5ccd6}.stats,#actions{display:flex;flex-wrap:wrap;gap:.6rem}.stats span{border:1px solid #394857;background:#0d1219;padding:.5rem .85rem;border-radius:.5rem}
+.stats strong{color:#ffe1a3;font-variant-numeric:tabular-nums}button{color:#f1f6ff;background:#112031;border:1px solid #536e88;padding:.6rem .7rem;border-radius:.35rem;font:inherit;cursor:pointer}button:disabled{opacity:.52;cursor:default}
+button:focus-visible,textarea:focus-visible{outline:3px solid #f6bf62;outline-offset:2px}textarea{display:block;box-sizing:border-box;width:100%;font:inherit;margin:.5rem 0;min-height:7rem}summary{cursor:pointer}details{border-top:1px solid #405160;margin-top:1.2rem;padding-top:.7rem}.label{letter-spacing:.14em;color:#acdcec;font-size:.8rem}
+</style>
+<main><p class="label">ATHENA / CARD LAB</p><h1>Clockwork Sentinel</h1>
+<p>Prime the coil, decide whether to take the hit, then discharge. A strike goes off when the timer hits zero. Zero shield means 6 damage. Your action resolves first.</p>
+<div class="stats"><span>Health <strong id="health"></strong></span><span>Shield <strong id="shield"></strong></span><span>Sentinel <strong id="enemy"></strong></span><span>Next strike <strong id="timer"></strong></span></div>
+<p id="status" role="status"></p><div id="actions"><button data-move="prime">Prime the coil</button><button data-move="brace">Brace the frame</button><button data-move="spark">Arc discharge</button><button data-move="end">Next turn</button></div>
+<ul id="events" aria-label="Last move"></ul><button id="restart">Restart encounter</button>
+<details><summary>Replay tape</summary><p>Copy your replay text or paste a Clockwork Sentinel tape. No information is stored or sent.</p>
+<label for="tape">Replay text (up to 16 KiB)</label><textarea id="tape" maxlength="16384" spellcheck="false"></textarea><button id="export">Make replay text</button> <button id="import">Load replay</button><p id="tape-status" role="status"></p></details>
+</main><script>__CODE__</script></html>

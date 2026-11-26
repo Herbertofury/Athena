@@ -1,0 +1,41 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+import assert from 'node:assert/strict';
+import {pathToFileURL} from 'node:url';
+import {resolve} from 'node:path';
+import {chromium} from 'playwright';
+import {openClockworkTape} from '../src/clockwork-encounter.mjs';
+const url=pathToFileURL(resolve('Athena-Clockwork-Sentinel.html')).href;
+const browser=await chromium.launch();
+try{
+ const page=await browser.newPage({viewport:{width:390,height:844},offline:true});
+ const external=[],errors=[];
+ page.on('request',r=>{if(!r.url().startsWith('file:'))external.push(r.url());});
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(url);
+ const move=name=>page.locator('[data-move="'+name+'"]');
+ await move('prime').focus();await page.keyboard.press('Enter');
+ await page.getByRole('button',{name:/Arc discharge.*STRIKE: 6 incoming/}).waitFor();
+ await move('brace').click();
+ assert.equal(await page.locator('#health').textContent(),'18');
+ assert.equal(await page.getByText('Sentinel dealt 0; blocked 6.',{exact:true}).count(),1);
+ await move('spark').click();
+ assert.equal(await page.locator('#enemy').textContent(),'6');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await page.getByText('Replay tape',{exact:true}).click();
+ await page.getByRole('button',{name:'Make replay text'}).click();
+ await page.getByText('Verified replay text is ready to copy.',{exact:true}).waitFor();
+ const raw=await page.locator('#tape').inputValue(), replay=await openClockworkTape(raw);
+ assert.equal(replay.view().state.sentinel,6);
+ replay.apply('end');replay.apply('prime');replay.apply('spark');
+ assert.equal(replay.view().state.outcome,'win');
+ const onward=await replay.tape();
+ await page.locator('#tape').fill(JSON.stringify(onward));await page.getByRole('button',{name:'Load replay'}).click();
+ await page.getByText('Verified replay loaded.',{exact:true}).waitFor();
+ assert.equal(await page.locator('#enemy').textContent(),'0');
+ await page.locator('#tape').fill(JSON.stringify({...onward,commands:['end']}));
+ await page.getByRole('button',{name:'Load replay'}).click();
+ await page.getByText('Rejected replay. Current encounter unchanged.',{exact:true}).waitFor();
+ assert.equal(await page.locator('#enemy').textContent(),'0');
+ assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
+ console.log('Clockwork Sentinel: real offline keyboard play, exact single strike, Node interchange and tamper refusal.');
+}finally{await browser.close();}
