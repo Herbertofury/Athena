@@ -3,13 +3,12 @@
 
 Versioned shared-policy snapshots; preserve repository-specific instructions.
 
-plan/status are read-only. apply never replaces AGENTS.md or edited snapshots.
+plan/status/verify-consumer are read-only. apply never replaces AGENTS.md or edited snapshots.
 This is separate from foundry_sync.py's explicitly selected Skill installs.
 """
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import subprocess
@@ -19,63 +18,10 @@ from pathlib import Path
 from athena_io import atomic_json, load_json
 from adoption_transaction import write_set
 
-SOURCE_URL = "https://github.com/Herbertofury/Athena"
-MANIFEST = "registry/repository-governance.json"
-LOCK = ".athena/governance-lock.json"
-SNAPSHOT = ".agents/athena"
-POLICY_FILES = (
-    "PRODUCT_INVARIANTS.md", "MODERNIZATION_STANDARD.md", "DESIGN_QUALITY_STANDARD.md",
-    "FAILURE_INTELLIGENCE_STANDARD.md", "CHALLENGER_INTEGRATION_STANDARD.md",
-    "PERFORMANCE_ACCEPTANCE.md", "RUNTIME_PROOF.md", "DURABLE_EXECUTION_STANDARD.md",
-    "EVALUATION_STANDARD.md", "OBSERVABILITY_STANDARD.md", "INTEROPERABILITY_STANDARD.md",
-    "AUTHORIZATION_CONTROL_STANDARD.md", "THIRD_PARTY_SKILL_SECURITY.md",
-    "SUPPLY_CHAIN_STANDARD.md", "DISTRIBUTION_STANDARD.md", "templates/AGENTS.repository.md",
+from consumer_verify import (
+    LEGACY_LOCK, LEGACY_URL, LOCK, MANIFEST, POLICY_FILES, SNAPSHOT, SOURCE_URL,
+    checked_release, content, destination, digest, release, safe_path, verify_consumer,
 )
-
-
-def content(path: Path) -> bytes:
-    # Markdown snapshots are portable across Git's Windows line-ending conversion.
-    return path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
-
-
-def digest(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def release(repo: Path, version: str) -> dict:
-    if not re.fullmatch(r"\d+\.\d+\.\d+", version):
-        raise ValueError("version must be major.minor.patch")
-    ids = re.findall(r"^## (\d+)\. ", (repo / POLICY_FILES[0]).read_text(encoding="utf-8"), re.M)
-    return {"schemaVersion": 1, "version": version, "sourceRepository": SOURCE_URL,
-            "digestFormat": "sha256-utf8-lf", "invariantIds": [int(x) for x in ids],
-            "files": {name: digest(content(repo / name)) for name in POLICY_FILES}}
-
-
-def checked_release(repo: Path) -> dict:
-    manifest = load_json(repo / MANIFEST, None)
-    if not isinstance(manifest, dict) or manifest.get("schemaVersion") != 1:
-        raise ValueError("missing/unsupported repository governance manifest")
-    if manifest != release(repo, manifest["version"]):
-        raise ValueError("canonical policy drift; publish a new manifest version before adoption")
-    return manifest
-
-
-def destination(name: str) -> str:
-    filename = "AGENTS-adapter.md" if name.startswith("templates/") else name
-    return f"{SNAPSHOT}/{filename}"
-
-
-def safe_path(target: Path, relative: str) -> Path:
-    # Never write through a symlink/junction into another project or user directory.
-    path = target / relative
-    for item in [path, *path.parents]:
-        if item == target:
-            break
-        if item.is_symlink() or (hasattr(item, "is_junction") and item.is_junction()):
-            raise ValueError(f"linked destination refused: {item}")
-    if not path.resolve().is_relative_to(target.resolve()):
-        raise ValueError(f"destination escapes target: {relative}")
-    return path
 
 
 def plan(repo: Path, target: Path) -> tuple[dict, dict, list[dict]]:
@@ -164,7 +110,7 @@ def apply(repo: Path, target: Path) -> list[dict]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("manifest", "check", "plan", "status", "apply"))
+    parser.add_argument("command", choices=("manifest", "check", "plan", "status", "apply", "verify-consumer"))
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--target", type=Path)
     parser.add_argument("--version", help="explicit new version for manifest generation")
@@ -186,6 +132,9 @@ def main() -> int:
             if not args.target:
                 raise ValueError("consumer command requires --target; targets are never discovered automatically")
             target = args.target.expanduser().resolve()
+            if args.command == "verify-consumer":
+                print(json.dumps(verify_consumer(repo, target), indent=2))
+                return 0
             actions = apply(repo, target) if args.command == "apply" else plan(repo, target)[2]
             print(json.dumps(actions, indent=2))
             if any(a["action"] == "conflict" for a in actions):

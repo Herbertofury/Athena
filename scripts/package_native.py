@@ -69,6 +69,11 @@ def package(source,binary,expected_sha,output,platform,engine=None,engine_sha=No
         for leaf in ('foundry-artist-concept.mjs','foundry-artist-concept.css'):
             copy(artist/leaf,'components/foundry-artist-concept/'+leaf)
             receipt['files'][-1]['optional_component']='foundry-artist-concept'
+        spec=importlib.util.spec_from_file_location('governance_inventory',ROOT/'native/foundry/portable_launcher.py')
+        inventory=importlib.util.module_from_spec(spec);spec.loader.exec_module(inventory)
+        for leaf in inventory.GOVERNANCE_FILES:
+            copy(ROOT/'guidance'/leaf,inventory.GOVERNANCE_PREFIX+leaf)
+            receipt['files'][-1]['optional_component']=inventory.GOVERNANCE_COMPONENT
     (output/'native-package.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     return receipt
 

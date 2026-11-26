@@ -34,6 +34,39 @@ def link_or_reparse(path):
     metadata=path.lstat()
     return stat.S_ISLNK(metadata.st_mode) or bool(getattr(metadata,'st_file_attributes',0)&0x400)
 
+GOVERNANCE_COMPONENT='athena-governance-audit'
+GOVERNANCE_FILES=(
+    'tools/consumer_verify.py', 'registry/repository-governance.json',
+    'PRODUCT_INVARIANTS.md', 'MODERNIZATION_STANDARD.md',
+    'DESIGN_QUALITY_STANDARD.md', 'FAILURE_INTELLIGENCE_STANDARD.md',
+    'CHALLENGER_INTEGRATION_STANDARD.md', 'PERFORMANCE_ACCEPTANCE.md',
+    'RUNTIME_PROOF.md', 'DURABLE_EXECUTION_STANDARD.md',
+    'EVALUATION_STANDARD.md', 'OBSERVABILITY_STANDARD.md',
+    'INTEROPERABILITY_STANDARD.md', 'AUTHORIZATION_CONTROL_STANDARD.md',
+    'THIRD_PARTY_SKILL_SECURITY.md', 'SUPPLY_CHAIN_STANDARD.md',
+    'DISTRIBUTION_STANDARD.md', 'templates/AGENTS.repository.md',
+)
+GOVERNANCE_PREFIX='components/'+GOVERNANCE_COMPONENT+'/'
+
+
+def review_governance(root, data, target):
+    target=external_path(target)
+    if not target.is_dir() or target==root or root in target.parents or any(link_or_reparse(p) for p in (target,*target.parents)):
+        raise ValueError('Select an ordinary external consumer directory')
+    selected={r['path']:r for r in data['files'] if r.get('optional_component')==GOVERNANCE_COMPONENT}
+    if set(selected)!={GOVERNANCE_PREFIX+name for name in GOVERNANCE_FILES}:
+        raise ValueError('Optional governance audit is not included')
+    for name,row in selected.items():
+        path=root/name
+        if not path.is_file() or any(link_or_reparse(p) for p in (path,*path.parents)):
+            raise ValueError('Optional governance audit is missing or linked')
+        with path.open('rb') as stream: raw=stream.read(row['bytes']+1)
+        if len(raw)!=row['bytes'] or hashlib.sha256(raw).hexdigest()!=row['sha256']:
+            raise ValueError('Optional governance audit integrity mismatch')
+    return subprocess.run([sys.executable,'-I','-B',str(root/GOVERNANCE_PREFIX/'tools/consumer_verify.py'),
+                           '--target',str(target)],timeout=30).returncode
+
+
 def verify(root):
     root=pathlib.Path(root).absolute()
     if any(link_or_reparse(p) for p in (root,*root.parents)):raise ValueError('Symlink package refused')
@@ -53,8 +86,11 @@ def verify(root):
     entries=data.get('files')
     if not isinstance(entries,list) or not 1<=len(entries)<=2000:raise ValueError('Invalid file inventory')
     names=set();aliases=set();total=0
-    optional=set()
+    optional=set(); optional_groups={}
     artist_components={'components/foundry-artist-concept/foundry-artist-concept.'+ext for ext in ('mjs','css')}
+    allowed={'foundry-artist-concept':artist_components,
+             GOVERNANCE_COMPONENT:{GOVERNANCE_PREFIX+leaf for leaf in GOVERNANCE_FILES}}
+    limits={'foundry-artist-concept':32768,GOVERNANCE_COMPONENT:131072}
     # Validate the entire inventory before consulting any listed path. The manifest
     # is an integrity record, not authority to inspect paths outside the package.
     for entry in entries:
@@ -67,13 +103,17 @@ def verify(root):
         if total>600*1024*1024:raise ValueError('Package byte bound exceeded')
         names.add(name);aliases.add(name.casefold())
         if 'optional_component' in entry:
-            if not engine or name not in artist_components or entry['optional_component']!='foundry-artist-concept' or size>32768:
+            group=entry['optional_component']
+            if not engine or not isinstance(group,str) or group not in allowed or name not in allowed[group] or size>limits[group]:
                 raise ValueError('Invalid optional inventory')
+            optional_groups.setdefault(group,set()).add(name)
             optional.add(name)
-    if optional and optional!=artist_components:raise ValueError('Incomplete optional manifest')
+    if optional_groups and any(seen!=allowed[group] for group,seen in optional_groups.items()):
+        raise ValueError('Incomplete optional manifest')
     for entry in entries:
         # Optional bytes are not part of base startup integrity. The native host
-        # independently checks both against its compiled first-party SHA-256 pins.
+        # independently checks the artist files against compiled pins. Governance
+        # bytes are verified against the package receipt only when explicitly invoked.
         if entry['path'] in optional:continue
         path=root/entry['path']
         if any(link_or_reparse(p) for p in (path,*path.parents)):raise ValueError('Invalid file')
@@ -370,6 +410,7 @@ def portable_data_paths(root,directory):
 def main():
     sys.dont_write_bytecode=True
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--portable-data-dir',help='open foundry.sqlite3 and engineering.sqlite3 in one existing external folder');p.add_argument('--init-portable-data',help='explicitly initialize a new paired profile in one existing external folder');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true')
+    p.add_argument('--review-governance',help='read-only check of one explicitly selected consumer repository')
     p.add_argument('--prepare-legacy',help='snapshot closed Feature Foundry v24 and print count-only review')
     p.add_argument('--import-reviewed-legacy',help='import supported data from the exact reviewed snapshot')
     p.add_argument('--archive-reviewed-legacy-history',help='save exact historical events to a separate new local JSON archive')
@@ -379,6 +420,10 @@ def main():
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if a.review_governance is not None:
+            if not data.get('engine') or any(v is not None and v is not False for k,v in vars(a).items() if k!='review_governance'):
+                raise ValueError('Select only one consumer directory on a unified package')
+            raise SystemExit(review_governance(root,data,a.review_governance))
         legacy_ops=(a.prepare_legacy,a.import_reviewed_legacy,a.archive_reviewed_legacy_history)
         if any(legacy_ops):
             if (sum(map(bool,legacy_ops))!=1 or not a.legacy_destination or
@@ -441,7 +486,9 @@ def main():
             os.execv(command[0],command)
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
-    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):
+    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError) as error:
+        if a.review_governance is not None:
+            p.exit(2,f'Governance audit refused: {error}\n')
         if a.prepare_legacy or a.import_reviewed_legacy:
             p.exit(2,'Legacy migration refused. Quit Feature Foundry before copying, use separate ordinary external paths and a new output, and import only the reviewed snapshot with its exact full SHA-256. Preserve originals and do not retry an uncertain copy blindly. See START-HERE.txt.\n')
         p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
