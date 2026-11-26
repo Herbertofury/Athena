@@ -15,6 +15,7 @@ Replace every placeholder with verified content. Delete inapplicable sections on
 - Common failure modes, troubleshooting and limitations:
 - Accessibility and keyboard use:
 - Architecture / flow diagram with text explanation and editable source reference (if useful):
+- Knowledge-map delta for material changes: entry point → changed component → critical caller/data/output; observed source vs inferred relationship vs runtime evidence; exact commit/scope, freshness or no-change reason:
 - Source paths, capability IDs, tests and last verified environment/date:
 - Walkthrough evidence (real artifact / native runtime, or explicitly scoped data/library check):
 - Simplification review: confusing steps, redundant controls or repeated work; causal evidence; adopted zero-loss fixes or linked unresolved backlog:

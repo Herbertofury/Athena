@@ -112,6 +112,32 @@ def validate(receipt, head):
                     problems.append("documentation_closeout: repository-only scope reason required")
             else:
                 problems.append("documentation_closeout: valid publication mode required")
+        if "knowledge_map" in documentation:
+            knowledge = documentation["knowledge_map"]
+            label = "documentation_closeout knowledge_map"
+            if not isinstance(knowledge, dict):
+                problems.append(f"{label}: must be an object")
+            elif knowledge.get("mode") == "not_applicable":
+                if not nonempty(knowledge.get("reason")):
+                    problems.append(f"{label}: inapplicability reason required")
+            elif knowledge.get("mode") == "changed":
+                if knowledge.get("head") != head:
+                    problems.append(f"{label}: exact candidate head required")
+                if not nonempty(knowledge.get("scope")):
+                    problems.append(f"{label}: changed component scope required")
+                if not nonempty(knowledge.get("evidence")):
+                    problems.append(f"{label}: evidence pointer required")
+                method = knowledge.get("method")
+                if method == "generated_graph":
+                    graph_head = knowledge.get("graph_head")
+                    if not valid_sha(graph_head):
+                        problems.append(f"{label}: full generated graph head required")
+                    elif graph_head != head and not nonempty(knowledge.get("scope_diff_evidence")):
+                        problems.append(f"{label}: different graph head needs scope diff evidence")
+                elif method != "source_walk":
+                    problems.append(f"{label}: valid evidence method required")
+            else:
+                problems.append(f"{label}: valid mode required")
     # Security audits are an optional advisory map, never a required gate.
     return list(dict.fromkeys(problems))
 
