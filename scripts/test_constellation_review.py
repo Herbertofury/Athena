@@ -83,6 +83,26 @@ def main(package):
                     f"writer's {summary} full group total was not verified")
             mismatched = {**payload, "summary": {**payload["summary"], summary: len(payload[kind]) + 1}}
             run(json.dumps(mismatched).encode(), success=False)
+        artifact_fixture = {**payload,
+                            "files": [
+                                {"chatId": "chat-A"}, {"chatId": "missing"},
+                                {"chatId": "chatgpt:downloads", "providerId": "chatgpt", "source": "downloads-api"},
+                                {"chatId": "chatgpt:downloads", "providerId": "other", "source": "downloads-api"},
+                                {"chatId": "chatgpt:downloads", "providerId": "chatgpt"}, {}, {"chatId": 42}, []
+                            ],
+                            "outputSnapshots": [
+                                {"chatId": "chat-A"}, {"chatId": "missing"},
+                                {"chatId": "chatgpt:downloads", "providerId": "chatgpt", "source": "downloads-api"},
+                                {"chatId": ""}, None
+                            ],
+                            "summary": {**payload["summary"], "files": 8, "outputSnapshots": 5}}
+        artifact_report = run(json.dumps(artifact_fixture).encode())["artifact_references"]
+        require(artifact_report == {
+            "files": {"linked_to_exported_chat": 1, "chat_not_in_export": 3,
+                      "provider_download_bucket": 1, "no_chat_link": 1, "unrecognized_row": 2},
+            "output_snapshots": {"linked_to_exported_chat": 1, "chat_not_in_export": 2,
+                                 "provider_download_bucket": 0, "no_chat_link": 1, "unrecognized_row": 1},
+        }, "artifact link coverage or synthetic provider bucket misclassified")
         old = {**payload, "summary": {"events": 12001, "checkpoints": 1000}}
         legacy = {r["kind"]: r for r in run(json.dumps(old).encode())["slices"]}
         require(legacy["files"]["source_reported"] is None and legacy["files"]["omitted"] is None,

@@ -5,10 +5,19 @@
 <header><p class="eyebrow">BEFORE YOU MOVE ANYTHING</p><h1>Review a Constellation export</h1><p>Check what an original v7 backup contains, what its writer omitted, and whether its saved turn links are present.</p></header>
 <section class="runner" aria-labelledby="choose"><h2 id="choose">Choose a closed v7 export</h2>
 <p id="scope">Athena processes the file in memory on this computer only. It shows counts and a checksum, not chat text, settings, or URLs. This is not an import or proof you can retire the source.</p>
-<form id="review-form" class="history-controls"><label for="source">Original export JSON (up to 16 MiB)</label><input id="source" type="file" accept=".json,application/json" required aria-describedby="scope"><button id="review" type="submit" disabled>Run local review</button></form>
+<form id="review-form" class="history-controls"><label for="source">Original export JSON or JSON gzip (up to 16 MiB after unpacking)</label><input id="source" type="file" accept=".json,.json.gz,.gz,application/json,application/gzip" required aria-describedby="scope"><button id="review" type="submit" disabled>Run local review</button></form>
 <p id="review-status" role="status">Choose a file; nothing is sent on selection.</p></section>
-<section id="results" class="runner" hidden aria-labelledby="receipt"><h2 id="receipt">What this export contains</h2><p id="digest"></p><ul id="references"></ul>
+<section id="results" class="runner" hidden aria-labelledby="receipt"><h2 id="receipt">What this export contains</h2><p id="digest"></p><p id="compressed-digest"></p><ul id="references"></ul>
+<h3>Artifact links</h3><p>These are links within the selected export, not a check that any file or URL can be opened. The saved receipt does not include this preview.</p><ul id="artifact-references"></ul>
 <label for="filter">Show collections</label> <select id="filter"><option value="all">All collections</option><option value="needs">Missing or uncertain</option></select>
-<p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div></section>
+<p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div>
+<details><summary>Keep or compare a redacted review</summary>
+<p>The receipt contains only collection and reference counts. Add the JSON fingerprint only if you need to identify its exact decoded bytes later. A gzip file also shows its separate archive fingerprint above. A receipt checksum detects edits, but does not prove authorship or import safety.</p>
+<label><input id="include-fingerprint" type="checkbox"> Include the export fingerprint</label>
+<button id="save-receipt" type="button">Download redacted receipt</button>
+<label for="saved-receipt">Saved redacted receipt JSON</label><input type="file" id="saved-receipt" accept=".json,application/json">
+<button id="compare-receipt" type="button" disabled>Compare saved counts</button>
+<p id="receipt-status" role="status"></p><ul id="receipt-differences"></ul>
+</details></section>
 <footer>No import · No file edits · No external requests</footer></main>
 <script type="module" src="/migration/constellation/app.js"></script></body></html>
