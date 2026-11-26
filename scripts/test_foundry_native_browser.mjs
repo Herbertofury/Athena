@@ -808,8 +808,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    const data=fs.readFileSync(name);assert.equal(JSON.parse(data).rules,rules);return data;
   };
   try{
-   await arenaPage.goto(origin+'/play/survivor/');
-   const next=arenaPage.getByLabel('Rules for next run',{exact:true});
+   await arenaPage.goto(origin+'/play');
+   await arenaPage.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   const next=arenaPage.getByRole('combobox',{name:'Rules for next run',exact:true});
+   await next.waitFor({timeout:10000});
    assert.equal(await next.inputValue(),'legacy');
    await arenaPage.getByRole('button',{name:'Start run',exact:true}).click();
    const active=arenaPage.locator('#active-run-rules');
