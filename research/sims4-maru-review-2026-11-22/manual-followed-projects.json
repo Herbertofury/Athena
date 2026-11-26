@@ -201,6 +201,85 @@
           "release": ""
         }
       ]
+    },
+    {
+      "id": "manual:curseforge:1780050:styled-look-creator",
+      "archived": false,
+      "sourceReview": {
+        "reviewedUtcDate": "2026-11-26",
+        "projectIdentity": {
+          "provider": "CurseForge",
+          "projectId": "1780050",
+          "game": "sims4",
+          "scope": "Live Mode outfit to one-way Styled Look package",
+          "url": "https://www.curseforge.com/sims4/mods/styled-look-creator"
+        },
+        "creatorAccounts": [
+          {
+            "provider": "CurseForge",
+            "account": "maru",
+            "url": "https://www.curseforge.com/members/maru/projects",
+            "evidence": "https://www.curseforge.com/sims4/mods/styled-look-creator"
+          }
+        ],
+        "identityEvidence": [
+          {
+            "source": "https://www.curseforge.com/sims4/mods/styled-look-creator",
+            "linksTo": [
+              "https://www.curseforge.com/members/maru/projects",
+              "https://www.curseforge.com/sims4/mods/styled-look-creator/files/9746944"
+            ]
+          }
+        ],
+        "documentedRelationships": [],
+        "observedFile": {
+          "fileId": "9746944",
+          "filename": "maru_StyledLookCreator261122.zip",
+          "platformUploadDate": "2026-11-22",
+          "listedGameVersion": "1.129.39",
+          "fileChangelog": "not provided",
+          "url": "https://www.curseforge.com/sims4/mods/styled-look-creator/files/9746944",
+          "uploader": "maru"
+        },
+        "authorUpdateNotes": [
+          {
+            "date": "2026-11-22",
+            "source": "https://www.curseforge.com/sims4/mods/styled-look-creator",
+            "claim": "Eligible out-of-slot outfits such as Trendi can be exported.",
+            "fileChangelog": false
+          },
+          {
+            "date": "2026-11-11",
+            "source": "https://www.curseforge.com/sims4/mods/styled-look-creator",
+            "claim": "Hair and makeup are optional; inapplicable sliders or CC may be omitted.",
+            "fileChangelog": false
+          }
+        ],
+        "packageWorkflow": {
+          "direction": "live_outfit_to_styled_look",
+          "outputFolder": "CreatedLooks",
+          "outputExtension": ".package",
+          "requiresRestartForCas": true,
+          "favoritesSyncVerified": false,
+          "bidirectionalApplyVerified": false
+        }
+      },
+      "revisions": [
+        {
+          "at": 1795651200000,
+          "name": "Styled Look Creator",
+          "ownership": "followed",
+          "stage": "research",
+          "goal": "Track Maru’s Live Mode outfit export as a one-way CAS save reference.",
+          "next": "At a permitted isolated test, compare one ordinary outfit and one Trendi outfit with the two generated packages and CAS after restart. Check one omitted custom item using a disposable duplicate profile.",
+          "blockers": "Author descriptions only. No package was downloaded, installed or tested. Shared favorites and bidirectional/live apply are not verified.",
+          "decisions": "Keep the November 22 project note separate from the file page, which has no changelog. Do not infer a Dynamic CAS Companion dependency or that CC is bundled.",
+          "resources": "Official project and file metadata only. The author documents CreatedLooks and restart before the look appears in CAS.",
+          "source": "https://www.curseforge.com/sims4/mods/styled-look-creator",
+          "version": "CurseForge file 9746944 · listed for The Sims 4 1.129.39",
+          "release": "https://www.curseforge.com/sims4/mods/styled-look-creator/files/9746944"
+        }
+      ]
     }
   ]
 }
