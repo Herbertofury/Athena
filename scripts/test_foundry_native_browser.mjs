@@ -797,6 +797,39 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
+ if(portableUnified)await check('Survivor Arena applies explicit visual rules only to new runs and preserves imported rules',async()=>{
+  const arenaPage=await context.newPage();
+  const refs=await import('../engines/roguelite/src/arena-replay.mjs');
+  const scratch=fs.mkdtempSync(path.join(temporary,'arena-rules-'));
+  const expectRules=async(file,rules)=>{
+   const download=arenaPage.waitForEvent('download');
+   await arenaPage.getByRole('button',{name:'Download run tape',exact:true}).click();
+   const name=path.join(scratch,file);await (await download).saveAs(name);
+   const data=fs.readFileSync(name);assert.equal(JSON.parse(data).rules,rules);return data;
+  };
+  try{
+   await arenaPage.goto(origin+'/play');
+   await arenaPage.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   const next=arenaPage.getByRole('combobox',{name:'Rules for next run',exact:true});
+   await next.waitFor({timeout:10000});
+   assert.equal(await next.inputValue(),'legacy');
+   await arenaPage.getByRole('button',{name:'Start run',exact:true}).click();
+   const active=arenaPage.locator('#active-run-rules');
+   await active.filter({hasText:'Active run: Legacy replay rules.'}).waitFor();
+   await next.selectOption('isolated');
+   await active.filter({hasText:'Active run: Legacy replay rules.'}).waitFor();
+   await arenaPage.getByText('Save or resume an offline run',{exact:true}).click();
+   const legacy=await expectRules('legacy.json',refs.ARENA_REPLAY_RULES);
+   await arenaPage.getByRole('button',{name:'Restart run',exact:true}).click();
+   await active.filter({hasText:'Active run: Isolated visual effects (preview).'}).waitFor();
+   await expectRules('isolated.json',refs.ARENA_PARTITIONED_REPLAY_RULES);
+   await arenaPage.getByLabel('Run tape',{exact:true}).setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:legacy});
+   await arenaPage.getByRole('button',{name:'Verify and load',exact:true}).click();
+   await active.filter({hasText:'Loaded run: Legacy replay rules.'}).waitFor();
+   assert.equal(await next.inputValue(),'isolated');
+   await expectRules('legacy-reexport.json',refs.ARENA_REPLAY_RULES);
+  }finally{await arenaPage.close();}
+ });
  if(portableUnified)await check('Exact portable Athena plays Frontier and restores both legacy and isolated visual-entropy tapes',async()=>{
   // The preceding animation proof installs a paused context-wide fake clock.
   // Replay cooperatively yields to real timers and should be tested independently.
