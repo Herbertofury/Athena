@@ -21,6 +21,8 @@ jobs:
           python-version: '3.12'
       - run: python guidance/tools/repository_governance.py check
       - run: python -m unittest discover -s guidance/tests -v
+      - name: Audit exact committed Athena instruction scope without text or edits
+        run: python guidance/tools/context_audit.py .
       - name: Build canonical reference bundle
         run: python guidance/tools/reference_bundle.py --output reference-core.zip
       - name: Verify canonical reference bundle
