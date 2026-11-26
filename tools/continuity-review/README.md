@@ -182,3 +182,32 @@ under the stated fresh-restore clock. This is not a live restore simulation of
 a populated profile. It does not compare full content, promise that every
 listed row is recoverable, perform a write, or change the original extension.
 Keep the snapshot, index and journal as separate files.
+
+### Write a new private replay candidate without importing it
+
+First run the verifier and review any ambiguous rows. If you want a separate
+inspection copy of the result, choose a **new private local path**:
+
+```sh
+node tools/continuity-review/write-constellation-replay-candidate.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz \
+  --output NEW-CANDIDATE.json
+```
+
+The writer rechecks all three inputs. It keeps snapshot order, appends
+previously unseen journal rows, and overlays a strictly newer journal row
+on its snapshot row, retaining the known base creation time and the exact
+journal modification time without dropping unchanged base fields. Older versions stay in the original journal. Equal
+timestamps with different objects, duplicate identities, unknown timestamps,
+and absent base collections are not guessed: their journal records stay
+separate in the candidate for inspection. A null collection means it was
+not supplied by the selected base, not empty. Root account/provider
+settings and unknown root fields are not copied; keep the original files.
+
+The new JSON contains private records and is **not** an Athena or Constellation
+import format; keep it out of shared folders and repositories. The terminal
+prints only counts and checksums. The exclusive-create output is limited to
+48 MiB, synced and read back for SHA-256 comparison. Mode 0600 applies where
+the OS honors it, not as a Windows ACL guarantee. A failed write may leave
+a partial new file. Existing files are not overwritten. No network, live
+browser storage, imports or cutovers are used.

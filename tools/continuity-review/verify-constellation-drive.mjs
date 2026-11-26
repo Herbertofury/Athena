@@ -124,7 +124,7 @@ function revisionPreview(before, after, clock) {
           sourceClock:'https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/src/brain-core.js#L14-L18'};
 }
 
-export function verifyDriveBundle({index, snapshot, journal, previewJournal=false, clock=Date.now()}) {
+export function readVerifiedDriveBundle({index, snapshot, journal, previewJournal=false, clock=Date.now()}) {
   const indexBytes = readSelected(index, INDEX_LIMIT, 'Index');
   const declared = json(indexBytes, 'Index');
   if (declared.schema !== 'project-constellation-drive-index' || declared.schemaVersion !== 2) {
@@ -160,7 +160,7 @@ export function verifyDriveBundle({index, snapshot, journal, previewJournal=fals
   }));
   const warnings = [];
   if (snapshotTime > checkpoint || checkpoint > indexTime) warnings.push('Snapshot/index clock order differs from the normal writer sequence.');
-  let journalAssessment = null, changes = null;
+  let journalAssessment = null, changes = null, journalData = null;
   if (journalDeclared) {
     const b = verifiedArtifact(journal,declared.journal,'Journal');
     if (b.data.schema !== 'project-constellation-delta' || b.data.schemaVersion !== 1 ||
@@ -175,13 +175,19 @@ export function verifyDriveBundle({index, snapshot, journal, previewJournal=fals
     const total = Object.values(records).reduce((sum,n)=>sum+n,0);
     if (total !== declared.journal.recordCount) refuse('Journal record count differs from the index.');
     journalAssessment = {...b.proof,records,total};
+    journalData = b.data;
     if (previewJournal) changes = revisionPreview(a.data,b.data,clock);
   }
-  return {schema:'athena-constellation-drive-bundle-review-v1',
+  const report = {schema:'athena-constellation-drive-bundle-review-v1',
           index:{sha256:sha(indexBytes),bytes:indexBytes.length},
           snapshot:{...a.proof,retained},journal:journalAssessment,warnings,source:SOURCE,
           ...(previewJournal ? {journalPreview:changes} : {}),
           scope:'Selected files match this local index. No provider authentication, record-level restore or retirement proof.'};
+  return {report,snapshotData:a.data,journalData};
+}
+
+export function verifyDriveBundle(options) {
+  return readVerifiedDriveBundle(options).report;
 }
 
 function main(argv) {
