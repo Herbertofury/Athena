@@ -40,7 +40,12 @@ class CatalogNavigationTests(unittest.TestCase):
    subprocess.run([sys.executable,str(target/'scripts/build_catalog.py')],check=True,capture_output=True)
    for path,body in before.items(): self.assertEqual(path.read_bytes(),body)
    for name in ('Home.md','_Sidebar.md'):
-    self.assertIn('(Engineering-Engine-Foundry)',(target/'wiki'/name).read_text())
+    page=(target/'wiki'/name).read_text()
+    self.assertEqual(page.count('## Game engines'),1)
+    self.assertIn('## Game engines\n\n- [Athena Engine Foundry](Engineering-Engine-Foundry)',page)
+   founder=(target/'wiki/Engineering-Engine-Foundry.md').read_bytes()
+   self.assertIn(b'[Game Systems Exchange](Engineering-Game-Systems-Exchange)',founder)
+   self.assertTrue(founder.endswith(b'\n') and not founder.endswith(b'\n\n'))
 class DocumentationLinkTests(unittest.TestCase):
  def test_url_path_fragment_and_query(self):
   import sys
