@@ -3,13 +3,14 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {pathToFileURL} from 'node:url';
+import {isDeepStrictEqual} from 'node:util';
 
 const MIB = 1024*1024;
 const FILE_LIMIT = 16*MIB;
 const INDEX_LIMIT = MIB;
 const SOURCE = 'https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js';
 const COLLECTIONS = Object.freeze('providers groups projects smartCollections chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns projectBaselines integrityFindings'.split(' '));
-const USAGE = 'node tools/continuity-review/verify-constellation-drive.mjs --index DriveIndex.json --snapshot Backup.json.gz [--journal Journal.json.gz] [--preview-journal]';
+const USAGE = 'node tools/continuity-review/verify-constellation-drive.mjs --index DriveIndex.json --snapshot Backup.json.gz [--journal Journal.json.gz] [--preview-journal] [--compare-source Export.json]';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const object = x => !!x && typeof x === 'object' && !Array.isArray(x);
 const unsigned = n => Number.isSafeInteger(n) && n >= 0;
@@ -124,7 +125,50 @@ function revisionPreview(before, after, clock) {
           sourceClock:'https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/src/brain-core.js#L14-L18'};
 }
 
-export function readVerifiedDriveBundle({index, snapshot, journal, previewJournal=false, clock=Date.now()}) {
+// A separate direct export is a comparison input, not a repair source or a
+// statement that a provider has lost data. Never send IDs or values to stdout.
+function compareIndependentExport(path, snapshot, journal) {
+  const bytes = readSelected(path, FILE_LIMIT, 'Comparison export');
+  const source = json(bytes, 'Comparison export');
+  if (source.schema !== 'project-constellation' || source.schemaVersion !== 7) {
+    refuse('Comparison export is not a plain original Constellation v7 export.');
+  }
+  const exportedAt = declaredTime(source.exportedAt, 'Comparison export');
+  const counts = () => ({exact:0, notRetained:0, backupOlder:0, backupNewer:0,
+                         sameTimeDifferent:0, unresolved:0});
+  const total = counts();
+  const collections = Object.fromEntries(COLLECTIONS.map(kind => {
+    const rows = source[kind];
+    if (rows === undefined) return [kind,{coverage:'not-in-reference'}];
+    if (!Array.isArray(rows)) refuse('Comparison export has an invalid known collection.');
+    const base = Array.isArray(snapshot[kind]) ? indexedIds(snapshot[kind]) : null;
+    const delta = journal ? indexedIds(journal[kind]) : new Map();
+    const reference = indexedIds(rows), c = counts();
+    for (const row of rows) {
+      const id = row?.id;
+      if (!base || reference.get(id) !== row || !timestamp(row?.updatedAt)) {
+        c.unresolved++; continue;
+      }
+      const a = base.get(id), b = delta.get(id);
+      if (a === null || b === null || [a,b].some(r => r && !timestamp(r.updatedAt)) ||
+          (a && b && a.updatedAt === b.updatedAt && !isDeepStrictEqual(a,b))) {
+        c.unresolved++; continue;
+      }
+      const selected = !a || (b && b.updatedAt > a.updatedAt) ? b : a;
+      if (!selected) c.notRetained++;
+      else if (selected.updatedAt < row.updatedAt) c.backupOlder++;
+      else if (selected.updatedAt > row.updatedAt) c.backupNewer++;
+      else if (isDeepStrictEqual(selected,row)) c.exact++;
+      else c.sameTimeDifferent++;
+    }
+    for (const k of Object.keys(total)) total[k] += c[k];
+    return [kind,{coverage:base ? 'compared' : 'not-in-backup-snapshot',counts:c}];
+  }));
+  return {exportedAt:new Date(exportedAt).toISOString(),total,collections,
+          scope:'Only selected collections against this comparison export; gaps may be later work, not proven backup loss. Root settings, media bytes, and cutover are not verified.'};
+}
+
+export function readVerifiedDriveBundle({index, snapshot, journal, previewJournal=false, compareSource, clock=Date.now()}) {
   const indexBytes = readSelected(index, INDEX_LIMIT, 'Index');
   const declared = json(indexBytes, 'Index');
   if (declared.schema !== 'project-constellation-drive-index' || declared.schemaVersion !== 2) {
@@ -182,6 +226,7 @@ export function readVerifiedDriveBundle({index, snapshot, journal, previewJourna
           index:{sha256:sha(indexBytes),bytes:indexBytes.length},
           snapshot:{...a.proof,retained},journal:journalAssessment,warnings,source:SOURCE,
           ...(previewJournal ? {journalPreview:changes} : {}),
+          ...(compareSource ? {sourceComparison:compareIndependentExport(compareSource,a.data,journalData)} : {}),
           scope:'Selected files match this local index. No provider authentication, record-level restore or retirement proof.'};
   return {report,snapshotData:a.data,journalData};
 }
@@ -197,11 +242,11 @@ function main(argv) {
     const key=argv[i++];
     if (key==='--preview-journal' && !options[key]) { options[key]=true; continue; }
     const value=argv[i++];
-    if (!['--index','--snapshot','--journal'].includes(key) || !value || Object.hasOwn(options,key)) refuse('Select one index, one snapshot, and an optional journal.');
+    if (!['--index','--snapshot','--journal','--compare-source'].includes(key) || !value || Object.hasOwn(options,key)) refuse('Select one index, one snapshot, and optional journal and comparison export.');
     options[key]=value;
   }
   if (!options['--index'] || !options['--snapshot']) refuse('Select one index and one snapshot.');
-  const result=verifyDriveBundle({index:options['--index'],snapshot:options['--snapshot'],journal:options['--journal'],previewJournal:options['--preview-journal']});
+  const result=verifyDriveBundle({index:options['--index'],snapshot:options['--snapshot'],journal:options['--journal'],previewJournal:options['--preview-journal'],compareSource:options['--compare-source']});
   process.stdout.write(JSON.stringify(result,null,2)+'\n');
 }
 
