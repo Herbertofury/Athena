@@ -1,6 +1,6 @@
-# Maru's Sims 4 projects: three manual references
+# Maru's Sims 4 projects: four manual references
 
-Reviewed November 22, 2026 UTC. [Maru's CurseForge project](https://www.curseforge.com/sims4/mods/dynamic-cas-columns)
+First reviewed November 22, 2026 UTC; Styled Look Creator added November 26. [Maru's CurseForge project](https://www.curseforge.com/sims4/mods/dynamic-cas-columns)
 links to both public [marumaru SIMS MOD](https://www.patreon.com/cw/marumaruSIMSMOD)
 tool posts. The [CC List Mover post](https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555)
 links back to that exact CurseForge project. These are direct links between
@@ -10,7 +10,7 @@ published project sources, not a claim about a legal identity or social account.
 
 Download [manual-followed-projects.json](manual-followed-projects.json) from this
 repository. In [Athena Projects](https://herbertofury.github.io/Athena/#projects),
-choose **Import backup**, select the JSON, review the three proposed entries,
+choose **Import backup**, select the JSON, review the proposed entries,
 then choose **Import reviewed projects**. Find them under **Following**. Cancel
 changes nothing. Reimporting identical entries is a no-op; a same-ID conflict
 refuses the import rather than overwriting your work.
@@ -48,3 +48,26 @@ For future testing, use original disposable samples: verify sibling items in a
 merged package are disclosed and distinguish read-only review from a whole-file
 move or mutation. Do not read these source links as proof of release
 compatibility, download permissions, or authorization to change a real Mods folder.
+
+## Styled Look Creator: the one-way outfit handoff
+
+[Maru’s project](https://www.curseforge.com/sims4/mods/styled-look-creator) (1780050) lists
+[release file 9746944](https://www.curseforge.com/sims4/mods/styled-look-creator/files/9746944),
+`maru_StyledLookCreator261122.zip`, uploaded November 22 for Sims 4 1.129.39.
+The file has no changelog. The separate description dated November 22 adds
+out-of-slot outfit export such as Trendi. Its November 11 note describes optional
+hair and makeup and warns that inapplicable sliders or custom content can be omitted.
+
+The author says a Live Mode outfit becomes a `.package` under `CreatedLooks`, which
+appears in CAS after a restart. Required CC must already be available to a recipient.
+No test confirmed the package resource types, handling of missing CC, shared favorites
+or bidirectional/live apply. The metadata import neither acquires nor runs a package.
+If the previous three references are already present and unchanged, importing the new
+file offers only the new fourth entry; a locally changed record still triggers the
+existing conflict protection.
+
+At a permitted isolated game-test checkpoint, capture one regular and one Trendi
+look on a disposable Sim. Record the generated package names and hashes, compare
+source category/items with CAS after restart, and compare one missing fixture item
+in a duplicate test profile. Keep real saves and Mods folders untouched. Test favorite
+sharing and bidirectional/live apply separately rather than inferring them from export.
