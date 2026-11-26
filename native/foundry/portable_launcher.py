@@ -1,5 +1,5 @@
 """Launch a verified portable package with an explicitly selected external database."""
-import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types,re,stat
+import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types,re,stat,shutil
 
 def external_path(value):
     path=pathlib.Path(value)
@@ -48,21 +48,58 @@ GOVERNANCE_FILES=(
 )
 GOVERNANCE_PREFIX='components/'+GOVERNANCE_COMPONENT+'/'
 
+BUNDLE_COMPONENT='athena-constellation-bundle-review'
+BUNDLE_SOURCE='tools/continuity-review/verify-constellation-drive.mjs'
+BUNDLE_LEAF='components/'+BUNDLE_COMPONENT+'/verify-constellation-drive.mjs'
+BUNDLE_KEYS={'review_constellation_bundle','bundle_index','bundle_snapshot','bundle_journal',
+             'bundle_compare_source','bundle_preview_journal'}
+
+
+def verified_optional(root,data,group,expected,label):
+    selected={r['path']:r for r in data['files'] if r.get('optional_component')==group}
+    if set(selected)!=expected:
+        raise ValueError(f'Optional {label} is not included')
+    for name,row in selected.items():
+        path=root/name
+        if not path.is_file() or any(link_or_reparse(p) for p in (path,*path.parents)):
+            raise ValueError(f'Optional {label} is missing or linked')
+        with path.open('rb') as stream: raw=stream.read(row['bytes']+1)
+        if len(raw)!=row['bytes'] or hashlib.sha256(raw).hexdigest()!=row['sha256']:
+            raise ValueError(f'Optional {label} integrity mismatch')
+
+
+def review_constellation_bundle(root,data,a):
+    if not (data.get('engine') and a.review_constellation_bundle and a.bundle_index and a.bundle_snapshot) or any(
+        v is not None and v is not False for k,v in vars(a).items() if k not in BUNDLE_KEYS
+    ):
+        raise ValueError('Choose one bundle review and select an index and snapshot; no other operation')
+    verified_optional(root,data,BUNDLE_COMPONENT,{BUNDLE_LEAF},'Constellation bundle reviewer')
+    command=[]
+    for flag,value in [('--index',a.bundle_index),('--snapshot',a.bundle_snapshot),
+                       ('--journal',a.bundle_journal),('--compare-source',a.bundle_compare_source)]:
+        if value is None:continue
+        selected=external_path(value)
+        if not selected.is_file() or root in selected.parents or any(link_or_reparse(p) for p in (selected,*selected.parents)):
+            raise ValueError('Select ordinary external bundle files')
+        command.extend((flag,str(selected)))
+    if a.bundle_preview_journal:command.append('--preview-journal')
+    node=shutil.which('node.exe' if os.name=='nt' else 'node')
+    if not node:raise ValueError('Node.js 24 or later must already be installed and on PATH')
+    node=str(pathlib.Path(node).resolve(strict=True))
+    # Never inherit preload, coverage, warning-output, or compiler-cache Node settings.
+    env={k:v for k,v in os.environ.items() if not k.upper().startswith('NODE_')}
+    version=subprocess.run([node,'--version'],env=env,capture_output=True,timeout=5)
+    match=re.fullmatch(rb'v(\d+)\.\d+\.\d+',version.stdout.strip())
+    if version.returncode or not match or int(match[1])<24:
+        raise ValueError('Node.js 24 or later must already be installed and on PATH')
+    return subprocess.run([node,str(root/BUNDLE_LEAF),*command],env=env,timeout=30).returncode
+
 
 def review_governance(root, data, target):
     target=external_path(target)
     if not target.is_dir() or target==root or root in target.parents or any(link_or_reparse(p) for p in (target,*target.parents)):
         raise ValueError('Select an ordinary external consumer directory')
-    selected={r['path']:r for r in data['files'] if r.get('optional_component')==GOVERNANCE_COMPONENT}
-    if set(selected)!={GOVERNANCE_PREFIX+name for name in GOVERNANCE_FILES}:
-        raise ValueError('Optional governance audit is not included')
-    for name,row in selected.items():
-        path=root/name
-        if not path.is_file() or any(link_or_reparse(p) for p in (path,*path.parents)):
-            raise ValueError('Optional governance audit is missing or linked')
-        with path.open('rb') as stream: raw=stream.read(row['bytes']+1)
-        if len(raw)!=row['bytes'] or hashlib.sha256(raw).hexdigest()!=row['sha256']:
-            raise ValueError('Optional governance audit integrity mismatch')
+    verified_optional(root,data,GOVERNANCE_COMPONENT,{GOVERNANCE_PREFIX+name for name in GOVERNANCE_FILES},'governance audit')
     return subprocess.run([sys.executable,'-I','-B',str(root/GOVERNANCE_PREFIX/'tools/consumer_verify.py'),
                            '--target',str(target)],timeout=30).returncode
 
@@ -89,8 +126,9 @@ def verify(root):
     optional=set(); optional_groups={}
     artist_components={'components/foundry-artist-concept/foundry-artist-concept.'+ext for ext in ('mjs','css')}
     allowed={'foundry-artist-concept':artist_components,
-             GOVERNANCE_COMPONENT:{GOVERNANCE_PREFIX+leaf for leaf in GOVERNANCE_FILES}}
-    limits={'foundry-artist-concept':32768,GOVERNANCE_COMPONENT:131072}
+             GOVERNANCE_COMPONENT:{GOVERNANCE_PREFIX+leaf for leaf in GOVERNANCE_FILES},
+             BUNDLE_COMPONENT:{BUNDLE_LEAF}}
+    limits={'foundry-artist-concept':32768,GOVERNANCE_COMPONENT:131072,BUNDLE_COMPONENT:32768}
     # Validate the entire inventory before consulting any listed path. The manifest
     # is an integrity record, not authority to inspect paths outside the package.
     for entry in entries:
@@ -411,6 +449,9 @@ def main():
     sys.dont_write_bytecode=True
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--portable-data-dir',help='open foundry.sqlite3 and engineering.sqlite3 in one existing external folder');p.add_argument('--init-portable-data',help='explicitly initialize a new paired profile in one existing external folder');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true')
     p.add_argument('--review-governance',help='read-only check of one explicitly selected consumer repository')
+    p.add_argument('--review-constellation-bundle',action='store_true',help='verify already saved Constellation backup inputs without provider access (requires Node.js 24+)')
+    p.add_argument('--bundle-index');p.add_argument('--bundle-snapshot');p.add_argument('--bundle-journal')
+    p.add_argument('--bundle-compare-source');p.add_argument('--bundle-preview-journal',action='store_true')
     p.add_argument('--prepare-legacy',help='snapshot closed Feature Foundry v24 and print count-only review')
     p.add_argument('--import-reviewed-legacy',help='import supported data from the exact reviewed snapshot')
     p.add_argument('--archive-reviewed-legacy-history',help='save exact historical events to a separate new local JSON archive')
@@ -418,8 +459,11 @@ def main():
     p.add_argument('--reviewed-sha256',help='exact snapshot SHA-256 printed during preparation')
     a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
+    bundle_requested=any(getattr(a,key) is not None and getattr(a,key) is not False for key in BUNDLE_KEYS)
     try:
         data=verify(root)
+        if bundle_requested:
+            raise SystemExit(review_constellation_bundle(root,data,a))
         if a.review_governance is not None:
             if not data.get('engine') or any(v is not None and v is not False for k,v in vars(a).items() if k!='review_governance'):
                 raise ValueError('Select only one consumer directory on a unified package')
@@ -487,6 +531,8 @@ def main():
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError) as error:
+        if bundle_requested:
+            p.exit(2,'Constellation bundle review refused. Use the verified unified package, Node.js 24+, and ordinary external files. See --help.\n')
         if a.review_governance is not None:
             p.exit(2,f'Governance audit refused: {error}\n')
         if a.prepare_legacy or a.import_reviewed_legacy:
