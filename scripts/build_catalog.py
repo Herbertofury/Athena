@@ -160,7 +160,8 @@ Consumers pin exact local package versions and keep host-specific UI, assets, sa
 [Card Game package](https://github.com/Herbertofury/Athena/tree/main/engines/card-game) · [Roguelite package](https://github.com/Herbertofury/Athena/tree/main/engines/roguelite) · [Mascot Open World package](https://github.com/Herbertofury/Athena/tree/main/engines/mascot-open-world) · [Shared Browser Game Runtime](https://github.com/Herbertofury/Athena/tree/main/engines/shared-game-runtime)
 """
 write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry)
-for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry'),('wiki/Engineering-Home.md','Engineering-Engine-Foundry'),('wiki/Engineering-Navigation.md','Engineering-Engine-Foundry')]:
+# Engineering-* navigation is maintained by Engineering Atlas, not this generator.
+for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry')]:
  destination = R / name
  link = '\n- [Athena Engine Foundry](' + target + ')\n'
  existing = destination.read_text()
