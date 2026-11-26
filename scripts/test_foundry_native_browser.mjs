@@ -772,6 +772,39 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(await preview.locator('img,iframe,audio,video').count(),0);
   }finally{page.off('request',track);}
  });
+ if(unified)await check('Artist preview code restores exact pixels after a fresh page and rejects cross-artist settings',async()=>{
+  const url=origin+'/migration/foundry-artists',start=report.externalRequests.length;
+  await page.goto(url);
+  await page.getByRole('button',{name:'Preview Frawgy worlds'}).click();
+  const preview=page.locator('#concept'),read=()=>page.locator('#primary canvas').evaluate(e=>e.toDataURL());
+  await preview.getByRole('status').filter({hasText:'Clear study'}).waitFor();
+  await preview.getByLabel('Weather study').selectOption('weather.frawgy.spore-shower');
+  await preview.getByLabel('Lighting phase').selectOption('time.frawgy.dusk');
+  await preview.getByLabel('Compare both variants').check();
+  const original=await read();
+  await preview.getByRole('button',{name:'Get preview code',exact:true}).click();
+  const field=page.getByRole('textbox',{name:'Preview code',exact:true}),code=await field.inputValue();
+  assert.ok(code.length>100&&code.length<512);
+  await page.goto(url);
+  const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+  await page.getByText('Keep or restore a concept preview',{exact:true}).click();
+  const restore=page.getByRole('button',{name:'Restore preview code',exact:true});
+  await field.fill(code);
+  await restore.click();
+  await preview.getByRole('status').filter({hasText:'Dusk'}).waitFor();
+  assert.equal(await read(),original);
+  assert.equal(await preview.getByLabel('Compare both variants').isChecked(),true);
+  const bad=JSON.parse(code);bad[4]='weather.karoline.silk-veil';
+  await field.fill(JSON.stringify(bad));await restore.click();
+  await page.locator('#preview-code-status').filter({hasText:'current preview was not changed'}).waitFor();
+  assert.equal(await read(),original);
+  const outdated=JSON.parse(code);outdated[1]='0'.repeat(64);
+  await field.fill(JSON.stringify(outdated));await restore.click();
+  await page.locator('#preview-code-status').filter({hasText:'different catalog'}).waitFor();
+  assert.equal(await read(),original);
+  assert.equal(await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}})),baseline);
+  assert.equal(report.externalRequests.length,start);
+ });
  if(suppliedPackage)await check('Extracted Athena artist catalog survives optional renderer removal, tamper and exact restore',async()=>{
   const leaf=path.join(portable,'components','foundry-artist-concept','foundry-artist-concept.mjs');
   const original=fs.readFileSync(leaf);

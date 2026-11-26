@@ -5,6 +5,10 @@
 <section class="runner"><h2>Find a world or district</h2><label for="find">Artist, world, district or weather</label><input id="find" type="search" maxlength="120">
 <p id="optional-concept-note" hidden>Concept previews are unavailable. You can still search every artist, world and source.</p>
 <p id="status" role="status">Reading the local catalog…</p><p id="source"></p></section>
+<details id="preview-code" class="runner" hidden><summary>Keep or restore a concept preview</summary>
+<p>Copy a preview code to save the artist, colorway, weather, lighting and comparison choice. Paste it here on a later launch with the same catalog version. This does not save a room, image, or music account.</p>
+<label for="preview-code-input">Preview code</label><input id="preview-code-input" type="text" maxlength="512" autocomplete="off" spellcheck="false">
+<button type="button" id="preview-code-restore">Restore preview code</button><p id="preview-code-status" role="status"></p></details>
 <div id="artists" class="layout"></div>
 <section id="concept" class="runner" aria-labelledby="concept-title" hidden>
 <h2 id="concept-title" tabindex="-1">Concept preview</h2>
@@ -14,6 +18,7 @@
 <label for="concept-weather">Weather study<select id="concept-weather"></select></label>
 <label for="concept-phase">Lighting phase<select id="concept-phase"></select></label>
 <label><input type="checkbox" id="concept-compare"> Compare both variants</label>
+<button type="button" id="preview-code-capture" disabled>Get preview code</button>
 <button type="button" id="concept-close">Close preview</button>
 </div>
 <p id="concept-status" role="status"></p>
