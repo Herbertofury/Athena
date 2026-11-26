@@ -8,6 +8,7 @@
     "districts": 20,
     "weather": 20,
     "timeflow": 20,
+    "interactions": 25,
     "music_routes": 21
   },
   "scope": "Public curated names only. Grouped by artist as in the original authority, not a per-world district assignment or a rendered scene.",
@@ -87,6 +88,33 @@
           "name": "Night"
         }
       ],
+      "interactions": [
+        {
+          "name": "Press",
+          "response": "Surface compresses like leaf-gel; nearby dew shifts toward contact point.",
+          "guardrail": "Immediate state change; effect follows and can be cancelled."
+        },
+        {
+          "name": "Drag",
+          "response": "Object stretches a soft vine tether and tilts by apparent mass.",
+          "guardrail": "No pointer capture loss; tether snaps back cleanly on cancel."
+        },
+        {
+          "name": "Drop",
+          "response": "Lilypad ripple propagates only to nearby relevant objects.",
+          "guardrail": "Bounded radius and attention budget."
+        },
+        {
+          "name": "Delete",
+          "response": "Object is gently swallowed by a flower or dissolves into spores; nearby light warms briefly red-coral.",
+          "guardrail": "Undo restores from the same flower with no delay."
+        },
+        {
+          "name": "Add",
+          "response": "New item sprouts, unfolds or hatches; environment responds with a faint green glow.",
+          "guardrail": "No blocking flourish."
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -162,6 +190,33 @@
         {
           "id": "time.lightweaver.signal-dawn",
           "name": "Acid Signal Dawn"
+        }
+      ],
+      "interactions": [
+        {
+          "name": "Hover",
+          "response": "A thin iris scan and filament edge reveal depth without brightening all content.",
+          "guardrail": "No flashing; preserve contrast."
+        },
+        {
+          "name": "Press",
+          "response": "A sigil ignites under contact, then resolves into the real selected state.",
+          "guardrail": "State is authoritative and instantaneous."
+        },
+        {
+          "name": "Drag",
+          "response": "Light fibers braid behind the object according to direction and velocity.",
+          "guardrail": "Fibers are renderer-only and never alter layout geometry."
+        },
+        {
+          "name": "Drop",
+          "response": "Filaments tighten into a clean glyph and emit a jeweled click.",
+          "guardrail": "Bounded to target region."
+        },
+        {
+          "name": "Error",
+          "response": "Blue glyph fractures into a readable red-magenta diagnostic seam.",
+          "guardrail": "No vague glitch effect; error text remains explicit."
         }
       ],
       "recorded_music_routes": 4
@@ -241,6 +296,33 @@
           "name": "Midnight Apotheosis"
         }
       ],
+      "interactions": [
+        {
+          "name": "Hover",
+          "response": "A precise halo tracer appears around the active object, with a faint star-ping at valid points of focus.",
+          "guardrail": "No blur over text; ring remains thin and high-contrast."
+        },
+        {
+          "name": "Focus",
+          "response": "The active panel is treated like a reliquary, gaining a chapel spotlight and slightly dimmed surroundings.",
+          "guardrail": "Dim only nonessential zones; keyboard focus remains explicit."
+        },
+        {
+          "name": "Add",
+          "response": "New items descend as consecrated modules, locking into place with a silver sparkle and soft choir shimmer.",
+          "guardrail": "Zero blocking delay; can be disabled in low-effects mode."
+        },
+        {
+          "name": "Delete",
+          "response": "Removed items dissolve into star ash while nearby gold accents briefly warm to ember red.",
+          "guardrail": "Undo restores instantly from the same location."
+        },
+        {
+          "name": "Warning / Conflict",
+          "response": "Guardian eyes awaken, a red line passes once through the affected route, and related shrine indicators open.",
+          "guardrail": "Single pass only; never global full-screen flashing."
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -318,6 +400,33 @@
           "name": "Menagerie Night"
         }
       ],
+      "interactions": [
+        {
+          "name": "Hover",
+          "response": "A macro lens reveals stitch direction, material grain and internal layers around the pointed object.",
+          "guardrail": "No magnification jump under the cursor; text remains stable and readable."
+        },
+        {
+          "name": "Press",
+          "response": "Textile surfaces compress while porcelain edges hold rigid; nearby gold thread tightens toward the contact point.",
+          "guardrail": "State changes immediately; no interaction delay or sticky pointer capture."
+        },
+        {
+          "name": "Drag",
+          "response": "A gold suture tether flexes according to apparent mass while feathers, wings or cloth trail by direction and velocity.",
+          "guardrail": "Tether is visual only, fully interruptible and never changes hit testing."
+        },
+        {
+          "name": "Add",
+          "response": "A small cocoon opens, the new item unfolds from mesh and embroidery, then settles into its functional form.",
+          "guardrail": "No blocking flourish; low-effects mode uses a single stitched outline."
+        },
+        {
+          "name": "Delete / Undo",
+          "response": "The item molts into a translucent exuvia that remains as the undo anchor; undo rehydrates the original from the same shell.",
+          "guardrail": "Undo is immediate and preserves exact state, position and selection."
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -393,6 +502,33 @@
         {
           "id": "time.saveroom.starcaller-midnight",
           "name": "Starcaller Midnight"
+        }
+      ],
+      "interactions": [
+        {
+          "name": "Hover / Focus",
+          "response": "A thin celestial save-ring aligns beneath the target while a distant map marker and nearby water reflection acknowledge the same focus cause.",
+          "guardrail": "No focus delay, no bloom over labels and full keyboard-visible fallback."
+        },
+        {
+          "name": "Press / Activate",
+          "response": "The control depresses like a brass memory-card seal, sends one circular water ripple outward and resolves with a small checkpoint chime.",
+          "guardrail": "State changes immediately on activation; audio is optional and the ripple can be interrupted."
+        },
+        {
+          "name": "Drag / Reorder",
+          "response": "The dragged item becomes a tiny navigable island or boat, leaving a wake whose width and curve reflect velocity and direction.",
+          "guardrail": "Pointer capture remains authoritative; wake never affects hit testing and cancels cleanly."
+        },
+        {
+          "name": "Add / Spawn",
+          "response": "A new item rises from beneath the water as a mapped island, sheds droplets and lights one citadel window when persistence succeeds.",
+          "guardrail": "No blocking reveal; persistence failure prevents the success light and reports truthfully."
+        },
+        {
+          "name": "Delete / Undo",
+          "response": "The item dissolves into blue map pixels and bubbles that flow toward the nearest save shrine; undo reverses the tide and restores exact state and position.",
+          "guardrail": "Undo is immediate, deterministic and available before the visual trail finishes."
         }
       ],
       "recorded_music_routes": 5

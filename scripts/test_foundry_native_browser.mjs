@@ -818,7 +818,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const endpoint=origin+'/api/migration/foundry-artists',external=report.externalRequests.length;
   const payload=await (await fetch(endpoint)).text(),index=JSON.parse(payload);
   assert.equal(index.source_sha256,'474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920');
-  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,timeflow:20,music_routes:21});
+  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,timeflow:20,interactions:25,music_routes:21});
   assert.doesNotMatch(payload,/local_filename|spotify_uri|open_search|instagram|tiktok/);
   await page.goto(origin+'/migration?source=foundry');
   await page.getByRole('link',{name:'Foundry artist index',exact:true}).click();
@@ -833,6 +833,28 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('#artists img,#artists iframe,#artists audio,#artists video').count(),0);
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,external);
+ });
+ if(unified)await check('Native artist interaction library compares 25 pinned recipes without running an effect',async()=>{
+  await page.goto(origin+'/migration/foundry-artists');
+  const panel=page.locator('#interaction-library'),control=page.getByRole('combobox',{name:'Compare an input'});
+  await panel.getByText('4 recipes for Press.',{exact:true}).waitFor();
+  const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+  const outbound=report.externalRequests.length, requests=[];
+  const track=req=>requests.push(req.url());page.on('request',track);
+  try{
+   assert.equal(await panel.locator('article').count(),4);
+   await panel.getByText(/Surface compresses like leaf-gel/).waitFor();
+   await control.selectOption('Activate');
+   await panel.getByText('1 recipe for Activate.',{exact:true}).waitFor();
+   await panel.getByText('Press / Activate',{exact:true}).waitFor();
+   await control.selectOption('Undo');
+   await panel.getByText('2 recipes for Undo.',{exact:true}).waitFor();
+   assert.equal(await panel.locator('article').count(),2);
+   assert.equal(await panel.locator('audio,video,img,iframe,canvas').count(),0);
+   assert.deepEqual(requests,[]);
+   assert.equal(report.externalRequests.length,outbound);
+   assert.equal(await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}})),baseline);
+  }finally{page.off('request',track);}
  });
  if(unified)await check('Native artist concept lighting and weather compare and export matching PNGs without requests or storage writes',async()=>{
   const modulePath='/migration/foundry-artists/concept.mjs';
