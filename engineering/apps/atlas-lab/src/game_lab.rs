@@ -134,7 +134,7 @@ pub(crate) fn router() -> Router {
             "/play/survivor/preview/host.mjs",
             get(|| async {
                 js!(concat!(
-                    "import {createRecordedArena,encodeArenaTape,decodeArenaTape,ARENA_TAPE_MAX_BYTES} from '../src/arena-replay.mjs';\n",
+                    "import {createRecordedArena,encodeArenaTape,decodeArenaTape,ARENA_TAPE_MAX_BYTES,ARENA_REPLAY_RULES,ARENA_PARTITIONED_REPLAY_RULES} from '../src/arena-replay.mjs';\n",
                     survivor!("preview/arena-browser.js")
                 ))
             }),

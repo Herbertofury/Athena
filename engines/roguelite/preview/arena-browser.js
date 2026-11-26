@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 const get=id=>document.getElementById(id);
 const board=get('arena'), ctx=board.getContext('2d'), start=get('start'), pause=get('pause'), seed=get('seed');
+const ruleField=get('run-rules'),activeRules=get('active-run-rules');
+const ruleLabel=r=>r===ARENA_PARTITIONED_REPLAY_RULES?'Isolated visual effects (preview)':'Legacy replay rules';
 const hud=Object.fromEntries(['hp','level','xp','kills','time','arsenal'].map(id=>[id,get(id)]));
 const choicePanel=get('choice'), choices=get('choices'), status=get('status'), formatField=get('run-format'), pressure=get('pressure');
 const expedition=get('expedition-readout'), eventReadout=get('expedition-event'), balanceReadout=get('expedition-balance');
@@ -354,7 +356,9 @@ start.addEventListener('click',()=>{
  if(!seed.checkValidity()||seed.value===''){seed.focus();setText(status,'Enter a whole seed from 0 to 4294967295.');return;}
  transfer++;
  if(loading)controls(false);
- host=createRecordedArena({seed:Number(seed.value),format:formatField.value});
+ const rules=ruleField.value==='isolated'?ARENA_PARTITIONED_REPLAY_RULES:ARENA_REPLAY_RULES;
+ host=createRecordedArena({seed:Number(seed.value),format:formatField.value,rules});
+ setText(activeRules,'Active run: '+ruleLabel(rules)+'.');
  clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();prior=0;leftover=0;snapshot=host.frameView();
  transition('running','Run started.');setText(start,'Restart run');board.focus();draw();
 });
@@ -392,6 +396,7 @@ verifyTapeButton.addEventListener('click',async()=>{
   host=candidate;clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();snapshot=host.frameView();
   const h=host.capture().header;
   seed.value=String(h.seed);formatField.value=h.format;
+  setText(activeRules,'Loaded run: '+ruleLabel(h.rules)+'.');
   if(host.phase()==='choice'){transition('choice',snapshot.portal?.awaitingDecision?'Select your pending rift decision.':snapshot.camp?.prompt?'Select your pending camp decision.':snapshot.region?.state==='decision'?'Select your pending frontier decision.':snapshot.relay?.route==='decision'?'Select your pending relay task.':'Select your pending upgrade.');showChoices(snapshot.offers);}
   else if(host.phase()==='finished')transition('finished','Verified completed run.');
   else transition('paused','Verified run loaded, ready to resume.');
