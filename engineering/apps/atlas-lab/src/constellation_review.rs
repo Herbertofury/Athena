@@ -24,6 +24,9 @@ struct Summary {
     files: Option<usize>,
     knowledge_items: Option<usize>,
     continuity_projects: Option<usize>,
+    groups: Option<usize>,
+    smart_collections: Option<usize>,
+    integrity_findings: Option<usize>,
     events: usize,
     checkpoints: usize,
 }
@@ -121,6 +124,75 @@ struct ArtifactReferences {
     output_snapshots: ArtifactLinks,
 }
 #[derive(Serialize)]
+struct LifecycleSlice {
+    source_reported_open: Option<usize>,
+    open: Option<usize>,
+    closed: Option<usize>,
+    unrecognized: Option<usize>,
+    matches_reported_open: Option<bool>,
+}
+#[derive(Serialize)]
+struct Lifecycle {
+    groups: LifecycleSlice,
+    smart_collections: LifecycleSlice,
+    integrity_findings: LifecycleSlice,
+}
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct LifecycleMarkers<'a> {
+    #[serde(borrow)]
+    deleted_at: Option<&'a RawValue>,
+    #[serde(borrow)]
+    resolved: Option<&'a RawValue>,
+}
+fn lifecycle(rows: Option<&Rows<'_>>, source: Option<usize>, findings: bool) -> LifecycleSlice {
+    let counts = rows.map(|rows| {
+        let (mut open, mut closed, mut unrecognized) = (0, 0, 0);
+        for row in rows {
+            let marker = if row.get().trim_start().starts_with('{') {
+                serde_json::from_str::<LifecycleMarkers<'_>>(row.get())
+                    .ok()
+                    .and_then(|fields| {
+                        if findings {
+                            match fields.resolved.map(RawValue::get) {
+                                None | Some("false") => Some(false),
+                                Some("true") => Some(true),
+                                _ => None,
+                            }
+                        } else {
+                            match fields.deleted_at.map(RawValue::get) {
+                                None => Some(false),
+                                Some(value) => value
+                                    .parse::<u64>()
+                                    .ok()
+                                    .filter(|n| *n <= 9_007_199_254_740_991)
+                                    .map(|n| n != 0),
+                            }
+                        }
+                    })
+            } else {
+                None
+            };
+            match marker {
+                Some(true) => closed += 1,
+                Some(false) => open += 1,
+                None => unrecognized += 1,
+            }
+        }
+        (open, closed, unrecognized)
+    });
+    LifecycleSlice {
+        source_reported_open: source,
+        open: counts.map(|c| c.0),
+        closed: counts.map(|c| c.1),
+        unrecognized: counts.map(|c| c.2),
+        matches_reported_open: counts
+            .filter(|c| c.2 == 0)
+            .zip(source)
+            .map(|(c, n)| c.0 == n),
+    }
+}
+#[derive(Serialize)]
 pub struct Report {
     schema: &'static str,
     source_schema: u32,
@@ -129,6 +201,7 @@ pub struct Report {
     slices: Vec<Slice>,
     references: References,
     artifact_references: ArtifactReferences,
+    lifecycle: Lifecycle,
     scope: &'static str,
 }
 fn slice(
@@ -347,6 +420,19 @@ pub fn review_bytes(bytes: &[u8]) -> Result<Report, &'static str> {
         slices,
         references,
         artifact_references,
+        lifecycle: Lifecycle {
+            groups: lifecycle(s.groups.as_ref(), s.summary.groups, false),
+            smart_collections: lifecycle(
+                s.smart_collections.as_ref(),
+                s.summary.smart_collections,
+                false,
+            ),
+            integrity_findings: lifecycle(
+                s.integrity_findings.as_ref(),
+                s.summary.integrity_findings,
+                true,
+            ),
+        },
         scope: "Read-only counts, basic turn references and artifact-to-chat links. Missing means absent in this export, not missing from the original application. No content validated for restoration, no import, no remote or provider actions, and no retirement decision.",
     })
 }

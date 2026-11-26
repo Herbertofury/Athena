@@ -541,6 +541,8 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   exportBody.files=[{id:'fixture-private-marker-never-render',filename:'fixture-private-marker-never-render'}];
   exportBody.chats=[{id:'chat-a'}];exportBody.turns=[{id:'turn-a',chatId:'chat-a'}];
   exportBody.turnRevisions=[{id:'revision-a',chatId:'different-chat',turnId:'turn-a'}];
+  Object.assign(exportBody,{groups:[{}, {deletedAt:1700000000000}],integrityFindings:[{resolved:false},{resolved:true},{resolved:'unknown'}]});
+  Object.assign(exportBody.summary,{groups:1,integrityFindings:1});
   const exportBytes=Buffer.from(JSON.stringify(exportBody));
   await page.locator('#source').setInputFiles({name:'fixture.json',mimeType:'application/json',buffer:exportBytes});
   verifyNoArchiveDisclosure();
@@ -556,9 +558,14 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.getByText('Revisions naming a different chat than their turn: 1',{exact:true}).waitFor();
   await page.getByText('Files: No chat link: 1.',{exact:true}).waitFor();
   await page.getByText('Output snapshots: no records.',{exact:true}).waitFor();
+  await check('Constellation review distinguishes deleted groups and unresolved or unknown findings',async()=>{
+   await page.getByText('Groups: 1 active; 1 deleted. Writer reported 1 active. Counts agree.',{exact:true}).waitFor();
+   await page.getByText('Smart collections: not present in this export. No writer count.',{exact:true}).waitFor();
+   await page.getByText('Integrity findings: 1 unresolved; 1 resolved; 1 unrecognized. Writer reported 1 unresolved. Comparison unavailable.',{exact:true}).waitFor();
+  });
   assert.equal((await page.locator('main').textContent()).includes('fixture-private-marker-never-render'),false);
   await page.selectOption('#filter','needs');
-  assert.match(await page.locator('#coverage').textContent(),/5 of 18 collections/);
+  assert.match(await page.locator('#coverage').textContent(),/3 of 18 collections/);
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await page.screenshot({path:path.join(out,'constellation-v7-review-narrow.png'),fullPage:true});
