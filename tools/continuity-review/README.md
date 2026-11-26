@@ -129,3 +129,32 @@ a file and explicitly click **Run local review**; selection alone makes no
 request. The current local engine accepts one bounded request at a time. The
 browser can filter to missing or uncertain collections. The file is processed
 in loopback memory and is never imported or persisted by the review.
+
+## Verify three already-downloaded Constellation Drive backup files
+
+```sh
+node tools/continuity-review/verify-constellation-drive.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz
+```
+
+Use the exact saved index and corresponding files from one quiescent backup
+boundary. The [original source writer](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2764-L2850)
+writes an index v2, a full v7 snapshot, and usually a cumulative journal v1.
+Omit `--journal` only if the index explicitly has no journal. A declared
+journal missing from the selected set is not silently ignored.
+
+The check compares exact stored bytes, declared size/SHA-256 and encoding,
+then parses bounded decoded JSON. It requires the same full checkpoint in
+the index and journal and compares the observed journal row count to the
+original index. The full snapshot and journal have separate counts; counts
+are **not added**, since the journal can contain updates to existing rows.
+The command warns when the recorded times are out of the writer's normal
+order. It never assumes a loose timestamp alone is enough to pair a delta.
+
+The index is limited to 1 MiB, each selected backup input and its expanded
+JSON to 16 MiB. JSON and gzip are supported where the index declares that
+encoding. There is no temporary extraction, Drive access or write. The report excludes
+URLs, filenames, provider identities, project IDs and chat text from the selected files.
+Checksums prove agreement with the selected index, not publisher authenticity,
+latest cloud state, record-level restorable content, or retirement readiness.
+This requires Node.js 24 and is separate from the native one-file v7 reviewer above.
