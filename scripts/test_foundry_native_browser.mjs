@@ -691,7 +691,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,external);
  });
- if(unified)await check('Optional native artist concept plates compare colorways and weather without requests or storage writes',async()=>{
+ if(unified)await check('Native artist concept plates compare weather and export matching PNGs without requests or storage writes',async()=>{
   const modulePath='/migration/foundry-artists/concept.mjs';
   const requested=[],outbound=report.externalRequests.length;
   const track=req=>{if(new URL(req.url()).pathname===modulePath)requested.push(req.url());};
@@ -716,6 +716,18 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await preview.getByLabel('Compare both variants').check();
    await preview.getByRole('heading',{name:'Lilypad Nocturne',exact:true}).waitFor();
    assert.notEqual(await frame('#alternate'),weather);
+   for(const [figure,world] of [['#primary','Verdant Conservatory'],['#alternate','Lilypad Nocturne']]){
+    const pending=page.waitForEvent('download');
+    await preview.getByRole('button',{name:'Save '+world+' concept PNG',exact:true}).click();
+    const file=await pending, chunks=[];
+    assert.match(file.suggestedFilename(),/^athena-concept-world\.frawgy\.[a-z-]+--weather\.frawgy\.spore-shower\.png$/);
+    for await(const chunk of await file.createReadStream())chunks.push(chunk);
+    const bytes=Buffer.concat(chunks);
+    assert.equal(bytes.readUInt32BE(16),640);
+    assert.equal(bytes.readUInt32BE(20),320);
+    assert.deepEqual(bytes,Buffer.from((await frame(figure)).split(',')[1],'base64'));
+    await file.delete();
+   }
    assert.equal(await preview.locator('.swatches span').count(),10);
    await preview.getByLabel('Weather study').selectOption('');
    assert.equal(await frame('#primary'),clear);
