@@ -129,3 +129,113 @@ a file and explicitly click **Run local review**; selection alone makes no
 request. The current local engine accepts one bounded request at a time. The
 browser can filter to missing or uncertain collections. The file is processed
 in loopback memory and is never imported or persisted by the review.
+
+## Verify three already-downloaded Constellation Drive backup files
+
+```sh
+node tools/continuity-review/verify-constellation-drive.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz
+```
+
+Use the exact saved index and corresponding files from one quiescent backup
+boundary. The [original source writer](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2764-L2850)
+writes an index v2, a full v7 snapshot, and usually a cumulative journal v1.
+Omit `--journal` only if the index explicitly has no journal. A declared
+journal missing from the selected set is not silently ignored.
+
+The check compares exact stored bytes, declared size/SHA-256 and encoding,
+then parses bounded decoded JSON. It requires the same full checkpoint in
+the index and journal and compares the observed journal row count to the
+original index. The full snapshot and journal have separate counts; counts
+are **not added**, since the journal can contain updates to existing rows.
+The command warns when the recorded times are out of the writer's normal
+order. It never assumes a loose timestamp alone is enough to pair a delta.
+
+The index is limited to 1 MiB, each selected backup input and its expanded
+JSON to 16 MiB. JSON and gzip are supported where the index declares that
+encoding. There is no temporary extraction, Drive access or write. The report excludes
+URLs, filenames, provider identities, project IDs and chat text from the selected files.
+Checksums prove agreement with the selected index, not publisher authenticity,
+latest cloud state, record-level restorable content, or retirement readiness.
+This requires Node.js 24 and is separate from the native one-file v7 reviewer above.
+
+### Preview the journal before relying on a legacy restore
+
+Add `--preview-journal` to a verified backup with a journal. The optional
+report compares IDs and stored integer timestamps without printing either.
+It separates rows seen only in the journal from newer, equal, and older
+overlaps and unresolved comparisons. Duplicates, missing comparison times,
+or absent base collections are unresolved, not treated as safe. A row seen
+only in the journal is not necessarily new globally: it may have been
+omitted from the selected snapshot.
+
+The legacy restore [reads the full snapshot first, then applies the journal](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2668-L2701).
+Its [write path](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L660-L679)
+uses [mergeRecord](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/src/brain-core.js#L14-L18),
+which raises stored modification times to at least the restore time. A journal
+row that is newer in the source files can then look older and be skipped. A
+synthetic rehearsal of the pinned functions reproduced that failure for one
+overlap while a journal-only row was still accepted.
+
+The optional `riskOfLegacySkip` count is a subset of known newer/equal overlaps
+under the stated fresh-restore clock. This is not a live restore simulation of
+a populated profile. It does not compare full content, promise that every
+listed row is recoverable, perform a write, or change the original extension.
+Keep the snapshot, index and journal as separate files.
+
+### Write a new private replay candidate without importing it
+
+First run the verifier and review any ambiguous rows. If you want a separate
+inspection copy of the result, choose a **new private local path**:
+
+```sh
+node tools/continuity-review/write-constellation-replay-candidate.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz \
+  --output NEW-CANDIDATE.json
+```
+
+The writer rechecks all three inputs. It keeps snapshot order, appends
+previously unseen journal rows, and overlays a strictly newer journal row
+on its snapshot row, retaining the known base creation time and the exact
+journal modification time without dropping unchanged base fields. Older versions stay in the original journal. Equal
+timestamps with different objects, duplicate identities, unknown timestamps,
+and absent base collections are not guessed: their journal records stay
+separate in the candidate for inspection. A null collection means it was
+not supplied by the selected base, not empty. Root account/provider
+settings and unknown root fields are not copied; keep the original files.
+
+The new JSON contains private records and is **not** an Athena or Constellation
+import format; keep it out of shared folders and repositories. The terminal
+prints only counts and checksums. The exclusive-create output is limited to
+48 MiB, synced and read back for SHA-256 comparison. Mode 0600 applies where
+the OS honors it, not as a Windows ACL guarantee. A failed write may leave
+a partial new file. Existing files are not overwritten. No network, live
+browser storage, imports or cutovers are used.
+
+### Compare against an independent direct export
+
+The original writer captures snapshot rows before uploading, but records the
+later completion time as the next journal's strict lower bound. An edit made
+in that window may be absent from both files even when all hashes pass.
+See [snapshot reads](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2311)
+and the [legacy checkpoint and journal writer](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2754-L2852).
+
+If you already have a separately saved plain v7 JSON export from the original
+source, select it locally alongside the verified Drive bundle. Prefer a
+direct export taken with editing stopped for the comparison, not a copy of
+the Drive snapshot.
+
+```sh
+node tools/continuity-review/verify-constellation-drive.mjs \
+  --index DriveIndex.json --snapshot Backup.json.gz --journal Journal.json.gz \
+  --compare-source IndependentExport.json
+```
+
+The report counts absent, older, newer, exactly retained and equal-timestamp
+but different selected records. Duplicate IDs, unknown timestamps and
+ambiguous equal-time backup rows are unresolved rather than guessed.
+Comparison is one-way from the selected reference, not a test of everything
+ever captured, root settings or media bytes. Later edits can also produce
+differences. No content or identities are printed. The plain private input is
+limited to 16 MiB; it is never uploaded or changed. Do not delete the old
+extension, source records or original backup files based on this report.
