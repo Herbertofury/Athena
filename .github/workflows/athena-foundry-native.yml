@@ -44,6 +44,10 @@ jobs:
         run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
       - name: Build and extract unsigned candidate from exact current binaries
         run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
+      - name: Extracted portable Projects and Continuity backup admission
+        env:
+          ATHENA_BACKUP_TEST_RUNTIME: ${{ github.workspace }}/candidate-extracted/runtime
+        run: node --test tests/project-continuity-backup-admission.test.cjs
       - name: Unified dual-store HTTP acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
