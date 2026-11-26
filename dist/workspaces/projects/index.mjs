@@ -1,8 +1,10 @@
+import {createPortableBackupReader} from '../../shared/portable-backup-job.mjs';
 import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions,createProjectReference} from './model.mjs';
 import {parseBackup,mergeBackup,MAX_IMPORT_BYTES} from './import.mjs';
 const PAGE=24;
 export function mount({container,state,setState,search='',signal,theme='dark',readSavedProject}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'});let data,disposed=false,selected=null,editing=null,generation=0,review=null,portable=null,ownership='',stage='',archived=false,searchHistory=false;const urls=new Set();
+ const backupReader=createPortableBackupReader('projects',parseBackup);
  let browseIndex,savedIndex,savedProjects,rows=[],shown=0,limit=PAGE;
  let failure='',committed;try{prepareData(state===undefined?empty():validate(state));rememberSaved();}catch(e){failure='Stored projects could not be opened and have not been overwritten. '+e.message;}
  root.innerHTML=`<div class="project-shell"><header><p class="eyebrow">YOUR NEXT WORLD STARTS HERE</p><h2>Project browser</h2><p>Ideas you own. Work you follow. One place to see what comes next.</p><div class="toolbar"><button id="new">New project</button><button id="export">Export projects</button><label class="import">Import backup<input id="import" type="file" accept="application/json,.json"></label></div></header><p id="notice" role="status"></p><section id="transfer-review" hidden aria-labelledby="transfer-heading"><h3 id="transfer-heading" tabindex="-1">Review one portable project</h3><p id="transfer-summary"></p><p>Only this saved project and its full history. Includes every saved revision, source link, and project-specific metadata. No other project records, workspace settings, learning or Continuity notes. The download is plain text; inspect it before sharing.</p><details id="transfer-packet"><summary>Inspect exact JSON contents</summary><pre id="transfer-json"></pre></details><div class="toolbar"><button id="transfer-save" type="button">Download reviewed project</button><button id="transfer-cancel" type="button">Cancel portable copy</button></div><p>To reopen elsewhere, choose Import backup there. Athena will review before adding this ID and never overwrite a conflicting project.</p></section><section id="backup-review" hidden aria-labelledby="backup-heading"><h3 id="backup-heading">Review project backup</h3><p id="backup-summary"></p><ul id="backup-projects"></ul><div class="toolbar"><button id="backup-confirm" type="button">Import reviewed projects</button><button id="backup-cancel" type="button">Cancel backup import</button></div></section><div class="filters"><label>Project search scope<select id="history-search" aria-label="Project search scope"><option value="current">Current revision</option><option value="history">All saved revisions</option></select></label><label>Project ownership<select id="ownership" aria-label="Project ownership"><option value="">All projects</option><option value="own">My projects</option><option value="followed">Following</option></select></label><label>Project stage<select id="stage" aria-label="Project stage"><option value="">Every stage</option>${stages.map(s=>`<option>${s}</option>`).join('')}</select></label><button id="archived">Show archived</button></div><p id="count" role="status"></p><div class="layout"><div class="collection"><section id="cards" aria-label="Project collection"></section><button id="more" type="button" aria-controls="cards" hidden>Show next projects</button></div><section id="detail" aria-label="Project details"></section></div><form id="editor" hidden><h3 id="editor-title">New project</h3><label>Project name<input name="name" required maxlength="200"></label><label>Ownership<select name="ownership" aria-label="Ownership"><option value="own">My project</option><option value="followed">Followed external project</option></select></label><label>Stage<select name="stage" aria-label="Stage">${stages.map(s=>`<option>${s}</option>`).join('')}</select></label><label>Goal<textarea name="goal" maxlength="10000"></textarea></label><label>Next actions<textarea name="next" maxlength="10000"></textarea></label><label>Blockers<textarea name="blockers" maxlength="10000"></textarea></label><label>Decisions<textarea name="decisions" maxlength="10000"></textarea></label><label>Resources and inspiration<textarea name="resources" maxlength="10000"></textarea></label><label>Official source URL<input name="source" type="url" maxlength="2000"></label><label>Observed version<input name="version" maxlength="200"></label><label>Release source URL<input name="release" type="url" maxlength="2000"></label><button type="submit">Save project</button><button type="button" id="cancel">Cancel</button></form><footer>Private in this browser. Export separately for backup. Followed projects are manually recorded references, not automatic polling or external social follows. Versions are your observations, not a claim of latest release. Detected competing Projects edits are refused; export your draft before reloading. Use one editing tab. Import requires review, adds missing IDs and refuses conflicts. The input limit is 100 projects / 16 MiB; the browser save limit is lower; nothing is silently replaced. Project continuity notes remain separate and untouched.</footer></div>`;
@@ -204,7 +206,7 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
  $('#ownership').onchange=e=>{ownership=e.target.value;resetList();};$('#stage').onchange=e=>{stage=e.target.value;resetList();};$('#archived').onclick=()=>{archived=!archived;$('#archived').textContent=archived?'Show active':'Show archived';resetList();};
  $('#export').onclick=()=>{if(!data||disposed)return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));urls.add(url);const a=el('a');a.href=url;a.download='athena-projects.json';a.click();};
  function clearReview(){review=null;$('#backup-review').hidden=true;$('#backup-projects').replaceChildren();}
- $('#backup-cancel').onclick=()=>{generation++;clearReview();notice.textContent='Backup import canceled. Nothing was saved.';$('#import').focus();};
+ $('#backup-cancel').onclick=()=>{generation++;backupReader.cancel();clearReview();notice.textContent='Backup import canceled. Nothing was saved.';$('#import').focus();};
  $('#backup-confirm').onclick=()=>{
   if(disposed||!review)return;
   const {before,merged}=review;
@@ -220,12 +222,12 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
  };
  $('#import').onchange=async e=>{
   if(disposed||!data)return;
-  const file=e.target.files?.[0],token=++generation;e.target.value='';clearReview();
+  const file=e.target.files?.[0],token=++generation;e.target.value='';backupReader.cancel();clearReview();
   if(!file)return;
   const before=data;
   try{
    if(file.size>MAX_IMPORT_BYTES)throw Error('Backup exceeds 16 MiB');
-   const incoming=parseBackup(new Uint8Array(await file.arrayBuffer()));
+   const incoming=await backupReader.read(file);
    if(disposed||token!==generation)return;
    if(data!==before)throw Error('Projects changed while reading the backup. Choose it again.');
    const merged=mergeBackup(before,incoming);
@@ -242,6 +244,6 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
   }catch(e){if(!disposed&&token===generation)notice.textContent='Import refused; existing projects unchanged. '+e.message;}
  };
  if(!data){notice.textContent=failure;for(const n of root.querySelectorAll('input,select,button,textarea'))n.disabled=true;}else{notice.textContent='Ready. Nothing is sent to a provider.';render();}
- function unmount(){if(disposed)return;disposed=true;generation++;review=null;for(const url of urls)URL.revokeObjectURL(url);root.replaceChildren();signal?.removeEventListener('abort',unmount);}
+ function unmount(){if(disposed)return;disposed=true;generation++;backupReader.cancel();review=null;for(const url of urls)URL.revokeObjectURL(url);root.replaceChildren();signal?.removeEventListener('abort',unmount);}
  function setTheme(t){container.dataset.theme=t==='light'?'light':'dark';}setTheme(theme);signal?.addEventListener('abort',unmount,{once:true});if(signal?.aborted)unmount();return {ready:!!data,unmount,setTheme,setSearch(q){const next=String(q);if(next!==search){search=next;resetList();}}};
 }
