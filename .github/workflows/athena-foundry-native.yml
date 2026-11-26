@@ -86,6 +86,11 @@ jobs:
           ATHENA_BACKUP_TEST_RUNTIME: ${{ github.workspace }}/candidate-extracted/runtime
           ATHENA_TEST_REAL_BACKUP_WORKER: '1'
         run: node --test tests/portable-backup-worker.test.cjs
+      - name: Mounted Projects large backup review and exact confirmation in Chromium
+        env:
+          ATHENA_BACKUP_TEST_RUNTIME: ${{ github.workspace }}/candidate-extracted/runtime
+          ATHENA_TEST_REAL_BACKUP_WORKER: '1'
+        run: node --test tests/projects-merge-review.test.cjs
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
       - name: Unified Lab and Foundry browser acceptance
