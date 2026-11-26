@@ -31,7 +31,8 @@ function artifactSummary(report){
  }
  return result;
 }
-const receiptSchema='athena-constellation-redacted-receipt-v1';
+const legacyReceipt='athena-constellation-redacted-receipt-v1';
+const receiptSchema='athena-constellation-redacted-receipt-v2';
 const receiptLimit=32*1024;
 const collections=Object.freeze('providers projects chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns groups smartCollections projectBaselines integrityFindings'.split(' '));
 const hex=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
@@ -46,6 +47,16 @@ function project(slices,references){
  });
  const referenceCounts=Object.fromEntries(Object.keys(refs).map(key=>{if(!unsigned(references[key]))throw Error('Invalid reference count.');return [key,references[key]];}));
  return {counts,reference_counts:referenceCounts};
+}
+const artifactKinds={files:'Files',output_snapshots:'Output snapshots'};
+function projectArtifacts(report){
+ const kinds=Object.keys(artifactKinds), keys=Object.keys(artifactStates);
+ if(!only(report,kinds))throw Error('Invalid artifact reference counts.');
+ return Object.fromEntries(kinds.map(kind=>{
+  const values=report[kind];
+  if(!only(values,keys)||keys.some(key=>!unsigned(values[key])))throw Error('Invalid artifact reference counts.');
+  return [kind,Object.fromEntries(keys.map(key=>[key,values[key]]))];
+ }));
 }
 const byteHash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
 const jsonHash=v=>byteHash(new TextEncoder().encode(JSON.stringify(v)));
@@ -86,8 +97,8 @@ function resetReceipt(){
  $('saved-receipt').value='';$('compare-receipt').disabled=true;$('receipt-status').textContent='';$('receipt-differences').replaceChildren();
 }
 function receiptBody(fingerprint){
- const {projection,digest}=currentReceipt;
- return {schema:receiptSchema,source_schema:7,...projection,input_sha256:fingerprint?digest:null};
+ const {projection,artifacts,digest}=currentReceipt;
+ return {schema:receiptSchema,source_schema:7,...projection,artifact_reference_counts:artifacts,input_sha256:fingerprint?digest:null};
 }
 function reportDiff(before,now){
  const diff=[];
@@ -101,6 +112,12 @@ function reportDiff(before,now){
  }
  for(const [key,label] of Object.entries(refs))if(before.reference_counts[key]!==now.reference_counts[key])
   diff.push(label+': '+before.reference_counts[key]+' → '+now.reference_counts[key]);
+ if(before.artifact_reference_counts)for(const [kind,label] of Object.entries(artifactKinds)){
+  for(const [key,state] of Object.entries(artifactStates)){
+   const old=before.artifact_reference_counts[kind][key], value=now.artifact_reference_counts[kind][key];
+   if(old!==value)diff.push(label+' · '+state+': '+old+' → '+value);
+  }
+ }
  return diff;
 }
 $('save-receipt').addEventListener('click',async()=>{
@@ -123,15 +140,21 @@ $('compare-receipt').addEventListener('click',async()=>{
  $('compare-receipt').disabled=true;$('receipt-differences').replaceChildren();
  try{
   const raw=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer()),data=JSON.parse(raw);
-  if(!only(data,['schema','source_schema','counts','reference_counts','input_sha256','checksum_sha256'])||
-     data.schema!==receiptSchema||data.source_schema!==7||!(data.input_sha256===null||hex(data.input_sha256))||!hex(data.checksum_sha256))throw Error('Receipt could not be verified.');
+  const legacy=data?.schema===legacyReceipt;
+  const fields=['schema','source_schema','counts','reference_counts','input_sha256','checksum_sha256'];
+  if(!legacy)fields.push('artifact_reference_counts');
+  if(!only(data,fields)||(!legacy&&data.schema!==receiptSchema)||data.source_schema!==7||
+     !(data.input_sha256===null||hex(data.input_sha256))||!hex(data.checksum_sha256))throw Error('Receipt could not be verified.');
   const projection=project(data.counts,data.reference_counts);
   for(const row of data.counts)if(!only(row,['kind','retained','export_cap','source_reported','omitted','cap_reached']))throw Error('Unexpected receipt fields.');
-  const body={schema:receiptSchema,source_schema:7,...projection,input_sha256:data.input_sha256};
+  const body={schema:data.schema,source_schema:7,...projection};
+  if(!legacy)body.artifact_reference_counts=projectArtifacts(data.artifact_reference_counts);
+  body.input_sha256=data.input_sha256;
   const calculated=await jsonHash(body);if(rev!==receiptEpoch)return;if(calculated!==data.checksum_sha256)throw Error('Receipt checksum does not match.');
   const diff=reportDiff(body,now);
   $('receipt-differences').replaceChildren(...diff.map(line=>node('li',line)));
   $('receipt-status').textContent=(diff.length?`${diff.length} count or limit changes.`:'No count or limit changes.')+
+   (legacy?' Older receipts did not track file or output links.':'')+
    (body.input_sha256?(body.input_sha256===digest?' Export fingerprint matches.':' Export fingerprint differs.'):' Saved receipt has no export fingerprint.');
  }catch(error){if(rev===receiptEpoch)$('receipt-status').textContent=/^(Receipt|Unsupported|Invalid|Unexpected)/.test(error.message)?error.message:'Receipt could not be verified.';}
  finally{if(rev===receiptEpoch)$('compare-receipt').disabled=false;}
@@ -145,7 +168,7 @@ function show(report,compressedHash){
   if (report.schema!=='athena-constellation-v7-review'||report.source_schema!==7
       ||!Array.isArray(report.slices)||report.slices.length!==18||!/^[a-f0-9]{64}$/.test(report.exact_input_sha256))
     throw Error('The engine returned an unsupported review.');
-  currentReceipt={projection:project(report.slices,report.references),digest:report.exact_input_sha256};
+  currentReceipt={projection:project(report.slices,report.references),artifacts:projectArtifacts(report.artifact_references),digest:report.exact_input_sha256};
   $('save-receipt').disabled=false;
   $('digest').textContent=compressedHash?`Decoded JSON SHA-256: ${report.exact_input_sha256}`:`SHA-256: ${report.exact_input_sha256}`;
   $('compressed-digest').textContent=compressedHash?`Selected gzip SHA-256: ${compressedHash}`:'';
