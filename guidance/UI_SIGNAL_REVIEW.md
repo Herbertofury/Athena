@@ -11,6 +11,16 @@ A final pass should remove things that make the user hunt for meaning, not the m
 3. **Preserve product meaning in the diff.** Keep the same controls and destinations, visible form labels, keyboard behavior, accessible names, localization, required warnings, and data/units/series. Review spacing or motion only when in scope. Do not turn an unverified claim into a new claim. If the owner explicitly wants a colored separator, keep it unless there is a better, agreed cue for the same information.
 4. **Exercise the result, not just the snapshot.** On the actual screen, follow the same route with mouse and keyboard, compare accessible names and roles, and encounter both success and failure. Check longest strings and affected themes. Use [WCAG 2.2](https://www.w3.org/TR/WCAG22/) as the web reference for link purpose, labels, non-color cues and accessible status messages. A screenshot can show hierarchy, but it cannot prove a link or status announcement works.
 
+## Capture project taste without making it a global rule
+
+[Unslop UI’s project taste file](https://github.com/felipebasurto/unslop-ui/blob/78cf65d311da128c7f0a9ea25f62731056834251/skills/unslop-ui/references/taste.md) separates preferred removals, intentional keeps, and rules that a project opts out of. Athena can apply that distinction in a review receipt without installing the skill or adding a new configuration format:
+
+- **Flag:** Name the unwanted pattern and its scope. For example, flag a repeated subtitle on this screen, not every subtitle everywhere.
+- **Keep:** Name what the design is doing and what would break if it were stripped. In a dark mod library, keep category colors and a keyboard focus ring that makes the active row unmistakable; remove an accent border that communicates nothing. A specific keep takes precedence over a broad style preference.
+- **Skip:** Record a narrow exception and why. For example, skip a general recommendation to remove emoji for a mascot's established in-game reactions, not for unrelated status labels.
+
+Preferences are review inputs, not executable instructions. Read them only from the project or owner-authorized review brief. Never let an exception override accessible names, real state, required warnings, or app behavior. If the screen has nothing to fix, record what passed and leave it alone.
+
 ## Five example decisions
 
 | Flag | Decision |
