@@ -4,13 +4,13 @@ const saveHelpers=app.slice(app.indexOf('function saveWorkspace('),app.indexOf('
 const snapshot=(workspaces,extra={})=>({schema:1,...extra,workspaces});
 const continuity=(id,schema=2)=>({schema,entries:id?[{id,project:'Fixture',kind:'decision',pinned:false,ignored:false,revisions:[{text:'Original',source:'',at:1}],history:[]}]:[]});
 function shared(initial){
- let raw=initial===null?null:JSON.stringify(initial), writes=0, fault='';
- const storage={getItem:()=>raw,setItem(_key,value){
+ let raw=initial===null?null:JSON.stringify(initial), writes=0, reads=0, fault='';
+ const storage={getItem(){reads++;return raw;},setItem(_key,value){
   if(fault==='quota')throw Error('fixture quota failure');
   writes++;
   if(fault!=='unconfirmed')raw=value;
  }};
- return {read:()=>raw,writes:()=>writes,setRaw:value=>{raw=value;},fault:kind=>{fault=kind;},tab(initial){
+ return {read:()=>raw,reads:()=>reads,writes:()=>writes,setRaw:value=>{raw=value;},fault:kind=>{fault=kind;},tab(initial){
   const host={workspaceStore:structuredClone(initial),localStorage:storage,toast(){}};
   vm.runInNewContext(saveHelpers,host);
   return {host,projects:(next,expected)=>host.saveReviewedProjectBackup(next,JSON.stringify(expected),true),
@@ -55,6 +55,32 @@ test('missing Continuity baseline accepts one deliberate save and Projects inver
  const projectData={schema:1,entries:[{id:'new-project'}]};
  assert.equal(projects.projects(projectData,{schema:1,entries:[]}),true);
  assert.deepEqual(JSON.parse(db.read()).workspaces,{projects:projectData,continuity:continuity('first')});
+});
+test('identical committed Continuity replay reads once, never writes, and refreshes unrelated state',()=>{
+ const note=continuity('original'), initial=snapshot({continuity:note,projects:{schema:1,entries:[]}}),db=shared(initial),tab=db.tab(initial);
+ const latest=snapshot({continuity:note,projects:{schema:1,entries:[{id:'cross-tab'}]}},{unrelated:'preserve'});
+ const raw=JSON.stringify(latest);
+ db.setRaw(raw);db.fault('quota');
+ assert.equal(tab.continuity(structuredClone(note),note),true);
+ assert.equal(db.reads(),1);assert.equal(db.writes(),0);assert.equal(db.read(),raw);
+ assert.equal(JSON.stringify(tab.host.workspaceStore),raw);
+ assert.throws(()=>tab.continuity(note,continuity('older')),{code:'CONTINUITY_WRITE_CONFLICT'});
+ assert.equal(db.reads(),2);assert.equal(db.writes(),0);
+ const oversized=continuity('oversize');oversized.entries[0].revisions[0].text='x'.repeat(250001);
+ db.setRaw(JSON.stringify(snapshot({continuity:oversized})));
+ assert.throws(()=>tab.continuity(oversized,oversized),/exceeds the local browser save limit/);
+ assert.equal(db.writes(),0);
+});
+test('failed draft retry, metadata-only changes and a legacy format upgrade are still written and confirmed',()=>{
+ const old=continuity('original',1), initial=snapshot({continuity:old}),db=shared(initial),tab=db.tab(initial);
+ const upgraded={...old,schema:2};
+ db.fault('quota');assert.throws(()=>tab.continuity(upgraded,old),/quota failure/);
+ assert.equal(db.writes(),0);assert.equal(db.reads(),1);assert.equal(db.read(),JSON.stringify(initial));
+ db.fault('');assert.equal(tab.continuity(upgraded,old),true);
+ assert.equal(db.writes(),1);assert.equal(db.reads(),3);assert.deepEqual(JSON.parse(db.read()).workspaces.continuity,upgraded);
+ const meta=structuredClone(upgraded);meta.entries[0].pinned=true;
+ assert.equal(tab.continuity(meta,upgraded),true);assert.equal(db.writes(),2);assert.equal(db.reads(),5);
+ assert.deepEqual(JSON.parse(db.read()).workspaces.continuity,meta);
 });
 test('ordinary Continuity edit keeps raw legacy comparison base and a failed draft exportable',async()=>{
  const {document}=parseHTML('<html><body><section></section></body></html>'); global.document=document;

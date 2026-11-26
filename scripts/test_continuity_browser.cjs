@@ -9,8 +9,19 @@ const packet=JSON.parse(await page.locator('#context-packet').textContent());ass
 const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export context Markdown',exact:true}).click()]);const markdown=fs.readFileSync(await download.path(),'utf8');assert(markdown.includes('Shared baseline'));assert(markdown.includes('Shared changed'));assert(markdown.includes('https://example.org/shared'));
 await page.reload();await page.locator('#context-warnings').getByText(/Evidence changed from reviewed revision 1 to observed revision 2/).waitFor();await first.getByText('Evidence links (1)',{exact:true}).click();await first.getByRole('button',{name:'Mark latest revision reviewed',exact:true}).click();await page.locator('#context-warnings').getByText(/No changed or missing linked evidence detected/).waitFor();
 const backup=await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity);
+const workspaceStorage=await page.evaluate(()=>{
+ const key='athena-workspaces-v1',proto=Storage.prototype,get=proto.getItem,set=proto.setItem;
+ const counts={reads:0,writes:0};
+ proto.getItem=function(name){if(this===localStorage&&name===key)counts.reads++;return Reflect.apply(get,this,[name]);};
+ proto.setItem=function(name,value){if(this===localStorage&&name===key)counts.writes++;return Reflect.apply(set,this,[name,value]);};
+ globalThis.__athenaStopStorageProbe=()=>{proto.getItem=get;proto.setItem=set;delete globalThis.__athenaStopStorageProbe;return counts;};
+ return get.call(localStorage,key);
+});
 await page.getByLabel('Import local continuity backup').setInputFiles({name:'synthetic-continuity.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});
 await page.getByText('Imported 0 notes; 2 identical notes retained. Saved in this browser. Export a backup.',{exact:true}).waitFor();
+assert.deepEqual(await page.evaluate(()=>globalThis.__athenaStopStorageProbe()),{reads:1,writes:0},'committed identical replay must reread exactly once without rewriting');
+assert.equal(await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),workspaceStorage);
+console.log('PASS mounted Continuity identical replay: one workspace read, zero writes, original bytes unchanged');
 backup.entries[0].pinned=!backup.entries[0].pinned;
 await page.getByLabel('Import local continuity backup').setInputFiles({name:'conflict.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});
 await page.getByText(/Import refused:/).waitFor();
