@@ -6,6 +6,10 @@ Start with [Security Foundations: Evidence Before Assumptions](docs/paths/securi
 
 Read [coverage and limits](docs/SECURITY-COVERAGE.md), [safe lab instructions](labs/security-foundations/README.md). No real accounts, credentials, customer records, scanning, network connections or security-setting changes are required. No claim of complete Security+ readiness is made.
 
+## Defensive knowledge review
+
+Use the [cybersecurity source review worksheet](docs/cybersecurity-source-review.md) to decide what Athena may cite, index or act on. The four fictional cases require no downloads or tools.
+
 ## Build and test the content pack
 
 ```sh
