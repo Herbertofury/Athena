@@ -1,17 +1,17 @@
 const q=id=>document.getElementById(id),el=(tag,t)=>Object.assign(document.createElement(tag),{textContent:t});
-const sections=[['worlds','Worlds','variant'],['districts','Districts'],['weather','Weather','intensity']];
+const sections=[['worlds','Worlds','variant'],['districts','Districts'],['weather','Weather','intensity'],['timeflow','Lighting phases']];
 let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0;
 const menu=(id,rows)=>q(id).replaceChildren(...rows.map(([value,name])=>Object.assign(el('option',name),{value})));
 const setStatus=t=>{q('concept-status').textContent=t;};
-function showPlate(preview,figure,world,weather) {
+function showPlate(preview,figure,world,weather,phase) {
  const node=q(figure),{motif,swatches}=preview.describePlate(world.id);
- preview.drawPlate(node.querySelector('canvas'),world.id,weather);
+ preview.drawPlate(node.querySelector('canvas'),world.id,weather,phase?.id);
  const save=node.querySelector('.save-plate');
- save.dataset.filename=`athena-concept-${world.id}--${weather?.id??'clear'}.png`;
+ save.dataset.filename=`athena-concept-${world.id}--${weather?.id??'clear'}${phase?'--'+phase.id:''}.png`;
  save.setAttribute('aria-label','Save '+world.name+' concept PNG');
  save.disabled=false;
  node.querySelector('h3').textContent=world.name;
- node.querySelector('p').textContent=`${world.variant} · ${motif}`;
+ node.querySelector('p').textContent=`${world.variant} · ${motif}${phase?' · '+phase.name:''}`;
  node.querySelector('.swatches').replaceChildren(...swatches.map(color=>{
   const tag=el('span',''),chip=el('i','');chip.style.backgroundColor=color;
   chip.setAttribute('aria-hidden','true');tag.append(chip,document.createTextNode(color.toUpperCase()));return tag;
@@ -55,14 +55,15 @@ function draw(){
  const {artist,preview}=active;
  const world=artist.worlds.find(w=>w.id===q('concept-world').value);
  const weather=artist.weather.find(w=>w.id===q('concept-weather').value);
+ const phase=artist.timeflow.find(p=>p.id===q('concept-phase').value);
  if(!world)return;
  try{
-  showPlate(preview,'primary',world,weather);
+  showPlate(preview,'primary',world,weather,phase);
   q('primary').hidden=false;
   const other=q('concept-compare').checked&&artist.worlds.find(w=>w.id!==world.id);
-  if(other)showPlate(preview,'alternate',other,weather);
+  if(other)showPlate(preview,'alternate',other,weather,phase);
   q('alternate').hidden=!other;
-  setStatus(`${world.name}${other?' and '+other.name:''} · ${weather?weather.name:'Clear study'}`);
+  setStatus(`${world.name}${other?' and '+other.name:''} · ${weather?weather.name:'Clear study'}${phase?' · '+phase.name:''}`);
  }catch{
   resetExports();
   for(const id of ['primary','alternate'])q(id).hidden=true;
@@ -75,20 +76,21 @@ async function openPreview(artist,button){
  q('concept').hidden=false;q('concept-title').textContent=artist.name+' concept preview';q('concept-title').focus();
  active=null;resetExports();q('primary').hidden=true;q('alternate').hidden=true;
  setStatus('Loading optional concept tools…');
- for(const id of ['concept-world','concept-weather','concept-compare'])q(id).disabled=true;
+ for(const id of ['concept-world','concept-weather','concept-phase','concept-compare'])q(id).disabled=true;
  try{
   const preview=await import('/migration/foundry-artists/concept.mjs');
   if(revision!==loadRevision)return;
   active={artist,preview};
   menu('concept-world',artist.worlds.map(w=>[w.id,w.name+' · '+w.variant]));
+  menu('concept-phase',[['','Original study lighting'],...artist.timeflow.map(p=>[p.id,p.name])]);
   menu('concept-weather',[['','Clear study'],...artist.weather.map(w=>[w.id,w.name+' · '+w.intensity])]);
-  for(const id of ['concept-world','concept-weather','concept-compare'])q(id).disabled=false;
+  for(const id of ['concept-world','concept-weather','concept-phase','concept-compare'])q(id).disabled=false;
   q('concept-compare').checked=false;q('primary').hidden=false;draw();
  }catch{
   if(revision===loadRevision)setStatus('Concept tools could not load. The separate artist index remains usable.');
  }
 }
-for(const id of ['concept-world','concept-weather','concept-compare'])q(id).addEventListener('change',draw);
+for(const id of ['concept-world','concept-weather','concept-phase','concept-compare'])q(id).addEventListener('change',draw);
 q('concept-close').addEventListener('click',()=>{
  ++loadRevision;active=null;resetExports();q('concept').hidden=true;
  if(caller?.closest('article')?.hidden)q('find').focus();else caller?.focus();caller=null;

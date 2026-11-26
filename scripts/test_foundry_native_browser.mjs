@@ -675,7 +675,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const endpoint=origin+'/api/migration/foundry-artists',external=report.externalRequests.length;
   const payload=await (await fetch(endpoint)).text(),index=JSON.parse(payload);
   assert.equal(index.source_sha256,'474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920');
-  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,music_routes:21});
+  assert.deepEqual(index.coverage,{artists:5,worlds:10,districts:20,weather:20,timeflow:20,music_routes:21});
   assert.doesNotMatch(payload,/local_filename|spotify_uri|open_search|instagram|tiktok/);
   await page.goto(origin+'/migration?source=foundry');
   await page.getByRole('link',{name:'Foundry artist index',exact:true}).click();
@@ -691,7 +691,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,external);
  });
- if(unified)await check('Native artist concept plates compare weather and export matching PNGs without requests or storage writes',async()=>{
+ if(unified)await check('Native artist concept lighting and weather compare and export matching PNGs without requests or storage writes',async()=>{
   const modulePath='/migration/foundry-artists/concept.mjs';
   const requested=[],outbound=report.externalRequests.length;
   const track=req=>{if(new URL(req.url()).pathname===modulePath)requested.push(req.url());};
@@ -729,6 +729,24 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
     await file.delete();
    }
    assert.equal(await preview.locator('.swatches span').count(),10);
+   const light=preview.getByLabel('Lighting phase');
+   assert.equal(await light.locator('option').count(),5);
+   const companionBefore=await frame('#alternate');
+   await light.selectOption('time.frawgy.dusk');
+   await preview.getByRole('status').filter({hasText:'Dusk'}).waitFor();
+   assert.notEqual(await frame('#primary'),weather);
+   assert.notEqual(await frame('#alternate'),companionBefore);
+   const [phased]=await Promise.all([page.waitForEvent('download'),
+    preview.getByRole('button',{name:'Save Verdant Conservatory concept PNG',exact:true}).click()]);
+   assert.match(phased.suggestedFilename(),/--weather\.frawgy\.spore-shower--time\.frawgy\.dusk\.png$/);
+   const phasedChunks=[];
+   for await(const chunk of await phased.createReadStream())phasedChunks.push(chunk);
+   assert.deepEqual(Buffer.concat(phasedChunks),Buffer.from((await frame('#primary')).split(',')[1],'base64'));
+   await phased.delete();
+   await light.selectOption('');
+   assert.equal(await frame('#primary'),weather);
+   assert.equal(await frame('#alternate'),companionBefore);
+
    await preview.getByLabel('Weather study').selectOption('');
    assert.equal(await frame('#primary'),clear);
    await preview.getByRole('button',{name:'Close preview',exact:true}).click();
