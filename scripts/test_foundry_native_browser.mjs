@@ -73,6 +73,14 @@ c=sqlite3.connect(sys.argv[1]); raw=c.execute('SELECT output FROM experiment_run
 raw='{\"large_integer\":18446744073709551617,'+raw[1:]
 c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(sys.argv[2])));c.execute('UPDATE experiments SET candidate=? WHERE id=?',('<img src=x onerror=alert(1)>',int(sys.argv[2])));c.commit();c.close();sys.stdout.write(raw)`,journal,String(offlineRun.experiment_id)],{encoding:'utf8',timeout:15000});
   if(!portableUnified)execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
+  if(!portableUnified){
+   const component=path.join(temporary,'components','foundry-artist-concept');
+   fs.mkdirSync(component,{recursive:true});
+   for(const ext of ['mjs','css']){
+    const name='foundry-artist-concept.'+ext;
+    fs.copyFileSync(path.join(repoRoot,'engineering/apps/atlas-lab/ui',name),path.join(component,name));
+   }
+  }
   report.portableUnified=portableUnified;
   report.scope='Actual unified Rust evidence and Foundry native stores in one origin; synthetic fixtures, no private migration or installer acceptance';
  }
@@ -693,13 +701,16 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
  });
  if(unified)await check('Native artist concept lighting and weather compare and export matching PNGs without requests or storage writes',async()=>{
   const modulePath='/migration/foundry-artists/concept.mjs';
+  const stylesheetPath='/migration/foundry-artists/concept.css';
+  const styleRequests=[];
   const requested=[],outbound=report.externalRequests.length;
-  const track=req=>{if(new URL(req.url()).pathname===modulePath)requested.push(req.url());};
+  const track=req=>{const route=new URL(req.url()).pathname;if(route===modulePath)requested.push(req.url());if(route===stylesheetPath)styleRequests.push(req.url());};
   page.on('request',track);
   try{
    await page.goto(origin+'/migration/foundry-artists');
    await page.locator('#status').filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
    assert.equal(requested.length,0);
+   assert.equal(styleRequests.length,0);
    const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
    const open=page.getByRole('button',{name:'Preview Frawgy worlds',exact:true});
    await open.focus();await page.keyboard.press('Enter');
@@ -707,6 +718,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await preview.getByRole('status').filter({hasText:'Verdant Conservatory · Clear study'}).waitFor();
    assert.equal(await page.locator('#concept-title').evaluate(e=>e===document.activeElement),true);
    assert.equal(requested.length,1);
+   assert.equal(styleRequests.length,1);
    const frame=selector=>page.locator(selector+' canvas').evaluate(e=>e.toDataURL());
    const clear=await frame('#primary');
    assert.ok(clear.length>2048);
@@ -759,6 +771,50 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,outbound);
    assert.equal(await preview.locator('img,iframe,audio,video').count(),0);
   }finally{page.off('request',track);}
+ });
+ if(suppliedPackage)await check('Extracted Athena artist catalog survives optional renderer removal, tamper and exact restore',async()=>{
+  const leaf=path.join(portable,'components','foundry-artist-concept','foundry-artist-concept.mjs');
+  const original=fs.readFileSync(leaf);
+  const url=origin+'/migration/foundry-artists';
+  const endpoint=origin+'/api/migration/foundry-artists';
+  const checked=await (await context.request.get(endpoint)).body();
+  const requests=[],track=req=>{
+   if(/\/concept\.(mjs|css)$/.test(new URL(req.url()).pathname))requests.push(req.url());
+  };
+  page.on('request',track);
+  const catalog=async()=>{
+   await page.goto(url);
+   await page.locator('#status').filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+   const got=await context.request.get(endpoint);
+   assert.deepEqual(await got.body(),checked);
+   await page.getByRole('searchbox',{name:'Artist, world, district or weather'}).fill('Sporelight Marsh');
+   await page.locator('#status').filter({hasText:'Showing 1 of 5 artists.'}).waitFor();
+   await page.getByRole('link',{name:'View pinned public source'}).waitFor();
+  };
+  const restart=async mutate=>{await stopBridge();mutate();origin=await startBridge();};
+  try{
+   await restart(()=>fs.unlinkSync(leaf));
+   await catalog();
+   assert.equal(await page.getByRole('button',{name:/Preview .* worlds/}).count(),0);
+   await page.locator('#optional-concept-note').waitFor();
+   assert.deepEqual(requests,[]);
+   await restart(()=>fs.writeFileSync(leaf,"throw Error('Unreviewed renderer must never load')"));
+   await catalog();
+   assert.equal(await page.getByRole('button',{name:/Preview .* worlds/}).count(),0);
+   await page.locator('#optional-concept-note').waitFor();
+   assert.deepEqual(requests,[]);
+   await restart(()=>fs.writeFileSync(leaf,original));
+   await catalog();
+   const open=page.getByRole('button',{name:'Preview Frawgy worlds',exact:true});
+   assert.deepEqual(requests,[]);
+   await open.click();
+   await page.locator('#concept-status').filter({hasText:'Verdant Conservatory · Clear study'}).waitFor();
+   assert.equal(requests.length,2);
+   assert.ok((await page.locator('#primary canvas').evaluate(e=>e.toDataURL())).length>2048);
+  }finally{
+   if(!fs.existsSync(leaf)||!fs.readFileSync(leaf).equals(original))fs.writeFileSync(leaf,original);
+   page.off('request',track);
+  }
  });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();

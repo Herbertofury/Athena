@@ -65,6 +65,10 @@ def package(source,binary,expected_sha,output,platform,engine=None,engine_sha=No
         copy(ROOT/'native/foundry/portable_process.py','portable_process.py')
         if os.name=='posix':(output/engine_name).chmod(0o700)
         receipt['engine']=engine_name;receipt['profile']='unified'
+        artist=ROOT/'engineering/apps/atlas-lab/ui'
+        for leaf in ('foundry-artist-concept.mjs','foundry-artist-concept.css'):
+            copy(artist/leaf,'components/foundry-artist-concept/'+leaf)
+            receipt['files'][-1]['optional_component']='foundry-artist-concept'
     (output/'native-package.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     return receipt
 

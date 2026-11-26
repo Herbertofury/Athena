@@ -1,6 +1,18 @@
 const q=id=>document.getElementById(id),el=(tag,t)=>Object.assign(document.createElement(tag),{textContent:t});
 const sections=[['worlds','Worlds','variant'],['districts','Districts'],['weather','Weather','intensity'],['timeflow','Lighting phases']];
-let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0;
+let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0,theme;
+const hasConcept=document.body.dataset.conceptReady==='yes';
+q('optional-concept-note').hidden=hasConcept;
+function conceptStyle(){
+ if(!theme)theme=new Promise((resolve,reject)=>{
+  const link=document.createElement('link');
+  link.rel='stylesheet';link.href='/migration/foundry-artists/concept.css';
+  link.onload=resolve;
+  link.onerror=()=>{link.remove();theme=undefined;reject(Error('Optional concept stylesheet unavailable'));};
+  document.head.append(link);
+ });
+ return theme;
+}
 const menu=(id,rows)=>q(id).replaceChildren(...rows.map(([value,name])=>Object.assign(el('option',name),{value})));
 const setStatus=t=>{q('concept-status').textContent=t;};
 function showPlate(preview,figure,world,weather,phase) {
@@ -78,7 +90,7 @@ async function openPreview(artist,button){
  setStatus('Loading optional concept tools…');
  for(const id of ['concept-world','concept-weather','concept-phase','concept-compare'])q(id).disabled=true;
  try{
-  const preview=await import('/migration/foundry-artists/concept.mjs');
+  const [preview]=await Promise.all([import('/migration/foundry-artists/concept.mjs'),conceptStyle()]);
   if(revision!==loadRevision)return;
   active={artist,preview};
   menu('concept-world',artist.worlds.map(w=>[w.id,w.name+' · '+w.variant]));
@@ -99,9 +111,11 @@ q('concept-close').addEventListener('click',()=>{
 function card(a){
  const article=document.createElement('article');article.className='record-panel';
  article.append(el('h2',a.name),el('p',a.family),el('p',a.rights_note));
- const preview=el('button','Preview '+a.name+' worlds');preview.type='button';
- preview.addEventListener('click',()=>void openPreview(a,preview));
- article.append(preview);
+ if(hasConcept){
+  const preview=el('button','Preview '+a.name+' worlds');preview.type='button';
+  preview.addEventListener('click',()=>void openPreview(a,preview));
+  article.append(preview);
+ }
 
  for(const [key,title,qualifier] of sections){
   const details=document.createElement('details'),list=document.createElement('ul');
