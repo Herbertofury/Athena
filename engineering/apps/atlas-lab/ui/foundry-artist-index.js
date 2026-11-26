@@ -1,6 +1,7 @@
 const q=id=>document.getElementById(id),el=(tag,t)=>Object.assign(document.createElement(tag),{textContent:t});
 const sections=[['worlds','Worlds','variant'],['districts','Districts'],['weather','Weather','intensity'],['timeflow','Lighting phases']];
-let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0,theme;
+let cards=[],active=null,caller=null,loadRevision=0,plateRevision=0,theme,sourceDigest;
+const artistCards=new Map();
 const hasConcept=document.body.dataset.conceptReady==='yes';
 q('optional-concept-note').hidden=hasConcept;
 function conceptStyle(){
@@ -32,6 +33,7 @@ function showPlate(preview,figure,world,weather,phase) {
 function resetExports(){
  ++plateRevision;
  q('plate-export-status').textContent='';
+ q('preview-code-capture').disabled=true;
  for(const id of ['primary','alternate'])q(id).querySelector('.save-plate').disabled=true;
 }
 function savePlate(event){
@@ -75,6 +77,7 @@ function draw(){
   const other=q('concept-compare').checked&&artist.worlds.find(w=>w.id!==world.id);
   if(other)showPlate(preview,'alternate',other,weather,phase);
   q('alternate').hidden=!other;
+  q('preview-code-capture').disabled=false;
   setStatus(`${world.name}${other?' and '+other.name:''} · ${weather?weather.name:'Clear study'}${phase?' · '+phase.name:''}`);
  }catch{
   resetExports();
@@ -82,7 +85,7 @@ function draw(){
   setStatus('Concept rendering is unavailable. The separate artist index remains usable.');
  }
 }
-async function openPreview(artist,button){
+async function openPreview(artist,button,restore=null){
  const revision=++loadRevision;
  caller=button;
  q('concept').hidden=false;q('concept-title').textContent=artist.name+' concept preview';q('concept-title').focus();
@@ -97,7 +100,12 @@ async function openPreview(artist,button){
   menu('concept-phase',[['','Original study lighting'],...artist.timeflow.map(p=>[p.id,p.name])]);
   menu('concept-weather',[['','Clear study'],...artist.weather.map(w=>[w.id,w.name+' · '+w.intensity])]);
   for(const id of ['concept-world','concept-weather','concept-phase','concept-compare'])q(id).disabled=false;
-  q('concept-compare').checked=false;q('primary').hidden=false;draw();
+  if(restore){
+   q('concept-world').value=restore.world;
+   q('concept-weather').value=restore.weather;
+   q('concept-phase').value=restore.phase;
+  }
+  q('concept-compare').checked=restore?.compare===true;q('primary').hidden=false;draw();
  }catch{
   if(revision===loadRevision)setStatus('Concept tools could not load. The separate artist index remains usable.');
  }
@@ -108,12 +116,40 @@ q('concept-close').addEventListener('click',()=>{
  if(caller?.closest('article')?.hidden)q('find').focus();else caller?.focus();caller=null;
 });
 
+const keyIds=['concept-world','concept-weather','concept-phase'];
+const codeInput=q('preview-code-input'),codeStatus=q('preview-code-status');
+const validId=(v,rows)=>typeof v==='string'&&rows.some(row=>row.id===v);
+function decodeCode(value){
+ if(value.length>512)return null;
+ let row;
+ try{row=JSON.parse(value);}catch{return null;}
+ if(!Array.isArray(row)||row.length!==7||row[0]!=='athena-concept-v1'||row[1]!==sourceDigest)return null;
+ const entry=artistCards.get(row[2]),[world,weather,phase,compare]=row.slice(3);
+ if(!entry||!validId(world,entry.artist.worlds)||!(weather===''||validId(weather,entry.artist.weather))||
+    !(phase===''||validId(phase,entry.artist.timeflow))||typeof compare!=='boolean')return null;
+ return {...entry,world,weather,phase,compare};
+}
+q('preview-code-capture').addEventListener('click',()=>{
+ if(!active||!sourceDigest||q('primary').hidden)return;
+ codeInput.value=JSON.stringify(['athena-concept-v1',sourceDigest,active.artist.id,...keyIds.map(id=>q(id).value),q('concept-compare').checked]);
+ q('preview-code').open=true;
+ codeStatus.textContent='Preview code selected. Copy it to keep this exact selection.';
+ codeInput.focus();codeInput.select();
+});
+q('preview-code-restore').addEventListener('click',()=>{
+ const recipe=hasConcept&&decodeCode(codeInput.value);
+ if(!recipe){codeStatus.textContent='This preview code is invalid or belongs to a different catalog. The current preview was not changed.';return;}
+ codeStatus.textContent='Opening the saved preview selection.';
+ void openPreview(recipe.artist,recipe.button,recipe);
+});
+
 function card(a){
  const article=document.createElement('article');article.className='record-panel';
  article.append(el('h2',a.name),el('p',a.family),el('p',a.rights_note));
  if(hasConcept){
   const preview=el('button','Preview '+a.name+' worlds');preview.type='button';
   preview.addEventListener('click',()=>void openPreview(a,preview));
+  artistCards.set(a.id,{artist:a,button:preview});
   article.append(preview);
  }
 
@@ -139,9 +175,11 @@ try{
  if(d.schema!=='athena-foundry-artist-index-v1'||d.artists.length!==5||!(/^[a-f0-9]{64}$/).test(d.source_sha256))throw Error();
  cards=d.artists.map(a=>{const n=card(a);return [n,(a.id+' '+n.textContent).toLocaleLowerCase()];});
  q('artists').replaceChildren(...cards.map(x=>x[0]));
+ sourceDigest=d.source_sha256;
  const provenance=new URL(d.pinned_source);
  if(provenance.origin!=='https://github.com'||!provenance.pathname.startsWith('/Herbertofury/Athena/blob/'))throw Error();
  const a=el('a','View pinned public source');a.href=provenance.href;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
+ q('preview-code').hidden=!hasConcept;
  q('source').append(a,el('span',` · ${d.coverage.worlds} worlds · ${d.coverage.districts} districts · SHA-256: ${d.source_sha256}`));
  q('find').addEventListener('input',filter);filter();
-}catch{q('artists').replaceChildren();q('status').textContent='The artist index could not be verified.';}
+}catch{sourceDigest=undefined;artistCards.clear();q('preview-code').hidden=true;q('artists').replaceChildren();q('status').textContent='The artist index could not be verified.';}
