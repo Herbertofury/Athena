@@ -25,9 +25,11 @@ macro_rules! card {
 const ARENA: &str = survivor!("preview/arena-template.html");
 const CITY: &str = city!("preview/city.html");
 const WARDEN: &str = card!("preview/warden.html");
+const CLOCKWORK: &str = card!("preview/clockwork.html");
 static ARENA_HTML: OnceLock<String> = OnceLock::new();
 static CITY_HTML: OnceLock<String> = OnceLock::new();
 static WARDEN_HTML: OnceLock<String> = OnceLock::new();
+static CLOCKWORK_HTML: OnceLock<String> = OnceLock::new();
 const LABEL: &str = r#"<nav aria-label="Engine Foundry"><a href="/play">Engine Foundry Play Lab</a> · <a href="/#build">Athena Foundry</a></nav>"#;
 
 fn page(template: &str, bundle_marker: &str, script: &str) -> String {
@@ -107,6 +109,31 @@ pub(crate) fn router() -> Router {
                 Html(WARDEN_HTML
                     .get_or_init(|| page(WARDEN, "<script>__CODE__</script>", "./preview/host.mjs"))
                     .as_str())
+            }),
+        )
+        .route(
+            "/play/clockwork/",
+            get(|| async {
+                Html(
+                    CLOCKWORK_HTML
+                        .get_or_init(|| {
+                            page(CLOCKWORK, "<script>__CODE__</script>", "./preview/host.mjs")
+                        })
+                        .as_str(),
+                )
+            }),
+        )
+        .route(
+            "/play/clockwork/style.css",
+            get(|| async { ([(header::CONTENT_TYPE, "text/css")], style(CLOCKWORK)) }),
+        )
+        .route(
+            "/play/clockwork/preview/host.mjs",
+            get(|| async {
+                js!(concat!(
+                    "import {newClockworkEncounter,openClockworkTape,clockworkCards} from '../src/clockwork-encounter.mjs';\n",
+                    card!("preview/clockwork-browser.js")
+                ))
             }),
         )
         .route(
@@ -196,6 +223,12 @@ pub(crate) fn router() -> Router {
             "/play/warden/src/card-terms.mjs",
             get(|| async { js!(card!("generated/card-terms.mjs")) }),
         );
+    let router = route_modules!(
+        router,
+        "/play/clockwork/",
+        card,
+        ["src/clockwork-encounter.mjs"]
+    );
     route_modules!(
         router,
         "/play/city/",
@@ -209,7 +242,12 @@ mod tests {
     use super::*;
     #[test]
     fn native_templates_keep_preview_controls_and_use_external_styles_and_modules() {
-        for (doc, marker) in [(ARENA, "BUNDLE"), (CITY, "CODE"), (WARDEN, "CODE")] {
+        for (doc, marker) in [
+            (ARENA, "BUNDLE"),
+            (CITY, "CODE"),
+            (WARDEN, "CODE"),
+            (CLOCKWORK, "CODE"),
+        ] {
             let expected = format!("<script>__{marker}__</script>");
             let out = page(doc, &expected, "./preview/host.mjs");
             assert!(out.contains(LABEL));

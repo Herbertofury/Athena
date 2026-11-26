@@ -1231,6 +1231,44 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(await play.locator('iframe').count(),0);
   }finally{await play.close();fs.rmSync(scratch,{recursive:true,force:true});}
  });
+ if(portableUnified)await check('Native Clockwork Sentinel shares the offline replay without storage or external requests',async()=>{
+  const {newClockworkEncounter,openClockworkTape}=await import('../engines/card-game/src/clockwork-encounter.mjs');
+  const clock=await context.newPage(),external=report.externalRequests.length,errors=[];
+  clock.on('pageerror',error=>errors.push(String(error)));
+  const requests=[];
+  clock.on('request',request=>requests.push([request.method(),request.url()]));
+  const stores=()=>clock.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+  try{
+   await clock.goto(origin+'/play');
+   const before=await stores();
+   await clock.getByRole('link',{name:'Clockwork Sentinel',exact:true}).click();
+   await clock.getByRole('heading',{name:'Clockwork Sentinel',exact:true}).waitFor();
+   await clock.getByRole('button',{name:/Prime the coil.*2 time/}).focus();
+   await clock.keyboard.press('Enter');
+   await clock.getByRole('button',{name:/Arc discharge.*STRIKE: 6 incoming/}).waitFor();
+   await clock.getByRole('button',{name:/Brace the frame.*STRIKE: 0 incoming/}).click();
+   assert.equal(await clock.getByText('Sentinel dealt 0; blocked 6.',{exact:true}).count(),1);
+   await clock.getByRole('button',{name:/Arc discharge.*9 damage/}).click();
+   await clock.getByText('Replay tape',{exact:true}).click();
+   await clock.getByRole('button',{name:'Make replay text',exact:true}).click();
+   await clock.getByText('Verified replay text is ready to copy.',{exact:true}).waitFor();
+   const field=clock.getByRole('textbox',{name:/Replay text/});
+   const m=await openClockworkTape(await field.inputValue());
+   assert.equal(m.view().state.sentinel,6);
+   const standalone=newClockworkEncounter();
+   for(const action of ['prime','spark','end','prime','spark']) standalone.apply(action);
+   await field.fill(JSON.stringify(await standalone.tape()));
+   await clock.getByRole('button',{name:'Load replay',exact:true}).click();
+   await clock.getByText('Verified replay loaded.',{exact:true}).waitFor();
+   assert.equal(await clock.locator('#enemy').textContent(),'0');
+   assert.equal(await stores(),before);
+   assert.deepEqual(errors,[]);
+   assert.equal(report.externalRequests.length,external);
+   assert.equal(await clock.locator('iframe').count(),0);
+   assert.ok(requests.some(([,url])=>url===origin+'/play/clockwork/src/clockwork-encounter.mjs'));
+   assert.ok(requests.every(([method,url])=>method==='GET'&&new URL(url).origin===origin));
+  }finally{await clock.close();}
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});
