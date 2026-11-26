@@ -81,6 +81,11 @@ jobs:
         run: python -m unittest discover -s tools/foundry-recovery/music -v
       - name: Install Chromium for real native-profile UI checks
         run: npx playwright install chromium
+      - name: Real Chromium one-shot local backup worker from extracted package
+        env:
+          ATHENA_BACKUP_TEST_RUNTIME: ${{ github.workspace }}/candidate-extracted/runtime
+          ATHENA_TEST_REAL_BACKUP_WORKER: '1'
+        run: node --test tests/portable-backup-worker.test.cjs
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
       - name: Unified Lab and Foundry browser acceptance
