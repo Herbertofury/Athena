@@ -11,11 +11,12 @@ export function createProjectReference(doc,label,value){
  return link;
 }
 function fields(p){required(p.name,200);if(!['own','followed'].includes(p.ownership)||!stages.includes(p.stage))throw Error('Invalid project type or stage');for(const k of ['goal','next','blockers','decisions','resources'])txt(p[k]);url(p.source);txt(p.version,200);url(p.release);return p;}
-export function validate(value){
+export function validateShape(value){
  if(!value||value.schema!==1||!Array.isArray(value.entries))throw Error('Unsupported projects backup');
  const seen=new Set();for(const p of value.entries){required(p.id,100);if(seen.has(p.id))throw Error('Duplicate project ID');seen.add(p.id);if(typeof p.archived!=='boolean'||!Array.isArray(p.revisions)||!p.revisions.length)throw Error('Invalid project history');for(const r of p.revisions){fields(r);if(!Number.isFinite(r.at))throw Error('Invalid revision date');}}
- return structuredClone(value);
+ return value;
 }
+export function validate(value){return structuredClone(validateShape(value));}
 export function change(value,id,input,now=Date.now()){
  const next=validate(value);fields(input);if(!Number.isFinite(now))throw Error('Invalid date');required(id,100);
  let project=next.entries.find(p=>p.id===id);if(!project){project={id,archived:false,revisions:[]};next.entries.push(project);}

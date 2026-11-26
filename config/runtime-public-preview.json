@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "app.js",
-      "sha256": "27b761f8b4e871a7506f7832b6f6f3bff7cf20d5e1bd8ca5b3a0dab29302b250"
+      "sha256": "bbae3fbe3f146650c1f9a9ecb4a33b328819d4c55c1c52c78b7ef88bb8dcbcd4"
     },
     {
       "path": "assets/athena-fox-owl-original.png",
@@ -45,6 +45,18 @@
     {
       "path": "shared/artifact-store.mjs",
       "sha256": "eb829d504e50502f39aff6a7d1152d16c0ed3b11d4f126fad7953479e2778916"
+    },
+    {
+      "path": "shared/portable-backup-admission.mjs",
+      "sha256": "5d60267700fe4c58c7fde19f25be7536a4c5874eeaf72a18f7a2be58e6f623fa"
+    },
+    {
+      "path": "shared/portable-backup-job.mjs",
+      "sha256": "cdfe06f6bf69164ffc21a72793b36d4d833f165af4b04e06bd48917cea02961c"
+    },
+    {
+      "path": "shared/portable-backup-worker.mjs",
+      "sha256": "e15b53a99f9b5bd4e74e80208f5a5406bdaf684da7c7d42cec4dbd0bbd874b70"
     },
     {
       "path": "simulations.css",
@@ -96,11 +108,11 @@
     },
     {
       "path": "workspaces/continuity/import.mjs",
-      "sha256": "bb4876827885d6e7afb930e5da5fcaf8dacbca6ef73541ff07657028bd883aa2"
+      "sha256": "c4b39d513717d396563e14dd59edf6bdb465efffa363ada49bea6701c351fa42"
     },
     {
       "path": "workspaces/continuity/index.mjs",
-      "sha256": "88e73c647c1911366dee178e29a05da1e05ce5ad7d4299c387bd86240b37199a"
+      "sha256": "ba9cbf6c567225b024d06d826c4f2589f1c055c7184f2b68d4e310b2d4d146b9"
     },
     {
       "path": "workspaces/continuity/model.mjs",
@@ -516,15 +528,15 @@
     },
     {
       "path": "workspaces/projects/model.mjs",
-      "sha256": "ea5689c0a09a6a6a140fd735b30c4ee385cc5745f0bf4d8870d5457b1cc5d734"
+      "sha256": "ed2d7b75c0143798d6d4ea02ea4c7b312da07b6fa6c70092bd50116db04853c2"
     },
     {
       "path": "workspaces/projects/index.mjs",
-      "sha256": "25f2624a7cc328cc64b8df5c04443c42b282c1e6e1deef34aca72eef55e1b784"
+      "sha256": "179affcf5fe10e4565573e3f821bcff5c0f83db86fcda52ecc2ab1020786fc08"
     },
     {
       "path": "workspaces/projects/import.mjs",
-      "sha256": "2706f344951566e053b9b4f20cd9822bf5888960cfdb9b18044b717a63d3cca4"
+      "sha256": "a495aa2976380ed923180577dffc5a4fb548e2342850a0f9d50070eba90fb7cd"
     },
     {
       "path": "workspaces/projects/compare.mjs",
