@@ -231,9 +231,9 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
    if(disposed||token!==generation)return;
    if(data!==before)throw Error('Projects changed while reading the backup. Choose it again.');
    const merged=mergeBackup(before,incoming);
-   if(JSON.stringify(merged.data)===JSON.stringify(before)){notice.textContent='This backup adds nothing. Nothing was saved.';return;}
-   const ids=new Set(before.entries.map(project=>project.id));
    const metadata=Object.keys(merged.data).filter(key=>!Object.hasOwn(before,key));
+   if(!merged.added&&!metadata.length){notice.textContent='This backup adds nothing. Nothing was saved.';return;}
+   const ids=new Set(before.entries.map(project=>project.id));
    $('#backup-summary').textContent=`${merged.added} new projects · ${merged.unchanged} identical · ${metadata.length} new backup metadata fields. Existing projects will not be replaced.`;
    for(const project of merged.data.entries)if(!ids.has(project.id)){
     const title=project.revisions.at(-1).name;
