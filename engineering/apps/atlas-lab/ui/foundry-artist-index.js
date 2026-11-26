@@ -143,6 +143,35 @@ q('preview-code-restore').addEventListener('click',()=>{
  void openPreview(recipe.artist,recipe.button,recipe);
 });
 
+function compareInputs(artists,count){
+ const recipes=new Map();
+ let total=0;
+ for(const artist of artists){
+  if(!Array.isArray(artist.interactions)||artist.interactions.length!==5)return;
+  for(const r of artist.interactions){
+   if(typeof r.name!=='string'||!(/^[A-Z][A-Za-z]*( \/ [A-Z][A-Za-z]*)?$/).test(r.name)||
+     typeof r.response!=='string'||typeof r.guardrail!=='string')return;
+   total++;
+   for(const input of r.name.split(' / ')){
+    if(!recipes.has(input))recipes.set(input,[]);
+    recipes.get(input).push([artist.name,r]);
+   }
+  }
+ }
+ if(total!==count||!recipes.has('Press'))return;
+ const control=q('interaction-input');
+ menu('interaction-input',[...recipes.keys()].sort().map(input=>[input,input]));
+ control.value='Press';
+ const reflect=()=>{
+  const rows=recipes.get(control.value)??[];
+  q('interaction-results').replaceChildren(...rows.map(([artist,r])=>{
+   const item=el('article','');item.className='record-panel';
+   item.append(el('h3',artist),el('p',r.name),el('p',r.response),el('p','Input guardrail: '+r.guardrail));return item;
+  }));
+  q('interaction-status').textContent=`${rows.length} ${rows.length===1?'recipe':'recipes'} for ${control.value}.`;
+ };
+ control.addEventListener('change',reflect);reflect();q('interaction-library').hidden=false;
+}
 function card(a){
  const article=document.createElement('article');article.className='record-panel';
  article.append(el('h2',a.name),el('p',a.family),el('p',a.rights_note));
@@ -181,5 +210,6 @@ try{
  const a=el('a','View pinned public source');a.href=provenance.href;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
  q('preview-code').hidden=!hasConcept;
  q('source').append(a,el('span',` · ${d.coverage.worlds} worlds · ${d.coverage.districts} districts · SHA-256: ${d.source_sha256}`));
+ compareInputs(d.artists,d.coverage.interactions);
  q('find').addEventListener('input',filter);filter();
-}catch{sourceDigest=undefined;artistCards.clear();q('preview-code').hidden=true;q('artists').replaceChildren();q('status').textContent='The artist index could not be verified.';}
+}catch{q('interaction-library').hidden=true;sourceDigest=undefined;artistCards.clear();q('preview-code').hidden=true;q('artists').replaceChildren();q('status').textContent='The artist index could not be verified.';}
