@@ -239,3 +239,23 @@ ever captured, root settings or media bytes. Later edits can also produce
 differences. No content or identities are printed. The plain private input is
 limited to 16 MiB; it is never uploaded or changed. Do not delete the old
 extension, source records or original backup files based on this report.
+
+### Run the read-only verifier from the unified portable ZIP
+
+You do not need an Athena database, a repository checkout, or a Google account
+for this check. With Node.js 24 or later already on PATH, extract the unified
+package and select ordinary files outside it:
+
+```sh
+python -B launch.py --review-constellation-bundle --bundle-index DriveIndex.json --bundle-snapshot Backup.json.gz --bundle-journal Journal.json.gz --bundle-compare-source IndependentExport.json
+```
+
+Use `--bundle-preview-journal` to see the possible legacy replay skip counts.
+Use `--bundle-journal` only when the index declares one. The independent
+export is optional. Inspection never writes an output file: the JSON report
+goes to your terminal. If you redirect it, choose a location outside the
+portable package. The optional component can be removed without affecting
+normal startup. Selection, hashing and bounded decoding remain the same as
+the standalone verifier above. The separate replay-candidate writer is not
+included in the package. No Google access, installation, import or restore
+occurs.

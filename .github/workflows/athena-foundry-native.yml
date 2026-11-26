@@ -108,6 +108,8 @@ jobs:
         run: python -m unittest discover -s tools/foundry-recovery/snapshot -v
       - name: Original MusicHub offline conversion
         run: python -m unittest discover -s tools/foundry-recovery/music -v
+      - name: Extracted portable Constellation bundle review and independent export coverage
+        run: python scripts/test_portable_constellation_bundle.py candidate-extracted
       - name: Install Chromium for real native-profile UI checks
         run: npx playwright install chromium
       - name: Real Chromium one-shot local backup worker from extracted package

@@ -74,6 +74,8 @@ def package(source,binary,expected_sha,output,platform,engine=None,engine_sha=No
         for leaf in inventory.GOVERNANCE_FILES:
             copy(ROOT/'guidance'/leaf,inventory.GOVERNANCE_PREFIX+leaf)
             receipt['files'][-1]['optional_component']=inventory.GOVERNANCE_COMPONENT
+        copy(ROOT/inventory.BUNDLE_SOURCE,inventory.BUNDLE_LEAF)
+        receipt['files'][-1]['optional_component']=inventory.BUNDLE_COMPONENT
     (output/'native-package.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     return receipt
 
