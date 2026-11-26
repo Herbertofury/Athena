@@ -127,3 +127,12 @@ jobs:
           retention-days: 14
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
+      - name: Test Clockwork Sentinel timing and browser to Node replay
+        run: node engines/card-game/build-clockwork.mjs && node engines/card-game/tests/clockwork-browser.proof.mjs
+      - name: Retain the exact tested Clockwork Sentinel page
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: clockwork-sentinel-page-${{ matrix.os }}
+          path: Athena-Clockwork-Sentinel.html
+          if-no-files-found: error
+          retention-days: 14
