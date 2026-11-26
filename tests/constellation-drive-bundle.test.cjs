@@ -33,10 +33,10 @@ function fixture(t,opts={}) {
    if(bundle.journal)Object.assign(bundle.journal,meta(delta,'gzip'));
    fs.writeFileSync(paths.index,encode(bundle));
  }
- function run(includeJournal=true){
+ function run(includeJournal=true, ...flags){
    const args=['--index',paths.index,'--snapshot',paths.snapshot];
    if(includeJournal)args.push('--journal',paths.journal);
-   const result=spawnSync(process.execPath,[CLI,...args],{encoding:'utf8',cwd:root});
+   const result=spawnSync(process.execPath,[CLI,...args,...flags],{encoding:'utf8',cwd:root});
    assert.doesNotMatch(result.stdout+result.stderr,/private-marker-123|private-file-456|private-provider-file|private-journal|SECRET-LOCAL|a private chat|example\.invalid/);
    return result;
  }
@@ -52,6 +52,7 @@ test('source-shaped compressed bundle verifies exact archive, index, journal cou
  assert.equal(report.index.sha256,sha(before[0]));
  assert.equal(report.snapshot.sha256,sha(before[1]));assert.equal(report.snapshot.retained.chats,1);
  assert.equal(report.journal.sha256,sha(before[2]));assert.equal(report.journal.total,1);
+ assert.equal(Object.hasOwn(report,'journalPreview'),false);
  assert.equal(report.journal.records.files,1);assert.equal(report.journal.records.chats,0);
  assert.deepEqual(report.warnings,[]);
  assert.deepEqual(Object.values(f.paths).map(p=>fs.readFileSync(p)),before);
@@ -105,4 +106,49 @@ test('refuses invalid gzip, bounded expansion, and linked selected paths',t=>{
  const file=f.paths.snapshot;fs.renameSync(file,file+'.orig');
  try{fs.symlinkSync(file+'.orig',file);}catch{return;}
  assert.match(f.run().stderr,/not an ordinary file/);
+});
+
+test('opt-in journal preview proves historical overlap risk without writing or exposing IDs',async t=>{
+ const f=fixture(t);
+ const row=(id,updatedAt,secret='private-marker-123')=>({id,updatedAt,secret});
+ const old=t0-500;
+ f.snapshot.files=[row('updated',old),row('equal',old),row('earlier',old),row('snapshot-duplicate',old),row('snapshot-duplicate',old)];
+ f.journal.files=[row('updated',old+3),row('equal',old),row('earlier',old-10),row('only',old+4),
+  row('snapshot-duplicate',old+8),row('journal-duplicate',old+10),row('journal-duplicate',old+11),row('date-unknown',null)];
+ f.snapshot.files.push(row('date-unknown',old));
+ f.bundle.journal.recordCount=f.journal.files.length;f.store();
+ const {verifyDriveBundle}=await import('../tools/continuity-review/verify-constellation-drive.mjs');
+ const clock=t0+10;
+ const report=verifyDriveBundle({...f.paths,previewJournal:true,clock});
+ assert.deepEqual(report.journalPreview.total,
+  {onlyInJournal:1,newerStoredTime:1,equalStoredTime:1,olderStoredTime:1,unresolved:4,riskOfLegacySkip:2});
+ assert.deepEqual(report.journalPreview.collections.files,report.journalPreview.total);
+ assert.equal(report.journalPreview.assumedFreshRestoreAt,at(clock));
+ assert.doesNotMatch(JSON.stringify(report),/snapshot-duplicate|journal-duplicate|date-unknown|private-marker-123/);
+ const before=Object.values(f.paths).map(p=>fs.readFileSync(p));
+ const cli=f.run(true,'--preview-journal');
+ assert.equal(cli.status,0,cli.stderr);
+ assert.equal(JSON.parse(cli.stdout).journalPreview.total.newerStoredTime,1);
+ assert.deepEqual(Object.values(f.paths).map(p=>fs.readFileSync(p)),before);
+});
+
+test('future relative to modeled restore clock is not mislabeled and absent groups are unknown',async t=>{
+ const f=fixture(t);
+ delete f.snapshot.groups;
+ f.snapshot.chats[0].updatedAt=t0+10;
+ f.journal.chats=[{id:f.snapshot.chats[0].id,updatedAt:t0+200}];
+ f.journal.groups=[{id:'unseen-group',updatedAt:t0+1}];
+ f.bundle.journal.recordCount=3;f.store();
+ const {verifyDriveBundle}=await import('../tools/continuity-review/verify-constellation-drive.mjs');
+ const {journalPreview:p}=verifyDriveBundle({...f.paths,previewJournal:true,clock:t0+20});
+ assert.equal(p.collections.chats.newerStoredTime,1);
+ assert.equal(p.collections.chats.riskOfLegacySkip,0);
+ assert.equal(p.collections.groups.unresolved,1);assert.equal(p.collections.groups.onlyInJournal,0);
+ assert.strictEqual(p.collections.files.onlyInJournal,1);
+});
+
+test('a bundle without a declared journal is still verifiable but cannot preview a journal',t=>{
+ const f=fixture(t,{identity:true});f.bundle.journal=null;f.store();
+ assert.equal(f.run(false).status,0);
+ assert.match(f.run(false,'--preview-journal').stderr,/does not|no journal to preview/);
 });

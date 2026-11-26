@@ -158,3 +158,27 @@ URLs, filenames, provider identities, project IDs and chat text from the selecte
 Checksums prove agreement with the selected index, not publisher authenticity,
 latest cloud state, record-level restorable content, or retirement readiness.
 This requires Node.js 24 and is separate from the native one-file v7 reviewer above.
+
+### Preview the journal before relying on a legacy restore
+
+Add `--preview-journal` to a verified backup with a journal. The optional
+report compares IDs and stored integer timestamps without printing either.
+It separates rows seen only in the journal from newer, equal, and older
+overlaps and unresolved comparisons. Duplicates, missing comparison times,
+or absent base collections are unresolved, not treated as safe. A row seen
+only in the journal is not necessarily new globally: it may have been
+omitted from the selected snapshot.
+
+The legacy restore [reads the full snapshot first, then applies the journal](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L2668-L2701).
+Its [write path](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/background.js#L660-L679)
+uses [mergeRecord](https://github.com/Herbertofury/Project-Constellation/blob/f46d7bd7e7fbd8771278e66caa36ff77349e63e6/extension/src/brain-core.js#L14-L18),
+which raises stored modification times to at least the restore time. A journal
+row that is newer in the source files can then look older and be skipped. A
+synthetic rehearsal of the pinned functions reproduced that failure for one
+overlap while a journal-only row was still accepted.
+
+The optional `riskOfLegacySkip` count is a subset of known newer/equal overlaps
+under the stated fresh-restore clock. This is not a live restore simulation of
+a populated profile. It does not compare full content, promise that every
+listed row is recoverable, perform a write, or change the original extension.
+Keep the snapshot, index and journal as separate files.
