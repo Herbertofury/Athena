@@ -498,6 +498,8 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.match(await page.locator('#collections').textContent(),/Source reported [\d,]+ · 1 omitted/);
   await page.locator('#collections article').filter({has:page.getByRole('heading',{name:'files',exact:true})}).getByText('Source reported 1 · 0 omitted.',{exact:true}).waitFor();
   await page.getByText('Revisions naming a different chat than their turn: 1',{exact:true}).waitFor();
+  await page.getByText('Files: No chat link: 1.',{exact:true}).waitFor();
+  await page.getByText('Output snapshots: no records.',{exact:true}).waitFor();
   assert.equal((await page.locator('main').textContent()).includes('fixture-private-marker-never-render'),false);
   await page.selectOption('#filter','needs');
   assert.match(await page.locator('#coverage').textContent(),/5 of 18 collections/);
@@ -515,7 +517,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(savedReceipt.toString().includes('fixture-private-marker-never-render'),false);
   assert.equal(savedReceipt.toString().includes('revision-a'),false);
   const first=JSON.parse(savedReceipt);assert.equal(first.input_sha256,null);
-  assert.equal(first.counts.length,18);assert.ok(/^[a-f0-9]{64}$/.test(first.checksum_sha256));
+  assert.equal(first.counts.length,18);assert.equal(Object.hasOwn(first,'artifact_references'),false);assert.ok(/^[a-f0-9]{64}$/.test(first.checksum_sha256));
   await page.getByLabel('Include the export fingerprint').check();
   const linked=JSON.parse(await downloadReceipt('constellation-redacted-linked.json'));
   assert.equal(linked.input_sha256,createHash('sha256').update(exportBytes).digest('hex'));

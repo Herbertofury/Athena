@@ -8,6 +8,7 @@
 <form id="review-form" class="history-controls"><label for="source">Original export JSON (up to 16 MiB)</label><input id="source" type="file" accept=".json,application/json" required aria-describedby="scope"><button id="review" type="submit" disabled>Run local review</button></form>
 <p id="review-status" role="status">Choose a file; nothing is sent on selection.</p></section>
 <section id="results" class="runner" hidden aria-labelledby="receipt"><h2 id="receipt">What this export contains</h2><p id="digest"></p><ul id="references"></ul>
+<h3>Artifact links</h3><p>These are links within the selected export, not a check that any file or URL can be opened. The saved receipt does not include this preview.</p><ul id="artifact-references"></ul>
 <label for="filter">Show collections</label> <select id="filter"><option value="all">All collections</option><option value="needs">Missing or uncertain</option></select>
 <p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div>
 <details><summary>Keep or compare a redacted review</summary>

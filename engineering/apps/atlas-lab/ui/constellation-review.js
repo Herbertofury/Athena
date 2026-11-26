@@ -10,6 +10,27 @@ const refs={
   best_revision_not_exported:'Best-revision links absent from this export',
   best_revision_points_to_other_turn:'Best-revision links pointing to another turn'
 };
+const artifactStates={
+ linked_to_exported_chat:'Linked to an exported chat',
+ chat_not_in_export:'Chat not in this export',
+ provider_download_bucket:'Provider download bucket (not a chat)',
+ no_chat_link:'No chat link',
+ unrecognized_row:'Unrecognized row'
+};
+function artifactSummary(report){
+ const result=[];
+ for(const [kind,label] of [['files','Files'],['output_snapshots','Output snapshots']]){
+  const values=report?.[kind];
+  const keys=Object.keys(artifactStates);
+  if(!only(values,keys)||keys.some(key=>!unsigned(values[key]))){
+   result.push(node('li',label+': link coverage unavailable.'));
+   continue;
+  }
+  const states=keys.filter(key=>values[key]>0).map(key=>artifactStates[key]+': '+count(values[key]));
+  result.push(node('li',label+': '+(states.join('; ')||'no records')+'.'));
+ }
+ return result;
+}
 const receiptSchema='athena-constellation-redacted-receipt-v1';
 const receiptLimit=32*1024;
 const collections=Object.freeze('providers projects chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns groups smartCollections projectBaselines integrityFindings'.split(' '));
@@ -95,6 +116,7 @@ function show(report){
   $('save-receipt').disabled=false;
   $('digest').textContent=`SHA-256: ${report.exact_input_sha256}`;
   $('references').replaceChildren(...Object.entries(refs).map(([key,label])=>node('li',`${label}: ${count(report.references[key])}`)));
+  $('artifact-references').replaceChildren(...artifactSummary(report.artifact_references));
   rows=report.slices.map(row=>{
     const card=document.createElement('article');card.className='record-panel';
     card.append(node('h3',row.kind.replace(/([a-z])([A-Z])/g,'$1 $2')),
@@ -110,7 +132,7 @@ function show(report){
 $('filter').addEventListener('change',showRows);
 $('source').addEventListener('change',()=>{
   active?.abort(); active=undefined; resetReceipt(); $('results').hidden=true;
-  $('collections').replaceChildren(); $('references').replaceChildren(); $('digest').textContent='';
+  $('collections').replaceChildren(); $('references').replaceChildren(); $('artifact-references').replaceChildren(); $('digest').textContent='';
   const file=$('source').files[0];
   $('review').disabled=!file||file.size>limit;
   $('review-status').textContent=!file?'Choose a file; nothing is sent on selection.'
