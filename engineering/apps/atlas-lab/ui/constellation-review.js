@@ -47,7 +47,40 @@ function project(slices,references){
  const referenceCounts=Object.fromEntries(Object.keys(refs).map(key=>{if(!unsigned(references[key]))throw Error('Invalid reference count.');return [key,references[key]];}));
  return {counts,reference_counts:referenceCounts};
 }
-const jsonHash=async v=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(v)))),b=>b.toString(16).padStart(2,'0')).join('');
+const byteHash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+const jsonHash=v=>byteHash(new TextEncoder().encode(JSON.stringify(v)));
+async function reviewInput(file,signal,budget=limit){
+ signal.throwIfAborted();
+ if(file.size>budget)throw Error('Selected export exceeds the 16 MiB limit.');
+ const prefix=new Uint8Array(await file.slice(0,2).arrayBuffer());
+ signal.throwIfAborted();
+ if(prefix[0]!==31||prefix[1]!==139)return {body:file,compressedHash:null};
+ if(typeof DecompressionStream!=='function')throw Error('This browser cannot read gzip. Unpack the JSON locally and select it instead.');
+ const reader=file.stream().pipeThrough(new DecompressionStream('gzip')).getReader();
+ const cancel=()=>{void reader.cancel().catch(()=>{});};
+ signal.addEventListener('abort',cancel,{once:true});
+ const pieces=[];
+ let total=0;
+ try{
+  for(;;){
+   signal.throwIfAborted();
+   const {done,value}=await reader.read();
+   signal.throwIfAborted();
+   if(done)break;
+   total+=value.byteLength;
+   if(total>budget){cancel();throw Error('Expanded gzip exceeds the 16 MiB review limit.');}
+   pieces.push(value);
+  }
+ }catch(error){
+  if(signal.aborted||error.message==='Expanded gzip exceeds the 16 MiB review limit.')throw error;
+  throw Error('This gzip archive could not be decoded; the export was not sent for review.');
+ }finally{
+  signal.removeEventListener('abort',cancel);reader.releaseLock();
+ }
+ const compressedHash=await byteHash(await file.arrayBuffer());
+ signal.throwIfAborted();
+ return {body:new Blob(pieces,{type:'application/json'}),compressedHash};
+}
 function resetReceipt(){
  receiptEpoch++;currentReceipt=undefined;$('include-fingerprint').checked=false;$('save-receipt').disabled=true;
  $('saved-receipt').value='';$('compare-receipt').disabled=true;$('receipt-status').textContent='';$('receipt-differences').replaceChildren();
@@ -108,13 +141,14 @@ function showRows(){
   $('collections').replaceChildren(...selection.map(r=>r.card));
   $('coverage').textContent=`${selection.length} of ${rows.length} collections`;
 }
-function show(report){
+function show(report,compressedHash){
   if (report.schema!=='athena-constellation-v7-review'||report.source_schema!==7
       ||!Array.isArray(report.slices)||report.slices.length!==18||!/^[a-f0-9]{64}$/.test(report.exact_input_sha256))
     throw Error('The engine returned an unsupported review.');
   currentReceipt={projection:project(report.slices,report.references),digest:report.exact_input_sha256};
   $('save-receipt').disabled=false;
-  $('digest').textContent=`SHA-256: ${report.exact_input_sha256}`;
+  $('digest').textContent=compressedHash?`Decoded JSON SHA-256: ${report.exact_input_sha256}`:`SHA-256: ${report.exact_input_sha256}`;
+  $('compressed-digest').textContent=compressedHash?`Selected gzip SHA-256: ${compressedHash}`:'';
   $('references').replaceChildren(...Object.entries(refs).map(([key,label])=>node('li',`${label}: ${count(report.references[key])}`)));
   $('artifact-references').replaceChildren(...artifactSummary(report.artifact_references));
   rows=report.slices.map(row=>{
@@ -132,7 +166,7 @@ function show(report){
 $('filter').addEventListener('change',showRows);
 $('source').addEventListener('change',()=>{
   active?.abort(); active=undefined; resetReceipt(); $('results').hidden=true;
-  $('collections').replaceChildren(); $('references').replaceChildren(); $('artifact-references').replaceChildren(); $('digest').textContent='';
+  $('collections').replaceChildren(); $('references').replaceChildren(); $('artifact-references').replaceChildren(); $('digest').textContent=''; $('compressed-digest').textContent='';
   const file=$('source').files[0];
   $('review').disabled=!file||file.size>limit;
   $('review-status').textContent=!file?'Choose a file; nothing is sent on selection.'
@@ -144,14 +178,18 @@ $('review-form').addEventListener('submit',async event=>{
   const request=new AbortController(); active=request; resetReceipt();
   $('review').disabled=true;$('results').hidden=true;$('review-status').textContent='Reviewing on this computer…';
   try{
+    const signal=AbortSignal.any([request.signal,AbortSignal.timeout(15000)]);
+    const {body,compressedHash}=await reviewInput(file,signal);
+    if(active!==request)return;
+    signal.throwIfAborted();
     const r=await fetch('/api/migration/constellation/review',{method:'POST',mode:'same-origin',
-      credentials:'omit',redirect:'error',cache:'no-store',signal:AbortSignal.any([request.signal,AbortSignal.timeout(15000)]),
-      headers:{'x-atlas-request':'local-ui','content-type':'application/json'},body:file});
+      credentials:'omit',redirect:'error',cache:'no-store',signal,
+      headers:{'x-atlas-request':'local-ui','content-type':'application/json'},body});
     if(active!==request)return;
     if(r.status===422)throw Error((await r.json()).error);
     if(!r.ok)throw Error(`Local review unavailable (${r.status}).`);
     const report=await r.json(); if(active!==request)return;
-    show(report); $('review-status').textContent='Review complete. Nothing was imported or changed.';
+    show(report,compressedHash); $('review-status').textContent='Review complete. Nothing was imported or changed.';
   }catch(error){
     if(active===request)$('review-status').textContent=error.message;
   }finally{
