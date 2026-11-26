@@ -43,5 +43,23 @@ fn main() {
 
     println!("cargo:rerun-if-env-changed=RUSTC");
     println!("cargo:rerun-if-env-changed=RUSTUP_TOOLCHAIN");
+    for (path, key) in [
+        (
+            "ui/foundry-artist-concept.mjs",
+            "ATHENA_ARTIST_CONCEPT_JS_SHA",
+        ),
+        (
+            "ui/foundry-artist-concept.css",
+            "ATHENA_ARTIST_CONCEPT_CSS_SHA",
+        ),
+    ] {
+        let bytes = std::fs::read(path).expect("Read first-party concept source");
+        let digest: String = Sha256::digest(bytes)
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect();
+        println!("cargo:rustc-env={key}={digest}");
+        println!("cargo:rerun-if-changed={path}");
+    }
     println!("cargo:rerun-if-changed=build.rs");
 }

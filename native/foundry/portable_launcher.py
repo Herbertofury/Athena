@@ -53,6 +53,8 @@ def verify(root):
     entries=data.get('files')
     if not isinstance(entries,list) or not 1<=len(entries)<=2000:raise ValueError('Invalid file inventory')
     names=set();aliases=set();total=0
+    optional=set()
+    artist_components={'components/foundry-artist-concept/foundry-artist-concept.'+ext for ext in ('mjs','css')}
     # Validate the entire inventory before consulting any listed path. The manifest
     # is an integrity record, not authority to inspect paths outside the package.
     for entry in entries:
@@ -64,7 +66,15 @@ def verify(root):
         total+=size
         if total>600*1024*1024:raise ValueError('Package byte bound exceeded')
         names.add(name);aliases.add(name.casefold())
+        if 'optional_component' in entry:
+            if not engine or name not in artist_components or entry['optional_component']!='foundry-artist-concept' or size>32768:
+                raise ValueError('Invalid optional inventory')
+            optional.add(name)
+    if optional and optional!=artist_components:raise ValueError('Incomplete optional manifest')
     for entry in entries:
+        # Optional bytes are not part of base startup integrity. The native host
+        # independently checks both against its compiled first-party SHA-256 pins.
+        if entry['path'] in optional:continue
         path=root/entry['path']
         if any(link_or_reparse(p) for p in (path,*path.parents)):raise ValueError('Invalid file')
         metadata=path.stat()
@@ -91,7 +101,7 @@ def verify(root):
                 if stat.S_ISDIR(metadata.st_mode):pending.append(path)
                 elif stat.S_ISREG(metadata.st_mode):actual.add(path.relative_to(root).as_posix())
                 else:raise ValueError('Unexpected package entry')
-    if actual!=names|{'native-package.json'}:raise ValueError('Unexpected package content')
+    if actual - optional != (names - optional)|{'native-package.json'}:raise ValueError('Unexpected package content')
     return data
 
 def create_database(root,data,destination):
