@@ -22,3 +22,5 @@ A good theme makes the product easier to recognize **and** easier to use. Changi
 | A game library with artwork and discovery | Let approved cover art carry personality while keeping the same fast routes for installed games, search and ownership filters. Try a compact table for finding and an optional shelf for browsing; use the same library to see where each wins. | The new look needs a hero or animation to feel distinctive but makes search, filter state, or play controls harder to find. |
 
 **Review receipt:** Product and screen · primary task · baseline/default preserved · two directions · selected direction and why · tested states/viewport · known gap · revert path. Keep the receipt short; evidence matters more than adjectives.
+
+After building or restyling, use [Review the screen without stripping its meaning](UI_SIGNAL_REVIEW.md) for a scoped final pass on copy, decoration, and status cues.
