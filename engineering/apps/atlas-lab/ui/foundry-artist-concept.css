@@ -1,0 +1,10 @@
+#concept[hidden],#alternate[hidden]{display:none!important}
+.concept-controls,.concept-grid,.swatches{display:flex;flex-wrap:wrap;gap:.8rem;align-items:end}
+.concept-controls label{display:grid;gap:.25rem}.concept-grid{align-items:stretch;margin-top:1rem}
+.concept-grid figure{flex:1 1 325px;margin:0;border:1px solid #475062;border-radius:.7rem;overflow:hidden;background:#111520}
+.concept-grid canvas{width:100%;height:auto;aspect-ratio:2;display:block}
+.concept-grid figcaption{padding:.85rem}.concept-grid h3{margin:0;color:#f5f8ff}
+.concept-controls button,.concept-controls select{font:inherit;padding:.55em;background:#151926;border:1px solid #69758c;border-radius:.4rem;color:#eef2fb;width:100%}
+.swatches span{display:inline-flex;align-items:center;gap:.3rem;border:1px solid #535e73;border-radius:.4rem;padding:.2rem .35rem;font: .78rem monospace}
+.swatches i{display:inline-block;width:1rem;height:1rem;border:1px solid #b2bbc9;border-radius:3px}
+button:focus-visible,select:focus-visible,#concept-title:focus-visible{outline:3px solid #aef7d2;outline-offset:3px}

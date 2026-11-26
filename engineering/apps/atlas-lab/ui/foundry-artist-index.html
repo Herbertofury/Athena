@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Athena · Artist world index</title><link rel="stylesheet" href="/learning/style.css"></head>
+<body data-concept-ready="no"><main><nav aria-label="Athena native pages"><a href="/">ATHENA / HOME</a><a href="/#build">Foundry workspace</a><a href="/migration?source=foundry">Migration readiness</a></nav>
+<header><p class="eyebrow">REFERENCE / CURATION</p><h1>Artist world index</h1><p>A reviewed text-only index of the separate artist catalog. These references are not installed V33 rooms. Open an optional concept preview to compare native interpretations.</p></header>
+<section class="runner"><h2>Find a world or district</h2><label for="find">Artist, world, district or weather</label><input id="find" type="search" maxlength="120">
+<p id="optional-concept-note" hidden>Concept previews are unavailable. You can still search every artist, world and source.</p>
+<p id="status" role="status">Reading the local catalog…</p><p id="source"></p></section>
+<details id="preview-code" class="runner" hidden><summary>Keep or restore a concept preview</summary>
+<p>Copy a preview code to save the artist, colorway, weather, lighting and comparison choice. Paste it here on a later launch with the same catalog version. This does not save a room, image, or music account.</p>
+<label for="preview-code-input">Preview code</label><input id="preview-code-input" type="text" maxlength="512" autocomplete="off" spellcheck="false">
+<button type="button" id="preview-code-restore">Restore preview code</button><p id="preview-code-status" role="status"></p></details>
+<div id="artists" class="layout"></div>
+<section id="concept" class="runner" aria-labelledby="concept-title" hidden>
+<h2 id="concept-title" tabindex="-1">Concept preview</h2>
+<p>Original static concept plates, inspired by the curated palette and scene ideas. No creator artwork, soundtrack, or reconstructed scene. Weather choices apply across this artist’s variants for comparison; this does not assert original per-world assignments. Lighting phases are artist-level and change only when you select one.</p>
+<div class="concept-controls">
+<label for="concept-world">World colorway<select id="concept-world"></select></label>
+<label for="concept-weather">Weather study<select id="concept-weather"></select></label>
+<label for="concept-phase">Lighting phase<select id="concept-phase"></select></label>
+<label><input type="checkbox" id="concept-compare"> Compare both variants</label>
+<button type="button" id="preview-code-capture" disabled>Get preview code</button>
+<button type="button" id="concept-close">Close preview</button>
+</div>
+<p id="concept-status" role="status"></p>
+<p id="plate-export-status" aria-live="polite"></p>
+<div class="concept-grid">
+<figure id="primary"><canvas width="640" height="320" aria-hidden="true"></canvas><figcaption><h3></h3><p></p><div class="swatches" aria-label="Palette swatches"></div><button type="button" class="save-plate" disabled>Save concept PNG</button></figcaption></figure>
+<figure id="alternate" hidden><canvas width="640" height="320" aria-hidden="true"></canvas><figcaption><h3></h3><p></p><div class="swatches" aria-label="Palette swatches"></div><button type="button" class="save-plate" disabled>Save concept PNG</button></figcaption></figure>
+</div>
+</section>
+<footer>Artist-level grouping; individual districts are not assigned to a particular world here. No assets, soundtrack URLs or provider requests.</footer>
+<script type="module" src="/migration/foundry-artists/app.js"></script></main></body></html>

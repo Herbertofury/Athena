@@ -110,6 +110,14 @@ Optional test: after your first start and shutdown, create a new checkpoint:
       python -B app/launch.py --fork-checkpoint checkpoint --working-directory working --source-quiescent
    Do not use existing destinations. Keep checkpoint and working copies private.
 
+Optional artist concept renderer:
+   Stop Athena before moving components/foundry-artist-concept outside the
+   portable package. Restart normally. The artist catalog and search still work;
+   concept rendering and PNG export will be unavailable. To restore them, stop
+   Athena and return the exact folder from this build, then restart. Do not copy
+   arbitrary or older scripts into it. Athena mounts these two first-party files
+   only when their digests match this build. No database files are in the folder.
+
 Optional Feature Foundry v24 rehearsal (disposable source only):
    Quit Feature Foundry. In a private folder with no active writers, prepare a
    new standalone review copy, even if the closed database has a WAL header:

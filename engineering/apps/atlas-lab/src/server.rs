@@ -634,10 +634,10 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
     }
 }
 pub async fn serve(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, false, None, None).await
+    serve_strategy(path, false, None, None, None).await
 }
 pub async fn serve_candidate(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, true, None, None).await
+    serve_strategy(path, true, None, None, None).await
 }
 pub async fn serve_athena(
     path: PathBuf,
@@ -645,7 +645,7 @@ pub async fn serve_athena(
 ) -> Result<(), Box<dyn std::error::Error>> {
     let assets =
         crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
-    serve_strategy(path, false, Some(Arc::new(assets)), None).await
+    serve_strategy(path, false, Some(Arc::new(assets)), None, public.parent()).await
 }
 pub async fn serve_unified(
     path: PathBuf,
@@ -655,13 +655,21 @@ pub async fn serve_unified(
     let foundry = crate::foundry_native::validate(&foundry, &path, &public)?;
     let assets =
         crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
-    serve_strategy(path, false, Some(Arc::new(assets)), Some(foundry)).await
+    serve_strategy(
+        path,
+        false,
+        Some(Arc::new(assets)),
+        Some(foundry),
+        public.parent(),
+    )
+    .await
 }
 async fn serve_strategy(
     path: PathBuf,
     overview_candidate: bool,
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
     foundry: Option<PathBuf>,
+    package_root: Option<&std::path::Path>,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let path_for_history = path.clone();
     let engine_instance = new_engine_instance()?;
@@ -765,6 +773,7 @@ async fn serve_strategy(
         .merge(crate::migration_readiness::router())
         .merge(crate::atlas_archive::router())
         .merge(crate::atlas_run_ledger::router())
+        .merge(crate::foundry_artist_index::router(package_root))
         .merge(crate::constellation_review_ui::router());
     let unified = foundry.is_some();
     let app = if let Some(path) = foundry {

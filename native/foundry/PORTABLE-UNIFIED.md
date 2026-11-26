@@ -83,3 +83,7 @@ or repository-deletion readiness claim follows from this portable profile.
 Windows API reference: [creation-time job-list attribute](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-updateprocthreadattribute).
 This avoids a separate post-create assignment step; it is not proof of transactional
 OS behavior under every forced termination inside CreateProcess itself.
+
+## Keep an artist concept selection across sessions
+
+Open an artist from **Migration readiness → Foundry artist index** and select the world, weather, lighting and comparison settings. Select **Get preview code** and copy the selected text somewhere you control. In a later portable launch, open **Keep or restore a concept preview**, paste the code, then choose **Restore preview code**. A code contains only a format version, the catalog digest, reviewed preset IDs and the comparison choice. A different catalog version or a weather/lighting selection from another artist is refused without changing the current preview. No login, browser storage, file import, scene save, data migration, or original artwork is involved. The controls are unavailable if the optional preview component is absent.
