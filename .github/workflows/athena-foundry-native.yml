@@ -60,6 +60,8 @@ jobs:
         env:
           ATHENA_BACKUP_TEST_RUNTIME: ${{ github.workspace }}/candidate-extracted/runtime
         run: node --test tests/project-continuity-backup-admission.test.cjs
+      - name: Extracted read-only dual-pin governance audit
+        run: python scripts/test_portable_governance_audit.py candidate-extracted
       - name: Unified dual-store HTTP acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}

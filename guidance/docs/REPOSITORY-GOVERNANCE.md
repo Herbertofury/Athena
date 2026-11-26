@@ -14,6 +14,14 @@ New consumers use `.agents/athena/` and `.athena/governance-lock.json`. Existing
 
 Legacy `.agent-foundry/governance-lock.json` consumers remain untouched. A subsequent reviewed migration must reconcile their previous source pins and local edits, update their import paths and validate each project; this initial port deliberately refuses automatic co-installation. It does not remove the legacy lock or change other repositories.
 
+### Verify an already-reviewed consumer migration, offline
+
+```sh
+python -B guidance/tools/repository_governance.py verify-consumer --target /path/to/reviewed-consumer
+```
+
+This read-only check compares the Athena lock and its sixteen documents to the selected canonical release; use the matching source checkout if the consumer intentionally pins a different release. It verifies a single explicit Athena `Read` directive in the root AGENTS.md and its override, if present. A retained Agent-Foundry lock and its sixteen local snapshots are checked against each other, not treated as authenticated legacy source history. The output does not prove what an installed client loaded, verify remote provenance, or authorize repository retirement. The existing `apply`, `plan` and `status` legacy refusal is unchanged.
+
 Policy wording is repository engineering guidance, not a new authorization grant or a replacement for platform controls. Sensitive actions still need the applicable approval. Athena may explain experimental alternatives and user tradeoffs without pretending an unverified result is proven.
 
 ## Additive owner directives
@@ -40,3 +48,16 @@ Keep the generic adoption guard: `repository_governance.py status` still
 refuses consumers carrying the legacy lock; it is not the transition verifier.
 The report does not certify installed agent discovery, browser runtime, other
 consumers, legacy source retirement or untouched files outside the plan.
+
+## Optional consumer governance audit
+
+From an extracted unified package, explicitly select an existing consumer repository:
+
+    python -B launch.py --review-governance "C:/path/to/consumer"
+
+This checks pinned Athena policy bytes, its root Read directive and any retained
+Agent-Foundry pin, without Git, a database, publishing or modifying either folder.
+It does not prove a running client loaded those instructions. The optional folder
+`components/athena-governance-audit` can be moved out of the package and added back
+without affecting ordinary package verification or startup. Keep it intact; a changed
+or incomplete component cannot be used for an audit.

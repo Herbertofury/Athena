@@ -87,3 +87,16 @@ OS behavior under every forced termination inside CreateProcess itself.
 ## Keep an artist concept selection across sessions
 
 Open an artist from **Migration readiness → Foundry artist index** and select the world, weather, lighting and comparison settings. Select **Get preview code** and copy the selected text somewhere you control. In a later portable launch, open **Keep or restore a concept preview**, paste the code, then choose **Restore preview code**. A code contains only a format version, the catalog digest, reviewed preset IDs and the comparison choice. A different catalog version or a weather/lighting selection from another artist is refused without changing the current preview. No login, browser storage, file import, scene save, data migration, or original artwork is involved. The controls are unavailable if the optional preview component is absent.
+
+## Optional consumer governance audit
+
+From an extracted unified package, explicitly select an existing consumer repository:
+
+    python -B launch.py --review-governance "C:/path/to/consumer"
+
+This checks pinned Athena policy bytes, its root Read directive and any retained
+Agent-Foundry pin, without Git, a database, publishing or modifying either folder.
+It does not prove a running client loaded those instructions. The optional folder
+`components/athena-governance-audit` can be moved out of the package and added back
+without affecting ordinary package verification or startup. Keep it intact; a changed
+or incomplete component cannot be used for an audit.

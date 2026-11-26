@@ -17,7 +17,7 @@ def files(root):
             for p in root.rglob("*") if p.is_file() and ".git" not in p.parts}
 
 
-class GovernanceCases:
+class GovernanceFixture:
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -48,6 +48,8 @@ class GovernanceCases:
         actions = governance.apply(self.source, self.target)
         self.assertTrue(all(x["action"] == "noop" for x in actions))
 
+
+class GovernanceCases(GovernanceFixture):
     def test_plan_is_read_only_and_preserves_local_instructions(self):
         root = self.target / "AGENTS.md"
         root.write_text("# Local\nKeep product commands and privacy restrictions.\n", encoding="utf-8")
@@ -184,6 +186,67 @@ class AthenaMigrationBoundaryTests(GovernanceCases, unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class DualPinReviewTests(GovernanceFixture, unittest.TestCase):
+    def create_legacy(self):
+        native = governance.load_json(self.target / governance.LOCK, {})
+        legacy = dict(native, sourceRepository=governance.LEGACY_URL, version="1.1.2")
+        legacy["files"] = {}
+        for path, digest in native["files"].items():
+            old_path = path.replace(".agents/athena/", ".agents/foundry/")
+            dest = self.target / old_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(self.target / path, dest)
+            legacy["files"][old_path] = digest
+        legacy_path = self.target / governance.LEGACY_LOCK
+        legacy_path.parent.mkdir()
+        governance.atomic_json(legacy_path, legacy)
+        return legacy_path
+
+    def test_native_only_and_dual_pins_without_weakening_legacy_apply(self):
+        self.adopted()
+        result = governance.verify_consumer(self.source, self.target)
+        self.assertIsNone(result["retainedLegacy"])
+        self.create_legacy()
+        before = files(self.target)
+        with self.assertRaisesRegex(ValueError, "legacy Agent-Foundry consumer"):
+            governance.apply(self.source, self.target)
+        result = governance.verify_consumer(self.source, self.target)
+        self.assertEqual([result[key]["filesVerified"] for key in ("athena", "retainedLegacy")], [16, 16])
+        self.assertEqual(files(self.target), before)
+        self.assertEqual(result["rootReadDirective"], ".agents/athena/AGENTS-adapter.md")
+
+    def test_report_refuses_retained_drift(self):
+        self.adopted()
+        self.create_legacy()
+        path = self.target / ".agents/foundry/AGENTS-adapter.md"
+        path.write_text("Unreviewed local edits")
+        before = files(self.target)
+        with self.assertRaisesRegex(ValueError, "pinned file drift"):
+            governance.verify_consumer(self.source, self.target)
+        self.assertEqual(files(self.target), before)
+
+    def test_refuses_lone_example_and_override_that_activates_legacy(self):
+        self.adopted()
+        root = self.target / "AGENTS.md"
+        native = root.read_text()
+        root.write_text("~~~markdown\n" + native + "~~~\n<!--\n" + native + "-->\n")
+        with self.assertRaisesRegex(ValueError, "Athena-only Read directive"):
+            governance.verify_consumer(self.source, self.target)
+        root.write_text(native)
+        (self.target / "AGENTS.override.md").write_text("Read `.agents/foundry/AGENTS-adapter.md`.\n")
+        with self.assertRaisesRegex(ValueError, "AGENTS.override.md"):
+            governance.verify_consumer(self.source, self.target)
+
+    def test_unexpected_managed_path_is_refused(self):
+        self.adopted()
+        path = self.target / governance.LOCK
+        lock = governance.load_json(path, {})
+        lock["files"]["other/private.txt"] = "0" * 64
+        governance.atomic_json(path, lock)
+        with self.assertRaisesRegex(ValueError, "incomplete governance lock"):
+            governance.verify_consumer(self.source, self.target)
+
 
 class CanonicalPathTests(unittest.TestCase):
     def test_target_and_child_use_same_resolved_basis(self):
