@@ -103,6 +103,23 @@ def main(package):
             "output_snapshots": {"linked_to_exported_chat": 1, "chat_not_in_export": 2,
                                  "provider_download_bucket": 0, "no_chat_link": 1, "unrecognized_row": 1},
         }, "artifact link coverage or synthetic provider bucket misclassified")
+        state_fixture = {**payload,
+                         "groups": [{}, {"deletedAt": 1750000000000}, {"deletedAt": 0}],
+                         "smartCollections": [{}, {"deletedAt": "unrecognized"}, [], {"deletedAt": None}],
+                         "integrityFindings": [{"resolved": True}, {"resolved": False}, {}, {"resolved": None}],
+                         "summary": {**payload["summary"], "groups": 2, "smartCollections": 3, "integrityFindings": 2}}
+        state = run(json.dumps(state_fixture).encode())["lifecycle"]
+        require(state["groups"] == {
+            "source_reported_open": 2, "open": 2, "closed": 1, "unrecognized": 0, "matches_reported_open": True,
+        }, "counted tombstoned groups as active")
+        require(state["smart_collections"] == {
+            "source_reported_open": 3, "open": 2, "closed": 0, "unrecognized": 2, "matches_reported_open": None,
+        }, "unknown state rows did not withhold verdict")
+        require(state["integrity_findings"] == {
+            "source_reported_open": 2, "open": 3, "closed": 1, "unrecognized": 0, "matches_reported_open": False,
+        }, "open finding summary mismatch not surfaced")
+        require(report["lifecycle"]["smart_collections"]["open"] is None, "missing lifecycle slice treated as empty")
+        print("Constellation lifecycle: active/deleted, unresolved/resolved, missing and malformed evidence stay distinct.")
         old = {**payload, "summary": {"events": 12001, "checkpoints": 1000}}
         legacy = {r["kind"]: r for r in run(json.dumps(old).encode())["slices"]}
         require(legacy["files"]["source_reported"] is None and legacy["files"]["omitted"] is None,

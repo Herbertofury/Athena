@@ -32,6 +32,16 @@ function artifactSummary(report){
  return result;
 }
 const legacyReceipt='athena-constellation-redacted-receipt-v1';
+function lifecycleSummary(report){
+ return [['groups','Groups','active','deleted'],['smart_collections','Smart collections','active','deleted'],['integrity_findings','Integrity findings','unresolved','resolved']].map(([kind,label,open,closed])=>{
+  const row=report?.[kind];
+  if(!row||![row.open,row.closed,row.unrecognized,row.source_reported_open].every(quantity))return node('li',label+': counts unavailable.');
+  const reported=row.source_reported_open===null?' No writer count.':` Writer reported ${count(row.source_reported_open)} ${open}.`;
+  if(row.open===null||row.closed===null||row.unrecognized===null)return node('li',label+': not present in this export.'+reported);
+  const status=row.matches_reported_open===false?' Counts differ.':row.matches_reported_open===true?' Counts agree.':row.unrecognized?' Comparison unavailable.':'';
+  return node('li',`${label}: ${count(row.open)} ${open}; ${count(row.closed)} ${closed}${row.unrecognized?'; '+count(row.unrecognized)+' unrecognized':''}.`+reported+status);
+ });
+}
 const receiptSchema='athena-constellation-redacted-receipt-v2';
 const receiptLimit=32*1024;
 const collections=Object.freeze('providers projects chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns groups smartCollections projectBaselines integrityFindings'.split(' '));
@@ -174,6 +184,7 @@ function show(report,compressedHash){
   $('compressed-digest').textContent=compressedHash?`Selected gzip SHA-256: ${compressedHash}`:'';
   $('references').replaceChildren(...Object.entries(refs).map(([key,label])=>node('li',`${label}: ${count(report.references[key])}`)));
   $('artifact-references').replaceChildren(...artifactSummary(report.artifact_references));
+  $('lifecycle').replaceChildren(...lifecycleSummary(report.lifecycle));
   rows=report.slices.map(row=>{
     const card=document.createElement('article');card.className='record-panel';
     card.append(node('h3',row.kind.replace(/([a-z])([A-Z])/g,'$1 $2')),
@@ -189,7 +200,7 @@ function show(report,compressedHash){
 $('filter').addEventListener('change',showRows);
 $('source').addEventListener('change',()=>{
   active?.abort(); active=undefined; resetReceipt(); $('results').hidden=true;
-  $('collections').replaceChildren(); $('references').replaceChildren(); $('artifact-references').replaceChildren(); $('digest').textContent=''; $('compressed-digest').textContent='';
+  $('collections').replaceChildren(); $('references').replaceChildren(); $('artifact-references').replaceChildren(); $('lifecycle').replaceChildren(); $('digest').textContent=''; $('compressed-digest').textContent='';
   const file=$('source').files[0];
   $('review').disabled=!file||file.size>limit;
   $('review-status').textContent=!file?'Choose a file; nothing is sent on selection.'
