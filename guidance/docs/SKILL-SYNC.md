@@ -44,3 +44,5 @@ adopted or deleted. Use explicit reviewed source payloads; this tool does not it
 make all eight legacy Skills licensed, private-data-clean or migrated.
 
 No real client installation or source-repository deletion is part of this pass.
+
+Before moving a repository rule into a Skill, run the [context audit](REPOSITORY-CONTEXT-AUDIT.md) against the pinned source and verify the target client can discover the Skill. Mandatory controls stay in always-loaded guidance.
