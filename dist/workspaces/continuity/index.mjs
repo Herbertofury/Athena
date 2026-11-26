@@ -1,3 +1,4 @@
+import {createPortableBackupReader} from '../../shared/portable-backup-job.mjs';
 import {attachArtifacts} from './artifacts.mjs';
 import {fresh, validate, apply, prepareVisible} from './model.mjs';
 import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
@@ -127,13 +128,14 @@ export function mount({container, state, search = '', setState, signal, theme = 
     }
   };
   let importGeneration = 0;
+  const backupReader = createPortableBackupReader('continuity',parseBackup);
   $('#import-backup').onchange = async event => {
     const input = event.target, file = input.files?.[0], generation = ++importGeneration;
-    input.value = '';
+    input.value = ''; backupReader.cancel();
     if (!file || !data || disposed) return;
     try {
       if (file.size > MAX_IMPORT_BYTES) throw Error('Backup exceeds the 16 MiB local import budget');
-      const incoming = parseBackup(new Uint8Array(await file.arrayBuffer()));
+      const incoming = await backupReader.read(file);
       if (disposed || generation !== importGeneration) return;
       // Merge against the current draft after the read, never a stale captured state.
       const result = mergeBackup(data, incoming);
@@ -155,9 +157,8 @@ export function mount({container, state, search = '', setState, signal, theme = 
   $('#export').onclick = () => { if (data) download(JSON.stringify(data, null, 2), 'athena-continuity.json', 'application/json'); };
   $('#export-context').onclick = () => { if (data) download(contextMarkdown(compileContext(data, project)), 'athena-project-context.md', 'text/markdown'); };
   if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal')) control.disabled = true;
-  function unmount() { if (disposed) return; disposed = true; artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); cards.clear(); data=byId=selectVisible=contextData=queryData=null; signal?.removeEventListener('abort', unmount); }
+  function unmount() { if (disposed) return; disposed = true; backupReader.cancel(); artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); cards.clear(); data=byId=selectVisible=contextData=queryData=null; signal?.removeEventListener('abort', unmount); }
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
   setTheme(theme); render(); signal?.addEventListener('abort', unmount, {once: true}); if (signal?.aborted) unmount();
   return {ready: !!data, unmount, setTheme, setSearch(value) { const next=String(value); if(search===next)return; search=next; render(); }};
 }
-

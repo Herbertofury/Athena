@@ -560,7 +560,8 @@
         "docs/GAME-SYSTEMS-EXCHANGE.md"
       ],
       "researchRefs": [
-        "docs/GAME-SYSTEMS-EXCHANGE.md"
+        "docs/GAME-SYSTEMS-EXCHANGE.md",
+        "guidance/research/ROGUELIKE-CARD-GAME-RADAR-2026-11-25.md"
       ],
       "candidates": [
         {
@@ -855,6 +856,15 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Source comments and deterministic rift-surge/war simulation state document same-seed/same-action reproducibility.",
           "limits": "RTS campaign simulation, not a roguelike run manager; verify the full seed ingress and save lifecycle separately."
+        },
+        {
+          "repository": "tiagomaciels/roguelite-core",
+          "commit": "65d68588c6f8576540fed7589fc6baa8ffa54e3f",
+          "path": "README.md",
+          "source": "https://github.com/tiagomaciels/roguelite-core/blob/65d68588c6f8576540fed7589fc6baa8ffa54e3f/README.md",
+          "evidence": "research_only",
+          "observed": "MIT pure-TypeScript deterministic content-agnostic auto-battler; seeded map/run reducers, evolution/synergy/status systems and batch simulation; package 0.1.0.",
+          "limits": "Small project; no production benchmarks, second-host acceptance or full card-zone/turn-resolution proof."
         }
       ],
       "nextAction": "Compare seed derivation, named random streams, run phases, deterministic replay and checkpoint recovery. Prefer shared behavioral fixtures and versioned snapshot contracts first; only share a PRNG/runtime library after equivalent two-host evidence."
@@ -926,6 +936,32 @@
         }
       ],
       "nextAction": "M3: inspect DBPF parser and cache call sites, compare exact package inventory, conflicts, malformed input and real CAS/preview acceptance; share versioned core only if no loss."
+    },
+    {
+      "id": "gameplay.typed-effect-resolution",
+      "name": "Declarative typed effects, event ordering and causality inspection",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "docs/GAME-SYSTEMS-EXCHANGE.md",
+        "guidance/schemas/game-system-package.schema.json",
+        "guidance/schemas/card-definition.schema.json"
+      ],
+      "researchRefs": [
+        "guidance/research/ROGUELIKE-CARD-GAME-RADAR-2026-11-25.md"
+      ],
+      "candidates": [
+        {
+          "repository": "AGomnes/Cantrip",
+          "commit": "974a915ef0c3c6bb3045c9c59b0bf9493fdfb8ae",
+          "path": "README.md",
+          "source": "https://github.com/AGomnes/Cantrip/blob/974a915ef0c3c6bb3045c9c59b0bf9493fdfb8ae/README.md",
+          "evidence": "research_only",
+          "observed": "MIT declarative effect DSL for cards/statuses/relics/enemies/heroes/abilities; event phases, modifiers, targeting, intents, editor lint/tests, content import/export checks and causality trace.",
+          "limits": "Godot 4.6 .NET + C# solution + .NET 8 required; not a drop-in for Java Forge or browser JS; not a complete deck/hand engine; integration and API stability require validation."
+        }
+      ],
+      "nextAction": "Compare typed effect vocabulary, trigger ordering, stacking policy, content linting and causality trace as language-neutral contracts. Do not adopt the Godot runtime outside a compatible host."
     }
   ],
   "coverage": {

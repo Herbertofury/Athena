@@ -160,10 +160,10 @@ Consumers pin exact local package versions and keep host-specific UI, assets, sa
 [Card Game package](https://github.com/Herbertofury/Athena/tree/main/engines/card-game) · [Roguelite package](https://github.com/Herbertofury/Athena/tree/main/engines/roguelite) · [Mascot Open World package](https://github.com/Herbertofury/Athena/tree/main/engines/mascot-open-world) · [Shared Browser Game Runtime](https://github.com/Herbertofury/Athena/tree/main/engines/shared-game-runtime)
 """
 write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry.rstrip('\n'))
-# Only the Home and Sidebar below are owned by this generator. Preserve any
-# existing Engineering navigation pages; they are independent wiki inputs.
-engine_section = '\n## Game engines\n\n- [Athena Engine Foundry](Engineering-Engine-Foundry)\n'
-for name in ('Home.md', '_Sidebar.md'):
- destination = R / 'wiki' / name
+# Engineering-* navigation is maintained by Engineering Atlas, not this generator.
+for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry')]:
+ destination = R / name
+ link = '\n## Game engines\n\n- [Athena Engine Foundry](' + target + ')\n'
  existing = destination.read_text(encoding='utf-8')
- destination.write_text(existing + engine_section, encoding='utf-8')
+ if 'Athena Engine Foundry](' not in existing:
+  destination.write_text(existing + link, encoding='utf-8')
