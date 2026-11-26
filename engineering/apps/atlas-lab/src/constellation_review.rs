@@ -97,6 +97,29 @@ struct References {
     best_revision_not_exported: usize,
     best_revision_points_to_other_turn: usize,
 }
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct ArtifactLink<'a> {
+    #[serde(borrow)]
+    chat_id: Option<std::borrow::Cow<'a, str>>,
+    #[serde(borrow)]
+    provider_id: Option<std::borrow::Cow<'a, str>>,
+    #[serde(borrow)]
+    source: Option<std::borrow::Cow<'a, str>>,
+}
+#[derive(Serialize, Default)]
+struct ArtifactLinks {
+    linked_to_exported_chat: usize,
+    chat_not_in_export: usize,
+    provider_download_bucket: usize,
+    no_chat_link: usize,
+    unrecognized_row: usize,
+}
+#[derive(Serialize, Default)]
+struct ArtifactReferences {
+    files: ArtifactLinks,
+    output_snapshots: ArtifactLinks,
+}
 #[derive(Serialize)]
 pub struct Report {
     schema: &'static str,
@@ -105,6 +128,7 @@ pub struct Report {
     exact_input_sha256: String,
     slices: Vec<Slice>,
     references: References,
+    artifact_references: ArtifactReferences,
     scope: &'static str,
 }
 fn slice(
@@ -146,7 +170,35 @@ fn unique<'a>(rows: &'a [Row<'_>]) -> Result<HashSet<&'a str>, &'static str> {
     }
     Ok(ids)
 }
-fn audit(s: &Snapshot<'_>) -> Result<References, &'static str> {
+fn artifact_links(rows: &[&RawValue], chats: &HashSet<&str>, files: bool) -> ArtifactLinks {
+    let mut result = ArtifactLinks::default();
+    for raw in rows {
+        if !raw.get().trim_start().starts_with('{') {
+            result.unrecognized_row += 1;
+            continue;
+        }
+        let Ok(link) = serde_json::from_str::<ArtifactLink<'_>>(raw.get()) else {
+            result.unrecognized_row += 1;
+            continue;
+        };
+        match link.chat_id.as_deref().filter(|id| !id.is_empty()) {
+            None => result.no_chat_link += 1,
+            Some(id) if chats.contains(id) => result.linked_to_exported_chat += 1,
+            Some(id)
+                if files
+                    && link.source.as_deref() == Some("downloads-api")
+                    && id.strip_suffix(":downloads").is_some_and(|provider| {
+                        !provider.is_empty() && link.provider_id.as_deref() == Some(provider)
+                    }) =>
+            {
+                result.provider_download_bucket += 1;
+            }
+            Some(_) => result.chat_not_in_export += 1,
+        }
+    }
+    result
+}
+fn audit(s: &Snapshot<'_>) -> Result<(References, ArtifactReferences), &'static str> {
     let chats = unique(&s.chats)?;
     let mut turns = HashMap::with_capacity(s.turns.len());
     for turn in &s.turns {
@@ -191,7 +243,11 @@ fn audit(s: &Snapshot<'_>) -> Result<References, &'static str> {
             }
         }
     }
-    Ok(result)
+    let artifacts = ArtifactReferences {
+        files: artifact_links(&s.files, &chats, true),
+        output_snapshots: artifact_links(&s.output_snapshots, &chats, false),
+    };
+    Ok((result, artifacts))
 }
 pub fn review_bytes(bytes: &[u8]) -> Result<Report, &'static str> {
     if bytes.len() as u64 > LIMIT {
@@ -282,14 +338,16 @@ pub fn review_bytes(bytes: &[u8]) -> Result<Report, &'static str> {
             None,
         )?,
     ];
+    let (references, artifact_references) = audit(&s)?;
     Ok(Report {
         schema: "athena-constellation-v7-review",
         source_schema: 7,
         writer_reviewed_at: SOURCE,
         exact_input_sha256: crate::build_identity::sha256_hex(bytes),
         slices,
-        references: audit(&s)?,
-        scope: "Read-only counts and basic turn references. Missing means absent in this export, not missing from the original application. No content validated for restoration, no import, no remote or provider actions, and no retirement decision.",
+        references,
+        artifact_references,
+        scope: "Read-only counts, basic turn references and artifact-to-chat links. Missing means absent in this export, not missing from the original application. No content validated for restoration, no import, no remote or provider actions, and no retirement decision.",
     })
 }
 
