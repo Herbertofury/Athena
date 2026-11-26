@@ -46,17 +46,23 @@ const RECEIPTS: &[(&str, &str, &str)] = &[
     (
         "2d78181ff6884e546fb3e02a7400a6261681ab30",
         "verification.json",
-        include_str!("../../../../migration/engineering-atlas/historical-evidence/2d78181ff6884e546fb3e02a7400a6261681ab30/verification.json"),
+        include_str!(
+            "../../../../migration/engineering-atlas/historical-evidence/2d78181ff6884e546fb3e02a7400a6261681ab30/verification.json"
+        ),
     ),
     (
         "4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff",
         "final-summary.json",
-        include_str!("../../../../migration/engineering-atlas/historical-evidence/4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff/final-summary.json"),
+        include_str!(
+            "../../../../migration/engineering-atlas/historical-evidence/4d3d405f0ec6e3d251f2f6ad21cfcac9da9221ff/final-summary.json"
+        ),
     ),
     (
         "0fc77cfd619dccd21deed7ed0bec60e9ccce2da5",
         "summary.json",
-        include_str!("../../../../migration/engineering-atlas/historical-evidence/0fc77cfd619dccd21deed7ed0bec60e9ccce2da5/summary.json"),
+        include_str!(
+            "../../../../migration/engineering-atlas/historical-evidence/0fc77cfd619dccd21deed7ed0bec60e9ccce2da5/summary.json"
+        ),
     ),
 ];
 
@@ -128,7 +134,9 @@ mod tests {
                 let name = file["path"].as_str().unwrap();
                 let doc = document(id, name);
                 if matches!(name, "README.md" | "results-table.md")
-                    || RECEIPTS.iter().any(|(key, file, _)| *key == id && *file == name)
+                    || RECEIPTS
+                        .iter()
+                        .any(|(key, file, _)| *key == id && *file == name)
                 {
                     let text = doc.expect("manifest document must be available offline");
                     if name.ends_with(".json") {
