@@ -1,0 +1,43 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createCampWorkshop} from '../src/camp-workshop.mjs';
+test('camp choice uses earned resources once and never steals a pending decision',()=>{
+ const camp=createCampWorkshop(),wallet={crystal:12,gold:24},player={x:0,y:0};
+ assert.equal(camp.step({clock:45,player,wallet,choicePending:false}),false);
+ const mark=camp.snapshot(wallet).mark;
+ assert.equal(camp.step({clock:52,player:mark,wallet,choicePending:true}),false);
+ assert.equal(camp.step({clock:53,player:mark,wallet,choicePending:false}),true);
+ const apply=[];
+ assert.throws(()=>camp.choose('nonexistent',wallet,x=>apply.push(x)),/not available/);
+ assert.equal(camp.snapshot(wallet).balance.crystal,12);
+ assert.equal(camp.choose('camp-totem',wallet,x=>apply.push(x)).rank,1);
+ assert.deepEqual(apply,['health']);
+ assert.equal(camp.snapshot(wallet).balance.crystal,0);
+ assert.throws(()=>camp.choose('camp-totem',wallet,x=>apply.push(x)),/No camp/);
+ assert.deepEqual(camp.snapshot(wallet).spent,{crystal:12,gold:0});
+});
+import {createHash} from 'node:crypto';
+import {encodeArenaTape,decodeArenaTape} from '../src/arena-replay.mjs';
+import {reachCamp} from './camp-fixture.mjs';
+const digest=s=>createHash('sha256').update(s).digest('hex');
+test('real ordinary attacks mine crystal, then the player builds a totem and resumes from a tape',async()=>{
+ const h=reachCamp(),before=h.snapshot();
+ assert.ok(before.run.kills>0);
+ assert.equal(before.camp.balance.crystal,12);
+ assert.equal(before.camp.spent.crystal,0);
+ assert.equal(h.phase(),'choice');
+ const pending=await decodeArenaTape(await encodeArenaTape(h,digest),{digest});
+ h.choose('camp-totem');pending.choose('camp-totem');
+ assert.equal(h.phase(),'running');
+ assert.deepEqual(pending.snapshot(),h.snapshot());
+ const after=h.snapshot();
+ assert.equal(after.camp.balance.crystal,0);
+ assert.equal(after.camp.spent.crystal,12);
+ assert.equal(after.camp.ranks.health,1);
+ assert.equal(after.player.maxHp,before.player.maxHp+15);
+ assert.equal(after.gameTime,before.gameTime,'decision cannot run the encounter clock');
+ assert.throws(()=>h.choose('camp-totem'),/pending Arena choice/);
+ const restored=await decodeArenaTape(await encodeArenaTape(h,digest),{digest});
+ assert.deepEqual(restored.snapshot(),after);
+});

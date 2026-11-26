@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-__HASH__'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Athena · Midnight City Walk</title>
+<style>
+:root{color-scheme:dark;color:#f2f4ff;background:#08090c;font:1rem system-ui,sans-serif}
+*{box-sizing:border-box}main{max-width:980px;margin:auto;padding:1.5rem clamp(.8rem,4vw,2rem)}
+.eyebrow{color:#93eecc;letter-spacing:.13em;font-weight:800;font-size:.76rem;text-transform:uppercase}
+h1{font-size:clamp(1.8rem,6vw,3.4rem);letter-spacing:-.055em;margin:.1em 0}p{color:#c2c7d6;margin:.6em 0}
+.hud,.controls{display:flex;flex-wrap:wrap;gap:.7rem;align-items:end;margin:.85rem 0}
+.hud div{flex:1 1 12rem;background:#11141c;border:1px solid #374156;padding:.55rem .8rem;border-radius:.6rem}
+.hud span{display:block;color:#c4cde2;font-size:.77rem}.hud strong{font-variant-numeric:tabular-nums}
+label{display:grid;gap:.25em;color:#c2c7d6}button,select{background:#171d29;border:1px solid #52637e;border-radius:.55rem;color:inherit;font:inherit;padding:.55rem .8rem}
+button:not(:disabled){cursor:pointer}button:disabled{color:#a0a9b8}canvas{display:block;width:100%;height:auto;border:1px solid #41526e;border-radius:.75rem;background:#0a0d16}
+:focus-visible{outline:3px solid #8ff3ca;outline-offset:4px}kbd{color:#ffc98b;font-weight:750}
+</style></head>
+<body><main>
+<header><p class="eyebrow">Athena · Engine Foundry / Offline traversal</p><h1>Midnight City Walk</h1>
+<p>Explore five original GameSync districts and step into four actual interiors. The authored layout and collision rules run locally.</p></header>
+<div class="hud"><div><span>Current location</span><strong id="scene"></strong></div><div><span>Position</span><strong id="point"></strong></div><div><span>Nearby interaction</span><strong id="target"></strong></div></div>
+<canvas id="map" width="960" height="520" tabindex="0" aria-label="Midnight City Walk game field" aria-describedby="controls-help">Canvas is required for the city map.</canvas>
+<div class="controls"><button id="interact" disabled>Interact</button><label for="start">Practice start<select id="start"></select></label><button id="reset">Go to practice start</button></div>
+<p id="walk-status" role="status">Walk toward a highlighted doorway.</p>
+<p id="controls-help"><kbd>WASD</kbd> or <kbd>arrows</kbd> move. Use <kbd>E</kbd> or the Interact button at a door or exit. Practice starts move you to the selected landmark.</p>
+<p>This is the standalone traversal preview, not the complete mascot game. No accounts, saves, original art, vehicles, missions or 3D mode.</p>
+</main><script>__CODE__</script></body></html>
