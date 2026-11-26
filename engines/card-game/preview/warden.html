@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-__HASH__'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Athena · Warden Duel</title>
+<style>
+:root{color-scheme:dark;background:#090a0d;color:#f2f3fa;font:1rem system-ui,sans-serif;--rule:#475160;--mint:#a5eccd;--mute:#c3c7d5}
+*{box-sizing:border-box} main{margin:auto;max-width:980px;padding:1.5rem clamp(.75rem,3vw,1.7rem)}
+h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.06em;margin:0}.eyebrow{font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mint)}
+h2{margin:.2em 0 .45em;font-size:1.15rem}p{color:var(--mute);margin:.55em 0}
+button,input{font:inherit;color:inherit;background:#191e28;border:1px solid var(--rule);border-radius:.5rem;padding:.55em .7em}
+button:disabled{color:#a8adba;border-color:#46505a} button:not(:disabled){cursor:pointer} button:hover:not(:disabled){border-color:var(--mint)}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px} [hidden]{display:none!important}
+.controls,.cards,.hud{display:flex;flex-wrap:wrap;gap:.6rem;align-items:end}.actions{display:flex;gap:.55rem;flex-wrap:wrap}
+.hud,.controls,.actions{margin:.85rem 0}.hud div{flex:1 1 8rem;background:#131720;border:1px solid var(--rule);border-radius:.6rem;padding:.55em .8em}
+.hud small,.card small{display:block;color:var(--mute)}.hud strong{font-variant-numeric:tabular-nums}
+.lane{border:1px solid var(--rule);background:#101318;border-radius:.75rem;margin:.75rem 0;padding:.7rem .8rem}
+.card{flex:0 1 10rem;min-width:8rem;text-align:left;min-height:5.5rem;display:grid;gap:.25em;align-content:start}
+.card b{font-size:.86rem;letter-spacing:.005em}.card small{font-size:.74rem}.card[aria-pressed=true]{border-color:var(--mint);background:#19362f}
+.card.attack{background:#291d2b}.state{font-weight:700;color:var(--mint);min-height:1.5em}
+label{display:grid;gap:.25em;color:var(--mute);font-size:.83rem} input[type=number]{width:8rem}
+summary{cursor:pointer;touch-action:manipulation}.story{color:#d0d7e4;font-size:.9rem}
+</style></head>
+<body><main>
+<header><p class="eyebrow">Athena · Engine Foundry / Offline card duel</p><h1>Warden Duel</h1>
+<p>A compact practice deck with the original GameSync battle rules. You are the Green Warden.</p></header>
+<div class="hud">
+<div><small>Turn</small><strong id="turn">0</strong></div><div><small>Your hero</small><strong id="your-hp">24 HP</strong></div>
+<div><small>Opponent</small><strong id="their-hp">24 HP</strong></div><div><small>Mana</small><strong id="mana">0 / 0</strong></div>
+</div>
+<p class="state" id="status" role="status" tabindex="-1"></p>
+<section id="mulligan" class="lane" aria-labelledby="start-heading"><h2 id="start-heading">Choose which cards to keep</h2><div id="keep-cards" class="cards"></div><button id="begin" type="button">Begin with selected cards</button></section>
+<div id="match" hidden>
+<section class="lane" aria-labelledby="enemy-heading"><h2 id="enemy-heading">Opponent’s board</h2><div id="enemy" class="cards"></div>
+<button id="enemy-hero" type="button">Attack opposing hero</button></section>
+<section class="lane" aria-labelledby="field-heading"><h2 id="field-heading">Your board</h2><div id="field" class="cards"></div></section>
+<section class="lane" aria-labelledby="hand-heading"><h2 id="hand-heading">Your hand</h2><div id="hand" class="cards"></div></section>
+<div class="actions"><button id="power" type="button">Gain 2 armor (2 mana)</button><button id="end" type="button">End turn</button><button id="concede" type="button">Concede</button></div>
+</div>
+<p class="story">Play an affordable card, then select a ready ally and click an eligible target. Taunt protectors must fall before you can attack the opposing hero.</p>
+<details class="lane" id="tape"><summary>New match or portable replay</summary>
+<div class="controls"><label>Seed <input id="seed" type="number" min="0" max="4294967295" step="1" value="42"></label>
+<button id="restart" type="button">Start a fresh match</button><button id="save" type="button">Download replay tape</button></div>
+<div class="controls"><label>Replay file <input id="file" type="file" accept="application/json,.json"></label><button id="load" type="button" disabled>Verify and resume</button></div>
+<p id="tape-status" role="status">Matches are not stored automatically. Save a tape if you want to keep it.</p></details>
+</main><script>__CODE__</script></body></html>

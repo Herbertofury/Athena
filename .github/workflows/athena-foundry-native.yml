@@ -38,6 +38,19 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Prove all ten artist concept plates and twenty bounded weather choices
         run: node --test tests/artist-concept.test.mjs
+      - name: Recheck the pinned Survivor Arena and Midnight City engine inputs
+        run: |
+          node engines/roguelite/tools/build-survivor-spawns.mjs --check
+          node engines/roguelite/tools/build-survivor-pickups.mjs --check
+          node engines/roguelite/tools/build-survivor-movement.mjs --check
+          node engines/roguelite/tools/build-survivor-upgrades.mjs --check
+          node engines/roguelite/tools/build-survivor-combat.mjs --check
+          node engines/mascot-open-world/tools/build-city-traversal.mjs --check
+          node --test engines/roguelite/tests/*.test.mjs engines/mascot-open-world/tests/*.test.mjs
+      - name: Rebuild pinned Warden Duel native assets and verify card rules and tapes
+        run: |
+          node engines/card-game/build-native-rules.mjs --check
+          node --test engines/card-game/tests/*.test.mjs
       - name: Native store formatting
         run: cargo fmt --manifest-path crates/athena-foundry-store/Cargo.toml -- --check
       - name: Native store tests

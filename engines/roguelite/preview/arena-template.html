@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-__SCRIPT_HASH__'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Athena • Survivor Arena</title>
+<style>
+:root{color-scheme:dark;--line:#353748;--muted:#b9bfd2;--mint:#88f8ca;--gold:#ffcf80}
+*{box-sizing:border-box}body{margin:0;background:#08090d;color:#f4f6ff;font:1rem system-ui,sans-serif}
+main{max-width:980px;margin:auto;padding:1.8rem clamp(.85rem,4vw,2rem)}
+.eyebrow{color:var(--mint);font-size:.78rem;letter-spacing:.17em;text-transform:uppercase;font-weight:800}
+h1{font-size:clamp(1.8rem,5vw,3.4rem);margin:.18em 0;letter-spacing:-.055em}p{margin:.45em 0;color:var(--muted)}
+header{margin-bottom:1rem}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin:.7rem 0}
+.metric,.panel{background:#111219;border:1px solid var(--line);border-radius:.85rem;padding:.65rem .8rem}
+.metric small{display:block;color:var(--muted);font-size:.73rem}.metric strong{font-size:1.05rem;font-variant-numeric:tabular-nums}
+.arena{position:relative;border:1px solid #3f465b;border-radius:1rem;overflow:hidden;background:#080910}
+canvas{display:block;width:100%;height:auto;aspect-ratio:16/10;outline-offset:-4px}
+.controls{display:flex;gap:.55rem;flex-wrap:wrap;align-items:end;margin:.85rem 0}
+button,input{font:inherit;border:1px solid var(--line);border-radius:.6rem;background:#171a24;color:inherit;padding:.53em .7em}
+input{width:9em}select{font:inherit;color:inherit;background:#151b27;border:1px solid #47556d;border-radius:.4rem;padding:.45em}label{display:grid;gap:.24em;color:var(--muted);font-size:.85rem}
+button{cursor:pointer}button.primary{background:var(--mint);color:#07170f;font-weight:750}button:disabled{opacity:.52;cursor:default}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.85rem}.panel h2{margin:.1em 0 .45em;font-size:1.25rem}.cards,.touch{display:flex;gap:.5rem;flex-wrap:wrap}.cards button{text-align:left;flex:1 0 9rem}.cards span{display:block;color:var(--muted);font-size:.8rem}
+[hidden]{display:none!important}.touch button{min-width:3rem;touch-action:none}.touch{display:none}
+@media(max-width:640px){main{padding-top:1rem}.hud{grid-template-columns:repeat(3,1fr)}}
+@media(pointer:coarse){.touch{display:flex}}
+#expedition-readout{margin:.35rem 0;padding:.7rem .85rem;border:1px solid #30585e;border-radius:.65rem;background:#0e1a23;color:#d6fff5}
+#expedition-hint{color:#9ed7d1}#expedition-balance{font-variant-numeric:tabular-nums;color:#ffe4a7;margin:.2rem 0}
+</style>
+</head>
+<body>
+<main>
+<header><div class="eyebrow">Athena · Engine Foundry / Offline preview</div><h1>Survivor Arena</h1><p>Play the original five-minute Classic or take on an endurance run. Your weapons fire automatically.</p></header>
+<div class="hud" aria-label="Run stats">
+<div class="metric"><small>Health</small><strong id="hp">100 / 100</strong></div>
+<div class="metric"><small>Level</small><strong id="level">1</strong></div>
+<div class="metric"><small>Experience</small><strong id="xp">0 / 10</strong></div>
+<div class="metric"><small>Defeated</small><strong id="kills">0</strong></div>
+<div class="metric"><small>Time survived</small><strong id="time">0:00</strong></div>
+</div>
+<div class="arena"><canvas id="arena" width="800" height="500" tabindex="0" aria-label="Survivor Arena game field" aria-describedby="help">This browser needs Canvas to display the game.</canvas></div>
+<div class="controls">
+<button id="start" class="primary" disabled>Start run</button><button id="pause" disabled>Pause</button>
+<label for="run-format">Format for next run<select id="run-format">
+<option value="classic">Classic · 5 min</option><option value="marathon-20">Marathon · 20 min</option><option value="marathon-30">Marathon · 30 min</option>
+<option value="marathon-60">Marathon · 60 min</option><option value="marathon-120">Marathon · 120 min</option><option value="endless">Endless</option><option value="roaming-expedition-20">Roaming Expedition · 20 min</option><option value="rift-expedition-20">Rift Expedition · 20 min</option><option value="camp-expedition-20">Camp Expedition · 20 min</option><option value="frontier-expedition-30">Frontier Expedition · 30 min</option><option value="frontier-expedition-60">Ashglass Frontier · 60 min</option><option value="frontier-expedition-90">Floodplain Frontier · 90 min</option><option value="frontier-expedition-endless">Frontier Relay · Endless</option>
+</select></label>
+<p id="pressure" aria-label="Run stage">Classic source rules</p>
+<label for="seed">Run seed<input id="seed" type="number" min="0" max="4294967295" value="42" step="1"></label>
+</div>
+<section id="expedition-readout" aria-label="Expedition findings" hidden>
+<strong id="expedition-event">Awaiting a roaming encounter.</strong>
+<p id="expedition-balance" aria-live="polite">Crystal 0 · Gold 0</p>
+<div id="expedition-hint">Follow the marker, let your weapons hit the target, then move to the dropped cache.</div>
+</section>
+<section id="rift-readout" aria-label="Rift route" class="panel" hidden>
+<strong id="rift-event" aria-live="polite">Rift scouting.</strong>
+<p id="rift-time"></p><p id="rift-earned"></p>
+<button type="button" id="rift-abandon" hidden>Leave rift (forfeit reward)</button>
+</section>
+<section id="camp-readout" class="panel" aria-label="Camp workshop" hidden>
+<strong id="camp-event">No workshop nearby.</strong>
+<p id="camp-wallet" aria-live="polite"></p><p id="camp-ranks"></p>
+</section>
+<section id="frontier-readout" class="panel" aria-label="Frontier discoveries" hidden>
+<strong id="frontier-event" aria-live="polite"></strong><p id="frontier-details"></p>
+</section>
+<section id="cavern-readout" class="panel" aria-label="Ashglass Cavern" hidden>
+<strong id="cavern-event" aria-live="polite"></strong><p id="cavern-details"></p>
+</section>
+<section id="escort-readout" class="panel" aria-label="Floodplain escort" hidden>
+<strong id="escort-event" aria-live="polite"></strong><progress id="escort-hull" aria-label="Ferry hull" max="100" value="100"></progress>
+<p id="escort-details"></p>
+</section>
+<section id="relay-readout" class="panel" aria-label="Frontier relay" hidden>
+<strong id="relay-event" aria-live="polite"></strong><p id="relay-details"></p>
+</section>
+<details id="run-tapes"><summary>Save or resume an offline run</summary>
+<div class="controls"><button type="button" id="write-tape" disabled>Download run tape</button>
+<label>Run tape <input type="file" id="read-tape" accept="application/json,.json"></label>
+<button type="button" id="verify-tape" disabled>Verify and load</button>
+<button type="button" id="cancel-tape" hidden>Cancel verification</button></div>
+<p id="tape-status" role="status">Nothing is stored automatically. A tape contains the seed, inputs and upgrade choices for this run.</p></details>
+<div class="touch" aria-label="Touch movement">
+<button type="button" data-code="ArrowLeft" aria-label="Move left">←</button><button type="button" data-code="ArrowUp" aria-label="Move up">↑</button><button type="button" data-code="ArrowDown" aria-label="Move down">↓</button><button type="button" data-code="ArrowRight" aria-label="Move right">→</button><button type="button" data-code="ShiftLeft">Dash</button>
+</div>
+<section id="choice" class="panel" aria-labelledby="choice-title" hidden><h2 id="choice-title">Choose an upgrade</h2><div id="choices" class="cards"></div></section>
+<p id="status" role="status">Loading Survivor Arena…</p>
+<p id="help" class="help"><kbd>WASD</kbd> or <kbd>↑ ← ↓ →</kbd> moves. <kbd>Shift</kbd> dashes while moving. <kbd>Escape</kbd> pauses. Upgrades are buttons you can tab to and activate. The game pauses when this tab is hidden.</p>
+<p id="arsenal" class="help">Equipped: Magic Orb</p>
+</main>
+<script>__BUNDLE__</script>
+</body>
+</html>

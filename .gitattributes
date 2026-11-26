@@ -6,3 +6,9 @@ migration/engineering-atlas/historical-evidence/** -text
 # Historical workflow sources are embedded and identified by exact blob digests.
 migration/engineering-atlas/workflow-runs.json -text
 migration/engineering-atlas/retirement-2026-11-14/workflow-summary.json -text
+
+# Exact source snapshots for the native Engine Foundry previews.
+engines/roguelite/upstream/** -text
+engines/mascot-open-world/upstream/** -text
+engines/shared-game-runtime/upstream/** -text
+engines/card-game/upstream/** -text

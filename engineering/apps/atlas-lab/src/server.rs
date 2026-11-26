@@ -774,6 +774,7 @@ async fn serve_strategy(
         .merge(crate::atlas_archive::router())
         .merge(crate::atlas_run_ledger::router())
         .merge(crate::foundry_artist_index::router(package_root))
+        .merge(crate::game_lab::router())
         .merge(crate::constellation_review_ui::router());
     let unified = foundry.is_some();
     let app = if let Some(path) = foundry {
