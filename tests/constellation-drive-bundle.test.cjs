@@ -152,3 +152,76 @@ test('a bundle without a declared journal is still verifiable but cannot preview
  assert.equal(f.run(false).status,0);
  assert.match(f.run(false,'--preview-journal').stderr,/does not|no journal to preview/);
 });
+
+const REPLAY=path.resolve(__dirname,'../tools/continuity-review/write-constellation-replay-candidate.mjs');
+function replay(f,output){
+ const result=spawnSync(process.execPath,[REPLAY,'--index',f.paths.index,'--snapshot',f.paths.snapshot,
+   '--journal',f.paths.journal,'--output',output],{encoding:'utf8',cwd:path.dirname(f.paths.index)});
+ assert.doesNotMatch(result.stdout+result.stderr,/SECRET-LOCAL|private-marker-123|private-provider-file|quarantine-secret|provider-settings-private/);
+ return result;
+}
+
+test('private replay merges truly newer overlap without stamping its time, preserves field and isolates review rows',t=>{
+ const f=fixture(t);
+ const old=t0-50, newer=t0+2;
+ const base=[
+  {id:'update',createdAt:old-1000,updatedAt:old,title:'before',keep:{nested:true}},
+  {id:'conflict',updatedAt:old,title:'base'},
+  {id:'same',updatedAt:old,title:'identical'},
+  {id:'stale',updatedAt:t0+2,title:'base newer'},
+  {id:'dup',updatedAt:old,tags:['a']},{id:'dup',updatedAt:old,tags:['b']},
+ ];
+ f.snapshot.files=base;f.snapshot.meta={provider:'provider-settings-private'};delete f.snapshot.groups;
+ f.journal.files=[
+  {id:'update',createdAt:old-500,updatedAt:newer,title:'source journal changed'},
+  {id:'conflict',updatedAt:old,title:'same clock different title',secret:'quarantine-secret'},
+  {...base[2]},
+  {id:'stale',updatedAt:old,title:'old'},
+  {id:'new',updatedAt:newer,title:'journal-only'},
+  {id:'dup',updatedAt:newer,title:'unresolved duplicate'},
+  {id:'unknown-date',updatedAt:null,title:'missing timestamp'},
+ ];
+ f.journal.groups=[{id:'unseen',updatedAt:newer}];
+ f.bundle.journal.recordCount=8;f.store();
+ const originals=Object.values(f.paths).map(p=>fs.readFileSync(p));
+ const output=path.join(path.dirname(f.paths.index),'new.json'), result=replay(f,output);
+ assert.equal(result.status,0,result.stderr);
+ const audit=JSON.parse(result.stdout), saved=fs.readFileSync(output), candidate=JSON.parse(saved);
+ assert.equal(audit.output.sha256,sha(saved));
+ assert.deepEqual(audit.inputHashes,{index:sha(originals[0]),snapshot:sha(originals[1]),journal:sha(originals[2])});
+ assert.equal(audit.output.bytes,saved.length);
+ assert.equal(candidate.schema,'athena-constellation-replay-candidate-v1');
+ assert.deepEqual(candidate.collections.files[0],{id:'update',createdAt:old-1000,updatedAt:newer,title:'source journal changed',keep:{nested:true}});
+ assert.deepEqual(candidate.collections.files.slice(1,6),base.slice(1));
+ assert.deepEqual(candidate.collections.files[6],f.journal.files[4]);
+ assert.deepEqual(candidate.unresolved.files.map(x=>x.reason),
+  ['same-timestamp-different-record','duplicate-base-id','journal-timestamp-unrecognized']);
+ assert.equal(candidate.unresolved.files[0].baseIndex,1);
+ assert.equal(candidate.unresolved.files[0].row.secret,'quarantine-secret');
+ assert.equal(candidate.collections.groups,null);
+ assert.deepEqual(candidate.unresolved.groups,[{reason:'base-collection-absent',row:f.journal.groups[0]}]);
+ assert.equal(candidate.audit.outcomes.files.newerMerged,1);
+ assert.equal(candidate.audit.outcomes.files.identical,1);
+ assert.equal(candidate.audit.outcomes.files.older,1);
+ assert.equal(candidate.audit.unresolvedCount,4);
+ assert.doesNotMatch(saved.toString(),/provider-settings-private/);
+ assert.deepEqual(Object.values(f.paths).map(p=>fs.readFileSync(p)),originals);
+ if(process.platform!=='win32')assert.equal(fs.statSync(output).mode & 0o777,0o600);
+ const second=path.join(path.dirname(output),'second.json');
+ assert.equal(replay(f,second).status,0);
+ assert.deepEqual(fs.readFileSync(second),saved,'same inputs must produce exact same candidate bytes');
+});
+
+test('a candidate never overwrites source or existing destination, and failed verification creates nothing',t=>{
+ const f=fixture(t);f.store();
+ const before=fs.readFileSync(f.paths.snapshot);
+ assert.match(replay(f,f.paths.snapshot).stderr,/existing path is never overwritten/);
+ assert.deepEqual(fs.readFileSync(f.paths.snapshot),before);
+ const output=path.join(path.dirname(f.paths.index),'new-failure.json');
+ fs.appendFileSync(f.paths.journal,'corrupted');
+ assert.match(replay(f,output).stderr,/did not verify/);
+ assert.equal(fs.existsSync(output),false);
+ f.store();fs.writeFileSync(output,'existing data');
+ assert.match(replay(f,output).stderr,/existing path is never overwritten/);
+ assert.equal(fs.readFileSync(output,'utf8'),'existing data');
+});
