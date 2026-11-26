@@ -55,8 +55,12 @@ test('missing optional comparison module leaves raw history and guarded edits us
  const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path'),{pathToFileURL}=require('node:url');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'athena-optional-project-compare-'));
  try{
-  for(const module of ['index','model','import'])await fs.copyFile(path.join(__dirname,'../dist/workspaces/projects',module+'.mjs'),path.join(directory,module+'.mjs'));
-  const {mount}=await import(pathToFileURL(path.join(directory,'index.mjs')));
+  // Preserve real relative imports while leaving only the optional comparator absent.
+  const projects=path.join(directory,'workspaces','projects'),shared=path.join(directory,'shared');
+  await Promise.all([fs.mkdir(projects,{recursive:true}),fs.mkdir(shared)]);
+  for(const module of ['index','model','import'])await fs.copyFile(path.join(__dirname,'../dist/workspaces/projects',module+'.mjs'),path.join(projects,module+'.mjs'));
+  for(const module of ['portable-backup-job','portable-backup-admission'])await fs.copyFile(path.join(__dirname,'../dist/shared',module+'.mjs'),path.join(shared,module+'.mjs'));
+  const {mount}=await import(pathToFileURL(path.join(projects,'index.mjs')));
   const state=await fixture(),{container}=rootFor(),saves=[];
   const app=mount({container,state,setState:(value,options)=>{saves.push([value,options]);return true;}});
   try{

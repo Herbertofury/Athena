@@ -54,6 +54,8 @@ function saveReviewedContinuity(value,expected){
  }
  const notes=JSON.stringify(value);
  if(notes.length>250000)throw Error('Continuity exceeds the local browser save limit.');
+ // An exact committed replay keeps the freshest envelope without rewriting it.
+ if(notes===original){workspaceStore=latest;return true;}
  const encoded=JSON.stringify({...latest,workspaces:{...latest.workspaces,continuity:JSON.parse(notes)}});
  localStorage.setItem(key,encoded);
  if(localStorage.getItem(key)!==encoded)throw Error('Browser storage did not confirm the Continuity save.');
