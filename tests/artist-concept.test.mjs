@@ -19,7 +19,7 @@ const commands=()=>{
  };
  return {log,canvas:{getContext}};
 };
-function draw(id,mode){const {log,canvas}=commands();const result=drawPlate(canvas,id,mode);assert.equal(canvas.width,640);assert.equal(canvas.height,320);return {log,result};}
+function draw(id,mode,phase){const {log,canvas}=commands();const result=drawPlate(canvas,id,mode,phase);assert.equal(canvas.width,640);assert.equal(canvas.height,320);return {log,result};}
 test('all ten exact authority variants use deterministic independent plates and bounded weather',()=>{
  const worlds=index.artists.flatMap(a=>a.worlds);
  const knownWeather=[];
@@ -45,4 +45,25 @@ test('all ten exact authority variants use deterministic independent plates and 
  assert.equal(layouts.size,10);assert.equal(motifs.size,5);
  assert.equal(new Set(knownWeather).size,40);
  assert.throws(()=>describePlate('__proto__'),RangeError);
+});
+
+test('all artist-level phases are deterministic, compose with weather and reject cross-artist recipes',()=>{
+ const seen=new Set();
+ for(const artist of index.artists)for(const world of artist.worlds){
+  assert.equal(artist.timeflow.length,4);
+  const base=draw(world.id),rain=artist.weather[0],wet=draw(world.id,rain);
+  for(const phase of artist.timeflow){
+   const dryPhase=draw(world.id,null,phase.id),wetPhase=draw(world.id,rain,phase.id);
+   assert.deepEqual(wetPhase,draw(world.id,rain,phase.id));
+   assert.notDeepEqual(dryPhase.log,base.log);
+   assert.notDeepEqual(wetPhase.log,wet.log);
+   assert.equal(wetPhase.result.marks,wet.result.marks);
+   assert.ok(wetPhase.log.length<=wet.log.length+5);
+   seen.add(JSON.stringify(wetPhase.log));
+  }
+  const other=index.artists.find(x=>x!==artist).timeflow[0].id;
+  for(const unknown of [other,'__proto__','unknown',undefined])
+   assert.deepEqual(wet,draw(world.id,rain,unknown));
+ }
+ assert.equal(seen.size,40);
 });

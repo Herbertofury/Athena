@@ -20,17 +20,44 @@ const MOTIFS=Object.freeze({
  cabinet:'A symmetrical exhibit of layered wings and specimen frames',
  islands:'Floating landforms, pool reflections and a distant horizon',
 });
+
+// Artist-scoped, original lighting recipes: sky tint, horizon opacity, sun height.
+// No clock, animation, reconstruction claim, or third-party artwork.
+const PHASES=Object.freeze({
+ 'time.frawgy.dawn':['#ffc594',.20,126],
+ 'time.frawgy.day':['#e9ffb1',.16,51],
+ 'time.frawgy.dusk':['#d272ca',.22,148],
+ 'time.frawgy.night':['#5a78ea',.21,49],
+ 'time.lightweaver.silver-noon':['#d8e4fa',.19,42],
+ 'time.lightweaver.blue-hour':['#516ff3',.24,109],
+ 'time.lightweaver.magenta-midnight':['#e34ab1',.18,32],
+ 'time.lightweaver.signal-dawn':['#cbfb83',.17,135],
+ 'time.dreamrelicc.matins':['#ead2c1',.21,123],
+ 'time.dreamrelicc.zenith':['#fbd293',.20,38],
+ 'time.dreamrelicc.vespers':['#bb90df',.23,151],
+ 'time.dreamrelicc.midnight':['#73729e',.23,47],
+ 'time.karoline.cabinet-morning':['#ffeccf',.19,111],
+ 'time.karoline.botanical-noon':['#c8deb5',.16,44],
+ 'time.karoline.imago-dusk':['#d298bd',.22,145],
+ 'time.karoline.menagerie-night':['#7487b6',.20,46],
+ 'time.saveroom.paradise-noon':['#f9e0a4',.17,39],
+ 'time.saveroom.blue-hour-voyage':['#4a8be5',.22,101],
+ 'time.saveroom.lavender-sunset':['#dc9ddf',.23,147],
+ 'time.saveroom.starcaller-midnight':['#8875e3',.22,33],
+});
+
 const W=640,H=320;
 export function describePlate(id){
  const a=PALETTES[id];
  if(!Object.hasOwn(PALETTES,id))throw new RangeError('World colorway not reviewed');
  return {motif:MOTIFS[a[5]],swatches:a.slice(0,5)};
 }
-export function drawPlate(canvas,id,weather){
+export function drawPlate(canvas,id,weather,phaseId){
  if(!Object.hasOwn(PALETTES,id))throw new RangeError('World colorway not reviewed');
  const c=canvas.getContext('2d');
  if(!c)throw Error('Canvas drawing unavailable');
  const [bg,field,glow,light,accent,kind,seed]=PALETTES[id];
+ const phase=Object.hasOwn(PHASES,phaseId)&&phaseId.split('.')[1]===id.split('.')[1]?PHASES[phaseId]:null;
  const intensity=weather?.intensity??'clear';
  const style=Object.hasOwn(WEATHER,weather?.id)?WEATHER[weather.id]:null;
  const value=style&&Object.hasOwn(DENSITY,intensity)?DENSITY[intensity]:0;
@@ -43,7 +70,11 @@ export function drawPlate(canvas,id,weather){
  const oval=(x,y,rx,ry,color,alpha=1)=>{c.fillStyle=color;c.globalAlpha=alpha;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();c.globalAlpha=1;};
  const box=(x,y,w,h,color,alpha=1)=>{c.fillStyle=color;c.globalAlpha=alpha;c.fillRect(x,y,w,h);c.globalAlpha=1;};
  const line=(x,y,tx,ty,color,alpha=1)=>{c.strokeStyle=color;c.globalAlpha=alpha;c.beginPath();c.moveTo(x,y);c.lineTo(tx,ty);c.stroke();c.globalAlpha=1;};
- oval(400+seed*11,77,65,65,glow,.10);oval(400+seed*11,77,43,43,light,.16);oval(400+seed*11,77,21,21,light,.88);
+ if(phase)box(0,0,W,H,phase[0],phase[1]);
+ const lightY=phase?.[2]??77;
+ oval(400+seed*11,lightY,65,65,phase?.[0]??glow,.10);
+ oval(400+seed*11,lightY,43,43,light,.16);
+ oval(400+seed*11,lightY,21,21,light,.88);
  for(let i=0;i<38;i++)oval(rnd()*W,14+rnd()*170,.65+rnd()*1.5,.65+rnd()*1.5,glow,.32);
  if(kind==='wetland'||kind==='islands'){
   for(let i=0;i<6;i++){

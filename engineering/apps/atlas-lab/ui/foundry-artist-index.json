@@ -7,6 +7,7 @@
     "worlds": 10,
     "districts": 20,
     "weather": 20,
+    "timeflow": 20,
     "music_routes": 21
   },
   "scope": "Public curated names only. Grouped by artist as in the original authority, not a per-world district assignment or a rendered scene.",
@@ -68,6 +69,24 @@
           "intensity": "gentle"
         }
       ],
+      "timeflow": [
+        {
+          "id": "time.frawgy.dawn",
+          "name": "Dawn"
+        },
+        {
+          "id": "time.frawgy.day",
+          "name": "Day"
+        },
+        {
+          "id": "time.frawgy.dusk",
+          "name": "Dusk"
+        },
+        {
+          "id": "time.frawgy.night",
+          "name": "Night"
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -125,6 +144,24 @@
           "id": "weather.lightweaver.glass-condensation",
           "name": "Glass-Skin Condensation",
           "intensity": "subtle"
+        }
+      ],
+      "timeflow": [
+        {
+          "id": "time.lightweaver.silver-noon",
+          "name": "Silver Studio Noon"
+        },
+        {
+          "id": "time.lightweaver.blue-hour",
+          "name": "Cobalt Blue Hour"
+        },
+        {
+          "id": "time.lightweaver.magenta-midnight",
+          "name": "Magenta Midnight"
+        },
+        {
+          "id": "time.lightweaver.signal-dawn",
+          "name": "Acid Signal Dawn"
         }
       ],
       "recorded_music_routes": 4
@@ -186,6 +223,24 @@
           "intensity": "dramatic"
         }
       ],
+      "timeflow": [
+        {
+          "id": "time.dreamrelicc.matins",
+          "name": "Orbit Matins"
+        },
+        {
+          "id": "time.dreamrelicc.zenith",
+          "name": "Solar Mass"
+        },
+        {
+          "id": "time.dreamrelicc.vespers",
+          "name": "Vesper Procession"
+        },
+        {
+          "id": "time.dreamrelicc.midnight",
+          "name": "Midnight Apotheosis"
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -245,6 +300,24 @@
           "intensity": "dramatic"
         }
       ],
+      "timeflow": [
+        {
+          "id": "time.karoline.cabinet-morning",
+          "name": "Cabinet Morning"
+        },
+        {
+          "id": "time.karoline.botanical-noon",
+          "name": "Botanical Noon"
+        },
+        {
+          "id": "time.karoline.imago-dusk",
+          "name": "Imago Dusk"
+        },
+        {
+          "id": "time.karoline.menagerie-night",
+          "name": "Menagerie Night"
+        }
+      ],
       "recorded_music_routes": 4
     },
     {
@@ -302,6 +375,24 @@
           "id": "weather.saveroom.lavender-afterglow",
           "name": "Lavender Afterglow",
           "intensity": "gentle"
+        }
+      ],
+      "timeflow": [
+        {
+          "id": "time.saveroom.paradise-noon",
+          "name": "Paradise Noon"
+        },
+        {
+          "id": "time.saveroom.blue-hour-voyage",
+          "name": "Blue-Hour Voyage"
+        },
+        {
+          "id": "time.saveroom.lavender-sunset",
+          "name": "Lavender Sunset"
+        },
+        {
+          "id": "time.saveroom.starcaller-midnight",
+          "name": "Starcaller Midnight"
         }
       ],
       "recorded_music_routes": 5

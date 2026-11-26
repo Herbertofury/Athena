@@ -10,7 +10,7 @@ SOURCE=ROOT/"feature-foundry/source/src/data/artist-worlds-v4.0.1.json"
 DEST=ROOT/"engineering/apps/atlas-lab/ui/foundry-artist-index.json"
 PIN="474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920"
 PROVENANCE="https://github.com/Herbertofury/Athena/blob/7d335a740ea92a66674bf4412c48f5e03faf6e9f/feature-foundry/source/src/data/artist-worlds-v4.0.1.json"
-EXPECTED={"artists":5,"worlds":10,"districts":20,"weather":20,"music_routes":21}
+EXPECTED={"artists":5,"worlds":10,"districts":20,"weather":20,"timeflow":20,"music_routes":21}
 
 def require(cond,msg):
     if not cond:raise ValueError(msg)
@@ -34,11 +34,12 @@ def generate(source=SOURCE):
         k=key(r["artist_id"])
         require(k.startswith("artist.") and k not in artists,"Duplicate artist identity")
         artists[k]={"id":k,"name":atom(r["display_name"]),"family":atom(r["theme_family"]),"rights_note":atom(r["rights_release_gate"]),
-                    "worlds":[],"districts":[],"weather":[],"recorded_music_routes":0}
+                    "worlds":[],"districts":[],"weather":[],"timeflow":[],"recorded_music_routes":0}
     maps=(
            ("worlds","world_id","world_name","variant","world."),
            ("districts","district_id","district",None,"district."),
            ("weather","weather_id","weather_state","intensity","weather."),
+           ("timeflow","timeflow_id","phase",None,"time."),
     )
     ids=set(artists)
     for group,id_field,label_field,extra_field,prefix in maps:
@@ -54,7 +55,7 @@ def generate(source=SOURCE):
         artists[parent]["recorded_music_routes"]+=1
         ids.add(k)
     for artist in artists.values():
-        require(all(artist[k] for k in ("worlds","districts","weather")),"Incomplete artist authority")
+        require(all(artist[k] for k in ("worlds","districts","weather")) and len(artist["timeflow"])==4,"Incomplete artist authority")
     return (json.dumps({"schema":"athena-foundry-artist-index-v1","source_sha256":PIN,"pinned_source":PROVENANCE,
         "coverage":EXPECTED,"scope":"Public curated names only. Grouped by artist as in the original authority, not a per-world district assignment or a rendered scene.",
         "artists":list(artists.values())},ensure_ascii=False,indent=2)+"\n").encode()
@@ -64,5 +65,5 @@ def main():
     a=p.parse_args();expected=generate()
     if a.check:require(DEST.read_bytes().replace(b"\r\n",b"\n")==expected,"Generated artist index differs")
     else:DEST.write_bytes(expected)
-    print("Reviewed artist index: 5 artists, 10 worlds, 20 districts, 20 weather records and 21 route counts; no raw provenance or media.")
+    print("Reviewed artist index: 5 artists, 10 worlds, 20 districts, 20 weather records, 20 phase labels and 21 route counts; no raw provenance or media.")
 if __name__=="__main__":main()
