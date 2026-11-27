@@ -201,13 +201,13 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expec
                 'engineering_validation':'SQLite integrity only; semantic/native acceptance remains separate',
                 'stores':{name:{'sha256':receipt['destination_sha256'],'bytes':receipt['destination_bytes'],'source_file_hashes':receipt['source_file_hashes'],'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime']} for name,receipt in zip(names,receipts)}}
         if parent_checkpoint_sha256 is not None:result['parent_checkpoint_sha256']=parent_checkpoint_sha256
-        # Exclusive directory. Completion marker is linked last; any partial new
+        # Exclusive directory. Completion marker is published last; any partial new
         # directory on failure is retained for inspection, never called complete.
         marker=stage/'checkpoint.json'
         with marker.open('x',encoding='utf-8') as stream:
             json.dump(result,stream,indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
         destination.mkdir(mode=0o700)
-        for name in (*names,'checkpoint.json'):os.link(stage/name,destination/name)
+        for name in (*names,'checkpoint.json'):publish_new(stage/name,destination/name)
     return result
 
 def verify_checkpoint(directory):

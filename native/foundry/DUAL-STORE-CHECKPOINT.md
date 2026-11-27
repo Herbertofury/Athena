@@ -29,11 +29,13 @@ implied by the synthetic two-store test.
 Output contains `foundry.sqlite3`, `engineering.sqlite3`, and `checkpoint.json`.
 The JSON records relative output names, hashes, runtime and validation scope, not
 original absolute paths. Treat every output as private user data. The new directory
-is exclusive, files are hardlinked from verified staging, and the completion marker
-is published last. Unsupported hardlinks fail closed. A publication failure can
+is exclusive. Verified staged files publish using a Windows no-replace rename
+or a POSIX exclusive hard link; the completion marker is published last. Failed
+publication never falls back to copying or overwriting and can
 leave a partial new directory without a completion marker; preserve it for review
 and choose a different new destination. Publication is not a transactional directory
-commit or power-loss durability claim. Trusted, quiescent directories are required;
+commit or power-loss durability claim. Physical removable-media and safe-eject/reinsert validation is separate.
+Trusted, quiescent directories are required;
 these checks do not defeat hostile concurrent directory changes.
 
 Unit acceptance uses disposable real SQLite files and the actual preparation
