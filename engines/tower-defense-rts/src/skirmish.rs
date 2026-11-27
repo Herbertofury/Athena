@@ -121,6 +121,10 @@ impl Skirmish {
         Ok(())
     }
 
+    pub(crate) fn grant_supply(&mut self) { self.ore += 5; }
+
+    pub(crate) fn repair_bastion(&mut self) { self.base_hp = (self.base_hp + 1).min(5); }
+
     pub fn advance(&mut self) {
         if self.outcome != Outcome::Active { return; }
         self.tick += 1;

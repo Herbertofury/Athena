@@ -266,3 +266,5 @@ mod tests {
 }
 
 pub mod skirmish;
+
+pub mod replay;

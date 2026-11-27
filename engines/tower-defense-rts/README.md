@@ -27,3 +27,9 @@ python -m http.server 8080 --bind 127.0.0.1 --directory browser/web
 ```
 
 Open `http://127.0.0.1:8080/`. PowerShell users can substitute `Copy-Item` for `cp`. The WASM is generated and is not checked in. After the local server opens the page, the playtest makes no external requests. It is not part of the released Athena app and does not save progress or implement optional roguelite runs.
+
+## Terminal checkpoints and optional run draft
+
+Run as before for **Classic**. To explicitly enable the first run-local post-wave draft, launch `cargo run --locked --offline --release --bin outpost -- --run 431` (choose an unsigned seed). At the end of the first wave, pick one offered reward with `choose OFFER OPTION`; the battle will not advance until you choose. No permanent rewards or account/profile data are written.
+
+In either mode, use `checkpoint` and keep the one-line code. Relaunch with the same mode and seed, and type `resume CODE`. The versioned code stores accepted inputs and reconstructs the current battle, including a pending offer or squad movement. It does not contain a file path or write user files. Invalid or incompatible codes do not replace your current battle. The browser preview still does not expose these new terminal controls.
