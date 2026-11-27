@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { once } from 'node:events';
+import { pathToFileURL } from 'node:url';
+
+const standalone=process.argv[2] ? pathToFileURL(process.argv[2]).href : null;
 
 const types = {
   '/': ['index.html', 'text/html; charset=utf-8'],
@@ -10,18 +13,18 @@ const types = {
   '/outpost.mjs': ['outpost.mjs', 'text/javascript'],
   '/outpost.wasm': ['outpost.wasm', 'application/wasm'],
 };
-const staticFiles = new Map(await Promise.all(Object.entries(types).map(async ([url,[filename,type]]) =>
+const staticFiles = standalone ? null : new Map(await Promise.all(Object.entries(types).map(async ([url,[filename,type]]) =>
   [url, { type, bytes: await readFile(new URL('./web/'+filename,import.meta.url)) }])));
-const server=createServer((req,res)=>{
+const server=standalone ? null : createServer((req,res)=>{
   if(req.url==='/favicon.ico'&&req.method==='GET'){res.writeHead(204).end();return;}
   const found=staticFiles.get(req.url);
   if(!found||req.method!=='GET'){res.writeHead(404).end();return;}
   res.writeHead(200,{ 'Content-Type': found.type, 'X-Content-Type-Options':'nosniff' });
   res.end(found.bytes);
 });
-server.listen(0,'127.0.0.1');
-await once(server,'listening');
-const origin='http://127.0.0.1:'+server.address().port;
+if(server){server.listen(0,'127.0.0.1');await once(server,'listening');}
+const origin=server?'http://127.0.0.1:'+server.address().port:null;
+const target=standalone||origin;
 
 let browser;
 try {
@@ -32,10 +35,11 @@ try {
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
   await page.route('**/*',r=>{
-    if(new URL(r.request().url()).origin===origin)return r.continue();
+    if(standalone?r.request().url()===standalone:new URL(r.request().url()).origin===origin)return r.continue();
     external.push(r.request().url());return r.abort();
   });
-  await page.goto(origin);
+  page.on('request',r=>{if(standalone&&r.url()!==standalone) external.push(r.url());});
+  await page.goto(target);
   await page.getByText('Plan your opening.').waitFor();
   assert.equal(await page.locator('[data-tile]').count(),45);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth===innerWidth));
@@ -99,5 +103,5 @@ try {
  }
 } finally {
  await browser?.close();
- await new Promise(resolve=>server.close(resolve));
+ if(server) await new Promise(resolve=>server.close(resolve));
 }
