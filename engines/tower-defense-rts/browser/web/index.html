@@ -19,6 +19,18 @@
 <button type="button" id="issue" class="commit" disabled>Issue order</button>
 <div class="time" aria-label="Advance turns"><button type="button" data-wait="1">+1 turn</button><button type="button" data-wait="5">+5 turns</button></div>
 <p id="status" role="status">Starting Outpost…</p>
-<button type="button" id="restart">Restart skirmish</button></section>
+<section id="draft" hidden aria-label="Run reward"><h2>Choose a wave reward</h2>
+<div class="tools"><button type="button" data-choice="0"></button><button type="button" data-choice="1"></button></div></section>
+<button type="button" id="restart">Restart skirmish</button>
+<details class="run-settings"><summary>Mode and checkpoints</summary>
+<p id="active-mode">Active mode: Classic</p>
+<div class="run-options">
+<label>Mode <select id="mode"><option value="0">Classic</option><option value="1">Run draft</option></select></label>
+<label>Run seed <input id="seed" inputmode="numeric" maxlength="20" value="431"></label>
+<button type="button" id="start-mode">Start selected mode</button></div>
+<label for="checkpoint">Portable checkpoint code</label>
+<textarea id="checkpoint" maxlength="8192" rows="3" spellcheck="false"></textarea>
+<div class="tools"><button type="button" id="export-save">Export code</button><button type="button" id="import-save">Resume code</button></div>
+</details></section>
 </div><footer>Turn-stepped offline playtest · Rust simulation shared with the terminal build</footer></main>
 </body></html>
