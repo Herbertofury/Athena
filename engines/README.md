@@ -21,6 +21,8 @@ Athena is the canonical host for reusable game engines across the owner's reposi
 
 - [Tower Defense + RTS](TOWER-DEFENSE-RTS-RESEARCH.md): a standalone defense-and-command core with optional roguelite layers, using *Dawn of Defense* as a design reference. Track the work under the existing [M5 Engine Foundry milestone](https://github.com/Herbertofury/Athena/issues/365).
 
+- [Outpost playtest](tower-defense-rts/README.md): executable Rust terminal prototype for the strategy design. It is not a canonical package.
+
 ## Source-intake policy
 
 The `upstream/` directories are immutable, exact-source snapshots with per-file Git blob SHA manifests. They are provenance and regression baselines, not production APIs. Do not edit them. New engine code belongs in each package's `src/`. The intake verifier checks that every snapshot still matches the recorded upstream blob.
