@@ -73,17 +73,24 @@ impl Skirmish {
     pub fn outcome(&self) -> Outcome { self.outcome }
     pub fn is_pad(cell: usize) -> bool { PADS.contains(&cell) }
 
-    pub fn build(&mut self, cell: usize, kind: Tower) -> Result<(), Reject> {
+    /// Ask for UI affordances without reserving ore or changing the board.
+    pub fn preview_build(&self, cell: usize, kind: Tower) -> Result<(), Reject> {
         if self.outcome != Outcome::Active { return Err(Reject::Finished); }
         if !Self::is_pad(cell) { return Err(Reject::InvalidPad); }
         if self.towers.contains_key(&cell) { return Err(Reject::AlreadyBuilt); }
         if self.ore < kind.cost() { return Err(Reject::InsufficientOre); }
+        Ok(())
+    }
+
+    pub fn build(&mut self, cell: usize, kind: Tower) -> Result<(), Reject> {
+        self.preview_build(cell, kind)?;
         self.ore -= kind.cost();
         self.towers.insert(cell, kind);
         Ok(())
     }
 
-    pub fn order(&mut self, destination: usize) -> Result<(), Reject> {
+    /// Query the exact route a new order would take, without changing pending orders.
+    pub fn preview_move(&self, destination: usize) -> Result<VecDeque<usize>, Reject> {
         if self.outcome != Outcome::Active { return Err(Reject::Finished); }
         let squad = self.squad.ok_or(Reject::NoSquad)?;
         if !ground(destination) { return Err(Reject::NoRoute); }
@@ -106,7 +113,11 @@ impl Skirmish {
             path.push_front(cell);
             cell = parent[cell].ok_or(Reject::NoRoute)?;
         }
-        self.orders = path;
+        Ok(path)
+    }
+
+    pub fn order(&mut self, destination: usize) -> Result<(), Reject> {
+        self.orders = self.preview_move(destination)?;
         Ok(())
     }
 

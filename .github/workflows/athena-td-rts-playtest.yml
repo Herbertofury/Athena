@@ -30,3 +30,21 @@ jobs:
           persist-credentials: false
       - run: rustup toolchain install 1.100.0 --profile minimal
       - run: cargo +1.100.0 test --offline --locked --release
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RUSTFLAGS: -Dwarnings
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: rustup toolchain install 1.100.0 --profile minimal --target wasm32-unknown-unknown
+      - run: cargo +1.100.0 build --manifest-path engines/tower-defense-rts/browser/Cargo.toml --target wasm32-unknown-unknown --locked --offline --release
+      - run: cp engines/tower-defense-rts/browser/target/wasm32-unknown-unknown/release/outpost_browser.wasm engines/tower-defense-rts/browser/web/outpost.wasm
+      - run: npm ci
+      - run: npx --no-install playwright install --with-deps chromium
+      - run: node engines/tower-defense-rts/browser/browser-test.mjs

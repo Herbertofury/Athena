@@ -63,3 +63,19 @@ fn terminal_player_can_win_without_expansion() {
     assert!(!text.contains("HELD"), "{text}");
     assert!(!text.contains("Order refused"), "{text}");
 }
+
+#[test]
+fn host_previews_neither_reserve_ore_nor_replace_existing_squad_order() {
+    let mut s = Skirmish::default();
+    s.order(OUTPOST).unwrap();
+    assert_eq!(s.preview_move(OUTPOST).unwrap().into_iter().collect::<Vec<_>>(), [14,13,22]);
+    assert_eq!(s.preview_move(17).unwrap().into_iter().collect::<Vec<_>>(), [16,17]);
+    assert_eq!(s.preview_move(usize::MAX), Err(Reject::NoRoute));
+    assert_eq!(s.preview_build(19,Tower::Pulse), Ok(()));
+    assert_eq!(s.ore(),12);
+    assert!(s.towers().is_empty());
+    s.build(25,Tower::Bolt).unwrap();
+    assert_eq!(s.build(19,Tower::Pulse),Err(Reject::InsufficientOre));
+    s.advance();
+    assert_eq!(s.squad().unwrap().cell,14);
+}
