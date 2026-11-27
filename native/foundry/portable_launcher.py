@@ -210,7 +210,7 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expec
         for name in (*names,'checkpoint.json'):publish_new(stage/name,destination/name)
     return result
 
-def verify_checkpoint(directory):
+def verify_checkpoint(directory,expected_marker_sha256=None):
     """Read a bounded unsigned integrity receipt; never treat receipt paths as authority."""
     directory=external_path(directory)
     if not directory.is_dir() or any(link_or_reparse(p) for p in (directory,*directory.parents)):raise ValueError('Ordinary checkpoint directory required')
@@ -226,6 +226,8 @@ def verify_checkpoint(directory):
     if marker.stat().st_size>1024*1024:raise ValueError('Checkpoint receipt too large')
     with marker.open('rb') as stream:payload=stream.read(1024*1024+1)
     if len(payload)>1024*1024:raise ValueError('Checkpoint receipt too large')
+    marker_sha256=hashlib.sha256(payload).hexdigest()
+    if expected_marker_sha256 is not None and marker_sha256!=expected_marker_sha256:raise ValueError('Checkpoint receipt hash mismatch')
     def unique(pairs):
         result={}
         for key,value in pairs:
@@ -251,7 +253,7 @@ def verify_checkpoint(directory):
                 remaining-=len(chunk);digest.update(chunk)
             if stream.read(1):raise ValueError('Checkpoint changed')
         if digest.hexdigest()!=row['sha256']:raise ValueError('Checkpoint hash mismatch')
-    return receipt,hashlib.sha256(payload).hexdigest()
+    return receipt,marker_sha256
 
 def fork_checkpoint(root,data,source,destination,quiescent=False):
     if not quiescent:raise ValueError('Stop all checkpoint writers first')
@@ -264,11 +266,16 @@ def fork_checkpoint(root,data,source,destination,quiescent=False):
 
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true')
+    p.add_argument('--verify-checkpoint',metavar='DIRECTORY',help='Validate a stopped checkpoint without opening SQLite')
+    p.add_argument('--expected-checkpoint-sha256',metavar='SHA256',help='Independently saved checkpoint.json hash, with --verify-checkpoint')
+    a=p.parse_args()
+    if a.expected_checkpoint_sha256 is not None and (not a.verify_checkpoint or not re.fullmatch('[0-9a-fA-F]{64}',a.expected_checkpoint_sha256)):
+        p.error('--expected-checkpoint-sha256 requires --verify-checkpoint and exactly 64 hex digits')
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
+        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),bool(a.verify_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
         if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')
         if a.fork_checkpoint and (a.journal or a.checkpoint_directory or not a.source_quiescent):raise ValueError('Fork requires stopped source and no unrelated arguments')
@@ -279,6 +286,16 @@ def main():
             print('Package file integrity verified; no executable or database opened.')
             print(json.dumps({'python_sqlite':sqlite3.sqlite_version,'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}));return
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
+        if a.verify_checkpoint:
+            directory=external_path(a.verify_checkpoint)
+            if data.get('profile')!='unified' or directory==root or root in directory.parents:
+                raise ValueError('External checkpoint and verified unified package required')
+            expected=a.expected_checkpoint_sha256.lower() if a.expected_checkpoint_sha256 is not None else None
+            receipt,marker_sha256=verify_checkpoint(directory,expected)
+            print(json.dumps({'verified':True,'checkpoint_sha256':marker_sha256,'expected_sha256_matched':expected is not None,
+                              'stores':{name:{key:row[key] for key in ('sha256','bytes')} for name,row in receipt['stores'].items()},
+                              'sqlite_opened':False,'restored':False}))
+            return
         if a.fork_checkpoint:
             print(json.dumps(fork_checkpoint(root,data,a.fork_checkpoint,a.working_directory,a.source_quiescent)));return
         if a.backup_database or a.upgrade_copy:
@@ -304,7 +321,9 @@ def main():
             os.execv(command[0],command)
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
-    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
+    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):
+        if a.verify_checkpoint:p.exit(2,'Checkpoint not verified: check the package, complete folder and hashes. No database was opened by the verifier.\n')
+        p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
     print(server.origin+'/#build',flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass

@@ -36,3 +36,26 @@ Windows/Linux integration creates both stores, checkpoints them, forks them thro
 the packaged CLI, and opens only the fork to verify workspace/experiment continuity,
 then rehashes both original stores and the preserved checkpoint. This is synthetic
 acceptance, not owner-data migration or a repository-retirement decision.
+
+## Check a copied checkpoint before you fork it
+
+After copying or moving a stopped checkpoint folder, run this from the verified
+portable unified package. It reads only: neither SQLite database is opened,
+upgraded, forked or restored.
+
+```text
+python -B launch.py --verify-checkpoint "/path/to/checkpoint"
+```
+
+Keep the printed `checkpoint_sha256` separately from the checkpoint. After a
+copy or move, supply that independently recorded hash to check the original
+receipt as well as both database files:
+
+```text
+python -B launch.py --verify-checkpoint "/path/to/copied-checkpoint" --expected-checkpoint-sha256 <saved SHA-256>
+```
+
+Without the independent hash, a passing result means the databases match the
+folder's own receipt, not that the receipt is the original or that SQLite
+contents are semantically compatible. Verification does not test the drive
+itself and is not a substitute for opening a separate fork.
