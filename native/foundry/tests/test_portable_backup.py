@@ -44,9 +44,9 @@ class BackupTests(unittest.TestCase):
    with self.assertRaises(subprocess.TimeoutExpired):self.backup()
   self.assertEqual(before,self.fingerprints());self.assertFalse(self.out.exists());self.assertEqual(list(self.root.glob('.athena-backup-*')),[])
  def test_racing_destination_preserved(self):
-  link=os.link
-  def race(src,dst):self.out.write_bytes(b'OTHER');return link(src,dst)
-  with patch.object(launch.os,'link',side_effect=race):
+  publish=launch.publish_new
+  def race(src,dst):self.out.write_bytes(b'OTHER');return publish(src,dst)
+  with patch.object(launch,'publish_new',side_effect=race):
    with self.assertRaises(FileExistsError):self.backup()
   self.assertEqual(self.out.read_bytes(),b'OTHER');self.assertEqual(list(self.root.glob('.athena-backup-*')),[])
 if __name__=='__main__':unittest.main()
