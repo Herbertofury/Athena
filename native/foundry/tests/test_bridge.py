@@ -21,6 +21,15 @@ class Tests(unittest.TestCase):
  def test_project_comparison_exact_static_bytes_and_database_unchanged(self):
   before=self.db.read_bytes();status,body,_=self.request(path='/workspaces/projects/compare.mjs')
   self.assertEqual(status,200);self.assertEqual(body,(ROOT.parents[1]/'dist/workspaces/projects/compare.mjs').read_bytes());self.assertEqual(self.db.read_bytes(),before)
+ def test_frontier_ledger_exact_static_bytes_and_database_unchanged(self):
+  path='/workspaces/engineering/research/frontier-observations.json'
+  before=self.db.read_bytes();status,body,headers=self.request(path=path)
+  self.assertEqual(status,200)
+  self.assertIn('application/json',headers.get('Content-Type',''))
+  self.assertEqual(body,(ROOT.parents[1]/'dist'/path.lstrip('/')).read_bytes())
+  self.assertEqual(len(json.loads(body)['entries']),64)
+  self.assertEqual(self.request(path=path+'.private')[0],404)
+  self.assertEqual(self.db.read_bytes(),before)
  def test_layers_explicit_disable_and_reviewed_static_module(self):
   self.server.shutdown();self.thread.join();self.server.server_close()
   self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist',disable_foundry_modules=['layers']);self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
