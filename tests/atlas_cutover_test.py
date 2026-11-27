@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 import unittest
 
-from scripts.verify_atlas_cutover import SNAPSHOT, verify
+from scripts.verify_atlas_cutover import SNAPSHOT, verify, verify_wiki
 
 
 class CutoverRecovery(unittest.TestCase):
@@ -69,3 +69,86 @@ class CutoverRecovery(unittest.TestCase):
         self.manifest['source_revision'] = 'a' * 40
         with self.assertRaisesRegex(ValueError, 'does not match retained source main'):
             self.run_verify()
+
+
+class WikiRecovery(unittest.TestCase):
+    def setUp(self):
+        base = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        source = base / 'source'
+        source.mkdir()
+        self.root = base / 'athena'
+        self.archive = self.root / SNAPSHOT.parent
+        self.snapshot = self.archive / 'wiki'
+        self.snapshot.mkdir(parents=True)
+        self.destinations = self.root / 'wiki'
+        self.destinations.mkdir()
+
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(source), *args]).strip()
+
+        git('init', '-q', '-b', 'master')
+        self.source_bytes = b'Original old Wiki page\n'
+        (source / 'Home.md').write_bytes(self.source_bytes)
+        git('add', '--all')
+        git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+            'commit', '-qm', 'Fixture')
+        ref_path = self.archive / 'wiki-refs.json'
+        self.refs = [{'ref': 'refs/heads/master', 'sha': git('rev-parse', 'HEAD').decode()}]
+        ref_path.write_text(json.dumps(self.refs), encoding='utf-8')
+        git('bundle', 'create', str(self.archive / 'engineering-atlas-wiki-history.bundle'), '--all')
+        (self.snapshot / 'Home.md').write_bytes(self.source_bytes)
+
+        def digest(data):
+            return hashlib.sha256(data).hexdigest()
+
+        self.verified = {
+            'docs/wiki-app-study/App-Study.md': digest(b'Source repo copy'),
+            'docs/wiki-app-study/README.md': digest(b'Unpublished index'),
+        }
+        self.pages = [
+            {'source_name': 'Home', 'athena_page': 'Engineering-Home',
+             'source_sha256': digest(self.source_bytes), 'destination_sha256': digest(b'Old revision')},
+            {'source_name': 'App-Study', 'athena_page': 'Engineering-App-Study',
+             'source_sha256': self.verified['docs/wiki-app-study/App-Study.md'],
+             'destination_sha256': digest(b'Establishing baseline')},
+        ]
+        (self.destinations / 'Engineering-Home.md').write_bytes(b'New revision')
+        (self.destinations / 'Engineering-App-Study.md').write_bytes(b'Establishing baseline')
+
+    def check(self):
+        (self.archive / 'wiki-page-map.json').write_text(json.dumps(self.pages), encoding='utf-8')
+        return verify_wiki(self.root, verified_source=self.verified)
+
+    def test_reconciles_both_sources_but_not_live_wiki(self):
+        result = self.check()
+        self.assertEqual(result['source_wiki_pages'], 1)
+        self.assertEqual(result['source_repository_pages'], 1)
+        self.assertEqual(result['athena_pages'], 2)
+        self.assertEqual(result['athena_pages_changed_since_cutover'], 1)
+        self.assertIn('not established', result['live_wiki_acceptance'])
+
+    def test_detects_altered_archive_page(self):
+        (self.snapshot / 'Home.md').write_bytes(b'tampered')
+        with self.assertRaisesRegex(ValueError, 'Archived Wiki bytes differ'):
+            self.check()
+
+    def test_detects_changed_wiki_ref(self):
+        self.refs[0]['sha'] = 'a' * 40
+        (self.archive / 'wiki-refs.json').write_text(json.dumps(self.refs), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'refs do not match'):
+            self.check()
+
+    def test_detects_missing_source_map_row(self):
+        self.pages.pop()
+        with self.assertRaisesRegex(ValueError, 'does not cover every'):
+            self.check()
+
+    def test_detects_missing_athena_page(self):
+        (self.destinations / 'Engineering-Home.md').unlink()
+        with self.assertRaisesRegex(ValueError, 'Missing or unsafe'):
+            self.check()
+
+    def test_rejects_path_outside_wiki(self):
+        self.pages[0]['athena_page'] = '../README'
+        with self.assertRaisesRegex(ValueError, 'Invalid wiki page name'):
+            self.check()
