@@ -2,9 +2,9 @@ name: Athena engineering checks
 on:
   push:
     branches: [main]
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "wiki/Engineering-*.md", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
   pull_request:
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "wiki/Engineering-*.md", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
   workflow_dispatch:
 permissions:
   contents: read
