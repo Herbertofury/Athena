@@ -53,9 +53,13 @@ mod tests {
         let rows = value["projects"].as_array().unwrap();
         assert_eq!(rows.len(), 4);
         let atlas = &rows[0];
-        assert!(atlas["gates"].as_array().unwrap().iter().any(|g| {
-            g["state"] == "recorded" && g["label"] == "Wiki cutover validation"
-        }));
+        assert!(
+            atlas["gates"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|g| { g["state"] == "recorded" && g["label"] == "Wiki cutover validation" })
+        );
         let foundry = &rows[1];
         assert!(foundry["gates"].as_array().unwrap().iter().any(|g| {
             g["state"] == "recorded" && g["label"] == "Windows and Linux checkpoint and fork"
