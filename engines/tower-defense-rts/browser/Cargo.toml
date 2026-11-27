@@ -1,0 +1,17 @@
+[package]
+name = "outpost-browser"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+athena-defense-placement = { path = ".." }
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+strip = true
