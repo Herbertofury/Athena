@@ -45,6 +45,25 @@ class HistoryBundleTests(unittest.TestCase):
         self.output.write_bytes(b'keep')
         with self.assertRaises(ValueError):bundle.create(self.source,self.output)
         self.assertEqual(self.output.read_bytes(),b'keep')
+    def test_publish_after_destination_appears_is_never_overwriting(self):
+        staged=self.root/'verified-new'
+        staged.write_bytes(b'complete verified bytes')
+        self.output.write_bytes(b'other writer')
+        with self.assertRaises(FileExistsError):bundle.publish_new(staged,self.output)
+        self.assertEqual(self.output.read_bytes(),b'other writer')
+        self.assertEqual(staged.read_bytes(),b'complete verified bytes')
+    def test_publish_uses_native_exclusive_operation(self):
+        staged=self.root/'verified-new'
+        staged.write_bytes(b'complete verified bytes')
+        if bundle.os.name=='nt':
+            with patch.object(bundle.os,'link',side_effect=OSError('hard links unsupported')):
+                bundle.publish_new(staged,self.output)
+            self.assertFalse(staged.exists())
+        else:
+            with patch.object(bundle.os,'rename',side_effect=AssertionError('POSIX rename could overwrite')):
+                bundle.publish_new(staged,self.output)
+            self.assertTrue(staged.exists())
+        self.assertEqual(self.output.read_bytes(),b'complete verified bytes')
     def test_failed_restore_never_publishes(self):
         original=bundle.git
         def fail(repo,*args):

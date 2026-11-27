@@ -33,6 +33,17 @@ def checksum(path):
             value.update(chunk)
     return value.hexdigest()
 
+def publish_new(staged, output):
+    """Publish a complete verified file only, without replacing any destination."""
+    staged.chmod(0o600)
+    # Windows rename is exclusive and needs no hard-link feature (e.g. exFAT).
+    # POSIX rename can overwrite an existing name, so keep the exclusive link.
+    # Each caller stages inside the destination parent; never use a copy fallback.
+    if os.name == 'nt':
+        os.rename(staged, output)
+    else:
+        os.link(staged, output)
+
 def create(source, output):
     source = source.resolve()
     output = output.absolute()
@@ -67,10 +78,7 @@ def create(source, output):
             raise ValueError('Source references changed during capture')
         digest = checksum(bundle)
         size = bundle.stat().st_size
-        # Exclusive hard link publishes only an already-verified complete bundle.
-        # Unsupported filesystems fail safely; existing paths are never overwritten.
-        bundle.chmod(0o600)
-        os.link(bundle, output)
+        publish_new(bundle, output)
         if checksum(output) != digest:
             raise ValueError('Published local bundle verification failed')
     return {'schemaVersion': 1, 'head': original_head, 'refCount': len(before),
