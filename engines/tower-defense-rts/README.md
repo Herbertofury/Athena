@@ -33,3 +33,9 @@ Open `http://127.0.0.1:8080/`. PowerShell users can substitute `Copy-Item` for `
 Run as before for **Classic**. To explicitly enable the first run-local post-wave draft, launch `cargo run --locked --offline --release --bin outpost -- --run 431` (choose an unsigned seed). At the end of the first wave, pick one offered reward with `choose OFFER OPTION`; the battle will not advance until you choose. No permanent rewards or account/profile data are written.
 
 In either mode, use `checkpoint` and keep the one-line code. Relaunch with the same mode and seed, and type `resume CODE`. The versioned code stores accepted inputs and reconstructs the current battle, including a pending offer or squad movement. It does not contain a file path or write user files. Invalid or incompatible codes do not replace your current battle. The browser preview exposes the same controls under **Mode and checkpoints**. Classic is the default; choose Run draft, enter the same unsigned seed, and select Start selected mode before resuming a Run code. A code can move between the terminal and browser. Nothing is uploaded or saved automatically.
+
+## Portable one-file browser preview
+
+The Outpost CI run can provide an **outpost-portable-browser-playtest** artifact after its real browser acceptance tests. Download it, extract `Outpost.html`, and open the file in a modern browser. The file embeds the Rust module and all presentation assets; it uses no account, network, installation, server, or automatic save. Classic is still the initial mode and checkpoint codes are portable between hosts.
+
+To rebuild the identical format locally, compile the WebAssembly target as above, then run `python browser/package_standalone.py Outpost.html`. Generation does not fetch any packages itself. The HTML is not a permanent Athena app release.
