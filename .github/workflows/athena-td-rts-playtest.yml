@@ -48,3 +48,12 @@ jobs:
       - run: npm ci
       - run: npx --no-install playwright install --with-deps chromium
       - run: node engines/tower-defense-rts/browser/browser-test.mjs
+      - name: Build the exact portable browser artifact
+        run: python3 engines/tower-defense-rts/browser/package_standalone.py Outpost.html
+      - name: Verify cold offline file play, checkpoint reload, and mode isolation
+        run: node engines/tower-defense-rts/browser/browser-test.mjs Outpost.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: outpost-portable-browser-playtest
+          path: Outpost.html
+          if-no-files-found: error
