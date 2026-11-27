@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Outpost | Athena Engine Foundry</title><link rel="stylesheet" href="outpost.css"><script type="module" src="outpost.mjs"></script>
+</head><body>
+<main><header><div class="brand">ENGINE FOUNDRY <span>/ PLAYTEST 01</span></div>
+<h1>Outpost</h1><p>Hold both lanes through three waves. Take the guarded outpost for triple ore, or keep your squad home and fortify.</p></header>
+<section class="readout" aria-label="Battle status"><div>TURN<strong id="turn">0</strong></div><div>ORE<strong id="ore">—</strong></div><div>BASTION<strong id="base">—</strong></div><div>NEXT WAVE<strong id="wave">—</strong></div></section>
+<div class="battle">
+<section class="map"><h2>Field map</h2><div id="board" aria-label="Field map tiles"></div><p class="legend">◆ Bastion · ◉ Outpost · + Build pad · ● Squad · ▲ Invader</p></section>
+<section class="orders"><h2>Orders</h2>
+<div class="tools" role="group" aria-label="Select an order">
+<button type="button" data-mode="0" aria-pressed="true">Move squad</button>
+<button type="button" data-mode="1" aria-pressed="false">Bolt · 7 ore</button>
+<button type="button" data-mode="2" aria-pressed="false">Pulse · 10 ore</button></div>
+<p id="selection">Loading the simulation…</p>
+<button type="button" id="issue" class="commit" disabled>Issue order</button>
+<div class="time" aria-label="Advance turns"><button type="button" data-wait="1">+1 turn</button><button type="button" data-wait="5">+5 turns</button></div>
+<p id="status" role="status">Starting Outpost…</p>
+<button type="button" id="restart">Restart skirmish</button></section>
+</div><footer>Turn-stepped offline playtest · Rust simulation shared with the terminal build</footer></main>
+</body></html>
