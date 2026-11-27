@@ -24,7 +24,7 @@ class DestinationTests(unittest.TestCase):
      with patch.object(launch.subprocess,'run') as run:self.assertRaises(FileExistsError,self.invoke,mode);run.assert_not_called()
      self.assertFalse(self.output.exists());self.assertEqual(side.read_bytes(),b'preserve')
   self.assertEqual(self.source.read_bytes(),self.before)
- def test_late_destination_family_refused_before_link(self):
+ def test_late_destination_family_refused_before_publication(self):
   original=subprocess.run
   for mode in ('create','backup','upgrade'):
    for suffix in ('-wal','-shm','-journal'):
@@ -36,11 +36,26 @@ class DestinationTests(unittest.TestCase):
       if command=='init':staged.write_bytes(self.before)
       if command=='status':side.write_bytes(b'late state')
       return subprocess.CompletedProcess(args,0,json.dumps({'schema':15,'integrity':'ok'}).encode(),b'')
-     with patch.object(launch.subprocess,'run',side_effect=run),patch.object(launch.os,'link') as link:
-      self.assertRaises(FileExistsError,self.invoke,mode);link.assert_not_called()
+     with patch.object(launch.subprocess,'run',side_effect=run),patch.object(launch,'publish_new') as publish:
+      self.assertRaises(FileExistsError,self.invoke,mode);publish.assert_not_called()
      self.assertFalse(self.output.exists());self.assertEqual(side.read_bytes(),b'late state')
      self.assertEqual(self.source.read_bytes(),self.before)
   self.assertEqual(list(self.root.glob('.athena-*')),[])
+ def test_exclusive_publish_creates_complete_target_without_touching_source(self):
+  staged=self.root/'staged.sqlite'
+  staged.write_bytes(self.before)
+  launch.publish_new(staged,self.output)
+  self.assertEqual(self.output.read_bytes(),self.before)
+  self.assertEqual(self.source.read_bytes(),self.before)
+ def test_exclusive_publish_refuses_file_created_after_preflight(self):
+  staged=self.root/'staged.sqlite'
+  staged.write_bytes(self.before)
+  launch.destination_clear(self.output)
+  self.output.write_bytes(b'other application won the name')
+  with self.assertRaises(FileExistsError):launch.publish_new(staged,self.output)
+  self.assertEqual(self.output.read_bytes(),b'other application won the name')
+  self.assertEqual(staged.read_bytes(),self.before)
+  self.assertEqual(self.source.read_bytes(),self.before)
  def test_dangling_sidecar_preserved(self):
   side=pathlib.Path(str(self.output)+'-shm')
   try:side.symlink_to(self.root/'missing')

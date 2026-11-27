@@ -19,14 +19,14 @@ class FirstRunTests(unittest.TestCase):
    with self.assertRaises(subprocess.TimeoutExpired):self.create()
   self.assertFalse(self.target.exists());self.assertEqual(sentinel.read_text(),'keep');self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
  def test_racing_target_never_overwritten(self):
-  actual_link=os.link
+  actual_publish=launch.publish_new
   def race(source,target):
-   self.target.write_bytes(b'OTHER WRITER');return actual_link(source,target)
-  with patch.object(launch.os,'link',side_effect=race):
+   self.target.write_bytes(b'OTHER WRITER');return actual_publish(source,target)
+  with patch.object(launch,'publish_new',side_effect=race):
    with self.assertRaises(FileExistsError):self.create()
   self.assertEqual(self.target.read_bytes(),b'OTHER WRITER');self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
- def test_unsupported_hardlinks_refuse_without_target(self):
-  with patch.object(launch.os,'link',side_effect=OSError('unsupported')):
+ def test_exclusive_publication_failure_refuses_without_target(self):
+  with patch.object(launch,'publish_new',side_effect=OSError('unsupported')):
    with self.assertRaises(OSError):self.create()
   self.assertFalse(self.target.exists());self.assertEqual(list(self.root.glob('.athena-first-run-*')),[])
  def test_missing_parent_internal_path_and_symlink_refused(self):
