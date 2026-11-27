@@ -14,6 +14,16 @@ def destination_clear(destination):
     if any(os.path.lexists(str(destination)+suffix) for suffix in ('','-wal','-shm','-journal')):
         raise FileExistsError('Destination database or sidecar exists; preserve it and choose a new name')
 
+def publish_new(staged,destination):
+    """Publish a verified staged file without ever replacing an existing target."""
+    # The callers stage on the destination volume. On Windows rename refuses
+    # an existing target and needs no hard links; on POSIX rename overwrites.
+    if os.name=='nt':
+        os.rename(staged,destination)
+    else:
+        os.link(staged,destination)
+
+
 def portable_name(name):
     if not isinstance(name,str) or not name or len(name)>512 or any(ord(c)<32 or ord(c)>126 for c in name):return False
     relative=pathlib.PurePosixPath(name)
@@ -104,10 +114,8 @@ def create_database(root,data,destination):
         status=json.loads(run('status'))
         if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Native setup verification failed')
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
-        # Exclusive publication, unlike rename which can replace an existing target.
-        # If hard links are unsupported, refuse rather than degrade to overwrite/copy.
         destination_clear(destination)
-        os.link(staged,destination)
+        publish_new(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
 def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
@@ -142,7 +150,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         payload=staged.read_bytes();final_sha=hashlib.sha256(payload).hexdigest()
         if not upgrade and final_sha!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
         destination_clear(destination)
-        os.link(staged,destination)
+        publish_new(staged,destination)
     return {'backed_up':True,'upgraded_copy':upgrade,'source_schema':original_schema,'schema':status['schema'],'integrity':'ok','bytes':len(payload),
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
