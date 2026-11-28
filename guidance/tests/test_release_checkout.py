@@ -31,6 +31,21 @@ class ReleaseCheckoutTests(unittest.TestCase):
     def test_valid_receipt(self):
         self.assertEqual(validate(receipt(), HEAD), [])
 
+    def test_affine_canvas_evidence_required_only_when_used(self):
+        r = receipt()
+        docs = r["checks"]["documentation_closeout"]
+        self.assertEqual(validate(r, HEAD), [])
+        canvas = {"source_commit": "f" * 40, "reading_order_evidence": "linear check",
+                  "export_readback_evidence": "checked export", "wiki_parity_evidence": "source match"}
+        docs["affine_canvas"] = canvas
+        self.assertEqual(validate(r, HEAD), [])
+        for field in canvas:
+            docs["affine_canvas"] = {key: value for key, value in canvas.items() if key != field}
+            with self.subTest(field=field):
+                self.assertTrue(any("AFFiNE canvas" in x for x in validate(r, HEAD)))
+        docs["affine_canvas"] = None
+        self.assertTrue(any("AFFiNE canvas" in x for x in validate(r, HEAD)))
+
     def test_wrong_head(self):
         self.assertTrue(validate(receipt(), "c" * 40))
 
