@@ -28,6 +28,10 @@ Every release receipt must explicitly list all older-version holds (an empty lis
 
 Consult the [existing reusable-package coordination policy](../docs/REUSABLE-PACKAGE-COORDINATION.md) and [capability routing index](registry/shared-capabilities.json) before adding a new implementation. Link to existing source and benchmark evidence, coordinate ownership, contribute improvements back to Athena and verify each consuming project independently. No forced fleet migration or new standalone tracking system.
 
+## Shared browser and site-adapter adoption
+
+Apply the [Shared Browser Core and Site Adapter Standard](BROWSER_AND_SITE_ADAPTER_STANDARD.md) to standalone or embedded browsers, scraping routes, provider adapters and transfers. Extend M1 rather than setting up another system.
+
 ## Continuous acquisition research
 
 Start with Ghost Downloader 3 and Firecrawl. Maintain a shared candidate catalog with exact upstream links, version channels, documented interfaces, platform support, license/redistribution terms, portable configuration and state, known limits, and measured versus advertised capabilities.
