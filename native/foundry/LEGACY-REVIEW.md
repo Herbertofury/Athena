@@ -15,7 +15,9 @@ preserve the original plus any recovery files. The same Windows/POSIX
 exclusive publication rules and existing Python SQLite WAL qualification
 apply. The second operation checks the exact reviewed bytes before starting,
 uses a private staging folder, and requires a standalone current Athena
-database before publishing. Existing files and live profiles are not replaced.
+database before publishing. Before publishing, Athena reopens the new database and compares every supported
+soundtrack field by exact theme and room, including original second-resolution
+timestamps and unset millisecond precision. Existing files and live profiles are not replaced.
 The report identifies that the importer is partial. Skipped original history,
 custom records, media fidelity, the owner's original data and source retirement
 are separate checks. Report troubleshooting facts without publishing private data.

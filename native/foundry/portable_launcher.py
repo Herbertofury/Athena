@@ -238,6 +238,8 @@ def legacy_copy(root,data,source,destination,quiescent=False,expected=None,archi
             status=cli('status',imported)
             if status.get('schema')!=15 or status.get('integrity')!='ok' or status.get('soundtracks')!=report['soundtracks']:
                 raise ValueError('Prepared Athena profile failed integrity, schema or assignment check')
+            if cli('verify-legacy-soundtracks',staged,imported)!={'matched_soundtracks': report['soundtracks']} or checksum(staged)!=expected:
+                raise ValueError('Imported soundtracks did not reconcile with the reviewed snapshot')
             staged=imported
             observed=checksum(staged)
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):

@@ -452,19 +452,17 @@ pub struct LegacyReport {
     pub skipped_metadata_rows: i64,
     pub skipped_assignment_metadata_rows: usize,
 }
-fn open_standalone_legacy(path: &Path) -> Result<Connection> {
+fn open_standalone_query(path: &Path) -> Result<Connection> {
     // A quiescent standalone SQLite backup is required; never ignore uncheckpointed WAL.
     for suffix in ["-wal", "-shm", "-journal"] {
         let mut side = path.as_os_str().to_os_string();
         side.push(suffix);
         if Path::new(&side).exists() {
-            return Err(
-                "Legacy file has journal/WAL sidecars; provide a quiescent SQLite backup".into(),
-            );
+            return Err("File has journal/WAL sidecars; provide a quiescent SQLite backup".into());
         }
     }
     if std::fs::metadata(path)?.len() > 64 * 1024 * 1024 {
-        return Err("Legacy database exceeds 64 MiB pilot limit".into());
+        return Err("Database exceeds 64 MiB pilot limit".into());
     }
     // Read-only SQLite may still create shared-memory sidecars for a WAL-format file.
     // Refuse WAL headers even after checkpoint/close; never mutate the source to convert it.
@@ -472,12 +470,17 @@ fn open_standalone_legacy(path: &Path) -> Result<Connection> {
     std::io::Read::read_exact(&mut std::fs::File::open(path)?, &mut header)?;
     if &header[..16] != b"SQLite format 3\0" || header[18] != 1 || header[19] != 1 {
         return Err(
-            "Legacy source must be a standalone rollback-journal SQLite backup, not WAL format"
-                .into(),
+            "Database must be a standalone rollback-journal SQLite backup, not WAL format".into(),
         );
     }
     let db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY)?;
-    db.execute_batch("PRAGMA query_only=ON; PRAGMA trusted_schema=OFF; BEGIN;")?;
+    db.execute_batch("PRAGMA query_only=ON; PRAGMA trusted_schema=OFF;")?;
+    Ok(db)
+}
+
+fn open_standalone_legacy(path: &Path) -> Result<Connection> {
+    let db = open_standalone_query(path)?;
+    db.execute_batch("BEGIN;")?;
     require_ordinary_table(&db, "metadata")?;
     let version: String = db.query_row(
         "SELECT value FROM metadata WHERE key='schema_version'",
@@ -647,6 +650,40 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
 }
 pub fn inspect_legacy(path: &Path) -> Result<LegacyReport> {
     Ok(legacy_snapshot(path)?.0)
+}
+/// Verify every supported assignment against a reopened, upgraded fresh import.
+pub fn verify_legacy_soundtracks(source: &Path, imported: &Path) -> Result<usize> {
+    let (_, expected) = legacy_snapshot(source)?;
+    let db = open_standalone_query(imported)?;
+    require_ordinary_table(&db, "soundtracks")?;
+    let schema: i64 = db.query_row("PRAGMA user_version", [], |row| row.get(0))?;
+    if schema != 15 {
+        return Err("Imported soundtrack verification requires schema 15".into());
+    }
+    let actual = Store { db }.soundtrack_library()?;
+    let actual = actual
+        .iter()
+        .map(|entry| {
+            let value = entry
+                .value
+                .as_ref()
+                .ok_or("Imported soundtrack is missing")?;
+            let assignment = &value.assignment;
+            Ok((
+                (assignment.theme_id.as_str(), assignment.room_id.as_str()),
+                value,
+            ))
+        })
+        .collect::<Result<std::collections::BTreeMap<_, _>>>()?;
+    if actual.len() != expected.len()
+        || expected.iter().any(|value| {
+            let a = &value.assignment;
+            actual.get(&(a.theme_id.as_str(), a.room_id.as_str())) != Some(&value)
+        })
+    {
+        return Err("Imported soundtrack values do not match reviewed legacy rooms".into());
+    }
+    Ok(expected.len())
 }
 /// Explicit source -> new destination only. Catalog content always comes from reviewed Athena data.
 pub fn import_legacy(source: &Path, destination: &Path) -> Result<LegacyReport> {

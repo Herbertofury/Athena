@@ -222,6 +222,10 @@ fn run() -> Result<()> {
         "inspect-legacy" if args.len() == 3 => {
             println!("{}", serde_json::to_string(&inspect_legacy(p)?)?)
         }
+        "verify-legacy-soundtracks" if args.len() == 4 => {
+            let count = athena_foundry_store::verify_legacy_soundtracks(p, Path::new(&args[3]))?;
+            println!("{}", serde_json::json!({"matched_soundtracks": count}));
+        }
         "import-legacy" if args.len() == 4 => println!(
             "{}",
             serde_json::to_string(&import_legacy(p, Path::new(&args[3]))?)?
