@@ -17,7 +17,19 @@ class PreservationProof(unittest.TestCase):
         self.assertEqual((result["restoredRefs"], result["restoredCommits"], result["sourcePathsVerified"]), (3, 10, 100))
         self.assertEqual(result["originalSourceZipFilesVerified"], 98)
         self.assertEqual(result["releaseAssetsVerified"] + len(result["missingReleaseAssets"]), 6)
+        self.assertEqual(len(result["outsideCheckout"]), 2)
+        self.assertEqual(result["privateReleaseAssetsVerified"], 0)
         self.assertIs(result["retirementCertified"], False)
+
+    def test_opt_in_requires_exact_private_originals(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            wrong = directory / "Feature-Foundry-v24.0.0-complete-release.zip"
+            # A same-sized placeholder must fail the pinned digest, not be counted.
+            with wrong.open("wb") as handle:
+                handle.truncate(11716663)
+            with self.assertRaisesRegex(ValueError, "wrong checksum"):
+                checker.verify(private_release_dir=directory)
 
     def test_same_size_changed_artifact_refused(self):
         with tempfile.TemporaryDirectory() as temp:
