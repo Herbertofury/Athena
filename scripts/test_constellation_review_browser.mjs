@@ -143,7 +143,13 @@ try {
   const saveRecipe=page.getByRole('button',{name:'Save private staging recipe',exact:true});
   await saveRecipe.click();
   await page.getByText(/Select 1–24 rows/).waitFor();
-  await page.getByRole('group',{name:'2. Workspace example',exact:true}).getByRole('checkbox').check();
+  const secondWorkspace=page.getByRole('group',{name:'2. Workspace example',exact:true});
+  assert.equal(await page.getByText('workspace-b',{exact:true}).count(),0);
+  await secondWorkspace.getByText('Show source identifier',{exact:true}).click();
+  await secondWorkspace.getByText('workspace-b',{exact:true}).waitFor();
+  await secondWorkspace.getByText('Show source identifier',{exact:true}).click();
+  await secondWorkspace.getByText('workspace-b',{exact:true}).waitFor({state:'detached'});
+  await secondWorkspace.getByRole('checkbox').check();
   await page.getByLabel('Stage for project 2',{exact:true}).selectOption('research');
   await page.getByLabel('Ownership for project 2',{exact:true}).selectOption('followed');
   const [recipe]=await Promise.all([page.waitForEvent('download'),saveRecipe.click()]);
