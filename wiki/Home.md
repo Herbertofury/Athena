@@ -67,3 +67,7 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 ## Game engines
 
 - [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+## Shared application cores
+
+- [Feed and ticker cores](Shared-Feed-Cores)

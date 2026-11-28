@@ -1,0 +1,50 @@
+name: Shared feed and ticker cores
+on:
+  pull_request:
+    paths: ['cores/**', '.github/workflows/shared-feed-cores.yml']
+  push:
+    branches: [main]
+    paths: ['cores/**', '.github/workflows/shared-feed-cores.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '31 6 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: shared-feed-cores-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['24', '26']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14'
+      - name: Verify JS contracts and lifecycle
+        run: node --test cores/feed-core/tests/*.test.cjs cores/ticker-core/tests/*.test.cjs
+      - name: Verify collector recovery contracts
+        run: python -m unittest discover -s cores/feed-core/python -p 'test_*.py'
+      - name: Measure equivalent complete ranking
+        run: node cores/feed-core/benchmark.cjs
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx --no-install playwright install --with-deps chromium --only-shell
+      - name: Verify real XML imports and accessible ticker lifecycle
+        run: node cores/browser-check.cjs
