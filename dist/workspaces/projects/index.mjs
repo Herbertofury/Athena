@@ -1,5 +1,5 @@
 import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions,createProjectReference} from './model.mjs';
-import {parseBackup,mergeBackup,MAX_IMPORT_BYTES} from './import.mjs';
+import {parseBackup,mergeBackup,prepareProjectImport,exportProjectsText,MAX_IMPORT_BYTES,STAGED_PROJECTS_KEY} from './import.mjs';
 const PAGE=24;
 export function mount({container,state,setState,search='',signal,theme='dark',readSavedProject}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'});let data,disposed=false,selected=null,editing=null,generation=0,review=null,portable=null,ownership='',stage='',archived=false,searchHistory=false;const urls=new Set();
@@ -202,7 +202,7 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
  function resetList(){limit=PAGE;render();}
  $('#history-search').onchange=e=>{searchHistory=e.target.value==='history';resetList();};
  $('#ownership').onchange=e=>{ownership=e.target.value;resetList();};$('#stage').onchange=e=>{stage=e.target.value;resetList();};$('#archived').onclick=()=>{archived=!archived;$('#archived').textContent=archived?'Show active':'Show archived';resetList();};
- $('#export').onclick=()=>{if(!data||disposed)return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));urls.add(url);const a=el('a');a.href=url;a.download='athena-projects.json';a.click();};
+ $('#export').onclick=()=>{if(!data||disposed)return;const url=URL.createObjectURL(new Blob([exportProjectsText(data)],{type:'application/json'}));urls.add(url);const a=el('a');a.href=url;a.download='athena-projects.json';a.click();};
  function clearReview(){review=null;$('#backup-review').hidden=true;$('#backup-projects').replaceChildren();}
  $('#backup-cancel').onclick=()=>{generation++;clearReview();notice.textContent='Backup import canceled. Nothing was saved.';$('#import').focus();};
  $('#backup-confirm').onclick=()=>{
@@ -225,17 +225,20 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
   const before=data;
   try{
    if(file.size>MAX_IMPORT_BYTES)throw Error('Backup exceeds 16 MiB');
-   const incoming=parseBackup(new Uint8Array(await file.arrayBuffer()));
+   const parsed=parseBackup(new Uint8Array(await file.arrayBuffer()));
+   if(disposed||token!==generation)return;
+   const {incoming,staged}=Object.hasOwn(parsed,STAGED_PROJECTS_KEY)?await prepareProjectImport(parsed,before,committed):{incoming:parsed,staged:false};
    if(disposed||token!==generation)return;
    if(data!==before)throw Error('Projects changed while reading the backup. Choose it again.');
    const merged=mergeBackup(before,incoming);
    if(JSON.stringify(merged.data)===JSON.stringify(before)){notice.textContent='This backup adds nothing. Nothing was saved.';return;}
    const ids=new Set(before.entries.map(project=>project.id));
    const metadata=Object.keys(merged.data).filter(key=>!Object.hasOwn(before,key));
-   $('#backup-summary').textContent=`${merged.added} new projects · ${merged.unchanged} identical · ${metadata.length} new backup metadata fields. Existing projects will not be replaced.`;
+   $('#backup-summary').textContent=`${staged?'Staged Constellation destination verified. ':''}${merged.added} new projects · ${merged.unchanged} identical · ${metadata.length} new backup metadata fields. Existing projects will not be replaced.`;
    for(const project of merged.data.entries)if(!ids.has(project.id)){
-    const title=project.revisions.at(-1).name;
-    $('#backup-projects').append(el('li',project.archived?title+' (archived)':title));
+    const latest=project.revisions.at(-1), title=latest.name;
+    const label=staged?`${title} · ${latest.ownership==='own'?'My project':'Following'} · ${latest.stage} · ${savedDate(latest.at)} · ${project.id.slice(17,29)}`:project.archived?title+' (archived)':title;
+    $('#backup-projects').append(el('li',label));
    }
    review={before,merged};$('#backup-review').hidden=false;notice.textContent='Backup ready for review. Nothing has been saved.';
    $('#backup-confirm').focus();
