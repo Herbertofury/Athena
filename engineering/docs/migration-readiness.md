@@ -61,13 +61,22 @@ does not import or restore content, or certify a source for deletion.
 To create the private recipe without hand-editing JSON, first review the
 saved export locally. Then choose **Show eligible workspace projects**.
 Select 1–24 rows explicitly and choose each stage and ownership. The selector
-shows at most the first 128 eligible rows in export order; the CLI can stage
-later rows when their IDs are known. Select a fresh **Export projects** download
+shows at most 128 rows at a time. Use **Search projects** to match any eligible
+title in the export before applying that display limit. Choices carry across
+searches by exact source ID; **Review selected projects** lists all of them
+even when a query hides their rows. Select a fresh **Export projects** download
 and save the recipe. Only workspace names, IDs and timestamps reach the
 local selector, never descriptions or chats. The destination is validated and
 hashed in the browser, not uploaded. The recipe contains selected source IDs
 and fingerprints; keep it private. The initial count review still omits these
 details. Selecting another backup clears the displayed candidates and draft.
+
+For an all-visual path, **Build local import candidate** sends the exact chosen
+export and destination to the same local process, using the native staging
+validator without temporary server files. Only then does the browser request
+a download. No online service is called; ordinary recipe-only export still
+does not send the destination anywhere. Review the candidate separately via
+Projects' **Import backup** before anything is saved.
 
 Use `atlas-lab stage-constellation-projects EXPORT RECIPE CURRENT_PROJECTS NEW_CANDIDATE`
 with stopped, local copies. To pin inputs, use the SHA-256 of the exact selected
