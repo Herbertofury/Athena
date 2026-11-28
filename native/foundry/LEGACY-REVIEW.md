@@ -50,3 +50,11 @@ to an active profile; soundtrack assignments, other tables and referenced media
 files are not included. The seven-family output uses archive schema 2. Keep the reviewed source and any
 associated files. Malformed input, a changed source hash or an existing output
 is refused, with no replacement.
+
+
+Open **Migration readiness → Feature Foundry → Review an original catalog
+archive** in the local Athena package to browse an unchanged archive. The
+viewer searches a selected family and checks the original JSON fingerprint
+before opening any record. Both supported archive schemas remain readable.
+It reads the file in the current browser only, does not write it back, and
+cannot activate anything.
