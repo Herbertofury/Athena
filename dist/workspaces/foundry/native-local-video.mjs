@@ -1,7 +1,7 @@
 // One existing HTMLVideoElement; never copy, replace, restart or reparent the source.
 function createVideoPopout({ frame, button, returnButton, status, resolveVideo, observeMedia = true, onChange = () => {} }) {
  const doc = frame.ownerDocument;
- let item = null, mode = 'inline', pending = false, disposed = false, priorFocus = null;
+ let item = null, mode = 'inline', pending = false, disposed = false, priorFocus = null, closing = null;
  const canRun = v => !!v && !v.error && v.readyState >= 1 && v.videoWidth > 0;
 
  function paint() {
@@ -9,7 +9,7 @@ function createVideoPopout({ frame, button, returnButton, status, resolveVideo, 
   button.hidden = mode !== 'inline';
   button.disabled = pending || !canRun(item);
   returnButton.hidden = mode === 'inline';
-  returnButton.disabled = pending;
+  returnButton.disabled = pending || closing !== null;
   onChange(mode, pending);
  }
  const describe = text => { status.textContent = text; };
@@ -25,13 +25,13 @@ function createVideoPopout({ frame, button, returnButton, status, resolveVideo, 
   if (next === 'dock') returnButton.focus();
  }
  function inline(text, restore = true) {
-  mode = 'inline'; paint();
+  closing = null; mode = 'inline'; paint();
   if (text) describe(text);
   if (restore) focusBack(); else priorFocus = null;
  }
  function onEnter(e) { if (!disposed && item === e.currentTarget) enter('native'); }
  function onLeave(e) {
-  if (!disposed && item === e.currentTarget && mode === 'native') inline('Video returned. Playback unchanged.');
+  if (!disposed && item === e.currentTarget && mode === 'native' && doc.pictureInPictureElement !== item) inline('Video returned. Playback unchanged.');
  }
  function disconnect() {
   if (!item) return;
@@ -39,7 +39,7 @@ function createVideoPopout({ frame, button, returnButton, status, resolveVideo, 
   item.removeEventListener('leavepictureinpicture', onLeave);
   if (observeMedia) for (const ev of ['loadedmetadata', 'emptied', 'error']) item.removeEventListener(ev, paint);
   // Do not close another player’s pop-out or change playback.
-  if (doc.pictureInPictureElement === item) {
+  if (doc.pictureInPictureElement === item && closing?.video !== item) {
    try { Promise.resolve(doc.exitPictureInPicture?.()).catch(() => {}); } catch {}
   }
  }
@@ -76,12 +76,23 @@ function createVideoPopout({ frame, button, returnButton, status, resolveVideo, 
   if (!disposed && item === video) enter('dock');
  }
  async function close() {
-  if (disposed || pending || mode === 'inline') return;
+  if (disposed || pending || closing || mode === 'inline') return;
   if (mode === 'native' && doc.pictureInPictureElement === item) {
+   const attempt = { video: item };
+   closing = attempt; paint();
+   const stillOwns = () => !disposed && closing === attempt && item === attempt.video && mode === 'native';
    try { await doc.exitPictureInPicture(); }
-   catch { if (!disposed && mode === 'native') describe('Close the floating window using its own controls.'); return; }
+   catch {
+    if (stillOwns()) {
+     closing = null; paint();
+     describe('Close the floating window using its own controls.');
+    }
+    return;
+   }
+   // A native leave event may already have returned this video, or a new video may own the UI.
+   if (!stillOwns()) return;
   }
-  if (!disposed && mode !== 'inline') inline('Video returned. Playback unchanged.');
+  inline('Video returned. Playback unchanged.');
  }
  function key(e) { if (mode === 'dock' && e.key === 'Escape' && !e.defaultPrevented && !e.repeat) { e.preventDefault(); void close(); } }
  button.addEventListener('click', open);
