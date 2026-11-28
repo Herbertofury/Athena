@@ -45,7 +45,7 @@ test('new workspace is connected to main navigation and reviewed public runtime'
   assert.match(fs.readFileSync('dist/index.html', 'utf8'), /href="#software" data-nav="software"/);
   assert.match(fs.readFileSync('dist/app.js', 'utf8'), /import\('\.\/workspaces\/software\/index.mjs'\)/);
   const allow = JSON.parse(fs.readFileSync('config/runtime-public-preview.json'));
-  for (const name of ['catalog.json', 'index.mjs', 'model.mjs', 'style.css']) {
+  for (const name of ['catalog.json', 'index.mjs', 'model.mjs', 'style.css', 'recommendations.mjs', 'repository-recommendations.json']) {
     const file = 'workspaces/software/' + name;
     const actual = require('node:crypto').createHash('sha256').update(fs.readFileSync('dist/' + file)).digest('hex');
     assert.equal(allow.files.find(x => x.path === file)?.sha256, actual, file);
