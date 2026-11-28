@@ -646,6 +646,7 @@ pub mod version_experiment_runner;
 
 pub mod build_identity;
 pub mod constellation_review;
+mod constellation_review_ui;
 pub mod continuity_archive;
 
 pub(crate) mod public_http;

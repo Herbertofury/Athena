@@ -81,6 +81,8 @@ jobs:
         run: python -m unittest discover -s tools/foundry-recovery/music -v
       - name: Install Chromium for real native-profile UI checks
         run: npx playwright install chromium
+      - name: Browser review of a local Constellation backup in the exact extracted package
+        run: node scripts/test_constellation_review_browser.mjs candidate-extracted
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
       - name: Unified Lab and Foundry browser acceptance
