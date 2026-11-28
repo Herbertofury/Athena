@@ -2,6 +2,7 @@
 """Verify retained Atlas source completeness without claiming product acceptance."""
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 import subprocess
@@ -10,10 +11,47 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = Path('migration/engineering-atlas/cutover-2026-11-13')
 
+def inspect_git(directory, *args):
+    env = {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
+    env.update(GIT_ALLOW_PROTOCOL='file', GIT_TERMINAL_PROMPT='0',
+               GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL=os.devnull,
+               GIT_OPTIONAL_LOCKS='0')
+    return subprocess.run(['git', '-C', str(directory), *args], check=True, env=env,
+                          capture_output=True, timeout=45).stdout
+
+
+def stage_bundle(source, destination, record):
+    size, digest = record['bytes'], record['sha256']
+    if (type(size) is not int or not 0 < size <= 32 * 1024 * 1024
+            or not isinstance(digest, str) or not re.fullmatch(r'[0-9a-f]{64}', digest)
+            or source.is_symlink() or not source.is_file() or source.stat().st_size != size):
+        raise ValueError('Retained bundle size or checksum metadata mismatch')
+    with source.open('rb') as file:
+        data = file.read(size + 1)
+    if len(data) != size or hashlib.sha256(data).hexdigest() != digest:
+        raise ValueError('Retained bundle digest mismatch')
+    destination.write_bytes(data)
+
+
+def retained_refs(entries, *, wiki=False):
+    expected = {}
+    pattern = r'refs/(?:heads|tags)/[A-Za-z0-9._/-]+' if wiki else r'refs/(?:(?:heads|tags)/[A-Za-z0-9._/-]+|pull/[1-9][0-9]*/(?:head|merge))'
+    for entry in entries:
+        ref, oid = entry['ref'], entry['sha']
+        if (not re.fullmatch(pattern, ref) or not re.fullmatch(r'[0-9a-f]{40}', oid)
+                or ref in expected):
+            raise ValueError('Invalid or duplicate retained ref')
+        expected[ref] = oid
+    return expected
+
+
+def restored_refs(directory):
+    output = inspect_git(directory, 'for-each-ref', '--format=%(refname) %(objectname)')
+    return dict(row.split() for row in output.decode('ascii').splitlines())
+
+
 def source_tree(directory, revision):
-    entries = subprocess.check_output(
-        ['git', '-C', directory, 'ls-tree', '-r', '-z', '--full-tree', revision]
-    )
+    entries = inspect_git(directory, 'ls-tree', '-r', '-z', '--full-tree', revision)
     tree = {}
     for entry in entries.split(b'\0')[:-1]:
         metadata, path = entry.split(b'\t', 1)
@@ -38,19 +76,29 @@ def verify(root=ROOT, *, include_wiki=False):
             raise ValueError(f'Unresolved migration: {path}')
     # Current implementation can evolve. The source bytes and every source ref
     # must remain recoverable even after subsequent intentional destination edits.
-    bundle = root / 'migration/engineering-atlas/engineering-atlas-history.bundle'
-    with tempfile.TemporaryDirectory() as directory:
-        subprocess.run(['git','clone','--mirror',str(bundle),directory],check=True,capture_output=True)
-        subprocess.run(['git','-C',directory,'fetch',str(root / SNAPSHOT / 'history-delta.bundle'),'+refs/*:refs/*'],check=True,capture_output=True)
-        subprocess.run(['git','-C',directory,'fsck','--full'],check=True,capture_output=True)
-        refs = json.loads((root / SNAPSHOT / 'source-refs.json').read_text())
-        revision = manifest['source_revision']
-        if [row['sha'] for row in refs if row['ref'] == 'refs/heads/main'] != [revision]:
-            raise ValueError('Manifest revision does not match retained source main')
-        for ref in refs:
-            actual = subprocess.check_output(['git','-C',directory,'rev-parse',ref['ref']],text=True).strip()
-            if actual != ref['sha']:
-                raise ValueError(f'Ref mismatch: {ref["ref"]}')
+    archive = root / SNAPSHOT.parent
+    pins = json.loads((archive / 'file-manifest.json').read_text(encoding='utf-8'))['archives']
+    supplement = json.loads((root / SNAPSHOT / 'public-provenance.json').read_text(encoding='utf-8'))
+    refs = retained_refs(json.loads((root / SNAPSHOT / 'source-refs.json').read_text(encoding='utf-8')))
+    revision = manifest['source_revision']
+    if refs.get('refs/heads/main') != revision:
+        raise ValueError('Manifest revision does not match retained source main')
+    with tempfile.TemporaryDirectory() as tmp:
+        scratch = Path(tmp)
+        directory = scratch / 'source.git'
+        bundle = scratch / 'base.bundle'
+        delta = scratch / 'delta.bundle'
+        name = 'engineering-atlas-history.bundle'
+        stage_bundle(archive / name, bundle, pins[name])
+        stage_bundle(root / SNAPSHOT / 'history-delta.bundle', delta,
+                     dict(bytes=supplement['bundle_bytes'], sha256=supplement['bundle_sha256']))
+        inspect_git(scratch, '-c', 'core.hooksPath=' + os.devnull, 'clone', '--mirror', '--', str(bundle), str(directory))
+        inspect_git(directory, 'bundle', 'verify', str(bundle))
+        inspect_git(directory, 'bundle', 'verify', str(delta))
+        inspect_git(directory, 'fetch', str(delta), '+refs/*:refs/*')
+        inspect_git(directory, 'fsck', '--full', '--no-reflogs')
+        if restored_refs(directory) != refs:
+            raise ValueError('Restored ref set or identity differs from the complete inventory')
         tracked = source_tree(directory, revision)
         if tracked.keys() != {path.encode('utf-8') for path in seen}:
             raise ValueError('Source tree inventory mismatch')
@@ -58,7 +106,7 @@ def verify(root=ROOT, *, include_wiki=False):
             oid = tracked[row['source_path'].encode('utf-8')]
             if oid != row['source_blob']:
                 raise ValueError(f'Source path/blob mismatch: {row["source_path"]}')
-            data = subprocess.check_output(['git','-C',directory,'cat-file','blob',oid])
+            data = inspect_git(directory, 'cat-file', 'blob', oid)
             if len(data) != row['bytes']:
                 raise ValueError(f'Source byte count mismatch: {row["source_path"]}')
             if hashlib.sha256(data).hexdigest() != row['source_sha256']:
@@ -87,36 +135,31 @@ def verify_wiki(root=ROOT, *, verified_source):
     """Compare the pinned source Wiki and separately preserved App Study pages."""
     archive = root / SNAPSHOT.parent
     pinned = json.loads((archive / 'wiki-refs.json').read_text(encoding='utf-8'))
-    expected = {}
-    for entry in pinned:
-        ref, oid = entry['ref'], entry['sha']
-        if (not re.fullmatch(r'refs/(?:heads|tags)/[A-Za-z0-9._/-]+', ref)
-                or not re.fullmatch(r'[0-9a-f]{40}', oid) or ref in expected):
-            raise ValueError('Invalid or duplicate Wiki ref')
-        expected[ref] = oid
+    expected = retained_refs(pinned, wiki=True)
     revision = expected.get('refs/heads/master')
     if not revision:
         raise ValueError('Missing retained Wiki master ref')
 
     wiki_hashes = {}
     snapshot = archive / 'wiki'
-    with tempfile.TemporaryDirectory() as directory:
-        bundle = archive / 'engineering-atlas-wiki-history.bundle'
-        subprocess.run(['git', 'clone', '--mirror', str(bundle), directory],
-                       check=True, capture_output=True)
-        subprocess.run(['git', '-C', directory, 'fsck', '--full'],
-                       check=True, capture_output=True)
-        restored = subprocess.check_output(
-            ['git', '-C', directory, 'for-each-ref', '--format=%(refname) %(objectname)'],
-            text=True)
-        if dict(row.split(' ') for row in restored.splitlines()) != expected:
+    with tempfile.TemporaryDirectory() as tmp:
+        scratch = Path(tmp)
+        directory = scratch / 'wiki.git'
+        name = 'engineering-atlas-wiki-history.bundle'
+        pins = json.loads((archive / 'file-manifest.json').read_text(encoding='utf-8'))['archives']
+        bundle = scratch / 'wiki.bundle'
+        stage_bundle(archive / name, bundle, pins[name])
+        inspect_git(scratch, '-c', 'core.hooksPath=' + os.devnull, 'clone', '--mirror', '--', str(bundle), str(directory))
+        inspect_git(directory, 'bundle', 'verify', str(bundle))
+        inspect_git(directory, 'fsck', '--full', '--no-reflogs')
+        if restored_refs(directory) != expected:
             raise ValueError('Retained Wiki refs do not match inventory')
 
         for raw_name, oid in source_tree(directory, revision).items():
             name = raw_name.decode('utf-8')
             if not name.endswith('.md') or wiki_page_path(name[:-3]) != name:
                 raise ValueError('Unexpected retained Wiki entry')
-            source = subprocess.check_output(['git', '-C', directory, 'cat-file', 'blob', oid])
+            source = inspect_git(directory, 'cat-file', 'blob', oid)
             if source != wiki_file(snapshot, name):
                 raise ValueError(f'Archived Wiki bytes differ from source: {name}')
             wiki_hashes[name] = hashlib.sha256(source).hexdigest()

@@ -9,6 +9,11 @@ import unittest
 from scripts.verify_atlas_cutover import SNAPSHOT, verify, verify_wiki
 
 
+def bundle_pin(path):
+    data = path.read_bytes()
+    return dict(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
+
+
 class CutoverRecovery(unittest.TestCase):
     def setUp(self):
         directory = self.enterContext(tempfile.TemporaryDirectory())
@@ -38,11 +43,23 @@ class CutoverRecovery(unittest.TestCase):
             'commit', '-qm', 'Fixture')
         self.revision = git('rev-parse', 'HEAD').decode()
         git('bundle', 'create', str(self.snapshot.parent / 'engineering-atlas-history.bundle'), '--all')
-        git('bundle', 'create', str(self.snapshot / 'history-delta.bundle'), '--all')
+        original = self.snapshot.parent / 'engineering-atlas-history.bundle'
+        delta = self.snapshot / 'history-delta.bundle'
+        git('bundle', 'create', str(delta), '--all')
+        self.source_git = git
+        self.delta = delta
+        (self.snapshot.parent / 'file-manifest.json').write_text(json.dumps(
+            {'archives': {original.name: bundle_pin(original)}}), encoding='utf-8')
+        self.pin_delta()
         (self.snapshot / 'source-refs.json').write_text(json.dumps([
             dict(ref='refs/heads/main', sha=self.revision)
         ]), encoding='utf-8')
         self.manifest = dict(source_revision=self.revision, files=rows)
+
+    def pin_delta(self):
+        record = bundle_pin(self.delta)
+        (self.snapshot / 'public-provenance.json').write_text(json.dumps(
+            dict(bundle_bytes=record['bytes'], bundle_sha256=record['sha256'])), encoding='utf-8')
 
     def run_verify(self):
         (self.snapshot / 'source-manifest.json').write_text(
@@ -52,6 +69,27 @@ class CutoverRecovery(unittest.TestCase):
 
     def test_binds_literal_git_paths_and_allows_evolved_destination(self):
         self.assertEqual(self.run_verify()['source_recovery'], 'verified')
+
+    def test_rejects_an_unlisted_retained_ref_in_a_valid_bundle(self):
+        self.source_git('branch', 'not-in-manifest')
+        self.source_git('bundle', 'create', str(self.delta), '--all')
+        self.pin_delta()
+        with self.assertRaisesRegex(ValueError, 'complete inventory'):
+            self.run_verify()
+
+    def test_rejects_duplicate_ref_metadata(self):
+        inventory = self.snapshot / 'source-refs.json'
+        rows = json.loads(inventory.read_text(encoding='utf-8'))
+        inventory.write_text(json.dumps(rows + rows), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'duplicate retained ref'):
+            self.run_verify()
+
+    def test_rejects_same_size_bundle_tampering_before_git_restore(self):
+        data = bytearray(self.delta.read_bytes())
+        data[-1] ^= 1
+        self.delta.write_bytes(data)
+        with self.assertRaisesRegex(ValueError, 'bundle digest mismatch'):
+            self.run_verify()
 
     def test_rejects_swapped_blob_with_matching_digest_and_size(self):
         left, right = self.manifest['files']
@@ -95,7 +133,10 @@ class WikiRecovery(unittest.TestCase):
         ref_path = self.archive / 'wiki-refs.json'
         self.refs = [{'ref': 'refs/heads/master', 'sha': git('rev-parse', 'HEAD').decode()}]
         ref_path.write_text(json.dumps(self.refs), encoding='utf-8')
-        git('bundle', 'create', str(self.archive / 'engineering-atlas-wiki-history.bundle'), '--all')
+        self.bundle = self.archive / 'engineering-atlas-wiki-history.bundle'
+        git('bundle', 'create', str(self.bundle), '--all')
+        (self.archive / 'file-manifest.json').write_text(json.dumps(
+            {'archives': {self.bundle.name: bundle_pin(self.bundle)}}), encoding='utf-8')
         (self.snapshot / 'Home.md').write_bytes(self.source_bytes)
 
         def digest(data):
@@ -130,6 +171,13 @@ class WikiRecovery(unittest.TestCase):
     def test_detects_altered_archive_page(self):
         (self.snapshot / 'Home.md').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError, 'Archived Wiki bytes differ'):
+            self.check()
+
+    def test_detects_changed_wiki_bundle_before_git_restore(self):
+        data = bytearray(self.bundle.read_bytes())
+        data[-1] ^= 1
+        self.bundle.write_bytes(data)
+        with self.assertRaisesRegex(ValueError, 'bundle digest mismatch'):
             self.check()
 
     def test_detects_changed_wiki_ref(self):
