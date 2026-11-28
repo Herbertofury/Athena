@@ -2,7 +2,7 @@ const $ = id => document.getElementById(id);
 const element = (tag, text) => Object.assign(document.createElement(tag), {textContent:text});
 const limit = 16 * 1024 * 1024;
 let job, result, reviewedFile, comparisonGeneration = 0;
-let projectJob, projectSelection, recipeGeneration = 0;
+let projectJob, candidateJob, projectSelection, recipeGeneration = 0;
 const label = key => key.replace(/([a-z])([A-Z])/g, '$1 $2').replaceAll('_', ' ').replace(/^./, c => c.toUpperCase());
 const count = n => n === null ? 'Not recorded' : typeof n === 'boolean' ? (n ? 'Yes' : 'No') : n.toLocaleString();
 const attention = s => s.retained === null || s.cap_reached || (s.omitted ?? 0) > 0;
@@ -199,12 +199,15 @@ const ownershipTypes = ['own','followed'];
 function clearProjectSelection() {
   projectJob?.abort();
   projectJob = projectSelection = undefined;
-  recipeGeneration++;
-  $('project-rows').replaceChildren();
+  invalidateCandidate();
+  for (const id of ['project-rows','picked-rows']) $(id).replaceChildren();
   $('project-recipe').reset();
-  $('project-recipe').hidden = true;
+  $('project-search').reset();
+  $('project-search').hidden = $('project-recipe').hidden = true;
+  $('project-picked').open = false;
+  $('picked-count').textContent = 'Review selected projects (0)';
   $('project-status').textContent = '';
-  $('load-projects').disabled = $('save-recipe').disabled = false;
+  $('load-projects').disabled = $('search-projects').disabled = false;
 }
 function choice(options, hint, accessibleName) {
   const select = document.createElement('select');
@@ -213,74 +216,137 @@ function choice(options, hint, accessibleName) {
   for (const [value,text] of options) select.append(new Option(text,value));
   return select;
 }
-$('load-projects').addEventListener('click', async () => {
-  if (projectJob || !reviewedFile || reviewedFile !== $('backup').files[0]) return;
-  clearProjectSelection();
+function updatePicked(view) {
+  $('picked-count').textContent = `Review selected projects (${view.selected.size})`;
+  const rows = [...view.selected.values()].map(p=>{
+    const row=element('li',`${p.name} · ${p.stage || 'Choose a stage'} · ${p.ownership || 'Choose ownership'} `);
+    const remove=element('button','Remove');remove.type='button';
+    remove.setAttribute('aria-label','Remove selected '+p.name+' · '+p.id);
+    remove.addEventListener('click',()=>{
+      view.selected.delete(p.id);
+      invalidateCandidate();
+      renderProjectRows(view);
+      $('picked-count').focus();
+    });
+    row.append(remove);return row;
+  });
+  $('picked-rows').replaceChildren(...rows);
+}
+function renderProjectRows(view) {
+  $('project-rows').replaceChildren(...view.projects.map((p,i)=>{
+    const row = document.createElement('fieldset');
+    const date = new Date(p.at);
+    row.append(element('legend',`${i+1}. ${p.name}`),element('p',
+      `Updated: ${Number.isFinite(date.getTime())?date.toISOString():p.at}`));
+    const check = document.createElement('input');check.type = 'checkbox';
+    const selection = element('label',' Include this workspace project');selection.prepend(check);
+    const stage = choice(stages.map(s=>[s,s]),'Choose a stage',`Stage for project ${i+1}`);
+    const ownership = choice([['own','My project'],['followed','Following']],'Choose ownership',`Ownership for project ${i+1}`);
+    const picked=view.selected.get(p.id);
+    check.checked=Boolean(picked);
+    stage.disabled = ownership.disabled = !picked;
+    stage.value=picked?.stage||'';ownership.value=picked?.ownership||'';
+    function preserveChoice() {
+      if (check.checked && !view.selected.has(p.id) && view.selected.size>=24) {
+        check.checked=false;
+        $('project-status').textContent='24 projects already selected. Remove a selection before adding another.';
+        return;
+      }
+      if (check.checked) view.selected.set(p.id,{id:p.id,name:p.name,stage:stage.value,ownership:ownership.value});
+      else view.selected.delete(p.id);
+      stage.disabled = ownership.disabled = !check.checked;
+      invalidateCandidate();
+      updatePicked(view);
+    }
+    check.addEventListener('change',preserveChoice);
+    for (const input of [stage,ownership]) input.addEventListener('change',preserveChoice);
+    const controls = document.createElement('p');controls.append(stage,' ',ownership);
+    const identity = document.createElement('details');
+    const idText = element('code','');
+    identity.append(element('summary','Show source identifier'),idText);
+    identity.addEventListener('toggle',()=>{idText.textContent=identity.open?p.id:'';});
+    row.append(selection,controls,identity);
+    return row;
+  }));
+  updatePicked(view);
+}
+async function listProjects(query='') {
+  if (!reviewedFile || reviewedFile !== $('backup').files[0]) return;
+  const term=new TextEncoder().encode(query);
+  if (term.length>512 || /[\u0000-\u001f\u007f-\u009f]/.test(query)) {
+    $('project-status').textContent='Use a shorter, single-line title search.';return;
+  }
+  projectJob?.abort();
   const file = reviewedFile, current = projectJob = new AbortController();
-  $('load-projects').disabled = true;
-  $('project-status').textContent = 'Looking for live workspace projects in the selected backup…';
+  const prev=projectSelection;
+  const head=new Uint8Array([term.length>>8,term.length&255]);
+  const option=query?'projects-search=1':'projects=1';
+  const body=query?new Blob([head,term,file]):file;
+  $('load-projects').disabled = $('search-projects').disabled = true;
+  $('project-status').textContent = query?'Searching all eligible projects in this backup…':'Looking for live workspace projects in the selected backup…';
   try {
-    const response = await fetch('/api/migration/constellation/review?projects=1',{
+    const response = await fetch('/api/migration/constellation/review?'+option,{
       method:'POST', headers:{'Content-Type':'application/octet-stream','X-Atlas-Request':'local-ui'},
-      body:file, signal:current.signal, redirect:'error', cache:'no-store'
+      body, signal:current.signal, redirect:'error', cache:'no-store'
     });
     if (current !== projectJob) return;
     if (!response.ok) throw Error('Unable to list projects for this backup.');
     const list = await response.json();
     if (current !== projectJob || file !== $('backup').files[0]) return;
     if (list.schema !== 'athena-constellation-project-selection-v1' || !hash(list.sourceSha256) ||
-        !nonnegative(list.eligible) || !nonnegative(list.notEligible) || !Array.isArray(list.projects) ||
-        list.projects.length !== Math.min(list.eligible,128) ||
+        !nonnegative(list.eligible) || !nonnegative(list.notEligible) || !nonnegative(list.matches) ||
+        list.matches>list.eligible || !Array.isArray(list.projects) ||
+        list.projects.length !== Math.min(list.matches,128) ||
         list.projects.some(p=>typeof p.id!=='string'||typeof p.name!=='string'||!nonnegative(p.at)))
       throw Error('Local project list could not be verified.');
-    const rows = list.projects.map((p,i)=>{
-      const row = document.createElement('fieldset');
-      const date = new Date(p.at);
-      row.append(element('legend',`${i+1}. ${p.name}`),element('p',
-        `Updated: ${Number.isFinite(date.getTime())?date.toISOString():p.at}`));
-      const check = document.createElement('input');check.type = 'checkbox';
-      const selection = element('label',' Include this workspace project');selection.prepend(check);
-      const stage = choice(stages.map(s=>[s,s]),'Choose a stage',`Stage for project ${i+1}`);
-      const ownership = choice([['own','My project'],['followed','Following']],'Choose ownership',`Ownership for project ${i+1}`);
-      stage.disabled = ownership.disabled = true;
-      check.addEventListener('change',()=>{
-        stage.disabled = ownership.disabled = !check.checked;
-        recipeGeneration++;$('save-recipe').disabled = false;
-      });
-      for (const input of [stage,ownership]) input.addEventListener('change',()=> {
-        recipeGeneration++;$('save-recipe').disabled = false;
-      });
-      const controls = document.createElement('p');controls.append(stage,' ',ownership);
-      const identity = document.createElement('details');
-      const idText = element('code','');
-      identity.append(element('summary','Show source identifier'),idText);
-      identity.addEventListener('toggle',()=>{idText.textContent=identity.open?p.id:'';});
-      row.append(selection,controls,identity);$('project-rows').append(row);
-      return {id:p.id,check,stage,ownership};
-    });
-    projectSelection = {file,sourceSha256:list.sourceSha256,rows};
-    $('project-recipe').hidden = !rows.length;
-    $('project-status').textContent = `${rows.length} of ${list.eligible} eligible projects shown. ${list.notEligible} records are not eligible.`+
-      (rows.length<list.eligible?' Use the native staging command to select eligible rows beyond this view.':'');
+    if(prev && prev.sourceSha256!==list.sourceSha256){
+      clearProjectSelection();
+      $('project-status').textContent='The backup changed. Review it again before making a new selection.';
+      return;
+    }
+    projectSelection = {file,sourceSha256:list.sourceSha256,projects:list.projects,selected:prev?.selected||new Map()};
+    invalidateCandidate();
+    renderProjectRows(projectSelection);
+    $('project-search').hidden = !list.eligible;
+    $('project-recipe').hidden = !list.eligible;
+    $('project-status').textContent = query
+      ? `${list.projects.length} of ${list.matches} matching projects shown. ${list.eligible} eligible total. ${projectSelection.selected.size} selected.`
+      : `${list.projects.length} of ${list.eligible} eligible projects shown. ${list.notEligible} records are not eligible.`+
+         (list.projects.length<list.eligible?' Search by title to find projects beyond this first list.':'');
   } catch {
-    if (current===projectJob) $('project-status').textContent = 'Project list refused or unavailable. Nothing was saved.';
+    if (current===projectJob) $('project-status').textContent = 'Project list refused or unavailable. No selection was changed.';
   } finally {
-    if (current===projectJob) {projectJob=undefined;$('load-projects').disabled=false;}
+    if (current===projectJob) {projectJob=undefined;$('load-projects').disabled=$('search-projects').disabled=false;}
   }
-});
+}
+$('load-projects').addEventListener('click', () => {$('project-query').value='';void listProjects();});
+$('project-search').addEventListener('submit',event=>{event.preventDefault();void listProjects($('project-query').value.trim());});
 $('clear-projects').addEventListener('click',()=>{
   clearProjectSelection();
   $('project-status').textContent='Project selection cleared. Nothing was imported.';
   $('load-projects').focus();
 });
 for (const id of ['project-destination','project-namespace']) $(id).addEventListener('input',()=>{
-  recipeGeneration++;$('save-recipe').disabled=false;
+  invalidateCandidate();
 });
+function setCandidateBusy(busy) {
+  $('save-recipe').disabled=$('build-candidate').disabled=busy;
+}
+function invalidateCandidate() {
+  recipeGeneration++;candidateJob?.abort();candidateJob=undefined;
+  setCandidateBusy(false);
+}
+function stageFrame(file, recipe, destination) {
+  const header=new Uint8Array(16), view=new DataView(header.buffer);
+  header.set([65,67,80,49]); // ACP1; lengths below are big endian.
+  [file.size,recipe.byteLength,destination.byteLength].forEach((n,i)=>view.setUint32(4*(i+1),n));
+  return new Blob([header,file,recipe,destination],{type:'application/octet-stream'});
+}
 $('project-recipe').addEventListener('submit',async event=>{
   event.preventDefault();
   const input = projectSelection, file = $('project-destination').files[0], namespace = $('project-namespace').value;
   if (!input || input.file!==$('backup').files[0]) return;
-  const selected = input.rows.filter(row=>row.check.checked).map(row=>({id:row.id,stage:row.stage.value,ownership:row.ownership.value}));
+  const selected = [...input.selected.values()].map(({id,stage,ownership})=>({id,stage,ownership}));
   if (!selected.length || selected.length>24 || selected.some(p=>!stages.includes(p.stage)||!ownershipTypes.includes(p.ownership))){
     $('project-status').textContent='Select 1–24 rows and explicitly set stage and ownership for each.';
     return;
@@ -289,30 +355,50 @@ $('project-recipe').addEventListener('submit',async event=>{
     $('project-status').textContent='Choose a current Projects export and a stable workspace label.';
     return;
   }
+  const build = event.submitter === $('build-candidate');
   const generation = ++recipeGeneration;
-  $('save-recipe').disabled = true;
+  setCandidateBusy(true);
   $('project-status').textContent = 'Checking the destination export in this browser…';
   try {
     const bytes = new Uint8Array(await file.arrayBuffer());
-    const {parseBackup} = await import('/workspaces/projects/import.mjs');
+    const {parseBackup, STAGED_PROJECTS_KEY} = await import('/workspaces/projects/import.mjs');
     const roster = parseBackup(bytes);
-    if (Object.hasOwn(roster,'athenaConstellationStage') || roster.entries.length+selected.length>100)
+    if (Object.hasOwn(roster,STAGED_PROJECTS_KEY) || roster.entries.length+selected.length>100)
       throw Error('Not a current destination export');
     const digest = await crypto.subtle.digest('SHA-256',bytes);
     if (generation!==recipeGeneration || input!==projectSelection || file!==$('project-destination').files[0]) return;
     const destinationSha256 = Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
     const payload = new TextEncoder().encode(JSON.stringify({schema:1,sourceSha256:input.sourceSha256,destinationSha256,namespace,selected},null,2)+'\n');
     if (payload.length > 32*1024) throw Error('Recipe size limit');
+    let download=payload, filename='athena-constellation-staging-recipe.json';
+    if (build) {
+      const controller=candidateJob=new AbortController();
+      $('project-status').textContent='Checking selected projects in your local Athena process…';
+      const response=await fetch('/api/migration/constellation/review?project-candidate=1',{
+        method:'POST',headers:{'Content-Type':'application/octet-stream','X-Atlas-Request':'local-ui'},
+        body:stageFrame(input.file,payload,bytes),signal:controller.signal,cache:'no-store',redirect:'error'
+      });
+      if (!response.ok) throw Error('The local engine refused this candidate');
+      download = new Uint8Array(await response.arrayBuffer());
+      if (download.byteLength>256*1024) throw Error('Unexpected candidate size');
+      const parsed=parseBackup(download);
+      if (parsed[STAGED_PROJECTS_KEY]?.destinationSha256!==destinationSha256 ||
+          parsed.entries.length!==selected.length) throw Error('Unexpected candidate');
+      filename = 'athena-constellation-project-candidate.json';
+    }
+    if (generation!==recipeGeneration || input!==projectSelection) return;
     const link=document.createElement('a');
-    const href=URL.createObjectURL(new Blob([payload],{type:'application/json'}));
+    const href=URL.createObjectURL(new Blob([download],{type:'application/json'}));
     link.href=href;
-    link.download='athena-constellation-staging-recipe.json';
+    link.download=filename;
     link.click();
     setTimeout(()=>URL.revokeObjectURL(href),1000);
-    $('project-status').textContent=`Recipe download requested for ${selected.length} selected project(s). Open it only in your local staging command.`;
+    $('project-status').textContent = build
+      ? `Candidate download requested for ${selected.length} project(s). Nothing was imported. Review it using Athena Projects’ Import backup.`
+      : `Recipe download requested for ${selected.length} selected project(s). Open it only in your local staging command.`;
   } catch {
-    if (generation===recipeGeneration) $('project-status').textContent='Recipe not saved. Check the destination backup and the selection size.';
+    if (generation===recipeGeneration) $('project-status').textContent=build?'Candidate not saved. Verify the selected source and destination before trying again.':'Recipe not saved. Check the destination backup and the selection size.';
   } finally {
-    if (generation===recipeGeneration) $('save-recipe').disabled=false;
+    if (generation===recipeGeneration) {candidateJob=undefined;setCandidateBusy(false);}
   }
 });
