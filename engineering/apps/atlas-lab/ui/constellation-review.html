@@ -20,6 +20,13 @@
 <div id="collections" class="layout"></div>
 <details><summary>References, artifact links and lifecycle counts</summary><dl id="details"></dl></details>
 <p id="hashes"></p><button type="button" id="save">Save count-only receipt</button>
+<details id="compare">
+<summary>Compare with a saved count-only receipt</summary>
+<p>See what changed since another review. The receipt stays in this browser. Counts are not proof that the underlying files match.</p>
+<p><label for="previous">Earlier Athena receipt</label> <input id="previous" type="file" accept=".json,application/json"></p>
+<button id="diff" type="button" disabled>Compare receipts</button>
+<p id="compare-status" role="status" aria-live="polite"></p><ul id="differences"></ul>
+</details>
 </section>
 <footer>This review does not certify restoration or deletion of the source.</footer></main>
 <script type="module" src="/migration/constellation/app.js"></script></body></html>

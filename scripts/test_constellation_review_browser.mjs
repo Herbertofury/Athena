@@ -71,6 +71,27 @@ try {
   let report=await save();
   assert.equal(report.exact_input_sha256,undefined);assert.equal(report.selected_gzip_sha256,undefined);
   assert.equal(report.slices.find(x=>x.kind==='events').retained,12000);
+  await page.getByText('Compare with a saved count-only receipt',{exact:true}).click();
+  const oldReport = structuredClone(report);
+  oldReport.slices.find(x=>x.kind==='events').omitted=0;
+  oldReport.slices.find(x=>x.kind==='groups').retained=0;
+  const compare = async value => {
+    await page.getByLabel('Earlier Athena receipt',{exact:true}).setInputFiles({
+      name:'private-receipt.json',mimeType:'application/json',
+      buffer:Buffer.from(typeof value==='string'?value:JSON.stringify(value,null,2)+'\n')
+    });
+    await page.getByRole('button',{name:'Compare receipts',exact:true}).click();
+  };
+  await compare(oldReport);
+  await page.getByText('Events / Omitted: 0 → 1',{exact:true}).waitFor();
+  await page.getByText('Groups / Retained: 0 → Not recorded',{exact:true}).waitFor();
+  await compare(report);
+  await page.getByText('No reported counts or limits changed. No shared fingerprints to compare.',{exact:true}).waitFor();
+  await compare({...report,fileName:markerName});
+  await page.getByText(/Receipt refused/).waitFor();
+  assert.equal(await page.locator('#differences li').count(),0);
+  await compare(JSON.stringify(report,null,2).replace('"source_schema": 7','"source_schema": 9,\n  "source_schema": 7'));
+  await page.getByText(/Receipt refused/).waitFor();
   await page.setViewportSize({width:1440,height:900});
   await choose(markerName+'.gz',zipped);
   await page.getByLabel('Include SHA-256 fingerprints',{exact:true}).check();
@@ -78,6 +99,11 @@ try {
   await page.getByText('Review complete. No data was imported.',{exact:true}).waitFor();
   report=await save();
   assert.equal(report.exact_input_sha256,hash(plain));assert.equal(report.selected_gzip_sha256,hash(zipped));
+  await compare(report);
+  await page.getByText('No reported counts or limits changed. Decoded JSON fingerprints match. Selected gzip fingerprints match.',{exact:true}).waitFor();
+  await compare({...report,exact_input_sha256:'f'.repeat(64)});
+  await page.getByText('No reported counts or limits changed. Decoded JSON fingerprints differ. Selected gzip fingerprints match.',{exact:true}).waitFor();
+
   await choose(markerName+'.gz',Buffer.concat([zipped,zipped]));await start();
   await page.getByText('Gzip export contains trailing bytes or multiple members',{exact:true}).waitFor();
   assert(!(await page.getByRole('button',{name:'Save count-only receipt',exact:true}).isVisible()));
