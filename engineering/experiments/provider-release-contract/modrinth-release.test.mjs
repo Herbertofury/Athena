@@ -39,3 +39,12 @@ test('duplicate content under two filenames is ambiguous without the exact filen
   assert.throws(()=>selectModrinthTransfer(projectId,versionId,r,'a'.repeat(128)),/No unique/);
   assert.equal(selectModrinthTransfer(projectId,versionId,r,'a'.repeat(128),'identical-copy.jar').filename,'identical-copy.jar');
 });
+
+test('legacy CDN route must use the version number of the same exact version response',()=>{
+  const legacy={...main,url:main.url.replace(versionId,'2.0%2Bfabric')};
+  const r={...response(legacy),version_number:'2.0+fabric'};
+  assert.equal(selectModrinthTransfer(projectId,versionId,r,'a'.repeat(128)).url,legacy.url);
+  assert.throws(()=>modrinthVersionFiles(projectId,versionId,{...r,version_number:'2.0+forge'}),/route or name mismatch/);
+  assert.throws(()=>modrinthVersionFiles(projectId,versionId,{...r,project_id:'ForeignA'}),/identity mismatch/);
+  assert.throws(()=>modrinthVersionFiles(projectId,versionId,response(main,{...companion,primary:true})),/Multiple/);
+});
