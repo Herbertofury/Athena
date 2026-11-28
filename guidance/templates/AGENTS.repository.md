@@ -16,6 +16,6 @@ Approach authorized work **Aggressively, eagerly, ambitiously, intelligently, cr
 
 Project-specific setup, commands, architecture, product constraints and acceptance criteria remain in project-owned `AGENTS.md` and scoped files. Do not copy them into this shared core. Stronger local requirements remain intact; actual harness precedence and higher-priority instructions govern conflicts.
 
-Read the pinned `.agents/athena/PRODUCT_INVARIANTS.md` for shared acceptance requirements; load other `.agents/athena/` standards only when relevant. Version, canonical source commit and digests live in `.athena/governance-lock.json`. Do not edit managed snapshots: propose shared changes in Athena and keep local exceptions local.
+Read the pinned `.agents/athena/PRODUCT_INVARIANTS.md` for shared acceptance requirements; load other `.agents/athena/` standards only when relevant. For UI or supporting data changes, use `.agents/athena/DESIGN_QUALITY_STANDARD.md` and retain an actual consumer receipt for profiles, motion and media where applicable. Version, canonical source commit and digests live in `.athena/governance-lock.json`. Do not edit managed snapshots: propose shared changes in Athena and keep local exceptions local.
 
 Skills are on-demand procedures, not a roster of agents or permission grants. Do not automatically load all chat orchestration, watchdogs or artifact catalogs into coding tasks.
