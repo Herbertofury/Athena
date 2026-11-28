@@ -1,4 +1,4 @@
-//! Count-only review of an explicitly selected export. Never writes a file.
+//! Local, explicitly selected export review. Neither mode writes a file.
 use axum::{
     Json, Router,
     body::to_bytes,
@@ -27,9 +27,10 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
     {
         return StatusCode::UNSUPPORTED_MEDIA_TYPE.into_response();
     }
-    let fingerprint = match request.uri().query() {
-        None => false,
-        Some("fingerprint=1") => true,
+    let mode = match request.uri().query() {
+        None => 0,
+        Some("fingerprint=1") => 1,
+        Some("projects=1") => 2,
         _ => return StatusCode::BAD_REQUEST.into_response(),
     };
     let Ok(permit) = slots.try_acquire_owned() else {
@@ -48,7 +49,12 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
     };
     match tokio::task::spawn_blocking(move || {
         let _permit = permit;
-        crate::constellation_review::review_selected_bytes(&body, fingerprint)
+        if mode == 2 {
+            crate::constellation_project_stage::review_projects(&body)
+        } else {
+            let report = crate::constellation_review::review_selected_bytes(&body, mode == 1)?;
+            serde_json::to_value(report).map_err(|_| "Could not prepare the local review")
+        }
     })
     .await
     {
