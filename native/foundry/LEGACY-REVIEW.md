@@ -58,3 +58,9 @@ viewer searches a selected family and checks the original JSON fingerprint
 before opening any record. Both supported archive schemas remain readable.
 It reads the file in the current browser only, does not write it back, and
 cannot activate anything.
+
+
+To verify the whole file against a separate trusted receipt, paste its archive
+SHA-256 into the viewer before choosing the file. A mismatch stops the file
+before any records appear. The viewer also displays the SHA-256 for a file
+opened without a pin; an unpinned hash is not independent proof of origin.
