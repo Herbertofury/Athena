@@ -85,6 +85,55 @@ class LegacyReview(unittest.TestCase):
         self.assertEqual(self.invoke(*command).returncode,2)
         self.assertFalse(self.updated.exists())
 
+    def test_exact_supported_fields_survive_reopen_and_reject_room_swaps(self):
+        theme='frutiger-aero'
+        aqua=theme+':room:aqua-atrium'
+        cloud=theme+':room:cloud-terminal'
+        with closing(sqlite3.connect(self.source)) as db, db:
+            db.execute("INSERT INTO rooms VALUES(?,?,?,?,?,?)",
+                       (cloud,theme,'district','Cloud','synthetic','{}'))
+            db.execute("INSERT INTO room_soundtracks VALUES(?,?,?,?,?,?,?,?)",
+                       (theme,cloud,'spotify','https://open.spotify.com/track/example',
+                        'Synthetic cloud ♫','USER_ASSIGNED',None,234567890))
+        before=sha(self.source)
+        prepared=self.prepare('--source-quiescent')
+        self.assertEqual(prepared.returncode,0,prepared.stderr)
+        pin=sha(self.review)
+        imported=self.invoke('--import-foundry-legacy',self.review,'--legacy-output',self.updated,
+                             '--expected-legacy-sha256',pin)
+        self.assertEqual(imported.returncode,0,imported.stderr)
+        self.assertNotIn('Synthetic cloud',imported.stdout+imported.stderr)
+        self.assertNotIn('private_marker',imported.stdout+imported.stderr)
+        self.assertFalse(json.loads(imported.stdout)['lossless_migration'])
+        columns='theme_id,room_id,provider,url,label,status,source_id,updated_at'
+        # Independent SQLite comparison, not the Rust library used by the verifier.
+        with closing(sqlite3.connect(self.source)) as db:
+            expected=db.execute(f'SELECT {columns},NULL FROM room_soundtracks ORDER BY theme_id,room_id').fetchall()
+        with closing(sqlite3.connect(self.updated)) as db:
+            loaded=db.execute(f'SELECT {columns},updated_at_ms FROM soundtracks ORDER BY theme_id,room_id').fetchall()
+            self.assertEqual(db.execute('PRAGMA user_version').fetchone(),(15,))
+        self.assertEqual(loaded,expected)
+        self.assertEqual(len(loaded),2)
+        command=[str(BIN),'verify-legacy-soundtracks',str(self.review),str(self.updated)]
+        matched=subprocess.run(command,text=True,capture_output=True)
+        self.assertEqual(matched.returncode,0,matched.stderr)
+        self.assertEqual(json.loads(matched.stdout),{'matched_soundtracks':2})
+        with closing(sqlite3.connect(self.updated)) as db, db:
+            for source,target in zip(loaded,reversed(loaded)):
+                db.execute("UPDATE soundtracks SET provider=?,url=?,label=?,status=?,source_id=?,updated_at=?,updated_at_ms=? WHERE theme_id=? AND room_id=?",
+                           (*source[2:],*target[:2]))
+            self.assertEqual(db.execute('PRAGMA integrity_check').fetchone(),('ok',))
+            self.assertEqual(db.execute('SELECT count(*) FROM soundtracks').fetchone(),(2,))
+        wrong=sha(self.updated)
+        rejected=subprocess.run(command,text=True,capture_output=True)
+        self.assertNotEqual(rejected.returncode,0)
+        self.assertIn('do not match reviewed legacy rooms',rejected.stderr)
+        self.assertNotIn('Synthetic cloud',rejected.stdout+rejected.stderr)
+        self.assertEqual(rejected.stdout,'')
+        self.assertEqual(sha(self.updated),wrong)
+        self.assertEqual(sha(self.source),before)
+        self.assertEqual(sha(self.review),pin)
+
     def test_history_archive_preserves_utf8_events_without_logging_payloads(self):
         payload = '{"private_marker": "synthetic ♫", "number":1.00 }'
         with closing(sqlite3.connect(self.source)) as db, db:
