@@ -1,23 +1,39 @@
 use atlas_lab::journal::Journal;
 use std::path::Path;
 
+fn local_review_args(
+    mut args: impl Iterator<Item = std::ffi::OsString>,
+    usage: &'static str,
+) -> Result<(std::ffi::OsString, bool), &'static str> {
+    let path = args.next().ok_or(usage)?;
+    let fingerprint = match args.next().as_deref() {
+        None => false,
+        Some(flag) if flag == "--include-fingerprint" => true,
+        _ => return Err(usage),
+    };
+    if args.next().is_some() || path == "--include-fingerprint" {
+        return Err(usage);
+    }
+    Ok((path, fingerprint))
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut raw = std::env::args_os();
     raw.next();
-    if raw.next().as_deref() == Some(std::ffi::OsStr::new("review-constellation-v7")) {
+    let cmd = raw.next();
+    if cmd.as_deref() == Some(std::ffi::OsStr::new("verify-continuity-artifact-backup")) {
+        let (path, fingerprint) = local_review_args(
+            raw,
+            "Usage: atlas-lab verify-continuity-artifact-backup ARCHIVE.athart [--include-fingerprint]",
+        )?;
+        let receipt = atlas_lab::continuity_archive::verify_file(Path::new(&path), fingerprint)?;
+        println!("{}", serde_json::to_string_pretty(&receipt)?);
+        return Ok(());
+    }
+    if cmd.as_deref() == Some(std::ffi::OsStr::new("review-constellation-v7")) {
         const USAGE: &str =
             "Usage: atlas-lab review-constellation-v7 EXPORT.json[.gz] [--include-fingerprint]";
-        let Some(path) = raw.next() else {
-            return Err(USAGE.into());
-        };
-        let fingerprint = match raw.next().as_deref() {
-            None => false,
-            Some(flag) if flag == "--include-fingerprint" => true,
-            _ => return Err(USAGE.into()),
-        };
-        if raw.next().is_some() || path == "--include-fingerprint" {
-            return Err(USAGE.into());
-        }
+        let (path, fingerprint) = local_review_args(raw, USAGE)?;
         let report = atlas_lab::constellation_review::review_file(Path::new(&path), fingerprint)?;
         println!("{}", serde_json::to_string_pretty(&report)?);
         return Ok(());
@@ -185,7 +201,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     if args.len() != 3 || args[1] != "dedup-lab" {
         eprintln!(
-            "Usage: atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
+            "Usage: atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab verify-continuity-artifact-backup ARCHIVE.athart [--include-fingerprint]\n       atlas-lab review-constellation-v7 EXPORT.json[.gz] [--include-fingerprint]\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
         );
         std::process::exit(2);
     }
