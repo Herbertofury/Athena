@@ -35,6 +35,14 @@ def link_or_reparse(path):
     metadata=path.lstat()
     return stat.S_ISLNK(metadata.st_mode) or bool(getattr(metadata,'st_file_attributes',0)&0x400)
 
+def manifest_object(pairs):
+    """Reject ambiguous JSON members, including names equal after decoding."""
+    result={}
+    for name,value in pairs:
+        if name in result:raise ValueError('Duplicate manifest member')
+        result[name]=value
+    return result
+
 def verify(root):
     root=pathlib.Path(root).absolute()
     if any(link_or_reparse(p) for p in (root,*root.parents)):raise ValueError('Symlink package refused')
@@ -42,7 +50,8 @@ def verify(root):
     if link_or_reparse(manifest) or not manifest.is_file() or manifest.stat().st_size>1024*1024:raise ValueError('Invalid manifest')
     with manifest.open('rb') as stream:payload=stream.read(1024*1024+1)
     if len(payload)>1024*1024:raise ValueError('Invalid manifest')
-    data=json.loads(payload.decode('utf-8'))
+    try:data=json.loads(payload.decode('utf-8'),object_pairs_hook=manifest_object)
+    except RecursionError as error:raise ValueError('Manifest nesting exceeds parser limits') from error
     if not isinstance(data,dict):raise ValueError('Invalid manifest object')
     if type(data.get('schema')) is not int or data.get('schema')!=1 or data.get('platform') not in ('windows','linux'):raise ValueError('Invalid platform')
     expected_binary='athena-foundry-store.exe' if data['platform']=='windows' else 'athena-foundry-store'
