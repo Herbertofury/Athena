@@ -48,6 +48,8 @@ jobs:
         run: node --test tests/*.test.mjs
       - name: Verify shared provider release and transfer contracts
         run: node --experimental-strip-types --test experiments/provider-release-contract/*.test.mjs
+      - name: Test the opt-in desktop taskbar contract
+        run: node --test ../experiments/desktop-workspace/model.test.mjs
       - name: Exercise explicitly synthetic benchmark example
         run: python scripts/compare_benchmarks.py tests/fixtures/synthetic-baseline.json tests/fixtures/synthetic-candidate.json
   rust-lab:
