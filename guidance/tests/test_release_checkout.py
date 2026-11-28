@@ -7,14 +7,14 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "../tools"))
-from release_checkout import CORE, GATES, validate
+from release_checkout import CORE, GATES, GOOGLE_MIGRATION, validate
 
 HEAD = "a" * 40
 
 
 def receipt():
     return {
-        "schemaVersion": 5, "head": HEAD, "baseline": "b" * 40,
+        "schemaVersion": 6, "head": HEAD, "baseline": "b" * 40,
         "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
         "retained_optimization": False,
         "checks": {name: {"status": "passed", "evidence": "fixture", **({"holds": []} if name == "stack_freshness" else {}), **({
@@ -23,7 +23,7 @@ def receipt():
             "publication": {"mode": "live_wiki", "url": "https://example.test/wiki",
                             "wiki_commit": "c" * 40, "readback_evidence": "fixture readback"}
         } if name == "documentation_closeout" else {})} for name in GATES},
-        "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture", "tool_version": "fixture", "command": name + " fixture"} for name in CORE},
+        "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture", "tool_version": "fixture", "command": name + " fixture", **({"source_commit": "d" * 40, "mode": "assessment"} if name == GOOGLE_MIGRATION else {})} for name in CORE},
     }
 
 
@@ -81,9 +81,40 @@ class ReleaseCheckoutTests(unittest.TestCase):
 
     def test_legacy_schema_rejected(self):
         r = receipt()
-        for version in (1, 2, 3, 4):
+        for version in (1, 2, 3, 4, 5):
             r["schemaVersion"] = version
             self.assertTrue(validate(r, HEAD))
+
+    def test_google_skill_is_required_as_a_separate_outcome(self):
+        r = receipt()
+        del r["core_tools"][GOOGLE_MIGRATION]
+        self.assertIn(f"missing core assessment: {GOOGLE_MIGRATION}", validate(r, HEAD))
+
+    def test_google_skill_accepts_evidenced_inapplicability(self):
+        r = receipt()
+        r["core_tools"][GOOGLE_MIGRATION] = {
+            "status": "not_applicable", "evidence": "Documentation-only change; no executable boundary"
+        }
+        self.assertEqual(validate(r, HEAD), [])
+
+    def test_google_assessment_needs_pinned_source_and_mode(self):
+        for field, value in (("source_commit", "main"), ("mode", "deferred")):
+            with self.subTest(field=field):
+                r = receipt()
+                r["core_tools"][GOOGLE_MIGRATION][field] = value
+                self.assertTrue(validate(r, HEAD))
+
+    def test_google_adoption_requires_isolation_and_parity(self):
+        r = receipt()
+        r["retained_optimization"] = True
+        r["checks"]["optimization_equivalence"] = {"status": "passed", "evidence": "fixture"}
+        migration = r["core_tools"][GOOGLE_MIGRATION]
+        migration.update(status="adopted", parity_evidence="deterministic corpus fixture")
+        self.assertTrue(validate(r, HEAD), "An assessment alone cannot be adopted")
+        migration["mode"] = "isolated_pilot"
+        self.assertEqual(validate(r, HEAD), [])
+        del migration["parity_evidence"]
+        self.assertTrue(validate(r, HEAD))
 
     def test_stack_freshness_required(self):
         r = receipt()
