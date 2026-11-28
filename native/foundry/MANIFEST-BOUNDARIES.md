@@ -9,7 +9,9 @@ Both supported operating systems use the same conservative portable filename
 rules: canonical relative paths, ASCII printable characters, no parent components,
 Windows drive/ADS syntax, reserved device names, backslashes, trailing dots/spaces,
 NULs or case aliases. The manifest cannot list itself. Unknown shapes, non-integer
-or negative sizes and malformed SHA-256 strings fail closed. Limits are 1 MiB of
+or negative sizes and malformed SHA-256 strings fail closed. Duplicate JSON
+members, including names identical after escape decoding, and input exceeding
+the JSON parser's nesting limit are rejected before reading a listed file. Limits are 1 MiB of
 manifest bytes, 2,000 entries and 600 MiB of declared package data. File hashing
 reads exactly the validated size plus one byte to detect growth, rather than
 following an unbounded growing file. This is not a wall-clock I/O deadline.
