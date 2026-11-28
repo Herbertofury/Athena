@@ -49,6 +49,57 @@ struct Project {
     deleted_at: Option<u64>,
     updated_at: Option<u64>,
 }
+impl Project {
+    fn workspace_metadata(&self) -> Option<(&str, u64)> {
+        if self.source_type.as_deref() != Some("workspace")
+            || self.provider_id.as_deref() != Some("")
+            || self.archived != Some(false)
+            || self.deleted_at.unwrap_or(0) != 0
+        {
+            return None;
+        }
+        let name = self.name.as_deref().filter(|n| {
+            !n.trim().is_empty()
+                && n.encode_utf16().count() <= 200
+                && !n.chars().any(char::is_control)
+        })?;
+        let at = self
+            .updated_at
+            .filter(|n| (1..=JS_SAFE_INTEGER).contains(n))?;
+        Some((name, at))
+    }
+}
+const REVIEW_LIMIT: usize = 128;
+pub(crate) fn review_projects(source: &[u8]) -> Result<Value, &'static str> {
+    let decoded = decode_export(source)?;
+    review_bytes(&decoded, false)?;
+    let legacy: Legacy<'_> = serde_json::from_slice(&decoded).map_err(|_| ERROR)?;
+    let mut seen = HashSet::new();
+    let mut rows = Vec::new();
+    let mut eligible = 0;
+    let mut omitted = 0;
+    for raw in legacy.projects {
+        let project: Project = serde_json::from_str(raw.get()).map_err(|_| ERROR)?;
+        if project.id.trim().is_empty()
+            || project.id.len() > 4096
+            || !seen.insert(project.id.clone())
+        {
+            return Err(ERROR);
+        }
+        let Some((name, at)) = project.workspace_metadata() else {
+            omitted += 1;
+            continue;
+        };
+        eligible += 1;
+        if rows.len() < REVIEW_LIMIT {
+            rows.push(json!({"id":project.id,"name":name,"at":at}));
+        }
+    }
+    Ok(
+        json!({"schema":"athena-constellation-project-selection-v1","sourceSha256":sha256_hex(source),
+        "eligible":eligible,"notEligible":omitted,"projects":rows}),
+    )
+}
 #[derive(Deserialize)]
 struct Destination<'a> {
     schema: u32,
@@ -117,31 +168,14 @@ fn build(source: &[u8], recipe: &[u8], destination: &[u8]) -> Result<Vec<u8>, &'
         let selected = projects.get(&choice.id).ok_or(ERROR)?;
         // Provider-mirrored projects, archived or deleted rows, and unclassified
         // records are not reinterpreted as user-owned workspaces.
-        if selected.source_type.as_deref() != Some("workspace")
-            || selected.provider_id.as_deref() != Some("")
-            || selected.archived != Some(false)
-            || selected.deleted_at.unwrap_or(0) != 0
-            || !matches!(
-                choice.stage.as_str(),
-                "idea" | "research" | "building" | "testing" | "released" | "paused"
-            )
-            || !matches!(choice.ownership.as_str(), "own" | "followed")
+        if !matches!(
+            choice.stage.as_str(),
+            "idea" | "research" | "building" | "testing" | "released" | "paused"
+        ) || !matches!(choice.ownership.as_str(), "own" | "followed")
         {
             return Err(ERROR);
         }
-        let name = selected
-            .name
-            .as_deref()
-            .filter(|n| {
-                !n.trim().is_empty()
-                    && n.encode_utf16().count() <= 200
-                    && !n.chars().any(char::is_control)
-            })
-            .ok_or(ERROR)?;
-        let at = selected
-            .updated_at
-            .filter(|n| (1..=JS_SAFE_INTEGER).contains(n))
-            .ok_or(ERROR)?;
+        let (name, at) = selected.workspace_metadata().ok_or(ERROR)?;
         let id = format!(
             "constellation-v7-{}",
             sha256_hex(format!("{}\0{}", plan.namespace, selected.id).as_bytes())

@@ -28,5 +28,18 @@
 <p id="compare-status" role="status" aria-live="polite"></p><ul id="differences"></ul>
 </details>
 </section>
+<section id="project-selector" class="runner" aria-labelledby="project-selection-heading" hidden>
+<h2 id="project-selection-heading">Stage selected workspace projects</h2>
+<p>Workspace names and timestamps are private. Show only eligible projects from the selected backup. Nothing is imported and no project is preselected.</p>
+<button type="button" id="load-projects">Show eligible workspace projects</button>
+<p id="project-status" role="status"></p>
+<form id="project-recipe" hidden>
+<p><label>Stable source workspace label <input id="project-namespace" required maxlength="64" pattern="[A-Za-z0-9_\-]+" placeholder="e.g. personal-workspace"></label></p>
+<p><label for="project-destination">Current Athena Projects export</label> <input id="project-destination" type="file" accept=".json,application/json" required></p>
+<p>Use a fresh <a href="/#projects">Export projects</a> download. The destination bytes stay in this browser. Pick up to 24 rows and explicitly choose each stage and ownership.</p>
+<div id="project-rows"></div>
+<button id="save-recipe" type="submit">Save private staging recipe</button> <button id="clear-projects" type="button">Clear project selection</button>
+</form>
+</section>
 <footer>This review does not certify restoration or deletion of the source.</footer></main>
 <script type="module" src="/migration/constellation/app.js"></script></body></html>

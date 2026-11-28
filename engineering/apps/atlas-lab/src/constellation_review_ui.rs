@@ -1,4 +1,4 @@
-//! Count-only review of an explicitly selected export. Never writes a file.
+//! Local, explicitly selected export review. Neither mode writes a file.
 use axum::{
     Json, Router,
     body::to_bytes,
@@ -9,6 +9,11 @@ use axum::{
 };
 use std::{sync::Arc, time::Duration};
 use tokio::sync::Semaphore;
+
+enum ReviewMode {
+    Counts { fingerprint: bool },
+    Projects,
+}
 
 async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Response {
     let headers = request.headers();
@@ -27,9 +32,10 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
     {
         return StatusCode::UNSUPPORTED_MEDIA_TYPE.into_response();
     }
-    let fingerprint = match request.uri().query() {
-        None => false,
-        Some("fingerprint=1") => true,
+    let mode = match request.uri().query() {
+        None => ReviewMode::Counts { fingerprint: false },
+        Some("fingerprint=1") => ReviewMode::Counts { fingerprint: true },
+        Some("projects=1") => ReviewMode::Projects,
         _ => return StatusCode::BAD_REQUEST.into_response(),
     };
     let Ok(permit) = slots.try_acquire_owned() else {
@@ -48,11 +54,18 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
     };
     match tokio::task::spawn_blocking(move || {
         let _permit = permit;
-        crate::constellation_review::review_selected_bytes(&body, fingerprint)
+        match mode {
+            ReviewMode::Counts { fingerprint } => {
+                crate::constellation_review::review_selected_bytes(&body, fingerprint)
+                    .map(|report| Json(report).into_response())
+            }
+            ReviewMode::Projects => crate::constellation_project_stage::review_projects(&body)
+                .map(|projects| Json(projects).into_response()),
+        }
     })
     .await
     {
-        Ok(Ok(result)) => Json(result).into_response(),
+        Ok(Ok(result)) => result,
         Ok(Err(message)) => (
             StatusCode::UNPROCESSABLE_ENTITY,
             Json(serde_json::json!({"error": message})),

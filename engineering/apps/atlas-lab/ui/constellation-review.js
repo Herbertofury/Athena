@@ -1,7 +1,8 @@
 const $ = id => document.getElementById(id);
 const element = (tag, text) => Object.assign(document.createElement(tag), {textContent:text});
 const limit = 16 * 1024 * 1024;
-let job, result, comparisonGeneration = 0;
+let job, result, reviewedFile, comparisonGeneration = 0;
+let projectJob, projectSelection, recipeGeneration = 0;
 const label = key => key.replace(/([a-z])([A-Z])/g, '$1 $2').replaceAll('_', ' ').replace(/^./, c => c.toUpperCase());
 const count = n => n === null ? 'Not recorded' : typeof n === 'boolean' ? (n ? 'Yes' : 'No') : n.toLocaleString();
 const attention = s => s.retained === null || s.cap_reached || (s.omitted ?? 0) > 0;
@@ -102,7 +103,9 @@ function renderCollections() {
 $('attention').addEventListener('change', () => { if (result) renderCollections(); });
 $('backup').addEventListener('change', () => {
   job?.abort();
-  job = result = undefined;
+  job = result = reviewedFile = undefined;
+  clearProjectSelection();
+  $('project-selector').hidden = true;
   clearComparison();
   $('result').hidden = true;
   $('start').disabled = false;
@@ -119,7 +122,9 @@ $('cancel').addEventListener('click', () => {
 $('review').addEventListener('submit', async event => {
   event.preventDefault();
   if (job) return;
-  result = undefined;
+  result = reviewedFile = undefined;
+  clearProjectSelection();
+  $('project-selector').hidden = true;
   clearComparison();
   $('result').hidden = true;
   const file = $('backup').files[0];
@@ -148,6 +153,8 @@ $('review').addEventListener('submit', async event => {
     if (job !== current) return;
     if (report.schema !== 'athena-constellation-v7-review' || report.source_schema !== 7 || !Array.isArray(report.slices)) throw Error('Unsupported review');
     result = report;
+    reviewedFile = file;
+    $('project-selector').hidden = false;
     renderCollections();
     const details = [];
     function append(prefix, group) {
@@ -185,4 +192,127 @@ $('save').addEventListener('click', () => {
   link.download = 'athena-constellation-counts.json';
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+const stages = ['idea','research','building','testing','released','paused'];
+const ownershipTypes = ['own','followed'];
+function clearProjectSelection() {
+  projectJob?.abort();
+  projectJob = projectSelection = undefined;
+  recipeGeneration++;
+  $('project-rows').replaceChildren();
+  $('project-recipe').reset();
+  $('project-recipe').hidden = true;
+  $('project-status').textContent = '';
+  $('load-projects').disabled = $('save-recipe').disabled = false;
+}
+function choice(options, hint, accessibleName) {
+  const select = document.createElement('select');
+  select.setAttribute('aria-label',accessibleName);
+  select.append(new Option(hint,''));
+  for (const [value,text] of options) select.append(new Option(text,value));
+  return select;
+}
+$('load-projects').addEventListener('click', async () => {
+  if (projectJob || !reviewedFile || reviewedFile !== $('backup').files[0]) return;
+  clearProjectSelection();
+  const file = reviewedFile, current = projectJob = new AbortController();
+  $('load-projects').disabled = true;
+  $('project-status').textContent = 'Looking for live workspace projects in the selected backup…';
+  try {
+    const response = await fetch('/api/migration/constellation/review?projects=1',{
+      method:'POST', headers:{'Content-Type':'application/octet-stream','X-Atlas-Request':'local-ui'},
+      body:file, signal:current.signal, redirect:'error', cache:'no-store'
+    });
+    if (current !== projectJob) return;
+    if (!response.ok) throw Error('Unable to list projects for this backup.');
+    const list = await response.json();
+    if (current !== projectJob || file !== $('backup').files[0]) return;
+    if (list.schema !== 'athena-constellation-project-selection-v1' || !hash(list.sourceSha256) ||
+        !nonnegative(list.eligible) || !nonnegative(list.notEligible) || !Array.isArray(list.projects) ||
+        list.projects.length !== Math.min(list.eligible,128) ||
+        list.projects.some(p=>typeof p.id!=='string'||typeof p.name!=='string'||!nonnegative(p.at)))
+      throw Error('Local project list could not be verified.');
+    const rows = list.projects.map((p,i)=>{
+      const row = document.createElement('fieldset');
+      const date = new Date(p.at);
+      row.append(element('legend',`${i+1}. ${p.name}`),element('p',
+        `Updated: ${Number.isFinite(date.getTime())?date.toISOString():p.at}`));
+      const check = document.createElement('input');check.type = 'checkbox';
+      const selection = element('label',' Include this workspace project');selection.prepend(check);
+      const stage = choice(stages.map(s=>[s,s]),'Choose a stage',`Stage for project ${i+1}`);
+      const ownership = choice([['own','My project'],['followed','Following']],'Choose ownership',`Ownership for project ${i+1}`);
+      stage.disabled = ownership.disabled = true;
+      check.addEventListener('change',()=>{
+        stage.disabled = ownership.disabled = !check.checked;
+        recipeGeneration++;$('save-recipe').disabled = false;
+      });
+      for (const input of [stage,ownership]) input.addEventListener('change',()=> {
+        recipeGeneration++;$('save-recipe').disabled = false;
+      });
+      const controls = document.createElement('p');controls.append(stage,' ',ownership);
+      const identity = document.createElement('details');
+      const idText = element('code','');
+      identity.append(element('summary','Show source identifier'),idText);
+      identity.addEventListener('toggle',()=>{idText.textContent=identity.open?p.id:'';});
+      row.append(selection,controls,identity);$('project-rows').append(row);
+      return {id:p.id,check,stage,ownership};
+    });
+    projectSelection = {file,sourceSha256:list.sourceSha256,rows};
+    $('project-recipe').hidden = !rows.length;
+    $('project-status').textContent = `${rows.length} of ${list.eligible} eligible projects shown. ${list.notEligible} records are not eligible.`+
+      (rows.length<list.eligible?' Use the native staging command to select eligible rows beyond this view.':'');
+  } catch {
+    if (current===projectJob) $('project-status').textContent = 'Project list refused or unavailable. Nothing was saved.';
+  } finally {
+    if (current===projectJob) {projectJob=undefined;$('load-projects').disabled=false;}
+  }
+});
+$('clear-projects').addEventListener('click',()=>{
+  clearProjectSelection();
+  $('project-status').textContent='Project selection cleared. Nothing was imported.';
+  $('load-projects').focus();
+});
+for (const id of ['project-destination','project-namespace']) $(id).addEventListener('input',()=>{
+  recipeGeneration++;$('save-recipe').disabled=false;
+});
+$('project-recipe').addEventListener('submit',async event=>{
+  event.preventDefault();
+  const input = projectSelection, file = $('project-destination').files[0], namespace = $('project-namespace').value;
+  if (!input || input.file!==$('backup').files[0]) return;
+  const selected = input.rows.filter(row=>row.check.checked).map(row=>({id:row.id,stage:row.stage.value,ownership:row.ownership.value}));
+  if (!selected.length || selected.length>24 || selected.some(p=>!stages.includes(p.stage)||!ownershipTypes.includes(p.ownership))){
+    $('project-status').textContent='Select 1–24 rows and explicitly set stage and ownership for each.';
+    return;
+  }
+  if (!file || !file.size || file.size>limit || !/^[a-zA-Z0-9_-]{1,64}$/.test(namespace)) {
+    $('project-status').textContent='Choose a current Projects export and a stable workspace label.';
+    return;
+  }
+  const generation = ++recipeGeneration;
+  $('save-recipe').disabled = true;
+  $('project-status').textContent = 'Checking the destination export in this browser…';
+  try {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const {parseBackup} = await import('/workspaces/projects/import.mjs');
+    const roster = parseBackup(bytes);
+    if (Object.hasOwn(roster,'athenaConstellationStage') || roster.entries.length+selected.length>100)
+      throw Error('Not a current destination export');
+    const digest = await crypto.subtle.digest('SHA-256',bytes);
+    if (generation!==recipeGeneration || input!==projectSelection || file!==$('project-destination').files[0]) return;
+    const destinationSha256 = Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+    const payload = new TextEncoder().encode(JSON.stringify({schema:1,sourceSha256:input.sourceSha256,destinationSha256,namespace,selected},null,2)+'\n');
+    if (payload.length > 32*1024) throw Error('Recipe size limit');
+    const link=document.createElement('a');
+    const href=URL.createObjectURL(new Blob([payload],{type:'application/json'}));
+    link.href=href;
+    link.download='athena-constellation-staging-recipe.json';
+    link.click();
+    setTimeout(()=>URL.revokeObjectURL(href),1000);
+    $('project-status').textContent=`Recipe download requested for ${selected.length} selected project(s). Open it only in your local staging command.`;
+  } catch {
+    if (generation===recipeGeneration) $('project-status').textContent='Recipe not saved. Check the destination backup and the selection size.';
+  } finally {
+    if (generation===recipeGeneration) $('save-recipe').disabled=false;
+  }
 });

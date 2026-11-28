@@ -1,8 +1,8 @@
 // Actual isolated Chromium against the extracted native Lab, not the public site.
 import assert from 'node:assert/strict';
-import {spawn} from 'node:child_process';
+import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {mkdtempSync, readFileSync, rmSync} from 'node:fs';
+import {mkdtempSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {setTimeout as delay} from 'node:timers/promises';
@@ -107,8 +107,77 @@ try {
   await choose(markerName+'.gz',Buffer.concat([zipped,zipped]));await start();
   await page.getByText('Gzip export contains trailing bytes or multiple members',{exact:true}).waitFor();
   assert(!(await page.getByRole('button',{name:'Save count-only receipt',exact:true}).isVisible()));
+  // Selection is opt-in. Only eligible workspace metadata reaches the local UI.
+  const workspace=(id,name,extra={})=>({id,sourceType:'workspace',providerId:'',name,archived:false,updatedAt:1700000000001,notes:marker,...extra});
+  const workspaceInput=gzip(Buffer.from(JSON.stringify({...data,projects:[
+    workspace('workspace-a','Workspace example'),workspace('workspace-b','Workspace example'),
+    workspace('mirror','hidden provider mirror',{providerId:'example',sourceType:'provider'}),
+    workspace('deleted','hidden deleted',{deletedAt:1700000000002})
+  ]})));
+  const unavailableOrigin=await fetch(endpoint+'?projects=1',{method:'POST',headers:{...headers,Origin:'https://not-local.invalid'},body:workspaceInput});
+  assert.equal(unavailableOrigin.status,403);
+  const many = Array.from({length:129},(_,i)=>workspace('id-'+i,'Eligible '+i));
+  const capped = await fetch(endpoint+'?projects=1',{method:'POST',headers,body:Buffer.from(JSON.stringify({...data,projects:many}))});
+  assert.equal(capped.status,200);
+  const list = await capped.json();
+  assert.equal(list.eligible,129); assert.equal(list.projects.length,128);
+  const duplicate = await fetch(endpoint+'?projects=1',{method:'POST',headers,body:Buffer.from(JSON.stringify({...data,projects:[many[0],many[0]]}))});
+  assert.equal(duplicate.status,422);
+  assert(!JSON.stringify(await duplicate.json()).includes('id-0'));
+  const beforeSave=await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1'));
+  await page.setViewportSize({width:390,height:820});
+  await choose('workspace-source.gz',workspaceInput);
+  await start();
+  await page.getByText('Review complete. No data was imported.',{exact:true}).waitFor();
+  assert.equal(await page.getByText('1. Workspace example',{exact:true}).count(),0);
+  await page.getByRole('button',{name:'Show eligible workspace projects',exact:true}).click();
+  await page.getByText('2 of 2 eligible projects shown. 2 records are not eligible.',{exact:true}).waitFor();
+  assert.equal(await page.getByText(/hidden provider mirror|hidden deleted|synthetic-private-value/).count(),0);
+  assert.equal(await page.locator('#project-rows input:checked').count(),0);
+  const space=await context.newPage();
+  await space.goto(origin+'/#projects');
+  const [dest]=await Promise.all([space.waitForEvent('download'),space.getByRole('button',{name:'Export projects',exact:true}).click()]);
+  const roster=readFileSync(await dest.path());
+  await page.getByLabel('Current Athena Projects export',{exact:true}).setInputFiles({name:'destination.json',mimeType:'application/json',buffer:roster});
+  await page.getByLabel('Stable source workspace label').fill('stable-slot');
+  const saveRecipe=page.getByRole('button',{name:'Save private staging recipe',exact:true});
+  await saveRecipe.click();
+  await page.getByText(/Select 1–24 rows/).waitFor();
+  const secondWorkspace=page.getByRole('group',{name:'2. Workspace example',exact:true});
+  assert.equal(await page.getByText('workspace-b',{exact:true}).count(),0);
+  await secondWorkspace.getByText('Show source identifier',{exact:true}).click();
+  await secondWorkspace.getByText('workspace-b',{exact:true}).waitFor();
+  await secondWorkspace.getByText('Show source identifier',{exact:true}).click();
+  await secondWorkspace.getByText('workspace-b',{exact:true}).waitFor({state:'detached'});
+  await secondWorkspace.getByRole('checkbox').check();
+  await page.getByLabel('Stage for project 2',{exact:true}).selectOption('research');
+  await page.getByLabel('Ownership for project 2',{exact:true}).selectOption('followed');
+  const [recipe]=await Promise.all([page.waitForEvent('download'),saveRecipe.click()]);
+  const recipeBytes=readFileSync(await recipe.path());
+  assert.deepEqual(JSON.parse(recipeBytes),{schema:1,sourceSha256:hash(workspaceInput),destinationSha256:hash(roster),namespace:'stable-slot',selected:[{id:'workspace-b',stage:'research',ownership:'followed'}]});
+  assert.equal(await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),beforeSave);
+  const [src,plan,dst,candidate]=['source.gz','plan.json','roster.json','candidate.json'].map(n=>path.join(work,n));
+  writeFileSync(src,workspaceInput);writeFileSync(plan,recipeBytes);writeFileSync(dst,roster);
+  const run=spawnSync(path.join(root,manifest.engine),['stage-constellation-projects',src,plan,dst,candidate],{cwd:work,encoding:'utf8',windowsHide:true,timeout:15000});
+  assert.equal(run.status,0,run.stderr);
+  const staged=readFileSync(candidate);
+  assert(!staged.includes(marker));
+  await space.getByLabel('Import backup',{exact:true}).setInputFiles({name:'candidate.json',mimeType:'application/json',buffer:staged});
+  await space.getByText(/Staged Constellation destination verified/).waitFor();
+  await space.getByRole('button',{name:'Import reviewed projects',exact:true}).click();
+  await space.getByRole('button',{name:'Open Workspace example',exact:true}).waitFor();
+  assert.equal(JSON.parse(await space.evaluate(()=>localStorage.getItem('athena-workspaces-v1'))).workspaces.projects.entries.length,1);
+  await page.getByRole('button',{name:'Clear project selection',exact:true}).click();
+  await page.getByText('Project selection cleared. Nothing was imported.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#project-rows fieldset').count(),0);
+  await page.getByRole('button',{name:'Show eligible workspace projects',exact:true}).click();
+  await page.getByText('2 of 2 eligible projects shown. 2 records are not eligible.',{exact:true}).waitFor();
+  await choose('different.gz',zipped);
+  assert.equal(await page.locator('#project-rows fieldset').count(),0);
+  assert.equal(await page.getByRole('button',{name:'Save private staging recipe',exact:true}).isVisible(),false);
+  await space.close();
   assert.deepEqual(external,[]);assert.deepEqual(errors,[]);
-  console.log('PASS actual extracted native browser: local navigation, precise bounded JSON/gzip, refused origins, private receipt, filtering, compact layout, and no outside requests.');
+  console.log('PASS actual extracted native browser: local navigation, precise bounded JSON/gzip, refused origins, private receipt, filtering, private recipe creation, native staging, exact reviewed import, and no outside requests.');
 } finally {
   await browser?.close();
   program.kill();await exited;
