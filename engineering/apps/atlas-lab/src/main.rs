@@ -2,6 +2,26 @@ use atlas_lab::journal::Journal;
 use std::path::Path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut raw = std::env::args_os();
+    raw.next();
+    if raw.next().as_deref() == Some(std::ffi::OsStr::new("review-constellation-v7")) {
+        const USAGE: &str =
+            "Usage: atlas-lab review-constellation-v7 EXPORT.json [--include-fingerprint]";
+        let Some(path) = raw.next() else {
+            return Err(USAGE.into());
+        };
+        let fingerprint = match raw.next().as_deref() {
+            None => false,
+            Some(flag) if flag == "--include-fingerprint" => true,
+            _ => return Err(USAGE.into()),
+        };
+        if raw.next().is_some() || path == "--include-fingerprint" {
+            return Err(USAGE.into());
+        }
+        let report = atlas_lab::constellation_review::review_file(Path::new(&path), fingerprint)?;
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
     let args: Vec<String> = std::env::args().collect();
     if args.len() == 4 && args[1] == "show-experiment" {
         let id: i64 = args[3].parse()?;
