@@ -462,12 +462,23 @@ pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static st
     if bytes.len() as u64 != opened.len() {
         return Err("File length changed during read; choose a quiescent export");
     }
+    review_selected_bytes(&bytes, fingerprint)
+}
+
+/// The same count-only review contract for a bounded, explicitly selected local body.
+pub(crate) fn review_selected_bytes(
+    bytes: &[u8],
+    fingerprint: bool,
+) -> Result<Report, &'static str> {
+    if bytes.len() as u64 > LIMIT {
+        return Err("Selected export exceeds the 16 MiB review budget");
+    }
     if !bytes.starts_with(&[0x1f, 0x8b]) {
-        return review_bytes(&bytes, fingerprint);
+        return review_bytes(bytes, fingerprint);
     }
     // Exactly one member, like the application writer. The BufRead decoder
     // leaves trailing bytes observable, including a concatenated next member.
-    let mut decoder = GzDecoder::new(bytes.as_slice());
+    let mut decoder = GzDecoder::new(bytes);
     let mut decoded = Vec::new();
     decoder
         .by_ref()
@@ -481,6 +492,6 @@ pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static st
         return Err("Gzip export contains trailing bytes or multiple members");
     }
     let mut report = review_bytes(&decoded, fingerprint)?;
-    report.selected_gzip_sha256 = fingerprint.then(|| crate::build_identity::sha256_hex(&bytes));
+    report.selected_gzip_sha256 = fingerprint.then(|| crate::build_identity::sha256_hex(bytes));
     Ok(report)
 }
