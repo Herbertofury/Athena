@@ -5,7 +5,8 @@ import json
 import re
 from pathlib import Path
 
-CORE = ("shrink-anything", "fast-anything", "rust-anything")
+GOOGLE_MIGRATION = "google-migrate-to-rust"
+CORE = ("shrink-anything", "fast-anything", "rust-anything", GOOGLE_MIGRATION)
 GATES = ("project_checks", "workflow_acceptance", "artifact_integrity",
          "artifact_rollback", "review", "stack_freshness", "documentation_closeout")
 LANES = ("quick", "standard", "high-risk")
@@ -25,8 +26,8 @@ def validate(receipt, head):
     if not isinstance(receipt, dict):
         return ["receipt must be an object"]
     problems = []
-    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 5:
-        problems.append("schemaVersion must be 5")
+    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 6:
+        problems.append("schemaVersion must be 6")
     if not valid_sha(head) or receipt.get("head") != head:
         problems.append("head must match the independently supplied full candidate SHA")
     if not valid_sha(receipt.get("baseline")):
@@ -54,6 +55,14 @@ def validate(receipt, head):
         if status in ("adopted", "no_safe_win"):
             if not nonempty(result.get("tool_version")) or not nonempty(result.get("command")):
                 problems.append(f"{name}: completed assessment requires tool version and command")
+        if name == GOOGLE_MIGRATION and status in ("adopted", "no_safe_win"):
+            mode = result.get("mode")
+            if not valid_sha(result.get("source_commit")):
+                problems.append(f"{name}: upstream source commit required")
+            if mode not in ("assessment", "isolated_pilot"):
+                problems.append(f"{name}: assessment or isolated_pilot mode required")
+            if status == "adopted" and (mode != "isolated_pilot" or not nonempty(result.get("parity_evidence"))):
+                problems.append(f"{name}: adoption requires an isolated pilot and parity evidence")
         adopted |= status == "adopted"
     retained = receipt.get("retained_optimization")
     if type(retained) is not bool or (adopted and retained is not True):
