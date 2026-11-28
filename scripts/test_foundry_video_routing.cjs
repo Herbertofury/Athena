@@ -4,15 +4,16 @@ const {chromium}=require('playwright');
 const root=path.resolve(process.env.ATHENA_BROWSER_ROOT||'dist'),out=path.resolve(process.env.ATHENA_BROWSER_OUTPUT||'browser-results/foundry-video-routing');
 let fixture=process.env.ATHENA_LOCAL_VIDEO_FIXTURE;
 if(fixture&&!fs.statSync(fixture).isFile())throw Error('ATHENA_LOCAL_VIDEO_FIXTURE must identify an existing synthetic test video');
+const forceDock=process.env.ATHENA_FORCE_DOCK==='1';
 const report={kind:'actual Chromium synthetic local-file routing',fixtureSource:fixture?'operator synthetic fixture':'generated canvas pattern (no capture device)',checks:[],errors:[],outsideRequests:[],limitations:['Synthetic local video only; no real user media or providers','Does not establish all codecs, Windows acceptance or full original media parity']};
 let browser,server,page;
 async function check(name,fn){report.current=name;await fn();report.checks.push(name);}
 (async()=>{
  fs.mkdirSync(out,{recursive:true});
- server=http.createServer((req,res)=>{try{const file=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!file.startsWith(root+path.sep))throw Error();const data=fs.readFileSync(file),ext=path.extname(file);res.writeHead(200,{'Content-Type':({'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json'})[ext]||'application/octet-stream'});res.end(data);}catch{res.writeHead(404);res.end();}});
+ server=http.createServer((req,res)=>{try{const file=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!file.startsWith(root+path.sep))throw Error();const data=fs.readFileSync(file),ext=path.extname(file);res.writeHead(200,{'Content-Type':({'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json'})[ext]||'application/octet-stream',...(forceDock?{'Permissions-Policy':'picture-in-picture=()'}:{})});res.end(data);}catch{res.writeHead(404);res.end();}});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});report.browser=browser.version();
- const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+ const context=await browser.newContext({viewport:forceDock?{width:390,height:844}:{width:1440,height:1000},hasTouch:forceDock,reducedMotion:'reduce'});
  await context.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin&&u.protocol!=='blob:'){report.outsideRequests.push(u.href);return route.abort();}return route.continue();});
  if(!fixture){
   const generator=await context.newPage();
@@ -67,6 +68,35 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
  });
  await check('return to preview and close restore artwork and remove player',async()=>{
   await one('[data-local-video-preview]').click();assert.equal(await one('[data-local-video-surface]').count(),0);assert.equal(await one('[data-local-video-view] video').count(),1);
+  await check('pop-out preserves one player, seeks, rate, mute and focus',async()=>{
+   const read=()=>one('[data-local-video-view] video').evaluate(v=>({src:v.src,time:v.currentTime,rate:v.playbackRate,muted:v.muted,paused:v.paused,captions:v.textTracks[0]?.mode,token:v.dataset.identityToken}));
+   await one('[data-local-video-view] video').evaluate(v=>{v.dataset.identityToken='same-player';v.currentTime=.55;v.playbackRate=1.25;v.muted=true;const track=v.addTextTrack('captions','Synthetic captions','en');track.addCue(new VTTCue(0,2,'In-session captions'));track.mode='showing';});
+   const before=await read();
+   const button=one('[data-local-video-pop-open]');await button.focus();await button.press('Enter');
+   await one('[data-local-video-frame]:is([data-video-popout="native"],[data-video-popout="dock"])').waitFor();
+   const frame=one('[data-local-video-frame]');const mode=await frame.getAttribute('data-video-popout');report.popoutMode=mode;if(forceDock)assert.equal(mode,'dock');
+   assert.equal(await one('video').count(),1);assert.deepEqual(await read(),before);
+   const back=one('[data-local-video-pop-return]');
+   if(mode==='dock'){
+    await frame.screenshot({path:path.join(out,'video-dock.png')});
+    assert.equal(await back.evaluate(el=>el===document.activeElement),true);
+    assert.equal(await frame.evaluate(e=>{const r=e.getBoundingClientRect();return getComputedStyle(e).position==='fixed'&&r.right<=innerWidth&&r.left>=0&&r.top>=0&&r.bottom<=innerHeight}),true);
+    await back.press('Escape');
+   }
+   else {assert.equal(await one('video').evaluate(el=>document.pictureInPictureElement===el),true);await back.click();}
+   await one('[data-local-video-frame][data-video-popout="inline"]').waitFor();
+   assert.deepEqual(await read(),before);assert.equal(await button.evaluate(el=>el===document.activeElement),true);
+   await one('[data-local-video-play]').click();
+   await one('[data-local-video-status][data-state="playing"]').waitFor();
+   await button.click();
+   await one('[data-local-video-frame]:is([data-video-popout="native"],[data-video-popout="dock"])').waitFor();
+   const playing=await read();assert.equal(playing.paused,false);assert.equal(playing.token,'same-player');
+   await back.click();
+   await one('[data-local-video-frame][data-video-popout="inline"]').waitFor();
+   const resumed=await read();assert.equal(resumed.paused,false);assert.ok(resumed.time>=playing.time);
+   assert.equal(resumed.captions,'showing');assert.equal(resumed.src,playing.src);
+   await one('[data-local-video-pause]').click();
+  });
   await one('.foundry-scene').scrollIntoViewIfNeeded();const restored=await one('.foundry-object').first().evaluate(o=>getComputedStyle(o.querySelector('.foundry-object-form'),'::before').visibility);assert.equal(restored,'visible');
   await one('[data-local-video-route]').click();await one('[data-local-video-close]').click();assert.equal(await one('video').count(),0);assert.equal(await one('[data-local-video-surface]').count(),0);
   const stored=await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')||'');assert.ok(!stored.includes('blob:'));assert.ok(!stored.includes(path.basename(fixture)));
