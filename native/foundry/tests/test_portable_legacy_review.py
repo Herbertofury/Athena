@@ -185,6 +185,73 @@ class LegacyReview(unittest.TestCase):
         self.assertEqual(result.returncode,2)
         self.assertFalse(archive.exists())
 
+    def test_archive_original_catalog_fields_without_installing_or_printing_them(self):
+        original=self.root/'original-catalog.sqlite'
+        archive=self.root/'original-catalog.json'
+        sql=(ROOT/'feature-foundry/source/src-tauri/src/database.rs').read_text(encoding='utf-8')
+        schema=sql.split('"BEGIN;',1)[1].split('COMMIT;"',1)[0]
+        raw='{ "secret fixture" : [ "\u00f1", 1e1 ] }'
+        with closing(sqlite3.connect(original)) as db, db:
+            db.executescript(schema)
+            db.execute("INSERT INTO metadata VALUES('schema_version','1')")
+            db.execute('INSERT INTO theme_packages VALUES(?,?,?,?,?,?,?,?)',('unreviewed-theme','Private title','v1',0,'old world','wood','still',raw))
+            db.execute('INSERT INTO rooms VALUES(?,?,?,?,?,?)',('room-one','unreviewed-theme','district','Old room','legacy',raw))
+            db.execute('INSERT INTO ecology_objects VALUES(?,?,?,?,?,?,?,?,?)',('item','unreviewed-theme','Plant','Decor','petal','curve',' [ "view" ] ','{ "light":true }',raw))
+        pin=sha(original)
+        cmd=('--archive-foundry-legacy-catalog',original,'--legacy-output',archive,'--expected-legacy-sha256')
+        self.assertEqual(self.invoke(*cmd,'f'*64).returncode,2)
+        self.assertFalse(archive.exists())
+        result=self.invoke(*cmd,pin)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertNotIn('Private title',result.stdout+result.stderr)
+        self.assertNotIn('secret fixture',result.stdout+result.stderr)
+        receipt=json.loads(result.stdout)
+        self.assertEqual(receipt,{'archived_catalog':True,'families':{'theme_packages':1,'rooms':1,'ecology_objects':1},
+            'reviewed_sha256':pin,'output_sha256':sha(archive),'lossless_migration':False})
+        data=json.loads(archive.read_bytes())
+        self.assertEqual([family['rows'][0]['original_fields'] for family in data['families']],[
+            {'id':'unreviewed-theme','name':'Private title','package_version':'v1','approved':0,
+             'world_name':'old world','material_language':'wood','motion':'still','raw_json':raw},
+            {'id':'room-one','theme_id':'unreviewed-theme','district_id':'district','name':'Old room','lineage':'legacy','raw_json':raw},
+            {'id':'item','theme_id':'unreviewed-theme','name':'Plant','role':'Decor','material':'petal',
+             'shape':'curve','affordances_json':' [ "view" ] ','behavior_json':'{ "light":true }','raw_json':raw},
+        ])
+        for family in data['families']:
+            item=family['rows'][0]
+            self.assertEqual(item['original_fields']['raw_json'],raw)
+            self.assertEqual(item['original_json_sha256'],hashlib.sha256(raw.encode('utf-8')).hexdigest())
+        if os.name=='posix':
+            self.assertEqual(stat.S_IMODE(archive.stat().st_mode)&0o077,0)
+        self.assertEqual(self.invoke(*cmd,pin).returncode,2)
+        self.assertEqual(sha(archive),receipt['output_sha256'])
+        self.assertEqual(sha(original),pin)
+        with closing(sqlite3.connect(original)) as db,db:
+            db.execute("UPDATE rooms SET raw_json='bad syntax'")
+        blocked=self.root/'no-partial.json'
+        before=sha(original)
+        invalid=self.invoke('--archive-foundry-legacy-catalog',original,'--legacy-output',blocked,'--expected-legacy-sha256',before)
+        self.assertEqual(invalid.returncode,2)
+        self.assertFalse(blocked.exists())
+        self.assertEqual(sha(original),before)
+
+    def test_archive_keeps_absent_catalog_family_distinct_from_empty(self):
+        for optional in (False,True):
+            with self.subTest(optional=optional):
+                origin=self.root/('empty.sqlite' if optional else 'missing.sqlite')
+                destination=self.root/('empty.json' if optional else 'missing.json')
+                sql=(ROOT/'feature-foundry/source/src-tauri/src/database.rs').read_text(encoding='utf-8')
+                schema=sql.split('"BEGIN;',1)[1].split('COMMIT;"',1)[0]
+                with closing(sqlite3.connect(origin)) as db,db:
+                    db.executescript(schema)
+                    db.execute("INSERT INTO metadata VALUES('schema_version','1')")
+                    if not optional:db.execute('DROP TABLE ecology_objects')
+                reviewed=sha(origin)
+                out=self.invoke('--archive-foundry-legacy-catalog',origin,'--legacy-output',destination,'--expected-legacy-sha256',reviewed)
+                self.assertEqual(out.returncode,0,out.stderr)
+                self.assertEqual(json.loads(out.stdout)['families']['ecology_objects'],0 if optional else None)
+                self.assertEqual(json.loads(destination.read_bytes())['families'][2]['rows'],[] if optional else None)
+                self.assertEqual(sha(origin),reviewed)
+
     def test_disjoint_actions_and_real_original_bytes(self):
         before=sha(self.source)
         self.assertEqual(self.prepare('--source-quiescent','--verify-only').returncode,2)

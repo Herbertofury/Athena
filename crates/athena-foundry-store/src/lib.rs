@@ -1,5 +1,6 @@
 //! Independent native Foundry persistence. No engine, browser, Tauri or network dependency.
 //! Explicitly opened database only; never discovers or modifies a legacy database.
+pub mod legacy_catalog;
 pub mod legacy_history;
 use rusqlite::{Connection, OpenFlags, OptionalExtension, params};
 use serde::{Deserialize, Serialize};

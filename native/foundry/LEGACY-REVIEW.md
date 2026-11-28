@@ -34,3 +34,18 @@ replay them. The terminal shows only the count and hashes. Keep the archive in
 a private folder (with private inherited permissions on Windows): original event contents may include personal data. An
 invalid event or an exceeded row/byte budget stops the export without writing
 a partial archive. This export does not cover other skipped database tables.
+
+To retain the original catalog without making it active, run:
+
+```text
+python -B launch.py --archive-foundry-legacy-catalog REVIEW.sqlite --legacy-output PRIVATE-CATALOG.json --expected-legacy-sha256 REVIEW_HASH
+```
+
+The new private archive preserves every documented original field for theme
+packages, rooms and ecology objects, including original JSON text and its
+individual SHA-256. The receipt includes counts and hashes only. An absent
+optional object table is reported separately from an empty one. No catalog
+row is installed, executed or attached to an active profile; other tables and
+referenced media files are not included. Keep the reviewed source and any
+associated files. Malformed input, a changed source hash or an existing output
+is refused, with no replacement.
