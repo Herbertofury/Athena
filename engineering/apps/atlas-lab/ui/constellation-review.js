@@ -1,10 +1,89 @@
 const $ = id => document.getElementById(id);
 const element = (tag, text) => Object.assign(document.createElement(tag), {textContent:text});
 const limit = 16 * 1024 * 1024;
-let job, result;
+let job, result, comparisonGeneration = 0;
 const label = key => key.replace(/([a-z])([A-Z])/g, '$1 $2').replaceAll('_', ' ').replace(/^./, c => c.toUpperCase());
 const count = n => n === null ? 'Not recorded' : typeof n === 'boolean' ? (n ? 'Yes' : 'No') : n.toLocaleString();
 const attention = s => s.retained === null || s.cap_reached || (s.omitted ?? 0) > 0;
+
+const nullableNumber = new Set(['retained','export_cap','source_reported','omitted','source_reported_open','open','closed','unrecognized']);
+const optionalHash = new Set(['exact_input_sha256','selected_gzip_sha256']);
+const hash = text => typeof text === 'string' && /^[a-f0-9]{64}$/.test(text);
+const nonnegative = value => Number.isSafeInteger(value) && value >= 0;
+const plain = value => value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype;
+
+function compareReports(text, latest) {
+  const prior = JSON.parse(text);
+  // Accept exact receipts from Athena, not JSON with duplicate keys,
+  // extra sensitive fields, or different interpretation/version.
+  if (text.trim() !== JSON.stringify(prior, null, 2) || !plain(prior) ||
+      prior.schema !== latest.schema || prior.source_schema !== latest.source_schema ||
+      prior.writer_reviewed_at !== latest.writer_reviewed_at || prior.scope !== latest.scope ||
+      [...optionalHash].some(k => Object.hasOwn(prior,k) && !hash(prior[k])) ||
+      (prior.selected_gzip_sha256 && !prior.exact_input_sha256)) throw Error('Unrecognized receipt');
+  const {exact_input_sha256: oldJson, selected_gzip_sha256: oldArchive, ...oldCounts} = prior;
+  const {exact_input_sha256: newJson, selected_gzip_sha256: newArchive, ...newCounts} = latest;
+  const differences = [];
+  const visit = (before, after, key, prefix) => {
+    if (Array.isArray(after)) {
+      if (!Array.isArray(before) || before.length !== after.length) throw Error('Invalid collections');
+      after.forEach((row,i) => visit(before[i],row,'',prefix + label(row.kind) + ' / '));
+    } else if (plain(after)) {
+      const keys = Object.keys(after);
+      if (!plain(before) || Object.keys(before).length !== keys.length || !keys.every(k => Object.hasOwn(before,k)))
+        throw Error('Invalid receipt fields');
+      keys.forEach(k => visit(before[k],after[k],k, prefix + (plain(after[k]) ? label(k)+' / ' : '')));
+    } else if (typeof after === 'string') {
+      if (before !== after) throw Error('Unsupported receipt schema');
+    } else {
+      const valid = nullableNumber.has(key) ? before === null || nonnegative(before) :
+        key === 'matches_reported_open' ? before === null || typeof before === 'boolean' :
+        typeof after === 'boolean' ? typeof before === 'boolean' : nonnegative(before);
+      if (!valid) throw Error('Invalid receipt value');
+      if (before !== after) differences.push(`${prefix}${label(key)}: ${count(before)} → ${count(after)}`);
+    }
+  };
+  visit(oldCounts,newCounts,'','');
+  const fingerprints = [
+    oldJson && newJson && `Decoded JSON fingerprints ${oldJson === newJson ? 'match' : 'differ'}.`,
+    oldArchive && newArchive && `Selected gzip fingerprints ${oldArchive === newArchive ? 'match' : 'differ'}.`
+  ].filter(Boolean);
+  return {differences, fingerprints};
+}
+
+function clearComparison() {
+  comparisonGeneration++;
+  $('previous').value = '';
+  $('diff').disabled = true;
+  $('compare-status').textContent = '';
+  $('differences').replaceChildren();
+}
+$('previous').addEventListener('change', () => {
+  comparisonGeneration++;
+  $('diff').disabled = !result || !$('previous').files[0];
+  $('compare-status').textContent = '';
+  $('differences').replaceChildren();
+});
+$('diff').addEventListener('click', async () => {
+  const saved = $('previous').files[0], latest = result, generation = ++comparisonGeneration;
+  if (!saved || !latest) return;
+  $('diff').disabled = true;
+  $('differences').replaceChildren();
+  $('compare-status').textContent = 'Comparing counts…';
+  try {
+    if (!saved.size || saved.size > 32 * 1024) throw Error('Receipt size unsupported');
+    const raw = new TextDecoder('utf-8',{fatal:true}).decode(await saved.arrayBuffer());
+    const {differences,fingerprints} = compareReports(raw,latest);
+    if (generation !== comparisonGeneration) return;
+    $('differences').replaceChildren(...differences.map(line=>element('li',line)));
+    $('compare-status').textContent = (differences.length ? `${differences.length} reported values changed.` : 'No reported counts or limits changed.') +
+      ' ' + (fingerprints.length ? fingerprints.join(' ') : 'No shared fingerprints to compare.');
+  } catch {
+    if (generation === comparisonGeneration) $('compare-status').textContent = 'Receipt refused. Select an unchanged Athena count-only JSON receipt within 32 KiB.';
+  } finally {
+    if (generation === comparisonGeneration) $('diff').disabled = false;
+  }
+});
 
 function renderCollections() {
   const rows = result.slices.filter(row => !$('attention').checked || attention(row));
@@ -24,6 +103,7 @@ $('attention').addEventListener('change', () => { if (result) renderCollections(
 $('backup').addEventListener('change', () => {
   job?.abort();
   job = result = undefined;
+  clearComparison();
   $('result').hidden = true;
   $('start').disabled = false;
   $('cancel').disabled = true;
@@ -40,6 +120,7 @@ $('review').addEventListener('submit', async event => {
   event.preventDefault();
   if (job) return;
   result = undefined;
+  clearComparison();
   $('result').hidden = true;
   const file = $('backup').files[0];
   if (!file || file.size === 0 || file.size > limit) {
