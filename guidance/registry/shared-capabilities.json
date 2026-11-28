@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-11-24",
+  "reviewedOn": "2026-11-28",
   "purpose": "Routing index for overlapping internal capabilities; authoritative implementation and detailed evidence remain at their linked owners. Not a separate upstream technology catalog or a declaration of shared-package parity.",
   "policy": "docs/REUSABLE-PACKAGE-COORDINATION.md",
   "capabilities": [
@@ -201,7 +201,8 @@
       "canonicalImplementation": null,
       "contractRefs": [
         "engineering/docs/adapters/contract.md",
-        "guidance/CLI_FIRST_EXECUTION.md"
+        "guidance/CLI_FIRST_EXECUTION.md",
+        "cores/content-extraction-core/README.md"
       ],
       "researchRefs": [
         "guidance/registry/web-acquisition-watch.json",
@@ -234,6 +235,15 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Repaired response binding before early provider metadata; full page/gallery path remains distinct.",
           "limits": "No general crawling or full media acceptance claimed."
+        },
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/content-extraction-core/content-extraction-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/content-extraction-core/content-extraction-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Bounded inert HTML-template parsing, declared feed discovery, JSON-LD/Open Graph article metadata and explicit listing selectors. DOM-adapter fixtures and actual Chromium tests passed, including zero image, stylesheet or frame requests during extraction. No publisher script execution or DOM insertion.",
+          "limits": "Narrow client-side parsing contract only; does not replace browser routing or authorized provider acquisition. Caller supplies already obtained HTML and policy. Real source metadata can be incomplete or inaccurate; field provenance and unknown dates remain explicit."
         }
       ],
       "nextAction": "Compare authorized parsing and provider-specific APIs/metadata before general crawler fallback. Review GameSync/Next site registries, MediaForge and UltraDeck specialized actions, and Noxviola browser integration once actual source is available. Do not replace proven specialized functionality with generic extraction."
@@ -975,6 +985,154 @@
         }
       ],
       "nextAction": "Compare typed effect vocabulary, trigger ordering, stacking policy, content linting and causality trace as language-neutral contracts. Do not adopt the Godot runtime outside a compatible host."
+    },
+    {
+      "id": "content.feed-processing",
+      "name": "feed-core",
+      "status": "implementation_candidate",
+      "ownerRepository": "Herbertofury/Athena",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "cores/feed-core/README.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "cores/README.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/feed-core/feed-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/feed-core/feed-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Athena-maintained typed feed records, exact-URL deduplication, explicit source preferences, safe regex filtering, lexical ranking/grouping, optional validated embedding interface, portable workspace data and precision-preserving feed serialization. JavaScript contracts and Python ingestion/publication recovery fixtures passed; actual Chromium XML imports passed.",
+          "limits": "No default embedding provider or authenticated cross-device preference service. Python acquisition is policy-configured. Exact consumer revisions and two independent real-host acceptance remain required before verified shared promotion."
+        },
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/feed-core/python/feed_collector.py",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/feed-core/python/feed_collector.py",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Generic policy-configured RSS/Atom/RDF/JSON collector: conditional HTTP, representation-version migration, source discovery, bounded retry/backoff, quarantine/probes and last-good output retention. Python recovery contracts passed.",
+          "limits": "Host policy controls acquisition, source identity, output publication, scheduling and alerts. Fixture acceptance does not prove arbitrary publisher or independent two-host compatibility."
+        },
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/feed-core/python/feed_publication.py",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/feed-core/python/feed_publication.py",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "RSS, Atom, JSON Feed and OPML projections preserve actual publication instants and separate date-only values; Atom omissions and counts are reported. Python publication contracts passed.",
+          "limits": "Host policy controls acquisition, source identity, output publication, scheduling and alerts. Fixture acceptance does not prove arbitrary publisher or independent two-host compatibility."
+        }
+      ],
+      "nextAction": "Consume the exact pinned source in INTA, record complete deployed and native/WebView acceptance, and verify a second independent compatible consumer before promoting to a verified shared implementation. Preserve existing user data and exact rollback pins."
+    },
+    {
+      "id": "content.feed-generation",
+      "name": "feed-generation-core",
+      "status": "implementation_candidate",
+      "ownerRepository": "Herbertofury/Athena",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "cores/feed-generation-core/README.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "cores/README.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/feed-generation-core/feed-generation-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/feed-generation-core/feed-generation-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Reusable listing/article extraction recipes compose the feed and extraction cores; selector/count/date regression validation, preserved last-good host workflow, recipe transfer and RSS/Atom/JSON output are implemented. DOM adapter and actual Chromium selector-generation contracts passed.",
+          "limits": "No implicit acquisition, remote publication or arbitrary website repair. The host must authorize and schedule HTML acquisition, keep last-good outputs and surface Atom omissions. Full independent second-host acceptance remains open."
+        }
+      ],
+      "nextAction": "Consume the exact pinned source in INTA, record complete deployed and native/WebView acceptance, and verify a second independent compatible consumer before promoting to a verified shared implementation. Preserve existing user data and exact rollback pins."
+    },
+    {
+      "id": "presentation.scrolling-ticker",
+      "name": "ticker-core",
+      "status": "implementation_candidate",
+      "ownerRepository": "Herbertofury/Athena",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "cores/ticker-core/README.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "cores/README.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/ticker-core/ticker-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/ticker-core/ticker-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Content-neutral measured scrolling with speed/direction changes, persistent pause, reduced-motion/focus/visibility handling, inert cloned content and teardown. Deterministic lifecycle and actual Chromium motion/accessibility-control harness passed.",
+          "limits": "Host supplies actual content/layout and persistent controls. Browser fixtures do not establish every native/WebView platform or assistive-technology combination; independent second-host acceptance remains open."
+        }
+      ],
+      "nextAction": "Consume the exact pinned source in INTA, record complete deployed and native/WebView acceptance, and verify a second independent compatible consumer before promoting to a verified shared implementation. Preserve existing user data and exact rollback pins."
+    },
+    {
+      "id": "presentation.dashboard-editor",
+      "name": "visual-editor-core",
+      "status": "implementation_candidate",
+      "ownerRepository": "Herbertofury/Athena",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "cores/visual-editor-core/README.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "cores/README.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/visual-editor-core/visual-editor-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/visual-editor-core/visual-editor-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Immutable typed dashboard widget add/update/delete/reorder operations with stable unique IDs and bounded layout values. State tests and mounted reader dashboard interactions passed; portable preferences preserve workspace data while appearance presets exclude it.",
+          "limits": "This core owns feed-dashboard state, not a general page-design platform. Pointer/keyboard interaction, rendering, persistence and native acceptance remain host or feed-widget-core responsibilities; independent second-host acceptance remains open."
+        }
+      ],
+      "nextAction": "Consume the exact pinned source in INTA, record complete deployed and native/WebView acceptance, and verify a second independent compatible consumer before promoting to a verified shared implementation. Preserve existing user data and exact rollback pins."
+    },
+    {
+      "id": "presentation.feed-widgets",
+      "name": "feed-widget-core",
+      "status": "implementation_candidate",
+      "ownerRepository": "Herbertofury/Athena",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "cores/feed-widget-core/README.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "cores/README.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "c3f6460e0403e67ed807499e59ec3ba2ab465002",
+          "path": "cores/feed-widget-core/feed-widget-core.js",
+          "source": "https://github.com/Herbertofury/Athena/blob/c3f6460e0403e67ed807499e59ec3ba2ab465002/cores/feed-widget-core/feed-widget-core.js",
+          "evidence": "source_and_contract_tests_verified",
+          "observed": "Configurable framework-independent reader factory with source discovery gallery, ten feed views, ticker settings, safe filters, saved article snapshots, recipes, website builder and dashboard controls. Five mounted DOM-adapter interaction contracts passed; product-specific storage namespace/groups/URLs are configuration.",
+          "limits": "Mounted DOM fixtures are not whole-application visual or native-platform proof. Offline/browser acquisition policy, authenticated preference sync, notification delivery and server-side publication remain explicit host capabilities. No full GameSync parity or independent two-host acceptance claim."
+        }
+      ],
+      "nextAction": "Consume the exact pinned source in INTA, record complete deployed and native/WebView acceptance, and verify a second independent compatible consumer before promoting to a verified shared implementation. Preserve existing user data and exact rollback pins."
     }
   ],
   "coverage": {

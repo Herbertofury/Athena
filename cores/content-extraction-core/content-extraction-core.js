@@ -141,11 +141,11 @@
         continue;
       }
       const key=Feed.canonicalUrl(url);if(seen.has(key)){stats.duplicates++;continue;}seen.add(key);
-      const time=select(row,selectors.date),image=select(row,selectors.image),summary=select(row,selectors.summary);
+      const time=select(row,selectors.date),image=select(row,selectors.image),summary=select(row,selectors.summary),author=select(row,selectors.author);
       const date=Feed.validDate(time?.getAttribute('datetime')||time?.getAttribute('content')||time?.getAttribute('data-published')||plain(time,100));
       const imageUrl=['src','data-src','data-lazy-src','content'].map(name=>Feed.safeUrl(image?.getAttribute(name),baseUrl)).find(Boolean)||'';
       if(!date)stats.undated++;if(!imageUrl)stats.withoutImage++;
-      const item=Feed.normalizeItem({sourceId:normalized.sourceId,title,url,date,summary:plain(summary),category:normalized.category,media:imageUrl?[{kind:'image',url:imageUrl}]:[]});
+      const item=Feed.normalizeItem({sourceId:normalized.sourceId,title,url,date,summary:plain(summary),author:plain(author,500),category:normalized.category,media:imageUrl?[{kind:'image',url:imageUrl}]:[]});
       if(item)items.push(item);
     }
     stats.extracted=items.length;

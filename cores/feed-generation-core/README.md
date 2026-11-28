@@ -10,7 +10,7 @@ const recipe = FeedGenerationCore.normalizeRecipe({
   sourceId: 'publisher', sourceName: 'Publisher news',
   baseUrl: 'https://publisher.example/news/',
   selectors: { item: 'article', title: 'h2', link: 'a[href]',
-    date: 'time[datetime]', image: 'img', summary: 'p' },
+    date: 'time[datetime]', image: 'img', summary: 'p', author: '.byline' },
   minimumItems: 1, maxDropRatio: 0.6, requireDates: false
 });
 const result = FeedGenerationCore.generate(downloadedHtml, recipe, {
@@ -26,7 +26,7 @@ if (result.validation.ok) {
 ## Contracts
 
 `normalizeRecipe` returns version 1 data with `sourceId`, `sourceName`, `baseUrl`,
-`category`, `mode`, the six selector fields, `limit`, `minimumItems`, `maxDropRatio`,
+`category`, `mode`, the seven selector fields, `limit`, `minimumItems`, `maxDropRatio`,
 `requireDates` and `allowCrossOrigin`. Only `listing` and `article` modes are
 accepted. In article mode, structured metadata extraction produces one item;
 listing mode applies the selectors. Empty optional selectors disable that field.

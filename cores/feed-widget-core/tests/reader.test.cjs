@@ -88,7 +88,8 @@ test('website builder discovers real feeds, validates a preview, saves and expor
   await h.click('.news-tabs [data-news-section="feeds"]');
   await h.set('#news-builder-url','https://publisher.example/news','input');
   await h.set('#news-builder-name','A website feed','input');
-  await h.set('#news-builder-html','<html><head><link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Publisher RSS"></head><body><article><h2><a href="/one">A safe extracted headline</a></h2><time datetime="2026-11-02T10:11:12Z"></time><p>A summary.</p><script>globalThis.shouldNotRun=true</script></article></body></html>','input');
+  await h.set('#news-builder-html','<html><head><link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Publisher RSS"></head><body><article><h2><a href="/one">A safe extracted headline</a></h2><time datetime="2026-11-02T10:11:12Z"></time><p>A summary.</p><span class="byline">Ada Example</span><script>globalThis.shouldNotRun=true</script></article></body></html>','input');
+  await h.set('[data-news-selector="author"]','.byline','input');
   await h.click('[data-news-action="discover-feeds"]');
   assert.equal(h.find('[data-discovered-feed]').dataset.discoveredFeed,'https://publisher.example/feed.xml');
   await h.click('[data-news-action="preview-extraction"]');
@@ -96,7 +97,7 @@ test('website builder discovers real feeds, validates a preview, saves and expor
   assert.match(h.find('.news-extraction-preview').textContent,/A safe extracted headline/);
   assert.equal(h.env.shouldNotRun,undefined);
   await h.click('[data-news-action="save-generated"]');
-  const p=h.prefs();assert.equal(p.feedRecipes.length,1);assert.equal(p.customItems.length,1);assert.equal(p.customItems[0].date,'2026-11-02T10:11:12.000Z');
+  const p=h.prefs();assert.equal(p.feedRecipes.length,1);assert.equal(p.customItems.length,1);assert.equal(p.customItems[0].date,'2026-11-02T10:11:12.000Z');assert.equal(p.customItems[0].author,'Ada Example');
   await h.click('[data-news-action="export-recipe"]');
   assert.equal(JSON.parse(h.downloads.at(-1).body).recipe.baseUrl,'https://publisher.example/news');
   await h.click('.news-tabs [data-news-section="latest"]');
@@ -113,4 +114,31 @@ test('the reader owns and removes ticker clones and endpoint-free local readers 
   }
   assert.equal(h.host.querySelectorAll('[aria-hidden="true"] a:not([tabindex="-1"])').length,0);
   h.reader.dispose();assert.equal(h.host.querySelectorAll('.news-ticker-segment').length,1);
+});
+
+test('600-story collections keep a bounded first page in all modes without truncating search, export or saved history',async t=>{
+  const h=harness();t.after(()=>h.reader.dispose());
+  const data=fixture();data.digest.generatedAt=new Date(Date.now()+1000).toISOString();
+  data.digest.items=Array.from({length:600},(_,i)=>({id:'bulk-'+i,sourceId:'alpha',title:'Large fixture story '+i,url:'https://alpha.example/bulk/'+i,date:'2026-11-20T12:34:00Z',media:[]}));
+  h.reader.mount(h.host,data);
+  for(const view of ['gallery','compact','list','masonry','magazine','carousel','imageboard','slideshow','social','ticker']){
+    await h.set('#news-view',view);assert.equal(h.host.querySelectorAll('[data-news-item]').length,60,view);
+    assert.deepEqual(Array.from(h.host.querySelectorAll('[data-news-item]'),node=>node.dataset.newsItem),Array.from({length:60},(_,i)=>'bulk-'+i),view+' order');
+  }
+  assert.match(h.find('#news-result-count').textContent,/600 stories · showing 60/);
+  assert.equal(h.host.querySelectorAll('.news-ticker-segment').length,2);
+  assert.equal(h.host.querySelector('.news-ticker-segment').querySelectorAll('[data-news-open]').length,120);
+  await h.click('[data-news-action="mark-visible-read"]');assert.equal(h.prefs().readIds.length,60);
+  await h.set('#news-view','slideshow');
+  await h.click('[data-news-action="show-more"]');assert.equal(h.host.querySelectorAll('[data-news-item]').length,120);
+  assert.deepEqual(Array.from(h.host.querySelectorAll('[data-news-item]'),node=>node.dataset.newsItem),Array.from({length:120},(_,i)=>'bulk-'+i));
+  assert.equal(h.find('[data-news-item]:not([hidden])').dataset.newsItem,'bulk-60','newly loaded slide is visible before focus moves');
+  await h.set('#news-article-search','story 599','input');assert.equal(h.host.querySelectorAll('[data-news-item]').length,1);
+  await h.click('[data-news-save="bulk-599"]');assert.equal(h.prefs().savedItems[0].id,'bulk-599');
+  await h.click('[data-news-action="clear-filters"]');
+  await h.click('.news-tabs [data-news-section="feeds"]');await h.click('[data-news-action="export-feed"]');
+  assert.equal(JSON.parse(h.downloads.at(-1).body).items.length,600);
+  await h.click('.news-tabs [data-news-section="saved"]');
+  h.reader.mount(h.host,{catalog:data.catalog,digest:{...data.digest,generatedAt:new Date(Date.now()+2000).toISOString(),items:[]}});
+  assert.equal(h.find('[data-news-item]').dataset.newsItem,'bulk-599');
 });

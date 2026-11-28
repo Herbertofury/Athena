@@ -1,10 +1,10 @@
 name: Shared feed cores
 on:
   pull_request:
-    paths: ['cores/**', '.github/workflows/shared-feed-cores.yml']
+    paths: ['cores/**', 'package.json', 'package-lock.json', '.github/workflows/shared-feed-cores.yml']
   push:
     branches: [main]
-    paths: ['cores/**', '.github/workflows/shared-feed-cores.yml']
+    paths: ['cores/**', 'package.json', 'package-lock.json', '.github/workflows/shared-feed-cores.yml']
   workflow_dispatch:
   schedule:
     - cron: '31 6 * * 1'

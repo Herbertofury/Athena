@@ -72,6 +72,7 @@ test('freshness distinguishes failed refresh, old success, offline and future cl
   const old={generatedAt:'2026-11-28T12:00:00Z',sources:[{id:'a',status:'unavailable',lastSuccessAt:'2026-11-20T00:00:00Z'}]};
   assert.equal(core.freshness(old,{now}).status,'stale');assert.equal(core.freshness(old,{now,offline:true}).status,'offline');
   assert.equal(core.freshness({}, {now}).status,'unknown');assert.equal(core.freshness({generatedAt:'2027-01-01'},{now}).status,'future');
+  assert.equal(core.freshness({generatedAt:'2026-11-28T12:00:00Z',sources:[{id:'canonical',status:'unavailable',lastSuccessfulCheckAt:'2026-11-20T00:00:00Z'}]},{now}).status,'stale');
 });
 test('merging a partial snapshot preserves archived articles and missing-source health',()=>{
   const merged=core.mergeDigests({items:[article('old'),article('same')],sources:[{id:'vendor',lastSuccessAt:'2026-11-27'},{id:'other',status:'ok'}]},

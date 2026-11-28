@@ -67,6 +67,7 @@
     if (image && !media.some(m=>m.url===image)) media.unshift({kind:'image',url:image});
     const publishedAt=validTimestamp(item.publishedAt)||validTimestamp(item.date_published)||validTimestamp(item.pubDate)||validTimestamp(item.date);
     const date=validDate(item.date)||validDate(item.date_published)||validDate(item.pubDate)||publishedAt||validDate(record(item._feed_core).date);
+    const author=(text(item.author)||text(record(item.author).name)||(Array.isArray(item.authors)?item.authors:[]).map(value=>text(record(value).name)).filter(Boolean).join(', ')).slice(0,500);
     return {
       id:text(item.id) || `${sourceId}:${canonicalUrl(url)}`, sourceId,title,url,date,
       publishedAt, updatedAt:validTimestamp(item.updatedAt)||validTimestamp(item.date_modified),
@@ -74,7 +75,7 @@
       category:text(item.category || src.category), media, tags:strings(item.tags),
       sourceIds:strings([sourceId,...(item.sourceIds || [])]),
       retained:item.retained === true,
-      ...(typeof item.author === 'string' ? {author:text(item.author)} : {})
+      ...(author ? {author} : {})
     };
   }
   function deduplicateItems(items) {
@@ -116,7 +117,7 @@
   }
   function normalizeFeedRecipe(raw={}) {
     const p=record(raw), supplied=record(p.selectors), selectors={}, baseUrl=safeUrl(p.baseUrl);
-    const defaults={item:'article',title:'h2, h3, h1',link:'a[href]',date:'time[datetime]',image:'img',summary:'p'};
+    const defaults={item:'article',title:'h2, h3, h1',link:'a[href]',date:'time[datetime]',image:'img',summary:'p',author:''};
     for(const [field,fallback]of Object.entries(defaults)) selectors[field]=typeof supplied[field]==='string'?text(supplied[field]).slice(0,513):fallback;
     return {schemaVersion:1,sourceId:(text(p.sourceId)||(baseUrl?`custom:${new URL(baseUrl).hostname}`:'custom')).slice(0,160),
       sourceName:(text(p.sourceName)||text(p.name)||'Custom feed').slice(0,200),baseUrl,category:(text(p.category)||'custom').slice(0,100),
@@ -297,7 +298,7 @@
   function freshness(digest,options={}) {
     const now=Number.isFinite(options.now)?options.now:Date.now(),maxAgeMs=number(options.maxAgeMs,2*3600000,0,Infinity);
     const data=record(digest),published=Date.parse(data.generatedAt||'');
-    const successes=(Array.isArray(data.sources)?data.sources:[]).map(row=>Date.parse(row.lastSuccessAt||row.lastSuccessfulFetchAt||row.lastSuccess||'')).filter(Number.isFinite);
+    const successes=(Array.isArray(data.sources)?data.sources:[]).map(row=>Date.parse(row.lastSuccessfulCheckAt||row.lastSuccessAt||row.lastSuccessfulFetchAt||row.lastSuccess||'')).filter(Number.isFinite);
     const lastSuccess=successes.length?Math.max(...successes):null;
     const stamp=lastSuccess??(Number.isFinite(published)?published:null),ageMs=stamp===null?null:Math.max(0,now-stamp);
     const status=options.offline?'offline':stamp===null?'unknown':stamp>now+300000?'future':ageMs>maxAgeMs?'stale':'current';
@@ -419,7 +420,7 @@
           if(!url)continue;const type=n.getAttribute('type')||n.getAttribute('medium')||'';const kind=name==='thumbnail'?'image':/^image/.test(type)?'image':/^audio/.test(type)?'audio':/^video/.test(type)?'video':'';if(kind)media.push({kind,url});}
         const guid=value(entry,atom?'id':'guid');
         add({id:guid?`${sourceId}:${guid}`:'',title:value(entry,'title'),url:safeUrl(link,baseUrl),date:value(entry,atom?'published':'pubDate')||value(entry,'date'),publishedAt:value(entry,atom?'published':'issued')||value(entry,'pubDate'),updatedAt:atom?value(entry,'updated'):value(entry,'modified'),
-          summary:value(entry,atom?'summary':'description'),media,author:value(entry,'author'),tags:children(entry).filter(n=>local(n)==='category').map(n=>n.getAttribute('term')||n.textContent)});
+          summary:value(entry,atom?'summary':'description'),media,author:atom?children(entry).filter(n=>local(n)==='author').map(n=>value(n,'name')).filter(Boolean).join(', '):value(entry,'author')||value(entry,'creator'),tags:children(entry).filter(n=>local(n)==='category').map(n=>n.getAttribute('term')||n.textContent)});
       }
     }
     if(!items.length)throw new Error('Feed contains no supported articles with a title and HTTP(S) link.');
@@ -438,15 +439,16 @@
       return /\.png$/.test(suffix)?'image/png':/\.webp$/.test(suffix)?'image/webp':/\.gif$/.test(suffix)?'image/gif':/\.jpe?g$/.test(suffix)?'image/jpeg':'application/octet-stream';};
     if(format==='json')return finish(JSON.stringify({version:'https://jsonfeed.org/version/1.1',title,...(url?{home_page_url:url}:{}),...(feedUrl?{feed_url:feedUrl}:{}),
       items:rows.map(item=>({id:item.id,url:item.url,title:item.title,content_text:item.summary||item.title,...(item.publishedAt?{date_published:item.publishedAt}:{}),
+        ...(item.author?{authors:[{name:item.author}]}:{}),
         ...(item.date?{_feed_core:{date:item.date.slice(0,10)}}:{}),
         ...(item.updatedAt?{date_modified:item.updatedAt}:{}),...(item.tags.length?{tags:item.tags}:{}),...((item.media.find(m=>m.kind==='image'))?{image:item.media.find(m=>m.kind==='image').url}:{}),
         ...(item.media.some(m=>m.kind!=='embed')?{attachments:item.media.filter(m=>m.kind!=='embed').map(m=>({url:m.url,mime_type:mime(m)}))}:{})}))},null,2));
-    if(format==='rss')return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"><channel><title>${xml(title)}</title><link>${xml(url||feedUrl)}</link><description>${xml(title)}</description>${rows.map(item=>`<item><guid isPermaLink="false">${xml(item.id)}</guid><title>${xml(item.title)}</title><link>${xml(item.url)}</link>${item.publishedAt?`<pubDate>${xml(new Date(item.publishedAt).toUTCString())}</pubDate><dcterms:issued>${xml(item.publishedAt)}</dcterms:issued>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}${item.updatedAt?`<dcterms:modified>${xml(item.updatedAt)}</dcterms:modified>`:''}<description>${xml(item.summary||item.title)}</description>${item.media.filter(m=>m.kind!=='embed').map(m=>`<media:content url="${xml(m.url)}" medium="${m.kind}"/>`).join('')}</item>`).join('')}</channel></rss>`);
+    if(format==='rss')return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"><channel><title>${xml(title)}</title><link>${xml(url||feedUrl)}</link><description>${xml(title)}</description>${rows.map(item=>`<item><guid isPermaLink="false">${xml(item.id)}</guid><title>${xml(item.title)}</title><link>${xml(item.url)}</link>${item.publishedAt?`<pubDate>${xml(new Date(item.publishedAt).toUTCString())}</pubDate><dcterms:issued>${xml(item.publishedAt)}</dcterms:issued>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}${item.updatedAt?`<dcterms:modified>${xml(item.updatedAt)}</dcterms:modified>`:''}<description>${xml(item.summary||item.title)}</description>${item.author?`<dc:creator>${xml(item.author)}</dc:creator>`:''}${item.media.filter(m=>m.kind!=='embed').map(m=>`<media:content url="${xml(m.url)}" medium="${m.kind}"/>`).join('')}</item>`).join('')}</channel></rss>`);
     // Atom requires a real entry updated instant. Feed generation is not article modification.
     const generatedAt=validTimestamp(options.generatedAt);if(!generatedAt)throw new Error('Atom export requires an explicit generatedAt timestamp for the feed.');
     const updated=new Date(generatedAt).toISOString();
     const timed=rows.filter(item=>item.publishedAt||item.updatedAt);
-    return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><id>${xml(feedUrl||url||'urn:feed:export')}</id><title>${xml(title)}</title><updated>${updated}</updated><author><name>${xml(text(options.author)||title)}</name></author>${timed.map(item=>`<entry><id>${xml(item.url)}</id><title>${xml(item.title)}</title><link href="${xml(item.url)}"/><updated>${xml(item.updatedAt||item.publishedAt)}</updated>${item.publishedAt?`<published>${xml(item.publishedAt)}</published>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}<summary>${xml(item.summary||item.title)}</summary>${item.media.filter(m=>m.kind!=='embed').map(m=>`<link rel="enclosure" href="${xml(m.url)}" type="${mime(m)}"/>`).join('')}</entry>`).join('')}</feed>`,timed.length);
+    return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><id>${xml(feedUrl||url||'urn:feed:export')}</id><title>${xml(title)}</title><updated>${updated}</updated><author><name>${xml(text(options.author)||title)}</name></author>${timed.map(item=>`<entry><id>${xml(item.url)}</id><title>${xml(item.title)}</title><link href="${xml(item.url)}"/><updated>${xml(item.updatedAt||item.publishedAt)}</updated>${item.publishedAt?`<published>${xml(item.publishedAt)}</published>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}<summary>${xml(item.summary||item.title)}</summary>${item.author?`<author><name>${xml(item.author)}</name></author>`:''}${item.media.filter(m=>m.kind!=='embed').map(m=>`<link rel="enclosure" href="${xml(m.url)}" type="${mime(m)}"/>`).join('')}</entry>`).join('')}</feed>`,timed.length);
   }
   function exportFeed(items,options={}){return exportFeedResult(items,options).content;}
   return Object.freeze({VERSION,VIEWS,safeUrl,canonicalUrl,validDate,validTimestamp,normalizeItem,deduplicateItems,sourceEnabled,resolveSourceSelection,normalizeTickerOptions,normalizeFeedRecipe,normalizeDashboard,normalizePreferences,

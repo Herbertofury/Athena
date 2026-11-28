@@ -51,6 +51,7 @@ metadata. Items and digest health follow `feed-core` schema version 1.
 | `title`, `description`, `eyebrow`, `route` | Product-facing labels and the route used by the Home strip. |
 | `groups` | Maps the host's category IDs to readable labels. |
 | `editorialSourceIds` | Identifies static editorial selections that must not count as automatically checked feeds. Digest rows with `origin: 'editorial'` already have this behavior. |
+| `pageSize`, `tickerLimit` | Initial article batch (default 60, range 20–120) and headline strip limit (default 120, range 10–300). Search, filters, exports and saved history remain complete. |
 | `defaultWidgets` | Optional first dashboard's widget definitions. An unconfigured reader starts with a latest-headlines widget. |
 | `publicUrl` | Publisher identity for exported feeds. No product URL is embedded in the shared source. |
 | `remoteBaseUrl` | Optional public catalog/digest/health base for a bundled local reader. A file-hosted reader without endpoints makes no background requests. |
@@ -82,7 +83,7 @@ outside the reader, native lifecycle and source catalog policy.
 ## Implemented behavior
 
 - Gallery, compact gallery, list, masonry, magazine, carousel, imageboard,
-  slideshow, social feed and ticker reading views use the same selected items.
+  slideshow, social feed and ticker reading views use the same selected items. The first 60 stories render initially; an explicit Show more control continues the list. The strip identifies its 120-headline scope when additional matches exist.
 - Source galleries and lists support search, categories, recommendations, saved
   sources, enable/disable and health filters. Explicit source choices override
   evolving catalog defaults. Reference-only sources are labeled and not offered
@@ -166,10 +167,10 @@ From the repository root, after `npm ci --ignore-scripts`:
 node --test cores/feed-widget-core/tests/*.test.cjs
 ```
 
-The five mounted DOM contract checks cover source/read/save persistence,
+The six mounted DOM contract checks cover source/read/save persistence,
 preset isolation, rejected pattern retention, dashboard order and editing,
-actual inert selector extraction/discovery/save/export, and ticker clone
-cleanup. They use linkedom and explicitly accommodate its textarea form-value
+actual inert selector extraction/discovery/save/export, ticker clone
+cleanup, and a 600-story workload preserving full search/export/bookmark data while bounding the initial DOM. They use linkedom and explicitly accommodate its textarea form-value
 behavior. They are **not** a rendered-browser, animation smoothness, CSS or
 native WebView acceptance claim. The consuming INTA repository adds
 `tests/browser_news.py` for real Playwright interaction, keyboard/drag behavior,
@@ -183,3 +184,21 @@ notification delivery, hosted user-defined publishing/webhooks/schedules, richer
 media/audio controls, and a configured semantic embedding provider. Exact-date,
 source-health and security constraints remain active even where those features
 are later added.
+
+### Measured initial-render budget
+
+[The dated browser receipt](benchmarks/render-performance.json) compares the
+same synthetic 600-record input before and after progressive rendering. At the
+tested catalog defaults, 597 entries matched: initial DOM elements fell from 15,876
+to 2,196, median mount time from 311.4 ms to 36.5 ms, and clearing a search from 224 ms
+to 30.1 ms across five runs. Every match is retained and available through search,
+export and Show more. This measures the bounded initial batch, not faster
+construction of all 600 cards, and is not a field/mobile performance guarantee.
+
+Reproduce with the same local input files and an isolated browser:
+
+```sh
+python cores/feed-widget-core/benchmarks/render-browser.py \
+  --catalog /path/to/news-sources.json --digest /path/to/news-digest.json \
+  --browser /path/to/chromium --output /tmp/reader-measurement.json
+```

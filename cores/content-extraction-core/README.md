@@ -17,7 +17,7 @@ const article = ContentExtractionCore.extractArticle(html, {
 const listing = ContentExtractionCore.extractListing(html, {
   sourceId: 'publisher', sourceName: 'Publisher',
   selectors: { item: '.story', title: 'h2', link: 'a', date: 'time',
-    image: 'img', summary: '.summary' }
+    image: 'img', summary: '.summary', author: '.byline' }
 }, { baseUrl: 'https://publisher.example/news/', DOMParser });
 ```
 

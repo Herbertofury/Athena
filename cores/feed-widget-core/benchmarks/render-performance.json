@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-28",
+  "scope": "Synthetic initial-render scaling with the same retained catalog/digest and unique fixture story URLs; complete source data remains in memory.",
+  "browser": {
+    "name": "Chromium",
+    "version": "158.0.8127.0",
+    "binarySha256": "1f698044a68e18c1ce0cce74be25413f176806f19f15a44de5bb02cd578996af",
+    "source": "https://github.com/Sparticuz/chromium",
+    "package": "@sparticuz/chromium@158.0.0",
+    "flags": [
+      "--no-sandbox"
+    ],
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "reducedMotion": true,
+    "offline": true
+  },
+  "baselineSourceCommit": "6aa1df919badd562dc39ce0a9449a5115c44182a",
+  "candidateReaderSha256": "4f227f1f9d4533d9f973cf1ae51ff7e7280b773a40ad0b09af3da8e884395b90",
+  "catalogSha256": "21eb4daea6da7859c1777a1f0111b4a65c3bcd3a752aa3363a3816cd5f6c6110",
+  "digestSha256": "fbb7ae71894fe3c4a37da4afe63d2203ea1692b0a669497c3d35381893eb923d",
+  "medians": {
+    "before": {
+      "166": {
+        "mountMs": 130.8,
+        "filterMs": 4.1,
+        "restoreMs": 120,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      "600": {
+        "mountMs": 311.4,
+        "filterMs": 9.4,
+        "restoreMs": 224,
+        "rendered": 597,
+        "domElements": 15876
+      }
+    },
+    "after": {
+      "166": {
+        "mountMs": 103.9,
+        "filterMs": 2.4,
+        "restoreMs": 77.6,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      "600": {
+        "mountMs": 36.5,
+        "filterMs": 1.8,
+        "restoreMs": 30.1,
+        "rendered": 60,
+        "domElements": 2196
+      }
+    }
+  },
+  "samples": {
+    "before": [
+      {
+        "count": 166,
+        "run": 0,
+        "mountMs": 147.89999999990687,
+        "filterMs": 4.2000000001862645,
+        "restoreMs": 144,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      {
+        "count": 166,
+        "run": 1,
+        "mountMs": 132.39999999990687,
+        "filterMs": 4.100000000093132,
+        "restoreMs": 120.29999999981374,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      {
+        "count": 166,
+        "run": 2,
+        "mountMs": 73.39999999990687,
+        "filterMs": 3.3999999999068677,
+        "restoreMs": 120,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      {
+        "count": 166,
+        "run": 3,
+        "mountMs": 59.299999999813735,
+        "filterMs": 2.3999999999068677,
+        "restoreMs": 54.60000000009313,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      {
+        "count": 166,
+        "run": 4,
+        "mountMs": 130.79999999981374,
+        "filterMs": 4.199999999720603,
+        "restoreMs": 53.10000000009313,
+        "rendered": 165,
+        "domElements": 4462
+      },
+      {
+        "count": 600,
+        "run": 0,
+        "mountMs": 326,
+        "filterMs": 9.400000000372529,
+        "restoreMs": 268.5,
+        "rendered": 597,
+        "domElements": 15876
+      },
+      {
+        "count": 600,
+        "run": 1,
+        "mountMs": 390.10000000009313,
+        "filterMs": 36.10000000009313,
+        "restoreMs": 373,
+        "rendered": 597,
+        "domElements": 15876
+      },
+      {
+        "count": 600,
+        "run": 2,
+        "mountMs": 235.89999999990687,
+        "filterMs": 8.399999999906868,
+        "restoreMs": 218.89999999990687,
+        "rendered": 597,
+        "domElements": 15876
+      },
+      {
+        "count": 600,
+        "run": 3,
+        "mountMs": 311.39999999990687,
+        "filterMs": 9.399999999906868,
+        "restoreMs": 200.5,
+        "rendered": 597,
+        "domElements": 15876
+      },
+      {
+        "count": 600,
+        "run": 4,
+        "mountMs": 309,
+        "filterMs": 39.09999999962747,
+        "restoreMs": 224,
+        "rendered": 597,
+        "domElements": 15876
+      }
+    ],
+    "after": [
+      {
+        "count": 166,
+        "run": 0,
+        "mountMs": 164.79999999981374,
+        "filterMs": 3,
+        "restoreMs": 88.1999999997206,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      {
+        "count": 166,
+        "run": 1,
+        "mountMs": 103.90000000037253,
+        "filterMs": 1.8000000002793968,
+        "restoreMs": 77.60000000009313,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      {
+        "count": 166,
+        "run": 2,
+        "mountMs": 105.70000000018626,
+        "filterMs": 16.199999999720603,
+        "restoreMs": 38.90000000037253,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      {
+        "count": 166,
+        "run": 3,
+        "mountMs": 85.59999999962747,
+        "filterMs": 2.400000000372529,
+        "restoreMs": 90.89999999990687,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      {
+        "count": 166,
+        "run": 4,
+        "mountMs": 50,
+        "filterMs": 2.2999999998137355,
+        "restoreMs": 63.5,
+        "rendered": 60,
+        "domElements": 2184
+      },
+      {
+        "count": 600,
+        "run": 0,
+        "mountMs": 61.39999999990687,
+        "filterMs": 2.3999999999068677,
+        "restoreMs": 29.899999999906868,
+        "rendered": 60,
+        "domElements": 2196
+      },
+      {
+        "count": 600,
+        "run": 1,
+        "mountMs": 36.39999999990687,
+        "filterMs": 1.6000000000931323,
+        "restoreMs": 30.100000000093132,
+        "rendered": 60,
+        "domElements": 2196
+      },
+      {
+        "count": 600,
+        "run": 2,
+        "mountMs": 41.89999999990687,
+        "filterMs": 1.7999999998137355,
+        "restoreMs": 44.8000000002794,
+        "rendered": 60,
+        "domElements": 2196
+      },
+      {
+        "count": 600,
+        "run": 3,
+        "mountMs": 35.700000000186265,
+        "filterMs": 2.7999999998137355,
+        "restoreMs": 28.5,
+        "rendered": 60,
+        "domElements": 2196
+      },
+      {
+        "count": 600,
+        "run": 4,
+        "mountMs": 36.5,
+        "filterMs": 1.3000000002793968,
+        "restoreMs": 32.299999999813735,
+        "rendered": 60,
+        "domElements": 2196
+      }
+    ]
+  },
+  "preservedBehavior": "All ten layouts render the same ordered initial 60 records; Show more continues the same order and reveals the newly focused slideshow item. Query, rank and export use the complete collection; marking read uses shown cards only; saved snapshot history remains independently retained. The 600-item DOM contract fixture exercises these properties.",
+  "limits": "Five measurements on one headless Linux workspace, no mobile hardware or field-web-vitals claim. This changes initial rendering to an explicit progressive page; it does not claim that rendering all 600 DOM cards became faster. Baseline commit identifies the locally validated source checkpoint; publication through a connector may use a different commit ID.",
+  "candidateMeasurementNote": "Final candidate rerun after the slideshow focus and publication-time display corrections, using unchanged catalog/digest hashes. Five sequential samples per input size; measurements remain machine-specific."
+}

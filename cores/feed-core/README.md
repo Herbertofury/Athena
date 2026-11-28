@@ -120,7 +120,7 @@ commit `576c80423a406baa7a509c6580490bfe94e81633` subsequently passed
 [actual Chromium XML-import/ticker CI](https://github.com/Herbertofury/Athena/actions/runs/46172706371),
 along with Node 24/26 and Python contracts. New extraction and widget changes
 require their own exact-revision CI run; the baseline pass does not cover them.
-The current source subsequently passed all 38 JavaScript and 19 Python fixtures,
+The shared implementation subsequently passed its JavaScript and Python contract suites,
 plus the actual local Chromium 158 harness with inert resource checks, extraction,
 XML imports and ticker lifecycle. The mounted widget tests use a DOM adapter;
 complete application visual/native acceptance remains a consumer responsibility.

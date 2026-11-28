@@ -46,3 +46,13 @@ test('relative listing images use the acquired page URL and safe lazy sources su
   const article=Extraction.extractArticle('<link rel="canonical" href="/canonical/story"><script type="APPLICATION/LD+JSON">{"@type":"Article","headline":"Declared","image":"images/a.jpg","keywords":["security","patch"]}</script>',options);
   assert.equal(article.media[0].url,'https://publisher.example/news/images/a.jpg');assert.deepEqual(article.tags,['security','patch']);
 });
+test('an optional author selector preserves publisher bylines as plain data',()=>{
+  const listing=Extraction.extractListing('<article><h2><a href="/one">An authored story</a></h2><address class="byline">Ada <strong>Example</strong><script>untrusted()</script></address></article>',{selectors:{author:'.byline'}},options);
+  assert.equal(listing.items[0].author,'Ada Example');
+  const Feed=require('../../feed-core/feed-core');
+  const json=Feed.exportFeed(listing.items,{format:'json'});
+  assert.deepEqual(JSON.parse(json).items[0].authors,[{name:'Ada Example'}]);
+  assert.equal(Feed.parseImportedFeed(json,{sourceId:'author-roundtrip'}).items[0].author,'Ada Example');
+  const versionOne=JSON.parse(json);versionOne.version='https://jsonfeed.org/version/1';versionOne.items[0].author={name:'Legacy author'};delete versionOne.items[0].authors;
+  assert.equal(Feed.parseImportedFeed(JSON.stringify(versionOne),{sourceId:'legacy-author'}).items[0].author,'Legacy author');
+});
