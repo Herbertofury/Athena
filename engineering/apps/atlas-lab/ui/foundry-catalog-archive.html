@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Athena · Original Foundry catalog</title><link rel="stylesheet" href="/learning/style.css"></head>
+<body><main>
+<nav aria-label="Athena native pages"><a href="/">ATHENA / HOME</a><a href="/migration">Migration readiness</a></nav>
+<header><p class="eyebrow">FOUNDRY / LOCAL ARCHIVE</p><h1>Original Foundry catalog</h1>
+<p>Open a saved original-catalog archive, search it and inspect any record. No uploads, imports, provider requests or changes to your active workspace.</p></header>
+<section class="runner" aria-labelledby="choose-heading">
+<h2 id="choose-heading">Open a private catalog archive</h2>
+<p><label for="archive">Saved Foundry catalog JSON</label> <input id="archive" type="file" accept=".json,application/json"></p>
+<p id="status" role="status">Select an unchanged Athena catalog archive (up to 12 MiB).</p>
+</section>
+<section class="runner" id="catalog" aria-labelledby="catalog-heading" hidden>
+<h2 id="catalog-heading">Catalog records</h2>
+<p>Matching an archive fingerprint checks the stored raw JSON text, not its authorship or its suitability for import.</p>
+<div class="history-controls">
+<label for="family">Catalog family</label><select id="family"></select>
+<label for="query">Search names, labels and IDs</label><input id="query" type="search" maxlength="128">
+</div>
+<div class="layout">
+<section aria-label="Original records"><p id="matches" role="status"></p><ul id="records"></ul><button type="button" id="more" hidden>Show the next records</button></section>
+<section id="detail" aria-label="Original record"><h3 id="record-heading" tabindex="-1">Choose a record</h3><p id="verification" role="status"></p><dl id="fields"></dl><details id="raw" hidden><summary>Inspect original JSON text</summary><pre id="raw-text"></pre></details></section>
+</div>
+</section>
+<footer>Original records may contain private details. Nothing here is activated, and source retirement is not certified.</footer>
+</main><script type="module" src="/migration/foundry-catalog/app.js"></script></body></html>
