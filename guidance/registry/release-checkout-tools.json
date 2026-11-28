@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "reviewedOn": "2026-11-24",
+  "reviewedOn": "2026-11-28",
   "purpose": "Mandatory named optimization assessments; risk-routed functional verification; dedicated security audits explicitly opt-in and advisory.",
   "tools": [
     {
@@ -8,7 +8,7 @@
       "upstream": "https://github.com/EL4CTEO/shrink-anything",
       "lane": "core",
       "trigger": "Changed supported source, dependencies or release assets",
-      "use": "Scan/weigh; cut only with strong tests; verify/undo.",
+      "use": "Scan/weigh; keep verified non-destructive improvements only.",
       "versionPolicy": "Review and pin the named tool before execution; exact unchanged-input evidence reuse allowed; no deferred or substitute assessment.",
       "releasePolicy": "mandatory_when_applicable"
     },
@@ -28,6 +28,15 @@
       "trigger": "Eligible non-Rust hotspot or migration boundary",
       "use": "Compare alternatives against the same baseline; record/diff/fuzz/bench/gate.",
       "versionPolicy": "Review and pin the named tool before execution; exact unchanged-input evidence reuse allowed; no deferred or substitute assessment.",
+      "releasePolicy": "mandatory_when_applicable"
+    },
+    {
+      "id": "google-migrate-to-rust",
+      "upstream": "https://github.com/google/skills/tree/10c799ee69bcdb10b82836403d1531bfcc3d9d24/skills/developers/migrate-to-rust",
+      "lane": "core",
+      "trigger": "Material, supported legacy-to-Rust component boundary under evaluation",
+      "use": "Review baseline and migration blueprint; run an independently authorized isolated pilot only where justified. Retain exact parity, full-workload measurement and rollback evidence.",
+      "versionPolicy": "Review and pin the skill source commit; never require global install, public telemetry or vendor execution.",
       "releasePolicy": "mandatory_when_applicable"
     },
     {
