@@ -1,0 +1,29 @@
+name: Athena interface motion lab
+on:
+  pull_request:
+    paths: ['experiments/interface-motion-lab/**', '.github/workflows/interface-motion-lab.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  renderer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Verify exact Aether custody and deterministic interaction
+        working-directory: experiments/interface-motion-lab/aether
+        run: |
+          sha256sum -c UPSTREAM-SHA256
+          node --test test.mjs
+      - name: Verify local browser behavior with no outward traffic
+        working-directory: experiments/interface-motion-lab
+        run: |
+          python -m pip install 'playwright==1.62.0'
+          python -m playwright install --with-deps chromium
+          python -B test-browser.py

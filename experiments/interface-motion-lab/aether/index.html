@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Aether motion reference</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./main.js"></script>
+</head>
+<body>
+<div id="background" aria-hidden="true"><canvas></canvas><div id="veil"></div></div>
+<main>
+<p class="eyebrow">INTERFACE LAB / 01</p>
+<h1>Aether motion reference</h1>
+<p>Move your pointer across the scene, or touch and drag. Try Selene with Ripples or Event Horizon with Gravity well.</p>
+<div class="controls">
+<label>Scene<select id="scene"></select></label>
+<label>Pointer reaction<select id="mode"></select></label>
+<label>Finish<select id="finish"></select></label>
+<label>Motion<select id="motion"><option value="full">Full</option><option value="calm">Calm</option><option value="still">Still</option></select></label>
+<label>Quality<select id="quality"><option value="battery">Battery</option><option value="balanced" selected>Balanced</option><option value="high">High</option></select></label>
+<label>Backdrop strength<select id="strength"><option value="calm">Calm</option><option value="balanced" selected>Balanced</option><option value="vivid">Vivid</option></select></label>
+</div>
+<p id="status" role="status"></p>
+</main>
+</body>
+</html>
