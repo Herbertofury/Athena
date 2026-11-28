@@ -42,10 +42,11 @@ python -B launch.py --archive-foundry-legacy-catalog REVIEW.sqlite --legacy-outp
 ```
 
 The new private archive preserves every documented original field for theme
-packages, rooms and ecology objects, including original JSON text and its
-individual SHA-256. The receipt includes counts and hashes only. An absent
-optional object table is reported separately from an empty one. No catalog
-row is installed, executed or attached to an active profile; other tables and
-referenced media files are not included. Keep the reviewed source and any
+packages, rooms, ecology objects, artist worlds, districts and weather, and
+music routes, including original JSON text and its individual SHA-256. The
+receipt includes counts and hashes only. Absent optional tables are reported
+separately from empty ones. No catalog row is installed, executed or attached
+to an active profile; soundtrack assignments, other tables and referenced media
+files are not included. The seven-family output uses archive schema 2. Keep the reviewed source and any
 associated files. Malformed input, a changed source hash or an existing output
 is refused, with no replacement.
