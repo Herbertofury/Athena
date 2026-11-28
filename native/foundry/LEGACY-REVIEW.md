@@ -19,3 +19,16 @@ database before publishing. Existing files and live profiles are not replaced.
 The report identifies that the importer is partial. Skipped original history,
 custom records, media fidelity, the owner's original data and source retirement
 are separate checks. Report troubleshooting facts without publishing private data.
+
+To preserve original legacy events outside the active database:
+
+```text
+python -B launch.py --archive-foundry-legacy-history REVIEW.sqlite --legacy-output PRIVATE-HISTORY.json --expected-legacy-sha256 REVIEW_HASH
+```
+
+The archive retains each event's original JSON text and SHA-256 in event-ID
+order. It is inert: Athena does not turn those events into active revisions or
+replay them. The terminal shows only the count and hashes. Keep the archive in
+a private folder (with private inherited permissions on Windows): original event contents may include personal data. An
+invalid event or an exceeded row/byte budget stops the export without writing
+a partial archive. This export does not cover other skipped database tables.

@@ -215,6 +215,10 @@ fn run() -> Result<()> {
             Some(v) => println!("{v}"),
             None => println!("null"),
         },
+        "archive-legacy-history" if args.len() == 3 => {
+            let archive = athena_foundry_store::legacy_history::archive_history(p)?;
+            println!("{}", serde_json::to_string(&archive)?);
+        }
         "inspect-legacy" if args.len() == 3 => {
             println!("{}", serde_json::to_string(&inspect_legacy(p)?)?)
         }
