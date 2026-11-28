@@ -11,7 +11,7 @@ Athena maintains shared guidance for all participating projects. Documentation i
 
 ## Tooling and shared knowledge
 
-- [Documentation tool routing](https://github.com/Herbertofury/Athena/blob/main/guidance/WIKI_CLOSEOUT.md#4-documentation-tool-routing) covers RAG-Anything, Diagram Design and lightweight alternatives.
+- [Documentation tool routing](https://github.com/Herbertofury/Athena/blob/main/guidance/WIKI_CLOSEOUT.md#4-documentation-tool-routing) covers RAG-Anything, Diagram Design, AFFiNE and lightweight alternatives. If an AFFiNE canvas informs a published workflow, check its linear reading order, exported output and parity with the canonical Wiki.
 - [Shared capability coordination](https://github.com/Herbertofury/Athena/blob/main/docs/REUSABLE-PACKAGE-COORDINATION.md) tracks reusable implementations and protects distinct project features.
 - [Frontier stack advancement](https://github.com/Herbertofury/Athena/blob/main/guidance/WEB_ACQUISITION_FRONTIER.md) requires current evidence and fix-forward repair before holding eligible older versions.
 

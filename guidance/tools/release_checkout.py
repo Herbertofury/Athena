@@ -105,6 +105,13 @@ def validate(receipt, head):
         for field in ("coverage_evidence", "walkthrough_evidence", "simplification_evidence"):
             if not nonempty(documentation.get(field)):
                 problems.append(f"documentation_closeout: {field} required")
+        if "affine_canvas" in documentation:
+            affine = documentation["affine_canvas"]
+            if not isinstance(affine, dict) or not valid_sha(affine.get("source_commit")):
+                problems.append("documentation_closeout AFFiNE canvas requires a full upstream source commit")
+            for field in ("reading_order_evidence", "export_readback_evidence", "wiki_parity_evidence"):
+                if not isinstance(affine, dict) or not nonempty(affine.get(field)):
+                    problems.append(f"documentation_closeout AFFiNE canvas: {field} required")
         publication = documentation.get("publication")
         if not isinstance(publication, dict):
             problems.append("documentation_closeout: publication evidence required")
