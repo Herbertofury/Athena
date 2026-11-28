@@ -1,4 +1,5 @@
 """Test the packaged native count-only review without any owner data or service."""
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -45,7 +46,7 @@ def main(package):
         ]
         payload["groups"] = []
 
-        def run(raw, success=True, fingerprint=False):
+        def run(raw, success=True, fingerprint=False, decoded=None):
             source.write_bytes(raw)
             files_before = {p.name for p in root.iterdir()}
             result = subprocess.run([str(engine), "review-constellation-v7", str(source),
@@ -60,10 +61,17 @@ def main(package):
             if success:
                 report = json.loads(result.stdout)
                 if fingerprint:
-                    require(report["exact_input_sha256"] == hashlib.sha256(raw).hexdigest(),
+                    payload_bytes = raw if decoded is None else decoded
+                    require(report["exact_input_sha256"] == hashlib.sha256(payload_bytes).hexdigest(),
                             "wrong exact-input hash")
+                    if decoded is None:
+                        require("selected_gzip_sha256" not in report, "plain JSON mislabeled as an archive")
+                    else:
+                        require(report["selected_gzip_sha256"] == hashlib.sha256(raw).hexdigest(),
+                                "wrong separate selected archive fingerprint")
                 else:
-                    require("exact_input_sha256" not in report, "default receipt disclosed a fingerprint")
+                    require(not {"exact_input_sha256", "selected_gzip_sha256"}.intersection(report),
+                            "default receipt disclosed a fingerprint")
                 return report
 
         raw = json.dumps(payload).encode()
@@ -140,6 +148,26 @@ def main(package):
         run(raw.replace(b'"id": "turn-B"', b'"id": "turn-A"'), success=False)
         run(b'\xff\xfe', success=False)
         run(b' ' * (16 * 1024 * 1024 + 1), success=False)
+        unusual = (json.dumps(payload, ensure_ascii=True, indent=1) + " \r\n").encode("utf-8")
+        archive = gzip.compress(unusual, mtime=0)
+        # The fixture filename deliberately ends in .json, not .gz.
+        require(run(archive) == run(unusual), "compressed and plain read-only receipts differ")
+        plain = run(unusual, fingerprint=True)
+        gz = run(archive, fingerprint=True, decoded=unusual)
+        require(gz.pop("selected_gzip_sha256") != gz["exact_input_sha256"] and plain == gz,
+                "archive fingerprint conflated with exact decoded JSON fingerprint")
+        run(archive[:-3], success=False)
+        bad_crc = bytearray(archive)
+        bad_crc[-8] ^= 1
+        run(bytes(bad_crc), success=False)
+        run(archive + b"trailing", success=False)
+        run(archive + gzip.compress(b"", mtime=0), success=False)
+        padded = unusual.ljust(16 * 1024 * 1024, b" ")
+        require(run(gzip.compress(padded, mtime=0)) == run(unusual), "exact expansion budget was refused")
+        run(gzip.compress(padded + b" ", mtime=0), success=False)
+        run(archive.ljust(16 * 1024 * 1024 + 1, b" "), success=False)
+        source = root / "plain with gzip extension.gz"
+        require(run(unusual) == run(archive), "filename extension overrides byte signature")
         print("Constellation v7: packaged CLI verified caps, references, privacy and untouched source.")
 
 

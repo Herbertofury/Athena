@@ -6,7 +6,7 @@ def load(name,path):
  spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 pack=load('candidate_pack',ROOT/'scripts/package_native.py');launch=load('candidate_launch',ROOT/'native/foundry/portable_launcher.py')
 def sha(path):return pack.digest(path)
-def license_expression(value):
+def license_expression(value, additional=()):
     # Parse the bounded subset actually used by this pinned dependency graph.
     normalized=value.replace('/',' OR ')
     tokens=re.findall(r'[A-Za-z0-9.+-]+|[()]',normalized)
@@ -20,7 +20,7 @@ def license_expression(value):
             expression()
             if position>=len(tokens) or tokens[position]!=')':raise ValueError('Unbalanced SPDX expression')
             position+=1
-        elif token not in ALLOWED:raise ValueError('Unreviewed SPDX license')
+        elif token not in ALLOWED and token not in additional:raise ValueError('Unreviewed SPDX license')
     def expression():
         nonlocal position
         atom()
@@ -29,6 +29,10 @@ def license_expression(value):
     expression()
     if position!=len(tokens):raise ValueError('Malformed SPDX expression')
     return value
+def dependency_license(name,version,expression):
+    # Only the reviewed pinned gzip checksum crate adds its upstream 0BSD alternative.
+    additional=('0BSD',) if (name,version)==('adler2','2.0.1') else ()
+    return license_expression(expression,additional)
 def notices(metadata,output):
     rows={};total=0
     for source in metadata:
@@ -42,7 +46,7 @@ def notices(metadata,output):
             name,version=p['name'],p['version']
             if not re.fullmatch('[A-Za-z0-9_.+-]+',name) or not re.fullmatch('[A-Za-z0-9_.+-]+',version):raise ValueError('Invalid package identity')
             expression=p.get('license') or ''
-            license_expression(expression)
+            dependency_license(name,version,expression)
             key=name+'-'+version
             if key in rows:
                 if rows[key]['license_expression']!=expression:raise ValueError('License metadata conflict')
