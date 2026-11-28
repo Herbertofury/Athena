@@ -48,3 +48,9 @@
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid{display:block!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>aside{display:none!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>.foundry-scene{height:min(70vh,800px);min-height:300px}
+
+/* The fixed dock moves visually, not in the DOM. No second media session. */
+[data-local-video-frame][data-video-popout="dock"]{position:fixed;z-index:1000;inset:auto max(.75rem,env(safe-area-inset-right)) max(.75rem,env(safe-area-inset-bottom)) auto;width:min(26rem,calc(100vw - 1.5rem));box-sizing:border-box;display:grid;gap:.4rem;padding:.55rem;background:#10111b;color:#f7f8ff;border:1px solid #6f73bc;border-radius:.7rem;box-shadow:0 12px 40px #000a}
+[data-local-video-frame][data-video-popout="dock"] [data-local-video-pop-return]{justify-self:end}
+[data-local-video-frame][data-video-popout="dock"] video{display:block;width:100%;max-height:40vh;object-fit:contain}
+[data-local-video-frame] [hidden]{display:none!important}
