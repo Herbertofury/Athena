@@ -166,3 +166,7 @@
 ## Game engines
 
 - [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+## Shared application cores
+
+- [Feed cores](Shared-Feed-Cores)
