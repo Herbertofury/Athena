@@ -41,6 +41,10 @@ function parse(text){
   }
   return x.families;
 }
+async function sha256(bytes){
+  const digest=await crypto.subtle.digest('SHA-256',bytes);
+  return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+}
 function clearDetail(){
   inspected++;
   $('record-heading').textContent='Choose a record';
@@ -55,9 +59,8 @@ async function open(row){
   $('record-heading').focus();
   $('verification').textContent='Checking the raw JSON fingerprint…';
   try{
-    const digest=await crypto.subtle.digest('SHA-256',encoder.encode(f.raw_json));
+    const hex=await sha256(encoder.encode(f.raw_json));
     if(token!==inspected)return;
-    const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
     if(hex!==row.original_json_sha256)throw Error();
     JSON.parse(f.raw_json); // Validate syntax only; render the exact original string.
     $('verification').textContent='Raw JSON fingerprint matches this archive entry.';
@@ -88,20 +91,34 @@ function render(){
   }));
   $('more').hidden=rows.length<=shown;
 }
-$('archive').addEventListener('change',async ()=>{
-  const file=$('archive').files[0], token=++pending;
+function resetArchive(){
   current=undefined;shown=pageSize;
   $('catalog').hidden=true;$('records').replaceChildren();$('family').replaceChildren();clearDetail();
-  $('query').value='';
+  $('query').value='';$('archive-identity').hidden=true;$('archive-sha').textContent='';
+}
+$('expected').addEventListener('input',()=>{
+  pending++;resetArchive();$('archive').value='';
+  $('status').textContent='Select the archive to check it against this value.';
+});
+$('archive').addEventListener('change',async ()=>{
+  const file=$('archive').files[0], token=++pending;
+  const expected=$('expected').value.trim().toLowerCase();
+  resetArchive();
+  if(expected&&!/^[0-9a-f]{64}$/.test(expected)){$('status').textContent='Enter exactly 64 hexadecimal characters for the expected SHA-256.';return;}
   if(!file||!file.size||file.size>cap){$('status').textContent='Select a catalog archive no larger than 12 MiB.';return;}
   $('status').textContent='Checking the archive in this browser…';
   try{
-    const rows=parse(new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer()));
+    const bytes=await file.arrayBuffer();
+    const actual=await sha256(bytes);
     if(token!==pending)return;
+    if(expected&&expected!==actual){$('status').textContent='Archive refused: the whole-file SHA-256 does not match.';return;}
+    const rows=parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
     current=rows;
     $('family').replaceChildren(...rows.map(f=>new Option(label(f.name),f.name)));
     $('catalog').hidden=false;
-    $('status').textContent=`${rows.length} archive families opened locally. Nothing was imported.`;
+    $('archive-sha').textContent=actual;$('archive-identity').hidden=false;
+    $('status').textContent=expected?'Expected SHA-256 matches. '+ `${rows.length} archive families opened locally. Nothing was imported.`:
+      `${rows.length} archive families opened locally. Nothing was imported.`;
     render();
   }catch{if(token===pending)$('status').textContent='Archive refused. Select an unchanged Athena catalog JSON export.';}
 });

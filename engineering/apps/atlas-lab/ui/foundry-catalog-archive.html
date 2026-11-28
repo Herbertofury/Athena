@@ -7,8 +7,11 @@
 <p>Open a saved original-catalog archive, search it and inspect any record. No uploads, imports, provider requests or changes to your active workspace.</p></header>
 <section class="runner" aria-labelledby="choose-heading">
 <h2 id="choose-heading">Open a private catalog archive</h2>
+<p><label for="expected">Expected archive SHA-256 (optional)</label> <input id="expected" type="text" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="pin-help"></p>
+<p id="pin-help">Paste the archive SHA-256 from a trusted export receipt before selecting the file. A matching hash checks the whole file, not its authorship.</p>
 <p><label for="archive">Saved Foundry catalog JSON</label> <input id="archive" type="file" accept=".json,application/json"></p>
 <p id="status" role="status">Select an unchanged Athena catalog archive (up to 12 MiB).</p>
+<p id="archive-identity" hidden>Archive SHA-256: <code id="archive-sha"></code></p>
 </section>
 <section class="runner" id="catalog" aria-labelledby="catalog-heading" hidden>
 <h2 id="catalog-heading">Catalog records</h2>
