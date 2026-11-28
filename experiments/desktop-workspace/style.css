@@ -1,0 +1,28 @@
+:root{color-scheme:dark;--bg:#090b11;--surface:#151922;--border:#303748;--ink:#f3f5fb;--weak:#a8b2c7;--accent:#96a7ff;font:16px system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink)}
+a{color:var(--accent);text-underline-offset:.2em}button,input,textarea{font:inherit}
+button,input[type=search],textarea{color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:.65rem;min-height:2.65rem;padding:.55rem .75rem}
+button{cursor:pointer}button:hover{background:#232a3a;border-color:var(--accent)}button:disabled{cursor:default;opacity:.55}button[aria-pressed=true]{background:#26335e;border-color:var(--accent)}
+:focus-visible{outline:3px solid #c1ceff;outline-offset:3px}
+[hidden]{display:none!important}.sr{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%)}
+.mast{display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:1rem 5vw;border-bottom:1px solid var(--border);flex-wrap:wrap}.brand{display:inline-flex;align-items:center;gap:.65rem;color:var(--ink);font-weight:750;text-decoration:none}.brand span{font:800 1rem system-ui;padding:.3rem .48rem;background:#273259;border-radius:.42rem;color:#c8d1ff}.breadcrumb,.switch,p{color:var(--weak)}.switch{display:flex;align-items:center;gap:.45rem;font-size:.9rem}
+.welcome,.intro{padding:clamp(2rem,7vw,6rem) 5vw 1.1rem}.welcome{max-width:58rem}.eyebrow{font-size:.73rem;letter-spacing:.16em;color:#b5c2ff;font-weight:750}
+h1{font-size:clamp(2.3rem,7vw,5.45rem);line-height:.98;letter-spacing:-.055em;margin:.65rem 0 1rem}.intro h1{font-size:clamp(2.05rem,5vw,3.8rem)}p{line-height:1.55;max-width:58ch}.welcome button{border-color:#758bfc;background:#26335e;font-weight:700;margin:1rem .8rem 0 0}.secondary{display:inline-block;margin-top:1rem}
+#desktop{position:relative;min-height:calc(100dvh - 5rem);padding-bottom:8rem;background:radial-gradient(ellipse at 4% 12%,#182540 0,transparent 62%),var(--bg)}
+#shortcuts{display:flex;flex-wrap:wrap;gap:.75rem;margin:0 5vw 1.25rem}#shortcuts button{text-align:left;padding:.75rem;min-width:7.5rem}#shortcuts .icon{display:block;margin:0 0 .25rem}
+.icon{color:#c0caff;font-size:1.2rem;margin-right:.35rem}
+#windows{margin:0 5vw;max-width:52rem}.tool{border:1px solid #536183;background:#101522;border-radius:1rem;overflow:hidden;box-shadow:0 1rem 3rem #0006}.titlebar{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.45rem .65rem;background:#1b2437;border-bottom:1px solid var(--border)}.titlebar h2{font-size:1rem;margin:0}.titlebar button{min-height:2.25rem}.tool-body{padding:1rem 1.2rem}.tool-body textarea{display:block;width:min(100%,40rem);margin:.5rem 0 1rem}.tool-body ul{padding-inline-start:1.3rem}.tool-body li{margin:.5rem 0}
+.taskbar{position:fixed;inset:auto 4vw max(.9rem,env(safe-area-inset-bottom));z-index:2;display:flex;align-items:center;gap:.5rem;padding:.52rem;background:#151a29;border:1px solid #56658a;border-radius:1rem;box-shadow:0 .4rem 1.5rem #0009}.taskbar button{white-space:nowrap}.taskbar #running{min-width:0;display:flex;overflow:auto;gap:.4rem;flex:1;scrollbar-width:thin}.taskbar [data-running=true]::after{content:" •";font-weight:bold;color:#bac7ff}.start{position:fixed;bottom:4.7rem;left:4vw;z-index:3;max-width:min(27rem,92vw);max-height:65dvh;overflow:auto;padding:1rem;background:#181f31;border:1px solid #63729a;border-radius:1rem;box-shadow:0 1rem 3rem #0009}.start label{display:block;font-weight:700}.start input{width:100%;margin:.5rem 0}#matches button{display:block;width:100%;text-align:left;margin:.3rem 0}.pin-layout{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0}
+@media(max-width:530px){.mast{gap:.7rem}.breadcrumb{display:none}.taskbar{inset-inline:2vw}.taskbar button{padding-inline:.48rem}.taskbar #show{max-width:5.25rem;white-space:normal;font-size:.75rem}.tool-body{padding:.8rem}.titlebar h2{max-width:60%;overflow-wrap:anywhere}}
+@media(forced-colors:active){button[aria-pressed=true]{border:2px solid Highlight}}
+html{scroll-padding-block-end:6rem}
+.intro{padding-top:clamp(1.65rem,4vw,3.4rem)}
+@media(max-width:530px){
+ #shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
+ #shortcuts button{min-width:0;font-size:.8rem;padding:.55rem .45rem;overflow-wrap:anywhere}
+ .taskbar #running button{min-width:2.55rem;position:relative}
+ .taskbar #running span:not(.icon){display:none}
+ .taskbar #running .icon{margin:0}
+ .taskbar #running [data-running=true]::after{position:absolute;right:.18rem;bottom:.05rem;font-size:.64rem}
+}
