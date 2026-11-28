@@ -164,6 +164,69 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
+def legacy_copy(root,data,source,destination,quiescent=False,expected=None):
+    """Close, copy and review Feature Foundry v24; import only a reviewed snapshot."""
+    source,destination=map(external_path,(source,destination))
+    for item in (source,destination.parent):
+        if item==root or root in item.parents or any(link_or_reparse(p) for p in (item,*item.parents)):
+            raise ValueError('Use separate ordinary external paths')
+    info=source.lstat()
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink!=1 or not 0<info.st_size<=64*1024*1024:
+        raise ValueError('Expected an ordinary unlinked legacy database up to 64 MiB')
+    if destination==root or root in destination.parents:
+        raise ValueError('Choose a destination outside the package')
+    destination_clear(destination)
+    if destination in {pathlib.Path(str(source)+suffix) for suffix in ('','-wal','-shm','-journal')}:
+        raise ValueError('Source aliases refused')
+    if expected is not None and not re.fullmatch('[0-9a-f]{64}',expected):
+        raise ValueError('Use the full reviewed SHA-256')
+    binary=str(root/data['binary'])
+    def cli(*args,decode=True):
+        result=subprocess.run([binary,*map(str,args)],capture_output=True,timeout=20,check=True)
+        return json.loads(result.stdout.decode('utf-8',errors='strict'),object_pairs_hook=manifest_object) if decode else None
+    def checksum(file):
+        with file.open('rb') as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
+    with tempfile.TemporaryDirectory(prefix='.athena-legacy-',dir=destination.parent) as temp:
+        staged=pathlib.Path(temp)/'review.sqlite3'
+        if expected is None:
+            if not quiescent:raise ValueError('Quit Feature Foundry before preparing a copy')
+            result=subprocess.run([sys.executable,'-B',str(root/'sqlite_backup.py'),'--source',str(source),
+                '--destination',str(staged),'--scratch',temp,'--source-quiescent'],capture_output=True,timeout=30,check=True)
+            receipt=json.loads(result.stdout.decode('utf-8',errors='strict'))
+            observed=checksum(staged)
+            if not receipt.get('source_unchanged_at_checks') or observed!=receipt.get('destination_sha256'):
+                raise ValueError('Snapshot does not match the preparation receipt')
+            report=cli('inspect-legacy',staged)
+        else:
+            # Pin the bytes actually consumed, not just the selected source path.
+            # Read at most the pilot limit plus one byte even if a file grows.
+            def has_sidecars(file):
+                return any(os.path.lexists(str(file)+suffix) for suffix in ('-wal','-shm','-journal'))
+            if has_sidecars(source):raise ValueError('Reviewed snapshot must be standalone')
+            with source.open('rb') as stream:raw=stream.read(64*1024*1024+1)
+            if has_sidecars(source):raise ValueError('Reviewed snapshot must be standalone')
+            if len(raw)>64*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected:
+                raise ValueError('Snapshot differs from the reviewed SHA-256')
+            staged.write_bytes(raw)
+            report=cli('inspect-legacy',staged)
+            imported=pathlib.Path(temp)/'imported.sqlite3'
+            if cli('import-legacy',staged,imported)!=report or checksum(staged)!=expected:
+                raise ValueError('Legacy review differs from imported evidence')
+            for suffix in ('transforms','scopes','environment','targets','instances','appearance',
+                           'filters','origins','environments','blend-modes','music-precision'):
+                cli('upgrade-'+suffix,imported,decode=False)
+            status=cli('status',imported)
+            if status.get('schema')!=15 or status.get('integrity')!='ok' or status.get('soundtracks')!=report['soundtracks']:
+                raise ValueError('Prepared Athena profile failed integrity, schema or assignment check')
+            staged=imported
+            observed=checksum(staged)
+        if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):
+            raise ValueError('Output is not a standalone SQLite file')
+        destination_clear(destination)
+        publish_new(staged,destination)
+    return {'prepared_review_copy':expected is None,'imported_new_athena_profile':expected is not None,
+        'output_sha256':observed,'lossless_migration':False,'report':report}
+
 def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expected_source_hashes=None,parent_checkpoint_sha256=None):
     """Explicit stopped-source copies, not an atomic live snapshot or restore."""
     if not quiescent or data.get('profile')!='unified':raise ValueError('Stopped unified profile required')
@@ -278,12 +341,32 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true')
     p.add_argument('--verify-checkpoint',metavar='DIRECTORY',help='Validate a stopped checkpoint without opening SQLite')
     p.add_argument('--expected-checkpoint-sha256',metavar='SHA256',help='Independently saved checkpoint.json hash, with --verify-checkpoint')
+    legacy=p.add_mutually_exclusive_group()
+    legacy.add_argument('--prepare-foundry-legacy',metavar='DATABASE',help='Copy and review an explicitly stopped Feature Foundry v24 store')
+    legacy.add_argument('--import-foundry-legacy',metavar='REVIEWED_COPY',help='Import a hash-pinned reviewed copy into a new Athena database')
+    p.add_argument('--legacy-output', metavar='NEW_DATABASE')
+    p.add_argument('--expected-legacy-sha256',metavar='SHA256')
     a=p.parse_args()
     if a.expected_checkpoint_sha256 is not None and (not a.verify_checkpoint or not re.fullmatch('[0-9a-fA-F]{64}',a.expected_checkpoint_sha256)):
         p.error('--expected-checkpoint-sha256 requires --verify-checkpoint and exactly 64 hex digits')
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if a.prepare_foundry_legacy or a.import_foundry_legacy:
+            unrelated=(a.database,a.journal,a.checkpoint_directory,a.fork_checkpoint,a.working_directory,
+                       a.create_database,a.backup_database,a.upgrade_copy,a.backup_destination,a.verify_only,
+                       a.verify_checkpoint,a.expected_checkpoint_sha256)
+            if (any(unrelated) or not a.legacy_output or
+                bool(a.prepare_foundry_legacy) != a.source_quiescent or
+                bool(a.import_foundry_legacy) != bool(a.expected_legacy_sha256)):
+                raise ValueError('Choose exactly one legacy operation and its required options')
+            if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):
+                raise ValueError('Platform mismatch')
+            print(json.dumps(legacy_copy(root,data,a.prepare_foundry_legacy or a.import_foundry_legacy,
+                                      a.legacy_output,a.source_quiescent,a.expected_legacy_sha256)))
+            return
+        if a.legacy_output or a.expected_legacy_sha256:
+            raise ValueError('Legacy options require a legacy operation')
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),bool(a.verify_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
         if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')
@@ -331,6 +414,8 @@ def main():
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):
+        if a.prepare_foundry_legacy or a.import_foundry_legacy:
+            p.exit(2,'Legacy operation refused: verify the package, stopped source or full reviewed hash, and new destination. No original database was replaced.\n')
         if a.verify_checkpoint:p.exit(2,'Checkpoint not verified: check the package, complete folder and hashes. No database was opened by the verifier.\n')
         p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
     print(server.origin+'/#build',flush=True)
