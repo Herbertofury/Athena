@@ -48,5 +48,9 @@ page. Select plain JSON or one gzip member. The file is sent only to the local
 Athena engine; selected and expanded data each have a 16 MiB limit. The engine
 returns counts and reference diagnostics without writing the file or using a
 provider. Filter missing, capped or incomplete collections and optionally save
-the count-only receipt. Fingerprints are excluded unless requested. This page
+the count-only receipt. Compare the current result to an unchanged Athena receipt
+in the same page; zero and not recorded stay distinct, and fingerprints are
+compared only when both review receipts include the corresponding type. The
+earlier receipt remains browser-local. Fingerprints are excluded unless requested.
+ This page
 does not import or restore content, or certify a source for deletion.
