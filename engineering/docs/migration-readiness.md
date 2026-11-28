@@ -7,7 +7,7 @@ to it; the frozen packaged home navigation and manifest are not changed.
 separately from its embedded evidence snapshot. Engine availability is never
 interpreted as completed migration.
 
-The snapshot was reconciled against five published source documents at Athena
+The original snapshot was reconciled against five published source documents at Athena
 commit `12ebe1e06707bdc1febd3369a43221e62c332f78`. Every evidence link pins that
 commit. Dated 2026-11-14 audits retain their date, explicit omissions and limits;
 they are not silently promoted to current verification. The later native Learning
@@ -30,3 +30,12 @@ Learning History, checks four source cards and seven pinned links, verifies exac
 snapshot bytes/hash, absence of action buttons, no browser mutation requests
 during the dedicated readiness visit, POST refusal and narrow-screen overflow. Screenshot inspection is
 separate from automated acceptance. Source repositories remain preserved.
+
+## November 28 Foundry evidence
+
+The source snapshot now pins `4e67e381b43eefd7424afe4fa9c1aad853343003`.
+Its reviewed legacy-import evidence distinguishes a hash-pinned partial
+import, exact soundtrack verification by room, and an optional local event
+archive. All were tested with synthetic inputs on hosted Windows and Linux.
+Owner data, custom catalog/media fidelity, rights, unsupported formats and
+any source-retirement decision remain open.
