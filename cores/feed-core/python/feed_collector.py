@@ -56,6 +56,7 @@ class Source(NamedTuple):
 MAX_DIGEST_ITEMS = 600
 MAX_SOURCES = 100
 STATE_BYTES = 384 * 1024
+REPRESENTATION_VERSION = 2  # Source timestamps became part of normalized articles.
 
 MEDIA_TYPES = {
     "image": frozenset({"image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"}),
@@ -237,8 +238,8 @@ class FeedLinks(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
-        if (tag == "link" and "alternate" in values.get("rel", "").lower().split()
-                and values.get("type", "").split(";", 1)[0].lower() in {
+        if (tag == "link" and "alternate" in (values.get("rel") or "").lower().split()
+                and (values.get("type") or "").split(";", 1)[0].lower() in {
                     "application/rss+xml", "application/atom+xml", "application/feed+json"}
                 and len(self.links) < 8):
             self.links.append(values.get("href", ""))
@@ -277,6 +278,32 @@ def item_date(raw):
     if value.year < 1990:
         return None
     return value.date().isoformat()
+
+def item_timestamp(raw):
+    """Preserve an explicit timezone-aware source instant; never invent midnight."""
+    if not isinstance(raw, str) or not raw or len(raw) > 100:
+        return None
+    raw = raw.strip()
+    try:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:[Zz]|[+-]\d{2}:\d{2})", raw):
+            value = dt.datetime.fromisoformat(raw.upper().replace("Z", "+00:00"))
+        else:
+            value = parsedate_to_datetime(raw)
+        if value.tzinfo is None or value.utcoffset() is None or value.year < 1990:
+            return None
+        return value.astimezone(dt.timezone.utc).isoformat().replace("+00:00", "Z")
+    except (ValueError, TypeError, OverflowError):
+        return None
+
+
+def available_at(item, now):
+    if item["date"] > now.date().isoformat():
+        return False
+    for key in ("publishedAt", "updatedAt"):
+        value = snapshot_time(item.get(key))
+        if value and value > now:
+            return False
+    return True
 
 def embed_url(url):
     split = urlsplit(url)
@@ -375,7 +402,9 @@ def parse_feed(source, data, base):
     xml = data.decode("utf-8-sig", errors="strict")
     if xml.lstrip().startswith("{"):
         obj = json.loads(xml)
-        if obj.get("version") not in {"https://jsonfeed.org/version/1", "https://jsonfeed.org/version/1.1"} or not isinstance(obj.get("items"), list):
+        if (not isinstance(obj.get("version"), str)
+                or obj["version"] not in {"https://jsonfeed.org/version/1", "https://jsonfeed.org/version/1.1"}
+                or not isinstance(obj.get("items"), list)):
             raise Unsafe("unrecognized JSON Feed schema")
         rows = []
         for entry in obj["items"][:MAX_SCANNED]:
@@ -388,8 +417,14 @@ def parse_feed(source, data, base):
                 if isinstance(part, dict):
                     media.append(("", part.get("url"), part.get("mime_type", "")))
             url = safe_url(entry.get("url") or entry.get("id"), base, source.hosts, canonical=True)
+            extension = entry.get("_feed_core") if isinstance(entry.get("_feed_core"), dict) else {}
+            extra_media = extension.get("media")
+            if isinstance(extra_media, list):
+                media = [(part.get("kind"), part.get("url"), "") for part in extra_media[:MAX_MEDIA]
+                         if isinstance(part, dict)] + media
             rows.append({"sourceId": source.id, "url": url, "title": entry.get("title", ""),
-                         "date": entry.get("date_published") or entry.get("date_modified"),
+                         "date": entry.get("date_published") or entry.get("date_modified") or extension.get("date"),
+                         "publishedAt": entry.get("date_published"), "updatedAt": entry.get("date_modified"),
                          "media": pick_media(source, media, url or base)})
         return normalize_saved_items(rows, source)
     if re.search(r"<!\s*(?:DOCTYPE|ENTITY)", xml, re.I):
@@ -412,15 +447,23 @@ def parse_feed(source, data, base):
             break
         url = safe_url(child_text(node, (rss_ns + "link",)) if rss_ns else item_links(node, atom), base, source.hosts, canonical=True)
         title = plain_title(child_text(node, (ATOM + "title",) if atom else (rss_ns + "title",)))
-        raw_date = child_text(node, (ATOM + "published", ATOM + "updated") if atom else (
-            "pubDate", "{http://purl.org/dc/elements/1.1/}date", "date"))
+        raw_published = child_text(node, (ATOM + "published",) if atom else (
+            "{http://purl.org/dc/terms/}issued", "pubDate", "{http://purl.org/dc/elements/1.1/}date", "date"))
+        raw_updated = child_text(node, (ATOM + "updated",) if atom else ("{http://purl.org/dc/terms/}modified",))
+        raw_date = raw_published or raw_updated
         date = item_date(raw_date)
         if not url or not title or not date or url in seen or promotional(source, node, url, title):
             continue
         seen.add(url)
-        items.append({"id": sha256((source.id + "|" + url).encode()).hexdigest()[:24],
-                      "sourceId": source.id, "title": title, "url": url, "date": date,
-                      "media": pick_media(source, feed_media(node, atom), url)})
+        item = {"id": sha256((source.id + "|" + url).encode()).hexdigest()[:24],
+                "sourceId": source.id, "title": title, "url": url, "date": date,
+                "media": pick_media(source, feed_media(node, atom), url)}
+        published, updated = item_timestamp(raw_published), item_timestamp(raw_updated)
+        if published:
+            item["publishedAt"] = published
+        if updated and (not published or snapshot_time(updated) >= snapshot_time(published)):
+            item["updatedAt"] = updated
+        items.append(item)
     return items
 
 REJECT = (Unsafe, URLError, OSError, ET.ParseError, UnicodeError, ValueError)
@@ -467,8 +510,14 @@ def normalize_saved_items(rows, source):
         candidates = saved.get("media")
         candidates = candidates[:MAX_MEDIA] if isinstance(candidates, list) else []
         media = pick_media(source, [(m.get("kind"), m.get("url"), "") for m in candidates if isinstance(m, dict)], url)
-        final.append({"id": sha256((source.id + "|" + url).encode()).hexdigest()[:24],
-                      "sourceId": source.id, "title": title, "url": url, "date": date, "media": media})
+        item = {"id": sha256((source.id + "|" + url).encode()).hexdigest()[:24],
+                "sourceId": source.id, "title": title, "url": url, "date": date, "media": media}
+        published, updated = item_timestamp(saved.get("publishedAt")), item_timestamp(saved.get("updatedAt"))
+        if published and published[:10] == date:
+            item["publishedAt"] = published
+        if updated and (not published or snapshot_time(updated) >= snapshot_time(published)) and (published or updated[:10] == date):
+            item["updatedAt"] = updated
+        final.append(item)
         if len(final) >= MAX_ITEMS:
             break
     return final
@@ -544,6 +593,8 @@ def validated_state(saved, source, now):
     if not isinstance(saved, dict):
         return {}
     out = {}
+    if type(saved.get("representationVersion")) is int and saved["representationVersion"] == REPRESENTATION_VERSION:
+        out["representationVersion"] = REPRESENTATION_VERSION
     for key in ("attemptedAt", "lastSuccessfulCheckAt", "nextAttemptAt"):
         value = snapshot_time(saved.get(key))
         if value and value <= now + dt.timedelta(days=2) and (key == "nextAttemptAt" or value <= now):
@@ -559,7 +610,7 @@ def validated_state(saved, source, now):
         value = header_value(saved.get(key))
         if value:
             out[key] = value
-    if saved.get("health") in {"healthy", "cached", "backoff", "quarantined", "empty", "schema-drift"}:
+    if isinstance(saved.get("health"), str) and saved["health"] in {"healthy", "cached", "backoff", "quarantined", "empty", "schema-drift"}:
         out["health"] = saved["health"]
     if type(saved.get("httpStatus")) is int and 100 <= saved["httpStatus"] <= 599:
         out["httpStatus"] = saved["httpStatus"]
@@ -593,7 +644,7 @@ def public_refresh_state(state, sources):
         if not isinstance(saved, dict):
             continue
         clean = validated_state(saved, source, generated)
-        row = {key: value for key, value in clean.items() if key not in {"feedUrl", "etag", "lastModified", "unchangedCount"}}
+        row = {key: value for key, value in clean.items() if key not in {"feedUrl", "etag", "lastModified", "unchangedCount", "representationVersion"}}
         if type(saved.get("unchanged")) is bool:
             row["unchanged"] = saved["unchanged"]
         public[source.id] = row
@@ -624,7 +675,7 @@ def collect_source(source, prior_items, saved, *, now, fetcher=fetch_response, f
         if time.monotonic() >= deadline:
             break
         validators = {}
-        if cached and endpoint == state.get("feedUrl"):
+        if cached and endpoint == state.get("feedUrl") and state.get("representationVersion") == REPRESENTATION_VERSION:
             if state.get("etag"):
                 validators["If-None-Match"] = state["etag"]
             if state.get("lastModified"):
@@ -642,7 +693,12 @@ def collect_source(source, prior_items, saved, *, now, fetcher=fetch_response, f
                 entries = cached
                 unchanged = True
             elif reply.status == 200:
-                entries = [row for row in parse_feed(source, reply.data, reply.url) if row["date"] <= now.date().isoformat()]
+                try:
+                    entries = [row for row in parse_feed(source, reply.data, reply.url) if available_at(row, now)]
+                except (Unsafe, ET.ParseError, UnicodeError, json.JSONDecodeError):
+                    state["health"] = "schema-drift"
+                    last_error = "Publisher feed format could not be parsed"
+                    continue
                 if not entries:
                     # A successful transport is not proof the adapter still extracts.
                     last_error = "Feed produced no valid dated items; last-good content retained"
@@ -670,6 +726,7 @@ def collect_source(source, prior_items, saved, *, now, fetcher=fetch_response, f
             else:
                 raise Unsafe("unexpected publisher status")
             state.update(feedUrl=reply.url, lastSuccessfulCheckAt=iso_time(now), consecutiveFailures=0,
+                         representationVersion=REPRESENTATION_VERSION,
                          unchangedCount=min(16, state.get("unchangedCount", 0) + 1) if unchanged else 0,
                          itemCount=len(entries), health="healthy", httpStatus=reply.status,
                          unchanged=unchanged)
@@ -750,7 +807,7 @@ def refresh(output, *, sources=(), seed_sources=None, page_media=False, seed=Non
         row = {"id": ident, "status": "ok" if status == "ok" or (status == "deferred" and not detail.get("consecutiveFailures")) else "unavailable", "origin": "feed"}
         if managed:
             stored_next[ident] = detail
-            row.update({k: v for k, v in detail.items() if k not in {"etag", "lastModified", "unchangedCount"}})
+            row.update({k: v for k, v in detail.items() if k not in {"etag", "lastModified", "unchangedCount", "representationVersion"}})
         elif status == "ok":
             row["lastSuccessfulCheckAt"] = generated
         else:
@@ -758,7 +815,7 @@ def refresh(output, *, sources=(), seed_sources=None, page_media=False, seed=Non
             if ident in prior:
                 row["lastSuccessfulCheckAt"] = prior[ident]["lastSuccessfulCheckAt"]
         states.append(row)
-        items.extend(x for x in entries if x["date"] <= now.date().isoformat())
+        items.extend(x for x in entries if available_at(x, now))
     live_ok = sum(status == "ok" for _, status, _, _ in gathered)
     attempted = sum(status != "deferred" for _, status, _, _ in gathered)
     if managed:
@@ -771,6 +828,12 @@ def refresh(output, *, sources=(), seed_sources=None, page_media=False, seed=Non
     if report_path:
         atomic_json(report_path, report)
     if attempted and not live_ok:
+        if managed and any(status == "deferred" and entries and detail.get("lastSuccessfulCheckAt")
+                           and not detail.get("consecutiveFailures") for _, status, entries, detail in gathered):
+            # A failed due feed is not a total outage when other validated sources
+            # are still within their refresh interval. Publish health, retain the
+            # digest and its timestamp, and let the next scheduled probe recover.
+            return previous
         raise Unsafe("all public sources unavailable; previous output left unchanged")
     if not attempted:
         return previous  # Do not create a fake fresh build timestamp on a no-op.

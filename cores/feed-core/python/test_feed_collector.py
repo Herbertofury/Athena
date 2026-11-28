@@ -45,6 +45,26 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(second["items"][0]["date"], "2026-11-28")
         self.assertEqual(second["sources"][0]["httpStatus"], 304)
 
+    def test_old_representation_is_refetched_once_to_acquire_real_source_timestamps(self):
+        self.run_refresh(self.success)
+        snapshot=json.loads(self.output.read_text())
+        snapshot['items'][0].pop('publishedAt',None)
+        self.output.write_text(json.dumps(snapshot))
+        saved=json.loads(self.state.read_text())
+        saved['sources']['example'].pop('representationVersion',None)
+        self.state.write_text(json.dumps(saved))
+        calls=[]
+        def fetch(url,*args,**kwargs):
+            calls.append(kwargs)
+            return self.success(url,*args,**kwargs)
+        upgraded=self.run_refresh(fetch,NOW+dt.timedelta(hours=1))
+        self.assertEqual(calls[0]['conditional'],{})
+        self.assertEqual(upgraded['items'][0]['publishedAt'],'2026-11-28T10:00:00Z')
+        self.assertNotIn('representationVersion',upgraded['sources'][0])
+        saved=json.loads(self.state.read_text())
+        self.assertEqual(saved['sources']['example']['representationVersion'],m.REPRESENTATION_VERSION)
+        self.assertNotIn('representationVersion',m.public_refresh_state(saved,(SOURCE,))['sources']['example'])
+
     def test_not_due_leaves_snapshot_bytes_and_timestamp_unchanged(self):
         first = self.run_refresh(self.success)
         before = self.output.read_bytes()
@@ -69,6 +89,29 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(state["health"], "backoff")
         self.assertTrue(json.loads(self.report.read_text())["previousSnapshotPreserved"])
 
+    def test_failed_due_feed_does_not_misreport_a_healthy_deferred_feed_as_outage(self):
+        slower = SOURCE._replace(id="slower", min_interval=7200)
+        sources = (SOURCE, slower)
+        m.refresh(self.output, sources=sources, state_path=self.state,
+                  report_path=self.report, now=NOW, fetcher=self.success)
+        before = self.output.read_bytes()
+        calls = []
+        def fail(url, *args, **kwargs):
+            calls.append(url)
+            raise OSError("One due source is unavailable")
+        result = m.refresh(self.output, sources=sources, state_path=self.state,
+                           report_path=self.report, now=NOW + dt.timedelta(hours=1), fetcher=fail)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(self.output.read_bytes(), before)
+        self.assertEqual(result["generatedAt"], m.iso_time(NOW))
+        report = json.loads(self.report.read_text())
+        self.assertEqual(report["failedSources"], 1)
+        self.assertEqual(report["deferredSources"], 1)
+        self.assertTrue(report["previousSnapshotPreserved"])
+        state = json.loads(self.state.read_text())["sources"]
+        self.assertEqual(state["slower"]["lastSuccessfulCheckAt"], m.iso_time(NOW))
+        self.assertEqual(state["example"]["health"], "backoff")
+
     def test_retry_after_is_respected_without_sleep_or_extra_requests(self):
         self.run_refresh(self.success)
         calls = []
@@ -82,15 +125,15 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(state["nextAttemptAt"], "2026-11-28T16:00:00Z")
 
     def test_empty_or_broken_feed_preserves_articles_and_signals_schema_drift(self):
-        self.run_refresh(self.success)
-        before = self.output.read_bytes()
-        for data in (b"<rss><channel/></rss>", b"<html>Changed feed</html>", b"{not json}"):
+        for data in (b"<rss><channel/></rss>", b"<html>Changed feed</html>", b"{not json}", b'{"version":[],"items":[]}'):
+            self.run_refresh(self.success, NOW, force=True)
+            before = self.output.read_bytes()
             with self.subTest(data=data), self.assertRaises(m.Unsafe):
                 self.run_refresh(lambda url, *args, **kwargs: m.HttpReply(data, url),
                                  NOW + dt.timedelta(hours=1), force=True)
             self.assertEqual(self.output.read_bytes(), before)
-        row = json.loads(self.state.read_text())["sources"]["example"]
-        self.assertEqual(row["health"], "schema-drift")
+            row = json.loads(self.state.read_text())["sources"]["example"]
+            self.assertEqual(row["health"], "schema-drift")
 
     def test_quarantine_still_probes_and_recovers_without_user_action(self):
         self.run_refresh(self.success)
@@ -108,6 +151,8 @@ class CollectorTest(unittest.TestCase):
     def test_only_publisher_declared_approved_alternates_are_discovered(self):
         page = b'''<link rel="alternate" type="application/rss+xml" href="/new.xml">
 <link rel="alternate" type="application/rss+xml" href="https://evil.example/feed">
+<link rel type="application/rss+xml" href="/missing-rel.xml">
+<link rel="alternate" type href="/missing-type.xml">
 <a href="/guessed.xml">RSS</a><script>fetch('/secret')</script>'''
         self.assertEqual(m.discover_feeds(SOURCE, page, SOURCE.discovery_url), ["https://publisher.example/new.xml"])
         calls = []
@@ -138,7 +183,7 @@ class CollectorTest(unittest.TestCase):
             self.run_refresh(lambda url, *args, **kwargs: m.HttpReply(future, url))
 
     def test_bad_cached_validators_urls_and_unbounded_delays_are_discarded(self):
-        state = m.validated_state({"feedUrl": "https://evil.example/feed", "etag": "a\r\nb",
+        state = m.validated_state({"feedUrl": "https://evil.example/feed", "etag": "a\r\nb", "health":[],
                                    "nextAttemptAt": "2099-01-01T00:00:00Z", "consecutiveFailures": -1}, SOURCE, NOW)
         self.assertEqual(state, {})
         self.assertIsNone(m.safe_url("https://127.0.0.1/x", SOURCE.feed, {"127.0.0.1"}))

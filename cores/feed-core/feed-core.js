@@ -39,10 +39,18 @@
   function validDate(value) {
     const raw = text(value);
     if (!raw || !Number.isFinite(Date.parse(raw))) return '';
+    const isoDay=raw.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
+    if(isoDay&&new Date(isoDay).toISOString().slice(0,10)!==isoDay)return '';
     // Preserve date-only precision; do not relabel it as an observed timestamp.
     if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return new Date(raw).toISOString().slice(0,10) === raw ? raw : '';
+    if(/\d{1,2}:\d{2}/.test(raw)&&!hasTimeZone(raw)){
+      if(isoDay)return isoDay;
+      const local=new Date(raw);return `${local.getFullYear()}-${String(local.getMonth()+1).padStart(2,'0')}-${String(local.getDate()).padStart(2,'0')}`;
+    }
     return new Date(raw).toISOString();
   }
+  function hasTimeZone(value){return /\d{1,2}:\d{2}/.test(value)&&/(?:z|[+-]\d{2}:?\d{2}|GMT|UTC|UT|[ECMP][DS]T)(?:\s*\([^)]*\))?$/i.test(value);}
+  function validTimestamp(value){const raw=text(value);return hasTimeZone(raw)?validDate(raw):'';}
   function normalizeItem(raw, source = {}) {
     const item = record(raw), src = record(source);
     const url = safeUrl(item.url || item.link || item.external_url,src.url || src.feedUrl);
@@ -57,10 +65,11 @@
     }
     const image = safeUrl(item.image || item.imageUrl,url);
     if (image && !media.some(m=>m.url===image)) media.unshift({kind:'image',url:image});
-    const date = validDate(item.date || item.publishedAt || item.date_published || item.pubDate);
+    const publishedAt=validTimestamp(item.publishedAt)||validTimestamp(item.date_published)||validTimestamp(item.pubDate)||validTimestamp(item.date);
+    const date=validDate(item.date)||validDate(item.date_published)||validDate(item.pubDate)||publishedAt||validDate(record(item._feed_core).date);
     return {
       id:text(item.id) || `${sourceId}:${canonicalUrl(url)}`, sourceId,title,url,date,
-      publishedAt:date, updatedAt:validDate(item.updatedAt || item.date_modified),
+      publishedAt, updatedAt:validTimestamp(item.updatedAt)||validTimestamp(item.date_modified),
       fetchedAt:validDate(item.fetchedAt), summary:text(item.summary || item.excerpt || item.content_text),
       category:text(item.category || src.category), media, tags:strings(item.tags),
       sourceIds:strings([sourceId,...(item.sourceIds || [])]),
@@ -83,6 +92,7 @@
         // One article identity; preserve original date and useful richer metadata.
         if (!prior.summary && item.summary) prior.summary = item.summary;
         if (!prior.date && item.date) {prior.date=item.date;prior.publishedAt=item.publishedAt || item.date;}
+        if(item.publishedAt&&(!prior.publishedAt||prior.publishedAt.length===10&&item.publishedAt.startsWith(prior.publishedAt)))prior.publishedAt=item.publishedAt;
         const seen = new Set((prior.media || []).map(m=>`${m.kind}:${m.url}`));
         prior.media = [...(prior.media || []),...(item.media || []).filter(m=>!seen.has(`${m.kind}:${m.url}`))];
       }
@@ -104,6 +114,28 @@
       style:choice(t.style,['classic','headlines','bright','bw','breaking','neon','wire','terminal','gold','gradient','sports'],'classic'),
       headlineColor:colour(t.headlineColor,''),showDate:t.showDate!==false,pauseOnHover:t.pauseOnHover!==false};
   }
+  function normalizeFeedRecipe(raw={}) {
+    const p=record(raw), supplied=record(p.selectors), selectors={}, baseUrl=safeUrl(p.baseUrl);
+    const defaults={item:'article',title:'h2, h3, h1',link:'a[href]',date:'time[datetime]',image:'img',summary:'p'};
+    for(const [field,fallback]of Object.entries(defaults)) selectors[field]=typeof supplied[field]==='string'?text(supplied[field]).slice(0,513):fallback;
+    return {schemaVersion:1,sourceId:(text(p.sourceId)||(baseUrl?`custom:${new URL(baseUrl).hostname}`:'custom')).slice(0,160),
+      sourceName:(text(p.sourceName)||text(p.name)||'Custom feed').slice(0,200),baseUrl,category:(text(p.category)||'custom').slice(0,100),
+      mode:choice(p.mode,['listing','article'],'listing'),selectors,limit:Math.round(number(p.limit,100,1,500)),
+      minimumItems:Math.round(number(p.minimumItems,1,0,500)),maxDropRatio:number(p.maxDropRatio,0.6,0,1),
+      requireDates:p.requireDates===true,allowCrossOrigin:p.allowCrossOrigin===true};
+  }
+  function normalizeDashboard(raw={}) {
+    const p=record(raw),widgets=[],seen=new Set();
+    for(const rawWidget of (Array.isArray(p.widgets)?p.widgets:[]).slice(0,64)){
+      const w=record(rawWidget),id=text(w.id).slice(0,120);
+      if(!id||!keyOK(id)||seen.has(id))continue;seen.add(id);
+      widgets.push({id,title:(text(w.title)||'News').slice(0,200),view:choice(w.view,VIEWS,'gallery'),query:text(w.query).slice(0,512),
+        category:text(w.category).slice(0,100),sourceIds:strings(w.sourceIds).slice(0,100).map(s=>s.slice(0,160)),
+        limit:Math.round(number(w.limit,12,1,100)),span:Math.round(number(w.span,1,1,2))});
+      if(widgets.length>=32)break;
+    }
+    return {id:(text(p.id)||'dashboard').slice(0,120),name:(text(p.name)||'Dashboard').slice(0,200),widgets};
+  }
   function normalizePreferences(raw = {},sources = [],nested = false) {
     const p=record(raw), sourceOverrides={};
     // Preserve overrides for temporarily absent sources so outages cannot reset choices.
@@ -111,13 +143,14 @@
     const result={schemaVersion:1,sourceOverrides,view:choice(p.view,VIEWS,'gallery'),sourceView:choice(p.sourceView,['gallery','list','compact'],'gallery'),
       sort:choice(p.sort,['newest','oldest','relevance','source'],'newest'),readIds:strings(p.readIds),savedIds:strings(p.savedIds),
       followedSourceIds:strings(p.followedSourceIds),includeKeywords:strings(p.includeKeywords),excludeKeywords:strings(p.excludeKeywords),
-      includeRegex:strings(p.includeRegex),excludeRegex:strings(p.excludeRegex),showImages:p.showImages===true,showSummary:p.showSummary!==false,
+      includeRegex:strings(p.includeRegex),excludeRegex:strings(p.excludeRegex),showImages:p.showImages===true,showSummary:p.showSummary!==false,groupRelated:p.groupRelated===true,
       density:choice(p.density,['comfortable','compact'],'comfortable'),columns:Math.round(number(p.columns,3,1,6)),
       cardStyle:choice(p.cardStyle,['default','grid','compact','cards','minimal','glass','paper','clear','warm','news','dracula','neonpink','darkgrey','blackwhite','amoled','aurora','sunset','terminal'],'default'),
-      ticker:normalizeTickerOptions(p.ticker),presets:[],customSources:[],customItems:[],savedItems:[],bundles:[],collections:[]};
+      ticker:normalizeTickerOptions(p.ticker),presets:[],customSources:[],customItems:[],savedItems:[],bundles:[],collections:[],
+      feedRecipes:[],dashboards:[],activeDashboardId:''};
     for (const row of Array.isArray(p.customSources) ? p.customSources : []) {
       const s=record(row),url=safeUrl(s.url),feedUrl=safeUrl(s.feedUrl);
-      if(text(s.id)&&keyOK(s.id)&&text(s.name)&&(url||feedUrl)) result.customSources.push({id:text(s.id),name:text(s.name),url:url||feedUrl,feedUrl:feedUrl||url,
+      if(text(s.id)&&keyOK(s.id)&&text(s.name)&&(url||feedUrl)) result.customSources.push({id:text(s.id),name:text(s.name),url:url||feedUrl,feedUrl,
         description:text(s.description),category:text(s.category)||'custom',defaultEnabled:s.defaultEnabled!==false,custom:true});
     }
     for (const item of Array.isArray(p.customItems)?p.customItems:[]) { const normal=normalizeItem(item);if(normal)result.customItems.push(normal); }
@@ -126,11 +159,22 @@
       const row=record(rawRow);if(!text(row.id)||!text(row.name))continue;
       result[name].push({id:text(row.id),name:text(row.name),sourceIds:strings(row.sourceIds),itemIds:strings(row.itemIds),description:text(row.description)});
     }
+    for(const entry of (Array.isArray(p.feedRecipes)?p.feedRecipes:[]).slice(0,100)){
+      const row=record(entry);if(!text(row.id)||!keyOK(row.id))continue;
+      const recipe=normalizeFeedRecipe(row.recipe);
+      result.feedRecipes.push({id:text(row.id).slice(0,120),sourceId:(text(row.sourceId)||recipe.sourceId).slice(0,160),name:(text(row.name)||recipe.sourceName).slice(0,200),recipe});
+    }
+    const seenDashboards=new Set();
+    for(const entry of (Array.isArray(p.dashboards)?p.dashboards:[]).slice(0,20)){
+      const dashboard=normalizeDashboard(entry);if(!keyOK(dashboard.id)||seenDashboards.has(dashboard.id))continue;
+      seenDashboards.add(dashboard.id);result.dashboards.push(dashboard);
+    }
+    result.activeDashboardId=seenDashboards.has(p.activeDashboardId)?p.activeDashboardId:result.dashboards[0]?.id||'';
     if(!nested) for(const rawPreset of Array.isArray(p.presets)?p.presets:[]) {
       const preset=record(rawPreset);if(!text(preset.id)||!text(preset.name))continue;
       const settings=normalizePreferences(preset.settings,sources,true);
       // Presets carry presentation/filters/source choices; reading history stays personal.
-      for(const field of ['presets','readIds','savedIds','savedItems','customItems','collections','bundles'])delete settings[field];
+      for(const field of ['presets','readIds','savedIds','savedItems','customItems','collections','bundles','feedRecipes','dashboards','activeDashboardId'])delete settings[field];
       result.presets.push({id:text(preset.id),name:text(preset.name),settings});
     }
     return result;
@@ -144,6 +188,9 @@
     const payload=JSON.parse(input);
     if(!payload||payload.format!=='feed-preferences'||payload.schemaVersion!==1||!payload.preferences||typeof payload.preferences!=='object'||Array.isArray(payload.preferences))throw new Error('Unsupported feed preferences format or version.');
     const result=normalizePreferences(payload.preferences,sources);
+    const managed=new Set((Array.isArray(sources)?sources:[]).filter(source=>source&&source.custom!==true).map(source=>source.id));
+    const collisions=[...result.customSources.map(source=>source.id),...result.customItems.map(item=>item.sourceId),...result.feedRecipes.flatMap(entry=>[entry.sourceId,entry.recipe.sourceId])].filter(id=>managed.has(id));
+    if(collisions.length)throw new Error('Imported custom feeds cannot replace managed source identities. Give each custom source a distinct ID and retry; no settings were changed.');
     for(const pattern of [...result.includeRegex,...result.excludeRegex])compilePattern(pattern);
     return result;
   }
@@ -257,6 +304,73 @@
     const messages={offline:'Offline — showing the last saved snapshot.',unknown:'Refresh time unavailable.',future:'Snapshot time is ahead of this device clock.',stale:'Updates are overdue — showing the last saved snapshot.',current:lastSuccess===null?'Recent snapshot; individual source health is shown separately.':'Recently refreshed; individual source health is shown separately.'};
     return {status,ageMs,lastSuccessAt:lastSuccess===null?'':new Date(lastSuccess).toISOString(),snapshotAt:text(data.generatedAt),message:messages[status]};
   }
+  function clusterStories(items,options={}) {
+    const rows=Array.isArray(items)?items:[],threshold=number(options.threshold,0.72,0.5,1),windowMs=number(options.windowHours,72,1,720)*3600000;
+    const maxItems=Math.round(number(options.maxItems,2000,1,10000)),maxCandidates=Math.round(number(options.maxCandidates,100,1,500));
+    const stops=new Set(['the','a','an','and','or','of','to','for','in','on','is','are','with','from','by','at','this','that','new','news','update','updates']);
+    const words=title=>new Set((text(title).toLowerCase().normalize('NFKC').match(/[\p{L}\p{N}]{2,}/gu)||[]).filter(t=>!stops.has(t)).slice(0,40));
+    const groups=[],terms=new Map(),urls=new Map();
+    for(let index=0;index<rows.length;index++){
+      const item=rows[index];if(!item||typeof item!=='object')continue;
+      const tokens=words(item.title),url=canonicalUrl(item.url),stamp=Date.parse(item.publishedAt||item.date),dated=Number.isFinite(stamp);
+      let found=url?urls.get(url):undefined;
+      if(found===undefined&&index<maxItems&&tokens.size>=3){
+        const candidates=new Set();
+        for(const token of tokens){for(const group of terms.get(token)||[]){candidates.add(group);if(candidates.size>=maxCandidates)break;}if(candidates.size>=maxCandidates)break;}
+        let best=threshold;
+        for(const candidate of candidates){
+          const group=groups[candidate];
+          if(dated!==group.dated)continue;
+          if(dated&&(Math.max(stamp,group.maxTime)-Math.min(stamp,group.minTime)>windowMs))continue;
+          let shared=0;for(const token of tokens)if(group.tokens.has(token))shared++;
+          const score=shared/(tokens.size+group.tokens.size-shared);
+          // Unknown dates and short generic titles are not enough evidence to join.
+          if(shared>=3&&score>=best&&(dated||score===1&&tokens.size>=5)){found=candidate;best=score;}
+        }
+      }
+      if(found===undefined){
+        found=groups.length;groups.push({id:`story:${text(item.id)||url||index}`,title:text(item.title),items:[],sourceIds:[],tokens,dated,minTime:dated?stamp:0,maxTime:dated?stamp:0});
+        if(index<maxItems)for(const token of tokens){if(!terms.has(token))terms.set(token,[]);terms.get(token).push(found);}
+      }
+      const group=groups[found];group.items.push(item);group.sourceIds=strings([...group.sourceIds,item.sourceId,...(Array.isArray(item.sourceIds)?item.sourceIds:[])]);
+      if(dated){if(!group.dated){group.minTime=stamp;group.maxTime=stamp;group.dated=true;}else{group.minTime=Math.min(group.minTime,stamp);group.maxTime=Math.max(group.maxTime,stamp);}}
+      if(url)urls.set(url,found);
+    }
+    return {method:'lexical-title-similarity',limited:rows.length>maxItems,groups:groups.map(({tokens,dated,minTime,maxTime,...group})=>({...group,latestAt:dated?new Date(maxTime).toISOString():''}))};
+  }
+  async function rankItemsSemantic(items,options={}) {
+    const lexical=rankItems(items,{...options,sort:'relevance'}),query=text(options.query).slice(0,4096);
+    const fallback=reason=>({method:'lexical',items:lexical,scores:[],scoredCount:0,reason});
+    if(!query)return fallback('A query is required for semantic ranking.');
+    if(typeof options.embedder!=='function')return fallback('No embedding provider is configured.');
+    if(!lexical.length)return {method:'semantic',items:[],scores:[],scoredCount:0,reason:''};
+    const aborted=()=>{const error=new Error('Ranking was cancelled.');error.name='AbortError';return error;};
+    if(options.signal?.aborted)throw aborted();
+    const limit=Math.round(number(options.maxItems,200,1,500)),sample=lexical.slice(0,limit),controller=typeof AbortController!=='undefined'?new AbortController():null;
+    let rejectCancelled;const cancelled=new Promise((_,reject)=>{rejectCancelled=reject;});
+    const cancel=()=>{controller?.abort();rejectCancelled(aborted());};options.signal?.addEventListener?.('abort',cancel,{once:true});
+    let timer,timedOut=false;
+    try{
+      const input=[query,...sample.map(item=>`${text(item.title).slice(0,500)}\n${text(item.summary).slice(0,4000)}`)];
+      const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{timedOut=true;controller?.abort();reject(new Error('timeout'));},number(options.timeoutMs,8000,10,60000));});
+      const vectors=await Promise.race([Promise.resolve().then(()=>options.embedder(input,{signal:controller?.signal||options.signal})),timeout,cancelled]);
+      if(options.signal?.aborted)throw aborted();
+      if(!Array.isArray(vectors)||vectors.length!==input.length)throw new Error('vectors');
+      let dimension=0;
+      const unit=vectors.map(vector=>{
+        if(!Array.isArray(vector)&&!ArrayBuffer.isView(vector))throw new Error('vectors');
+        if(!dimension)dimension=vector.length;
+        if(!dimension||dimension>4096||vector.length!==dimension)throw new Error('vectors');
+        let sum=0;for(const value of vector){if(typeof value!=='number'||!Number.isFinite(value))throw new Error('vectors');sum+=value*value;}
+        if(!sum||!Number.isFinite(sum))throw new Error('vectors');const scale=Math.sqrt(sum);return Array.from(vector,value=>value/scale);
+      });
+      const ranked=sample.map((item,index)=>({item,index,score:unit[0].reduce((sum,value,k)=>sum+value*unit[index+1][k],0)})).sort((a,b)=>b.score-a.score||a.index-b.index);
+      return {method:lexical.length>sample.length?'semantic-with-lexical-tail':'semantic',items:[...ranked.map(row=>row.item),...lexical.slice(limit)],scores:ranked.map(({item,score})=>({id:item.id,score})),scoredCount:sample.length,reason:''};
+    }catch(error){
+      if(options.signal?.aborted)throw aborted();
+      return fallback(timedOut?'Embedding provider timed out; lexical ranking was used.':'Embedding provider failed or returned invalid vectors; lexical ranking was used.');
+    }finally{clearTimeout(timer);options.signal?.removeEventListener?.('abort',cancel);}
+  }
   function mergeDigests(previous,incoming) {
     const old=record(previous),next=record(incoming);
     if(!Array.isArray(next.items)||!Array.isArray(next.sources))throw new Error('Invalid feed snapshot: items and sources arrays are required.');
@@ -269,13 +383,13 @@
   function parseImportedFeed(input,options={}) {
     if(typeof input!=='string')throw new TypeError('Feed import requires text.');
     if(input.length>8*1024*1024)throw new RangeError('Feed exceeds the 8 MiB import limit; import a smaller publisher feed.');
-    const baseUrl=safeUrl(options.baseUrl),sourceId=text(options.sourceId)||`custom:${baseUrl||'import'}`;
-    const sources=[{id:sourceId,name:'Imported feed',url:baseUrl,feedUrl:baseUrl,category:'custom',defaultEnabled:true,custom:true}],items=[];
+    const baseUrl=safeUrl(options.baseUrl),feedUrl=safeUrl(options.feedUrl),sourceId=text(options.sourceId)||`custom:${baseUrl||'import'}`;
+    const sources=[{id:sourceId,name:'Imported feed',url:baseUrl,feedUrl,category:'custom',defaultEnabled:true,custom:true}],items=[];
     const add=raw=>{const item=normalizeItem({...raw,sourceId},sources[0]);if(item)items.push(item);};
     if(/^\s*\{/.test(input)){
       const feed=JSON.parse(input);
       if(!['https://jsonfeed.org/version/1','https://jsonfeed.org/version/1.1'].includes(feed.version)||!Array.isArray(feed.items))throw new Error('Expected JSON Feed version 1 or 1.1.');
-      sources[0].name=text(feed.title)||'Imported feed';sources[0].url=safeUrl(feed.home_page_url)||baseUrl;sources[0].feedUrl=safeUrl(feed.feed_url)||baseUrl;
+      sources[0].name=text(feed.title)||'Imported feed';sources[0].url=safeUrl(feed.home_page_url,baseUrl)||baseUrl;sources[0].feedUrl=safeUrl(feed.feed_url,baseUrl)||feedUrl;
       for(const item of feed.items){
         const media=(Array.isArray(item.attachments)?item.attachments:[]).map(a=>({url:a.url,mimeType:a.mime_type,kind:/^audio\//.test(a.mime_type)?'audio':/^video\//.test(a.mime_type)?'video':/^image\//.test(a.mime_type)?'image':''}));
         add({...item,id:item.id!=null?`${sourceId}:${String(item.id)}`:'',media,summary:item.summary||item.content_text});
@@ -298,13 +412,13 @@
       const homeLink=atom?channelLinks.find(n=>!n.getAttribute('rel')||n.getAttribute('rel')==='alternate')?.getAttribute('href'):value(channel,'link');
       sources[0].url=safeUrl(homeLink,baseUrl)||baseUrl;
       const selfLink=channelLinks.find(n=>n.getAttribute('rel')==='self')?.getAttribute('href');
-      sources[0].feedUrl=safeUrl(selfLink,baseUrl)||baseUrl;
+      sources[0].feedUrl=safeUrl(selfLink,baseUrl)||feedUrl;
       for(const entry of articleNodes){
         const links=children(entry).filter(n=>local(n)==='link'),link=atom?(links.find(n=>!n.getAttribute('rel')||n.getAttribute('rel')==='alternate')?.getAttribute('href')||''):value(entry,'link');
         const media=[];for(const n of children(entry)){const name=local(n),url=n.getAttribute('url')||(name==='link'&&n.getAttribute('rel')==='enclosure'?n.getAttribute('href'):'');
           if(!url)continue;const type=n.getAttribute('type')||n.getAttribute('medium')||'';const kind=name==='thumbnail'?'image':/^image/.test(type)?'image':/^audio/.test(type)?'audio':/^video/.test(type)?'video':'';if(kind)media.push({kind,url});}
         const guid=value(entry,atom?'id':'guid');
-        add({id:guid?`${sourceId}:${guid}`:'',title:value(entry,'title'),url:safeUrl(link,baseUrl),date:value(entry,atom?'published':'pubDate')||value(entry,'date'),updatedAt:atom?value(entry,'updated'):'',
+        add({id:guid?`${sourceId}:${guid}`:'',title:value(entry,'title'),url:safeUrl(link,baseUrl),date:value(entry,atom?'published':'pubDate')||value(entry,'date'),publishedAt:value(entry,atom?'published':'issued')||value(entry,'pubDate'),updatedAt:atom?value(entry,'updated'):value(entry,'modified'),
           summary:value(entry,atom?'summary':'description'),media,author:value(entry,'author'),tags:children(entry).filter(n=>local(n)==='category').map(n=>n.getAttribute('term')||n.textContent)});
       }
     }
@@ -312,24 +426,29 @@
     if(!sources[0].url)sources[0].url=new URL(items[0].url).origin;
     return {schemaVersion:1,sources,items:deduplicateItems(items)};
   }
-  function exportFeed(items,options={}) {
+  function exportFeedResult(items,options={}) {
     const title=text(options.title)||'Feed',url=safeUrl(options.url),feedUrl=safeUrl(options.feedUrl),format=choice(options.format,['rss','atom','json'],'json');
     const rows=(items||[]).map(item=>normalizeItem(item)).filter(Boolean);
+    const finish=(content,exportedItems=rows.length)=>({content,format,inputItems:rows.length,exportedItems,omittedItems:rows.length-exportedItems,
+      warnings:rows.length>exportedItems?[`${rows.length-exportedItems} item(s) lack an original publication or update timestamp and were omitted from Atom. JSON Feed and RSS retain these stories.`]:[]});
     const xml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
     const mime=media=>{if(media.mimeType)return media.mimeType;const suffix=new URL(media.url).pathname.toLowerCase();
       if(media.kind==='audio')return /\.ogg$/.test(suffix)?'audio/ogg':/\.m4a$/.test(suffix)?'audio/mp4':/\.wav$/.test(suffix)?'audio/wav':/\.mp3$/.test(suffix)?'audio/mpeg':'application/octet-stream';
       if(media.kind==='video')return /\.webm$/.test(suffix)?'video/webm':/\.mp4$/.test(suffix)?'video/mp4':'application/octet-stream';
       return /\.png$/.test(suffix)?'image/png':/\.webp$/.test(suffix)?'image/webp':/\.gif$/.test(suffix)?'image/gif':/\.jpe?g$/.test(suffix)?'image/jpeg':'application/octet-stream';};
-    if(format==='json')return JSON.stringify({version:'https://jsonfeed.org/version/1.1',title,...(url?{home_page_url:url}:{}),...(feedUrl?{feed_url:feedUrl}:{}),
-      items:rows.map(item=>({id:item.id,url:item.url,title:item.title,content_text:item.summary||item.title,...(item.date?{date_published:new Date(item.date).toISOString()}:{}),
+    if(format==='json')return finish(JSON.stringify({version:'https://jsonfeed.org/version/1.1',title,...(url?{home_page_url:url}:{}),...(feedUrl?{feed_url:feedUrl}:{}),
+      items:rows.map(item=>({id:item.id,url:item.url,title:item.title,content_text:item.summary||item.title,...(item.publishedAt?{date_published:item.publishedAt}:{}),
+        ...(item.date?{_feed_core:{date:item.date.slice(0,10)}}:{}),
         ...(item.updatedAt?{date_modified:item.updatedAt}:{}),...(item.tags.length?{tags:item.tags}:{}),...((item.media.find(m=>m.kind==='image'))?{image:item.media.find(m=>m.kind==='image').url}:{}),
-        ...(item.media.some(m=>m.kind!=='embed')?{attachments:item.media.filter(m=>m.kind!=='embed').map(m=>({url:m.url,mime_type:mime(m)}))}:{})}))},null,2);
-    if(format==='rss')return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>${xml(title)}</title><link>${xml(url||feedUrl)}</link><description>${xml(title)}</description>${rows.map(item=>`<item><guid isPermaLink="false">${xml(item.id)}</guid><title>${xml(item.title)}</title><link>${xml(item.url)}</link>${item.date?`<pubDate>${xml(new Date(item.date).toUTCString())}</pubDate>`:''}<description>${xml(item.summary||item.title)}</description>${item.media.filter(m=>m.kind!=='embed').map(m=>`<media:content url="${xml(m.url)}" medium="${m.kind}"/>`).join('')}</item>`).join('')}</channel></rss>`;
-    // Atom requires updated, which is distinct from original publication time.
-    const generatedAt=validDate(options.generatedAt);if(!generatedAt)throw new Error('Atom export requires an explicit generatedAt timestamp for entries without update dates.');
+        ...(item.media.some(m=>m.kind!=='embed')?{attachments:item.media.filter(m=>m.kind!=='embed').map(m=>({url:m.url,mime_type:mime(m)}))}:{})}))},null,2));
+    if(format==='rss')return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"><channel><title>${xml(title)}</title><link>${xml(url||feedUrl)}</link><description>${xml(title)}</description>${rows.map(item=>`<item><guid isPermaLink="false">${xml(item.id)}</guid><title>${xml(item.title)}</title><link>${xml(item.url)}</link>${item.publishedAt?`<pubDate>${xml(new Date(item.publishedAt).toUTCString())}</pubDate><dcterms:issued>${xml(item.publishedAt)}</dcterms:issued>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}${item.updatedAt?`<dcterms:modified>${xml(item.updatedAt)}</dcterms:modified>`:''}<description>${xml(item.summary||item.title)}</description>${item.media.filter(m=>m.kind!=='embed').map(m=>`<media:content url="${xml(m.url)}" medium="${m.kind}"/>`).join('')}</item>`).join('')}</channel></rss>`);
+    // Atom requires a real entry updated instant. Feed generation is not article modification.
+    const generatedAt=validTimestamp(options.generatedAt);if(!generatedAt)throw new Error('Atom export requires an explicit generatedAt timestamp for the feed.');
     const updated=new Date(generatedAt).toISOString();
-    return `<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom"><id>${xml(feedUrl||url||'urn:feed:export')}</id><title>${xml(title)}</title><updated>${updated}</updated><author><name>${xml(text(options.author)||title)}</name></author>${rows.map(item=>`<entry><id>${xml(item.url)}</id><title>${xml(item.title)}</title><link href="${xml(item.url)}"/><updated>${xml(item.updatedAt||item.date&&new Date(item.date).toISOString()||updated)}</updated>${item.date?`<published>${xml(new Date(item.date).toISOString())}</published>`:''}<summary>${xml(item.summary||item.title)}</summary>${item.media.filter(m=>m.kind!=='embed').map(m=>`<link rel="enclosure" href="${xml(m.url)}" type="${mime(m)}"/>`).join('')}</entry>`).join('')}</feed>`;
+    const timed=rows.filter(item=>item.publishedAt||item.updatedAt);
+    return finish(`<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><id>${xml(feedUrl||url||'urn:feed:export')}</id><title>${xml(title)}</title><updated>${updated}</updated><author><name>${xml(text(options.author)||title)}</name></author>${timed.map(item=>`<entry><id>${xml(item.url)}</id><title>${xml(item.title)}</title><link href="${xml(item.url)}"/><updated>${xml(item.updatedAt||item.publishedAt)}</updated>${item.publishedAt?`<published>${xml(item.publishedAt)}</published>`:''}${item.date?`<dc:date>${xml(item.date.slice(0,10))}</dc:date>`:''}<summary>${xml(item.summary||item.title)}</summary>${item.media.filter(m=>m.kind!=='embed').map(m=>`<link rel="enclosure" href="${xml(m.url)}" type="${mime(m)}"/>`).join('')}</entry>`).join('')}</feed>`,timed.length);
   }
-  return Object.freeze({VERSION,VIEWS,safeUrl,canonicalUrl,validDate,normalizeItem,deduplicateItems,sourceEnabled,resolveSourceSelection,normalizeTickerOptions,normalizePreferences,
-    normalisePreferences:normalizePreferences,exportPreferences,importPreferences,compilePattern,filterItems,rankItems,freshness,mergeDigests,parseImportedFeed,exportFeed});
+  function exportFeed(items,options={}){return exportFeedResult(items,options).content;}
+  return Object.freeze({VERSION,VIEWS,safeUrl,canonicalUrl,validDate,validTimestamp,normalizeItem,deduplicateItems,sourceEnabled,resolveSourceSelection,normalizeTickerOptions,normalizeFeedRecipe,normalizeDashboard,normalizePreferences,
+    normalisePreferences:normalizePreferences,exportPreferences,importPreferences,compilePattern,filterItems,rankItems,clusterStories,rankItemsSemantic,freshness,mergeDigests,parseImportedFeed,exportFeed,exportFeedResult});
 });

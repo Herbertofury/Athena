@@ -169,4 +169,4 @@
 
 ## Shared application cores
 
-- [Feed and ticker cores](Shared-Feed-Cores)
+- [Feed cores](Shared-Feed-Cores)

@@ -1,0 +1,10 @@
+{
+  "name": "feed-widget-core",
+  "version": "0.1.0",
+  "description": "Framework-independent news reader, source gallery, dashboard and feed builder UI",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "feed-widget-core.js",
+  "files": ["feed-widget-core.js", "feed-widget-core.css", "README.md"],
+  "scripts": {"test": "node --test tests/*.test.cjs"}
+}

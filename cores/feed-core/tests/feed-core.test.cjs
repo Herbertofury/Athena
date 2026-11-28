@@ -13,7 +13,9 @@ test('normalization never substitutes fetch time for publication date or changes
   const item=core.normalizeItem(article('one',{date:'',fetchedAt:'2026-11-28T10:00:00Z'}));
   assert.equal(item.date,'');assert.equal(item.publishedAt,'');assert.equal(item.fetchedAt,'2026-11-28T10:00:00.000Z');
   assert.equal(core.normalizeItem(article('two')).date,'2026-11-27');
-  assert.equal(core.validDate('2026-02-31'),'');assert.equal(core.normalizeItem(article('bad',{url:'data:text/html,hi'})),null);
+  const precise=core.normalizeItem(article('precise',{date:'2026-11-27',publishedAt:'2026-11-27T15:12:00Z'}));
+  assert.equal(precise.date,'2026-11-27');assert.equal(precise.publishedAt,'2026-11-27T15:12:00.000Z');
+  assert.equal(core.validDate('2026-02-31'),'');assert.equal(core.validDate('2026-02-31T12:00:00Z'),'');assert.equal(core.normalizeItem(article('bad',{url:'data:text/html,hi'})),null);
 });
 test('exact URL dedupe preserves attribution and does not collapse distinct same-title articles',()=>{
   const rows=core.deduplicateItems([article('one'),article('copy',{sourceId:'second',url:'https://example.org/one?utm_source=x',summary:'Extra detail'}),article('distinct',{title:'Article one'})]);
@@ -32,6 +34,21 @@ test('typed imports discard scripts/secrets/prototype keys and preserve custom d
   assert.equal(p.view,'list');assert.equal(p.slackWebhook,undefined);assert.equal(Object.hasOwn(p.sourceOverrides,'__proto__'),false);assert.equal(p.ticker.accent,'#497fcf');
   assert.equal(p.customItems.length,1);assert.equal(p.customSources.length,1);assert.equal(p.presets[0].settings.readIds,undefined);
   assert.throws(()=>core.importPreferences('{"format":"feed-preferences","schemaVersion":9,"preferences":{}}'),/version/);
+});
+test('custom imports cannot shadow managed publisher identities while saved snapshots and opt-outs remain portable',()=>{
+  const managed=[{id:'vendor',name:'Verified publisher',defaultEnabled:true}];
+  assert.throws(()=>core.importPreferences(core.exportPreferences({customSources:[{id:'vendor',name:'Impersonated',url:'https://different.example/'}]}),managed),/managed source identities/);
+  assert.throws(()=>core.importPreferences(core.exportPreferences({customItems:[article('pretend')]}),managed),/managed source identities/);
+  const p=core.importPreferences(core.exportPreferences({sourceOverrides:{vendor:false},savedItems:[article('saved')],groupRelated:true}),managed);
+  assert.equal(p.sourceOverrides.vendor,false);assert.equal(p.savedItems[0].sourceId,'vendor');assert.equal(p.groupRelated,true);
+});
+test('a publisher homepage or relative-link base is never invented as a feed refresh endpoint',()=>{
+  const feed=JSON.stringify({version:'https://jsonfeed.org/version/1.1',title:'Imported',home_page_url:'https://publisher.example/',items:[{id:'one',title:'Reported',url:'https://publisher.example/story',content_text:'Summary'}]});
+  const local=core.parseImportedFeed(feed,{sourceId:'custom',baseUrl:'https://publisher.example/'});
+  assert.equal(local.sources[0].feedUrl,'');
+  const prefs=core.normalizePreferences({customSources:local.sources});assert.equal(prefs.customSources[0].feedUrl,'');
+  const fetched=core.parseImportedFeed(feed,{sourceId:'custom',baseUrl:'https://publisher.example/feed.json',feedUrl:'https://publisher.example/feed.json'});
+  assert.equal(fetched.sources[0].feedUrl,'https://publisher.example/feed.json');
 });
 test('filters combine selections, keywords, title search, unread, saved and source categories',()=>{
   const items=[article('a',{title:'Security patch CVE-2026-1234',summary:'Linux update'}),article('b',{title:'New release',sourceId:'other'})];
@@ -69,4 +86,35 @@ test('JSON Feed import and all exports preserve absent publication dates and esc
   assert.throws(()=>core.exportFeed(parsed.items,{format:'atom'}),/generatedAt/);
   const atom=core.exportFeed(parsed.items,{format:'atom',generatedAt:'2026-11-28T12:00:00Z'});assert.ok(!atom.includes('<published>'));assert.ok(atom.includes('<updated>2026-11-28T12:00:00.000Z</updated>'));
   assert.throws(()=>core.parseImportedFeed('<!DOCTYPE x><rss/>'),/DTD/);
+});
+test('publication keeps day precision, retains real instants, and reports untimed Atom omissions',()=>{
+  const items=[article('day'),article('instant',{publishedAt:'2026-11-27T15:12:00Z'}),article('modified',{date:'',updatedAt:'2026-11-28T10:00:00Z'}),article('unknown',{date:''})];
+  const json=JSON.parse(core.exportFeed(items,{format:'json'}));
+  assert.equal(json.items[0].date_published,undefined);assert.equal(json.items[0]._feed_core.date,'2026-11-27');assert.equal(json.items[1].date_published,'2026-11-27T15:12:00.000Z');
+  const roundtrip=core.parseImportedFeed(JSON.stringify(json),{sourceId:'custom'});assert.equal(roundtrip.items[0].date,'2026-11-27');assert.equal(roundtrip.items[0].publishedAt,'');
+  const rss=core.exportFeed(items,{format:'rss'});assert.equal((rss.match(/<pubDate>/g)||[]).length,1);assert.ok(rss.includes('<dc:date>2026-11-27</dc:date>'));
+  const atom=core.exportFeedResult(items,{format:'atom',generatedAt:'2026-11-28T12:00:00Z'});
+  assert.equal(atom.inputItems,4);assert.equal(atom.exportedItems,2);assert.equal(atom.omittedItems,2);assert.match(atom.warnings[0],/omitted/);
+  assert.equal((atom.content.match(/<entry>/g)||[]).length,2);assert.equal((atom.content.match(/<published>/g)||[]).length,1);
+  assert.equal(core.validTimestamp('2026-11-27'),'');assert.equal(core.validTimestamp('2026-11-27T15:12:00'),'');assert.equal(core.validDate('2026-11-27T15:12:00'),'2026-11-27');
+});
+test('story grouping is bounded lexical evidence, preserves every report, and respects time windows',()=>{
+  const items=[article('one',{title:'Kernel developers patch critical memory vulnerability'}),article('two',{title:'Developers patch critical kernel memory vulnerability',sourceId:'second'}),article('unrelated',{title:'Weather report forecasts winter rain'}),article('distant',{title:'Kernel developers patch critical memory vulnerability',date:'2020-01-01'}),article('undated',{title:'Kernel developers patch critical memory vulnerability',date:''})];
+  const clustered=core.clusterStories(items);
+  assert.equal(clustered.method,'lexical-title-similarity');assert.equal(clustered.groups.length,4);
+  assert.deepEqual(clustered.groups[0].items.map(i=>i.id),['one','two']);assert.deepEqual(clustered.groups[0].sourceIds,['vendor','second']);
+  assert.equal(clustered.groups.flatMap(g=>g.items).length,items.length);assert.equal(core.clusterStories(items,{maxItems:1}).limited,true);
+});
+test('optional semantic ranking uses validated embeddings and reports honest lexical fallback',async()=>{
+  const items=[article('lexical',{title:'car engine'}),article('semantic',{title:'automobile mechanics'})];
+  const semantic=await core.rankItemsSemantic(items,{query:'car engine',now,embedder:async input=>{
+    assert.equal(input.length,3);return [[1,0],[0.1,1],[1,0]];
+  }});
+  assert.equal(semantic.method,'semantic');assert.equal(semantic.items[0].id,'semantic');assert.equal(semantic.scoredCount,2);
+  const none=await core.rankItemsSemantic(items,{query:'car engine',now});assert.equal(none.method,'lexical');assert.match(none.reason,/No embedding/);
+  const bad=await core.rankItemsSemantic(items,{query:'car engine',now,embedder:async()=>[[NaN]]});assert.equal(bad.method,'lexical');assert.match(bad.reason,/invalid vectors/);
+  const timeout=await core.rankItemsSemantic(items,{query:'car engine',timeoutMs:10,embedder:()=>new Promise(()=>{})});assert.equal(timeout.method,'lexical');assert.match(timeout.reason,/timed out/);
+  const controller=new AbortController();
+  const pending=core.rankItemsSemantic(items,{query:'car engine',signal:controller.signal,embedder:()=>new Promise(()=>{})});controller.abort();
+  await assert.rejects(pending,{name:'AbortError'});
 });

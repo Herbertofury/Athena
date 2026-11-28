@@ -70,4 +70,4 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 
 ## Shared application cores
 
-- [Feed and ticker cores](Shared-Feed-Cores)
+- [Feed cores](Shared-Feed-Cores)

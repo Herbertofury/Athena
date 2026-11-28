@@ -1,4 +1,4 @@
-name: Shared feed and ticker cores
+name: Shared feed cores
 on:
   pull_request:
     paths: ['cores/**', '.github/workflows/shared-feed-cores.yml']
@@ -30,7 +30,9 @@ jobs:
         with:
           python-version: '3.14'
       - name: Verify JS contracts and lifecycle
-        run: node --test cores/feed-core/tests/*.test.cjs cores/ticker-core/tests/*.test.cjs
+        run: |
+          npm ci --ignore-scripts
+          node --test cores/*/tests/*.test.cjs
       - name: Verify collector recovery contracts
         run: python -m unittest discover -s cores/feed-core/python -p 'test_*.py'
       - name: Measure equivalent complete ranking

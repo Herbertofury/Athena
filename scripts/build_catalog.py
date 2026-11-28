@@ -169,14 +169,18 @@ for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sideb
   destination.write_text(existing + link)
 
 # Generic shared-capability sources stay separate from product branding.
-write(R/'wiki/Shared-Feed-Cores.md', """# Shared feed and ticker cores
+write(R/'wiki/Shared-Feed-Cores.md', """# Shared feed cores
 
-Athena owns the reusable `feed-core` and `ticker-core` source. Consumer products
-choose their own interface; INTA exposes its integrated experience as **News**.
+Athena owns generic shared feed capabilities. Consumer products choose their own
+configuration and identity; INTA exposes its integrated experience as **News**.
 
 - [Core catalog, exact-source consumption and verification](https://github.com/Herbertofury/Athena/blob/main/cores/README.md)
 - [feed-core API, portable preferences and date/attribution rules](https://github.com/Herbertofury/Athena/blob/main/cores/feed-core/README.md)
 - [ticker-core lifecycle, motion controls and host responsibilities](https://github.com/Herbertofury/Athena/blob/main/cores/ticker-core/README.md)
+- [content-extraction-core inert metadata and listing extraction](https://github.com/Herbertofury/Athena/blob/main/cores/content-extraction-core/README.md)
+- [feed-generation-core recipes, regression validation and portable output](https://github.com/Herbertofury/Athena/blob/main/cores/feed-generation-core/README.md)
+- [visual-editor-core immutable dashboard operations](https://github.com/Herbertofury/Athena/blob/main/cores/visual-editor-core/README.md)
+- [feed-widget-core configurable reader and editor controls](https://github.com/Herbertofury/Athena/blob/main/cores/feed-widget-core/README.md)
 - [Shared capability routing index](https://github.com/Herbertofury/Athena/blob/main/guidance/registry/shared-capabilities.json)
 
 Consumers bundle pinned source locally and keep independent offline operation.
@@ -186,4 +190,4 @@ automatic claim that every platform has shipped or that a live workflow ran.
 """)
 for name in ('wiki/Home.md', 'wiki/_Sidebar.md'):
  destination = R / name
- destination.write_text(destination.read_text() + '\n## Shared application cores\n\n- [Feed and ticker cores](Shared-Feed-Cores)\n')
+ destination.write_text(destination.read_text() + '\n## Shared application cores\n\n- [Feed cores](Shared-Feed-Cores)\n')
