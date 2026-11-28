@@ -78,6 +78,22 @@ mod tests {
                 .unwrap()
                 .ends_with("/native/foundry/LEGACY-REVIEW.md")
         }));
+        let constellation = &rows[2];
+        assert_eq!(constellation["project_tracker"], "/#projects");
+        assert!(
+            constellation["gates"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|g| g["state"] == "recorded" && g["label"] == "Reviewed project staging")
+        );
+        assert!(
+            constellation["gates"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|g| g["state"] == "open" && g["label"] == "Owner-target project migration")
+        );
         let mut ids = std::collections::HashSet::new();
         for row in rows {
             assert!(ids.insert(row["id"].as_str().unwrap()));

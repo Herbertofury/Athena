@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "snapshot_date": "2026-11-28",
-  "source_snapshot_commit": "4e67e381b43eefd7424afe4fa9c1aad853343003",
+  "source_snapshot_commit": "0c056945304563c3d95143896360ee8ee0e8c429",
   "retirement_certified": false,
   "scope": "Read-only routing and evidence snapshot, not a new live repository audit. No source is certified safe to delete. Older evidence retains its original date.",
   "projects": [
@@ -31,11 +31,11 @@
       "evidence": [
         {
           "label": "Verified original Wiki and current destination mapping",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/scripts/verify_atlas_cutover.py"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/scripts/verify_atlas_cutover.py"
         },
         {
           "label": "Native Learning History and explicit runner scope",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/engineering/docs/learning-history.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/engineering/docs/learning-history.md"
         }
       ]
     },
@@ -75,15 +75,15 @@
       "evidence": [
         {
           "label": "Dated retirement audit",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/migration/feature-foundry/retirement-audit-2026-11-14.json"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/migration/feature-foundry/retirement-audit-2026-11-14.json"
         },
         {
           "label": "Portable two-store checkpoint behavior",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/native/foundry/DUAL-STORE-CHECKPOINT.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/native/foundry/DUAL-STORE-CHECKPOINT.md"
         },
         {
           "label": "Portable import, original event archive and limits",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/native/foundry/LEGACY-REVIEW.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/native/foundry/LEGACY-REVIEW.md"
         }
       ]
     },
@@ -92,12 +92,23 @@
       "name": "Project Constellation",
       "workspace": "/#continuity",
       "native_entry": null,
-      "summary": "Athena Continuity provides source-attributed notes, revisions and explicit evidence dependencies.",
+      "summary": "Athena Projects tracks owned ideas and followed work. Continuity keeps source-attributed notes, revisions and explicit evidence dependencies.",
+      "project_tracker": "/#projects",
       "gates": [
         {
           "state": "recorded",
           "label": "Native continuity slice",
           "detail": "Integration documentation distinguishes the reconstructed 0.20.1 baseline from incomplete staged 0.20.2 recovery. It is not a full extension port."
+        },
+        {
+          "state": "recorded",
+          "label": "Reviewed project staging",
+          "detail": "The local v7 picker passed Windows and Linux with synthetic backups. It stages only selected live workspace names and exact timestamps with explicit ownership and stage. The saved Projects roster must still match before confirmation. Provider mirrors, notes, chats and approval history are not copied."
+        },
+        {
+          "state": "open",
+          "label": "Owner-target project migration",
+          "detail": "Keep the original export and test an independent stopped copy from the intended device. Do not infer full project history, provider coverage, account synchronization or data cutover from a synthetic staging test."
         },
         {
           "state": "open",
@@ -108,7 +119,11 @@
       "evidence": [
         {
           "label": "Continuity capabilities, provenance and remaining gates",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/docs/integration/PROJECT-CONTINUITY.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/docs/integration/PROJECT-CONTINUITY.md"
+        },
+        {
+          "label": "Local Constellation project staging and verification",
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/engineering/docs/migration-readiness.md"
         }
       ]
     },
@@ -133,11 +148,11 @@
       "evidence": [
         {
           "label": "Pinned source inventory",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/guidance/registry/agent-foundry-source-inventory.json"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/guidance/registry/agent-foundry-source-inventory.json"
         },
         {
           "label": "Guidance integration and retirement gates",
-          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/docs/integration/AGENT-GUIDANCE.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/docs/integration/AGENT-GUIDANCE.md"
         }
       ]
     }
