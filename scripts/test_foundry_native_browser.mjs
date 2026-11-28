@@ -351,6 +351,50 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.getByRole('link',{name:'Open project tracker',exact:true}).getAttribute('href'),'/#projects');
   assert.equal(await page.getByRole('heading',{name:'Recorded evidence · Reviewed project staging'}).count(),1);
   assert.equal(await page.getByRole('heading',{name:'Still open · Owner-target project migration'}).count(),1);
+  await page.getByRole('link',{name:'Review an original catalog archive',exact:true}).click();
+  await page.getByRole('heading',{name:'Original Foundry catalog',exact:true}).waitFor();
+  const originalCatalog=path.join(temporary,'original-catalog.sqlite');
+  const schemaSource=path.join(repoRoot,'feature-foundry/source/src-tauri/src/database.rs');
+  const originalWriterFixture=`import pathlib,sqlite3,sys
+s=pathlib.Path(sys.argv[1]).read_text(encoding='utf-8').split('"BEGIN;',1)[1].split('COMMIT;"',1)[0]
+with sqlite3.connect(sys.argv[2]) as db:
+ db.executescript(s)
+ db.execute("INSERT INTO metadata VALUES('schema_version','1')")
+ db.execute('DROP TABLE ecology_objects')
+ for i in range(52):
+  db.execute('INSERT INTO theme_packages VALUES(?,?,?,?,?,?,?,?)',('theme-%03d'%i,'Café Theme %03d'%i,'v1',0,'Old world','wood','still','{ "original": "private synthetic content" }'))
+`;
+  execFileSync(pythonCommand,['-B','-c',originalWriterFixture,schemaSource,originalCatalog],{timeout:12000});
+  const originalBefore=fs.readFileSync(originalCatalog);
+  const exactCatalog=execFileSync(binaryPath,['archive-legacy-catalog',originalCatalog],{timeout:12000});
+  assert.deepEqual(fs.readFileSync(originalCatalog),originalBefore);
+  const openCatalog=buffer=>page.getByLabel('Saved Foundry catalog JSON',{exact:true}).setInputFiles({
+    name:'catalog.json',mimeType:'application/json',buffer});
+  await openCatalog(exactCatalog);
+  await page.getByText('7 archive families opened locally. Nothing was imported.',{exact:true}).waitFor();
+  await page.getByText('Showing 48 of 52 matching records. 52 records in this family.',{exact:true}).waitFor();
+  assert.equal(await page.getByRole('button',{name:'Café Theme 051',exact:true}).count(),0);
+  await page.getByLabel('Search names, labels and IDs',{exact:true}).fill('CAFÉ THEME 051');
+  await page.getByRole('button',{name:'Café Theme 051',exact:true}).click();
+  await page.getByText('Raw JSON fingerprint matches this archive entry.',{exact:true}).waitFor();
+  await page.getByText('Inspect original JSON text',{exact:true}).click();
+  await page.getByText('{ "original": "private synthetic content" }',{exact:true}).waitFor();
+  await page.getByLabel('Catalog family',{exact:true}).selectOption('ecology_objects');
+  await page.getByText('This table was absent from the original file.',{exact:true}).waitFor();
+  const corrupted=JSON.parse(exactCatalog);
+  corrupted.families[0].rows[0].original_fields.raw_json='{"different":true}';
+  await openCatalog(Buffer.from(JSON.stringify(corrupted)));
+  await page.getByRole('button',{name:'Café Theme 000',exact:true}).click();
+  await page.getByText('Could not verify this record’s raw JSON. Its details were not opened.',{exact:true}).waitFor();
+  await openCatalog(Buffer.from(exactCatalog.toString('utf8').replace('"schema":2','"schema":2,"schema":2')));
+  await page.getByText(/Archive refused/).waitFor();
+  assert.equal(await page.locator('#catalog').isVisible(),false);
+  const v1=JSON.parse(exactCatalog);v1.schema=1;v1.families=v1.families.slice(0,3);
+  await openCatalog(Buffer.from(JSON.stringify(v1)+'\n'));
+  await page.getByText('3 archive families opened locally. Nothing was imported.',{exact:true}).waitFor();
+  await page.getByRole('link',{name:'Migration readiness',exact:true}).click();
+  await page.locator('#projects article').nth(3).waitFor();
+
   await page.getByRole('link',{name:'Open project tracker',exact:true}).click();
   await page.getByRole('heading',{name:'Project browser',exact:true}).last().waitFor();
   await page.getByRole('button',{name:'New project',exact:true}).waitFor();
