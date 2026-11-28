@@ -47,7 +47,7 @@ mod tests {
         let value: serde_json::Value = serde_json::from_str(SNAPSHOT).unwrap();
         assert_eq!(value["schema"], 1);
         assert_eq!(value["retirement_certified"], false);
-        assert_eq!(value["snapshot_date"], "2026-11-27");
+        assert_eq!(value["snapshot_date"], "2026-11-28");
         let pin = value["source_snapshot_commit"].as_str().unwrap();
         assert_eq!(pin.len(), 40);
         let rows = value["projects"].as_array().unwrap();
@@ -63,6 +63,20 @@ mod tests {
         let foundry = &rows[1];
         assert!(foundry["gates"].as_array().unwrap().iter().any(|g| {
             g["state"] == "recorded" && g["label"] == "Windows and Linux checkpoint and fork"
+        }));
+        let foundry_gates = foundry["gates"].as_array().unwrap();
+        assert!(foundry_gates.iter().any(|g| {
+            g["state"] == "recorded"
+                && g["label"] == "Reviewed legacy import and event preservation"
+        }));
+        assert!(foundry_gates.iter().any(|g| {
+            g["state"] == "open" && g["label"] == "Owner data and remaining legacy records"
+        }));
+        assert!(foundry["evidence"].as_array().unwrap().iter().any(|row| {
+            row["url"]
+                .as_str()
+                .unwrap()
+                .ends_with("/native/foundry/LEGACY-REVIEW.md")
         }));
         let mut ids = std::collections::HashSet::new();
         for row in rows {
