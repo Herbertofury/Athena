@@ -143,8 +143,20 @@ Storage is origin-scoped IndexedDB, **not an encrypted vault**, tamper-proof rec
 owner-authenticity proof, remote backup or native Rust/SQLite store. Same-origin
 scripts and browser-profile access can read it; clearing/evicting browser storage
 can lose it. SHA-256 verifies consistency of bytes, not provenance or metadata
-signatures. The existing note JSON export does **not** contain artifact bytes;
-keep independent downloaded copies of every revision you need before clearing data.
+signatures. The note JSON export does **not** contain artifact bytes. In Continuity,
+open the local artifact journal and select **Export complete artifact journal** to
+download a separate `.athart` backup, then store it privately. It holds filenames
+and original bytes without encryption. To recover into a different profile or
+origin, open its journal, choose the backup and select **Restore missing revisions**.
+Restore is additive: identical revisions are skipped, conflicting or corrupt backups
+are refused without changing existing entries, and repeated import is safe.
+
+With the extracted native package, run `atlas-lab verify-continuity-artifact-backup
+ARCHIVE.athart` (`atlas-lab.exe` on Windows) to check a selected file independently.
+The command reads the backup without extracting or restoring it and outputs aggregate
+counts, not paths or names. Pass `--include-fingerprint` only to compare the
+whole-file SHA-256. A passing check is not proof of authorship or an owner-data
+migration; leave originals intact until an explicit restore has been verified.
 The journal remains accessible even if unrelated note JSON cannot be opened.
 
 Local UI/hash tests and a synthetic fake-indexeddb transaction rehearsal passed;

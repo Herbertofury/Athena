@@ -46,6 +46,8 @@ jobs:
         run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
       - name: Review a synthetic Constellation export in the exact extracted native package
         run: python -B scripts/test_constellation_review.py candidate-extracted
+      - name: Verify browser-created artifact backups in the exact extracted native package
+        run: node scripts/test_continuity_artifact_verifier.mjs candidate-extracted
       - name: Unified dual-store HTTP acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
