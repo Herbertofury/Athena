@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Athena · Review Constellation export</title><link rel="stylesheet" href="/learning/style.css"></head>
+<body><main>
+<nav aria-label="Athena native pages"><a href="/">ATHENA / HOME</a><a href="/migration">Migration readiness</a></nav>
+<header><p class="eyebrow">CONTINUITY / BACKUP REVIEW</p><h1>Review a Constellation export</h1>
+<p>Check what the v7 backup actually contains before attempting a migration. Missing data here does not mean it was missing in Constellation.</p></header>
+<section class="runner" aria-labelledby="input-heading">
+<h2 id="input-heading">Select a saved backup</h2>
+<p>Plain JSON or a single gzip member, up to 16 MiB both before and after decompression. The file goes only to the local Athena process. No import, disk write, provider request, or change to the original.</p>
+<form id="review" method="post">
+<p><label for="backup">Constellation backup</label> <input id="backup" type="file" accept=".json,.gz,application/json,application/gzip" required></p>
+<p><label><input id="fingerprint" type="checkbox"> Include SHA-256 fingerprints</label></p>
+<button id="start" type="submit">Review backup</button> <button id="cancel" type="button" disabled>Cancel</button>
+</form><p id="status" role="status" aria-live="polite">Choose a backup to start.</p>
+</section>
+<section id="result" class="runner" aria-labelledby="results-heading" hidden>
+<h2 id="results-heading">Backup coverage</h2><p id="summary"></p>
+<p><label><input id="attention" type="checkbox"> Show only missing, capped or incomplete collections</label></p>
+<div id="collections" class="layout"></div>
+<details><summary>References, artifact links and lifecycle counts</summary><dl id="details"></dl></details>
+<p id="hashes"></p><button type="button" id="save">Save count-only receipt</button>
+</section>
+<footer>This review does not certify restoration or deletion of the source.</footer></main>
+<script type="module" src="/migration/constellation/app.js"></script></body></html>
