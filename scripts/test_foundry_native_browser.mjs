@@ -342,12 +342,20 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const snapshotResponse=await fetch(origin+'/api/migration/readiness');const snapshotText=await snapshotResponse.text();
   assert.equal(snapshotResponse.headers.get('x-athena-snapshot-sha256'),createHash('sha256').update(snapshotText).digest('hex'));
   assert.equal(JSON.parse(snapshotText).retirement_certified,false);
-  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),8);
+  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),9);
   assert.equal(await page.getByRole('heading',{name:'Recorded evidence · Reviewed legacy import and event preservation'}).count(),1);
   assert.equal(await page.getByRole('heading',{name:'Still open · Owner data and remaining legacy records'}).count(),1);
   assert.equal(await page.getByRole('link',{name:'Portable import, original event archive and limits'}).getAttribute('href'),
-    'https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/native/foundry/LEGACY-REVIEW.md');
+    'https://github.com/Herbertofury/Athena/blob/0c056945304563c3d95143896360ee8ee0e8c429/native/foundry/LEGACY-REVIEW.md');
   assert.equal(await page.locator('#projects a[href="/#continuity"]').count(),1);
+  assert.equal(await page.getByRole('link',{name:'Open project tracker',exact:true}).getAttribute('href'),'/#projects');
+  assert.equal(await page.getByRole('heading',{name:'Recorded evidence · Reviewed project staging'}).count(),1);
+  assert.equal(await page.getByRole('heading',{name:'Still open · Owner-target project migration'}).count(),1);
+  await page.getByRole('link',{name:'Open project tracker',exact:true}).click();
+  await page.getByRole('heading',{name:'Project browser',exact:true}).last().waitFor();
+  await page.getByRole('button',{name:'New project',exact:true}).waitFor();
+  await page.goBack();
+  await page.locator('#projects article').nth(3).waitFor();
   await page.screenshot({path:path.join(out,'migration-readiness.png'),fullPage:true});
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
