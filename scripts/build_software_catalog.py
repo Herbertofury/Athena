@@ -658,7 +658,7 @@ def build(check=False, partial=False):
                REPORTS + "/refresh-queue.json": json.dumps(coverage_report(catalog), indent=2) + "\n",
                REPORTS + "/expansion-progress.json": json.dumps(expansion_progress(catalog), indent=2) + "\n",
                **markdown(catalog)}
-    for name in ("index.mjs", "model.mjs", "style.css"):
+    for name in ("index.mjs", "model.mjs", "style.css", "recommendations.mjs", "repository-recommendations.json"):
         p = ROOT / "src/software" / name
         if p.exists():
             outputs["dist/workspaces/software/" + name] = p.read_text()

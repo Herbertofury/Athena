@@ -1,3 +1,4 @@
+import {mountRecommendations} from './recommendations.mjs';
 import {FILTERS, indexCatalog, parseState, encodeState, normalizeState, queryCatalog, queryResearch, relatedGuides, queryGuides, safeLink, comparisonRows, alternativeTarget} from './model.mjs';
 
 function element(tag, attrs = {}, ...children) {
@@ -44,6 +45,7 @@ export async function mount({container, search = '', state: saved = {}, route = 
     element('div', {id: 'guide-directory-results', class: 'guide-directory-results'}),
     element('button', {id: 'guide-directory-more', type: 'button', hidden: ''}, 'Show more decision guides'));
   $('filters').after(guideDirectory);
+  mountRecommendations($('filters'), {element, link, signal});
   $('guide').tabIndex = -1;
   $('detail-title').tabIndex = -1;
   const byId = new Map(), byCategory = new Map();

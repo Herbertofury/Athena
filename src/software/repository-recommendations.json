@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "id": "ripienaar--free-for-dev",
+      "name": "Free for Dev",
+      "category": "Auth & free tiers",
+      "use": "Find free-tier identity providers and infrastructure; verify the vendor limits before adopting.",
+      "repository": "https://github.com/ripienaar/free-for-dev",
+      "stars": 144038,
+      "repositoryEvidence": "https://api.github.com/repos/ripienaar/free-for-dev",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Start here",
+      "observed": "2026-11-28",
+      "links": [
+        {
+          "label": "Browse authentication options",
+          "url": "https://github.com/ripienaar/free-for-dev#authentication-authorization-and-user-management"
+        },
+        {
+          "label": "Check Supabase’s actual plan",
+          "url": "https://supabase.com/pricing"
+        },
+        {
+          "label": "Compare Clerk’s hosted auth plan",
+          "url": "https://clerk.com/pricing"
+        }
+      ]
+    },
+    {
+      "id": "affaan-m--ecc",
+      "name": "ECC",
+      "category": "Engineering workflow",
+      "use": "Test-first verification and agent harness methods; use reviewed pieces rather than installing wholesale.",
+      "repository": "https://github.com/affaan-m/ECC",
+      "stars": 312101,
+      "repositoryEvidence": "https://api.github.com/repos/affaan-m/ECC",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "coollabsio--coolify",
+      "name": "Coolify",
+      "category": "Hosting & deployment",
+      "use": "Self-hosted deployment control plane; the software is separate from the cost of infrastructure.",
+      "repository": "https://github.com/coollabsio/coolify",
+      "stars": 66985,
+      "repositoryEvidence": "https://api.github.com/repos/coollabsio/coolify",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "panniantong--agent-reach",
+      "name": "Agent Reach",
+      "category": "Web acquisition",
+      "use": "Compare public source connectors and official API coverage; review each integration before use.",
+      "repository": "https://github.com/Panniantong/Agent-Reach",
+      "stars": 115483,
+      "repositoryEvidence": "https://api.github.com/repos/Panniantong/Agent-Reach",
+      "downloads": 124037,
+      "downloadEvidence": "https://github.com/Panniantong/Agent-Reach/releases/tag/v1.6.1",
+      "downloadScope": "v1.6.1",
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "ardia-browser--ardia",
+      "name": "Ardia",
+      "category": "Browser design",
+      "use": "Reference for browser shell and navigation ideas; not a claim of browser parity.",
+      "repository": "https://github.com/ardia-browser/ardia",
+      "stars": 3277,
+      "repositoryEvidence": "https://api.github.com/repos/ardia-browser/ardia",
+      "downloads": 31259,
+      "downloadEvidence": "https://github.com/ardia-browser/ardia/releases/tag/v0.2.49",
+      "downloadScope": "v0.2.49",
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "alexsjones--llmfit",
+      "name": "llmfit",
+      "category": "Local model selection",
+      "use": "Compare supported local models against available hardware.",
+      "repository": "https://github.com/AlexsJones/llmfit",
+      "stars": 39453,
+      "repositoryEvidence": "https://api.github.com/repos/AlexsJones/llmfit",
+      "downloads": 5042,
+      "downloadEvidence": "https://github.com/AlexsJones/llmfit/releases/tag/v1.1.21",
+      "downloadScope": "v1.1.21",
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "harnessrouter--harnessrouter",
+      "name": "HarnessRouter",
+      "category": "Engineering workflow",
+      "use": "Candidate for AI harness routing; compare using the project’s real workflows.",
+      "repository": "https://github.com/HarnessRouter/harnessrouter",
+      "stars": 4585,
+      "repositoryEvidence": "https://api.github.com/repos/HarnessRouter/harnessrouter",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "nvidia--auto-ontology",
+      "name": "NVIDIA Auto Ontology",
+      "category": "Knowledge & data",
+      "use": "Candidate for generating a reviewable taxonomy from data.",
+      "repository": "https://github.com/NVIDIA/auto-ontology",
+      "stars": 16124,
+      "repositoryEvidence": "https://api.github.com/repos/NVIDIA/auto-ontology",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "egonex-ai--understand-anything",
+      "name": "Understand Anything",
+      "category": "Knowledge & data",
+      "use": "Reference for codebase orientation and repository closeout.",
+      "repository": "https://github.com/Egonex-AI/Understand-Anything",
+      "stars": 94775,
+      "repositoryEvidence": "https://api.github.com/repos/Egonex-AI/Understand-Anything",
+      "downloads": 5747,
+      "downloadEvidence": "https://github.com/Egonex-AI/Understand-Anything/releases/tag/v2.9.8",
+      "downloadScope": "v2.9.8",
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "alztrk--opentaskbar",
+      "name": "OpenTaskbar",
+      "category": "Desktop design",
+      "use": "Reference for stable pins, task visibility, layout and fast switching.",
+      "repository": "https://github.com/alztrk/opentaskbar",
+      "stars": 456,
+      "repositoryEvidence": "https://api.github.com/repos/alztrk/opentaskbar",
+      "downloads": 1322,
+      "downloadEvidence": "https://github.com/alztrk/opentaskbar/releases/tag/v0.3.4",
+      "downloadScope": "v0.3.4",
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "kylepaulsen--superbookmarkdesktop",
+      "name": "Super Bookmark Desktop",
+      "category": "Desktop design",
+      "use": "Reference for desktop-style shortcuts, bookmark arrangement and folders.",
+      "repository": "https://github.com/kylepaulsen/SuperBookmarkDesktop",
+      "stars": 63,
+      "repositoryEvidence": "https://api.github.com/repos/kylepaulsen/SuperBookmarkDesktop",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "elementalsouls--claude-bughunter",
+      "name": "Claude-BugHunter",
+      "category": "Defensive review references",
+      "use": "A security research bundle with offensive features. Reference only for defensive review of code you control; not a default developer dependency.",
+      "repository": "https://github.com/elementalsouls/Claude-BugHunter",
+      "stars": 26614,
+      "repositoryEvidence": "https://api.github.com/repos/elementalsouls/Claude-BugHunter",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Review only",
+      "observed": "2026-11-28"
+    },
+    {
+      "id": "mjmirza--app-store-compliance",
+      "name": "App Store Compliance",
+      "category": "Mobile release",
+      "use": "A pre-submission checklist for iOS and Android. Check live Apple and Google policies; a local result does not guarantee approval.",
+      "repository": "https://github.com/mjmirza/app-store-compliance",
+      "stars": 8172,
+      "repositoryEvidence": "https://api.github.com/repos/mjmirza/app-store-compliance",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28",
+      "links": [
+        {
+          "label": "Apple App Review Guidelines",
+          "url": "https://developer.apple.com/app-store/review/guidelines/"
+        },
+        {
+          "label": "Google Play Developer Program Policy",
+          "url": "https://play.google/developer-content-policy/"
+        }
+      ]
+    },
+    {
+      "id": "toeverything--affine",
+      "name": "AFFiNE",
+      "category": "Knowledge & data",
+      "use": "Page and Edgeless authoring for documentation maps, with linear reading order and canonical wiki verification.",
+      "repository": "https://github.com/toeverything/AFFiNE",
+      "stars": 79638,
+      "repositoryEvidence": "https://api.github.com/repos/toeverything/AFFiNE",
+      "downloads": null,
+      "downloadEvidence": null,
+      "downloadScope": null,
+      "reviews": null,
+      "reviewCount": null,
+      "recommendation": "Reference",
+      "observed": "2026-11-28",
+      "links": [
+        {
+          "label": "Official Page and Edgeless guide",
+          "url": "https://docs.affine.pro/core-concepts/elements-of-affine/page-mode"
+        }
+      ]
+    }
+  ]
+}
