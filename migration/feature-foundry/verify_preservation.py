@@ -1,6 +1,7 @@
 """Replay the retained Feature Foundry history and release proof entirely offline."""
 from __future__ import annotations
 
+import argparse
 import hashlib
 import io
 import json
@@ -74,7 +75,7 @@ def verify_source_zip(data, manifest):
     return len(files)
 
 
-def verify(root=ROOT):
+def verify(root=ROOT, private_release_dir=None):
     repo = json.loads((root / "history-recovery.json").read_bytes())
     manifest = json.loads((root / "source-manifest.json").read_bytes())
     original = manifest["sourceHead"]
@@ -113,14 +114,22 @@ def verify(root=ROOT):
     require(len(assets) == len(release["assets"]) == 6 and all(safe_member(n) and "/" not in n for n in assets),
             "Invalid release asset inventory")
     release_dir = root / "releases/v24.0.0"
-    preserved, absent = {}, []
+    preserved, outside_checkout = {}, []
+    private_count = 0
+    if private_release_dir is not None:
+        require(private_release_dir.is_dir() and not private_release_dir.is_symlink(),
+                "Private release input must be a local directory")
     for name, item in sorted(assets.items()):
         file = release_dir / name
-        if not file.exists() and not file.is_symlink():
-            require(item["preservationStatus"] == "not-preserved", "A previously retained release file is missing")
-            absent.append(name)
-            continue
         require(item["digest"].startswith("sha256:"), "A checksum type is unsupported")
+        if item["preservationStatus"].startswith("preserved-private-hash-verified-"):
+            outside_checkout.append(name)
+            require(not file.exists() and not file.is_symlink(),
+                    "A private original must remain out of the tracked checkout")
+            if private_release_dir is None:
+                continue
+            file = private_release_dir / name
+            private_count += 1
         preserved[name] = read_pinned(file, item["bytes"], item["digest"][7:])
     sums = {}
     for line in preserved["SHA256SUMS.txt"].decode("ascii").splitlines():
@@ -131,15 +140,20 @@ def verify(root=ROOT):
     require(sums == {n: a["digest"] for n, a in assets.items() if n != "SHA256SUMS.txt"},
             "The retained original checksum text and release inventory disagree")
     zip_count = verify_source_zip(preserved["Feature-Foundry-v24.0.0-source.zip"], by_path)
-    return {"status": "verified-partial-preservation", "offline": True, "restoredRefs": len(refs),
+    return {"status": "verified-original-release-bytes" if len(preserved) == len(assets) else "verified-partial-preservation", "offline": True, "restoredRefs": len(refs),
             "restoredCommits": len(commits), "sourcePathsVerified": len(by_path),
             "originalSourceZipFilesVerified": zip_count, "releaseAssetsVerified": len(preserved),
-            "missingReleaseAssets": absent, "retirementCertified": False}
+            "outsideCheckout": outside_checkout, "privateReleaseAssetsVerified": private_count,
+            "missingReleaseAssets": sorted(set(assets) - set(preserved)), "retirementCertified": False}
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--private-release-dir", type=Path,
+                        help="Local untracked folder containing the two independently retained original ZIPs")
+    options = parser.parse_args()
     try:
-        result = verify()
+        result = verify(private_release_dir=options.private_release_dir)
     except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError, zipfile.BadZipFile):
         print(json.dumps({"status": "refused", "retirementCertified": False}))
         raise SystemExit(2)
