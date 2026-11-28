@@ -13,6 +13,8 @@ use tokio::sync::Semaphore;
 enum ReviewMode {
     Counts { fingerprint: bool },
     Projects,
+    Search,
+    Candidate,
 }
 
 async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Response {
@@ -36,12 +38,18 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
         None => ReviewMode::Counts { fingerprint: false },
         Some("fingerprint=1") => ReviewMode::Counts { fingerprint: true },
         Some("projects=1") => ReviewMode::Projects,
+        Some("projects-search=1") => ReviewMode::Search,
+        Some("project-candidate=1") => ReviewMode::Candidate,
         _ => return StatusCode::BAD_REQUEST.into_response(),
     };
     let Ok(permit) = slots.try_acquire_owned() else {
         return StatusCode::TOO_MANY_REQUESTS.into_response();
     };
-    let limit = crate::constellation_review::LIMIT as usize;
+    let limit = match mode {
+        ReviewMode::Candidate => crate::constellation_project_stage::MAX_FRAME_BYTES,
+        ReviewMode::Search => crate::constellation_project_stage::MAX_SEARCH_FRAME,
+        _ => crate::constellation_review::LIMIT as usize,
+    };
     let body = match tokio::time::timeout(
         Duration::from_secs(10),
         to_bytes(request.into_body(), limit),
@@ -59,8 +67,15 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
                 crate::constellation_review::review_selected_bytes(&body, fingerprint)
                     .map(|report| Json(report).into_response())
             }
-            ReviewMode::Projects => crate::constellation_project_stage::review_projects(&body)
+            ReviewMode::Projects => crate::constellation_project_stage::review_projects(&body, "")
                 .map(|projects| Json(projects).into_response()),
+            ReviewMode::Search => crate::constellation_project_stage::search_projects(&body)
+                .map(|projects| Json(projects).into_response()),
+            ReviewMode::Candidate => {
+                crate::constellation_project_stage::build_candidate_frame(&body).map(|bytes| {
+                    ([(header::CONTENT_TYPE, "application/json")], bytes).into_response()
+                })
+            }
         }
     })
     .await

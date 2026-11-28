@@ -162,7 +162,16 @@ try {
   assert.equal(run.status,0,run.stderr);
   const staged=readFileSync(candidate);
   assert(!staged.includes(marker));
-  await space.getByLabel('Import backup',{exact:true}).setInputFiles({name:'candidate.json',mimeType:'application/json',buffer:staged});
+  const candidateRoute=endpoint+'?project-candidate=1';
+  for(const [rpcHeaders,status] of [[{...headers,Origin:'https://not-local.invalid'},403],[headers,422]]) {
+    const denied=await fetch(candidateRoute,{method:'POST',headers:rpcHeaders,body:Buffer.from('not a frame')});
+    assert.equal(denied.status,status);
+  }
+  const [direct]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Build local import candidate',exact:true}).click()]);
+  const directBytes=readFileSync(await direct.path());
+  assert.deepEqual(directBytes,staged,'The local browser endpoint must preserve exact native CLI output');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),beforeSave);
+  await space.getByLabel('Import backup',{exact:true}).setInputFiles({name:'candidate.json',mimeType:'application/json',buffer:directBytes});
   await space.getByText(/Staged Constellation destination verified/).waitFor();
   await space.getByRole('button',{name:'Import reviewed projects',exact:true}).click();
   await space.getByRole('button',{name:'Open Workspace example',exact:true}).waitFor();
@@ -175,9 +184,58 @@ try {
   await choose('different.gz',zipped);
   assert.equal(await page.locator('#project-rows fieldset').count(),0);
   assert.equal(await page.getByRole('button',{name:'Save private staging recipe',exact:true}).isVisible(),false);
+  // The native query must see beyond the first page, while maintaining exact-ID selections.
+  const late=Array.from({length:140},(_,i)=>workspace('late-'+i,[137,139].includes(i)?'Outer Reach':'Ordinary '+i));
+  late.push(workspace('unaccepted-mirror','Outer Reach',{providerId:'example',sourceType:'provider'}));
+  const lateGzip=gzip(Buffer.from(JSON.stringify({...data,projects:late})));
+  await choose('late.gz',lateGzip);
+  await start();
+  await page.getByText('Review complete. No data was imported.',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'Show eligible workspace projects',exact:true}).click();
+  await page.getByText(/128 of 140 eligible projects shown/).waitFor();
+  assert.equal(await page.getByRole('group',{name:/Outer Reach/}).count(),0);
+  const query=page.getByRole('searchbox',{name:'Search all eligible titles',exact:true});
+  const search=async term=>{await query.fill(term);await query.press('Enter');};
+  await search('oUTeR reAcH');
+  await page.getByText('2 of 2 matching projects shown. 140 eligible total. 0 selected.',{exact:true}).waitFor();
+  await page.getByRole('group',{name:'2. Outer Reach',exact:true}).getByRole('checkbox').check();
+  await page.getByLabel('Stage for project 2',{exact:true}).selectOption('testing');
+  await page.getByLabel('Ownership for project 2',{exact:true}).selectOption('own');
+  await search('Ordinary 23');
+  await page.getByText('1 of 1 matching projects shown. 140 eligible total. 1 selected.',{exact:true}).waitFor();
+  await page.getByRole('group',{name:'1. Ordinary 23',exact:true}).getByRole('checkbox').check();
+  await page.getByLabel('Stage for project 1',{exact:true}).selectOption('idea');
+  await page.getByLabel('Ownership for project 1',{exact:true}).selectOption('followed');
+  await search('nothing matches this');
+  await page.getByText('0 of 0 matching projects shown. 140 eligible total. 2 selected.',{exact:true}).waitFor();
+  await page.getByText('Review selected projects (2)',{exact:true}).click();
+  await page.getByText('Outer Reach · testing · own',{exact:false}).waitFor();
+  await page.getByLabel('Current Athena Projects export',{exact:true}).setInputFiles({name:'roster.json',mimeType:'application/json',buffer:roster});
+  await page.getByLabel('Stable source workspace label').fill('search-fixture');
+  const [searchedRecipe]=await Promise.all([page.waitForEvent('download'),saveRecipe.click()]);
+  assert.deepEqual(JSON.parse(readFileSync(await searchedRecipe.path())).selected,[
+    {id:'late-139',stage:'testing',ownership:'own'},{id:'late-23',stage:'idea',ownership:'followed'}]);
+  await search('Ordinary');
+  await page.getByText('128 of 138 matching projects shown. 140 eligible total. 2 selected.',{exact:true}).waitFor();
+  const visibleChecks=page.locator('#project-rows input[type=checkbox]');
+  for(let i=0;i<22;i++)await visibleChecks.nth(i).check();
+  await page.getByText('Review selected projects (24)',{exact:true}).waitFor();
+  await search('Outer Reach');
+  await page.getByText('2 of 2 matching projects shown. 140 eligible total. 24 selected.',{exact:true}).waitFor();
+  const lateMatch=page.getByRole('group',{name:'1. Outer Reach',exact:true}).getByRole('checkbox');
+  await lateMatch.press('Space');
+  await page.getByText(/24 projects already selected/).waitFor();
+  assert.equal(await lateMatch.isChecked(),false);
+  await page.getByRole('button',{name:'Remove selected Outer Reach · late-139',exact:true}).click();
+  await page.getByText('Review selected projects (23)',{exact:true}).waitFor();
+  await page.getByRole('group',{name:'1. Outer Reach',exact:true}).getByRole('checkbox').check();
+  assert.equal(await page.getByLabel('Stage for project 1',{exact:true}).inputValue(),'');
+  await choose('changed.gz',workspaceInput);
+  assert.equal(await page.locator('#picked-rows li').count(),0);
+  assert.equal(await query.isVisible(),false);
   await space.close();
   assert.deepEqual(external,[]);assert.deepEqual(errors,[]);
-  console.log('PASS actual extracted native browser: local navigation, precise bounded JSON/gzip, refused origins, private receipt, filtering, private recipe creation, native staging, exact reviewed import, and no outside requests.');
+  console.log('PASS actual extracted native browser: local navigation, precise bounded JSON/gzip, refused origins, private receipt, filtering, private recipe creation, native staging, exact reviewed import, whole-export title search and cross-search selection, and no outside requests.');
 } finally {
   await browser?.close();
   program.kill();await exited;

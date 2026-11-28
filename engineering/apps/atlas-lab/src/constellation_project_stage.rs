@@ -70,7 +70,25 @@ impl Project {
     }
 }
 const REVIEW_LIMIT: usize = 128;
-pub(crate) fn review_projects(source: &[u8]) -> Result<Value, &'static str> {
+pub(crate) const MAX_SEARCH_FRAME: usize = 2 + 512 + crate::constellation_review::LIMIT as usize;
+
+pub(crate) fn search_projects(frame: &[u8]) -> Result<Value, &'static str> {
+    let header = frame.get(..2).ok_or(ERROR)?;
+    let len = u16::from_be_bytes([header[0], header[1]]) as usize;
+    if !(1..=512).contains(&len) || frame.len() <= 2 + len {
+        return Err(ERROR);
+    }
+    let query = std::str::from_utf8(&frame[2..2 + len])
+        .map_err(|_| ERROR)?
+        .trim();
+    if query.is_empty() || query.chars().any(char::is_control) {
+        return Err(ERROR);
+    }
+    review_projects(&frame[2 + len..], query)
+}
+
+pub(crate) fn review_projects(source: &[u8], query: &str) -> Result<Value, &'static str> {
+    let query = query.to_lowercase();
     let decoded = decode_export(source)?;
     review_bytes(&decoded, false)?;
     let legacy: Legacy<'_> = serde_json::from_slice(&decoded).map_err(|_| ERROR)?;
@@ -78,6 +96,7 @@ pub(crate) fn review_projects(source: &[u8]) -> Result<Value, &'static str> {
     let mut rows = Vec::new();
     let mut eligible = 0;
     let mut omitted = 0;
+    let mut matches = 0;
     for raw in legacy.projects {
         let project: Project = serde_json::from_str(raw.get()).map_err(|_| ERROR)?;
         if project.id.trim().is_empty()
@@ -91,13 +110,17 @@ pub(crate) fn review_projects(source: &[u8]) -> Result<Value, &'static str> {
             continue;
         };
         eligible += 1;
+        if !query.is_empty() && !name.to_lowercase().contains(&query) {
+            continue;
+        }
+        matches += 1;
         if rows.len() < REVIEW_LIMIT {
             rows.push(json!({"id":project.id,"name":name,"at":at}));
         }
     }
     Ok(
         json!({"schema":"athena-constellation-project-selection-v1","sourceSha256":sha256_hex(source),
-        "eligible":eligible,"notEligible":omitted,"projects":rows}),
+        "eligible":eligible,"notEligible":omitted,"matches":matches,"projects":rows}),
     )
 }
 #[derive(Deserialize)]
@@ -232,4 +255,88 @@ pub fn stage(
         json!({"schema":"athena-constellation-project-stage-v1","bytes":candidate.len(),"candidateWritten":true,
         "applied":false,"scope":"Selected workspace names and timestamps only, with explicitly chosen stage and ownership. Keep all originals."}),
     )
+}
+
+// An in-memory request uses a fixed magic, then three big-endian lengths.
+// File names, caller-supplied paths and trailing bytes are never accepted.
+const FRAME_HEADER: usize = 16;
+const FRAME_MAGIC: &[u8; 4] = b"ACP1";
+const MAX_EXPORT: usize = crate::constellation_review::LIMIT as usize;
+pub(crate) const MAX_FRAME_BYTES: usize = FRAME_HEADER + 2 * MAX_EXPORT + MAX_RECIPE_BYTES;
+const FRAME_ERROR: &str = "Invalid or oversized local project candidate request";
+
+type StageParts<'a> = (&'a [u8], &'a [u8], &'a [u8]);
+fn frame_parts(frame: &[u8]) -> Result<StageParts<'_>, &'static str> {
+    if frame.len() < FRAME_HEADER || frame.len() > MAX_FRAME_BYTES || &frame[..4] != FRAME_MAGIC {
+        return Err(FRAME_ERROR);
+    }
+    let sizes = [4, 8, 12].map(|offset| {
+        u32::from_be_bytes([
+            frame[offset],
+            frame[offset + 1],
+            frame[offset + 2],
+            frame[offset + 3],
+        ]) as usize
+    });
+    if sizes.contains(&0)
+        || sizes[0] > MAX_EXPORT
+        || sizes[1] > MAX_RECIPE_BYTES
+        || sizes[2] > MAX_EXPORT
+    {
+        return Err(FRAME_ERROR);
+    }
+    let source_end = FRAME_HEADER + sizes[0];
+    let recipe_end = source_end + sizes[1];
+    if frame.len() != recipe_end + sizes[2] {
+        return Err(FRAME_ERROR);
+    }
+    Ok((
+        &frame[FRAME_HEADER..source_end],
+        &frame[source_end..recipe_end],
+        &frame[recipe_end..],
+    ))
+}
+pub(crate) fn build_candidate_frame(frame: &[u8]) -> Result<Vec<u8>, &'static str> {
+    let (source, recipe, destination) = frame_parts(frame)?;
+    build(source, recipe, destination)
+}
+
+#[cfg(test)]
+mod framed_tests {
+    use super::*;
+
+    fn make(sizes: [u32; 3], payload: &[u8]) -> Vec<u8> {
+        let mut bytes = FRAME_MAGIC.to_vec();
+        for size in sizes {
+            bytes.extend_from_slice(&size.to_be_bytes());
+        }
+        bytes.extend_from_slice(payload);
+        bytes
+    }
+
+    #[test]
+    fn reads_only_exact_bounded_frames() {
+        let good = make([2, 3, 4], b"123456789");
+        assert_eq!(
+            frame_parts(&good),
+            Ok((b"12".as_slice(), b"345".as_slice(), b"6789".as_slice()))
+        );
+        for length in 0..good.len() {
+            assert_eq!(frame_parts(&good[..length]), Err(FRAME_ERROR));
+        }
+        let mut extra = good.clone();
+        extra.push(0);
+        assert_eq!(frame_parts(&extra), Err(FRAME_ERROR));
+        for sizes in [
+            [0, 3, 4],
+            [2, u32::MAX, 4],
+            [u32::MAX, 3, 4],
+            [2, 3, u32::MAX],
+        ] {
+            assert_eq!(frame_parts(&make(sizes, b"123456789")), Err(FRAME_ERROR));
+        }
+        let mut unknown = good;
+        unknown[3] = b'2';
+        assert_eq!(frame_parts(&unknown), Err(FRAME_ERROR));
+    }
 }

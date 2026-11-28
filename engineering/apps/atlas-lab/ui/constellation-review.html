@@ -33,12 +33,16 @@
 <p>Workspace names and timestamps are private. Show only eligible projects from the selected backup. Nothing is imported and no project is preselected.</p>
 <button type="button" id="load-projects">Show eligible workspace projects</button>
 <p id="project-status" role="status"></p>
+<form id="project-search" hidden>
+<p><label>Search all eligible titles <input id="project-query" type="search" maxlength="128" placeholder="Enter all or part of a title"></label> <button id="search-projects" type="submit">Search projects</button></p>
+</form>
 <form id="project-recipe" hidden>
 <p><label>Stable source workspace label <input id="project-namespace" required maxlength="64" pattern="[A-Za-z0-9_\-]+" placeholder="e.g. personal-workspace"></label></p>
 <p><label for="project-destination">Current Athena Projects export</label> <input id="project-destination" type="file" accept=".json,application/json" required></p>
-<p>Use a fresh <a href="/#projects">Export projects</a> download. The destination bytes stay in this browser. Pick up to 24 rows and explicitly choose each stage and ownership.</p>
+<p>Use a fresh <a href="/#projects">Export projects</a> download. Pick up to 24 rows and explicitly choose each stage and ownership. A recipe hashes the destination in your browser. Building a candidate also sends the selected destination to the local Athena process for collision checks; nothing is sent online or imported.</p>
+<details id="project-picked"><summary id="picked-count">Review selected projects (0)</summary><ul id="picked-rows"></ul></details>
 <div id="project-rows"></div>
-<button id="save-recipe" type="submit">Save private staging recipe</button> <button id="clear-projects" type="button">Clear project selection</button>
+<button id="save-recipe" type="submit">Save private staging recipe</button> <button id="build-candidate" type="submit">Build local import candidate</button> <button id="clear-projects" type="button">Clear project selection</button>
 </form>
 </section>
 <footer>This review does not certify restoration or deletion of the source.</footer></main>
