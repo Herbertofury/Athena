@@ -164,7 +164,35 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
-def legacy_copy(root,data,source,destination,quiescent=False,expected=None,archive=False):
+def catalog_receipt(doc, expected_rows):
+    known={'theme_packages','rooms','ecology_objects'}
+    if not isinstance(doc,dict) or set(doc)!={'schema','format','families'} or doc['schema']!=1 or doc['format']!='feature-foundry-v24-catalog' or not isinstance(doc['families'],list):
+        raise ValueError('Unsupported legacy catalog archive')
+    output={}
+    for family in doc['families']:
+        if not isinstance(family,dict) or set(family)!={'name','rows'}:
+            raise ValueError('Invalid catalog archive family')
+        name=family['name']
+        if name not in known or name in output:
+            raise ValueError('Unexpected or duplicate legacy catalog family')
+        rows=family['rows']
+        if rows is None and name=='ecology_objects' and name not in expected_rows:
+            output[name]=None
+            continue
+        if not isinstance(rows,list) or len(rows)!=expected_rows.get(name):
+            raise ValueError('Catalog row count differs from reviewed snapshot')
+        output[name]=len(rows)
+        for row in rows:
+            if not isinstance(row,dict) or set(row)!={'original_fields','original_json_sha256'} or not isinstance(row['original_fields'],dict):
+                raise ValueError('Invalid original catalog row')
+            raw=row['original_fields'].get('raw_json')
+            if not isinstance(raw,str) or hashlib.sha256(raw.encode('utf-8')).hexdigest()!=row['original_json_sha256']:
+                raise ValueError('Original catalog JSON fingerprint mismatch')
+    if set(output)!=known:
+        raise ValueError('Missing legacy catalog family')
+    return output
+
+def legacy_copy(root,data,source,destination,quiescent=False,expected=None,archive=False,archive_catalog=False):
     """Close, copy and review Feature Foundry v24; import only a reviewed snapshot."""
     source,destination=map(external_path,(source,destination))
     for item in (source,destination.parent):
@@ -208,6 +236,32 @@ def legacy_copy(root,data,source,destination,quiescent=False,expected=None,archi
             if len(raw)>64*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected:
                 raise ValueError('Snapshot differs from the reviewed SHA-256')
             staged.write_bytes(raw)
+            if archive_catalog:
+                if archive:raise ValueError('Choose a single inert archive format')
+                document=cli('archive-legacy-catalog',staged)
+                # Validate counts independently against the private, immutable copy.
+                # Do not require this archive to pass the active soundtrack import.
+                db=sqlite3.connect(staged.as_uri()+'?mode=ro&immutable=1',uri=True)
+                try:
+                    db.execute('PRAGMA trusted_schema=OFF')
+                    counts={}
+                    for table in ('theme_packages','rooms','ecology_objects'):
+                        if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",(table,)).fetchone():
+                            counts[table]=db.execute('SELECT count(*) FROM '+table).fetchone()[0]
+                finally:
+                    db.close()
+                families=catalog_receipt(document,counts)
+                if checksum(staged)!=expected:raise ValueError('Reviewed snapshot changed during catalog archive')
+                payload=(json.dumps(document,ensure_ascii=False,separators=(',',':'))+'\n').encode('utf-8')
+                if len(payload)>12*1024*1024:raise ValueError('Original catalog archive exceeds its size limit')
+                output=pathlib.Path(temp)/'catalog.json'
+                fd=os.open(output,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+                with os.fdopen(fd,'wb') as stream:stream.write(payload)
+                digest=checksum(output)
+                destination_clear(destination)
+                publish_new(output,destination)
+                return {'archived_catalog':True,'families':families,'reviewed_sha256':expected,
+                        'output_sha256':digest,'lossless_migration':False}
             report=cli('inspect-legacy',staged)
             if archive:
                 history=cli('archive-legacy-history',staged)
@@ -367,6 +421,7 @@ def main():
     legacy.add_argument('--prepare-foundry-legacy',metavar='DATABASE',help='Copy and review an explicitly stopped Feature Foundry v24 store')
     legacy.add_argument('--import-foundry-legacy',metavar='REVIEWED_COPY',help='Import a hash-pinned reviewed copy into a new Athena database')
     legacy.add_argument('--archive-foundry-legacy-history',metavar='REVIEWED_COPY',help='Archive original events as local, inert JSON')
+    legacy.add_argument('--archive-foundry-legacy-catalog',metavar='REVIEWED_COPY',help='Archive original catalog rows as local, inert JSON')
     p.add_argument('--legacy-output', metavar='NEW_FILE')
     p.add_argument('--expected-legacy-sha256',metavar='SHA256')
     a=p.parse_args()
@@ -375,18 +430,19 @@ def main():
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if a.prepare_foundry_legacy or a.import_foundry_legacy or a.archive_foundry_legacy_history:
+        catalog=a.archive_foundry_legacy_catalog
+        if a.prepare_foundry_legacy or a.import_foundry_legacy or a.archive_foundry_legacy_history or catalog:
             unrelated=(a.database,a.journal,a.checkpoint_directory,a.fork_checkpoint,a.working_directory,
                        a.create_database,a.backup_database,a.upgrade_copy,a.backup_destination,a.verify_only,
                        a.verify_checkpoint,a.expected_checkpoint_sha256)
             if (any(unrelated) or not a.legacy_output or
                 bool(a.prepare_foundry_legacy) != a.source_quiescent or
-                bool(a.import_foundry_legacy or a.archive_foundry_legacy_history) != bool(a.expected_legacy_sha256)):
+                bool(a.import_foundry_legacy or a.archive_foundry_legacy_history or catalog) != bool(a.expected_legacy_sha256)):
                 raise ValueError('Choose exactly one legacy operation and its required options')
             if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):
                 raise ValueError('Platform mismatch')
-            print(json.dumps(legacy_copy(root,data,a.prepare_foundry_legacy or a.import_foundry_legacy or a.archive_foundry_legacy_history,
-                                      a.legacy_output,a.source_quiescent,a.expected_legacy_sha256,bool(a.archive_foundry_legacy_history))))
+            print(json.dumps(legacy_copy(root,data,a.prepare_foundry_legacy or a.import_foundry_legacy or a.archive_foundry_legacy_history or catalog,
+                                      a.legacy_output,a.source_quiescent,a.expected_legacy_sha256,bool(a.archive_foundry_legacy_history),bool(catalog))))
             return
         if a.legacy_output or a.expected_legacy_sha256:
             raise ValueError('Legacy options require a legacy operation')
