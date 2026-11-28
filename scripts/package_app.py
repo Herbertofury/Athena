@@ -8,7 +8,7 @@ import shutil
 import tempfile
 
 REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'workspace-host.js',
-            'workspaces/software/index.mjs', 'workspaces/software/model.mjs',
+            'workspaces/software/index.mjs', 'workspaces/software/model.mjs', 'workspaces/software/recommendations.mjs', 'workspaces/software/repository-recommendations.json',
             'workspaces/software/style.css', 'workspaces/software/catalog.json',
             'workspaces/guidance/index.mjs', 'workspaces/guidance/model.mjs',
             'workspaces/guidance/style.css', 'workspaces/guidance/catalog.json',
