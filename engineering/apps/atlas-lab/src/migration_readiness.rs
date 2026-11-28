@@ -13,6 +13,19 @@ pub fn router() -> Router {
             get(|| async { Html(include_str!("../ui/migration-readiness.html")) }),
         )
         .route(
+            "/migration/foundry-catalog",
+            get(|| async { Html(include_str!("../ui/foundry-catalog-archive.html")) }),
+        )
+        .route(
+            "/migration/foundry-catalog/app.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../ui/foundry-catalog-archive.js"),
+                )
+            }),
+        )
+        .route(
             "/migration/app.js",
             get(|| async {
                 (
