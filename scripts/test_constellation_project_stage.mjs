@@ -11,7 +11,7 @@ const input = path.resolve(process.argv[2]);
 const native = process.argv[3] ? path.resolve(process.argv[3]) :
   path.join(input, JSON.parse(readFileSync(path.join(input,'native-package.json'),'utf8')).engine);
 const runtime = process.argv[3] ? input : path.join(input,'runtime');
-const {parseBackup,mergeBackup} = await import(pathToFileURL(path.join(runtime,'workspaces/projects/import.mjs')));
+const {parseBackup,mergeBackup,prepareProjectImport,exportProjectsText} = await import(pathToFileURL(path.join(runtime,'workspaces/projects/import.mjs')));
 const hash = b => createHash('sha256').update(b).digest('hex');
 const dir = mkdtempSync(path.join(tmpdir(),'athena-project-stage '));
 const paths = ['chosen export.json.gz','explicit recipe.json','current Projects.json','new candidate.json'].map(n=>path.join(dir,n));
@@ -21,7 +21,8 @@ const row = id => ({id,sourceType:'workspace',providerId:'',name:'Same title',ar
                     notes:'never migrate raw notes',description:'private detail',autopilotLedger:{secret:'not from source'}});
 data.projects = [row('private-old-a'),row('private-old-b'),{...row('mirror'),sourceType:'provider'}];
 let source = gzipSync(Buffer.from(JSON.stringify(data)));
-const destination = Buffer.from('{"schema":1,"entries":[]}');
+const roster={schema:1,entries:[]};
+const destination = Buffer.from(exportProjectsText(roster));
 const plan = {schema:1,sourceSha256:hash(source),destinationSha256:hash(destination),namespace:'my-explicit-source-slot',
               selected:[{id:'private-old-a',stage:'testing',ownership:'own'},{id:'private-old-b',stage:'building',ownership:'followed'}]};
 try {
@@ -47,8 +48,14 @@ try {
  assert.deepEqual(staged.entries.map(e=>e.revisions[0].stage),['testing','building']);
  assert.deepEqual(staged.entries.map(e=>e.revisions[0].at),[1700000000001,1700000000001]);
  assert.doesNotMatch(bytes.toString(),/private-old|private detail|never migrate|Ledger|not from source/);
- assert.equal(mergeBackup(JSON.parse(destination),staged).added,2);
- assert.equal(mergeBackup(staged,staged).unchanged,2);
+ assert.throws(()=>mergeBackup(roster,staged),/Review the staged destination/);
+ await assert.rejects(prepareProjectImport(staged,{...roster,other:true},JSON.stringify(roster)),/unsaved changes/);
+ await assert.rejects(prepareProjectImport(staged,{...roster,other:true},JSON.stringify({...roster,other:true})),/no longer matches/);
+ const verified=await prepareProjectImport(staged,roster,JSON.stringify(roster));
+ assert.equal(verified.staged,true);
+ assert.equal(mergeBackup(roster,verified.incoming).added,2);
+ assert.equal(mergeBackup(verified.incoming,verified.incoming).unchanged,2);
+ assert.equal(Object.hasOwn(mergeBackup(roster,verified.incoming).data,'athenaConstellationStage'),false);
  run(plan,false);
  assert.deepEqual(readFileSync(paths[3]),bytes);
  rmSync(paths[3]);

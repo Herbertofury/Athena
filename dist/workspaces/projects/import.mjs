@@ -2,6 +2,7 @@
 import {validate} from './model.mjs';
 export const MAX_IMPORT_NOTES = 100; // Admission budget for the current eager dependency UI, not a storage limit.
 export const MAX_IMPORT_BYTES = 16 * 1024 * 1024;
+export const STAGED_PROJECTS_KEY = "athenaConstellationStage";
 const canonical = value => JSON.stringify(value, (_key, item) => item && typeof item === 'object' && !Array.isArray(item)
   ? Object.fromEntries(Object.keys(item).sort().map(key => [key, item[key]])) : item);
 export function parseBackup(bytes) {
@@ -47,7 +48,32 @@ export function parseBackup(bytes) {
   scan();
   return validate(parsed);
 }
+// Exact bytes of the native Export projects download are the freshness pin.
+export const exportProjectsText = data => JSON.stringify(data,null,2);
+export async function prepareProjectImport(incoming, current, committed) {
+  if (!Object.hasOwn(incoming,STAGED_PROJECTS_KEY)) return {incoming,staged:false};
+  const pin=incoming[STAGED_PROJECTS_KEY];
+  if (!pin || Object.keys(incoming).length!==3 || Object.keys(pin).length!==2 ||
+      pin.schema!==1 || typeof pin.destinationSha256!=='string' ||
+      !/^[0-9a-f]{64}$/.test(pin.destinationSha256) ||
+      incoming.entries.length<1 || incoming.entries.length>24 ||
+      incoming.entries.some(project=>!/^constellation-v7-[0-9a-f]{64}$/.test(project.id) ||
+        Object.keys(project).length!==3 || project.archived || project.revisions.length!==1 ||
+        Object.keys(project.revisions[0]).length!==12 || !Number.isSafeInteger(project.revisions[0].at) ||
+        project.revisions[0].at<1 ||
+        ['goal','next','blockers','decisions','resources','source','version','release'].some(key=>project.revisions[0][key]!==''))) {
+    throw Error('Invalid staged Constellation project candidate');
+  }
+  if(JSON.stringify(current)!==committed)throw Error('Projects has unsaved changes. Save or export your draft before staging again.');
+  if(!globalThis.crypto?.subtle)throw Error('Destination verification requires a secure Athena session');
+  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(exportProjectsText(current)));
+  const actual=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
+  if(actual!==pin.destinationSha256)throw Error('Staged destination no longer matches. Export current Projects and stage again.');
+  // Never store or re-export the migration marker as workspace metadata.
+  return {incoming:{schema:1,entries:incoming.entries},staged:true};
+}
 export function mergeBackup(current, incoming) {
+  if(Object.hasOwn(incoming,STAGED_PROJECTS_KEY))throw Error('Review the staged destination before importing this candidate');
   const next = validate(current), backup = validate(incoming);
   // Unknown fields are retained, not silently discarded or overwritten.
   for (const key of Object.keys(backup)) {

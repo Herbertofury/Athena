@@ -156,7 +156,7 @@ fn build(source: &[u8], recipe: &[u8], destination: &[u8]) -> Result<Vec<u8>, &'
             "goal":"","next":"","blockers":"","decisions":"","resources":"","source":"","version":"","release":""
         }]}));
     }
-    serde_json::to_vec_pretty(&json!({"schema":1,"entries":result})).map_err(|_| ERROR)
+    serde_json::to_vec_pretty(&json!({"schema":1,"entries":result,"athenaConstellationStage":{"schema":1,"destinationSha256":plan.destination_sha256}})).map_err(|_| ERROR)
 }
 
 pub fn stage(

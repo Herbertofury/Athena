@@ -60,8 +60,8 @@ does not import or restore content, or certify a source for deletion.
 
 Use `atlas-lab stage-constellation-projects EXPORT RECIPE CURRENT_PROJECTS NEW_CANDIDATE`
 with stopped, local copies. To pin inputs, use the SHA-256 of the exact selected
-export file (including compressed bytes if gzip) and the exact current Projects
-backup. The recipe is a private JSON object with `schema: 1`, `sourceSha256`,
+export file (including compressed bytes if gzip) and the exact file downloaded by Projects’ **Export projects** button. Do not
+reformat that download. Save or export any open draft before staging. The recipe is a private JSON object with `schema: 1`, `sourceSha256`,
 `destinationSha256`, `namespace` (stable for this Constellation workspace),
 and an ordered `selected` array (1–24). Each row has the exact source `id` and
 an operator-chosen `stage` and `ownership` valid in Athena Projects. Only live
@@ -74,7 +74,11 @@ Descriptions, notes, chat text/URLs, source IDs and approval ledgers are not
 copied. The selected names are still private. Secure the recipe and candidate
 in an operator-controlled folder; Windows uses that folder's access rules.
 No existing file or live Athena data is modified. Any failed write may leave
-a partial new file; never import that file. Before using Projects' separate
-backup importer, open and review the output, keep the originals, and check that
-the destination backup is still current. The standard import adds entries or
-refuses conflicting IDs; it does not merge arbitrary changes to the roster.
+a partial new file; never import that file. In Athena Projects, choose **Import backup** and select the staged file. The
+reviewer checks the destination digest against the current Projects export bytes
+before opening the preview. Review names, ownership, stages and timestamps;
+confirm to add only the selected metadata, or cancel without writing. If the
+destination changes, export and stage again. Athena will also refuse to save
+over competing edits from another tab. Keep both originals. The destination
+fingerprint is a freshness check, not a signature, and is not stored in Projects.
+Ordinary Projects backups are still imported through the existing review flow.
