@@ -12,7 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 SOFTWARE_PATHS = frozenset(
     "workspaces/software/" + name
-    for name in ("catalog.json", "index.mjs", "model.mjs", "style.css")
+    for name in ("catalog.json", "index.mjs", "model.mjs", "style.css", "recommendations.mjs", "repository-recommendations.json")
 )
 
 
