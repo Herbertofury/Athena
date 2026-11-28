@@ -10,6 +10,11 @@ use axum::{
 use std::{sync::Arc, time::Duration};
 use tokio::sync::Semaphore;
 
+enum ReviewMode {
+    Counts { fingerprint: bool },
+    Projects,
+}
+
 async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Response {
     let headers = request.headers();
     // The enclosing server checks the exact loopback origin/host before reading
@@ -28,9 +33,9 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
         return StatusCode::UNSUPPORTED_MEDIA_TYPE.into_response();
     }
     let mode = match request.uri().query() {
-        None => 0,
-        Some("fingerprint=1") => 1,
-        Some("projects=1") => 2,
+        None => ReviewMode::Counts { fingerprint: false },
+        Some("fingerprint=1") => ReviewMode::Counts { fingerprint: true },
+        Some("projects=1") => ReviewMode::Projects,
         _ => return StatusCode::BAD_REQUEST.into_response(),
     };
     let Ok(permit) = slots.try_acquire_owned() else {
@@ -49,16 +54,18 @@ async fn review(State(slots): State<Arc<Semaphore>>, request: Request) -> Respon
     };
     match tokio::task::spawn_blocking(move || {
         let _permit = permit;
-        if mode == 2 {
-            crate::constellation_project_stage::review_projects(&body)
-        } else {
-            let report = crate::constellation_review::review_selected_bytes(&body, mode == 1)?;
-            serde_json::to_value(report).map_err(|_| "Could not prepare the local review")
+        match mode {
+            ReviewMode::Counts { fingerprint } => {
+                crate::constellation_review::review_selected_bytes(&body, fingerprint)
+                    .map(|report| Json(report).into_response())
+            }
+            ReviewMode::Projects => crate::constellation_project_stage::review_projects(&body)
+                .map(|projects| Json(projects).into_response()),
         }
     })
     .await
     {
-        Ok(Ok(result)) => Json(result).into_response(),
+        Ok(Ok(result)) => result,
         Ok(Err(message)) => (
             StatusCode::UNPROCESSABLE_ENTITY,
             Json(serde_json::json!({"error": message})),
