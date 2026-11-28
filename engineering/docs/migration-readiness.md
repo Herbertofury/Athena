@@ -54,3 +54,27 @@ compared only when both review receipts include the corresponding type. The
 earlier receipt remains browser-local. Fingerprints are excluded unless requested.
  This page
 does not import or restore content, or certify a source for deletion.
+
+
+### Stage a selected workspace project as a private candidate
+
+Use `atlas-lab stage-constellation-projects EXPORT RECIPE CURRENT_PROJECTS NEW_CANDIDATE`
+with stopped, local copies. To pin inputs, use the SHA-256 of the exact selected
+export file (including compressed bytes if gzip) and the exact current Projects
+backup. The recipe is a private JSON object with `schema: 1`, `sourceSha256`,
+`destinationSha256`, `namespace` (stable for this Constellation workspace),
+and an ordered `selected` array (1–24). Each row has the exact source `id` and
+an operator-chosen `stage` and `ownership` valid in Athena Projects. Only live
+workspace project names and exact update timestamps are projected. This
+shape is based on [the pinned Constellation workspace source](https://github.com/Herbertofury/Project-Constellation/blob/4fe8980f8caad979eb42dd47d64fa33190d25a2b/extension/background.js).
+
+The command refuses ambiguous source IDs, already-present destination IDs,
+changed input digests, inferred stages, deleted projects, and provider mirrors.
+Descriptions, notes, chat text/URLs, source IDs and approval ledgers are not
+copied. The selected names are still private. Secure the recipe and candidate
+in an operator-controlled folder; Windows uses that folder's access rules.
+No existing file or live Athena data is modified. Any failed write may leave
+a partial new file; never import that file. Before using Projects' separate
+backup importer, open and review the output, keep the originals, and check that
+the destination backup is still current. The standard import adds entries or
+refuses conflicting IDs; it does not merge arbitrary changes to the roster.

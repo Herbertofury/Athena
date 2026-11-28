@@ -326,7 +326,7 @@ fn audit(s: &Snapshot<'_>) -> Result<(References, ArtifactReferences), &'static 
     };
     Ok((result, artifacts))
 }
-fn review_bytes(bytes: &[u8], fingerprint: bool) -> Result<Report, &'static str> {
+pub(crate) fn review_bytes(bytes: &[u8], fingerprint: bool) -> Result<Report, &'static str> {
     if bytes.len() as u64 > LIMIT {
         return Err("Export exceeds the 16 MiB review budget");
     }
@@ -442,7 +442,7 @@ fn review_bytes(bytes: &[u8], fingerprint: bool) -> Result<Report, &'static str>
     })
 }
 
-pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static str> {
+pub(crate) fn read_export_file(path: &Path) -> Result<Vec<u8>, &'static str> {
     let info = std::fs::symlink_metadata(path).map_err(|_| "Could not inspect selected export")?;
     if !info.is_file() || info.len() > LIMIT {
         return Err("Choose a regular export file within the 16 MiB review budget");
@@ -462,7 +462,10 @@ pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static st
     if bytes.len() as u64 != opened.len() {
         return Err("File length changed during read; choose a quiescent export");
     }
-    review_selected_bytes(&bytes, fingerprint)
+    Ok(bytes)
+}
+pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static str> {
+    review_selected_bytes(&read_export_file(path)?, fingerprint)
 }
 
 /// The same count-only review contract for a bounded, explicitly selected local body.
@@ -470,11 +473,20 @@ pub(crate) fn review_selected_bytes(
     bytes: &[u8],
     fingerprint: bool,
 ) -> Result<Report, &'static str> {
+    let decoded = decode_export(bytes)?;
+    let mut report = review_bytes(&decoded, fingerprint)?;
+    if matches!(decoded, std::borrow::Cow::Owned(_)) {
+        report.selected_gzip_sha256 = fingerprint.then(|| crate::build_identity::sha256_hex(bytes));
+    }
+    Ok(report)
+}
+
+pub(crate) fn decode_export(bytes: &[u8]) -> Result<std::borrow::Cow<'_, [u8]>, &'static str> {
     if bytes.len() as u64 > LIMIT {
         return Err("Selected export exceeds the 16 MiB review budget");
     }
     if !bytes.starts_with(&[0x1f, 0x8b]) {
-        return review_bytes(bytes, fingerprint);
+        return Ok(std::borrow::Cow::Borrowed(bytes));
     }
     // Exactly one member, like the application writer. The BufRead decoder
     // leaves trailing bytes observable, including a concatenated next member.
@@ -491,7 +503,5 @@ pub(crate) fn review_selected_bytes(
     if !decoder.into_inner().is_empty() {
         return Err("Gzip export contains trailing bytes or multiple members");
     }
-    let mut report = review_bytes(&decoded, fingerprint)?;
-    report.selected_gzip_sha256 = fingerprint.then(|| crate::build_identity::sha256_hex(bytes));
-    Ok(report)
+    Ok(std::borrow::Cow::Owned(decoded))
 }

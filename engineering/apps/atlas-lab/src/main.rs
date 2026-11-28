@@ -38,6 +38,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("{}", serde_json::to_string_pretty(&report)?);
         return Ok(());
     }
+    if cmd.as_deref() == Some(std::ffi::OsStr::new("stage-constellation-projects")) {
+        let paths: Vec<_> = raw.take(5).collect();
+        if paths.len() != 4 {
+            return Err("Usage: atlas-lab stage-constellation-projects EXPORT RECIPE CURRENT_PROJECTS NEW_CANDIDATE".into());
+        }
+        let receipt = atlas_lab::constellation_project_stage::stage(
+            Path::new(&paths[0]),
+            Path::new(&paths[1]),
+            Path::new(&paths[2]),
+            Path::new(&paths[3]),
+        )?;
+        println!("{}", serde_json::to_string_pretty(&receipt)?);
+        return Ok(());
+    }
     let args: Vec<String> = std::env::args().collect();
     if args.len() == 4 && args[1] == "show-experiment" {
         let id: i64 = args[3].parse()?;
