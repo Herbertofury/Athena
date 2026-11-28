@@ -251,7 +251,11 @@ $('load-projects').addEventListener('click', async () => {
         recipeGeneration++;$('save-recipe').disabled = false;
       });
       const controls = document.createElement('p');controls.append(stage,' ',ownership);
-      row.append(selection,controls);$('project-rows').append(row);
+      const identity = document.createElement('details');
+      const idText = element('code','');
+      identity.append(element('summary','Show source identifier'),idText);
+      identity.addEventListener('toggle',()=>{idText.textContent=identity.open?p.id:'';});
+      row.append(selection,controls,identity);$('project-rows').append(row);
       return {id:p.id,check,stage,ownership};
     });
     projectSelection = {file,sourceSha256:list.sourceSha256,rows};
