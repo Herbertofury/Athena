@@ -197,6 +197,15 @@ class LegacyReview(unittest.TestCase):
             db.execute('INSERT INTO theme_packages VALUES(?,?,?,?,?,?,?,?)',('unreviewed-theme','Private title','v1',0,'old world','wood','still',raw))
             db.execute('INSERT INTO rooms VALUES(?,?,?,?,?,?)',('room-one','unreviewed-theme','district','Old room','legacy',raw))
             db.execute('INSERT INTO ecology_objects VALUES(?,?,?,?,?,?,?,?,?)',('item','unreviewed-theme','Plant','Decor','petal','curve',' [ "view" ] ','{ "light":true }',raw))
+        with closing(sqlite3.connect(original)) as db,db:
+            db.execute('INSERT INTO artist_worlds VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                ('world','artist','World','variant','Original private description','palette','material','shape','light','ui','mascot','guardrail',raw))
+            db.execute('INSERT INTO artist_districts VALUES(?,?,?,?,?,?,?)',
+                ('district','artist','District','thesis','weather','best mode',raw))
+            db.execute('INSERT INTO artist_weather VALUES(?,?,?,?,?,?,?,?)',
+                ('weather','artist','Weather','intensity','behavior','routing','rules',raw))
+            db.execute('INSERT INTO music_routes VALUES(?,?,?,?,?,?,?,?,?)',
+                ('route','artist','Music','adaptive','spotify:track:example','https://example.invalid/private','offline','Private note',raw))
         pin=sha(original)
         cmd=('--archive-foundry-legacy-catalog',original,'--legacy-output',archive,'--expected-legacy-sha256')
         self.assertEqual(self.invoke(*cmd,'f'*64).returncode,2)
@@ -206,15 +215,25 @@ class LegacyReview(unittest.TestCase):
         self.assertNotIn('Private title',result.stdout+result.stderr)
         self.assertNotIn('secret fixture',result.stdout+result.stderr)
         receipt=json.loads(result.stdout)
-        self.assertEqual(receipt,{'archived_catalog':True,'families':{'theme_packages':1,'rooms':1,'ecology_objects':1},
+        self.assertEqual(receipt,{'archived_catalog':True,'families':{name:1 for name in ('theme_packages','rooms','ecology_objects','artist_worlds','artist_districts','artist_weather','music_routes')},
             'reviewed_sha256':pin,'output_sha256':sha(archive),'lossless_migration':False})
         data=json.loads(archive.read_bytes())
-        self.assertEqual([family['rows'][0]['original_fields'] for family in data['families']],[
+        self.assertEqual(data['schema'],2)
+        self.assertEqual([family['rows'][0]['original_fields'] for family in data['families']], [
             {'id':'unreviewed-theme','name':'Private title','package_version':'v1','approved':0,
              'world_name':'old world','material_language':'wood','motion':'still','raw_json':raw},
             {'id':'room-one','theme_id':'unreviewed-theme','district_id':'district','name':'Old room','lineage':'legacy','raw_json':raw},
             {'id':'item','theme_id':'unreviewed-theme','name':'Plant','role':'Decor','material':'petal',
              'shape':'curve','affordances_json':' [ "view" ] ','behavior_json':'{ "light":true }','raw_json':raw},
+            {'id':'world','artist_id':'artist','name':'World','variant':'variant','description':'Original private description',
+             'palette':'palette','material_language':'material','shape_language':'shape','lighting':'light','ui_language':'ui',
+             'mascot':'mascot','guardrail':'guardrail','raw_json':raw},
+            {'id':'district','artist_id':'artist','name':'District','thesis':'thesis','environment_weather':'weather',
+             'best_use_mode':'best mode','raw_json':raw},
+            {'id':'weather','artist_id':'artist','name':'Weather','intensity':'intensity','behavior':'behavior',
+             'routing':'routing','guardrails':'rules','raw_json':raw},
+            {'id':'route','artist_id':'artist','label':'Music','routing':'adaptive','spotify_uri':'spotify:track:example',
+             'url':'https://example.invalid/private','status':'offline','notes':'Private note','raw_json':raw},
         ])
         for family in data['families']:
             item=family['rows'][0]

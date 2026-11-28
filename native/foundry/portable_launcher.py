@@ -165,8 +165,9 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
 def catalog_receipt(doc, expected_rows):
-    known={'theme_packages','rooms','ecology_objects'}
-    if not isinstance(doc,dict) or set(doc)!={'schema','format','families'} or doc['schema']!=1 or doc['format']!='feature-foundry-v24-catalog' or not isinstance(doc['families'],list):
+    required={'theme_packages','rooms'}
+    known=required|{'ecology_objects','artist_worlds','artist_districts','artist_weather','music_routes'}
+    if not isinstance(doc,dict) or set(doc)!={'schema','format','families'} or doc['schema']!=2 or doc['format']!='feature-foundry-v24-catalog' or not isinstance(doc['families'],list):
         raise ValueError('Unsupported legacy catalog archive')
     output={}
     for family in doc['families']:
@@ -176,7 +177,7 @@ def catalog_receipt(doc, expected_rows):
         if name not in known or name in output:
             raise ValueError('Unexpected or duplicate legacy catalog family')
         rows=family['rows']
-        if rows is None and name=='ecology_objects' and name not in expected_rows:
+        if rows is None and name not in required and name not in expected_rows:
             output[name]=None
             continue
         if not isinstance(rows,list) or len(rows)!=expected_rows.get(name):
@@ -245,7 +246,7 @@ def legacy_copy(root,data,source,destination,quiescent=False,expected=None,archi
                 try:
                     db.execute('PRAGMA trusted_schema=OFF')
                     counts={}
-                    for table in ('theme_packages','rooms','ecology_objects'):
+                    for table in ('theme_packages','rooms','ecology_objects','artist_worlds','artist_districts','artist_weather','music_routes'):
                         if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",(table,)).fetchone():
                             counts[table]=db.execute('SELECT count(*) FROM '+table).fetchone()[0]
                 finally:

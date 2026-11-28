@@ -53,6 +53,63 @@ const CATALOG: &[Family] = &[
             "raw_json",
         ],
     },
+    Family {
+        name: "artist_worlds",
+        fields: &[
+            "id",
+            "artist_id",
+            "name",
+            "variant",
+            "description",
+            "palette",
+            "material_language",
+            "shape_language",
+            "lighting",
+            "ui_language",
+            "mascot",
+            "guardrail",
+            "raw_json",
+        ],
+    },
+    Family {
+        name: "artist_districts",
+        fields: &[
+            "id",
+            "artist_id",
+            "name",
+            "thesis",
+            "environment_weather",
+            "best_use_mode",
+            "raw_json",
+        ],
+    },
+    Family {
+        name: "artist_weather",
+        fields: &[
+            "id",
+            "artist_id",
+            "name",
+            "intensity",
+            "behavior",
+            "routing",
+            "guardrails",
+            "raw_json",
+        ],
+    },
+    Family {
+        name: "music_routes",
+        fields: &[
+            "id",
+            "artist_id",
+            "label",
+            "routing",
+            "spotify_uri",
+            "url",
+            "status",
+            "notes",
+            "raw_json",
+        ],
+    },
 ];
 #[derive(Serialize)]
 struct Catalog {
@@ -80,7 +137,7 @@ pub fn archive_catalog(path: &Path) -> Result<Vec<u8>> {
             [family.name],
             |r| r.get(0),
         )?;
-        if !present && family.name == "ecology_objects" {
+        if !present && !matches!(family.name, "theme_packages" | "rooms") {
             families.push(CatalogFamily {
                 name: family.name,
                 rows: None,
@@ -156,7 +213,7 @@ pub fn archive_catalog(path: &Path) -> Result<Vec<u8>> {
         });
     }
     let archive = serde_json::to_vec(&Catalog {
-        schema: 1,
+        schema: 2,
         format: "feature-foundry-v24-catalog",
         families,
     })?;
