@@ -215,6 +215,12 @@ fn run() -> Result<()> {
             Some(v) => println!("{v}"),
             None => println!("null"),
         },
+        "archive-legacy-catalog" if args.len() == 3 => {
+            use std::io::Write;
+            std::io::stdout()
+                .lock()
+                .write_all(&athena_foundry_store::legacy_catalog::archive_catalog(p)?)?;
+        }
         "archive-legacy-history" if args.len() == 3 => {
             let archive = athena_foundry_store::legacy_history::archive_history(p)?;
             println!("{}", serde_json::to_string(&archive)?);
