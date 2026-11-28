@@ -113,6 +113,12 @@ jobs:
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-video-routing
         run: node scripts/test_foundry_video_routing.cjs
+      - if: runner.os == 'Linux'
+        name: Video dock fallback with Picture-in-Picture denied on mobile viewport
+        env:
+          ATHENA_FORCE_DOCK: '1'
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-video-dock
+        run: node scripts/test_foundry_video_routing.cjs
       - name: Current-theme catalog spawning and recovery in Chromium
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-asset-library
