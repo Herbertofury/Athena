@@ -58,6 +58,17 @@ does not import or restore content, or certify a source for deletion.
 
 ### Stage a selected workspace project as a private candidate
 
+To create the private recipe without hand-editing JSON, first review the
+saved export locally. Then choose **Show eligible workspace projects**.
+Select 1–24 rows explicitly and choose each stage and ownership. The selector
+shows at most the first 128 eligible rows in export order; the CLI can stage
+later rows when their IDs are known. Select a fresh **Export projects** download
+and save the recipe. Only workspace names, IDs and timestamps reach the
+local selector, never descriptions or chats. The destination is validated and
+hashed in the browser, not uploaded. The recipe contains selected source IDs
+and fingerprints; keep it private. The initial count review still omits these
+details. Selecting another backup clears the displayed candidates and draft.
+
 Use `atlas-lab stage-constellation-projects EXPORT RECIPE CURRENT_PROJECTS NEW_CANDIDATE`
 with stopped, local copies. To pin inputs, use the SHA-256 of the exact selected
 export file (including compressed bytes if gzip) and the exact file downloaded by Projects’ **Export projects** button. Do not
