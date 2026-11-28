@@ -9,3 +9,11 @@ Current official [GitHub releases](https://docs.github.com/en/rest/releases/rele
 ## Verified streaming transfer
 
 One backpressure-aware pipeline stages files on the destination filesystem, verifies provider size/digest when present, enforces actual received-byte limits and promotes only after the writer closes. HTTP failures retain status and Retry-After for caller policy. The loopback fixture exercises truncated transfers, wrong size/hash, path rejection, a chunked size overrun, throttling, successful replacement and last-good preservation. Node 22.16.0: four test groups pass across the two suites. This is scoped transfer correctness, not authenticated redirect policy, crash-durability or native performance evidence. Consumer-specific routing and authorization remain with each host.
+
+## Modrinth exact-file selection
+
+`modrinthVersionFiles` accepts a public response from [Get a version](https://docs.modrinth.com/api/operations/getversion/) and a caller-resolved provider project ID and version ID. It keeps main and supplemental files separate, checks version ownership and the exact CDN path, and requires a valid SHA-512 and size. The primary marker is display metadata, not permission to silently select another file. Pick by SHA-512; if identical content has multiple filenames, also pass the exact filename. Unsupported URLs or missing evidence fail rather than falling back to an arbitrary file.
+
+`selectModrinthTransfer` makes a request for the existing staging pipeline. Its redirect policy rejects redirects instead of following a portal or forwarding headers. The staging pipeline verifies the exact SHA-512 in the original stream before replacing a destination; SHA-256 remains available as a local receipt. Generic GitHub behavior is unchanged. This is not an installer, a Modrinth search or compatibility API, or evidence of consumer adoption.
+
+Run `node --experimental-strip-types --test *.test.mjs` in this directory. Synthetic tests cover same-version siblings, encoded filenames, case-sensitive IDs, wrong project/version routes, digest ambiguity, mismatching bytes, and preservation of an existing file on rejection. Only public metadata was checked externally. No mod binaries, user accounts or private assets are required by CI. Next consumer evidence remains Enderloom and ModHunter against the same version/file contract.
