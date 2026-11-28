@@ -56,3 +56,5 @@ Current inventory and inspection limits: [Keshav study queue](kshv-study-queue.m
 - [Bencho and BestSaaSWebDesigns](bencho-and-saas.md): additional owner-selected follows, bounded official-source research and original implementation plans.
 
 - [Storage management source study](storage-management-study.md): sucodeee/MetalForge reference, licensing boundary, original read-only Storage Observatory experiment and production acceptance backlog. Not a native disk scanner or cleanup tool.
+
+- [Profiles, interactive themes and media study](profile-motion-media-study.md): Discord, Prism, Aether, Claude references and Opera GX, with explicit source and host boundaries.
