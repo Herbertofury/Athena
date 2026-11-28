@@ -32,6 +32,8 @@ Current intake is source evidence, not a production-ready universal engine. See 
 
 ## M1 — provider and site adapters: first cross-repository execution lane
 
+Use the [Shared Browser Core and Site Adapter Standard](../guidance/BROWSER_AND_SITE_ADAPTER_STANDARD.md) for the existing Enderloom/ModHunter provider cohort and Noxviola/Athena Constellation browser pair. Record real host acceptance separately from the adapter inventory or style pack.
+
 **Active coordination issue:** [Athena #363](https://github.com/Herbertofury/Athena/issues/363). Existing consumer trackers are linked from the repository assignments below.
 
 **Current fragmentation is confirmed, best implementation is not yet established.** Athena's [collection contract](../engineering/docs/adapters/contract.md) distinguishes provider-qualified IDs, media roles, access state and completeness; its [adapter lab](../engineering/docs/adapters/README.md) reports 426 researched scopes and limited operation-level real evidence. Minecraft Mod Vault's [identity contract](https://github.com/Herbertofury/Minecraft-Mod-Vault/blob/main/PROVIDER-IDENTITY-CONTRACT.md) adds exact-file anchors and compatibility. Modding-Knowledge's [health query contract](https://github.com/Herbertofury/Modding-Knowledge/blob/main/docs/mod-health-query.md) already defines exact-context public claims. Reuse these; don't design another incompatible schema.
