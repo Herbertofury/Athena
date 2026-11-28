@@ -184,6 +184,15 @@
       "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
     },
     {
+      "id": "affine",
+      "upstream": "https://github.com/toeverything/AFFiNE",
+      "lane": "targeted",
+      "trigger": "Optional spatial knowledge map for a complex documented workflow",
+      "use": "Pair Page and Edgeless authoring with verified linear reading order, local reviewed export and canonical wiki readback; do not transfer private material to cloud or AI without authorization.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review version and rights; pin an exact source commit and record AFFiNE canvas evidence only when used."
+    },
+    {
       "id": "mermaid",
       "upstream": "https://github.com/mermaid-js/mermaid",
       "lane": "targeted",
