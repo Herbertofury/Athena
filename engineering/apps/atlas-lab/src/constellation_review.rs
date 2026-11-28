@@ -1,5 +1,6 @@
 //! Count-only preview of an explicitly selected Project Constellation v7 export.
 //! Discards unsupported data from the *report*, never from the user's file.
+use flate2::bufread::GzDecoder;
 use serde::{Deserialize, Serialize};
 use serde_json::value::RawValue;
 use std::{
@@ -199,6 +200,8 @@ pub struct Report {
     writer_reviewed_at: &'static str,
     #[serde(skip_serializing_if = "Option::is_none")]
     exact_input_sha256: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    selected_gzip_sha256: Option<String>,
     slices: Vec<Slice>,
     references: References,
     artifact_references: ArtifactReferences,
@@ -418,6 +421,7 @@ fn review_bytes(bytes: &[u8], fingerprint: bool) -> Result<Report, &'static str>
         source_schema: 7,
         writer_reviewed_at: SOURCE,
         exact_input_sha256: fingerprint.then(|| crate::build_identity::sha256_hex(bytes)),
+        selected_gzip_sha256: None,
         slices,
         references,
         artifact_references,
@@ -458,5 +462,25 @@ pub fn review_file(path: &Path, fingerprint: bool) -> Result<Report, &'static st
     if bytes.len() as u64 != opened.len() {
         return Err("File length changed during read; choose a quiescent export");
     }
-    review_bytes(&bytes, fingerprint)
+    if !bytes.starts_with(&[0x1f, 0x8b]) {
+        return review_bytes(&bytes, fingerprint);
+    }
+    // Exactly one member, like the application writer. The BufRead decoder
+    // leaves trailing bytes observable, including a concatenated next member.
+    let mut decoder = GzDecoder::new(bytes.as_slice());
+    let mut decoded = Vec::new();
+    decoder
+        .by_ref()
+        .take(LIMIT + 1)
+        .read_to_end(&mut decoded)
+        .map_err(|_| "Invalid or truncated gzip export")?;
+    if decoded.len() as u64 > LIMIT {
+        return Err("Expanded gzip exceeds the 16 MiB review budget");
+    }
+    if !decoder.into_inner().is_empty() {
+        return Err("Gzip export contains trailing bytes or multiple members");
+    }
+    let mut report = review_bytes(&decoded, fingerprint)?;
+    report.selected_gzip_sha256 = fingerprint.then(|| crate::build_identity::sha256_hex(&bytes));
+    Ok(report)
 }

@@ -6,7 +6,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     raw.next();
     if raw.next().as_deref() == Some(std::ffi::OsStr::new("review-constellation-v7")) {
         const USAGE: &str =
-            "Usage: atlas-lab review-constellation-v7 EXPORT.json [--include-fingerprint]";
+            "Usage: atlas-lab review-constellation-v7 EXPORT.json[.gz] [--include-fingerprint]";
         let Some(path) = raw.next() else {
             return Err(USAGE.into());
         };
