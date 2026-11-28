@@ -28,6 +28,11 @@ class CandidateArchive(unittest.TestCase):
   self.assertRaises(ValueError,self.build,'badlicense')
   data['packages'][0]['license']='MIT';self.metadata.write_text(json.dumps(data));(self.root/'dep'/'LICENSE').unlink()
   self.assertRaises(ValueError,self.build,'missing')
+ def test_gzip_checksum_license_is_scoped_to_reviewed_version(self):
+  upstream='0BSD OR MIT OR Apache-2.0'
+  self.assertEqual(c.dependency_license('adler2','2.0.1',upstream),upstream)
+  for name,version in (('adler2','2.0.2'),('other','2.0.1')):
+   self.assertRaises(ValueError,c.dependency_license,name,version,upstream)
  def test_malformed_license_expression_refused(self):
   for value in ('MIT AND','AND MIT','MIT Apache-2.0','(MIT','MIT OR OR ISC'):
    self.assertRaises(ValueError,c.license_expression,value)
