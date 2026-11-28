@@ -370,8 +370,26 @@ with sqlite3.connect(sys.argv[2]) as db:
   assert.deepEqual(fs.readFileSync(originalCatalog),originalBefore);
   const openCatalog=buffer=>page.getByLabel('Saved Foundry catalog JSON',{exact:true}).setInputFiles({
     name:'catalog.json',mimeType:'application/json',buffer});
+  const archiveHash=createHash('sha256').update(exactCatalog).digest('hex');
+  const archivePin=page.getByLabel('Expected archive SHA-256 (optional)',{exact:true});
+  await archivePin.fill('too-short');
+  await openCatalog(exactCatalog);
+  await page.getByText('Enter exactly 64 hexadecimal characters for the expected SHA-256.',{exact:true}).waitFor();
+  await archivePin.fill(archiveHash.toUpperCase());
+  const tampered=JSON.parse(exactCatalog);
+  tampered.families[0].rows[0].original_fields.name='Changed without touching raw JSON';
+  await openCatalog(Buffer.from(JSON.stringify(tampered)+'\n'));
+  await page.getByText('Archive refused: the whole-file SHA-256 does not match.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#catalog').isVisible(),false);
+  assert.equal(await page.locator('#archive-identity').isVisible(),false);
+  await openCatalog(exactCatalog);
+  await page.getByText('Expected SHA-256 matches. 7 archive families opened locally. Nothing was imported.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#archive-sha').textContent(),archiveHash);
+  await archivePin.fill('');
+  assert.equal(await page.locator('#catalog').isVisible(),false);
   await openCatalog(exactCatalog);
   await page.getByText('7 archive families opened locally. Nothing was imported.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#archive-sha').textContent(),archiveHash);
   await page.getByText('Showing 48 of 52 matching records. 52 records in this family.',{exact:true}).waitFor();
   assert.equal(await page.getByRole('button',{name:'Café Theme 051',exact:true}).count(),0);
   await page.getByLabel('Search names, labels and IDs',{exact:true}).fill('CAFÉ THEME 051');
