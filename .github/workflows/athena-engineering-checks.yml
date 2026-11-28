@@ -46,8 +46,8 @@ jobs:
         run: python scripts/build_media_lab.py --check
       - name: Test all JavaScript contracts and browser harness invariants
         run: node --test tests/*.test.mjs
-      - name: Verify shared GitHub provider release contract
-        run: node --experimental-strip-types --test experiments/provider-release-contract/github-release.test.mjs experiments/provider-release-contract/verified-transfer.test.mjs
+      - name: Verify shared provider release and transfer contracts
+        run: node --experimental-strip-types --test experiments/provider-release-contract/*.test.mjs
       - name: Exercise explicitly synthetic benchmark example
         run: python scripts/compare_benchmarks.py tests/fixtures/synthetic-baseline.json tests/fixtures/synthetic-candidate.json
   rust-lab:

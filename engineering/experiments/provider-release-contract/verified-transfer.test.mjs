@@ -36,3 +36,30 @@ test('verify full transfer, reject incomplete/mismatched and keep last-good dest
     assert.equal(result.sha256,sha);assert.equal(result.sizeBytes,bytes.length);assert.deepEqual(await readFile(result.localPath),bytes);assert.deepEqual(await readdir(dir),['asset.zip']);
   }finally{await new Promise(resolve=>server.close(resolve));await rm(dir,{recursive:true,force:true});}
 });
+
+test('SHA-512 verifies before publication, rejects redirects and preserves last-good content',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'athena-sha512-'));
+  let redirected=0;
+  const sha512=createHash('sha512').update(bytes).digest('hex');
+  const server=createServer((req,res)=>{
+    if(req.url==='/redirect'){res.writeHead(302,{Location:'/target'});return res.end();}
+    if(req.url==='/target')redirected++;
+    res.writeHead(200);res.write(bytes.subarray(0,5));res.end(bytes.subarray(5));
+  });
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const url='http://127.0.0.1:'+server.address().port;
+  const request={url,filename:'example.jar',expectedSizeBytes:bytes.length,expectedSha512:sha512,redirect:'error'};
+  const file=join(dir,request.filename);
+  try {
+    await writeFile(file,'last good');
+    await assert.rejects(verifiedTransfer({...request,expectedSha512:'0'.repeat(128)},dir,opts),/SHA-512 mismatch/);
+    await assert.rejects(verifiedTransfer({...request,url:url+'/redirect'},dir,opts));
+    assert.equal(redirected,0);
+    assert.equal(await readFile(file,'utf8'),'last good');
+    assert.deepEqual(await readdir(dir),[request.filename]);
+    const result=await verifiedTransfer(request,dir,opts);
+    assert.equal(result.sha512,sha512);
+    assert.equal(result.sha256,sha);
+    assert.deepEqual(await readFile(file),bytes);
+  }finally{await new Promise(resolve=>server.close(resolve));await rm(dir,{recursive:true,force:true});}
+});
