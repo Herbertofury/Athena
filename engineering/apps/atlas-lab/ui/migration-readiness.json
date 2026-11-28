@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "snapshot_date": "2026-11-27",
-  "source_snapshot_commit": "8cb7528a2a1de31a52f1e296cc1ce6592278f249",
+  "snapshot_date": "2026-11-28",
+  "source_snapshot_commit": "4e67e381b43eefd7424afe4fa9c1aad853343003",
   "retirement_certified": false,
   "scope": "Read-only routing and evidence snapshot, not a new live repository audit. No source is certified safe to delete. Older evidence retains its original date.",
   "projects": [
@@ -31,11 +31,11 @@
       "evidence": [
         {
           "label": "Verified original Wiki and current destination mapping",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/scripts/verify_atlas_cutover.py"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/scripts/verify_atlas_cutover.py"
         },
         {
           "label": "Native Learning History and explicit runner scope",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/engineering/docs/learning-history.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/engineering/docs/learning-history.md"
         }
       ]
     },
@@ -57,19 +57,33 @@
           "detail": "The portable launcher can checkpoint both stopped stores and open a separate fork, preserving the original pair. Hosted Windows and Linux exercised this with synthetic stores; this does not verify owner data, physical media, or all older releases."
         },
         {
+          "state": "recorded",
+          "label": "Reviewed legacy import and event preservation",
+          "detail": "Windows and Linux CI tested a stopped Feature Foundry v24 snapshot, exact soundtrack values by theme and room, and optional original event export to a separate local file. These were synthetic tests. The archive is not active history, and the import does not cover all legacy records."
+        },
+        {
           "state": "open",
           "label": "Native and rights acceptance",
           "detail": "Complete native parity, owner-target acceptance, and privacy/rights review remain separate gates. Historical release inventory is not native runtime verification."
+        },
+        {
+          "state": "open",
+          "label": "Owner data and remaining legacy records",
+          "detail": "Compare an independent stopped copy of the owner’s data before cutover. Custom catalog records, media fidelity, unsupported historical data and rights still need their own acceptance. Preserve the original."
         }
       ],
       "evidence": [
         {
           "label": "Dated retirement audit",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/migration/feature-foundry/retirement-audit-2026-11-14.json"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/migration/feature-foundry/retirement-audit-2026-11-14.json"
         },
         {
           "label": "Portable two-store checkpoint behavior",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/native/foundry/DUAL-STORE-CHECKPOINT.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/native/foundry/DUAL-STORE-CHECKPOINT.md"
+        },
+        {
+          "label": "Portable import, original event archive and limits",
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/native/foundry/LEGACY-REVIEW.md"
         }
       ]
     },
@@ -94,7 +108,7 @@
       "evidence": [
         {
           "label": "Continuity capabilities, provenance and remaining gates",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/docs/integration/PROJECT-CONTINUITY.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/docs/integration/PROJECT-CONTINUITY.md"
         }
       ]
     },
@@ -119,11 +133,11 @@
       "evidence": [
         {
           "label": "Pinned source inventory",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/guidance/registry/agent-foundry-source-inventory.json"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/guidance/registry/agent-foundry-source-inventory.json"
         },
         {
           "label": "Guidance integration and retirement gates",
-          "url": "https://github.com/Herbertofury/Athena/blob/8cb7528a2a1de31a52f1e296cc1ce6592278f249/docs/integration/AGENT-GUIDANCE.md"
+          "url": "https://github.com/Herbertofury/Athena/blob/4e67e381b43eefd7424afe4fa9c1aad853343003/docs/integration/AGENT-GUIDANCE.md"
         }
       ]
     }
